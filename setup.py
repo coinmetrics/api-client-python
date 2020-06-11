@@ -11,7 +11,7 @@ with open(readme) as file:
 with open(requirements) as file:
     requirements_content = file.read() + '\n'
 
-__version__ = '2019.04.20.22.48'
+__version__ = 'YYYY.MM.DD.HH.MM.SS'
 
 packages = find_packages()
 print(packages)
