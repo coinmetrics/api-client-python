@@ -1,0 +1,2 @@
+include *.txt
+recursive-include coinmetrics *.txt *.py
