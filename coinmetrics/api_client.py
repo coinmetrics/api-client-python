@@ -90,6 +90,7 @@ class CoinMetricsClient:
         actual_url = f'{self.api_base_url}/{url}?api_key={self.api_key}{params_str}'
         resp = requests.get(actual_url)
         try:
+            resp.raise_for_status()
             data = resp.json()
             if 'error' in data:
                 logger.error('error found for the query: %s, error content: %s', actual_url, data)
