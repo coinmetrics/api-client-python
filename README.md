@@ -1,2 +1,1 @@
-# Coin Metrics Python API client library
-
+# Coin Metrics Python API v4 client library

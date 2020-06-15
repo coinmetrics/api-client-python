@@ -1,124 +1,264 @@
 from datetime import datetime, date
-from enum import Enum
 from logging import getLogger
-from typing import Dict, Union, List, Any, Optional
+from typing import Dict, Union, List, Any, Optional, cast
 from urllib.parse import urlencode
 
 import requests
 
+from coinmetrics._utils import transform_url_params_values_to_str
+
+try:
+    import ujson as json
+except ImportError:
+    # fall back to std json package
+    import json  # type: ignore
+
+from coinmetrics._client_types import DATA_RETURN_TYPE
 from coinmetrics.constants import ApiBranch, PagingFrom, API_BASE
-from coinmetrics.data_collection import DataCollection
+from coinmetrics._data_collection import DataCollection
 
 
-logger = getLogger()
+logger = getLogger('cm_client')
 
 
 class CoinMetricsClient:
-    def __init__(self, api_key, api_branch=ApiBranch.PRODUCTION, version=4):
+    def __init__(self, api_key: str, api_branch: ApiBranch = ApiBranch.PRODUCTION):
+        if not api_key or not isinstance(api_key, (str, bytes)):
+            raise ValueError('API key must be a non empty string')
         self.api_key = api_key
-        self.api_base_url = f'{API_BASE[api_branch]}/v{version}'
+        self.api_base_url = f'{API_BASE[api_branch]}/v4'
 
-    def catalog_markets(self, exchange: str = None, base: str = None, quote: str = None, asset: str = None) -> List[Dict[str, Any]]:
-        params = {'exchange': exchange, 'base': base, 'quote': quote, 'asset': asset}
-        return self._get_data('catalog/markets', self._transform_url_params_values_to_str(params))['data']
+    def catalog_assets(self, assets: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]:
+        """
+        Returns meta information about assets.
 
-    def catalog_metrics(self, metrics: Union[List[str], str] = None, reviewable: bool = None) -> List[Dict[str, Any]]:
-        params = {'metrics': metrics, 'reviewable': reviewable}
-        return self._get_data('catalog/metrics', self._transform_url_params_values_to_str(params))['data']
+        :param assets: A single asset or a list of assets to return info for.
+        If no assets provided, all available assets are returned.
+        :return: Information that is available for requested assets, like: Full name, metrics and available frequencies,
+        markets, exchanges, etc.
+        """
+
+        return cast(List[Dict[str, Any]], self._get_data('catalog/markets', {'assets': assets})['data'])
+
+    def catalog_exchanges(self, exchanges: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]:
+        """
+        Returns meta information about exchanges.
+
+        :param exchanges: A single exchange name or a list of exchanges to return info for.
+        If no exchanges provided, all available exchanges are returned.
+        :return: Information that is available for requested exchanges, like: markets, min and max time available.
+        """
+        return cast(List[Dict[str, Any]], self._get_data('catalog/exchanges', {'exchanges': exchanges})['data'])
+
+    def catalog_indexes(self, indexes: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]:
+        """
+        Returns meta information about indexes.
+
+        :param indexes: A single index name or a list of indexes to return info for.
+        If no indexes provided, all available indexes are returned.
+        :return: Information that is available for requested indexes, like: Full name, and available frequencies.
+        """
+        return cast(List[Dict[str, Any]], self._get_data('catalog/indexes', {'indexes': indexes})['data'])
+
+    def catalog_markets(
+            self,
+            exchange: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None
+    ) -> List[Dict[str, Any]]:
+        """
+        Returns list of markets that correspond to a filter, if no filter is set, returns all available asset.
+
+        :param exchange: name of the exchange
+        :param base: name of base asset
+        :param quote: name of quote asset
+        :param asset: name of either base or quote asset
+        :return: Information about markets that correspond to a filter along with meta information like:
+        type of market and min and max available time frames.
+        """
+        params: Dict[str, Any] = {'exchange': exchange, 'base': base, 'quote': quote, 'asset': asset}
+        return cast(List[Dict[str, Any]], self._get_data('catalog/markets', params)['data'])
+
+    def catalog_metrics(
+            self,
+            metrics: Optional[Union[List[str], str]] = None,
+            reviewable: Optional[bool] = None
+    ) -> List[Dict[str, Any]]:
+        """
+        Returns list of available metrics along with information for them like
+        description, category, precision and assets for which a metric is available.
+
+        :param metrics: A single metric name or a list of metrics to return info for.
+        If no metrics provided, all available metrics are returned.
+        :param reviewable: Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+        :return: Information about metrics that correspond to a filter along with meta information like:
+        description, category, precision and assets for which a metric is available.
+        """
+        params: Dict[str, Any] = {'metrics': metrics, 'reviewable': reviewable}
+        return cast(List[Dict[str, Any]], self._get_data('catalog/metrics', params)['data'])
+
+    def get_index_levels(
+            self,
+            indexes: Union[List[str], str],
+            frequency: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[Union[PagingFrom, str]] = None,
+            start_time: Optional[Union[datetime, date, str]] = None,
+            end_time: Optional[Union[datetime, date, str]] = None,
+            start_inclusive: Optional[bool] = None,
+            end_inclusive: Optional[bool] = None,
+            timezone: Optional[str] = None
+    ) -> DataCollection:
+        params: Dict[str, Any] = {
+            'indexes': indexes,
+            'frequency': frequency,
+            'page_size': page_size,
+            'paging_from': paging_from,
+            'start_time': start_time,
+            'end_time': end_time,
+            'start_inclusive': start_inclusive,
+            'end_inclusive': end_inclusive,
+            'timezone': timezone,
+        }
+        return DataCollection(self._get_data, 'timeseries/index-levels', params)
 
     def get_market_candles(
             self,
             markets: Union[List[str], str],
-            frequency: str = None,
-            page_size: int = None,
-            paging_from: PagingFrom = None,
-            start_time: Union[datetime, date, str] = None,
-            end_time: Union[datetime, date, str] = None,
+            frequency: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[Union[PagingFrom, str]] = None,
+            start_time: Optional[Union[datetime, date, str]] = None,
+            end_time: Optional[Union[datetime, date, str]] = None,
+            start_inclusive: Optional[bool] = None,
+            end_inclusive: Optional[bool] = None,
+            timezone: Optional[str] = None
     ) -> DataCollection:
-        params = {'page_size': page_size, 'frequency': frequency, 'paging_from': paging_from, 'start_time': start_time,
-                  'end_time': end_time, 'markets': markets, }
-        params = self._transform_url_params_values_to_str(params)
+        params: Dict[str, Any] = {
+            'markets': markets,
+            'frequency': frequency,
+            'page_size': page_size,
+            'paging_from': paging_from,
+            'start_time': start_time,
+            'end_time': end_time,
+            'start_inclusive': start_inclusive,
+            'end_inclusive': end_inclusive,
+            'timezone': timezone,
+        }
         return DataCollection(self._get_data, 'timeseries/market-candles', params)
 
     def get_market_trades(
             self,
             markets: Union[List[str], str],
-            page_size: int = None,
-            paging_from: PagingFrom = None,
-            start_time: Union[datetime, date, str] = None,
-            end_time: Union[datetime, date, str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[Union[PagingFrom, str]] = None,
+            start_time: Optional[Union[datetime, date, str]] = None,
+            end_time: Optional[Union[datetime, date, str]] = None,
+            start_inclusive: Optional[bool] = None,
+            end_inclusive: Optional[bool] = None,
+            timezone: Optional[str] = None
     ) -> DataCollection:
-        params = {'page_size': page_size, 'paging_from': paging_from, 'start_time': start_time, 'end_time': end_time,
-                  'markets': markets, }
-        params = self._transform_url_params_values_to_str(params)
+        params: Dict[str, Any] = {
+            'markets': markets,
+            'page_size': page_size,
+            'paging_from': paging_from,
+            'start_time': start_time,
+            'end_time': end_time,
+            'start_inclusive': start_inclusive,
+            'end_inclusive': end_inclusive,
+            'timezone': timezone,
+        }
         return DataCollection(self._get_data, 'timeseries/market-trades', params)
 
-    def get_market_books(
+    def get_market_quotes(
             self,
             markets: Union[List[str], str],
-            page_size: int = None,
-            paging_from: PagingFrom = None,
-            start_time: Union[datetime, date, str] = None,
-            end_time: Union[datetime, date, str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[Union[PagingFrom, str]] = None,
+            start_time: Optional[Union[datetime, date, str]] = None,
+            end_time: Optional[Union[datetime, date, str]] = None,
+            start_inclusive: Optional[bool] = None,
+            end_inclusive: Optional[bool] = None,
+            timezone: Optional[str] = None
     ) -> DataCollection:
-        params = {'page_size': page_size, 'paging_from': paging_from, 'start_time': start_time, 'end_time': end_time,
-                  'markets': markets, }
-        params = self._transform_url_params_values_to_str(params)
+        params: Dict[str, Any] = {
+            'markets': markets,
+            'page_size': page_size,
+            'paging_from': paging_from,
+            'start_time': start_time,
+            'end_time': end_time,
+            'start_inclusive': start_inclusive,
+            'end_inclusive': end_inclusive,
+            'timezone': timezone,
+        }
+        return DataCollection(self._get_data, 'timeseries/market-quotes', params)
+
+    def get_market_orderbooks(
+            self,
+            markets: Union[List[str], str],
+            page_size: Optional[int] = None,
+            paging_from: Optional[Union[PagingFrom, str]] = None,
+            start_time: Optional[Union[datetime, date, str]] = None,
+            end_time: Optional[Union[datetime, date, str]] = None,
+            start_inclusive: Optional[bool] = None,
+            end_inclusive: Optional[bool] = None,
+            timezone: Optional[str] = None
+    ) -> DataCollection:
+        params: Dict[str, Any] = {
+            'markets': markets,
+            'page_size': page_size,
+            'paging_from': paging_from,
+            'start_time': start_time,
+            'end_time': end_time,
+            'start_inclusive': start_inclusive,
+            'end_inclusive': end_inclusive,
+            'timezone': timezone,
+        }
         return DataCollection(self._get_data, 'timeseries/market-orderbooks', params)
 
     def get_asset_metrics(
             self,
             assets: Union[List[str], str],
             metrics: Union[List[str], str],
-            frequency: str = None,
-            page_size: int = None,
-            paging_from: PagingFrom = None,
-            start_time: Union[datetime, date, str] = None,
-            end_time: Union[datetime, date, str] = None,
+            frequency: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[Union[PagingFrom, str]] = None,
+            start_time: Optional[Union[datetime, date, str]] = None,
+            end_time: Optional[Union[datetime, date, str]] = None,
+            start_inclusive: Optional[bool] = None,
+            end_inclusive: Optional[bool] = None,
+            timezone: Optional[str] = None
     ) -> DataCollection:
-        params = {'frequency': frequency, 'page_size': page_size, 'paging_from': paging_from, 'start_time': start_time,
-                  'end_time': end_time, 'assets': assets, 'metrics': metrics, }
-        params = self._transform_url_params_values_to_str(params)
+        params: Dict[str, Any] = {
+            'assets': assets,
+            'metrics': metrics,
+            'frequency': frequency,
+            'page_size': page_size,
+            'paging_from': paging_from,
+            'start_time': start_time,
+            'end_time': end_time,
+            'start_inclusive': start_inclusive,
+            'end_inclusive': end_inclusive,
+            'timezone': timezone,
+        }
         return DataCollection(self._get_data, 'timeseries/asset-metrics', params)
 
-    def _get_data(self, url: str, params: Dict[str, str]) -> Dict[Any, Any]:
+    def _get_data(self, url: str, params: Dict[str, Any]) -> DATA_RETURN_TYPE:
         if params:
-            params_str = f'&{urlencode(params)}'
+            params_str = f'&{urlencode(transform_url_params_values_to_str(params))}'
         else:
             params_str = ''
 
         actual_url = f'{self.api_base_url}/{url}?api_key={self.api_key}{params_str}'
         resp = requests.get(actual_url)
         try:
+            data = json.loads(resp.content)
+        except ValueError:
             resp.raise_for_status()
-            data = resp.json()
+            raise
+        else:
             if 'error' in data:
                 logger.error('error found for the query: %s, error content: %s', actual_url, data)
-            return data
-        except Exception:
-            logger.info('response: %s', resp.content)
-            raise
-
-    def _transform_url_params_values_to_str(self, params: Dict[str, Optional[Any]]) -> Dict[str, str]:
-        processed_params = {}
-        for param_name, param_value in params.items():
-            if param_value is None:
-                continue
-            if isinstance(param_value, (datetime, date)):
-                if param_name.endswith('_time'):
-                    processed_params[param_name] = param_value.isoformat()
-                else:
-                    raise ValueError(f'`{param_name}` doesn\'t support {type(param_value)} objects')
-            elif isinstance(param_value, (list, tuple)):
-                processed_params[param_name] = self._format_list_args(param_value)
-            elif isinstance(param_value, Enum):
-                processed_params[param_name] = param_value.value
-            elif isinstance(param_value, bool):
-                processed_params[param_name] = 'true' if param_value else 'false'
-            else:
-                processed_params[param_name] = param_value
-        return  processed_params
-
-    @staticmethod
-    def _format_list_args(url_args: Union[List[str], str]) -> str:
-        return ','.join(url_args) if isinstance(url_args, (list, tuple)) else url_args
+                resp.raise_for_status()
+            return cast(DATA_RETURN_TYPE, data)
