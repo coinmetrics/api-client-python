@@ -14,19 +14,19 @@ except ImportError:
     import json  # type: ignore
 
 from coinmetrics._client_types import DATA_RETURN_TYPE
-from coinmetrics.constants import ApiBranch, PagingFrom, API_BASE
+from coinmetrics.constants import ApiBranch, PagingFrom, API_BASE, COMMUNITY_API_BRANCHES
 from coinmetrics._data_collection import DataCollection
-
 
 logger = getLogger('cm_client')
 
 
 class CoinMetricsClient:
-    def __init__(self, api_key: str, api_branch: ApiBranch = ApiBranch.PRODUCTION):
+    def __init__(self, api_key: str = '', api_branch: ApiBranch = ApiBranch.PRODUCTION):
         if not api_key or not isinstance(api_key, (str, bytes)):
-            raise ValueError('API key must be a non empty string')
-        self.api_key = api_key
-        self.api_base_url = f'{API_BASE[api_branch]}/v4'
+            if api_branch not in COMMUNITY_API_BRANCHES:
+                raise ValueError('API key must be a non empty string')
+        self._api_key_url_str = f'api_key={api_key}' if api_branch in COMMUNITY_API_BRANCHES else ''
+        self._api_base_url = f'{API_BASE[api_branch]}/v4'
 
     def catalog_assets(self, assets: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]:
         """
@@ -250,7 +250,7 @@ class CoinMetricsClient:
         else:
             params_str = ''
 
-        actual_url = f'{self.api_base_url}/{url}?api_key={self.api_key}{params_str}'
+        actual_url = f'{self._api_base_url}/{url}?{self._api_key_url_str}{params_str}'
         resp = requests.get(actual_url)
         try:
             data = json.loads(resp.content)

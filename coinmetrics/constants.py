@@ -19,3 +19,4 @@ API_BASE = {
     ApiBranch.COMMUNITY: 'https://community-api.coinmetrics.io',
     ApiBranch.STAGING_COMMUNITY: 'https://staging-community-api.coinmetrics.io',
 }
+COMMUNITY_API_BRANCHES = {ApiBranch.STAGING, ApiBranch.STAGING_COMMUNITY}
