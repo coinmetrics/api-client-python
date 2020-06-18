@@ -1,7 +1,14 @@
+import pathlib
 from copy import deepcopy
-from typing import Any, Dict, List, Optional, Iterator, cast
+from io import StringIO
+from typing import Any, Dict, List, Optional, Iterator, cast, Union, AnyStr, IO
 
-from coinmetrics._client_types import DATA_RETRIEVAL_FUNC_TYPE, URL_PARAMS_TYPES
+from coinmetrics._typing import DATA_RETRIEVAL_FUNC_TYPE, URL_PARAMS_TYPES
+from coinmetrics._utils import get_file_path_or_buffer
+
+
+class CsvExportError(Exception):
+    pass
 
 
 class DataCollection:
@@ -9,8 +16,10 @@ class DataCollection:
             self,
             data_retrieval_function: DATA_RETRIEVAL_FUNC_TYPE,
             endpoint: str,
-            url_params: Dict[str, URL_PARAMS_TYPES]
+            url_params: Dict[str, URL_PARAMS_TYPES],
+            csv_export_supported: bool = True,
     ) -> None:
+        self._csv_export_supported = csv_export_supported
         self._data_retrieval_function = data_retrieval_function
         self._endpoint = endpoint
         self._url_params = url_params
@@ -38,3 +47,37 @@ class DataCollection:
 
     def __iter__(self) -> 'DataCollection':
         return self
+
+    def export_to_csv(
+            self,
+            path_or_bufstr: Union[str, pathlib.Path, IO[AnyStr], None] = None,
+            columns_to_store: List[str] = None
+    ):
+        if not self._csv_export_supported:
+            raise CsvExportError('Sorry, csv export is not supported for this data type.')
+        if path_or_bufstr is None:
+            path_or_bufstr = StringIO()
+
+        path_or_bufstr = get_file_path_or_buffer(path_or_bufstr)
+
+        if hasattr(path_or_bufstr, "write"):
+            f = path_or_bufstr
+            close = False
+        else:
+            f = open(path_or_bufstr, 'w')
+            close = True
+        try:
+            first_data_el = None
+            if columns_to_store is None:
+                first_data_el = next(self)
+                columns_to_store = list(first_data_el.keys())
+
+            f.write(','.join(columns_to_store) + '\n')
+            if first_data_el is not None:
+                f.write(','.join(first_data_el[column] for column in columns_to_store) + '\n')
+
+            for data_el in self:
+                f.write(','.join(data_el[column] for column in columns_to_store) + '\n')
+        finally:
+            if close:
+                f.close()

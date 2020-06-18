@@ -13,7 +13,7 @@ except ImportError:
     # fall back to std json package
     import json  # type: ignore
 
-from coinmetrics._client_types import DATA_RETURN_TYPE
+from coinmetrics._typing import DATA_RETURN_TYPE
 from coinmetrics.constants import ApiBranch, PagingFrom, API_BASE, COMMUNITY_API_BRANCHES
 from coinmetrics._data_collection import DataCollection
 
@@ -25,8 +25,8 @@ class CoinMetricsClient:
         if not api_key or not isinstance(api_key, (str, bytes)):
             if api_branch not in COMMUNITY_API_BRANCHES:
                 raise ValueError('API key must be a non empty string')
-        self._api_key_url_str = f'api_key={api_key}' if api_branch in COMMUNITY_API_BRANCHES else ''
-        self._api_base_url = f'{API_BASE[api_branch]}/v4'
+        self._api_key_url_str = 'api_key={}'.format(api_key) if api_branch not in COMMUNITY_API_BRANCHES else ''
+        self._api_base_url = '{}/v4'.format(API_BASE[api_branch])
 
     def catalog_assets(self, assets: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]:
         """
@@ -65,7 +65,8 @@ class CoinMetricsClient:
             exchange: Optional[str] = None,
             base: Optional[str] = None,
             quote: Optional[str] = None,
-            asset: Optional[str] = None
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
     ) -> List[Dict[str, Any]]:
         """
         Returns list of markets that correspond to a filter, if no filter is set, returns all available asset.
@@ -74,6 +75,7 @@ class CoinMetricsClient:
         :param base: name of base asset
         :param quote: name of quote asset
         :param asset: name of either base or quote asset
+        :param symbol: name of a symbol. Usually used for futures contracts.
         :return: Information about markets that correspond to a filter along with meta information like:
         type of market and min and max available time frames.
         """
@@ -246,11 +248,11 @@ class CoinMetricsClient:
 
     def _get_data(self, url: str, params: Dict[str, Any]) -> DATA_RETURN_TYPE:
         if params:
-            params_str = f'&{urlencode(transform_url_params_values_to_str(params))}'
+            params_str = '&{}'.format(urlencode(transform_url_params_values_to_str(params)))
         else:
             params_str = ''
 
-        actual_url = f'{self._api_base_url}/{url}?{self._api_key_url_str}{params_str}'
+        actual_url = '{}/{}?{}{}'.format(self._api_base_url, url, self._api_key_url_str, params_str)
         resp = requests.get(actual_url)
         try:
             data = json.loads(resp.content)
