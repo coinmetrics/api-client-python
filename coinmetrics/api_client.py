@@ -79,7 +79,7 @@ class CoinMetricsClient:
         :return: Information about markets that correspond to a filter along with meta information like:
         type of market and min and max available time frames.
         """
-        params: Dict[str, Any] = {'exchange': exchange, 'base': base, 'quote': quote, 'asset': asset}
+        params: Dict[str, Any] = {'exchange': exchange, 'base': base, 'quote': quote, 'asset': asset, 'symbol': symbol}
         return cast(List[Dict[str, Any]], self._get_data('catalog/markets', params)['data'])
 
     def catalog_metrics(
