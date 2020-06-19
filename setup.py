@@ -17,7 +17,7 @@ with open(requirements) as file:
                     if not package.split('=')[0].split('>')[0].split('<')[0] in requirements_exclude_list]
 
 
-__version__ = '2020.6.18.21.16.40-alpha'
+__version__ = '2020.06.19.02.53.19-alpha'
 
 packages = find_packages()
 print(packages)
@@ -31,7 +31,7 @@ setup(
     long_description_content_type='text/markdown',
     author='Oleksandr Buchkovsky',
     author_email='oleksandr@coinmetrics.io',
-    url='https://gitlab.com/coinmetrics/python-api-client',
+    url='https://github.com/coinmetrics-io/api-client-python',
     keywords=['coin-metrics', 'coin', 'metrics', 'crypto', 'bitcoin', 'network-data', 'market-data',
               'for-humans', 'fast', 'bigdata', 'api', 'handy'],
     install_requires=[line.strip() for line in requirements_content.splitlines() if line.strip()],
