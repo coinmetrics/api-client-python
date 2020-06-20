@@ -20,7 +20,7 @@ FUTURES_MARKETS_TO_EXPORT = [
 
 LOCAL_DST_ROOT = '.'
 EXPORT_START_DATE = '2020-05-30'
-EXPORT_END_DATE = '2020-05-31'
+EXPORT_END_DATE = '2020-05-31'  # if you set this to None, a today - 1 day will be used as the end date
 PROCESSED_DAYS_REGISTRY_FILE_PATH = 'processed_days_registry.txt'
 
 api_key = environ.get('CM_API_KEY') or sys.argv[1]  # sys.argv[1] is executed only if CM_API_KEY is not found
@@ -29,7 +29,7 @@ client = CoinMetricsClient(api_key)
 
 def export_data():
     min_export_date = date.fromisoformat(EXPORT_START_DATE)
-    max_export_date = date.fromisoformat(EXPORT_END_DATE)
+    max_export_date = date.fromisoformat(EXPORT_END_DATE) if EXPORT_END_DATE else date.today() - timedelta(days=1)
     processed_dates_and_markets = read_already_processed_files()
 
     markets = get_markets_to_process()
