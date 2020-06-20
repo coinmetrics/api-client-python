@@ -20,7 +20,7 @@ FUTURES_MARKETS_TO_EXPORT = [
 
 LOCAL_DST_ROOT = '.'
 EXPORT_START_DATE = '2020-05-30'
-EXPORT_END_DATE = '2020-05-31'  # if you set this to None, a today - 1 day will be used as the end date
+EXPORT_END_DATE = '2020-05-31'  # if you set this to None, then `today - 1 day` will be used as the end date
 PROCESSED_DAYS_REGISTRY_FILE_PATH = 'processed_days_registry.txt'
 
 api_key = environ.get('CM_API_KEY') or sys.argv[1]  # sys.argv[1] is executed only if CM_API_KEY is not found
@@ -41,23 +41,32 @@ def export_data():
     with Pool(processes_count) as pool:
         tasks = []
         for market in markets:
-            if market['type'] == 'spot':
-                instrument_root = '{}_{}_{}'.format(market['base'], market['quote'], market['type'])
-            else:
-                instrument_root = '{}_{}'.format(market['symbol'].replace(':', '_'), market['type'])
-            market_data_root = join(LOCAL_DST_ROOT, market['market'].split('-')[0], instrument_root)
-            min_date = max(date.fromisoformat(market['min_time'].split('T')[0]), min_export_date)
-            max_date = min(date.fromisoformat(market['max_time'].split('T')[0]), max_export_date)
+            market_data_root = join(LOCAL_DST_ROOT, market['market'].split('-')[0], get_instrument_root(market))
+
+            # creating all the directories upfront to not to call this function in export function for each day
+            # otherwise it can fail in the multiproc environment even with exist_ok=True.
             makedirs(market_data_root, exist_ok=True)
 
-            for target_date_index in range((max_date - min_date).days + 1):
-                target_date = min_date + timedelta(days=target_date_index)
+            for target_date in get_days_to_export(market, min_export_date, max_export_date):
                 if get_registry_key(market, target_date) not in processed_dates_and_markets:
                     tasks.append(pool.apply_async(export_data_for_a_market,
                                                   (market, market_data_root, target_date)))
 
         for task in tasks:
             task.get()
+
+
+def get_instrument_root(market):
+    if market['type'] == 'spot':
+        return '{}_{}_{}'.format(market['base'], market['quote'], market['type'])
+    return '{}_{}'.format(market['symbol'].replace(':', '_'), market['type'])
+
+
+def read_already_processed_files():
+    if exists(PROCESSED_DAYS_REGISTRY_FILE_PATH):
+        with open(PROCESSED_DAYS_REGISTRY_FILE_PATH) as registry_file:
+            return set(registry_file.read().splitlines())
+    return set()
 
 
 def get_markets_to_process():
@@ -71,11 +80,11 @@ def get_markets_to_process():
     return markets
 
 
-def read_already_processed_files():
-    if exists(PROCESSED_DAYS_REGISTRY_FILE_PATH):
-        with open(PROCESSED_DAYS_REGISTRY_FILE_PATH) as registry_file:
-            return set(registry_file.read().splitlines())
-    return set()
+def get_days_to_export(market_info, min_export_date, max_export_date):
+    min_date = max(date.fromisoformat(market_info['min_time'].split('T')[0]), min_export_date)
+    max_date = min(date.fromisoformat(market_info['max_time'].split('T')[0]), max_export_date)
+    for target_date_index in range((max_date - min_date).days + 1):
+        yield min_date + timedelta(days=target_date_index)
 
 
 def export_data_for_a_market(market, market_data_root, target_date):
