@@ -142,3 +142,4 @@ cython_debug/
 
 examples/data/
 *.csv
+examples/*.txt
