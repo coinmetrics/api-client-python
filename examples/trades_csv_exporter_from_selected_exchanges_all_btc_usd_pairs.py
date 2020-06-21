@@ -18,7 +18,7 @@ FUTURES_MARKETS_TO_EXPORT = [
     'deribit-BTC-PERPETUAL-future'
 ]
 
-LOCAL_DST_ROOT = '.'
+LOCAL_DST_ROOT = './data/'
 EXPORT_START_DATE = '2020-05-30'
 EXPORT_END_DATE = '2020-05-31'  # if you set this to None, then `today - 1 day` will be used as the end date
 PROCESSED_DAYS_REGISTRY_FILE_PATH = 'processed_days_registry.txt'
