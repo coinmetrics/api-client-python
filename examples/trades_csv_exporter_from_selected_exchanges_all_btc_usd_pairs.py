@@ -94,7 +94,7 @@ def export_data_for_a_market(market, market_data_root, target_date):
     print('downloading data to:', dst_csv_file_path)
     market_trades.export_to_csv(dst_csv_file_path)
     with open(PROCESSED_DAYS_REGISTRY_FILE_PATH, 'a') as registry_file:
-        registry_file.write(get_registry_key(market, target_date))
+        registry_file.write(get_registry_key(market, target_date)+'\n')
 
 
 def get_registry_key(market, target_date):
