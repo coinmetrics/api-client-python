@@ -98,7 +98,7 @@ def export_data_for_a_market(market, market_data_root, target_date):
 
 
 def get_registry_key(market, target_date):
-    return '{},{}'.format(market, target_date.isoformat())
+    return '{},{}'.format(market['market'], target_date.isoformat())
 
 
 if __name__ == '__main__':
