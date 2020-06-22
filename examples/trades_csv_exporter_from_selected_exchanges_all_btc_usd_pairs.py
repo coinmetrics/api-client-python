@@ -40,7 +40,7 @@ client = CoinMetricsClient(api_key)
 s3 = None
 if DST_ROOT.startswith('s3://'):
     import s3fs
-    s3 = s3fs.S3FileSystem(key=environ['AWS_ACCESS_KEY_ID'], secret=environ['AWS_SECRET_ACCESS_KEY'])
+    s3 = s3fs.S3FileSystem(key=environ.get('AWS_ACCESS_KEY_ID'), secret=environ.get('AWS_SECRET_ACCESS_KEY'))
 
 
 def export_data():
