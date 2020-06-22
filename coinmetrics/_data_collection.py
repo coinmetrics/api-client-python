@@ -1,10 +1,13 @@
 import pathlib
 from copy import deepcopy
 from io import StringIO
+from logging import getLogger
 from typing import Any, Dict, List, Optional, Iterator, cast, Union, AnyStr, IO
 
 from coinmetrics._typing import DATA_RETRIEVAL_FUNC_TYPE, URL_PARAMS_TYPES
 from coinmetrics._utils import get_file_path_or_buffer
+
+logger = getLogger('cm_client_data_collection')
 
 
 class CsvExportError(Exception):
@@ -69,7 +72,11 @@ class DataCollection:
         try:
             first_data_el = None
             if columns_to_store is None:
-                first_data_el = next(self)
+                try:
+                    first_data_el = next(self)
+                except StopIteration:
+                    logger.info('no data to export')
+                    return
                 columns_to_store = list(first_data_el.keys())
 
             f.write(','.join(columns_to_store) + '\n')

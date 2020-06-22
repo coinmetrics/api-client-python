@@ -1,8 +1,8 @@
 import sys
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 from multiprocessing import Pool, cpu_count
 from os import makedirs, environ
-from os.path import join, exists
+from os.path import exists
 
 from coinmetrics.api_client import CoinMetricsClient
 from coinmetrics.constants import PagingFrom
@@ -18,13 +18,22 @@ FUTURES_MARKETS_TO_EXPORT = [
     'deribit-BTC-PERPETUAL-future'
 ]
 
-LOCAL_DST_ROOT = './data/'
-EXPORT_START_DATE = '2020-05-30'
+# DST_ROOT is the path where you want the data to be saved to
+# start the path with 's3://' prefix to make the script save to AWS S3, example
+# or omit the s3:// prefix to save to local storage
+DST_ROOT = './data/'.rstrip('/')
+
+EXPORT_START_DATE = '2020-05-21'
 EXPORT_END_DATE = '2020-05-31'  # if you set this to None, then `today - 1 day` will be used as the end date
 PROCESSED_DAYS_REGISTRY_FILE_PATH = 'processed_days_registry.txt'
 
 api_key = environ.get('CM_API_KEY') or sys.argv[1]  # sys.argv[1] is executed only if CM_API_KEY is not found
 client = CoinMetricsClient(api_key)
+
+s3 = None
+if DST_ROOT.startswith('s3://'):
+    import s3fs
+    s3 = s3fs.S3FileSystem(key=environ['AWS_ACCESS_KEY_ID'], secret=environ['AWS_SECRET_ACCESS_KEY'])
 
 
 def export_data():
@@ -41,11 +50,14 @@ def export_data():
     with Pool(processes_count) as pool:
         tasks = []
         for market in markets:
-            market_data_root = join(LOCAL_DST_ROOT, market['market'].split('-')[0], get_instrument_root(market))
+            market_data_root = '/'.join((DST_ROOT, market['market'].split('-')[0], get_instrument_root(market)))
 
             # creating all the directories upfront to not to call this function in export function for each day
             # otherwise it can fail in the multiproc environment even with exist_ok=True.
-            makedirs(market_data_root, exist_ok=True)
+            if s3 is not None:
+                s3.makedirs(market_data_root, exist_ok=True)
+            else:
+                makedirs(market_data_root, exist_ok=True)
 
             for target_date in get_days_to_export(market, min_export_date, max_export_date):
                 if get_registry_key(market, target_date) not in processed_dates_and_markets:
@@ -90,9 +102,13 @@ def get_days_to_export(market_info, min_export_date, max_export_date):
 def export_data_for_a_market(market, market_data_root, target_date):
     market_trades = client.get_market_trades(market['market'], start_time=target_date, end_time=target_date,
                                              page_size=10000, paging_from=PagingFrom.START)
-    dst_csv_file_path = join(market_data_root, target_date.isoformat()) + '.csv'
+    dst_csv_file_path = '/'.join((market_data_root, target_date.isoformat())) + '.csv'
     print('downloading data to:', dst_csv_file_path)
-    market_trades.export_to_csv(dst_csv_file_path)
+    if s3 is not None:
+        with s3.open(dst_csv_file_path.split('s3://')[1], 'w') as data_file:
+            market_trades.export_to_csv(data_file)
+    else:
+        market_trades.export_to_csv(dst_csv_file_path)
     with open(PROCESSED_DAYS_REGISTRY_FILE_PATH, 'a') as registry_file:
         registry_file.write(get_registry_key(market, target_date)+'\n')
 
@@ -102,4 +118,9 @@ def get_registry_key(market, target_date):
 
 
 if __name__ == '__main__':
-    export_data()
+    export_start_time = datetime.now()
+    try:
+        export_data()
+    finally:
+        print('export took:', datetime.now() - export_start_time)
+
