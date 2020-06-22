@@ -1,3 +1,4 @@
+import logging
 import sys
 from datetime import date, timedelta, datetime
 from multiprocessing import Pool, cpu_count
@@ -6,6 +7,16 @@ from os.path import exists
 
 from coinmetrics.api_client import CoinMetricsClient
 from coinmetrics.constants import PagingFrom
+
+logger = logging.getLogger()
+stream_handler = logging.StreamHandler()
+level = logging.getLevelName('INFO')
+stream_handler.level = level
+formatter = logging.Formatter(datefmt='[%Y-%m-%d %H:%M:%S]', fmt='%(asctime)-15s %(levelname)s %(message)s')
+stream_handler.setFormatter(formatter)
+logger.addHandler(stream_handler)
+logger.level = level
+
 
 EXCHANGES_TO_EXPORT = [
     'binance.us', 'binance', 'coinbase', 'okex', 'kraken', 'huobi', 'bitmex', 'bitfinex', 'deribit',
@@ -50,7 +61,7 @@ def export_data():
 
     markets = get_markets_to_process()
 
-    print('getting markets:', [market['market'] for market in markets])
+    logger.info('getting markets: %s', [market['market'] for market in markets])
 
     processes_count = cpu_count() * 2
 
@@ -71,8 +82,9 @@ def export_data():
                     tasks.append(pool.apply_async(export_data_for_a_market,
                                                   (market, market_data_root, target_date)))
 
-        for task in tasks:
+        for i, task in enumerate(tasks, 1):
             task.get()
+            logger.info('processed task: %s/%s', i, len(tasks))
 
 
 def get_instrument_root(market):
@@ -112,7 +124,7 @@ def export_data_for_a_market(market, market_data_root, target_date):
     dst_csv_file_path = '/'.join((market_data_root, target_date.isoformat())) + '.csv'
     if COMPRESS_DATA:
         dst_csv_file_path = dst_csv_file_path + '.gz'
-    print('downloading data to:', dst_csv_file_path)
+    logger.info('downloading data to: %s', dst_csv_file_path)
     if s3 is not None:
         with s3.open(dst_csv_file_path.split('s3://')[1], 'wb' if COMPRESS_DATA else 'w') as data_file:
             market_trades.export_to_csv(data_file, compress=COMPRESS_DATA)
@@ -131,5 +143,5 @@ if __name__ == '__main__':
     try:
         export_data()
     finally:
-        print('export took:', datetime.now() - export_start_time)
+        logger.info('export took: %s', datetime.now() - export_start_time)
 
