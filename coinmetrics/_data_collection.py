@@ -1,5 +1,6 @@
 import pathlib
 from copy import deepcopy
+from gzip import GzipFile
 from io import StringIO
 from logging import getLogger
 from typing import Any, Dict, List, Optional, Iterator, cast, Union, AnyStr, IO
@@ -54,7 +55,8 @@ class DataCollection:
     def export_to_csv(
             self,
             path_or_bufstr: Union[str, pathlib.Path, IO[AnyStr], None] = None,
-            columns_to_store: List[str] = None
+            columns_to_store: List[str] = None,
+            compress: bool = False
     ):
         if not self._csv_export_supported:
             raise CsvExportError('Sorry, csv export is not supported for this data type.')
@@ -67,24 +69,36 @@ class DataCollection:
             f = path_or_bufstr
             close = False
         else:
-            f = open(path_or_bufstr, 'w')
+            f = open(path_or_bufstr, 'wb' if compress else 'w')
             close = True
+
+        if compress:
+            output_file = GzipFile(fileobj=f)
+        else:
+            output_file = f
+
         try:
-            first_data_el = None
-            if columns_to_store is None:
-                try:
-                    first_data_el = next(self)
-                except StopIteration:
-                    logger.info('no data to export')
-                    return
-                columns_to_store = list(first_data_el.keys())
-
-            f.write(','.join(columns_to_store) + '\n')
-            if first_data_el is not None:
-                f.write(','.join(first_data_el[column] for column in columns_to_store) + '\n')
-
-            for data_el in self:
-                f.write(','.join(data_el[column] for column in columns_to_store) + '\n')
+            for line in self._get_data_lines(columns_to_store):
+                output_file.write(line.encode() if compress else line)
         finally:
+            if compress:
+                output_file.close()
             if close:
                 f.close()
+
+    def _get_data_lines(self, columns_to_store):
+        first_data_el = None
+        if columns_to_store is None:
+            try:
+                first_data_el = next(self)
+            except StopIteration:
+                logger.info('no data to export')
+                return
+            columns_to_store = list(first_data_el.keys())
+
+        yield ','.join(columns_to_store) + '\n'
+        if first_data_el is not None:
+            yield ','.join(first_data_el[column] for column in columns_to_store) + '\n'
+
+        for data_el in self:
+            yield ','.join(data_el[column] for column in columns_to_store) + '\n'

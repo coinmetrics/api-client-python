@@ -21,11 +21,18 @@ FUTURES_MARKETS_TO_EXPORT = [
 # DST_ROOT is the path where you want the data to be saved to
 # start the path with 's3://' prefix to make the script save to AWS S3, example
 # or omit the s3:// prefix to save to local storage
-DST_ROOT = './data/'.rstrip('/')
+# examples:
+# DST_ROOT = './data'
+# DST_ROOT = 's3://<bucket_name>/data'
+DST_ROOT = './data'
 
-EXPORT_START_DATE = '2020-05-21'
+EXPORT_START_DATE = '2017-01-01'
 EXPORT_END_DATE = '2020-05-31'  # if you set this to None, then `today - 1 day` will be used as the end date
+COMPRESS_DATA = True  # False - for raw csv files; True - for gzipped csv files
+
+# path to local file that is used to not reexport data if it was already exported
 PROCESSED_DAYS_REGISTRY_FILE_PATH = 'processed_days_registry.txt'
+
 
 api_key = environ.get('CM_API_KEY') or sys.argv[1]  # sys.argv[1] is executed only if CM_API_KEY is not found
 client = CoinMetricsClient(api_key)
@@ -50,7 +57,7 @@ def export_data():
     with Pool(processes_count) as pool:
         tasks = []
         for market in markets:
-            market_data_root = '/'.join((DST_ROOT, market['market'].split('-')[0], get_instrument_root(market)))
+            market_data_root = '/'.join((DST_ROOT.rstrip('/'), market['market'].split('-')[0], get_instrument_root(market)))
 
             # creating all the directories upfront to not to call this function in export function for each day
             # otherwise it can fail in the multiproc environment even with exist_ok=True.
@@ -103,12 +110,14 @@ def export_data_for_a_market(market, market_data_root, target_date):
     market_trades = client.get_market_trades(market['market'], start_time=target_date, end_time=target_date,
                                              page_size=10000, paging_from=PagingFrom.START)
     dst_csv_file_path = '/'.join((market_data_root, target_date.isoformat())) + '.csv'
+    if COMPRESS_DATA:
+        dst_csv_file_path = dst_csv_file_path + '.gz'
     print('downloading data to:', dst_csv_file_path)
     if s3 is not None:
-        with s3.open(dst_csv_file_path.split('s3://')[1], 'w') as data_file:
-            market_trades.export_to_csv(data_file)
+        with s3.open(dst_csv_file_path.split('s3://')[1], 'wb' if COMPRESS_DATA else 'w') as data_file:
+            market_trades.export_to_csv(data_file, compress=COMPRESS_DATA)
     else:
-        market_trades.export_to_csv(dst_csv_file_path)
+        market_trades.export_to_csv(dst_csv_file_path, compress=COMPRESS_DATA)
     with open(PROCESSED_DAYS_REGISTRY_FILE_PATH, 'a') as registry_file:
         registry_file.write(get_registry_key(market, target_date)+'\n')
 
