@@ -34,5 +34,5 @@ setup(
     url='https://github.com/coinmetrics-io/api-client-python',
     keywords=['coin-metrics', 'coin', 'metrics', 'crypto', 'bitcoin', 'network-data', 'market-data',
               'for-humans', 'fast', 'bigdata', 'api', 'handy'],
-    install_requires=[line.strip() for line in requirements_content.splitlines() if line.strip()],
+    install_requires=requirements,
 )

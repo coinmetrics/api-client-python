@@ -17,7 +17,7 @@ with open(requirements) as file:
                     if not package.split('=')[0].split('>')[0].split('<')[0] in requirements_exclude_list]
 
 
-__version__ = '2020.06.23.00.08.05-alpha'
+__version__ = '2020.06.23.00.16.39-alpha'
 
 packages = find_packages()
 print(packages)
@@ -34,5 +34,5 @@ setup(
     url='https://github.com/coinmetrics-io/api-client-python',
     keywords=['coin-metrics', 'coin', 'metrics', 'crypto', 'bitcoin', 'network-data', 'market-data',
               'for-humans', 'fast', 'bigdata', 'api', 'handy'],
-    install_requires=[line.strip() for line in requirements_content.splitlines() if line.strip()],
+    install_requires=requirements,
 )
