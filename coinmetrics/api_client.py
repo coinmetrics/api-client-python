@@ -1,3 +1,4 @@
+import socket
 from datetime import datetime, date
 from logging import getLogger
 from typing import Dict, Union, List, Any, Optional, cast
@@ -5,7 +6,7 @@ from urllib.parse import urlencode
 
 import requests
 
-from coinmetrics._utils import transform_url_params_values_to_str
+from coinmetrics._utils import transform_url_params_values_to_str, retry
 
 try:
     import ujson as json
@@ -253,7 +254,7 @@ class CoinMetricsClient:
             params_str = ''
 
         actual_url = '{}/{}?{}{}'.format(self._api_base_url, url, self._api_key_url_str, params_str)
-        resp = requests.get(actual_url)
+        resp = self._send_request(actual_url)
         try:
             data = json.loads(resp.content)
         except ValueError:
@@ -264,3 +265,7 @@ class CoinMetricsClient:
                 logger.error('error found for the query: %s, error content: %s', actual_url, data)
                 resp.raise_for_status()
             return cast(DATA_RETURN_TYPE, data)
+
+    @retry(socket.gaierror, retries=5, wait_time_between_retries=5)
+    def _send_request(self, actual_url):
+        return requests.get(actual_url)

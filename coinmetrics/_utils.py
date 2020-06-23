@@ -1,12 +1,15 @@
 import pathlib
 from datetime import datetime, date
 from enum import Enum
+from functools import wraps
+from logging import getLogger
 from os.path import expanduser
+from time import sleep
 from typing import Dict, AnyStr
 
-import mmap
-
 from coinmetrics._typing import FilePathOrBuffer, URL_PARAMS_TYPES
+
+logger = getLogger('cm_client_utils')
 
 
 def transform_url_params_values_to_str(params: Dict[str, URL_PARAMS_TYPES]) -> Dict[str, str]:
@@ -68,3 +71,26 @@ def _is_file_like(obj) -> bool:
         return False
 
     return True
+
+
+def retry(error_cls, retries=5, wait_time_between_retries=30, message=None, fail=True, error_str=None):
+    def retry_wrapper(f):
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+            for n in range(1, retries+1):
+                try:
+                    return f(*args, **kwargs)
+                except error_cls as error:
+                    if (n == retries or (error_str is not None and error_str not in str(error))) and fail:
+                        raise
+                    if callable(wait_time_between_retries):
+                        wait_time = wait_time_between_retries()
+                    else:
+                        wait_time = wait_time_between_retries
+                    if message:
+                        logger.info('%s. Retrying in: %s sec. Iteration: %s',
+                                    message, wait_time, n)
+
+                    sleep(wait_time)
+        return wrapper
+    return retry_wrapper
