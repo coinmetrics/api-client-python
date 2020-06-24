@@ -17,7 +17,7 @@ with open(requirements) as file:
                     if not package.split('=')[0].split('>')[0].split('<')[0] in requirements_exclude_list]
 
 
-__version__ = '2020.06.23.19.13.50-alpha'
+__version__ = '2020.06.24.23.11.56-alpha'
 
 packages = find_packages()
 print(packages)

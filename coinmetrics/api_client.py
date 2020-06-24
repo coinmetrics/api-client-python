@@ -39,7 +39,7 @@ class CoinMetricsClient:
         markets, exchanges, etc.
         """
 
-        return cast(List[Dict[str, Any]], self._get_data('catalog/markets', {'assets': assets})['data'])
+        return cast(List[Dict[str, Any]], self._get_data('catalog/assets', {'assets': assets})['data'])
 
     def catalog_exchanges(self, exchanges: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]:
         """
