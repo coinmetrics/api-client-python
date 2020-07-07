@@ -5,6 +5,7 @@ from typing import Dict, Union, List, Any, Optional, cast
 from urllib.parse import urlencode
 
 import requests
+from requests import HTTPError
 
 from coinmetrics._utils import transform_url_params_values_to_str, retry
 
@@ -266,6 +267,6 @@ class CoinMetricsClient:
                 resp.raise_for_status()
             return cast(DATA_RETURN_TYPE, data)
 
-    @retry(socket.gaierror, retries=5, wait_time_between_retries=5)
+    @retry((socket.gaierror, HTTPError), retries=5, wait_time_between_retries=5)
     def _send_request(self, actual_url):
         return requests.get(actual_url)
