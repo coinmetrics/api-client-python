@@ -9,14 +9,14 @@ class ApiBranch(Enum):
 
 
 class PagingFrom(Enum):
-    START = 'start'
-    END = 'end'
+    START = "start"
+    END = "end"
 
 
 API_BASE = {
-    ApiBranch.PRODUCTION: 'https://api.coinmetrics.io',
-    ApiBranch.STAGING: 'https://staging-api.coinmetrics.io',
-    ApiBranch.COMMUNITY: 'https://community-api.coinmetrics.io',
-    ApiBranch.STAGING_COMMUNITY: 'https://staging-community-api.coinmetrics.io',
+    ApiBranch.PRODUCTION: "https://api.coinmetrics.io",
+    ApiBranch.STAGING: "https://staging-api.coinmetrics.io",
+    ApiBranch.COMMUNITY: "https://community-api.coinmetrics.io",
+    ApiBranch.STAGING_COMMUNITY: "https://staging-community-api.coinmetrics.io",
 }
 COMMUNITY_API_BRANCHES = {ApiBranch.COMMUNITY, ApiBranch.STAGING_COMMUNITY}

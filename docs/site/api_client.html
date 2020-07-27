@@ -1,0 +1,712 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="assets/images/logo.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.0">
+    
+    
+      
+        <title>API Client Spec - Coin Metrics Python API Client</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.b5d04df8.min.css">
+      
+        <link rel="stylesheet" href="assets/stylesheets/palette.9ab2c1f8.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#546e7a">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue-grey" data-md-color-accent="">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#coinmetricsapi_client" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="." title="Coin Metrics Python API Client" class="md-header-nav__button md-logo" aria-label="Coin Metrics Python API Client">
+      
+  <img src="assets/images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Coin Metrics Python API Client
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              API Client Spec
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Coin Metrics Python API Client" class="md-nav__button md-logo" aria-label="Coin Metrics Python API Client">
+      
+  <img src="assets/images/logo.png" alt="logo">
+
+    </a>
+    Coin Metrics Python API Client
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="index.html" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        API Client Spec
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="api_client.html" title="API Client Spec" class="md-nav__link md-nav__link--active">
+      API Client Spec
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#coinmetricsclient-objects" class="md-nav__link">
+    CoinMetricsClient Objects
+  </a>
+  
+    <nav class="md-nav" aria-label="CoinMetricsClient Objects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#catalog_assets" class="md-nav__link">
+    catalog_assets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_exchanges" class="md-nav__link">
+    catalog_exchanges
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_indexes" class="md-nav__link">
+    catalog_indexes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_markets" class="md-nav__link">
+    catalog_markets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_metrics" class="md-nav__link">
+    catalog_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_index_levels" class="md-nav__link">
+    get_index_levels
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_market_candles" class="md-nav__link">
+    get_market_candles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_market_trades" class="md-nav__link">
+    get_market_trades
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_market_quotes" class="md-nav__link">
+    get_market_quotes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_market_orderbooks" class="md-nav__link">
+    get_market_orderbooks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_asset_metrics" class="md-nav__link">
+    get_asset_metrics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#coinmetricsclient-objects" class="md-nav__link">
+    CoinMetricsClient Objects
+  </a>
+  
+    <nav class="md-nav" aria-label="CoinMetricsClient Objects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#catalog_assets" class="md-nav__link">
+    catalog_assets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_exchanges" class="md-nav__link">
+    catalog_exchanges
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_indexes" class="md-nav__link">
+    catalog_indexes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_markets" class="md-nav__link">
+    catalog_markets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_metrics" class="md-nav__link">
+    catalog_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_index_levels" class="md-nav__link">
+    get_index_levels
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_market_candles" class="md-nav__link">
+    get_market_candles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_market_trades" class="md-nav__link">
+    get_market_trades
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_market_quotes" class="md-nav__link">
+    get_market_quotes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_market_orderbooks" class="md-nav__link">
+    get_market_orderbooks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_asset_metrics" class="md-nav__link">
+    get_asset_metrics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <p><a name="coinmetrics.api_client"></a></p>
+<h1 id="coinmetricsapi_client">coinmetrics.api_client<a class="headerlink" href="#coinmetricsapi_client" title="Permanent link">&para;</a></h1>
+<p><a name="coinmetrics.api_client.CoinMetricsClient"></a></p>
+<h2 id="coinmetricsclient-objects">CoinMetricsClient Objects<a class="headerlink" href="#coinmetricsclient-objects" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">CoinMetricsClient</span><span class="p">()</span>
+</code></pre></div>
+
+<p><a name="coinmetrics.api_client.CoinMetricsClient.catalog_assets"></a></p>
+<h4 id="catalog_assets">catalog_assets<a class="headerlink" href="#catalog_assets" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">catalog_assets</span><span class="p">(</span><span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
+</code></pre></div>
+
+<p>Returns meta information about assets.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code>: A single asset or a list of assets to return info for.
+If no assets provided, all available assets are returned.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>Information that is available for requested assets, like: Full name, metrics and available frequencies,
+markets, exchanges, etc.</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.catalog_exchanges"></a></p>
+<h4 id="catalog_exchanges">catalog_exchanges<a class="headerlink" href="#catalog_exchanges" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">catalog_exchanges</span><span class="p">(</span><span class="n">exchanges</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
+</code></pre></div>
+
+<p>Returns meta information about exchanges.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>exchanges</code>: A single exchange name or a list of exchanges to return info for.
+If no exchanges provided, all available exchanges are returned.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>Information that is available for requested exchanges, like: markets, min and max time available.</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.catalog_indexes"></a></p>
+<h4 id="catalog_indexes">catalog_indexes<a class="headerlink" href="#catalog_indexes" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">catalog_indexes</span><span class="p">(</span><span class="n">indexes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
+</code></pre></div>
+
+<p>Returns meta information about indexes.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>indexes</code>: A single index name or a list of indexes to return info for.
+If no indexes provided, all available indexes are returned.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>Information that is available for requested indexes, like: Full name, and available frequencies.</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.catalog_markets"></a></p>
+<h4 id="catalog_markets">catalog_markets<a class="headerlink" href="#catalog_markets" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">catalog_markets</span><span class="p">(</span><span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">base</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">quote</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
+</code></pre></div>
+
+<p>Returns list of markets that correspond to a filter, if no filter is set, returns all available asset.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>exchange</code>: name of the exchange</li>
+<li><code>base</code>: name of base asset</li>
+<li><code>quote</code>: name of quote asset</li>
+<li><code>asset</code>: name of either base or quote asset</li>
+<li><code>symbol</code>: name of a symbol. Usually used for futures contracts.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>Information about markets that correspond to a filter along with meta information like:
+type of market and min and max available time frames.</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.catalog_metrics"></a></p>
+<h4 id="catalog_metrics">catalog_metrics<a class="headerlink" href="#catalog_metrics" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">catalog_metrics</span><span class="p">(</span><span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">reviewable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
+</code></pre></div>
+
+<p>Returns list of available metrics along with information for them like
+description, category, precision and assets for which a metric is available.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>metrics</code>: A single metric name or a list of metrics to return info for.
+If no metrics provided, all available metrics are returned.</li>
+<li><code>reviewable</code>: Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>Information about metrics that correspond to a filter along with meta information like:
+description, category, precision and assets for which a metric is available.</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.get_index_levels"></a></p>
+<h4 id="get_index_levels">get_index_levels<a class="headerlink" href="#get_index_levels" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_index_levels</span><span class="p">(</span><span class="n">indexes</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">frequency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+
+<p>Returns index levels for specified indexes and date range.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>indexes</code>: list of index names</li>
+<li><code>frequency</code>: frequency of the returned timeseries, for e.g 15s, 1d, etc.</li>
+<li><code>page_size</code>: number of items returned per page,
+typically you don't want to change this parameter unless you are interested in a first retuned item only.</li>
+<li><code>paging_from</code>: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
+<li><code>start_time</code>: Start time of the timeseries.</li>
+<li><code>end_time</code>: End time of the timeseries.</li>
+<li><code>start_inclusive</code>: Flag to define if start timestamp must be included in the timeseries if present.</li>
+<li><code>end_inclusive</code>: Flag to define if end timestamp must be included in the timeseries if present.</li>
+<li><code>timezone</code>: timezone of the start/end times in db format for example: "America/Chicago".
+Default value is "UTC". For more details check out API documentation page.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>Index Levels timeseries.</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.get_market_candles"></a></p>
+<h4 id="get_market_candles">get_market_candles<a class="headerlink" href="#get_market_candles" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_market_candles</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">frequency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+
+<p>Returns market candles for specified markets, frequency and date range.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code>: list of market names</li>
+<li><code>frequency</code>: frequency of the returned timeseries, for e.g 5m, 1h, 1d, etc.</li>
+<li><code>page_size</code>: number of items returned per page,
+typically you don't want to change this parameter unless you are interested in a first retuned item only.</li>
+<li><code>paging_from</code>: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
+<li><code>start_time</code>: Start time of the timeseries.</li>
+<li><code>end_time</code>: End time of the timeseries.</li>
+<li><code>start_inclusive</code>: Flag to define if start timestamp must be included in the timeseries if present.</li>
+<li><code>end_inclusive</code>: Flag to define if end timestamp must be included in the timeseries if present.</li>
+<li><code>timezone</code>: timezone of the start/end times in db format for example: "America/Chicago".
+Default value is "UTC". For more details check out API documentation page.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>Market Candles timeseries.</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.get_market_trades"></a></p>
+<h4 id="get_market_trades">get_market_trades<a class="headerlink" href="#get_market_trades" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_market_trades</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+
+<p>Returns market trades for specified markets and date range.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code>: list of market names</li>
+<li><code>page_size</code>: number of items returned per page,
+typically you don't want to change this parameter unless you are interested in a first retuned item only.</li>
+<li><code>paging_from</code>: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
+<li><code>start_time</code>: Start time of the timeseries.</li>
+<li><code>end_time</code>: End time of the timeseries.</li>
+<li><code>start_inclusive</code>: Flag to define if start timestamp must be included in the timeseries if present.</li>
+<li><code>end_inclusive</code>: Flag to define if end timestamp must be included in the timeseries if present.</li>
+<li><code>timezone</code>: timezone of the start/end times in db format for example: "America/Chicago".
+Default value is "UTC". For more details check out API documentation page.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>Market Trades timeseries.</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.get_market_quotes"></a></p>
+<h4 id="get_market_quotes">get_market_quotes<a class="headerlink" href="#get_market_quotes" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_market_quotes</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+
+<p>Returns market quotes for specified markets and date range.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code>: list of market names</li>
+<li><code>page_size</code>: number of items returned per page,
+typically you don't want to change this parameter unless you are interested in a first retuned item only.</li>
+<li><code>paging_from</code>: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
+<li><code>start_time</code>: Start time of the timeseries.</li>
+<li><code>end_time</code>: End time of the timeseries.</li>
+<li><code>start_inclusive</code>: Flag to define if start timestamp must be included in the timeseries if present.</li>
+<li><code>end_inclusive</code>: Flag to define if end timestamp must be included in the timeseries if present.</li>
+<li><code>timezone</code>: timezone of the start/end times in db format for example: "America/Chicago".
+Default value is "UTC". For more details check out API documentation page.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>Market Quotes timeseries.</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.get_market_orderbooks"></a></p>
+<h4 id="get_market_orderbooks">get_market_orderbooks<a class="headerlink" href="#get_market_orderbooks" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_market_orderbooks</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+
+<p>Returns market order books for specified markets and date range.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code>: list of market names</li>
+<li><code>page_size</code>: number of items returned per page,
+typically you don't want to change this parameter unless you are interested in a first retuned item only.</li>
+<li><code>paging_from</code>: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
+<li><code>start_time</code>: Start time of the timeseries.</li>
+<li><code>end_time</code>: End time of the timeseries.</li>
+<li><code>start_inclusive</code>: Flag to define if start timestamp must be included in the timeseries if present.</li>
+<li><code>end_inclusive</code>: Flag to define if end timestamp must be included in the timeseries if present.</li>
+<li><code>timezone</code>: timezone of the start/end times in db format for example: "America/Chicago".
+Default value is "UTC". For more details check out API documentation page.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>Market Order Books timeseries.</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.get_asset_metrics"></a></p>
+<h4 id="get_asset_metrics">get_asset_metrics<a class="headerlink" href="#get_asset_metrics" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_asset_metrics</span><span class="p">(</span><span class="n">assets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">metrics</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">frequency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+
+<p>Returns asset metrics books for specified assets, metrics, date range and frequency.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code>: list of asset names</li>
+<li><code>metrics</code>: list of metric names</li>
+<li><code>frequency</code>: frequency of the returned timeseries, for e.g 1s, 1b, 1d, etc.</li>
+<li><code>page_size</code>: number of items returned per page,
+typically you don't want to change this parameter unless you are interested in a first retuned item only.</li>
+<li><code>paging_from</code>: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
+<li><code>start_time</code>: Start time of the timeseries.</li>
+<li><code>end_time</code>: End time of the timeseries.</li>
+<li><code>start_inclusive</code>: Flag to define if start timestamp must be included in the timeseries if present.</li>
+<li><code>end_inclusive</code>: Flag to define if end timestamp must be included in the timeseries if present.</li>
+<li><code>timezone</code>: timezone of the start/end times in db format for example: "America/Chicago".
+Default value is "UTC". For more details check out API documentation page.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>Asset Metrics timeseries.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="index.html" title="Home" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Home
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.92ffa368.min.js"></script>
+      <script src="assets/javascripts/bundle.5123e3d4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.a68abb33.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

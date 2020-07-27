@@ -1,4 +1,0 @@
-requests==2.23.0
-flake8==3.8.3
-mypy==0.780
-ujson==3.0.0

@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "coinmetrics-api-client"
+version = "2020.07.27.14.04-alpha"
+description = "Python client for Coin Metrics API v4."
+authors = ["Coin Metrics <info@coinmetrics.io>", "Oleksandr Buchkovskyi <oleksandr@coinmetrics.io>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/coinmetrics-io/api-client-python"
+repository = "https://github.com/coinmetrics-io/api-client-python"
+packages = [{include = "coinmetrics"}]
+keywords = ["coin metrics", "coin", "metrics", "crypto", "bitcoin", "network-data", "market-data", "api", "handy"]
+documentation = "https://github.com/coinmetrics-io/api-client-python/blob/master/README.md"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+requests = "^2.24.0"
+
+[tool.poetry.dev-dependencies]
+mypy = "^0.782"
+flake8 = "^3.8.3"
+black = "^19.10b0"
+mkdocs = "^1.1.2"
+mkdocs-material = "^5.5.0"
+pydoc-markdown = "^3.3.0"
+pytest-mock = "^3.2.0"
+
+[tool.poetry.scripts]
+poetry = 'poetry.console:run'
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
