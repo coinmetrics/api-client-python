@@ -1,13 +1,13 @@
 import socket
-from datetime import datetime, date
+from datetime import date, datetime
 from logging import getLogger
-from typing import Dict, Union, List, Any, Optional, cast
+from typing import Any, Dict, List, Optional, Union, cast
 from urllib.parse import urlencode
 
 import requests
-from requests import HTTPError
+from requests import HTTPError, Response
 
-from coinmetrics._utils import transform_url_params_values_to_str, retry
+from coinmetrics._utils import retry, transform_url_params_values_to_str
 
 try:
     import ujson as json
@@ -16,12 +16,7 @@ except ImportError:
     import json  # type: ignore
 
 from coinmetrics._typing import DataReturnType
-from coinmetrics.constants import (
-    ApiBranch,
-    PagingFrom,
-    API_BASE,
-    COMMUNITY_API_BRANCHES,
-)
+from coinmetrics.constants import PagingFrom
 from coinmetrics._data_collection import DataCollection
 
 logger = getLogger("cm_client")
@@ -29,21 +24,15 @@ logger = getLogger("cm_client")
 
 class CoinMetricsClient:
     def __init__(
-        self,
-        api_key: str = "",
-        api_branch: ApiBranch = ApiBranch.PRODUCTION,
-        page_size: int = 1000,
+        self, api_key: str = "", page_size: int = 1000,
     ):
-        if not api_key or not isinstance(api_key, (str, bytes)):
-            if api_branch not in COMMUNITY_API_BRANCHES:
-                raise ValueError("API key must be a non empty string")
         self._page_size = page_size
-        self._api_key_url_str = (
-            "api_key={}".format(api_key)
-            if api_branch not in COMMUNITY_API_BRANCHES
-            else ""
-        )
-        self._api_base_url = "{}/v4".format(API_BASE[api_branch])
+        self._api_key_url_str = "api_key={}".format(api_key) if api_key else ""
+
+        api_path_prefix = ""
+        if not api_key:
+            api_path_prefix = "community-"
+        self._api_base_url = "https://{}api.coinmetrics.io/v4".format(api_path_prefix)
 
     def catalog_assets(
         self, assets: Optional[Union[List[str], str]] = None
@@ -414,5 +403,5 @@ class CoinMetricsClient:
             return cast(DataReturnType, data)
 
     @retry((socket.gaierror, HTTPError), retries=5, wait_time_between_retries=5)
-    def _send_request(self, actual_url):
+    def _send_request(self, actual_url: str) -> Response:
         return requests.get(actual_url)

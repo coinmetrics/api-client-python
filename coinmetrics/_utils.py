@@ -1,11 +1,11 @@
 import pathlib
-from datetime import datetime, date
+from datetime import date, datetime
 from enum import Enum
 from functools import wraps
 from logging import getLogger
 from os.path import expanduser
 from time import sleep
-from typing import Any, Callable, Dict, AnyStr, List, Optional, Tuple, Union
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 from coinmetrics._typing import FilePathOrBuffer, UrlParamTypes
 
@@ -39,7 +39,7 @@ def transform_url_params_values_to_str(
     return processed_params
 
 
-def get_file_path_or_buffer(filepath_or_buffer: FilePathOrBuffer[AnyStr]) -> FilePathOrBuffer[AnyStr]:
+def get_file_path_or_buffer(filepath_or_buffer: FilePathOrBuffer,) -> FilePathOrBuffer:
     if isinstance(filepath_or_buffer, (str, bytes, pathlib.Path)):
         return _stringify_path(filepath_or_buffer)
 
@@ -52,9 +52,7 @@ def get_file_path_or_buffer(filepath_or_buffer: FilePathOrBuffer[AnyStr]) -> Fil
     return filepath_or_buffer
 
 
-def _stringify_path(
-    filepath_or_buffer: FilePathOrBuffer[AnyStr],
-) -> FilePathOrBuffer[AnyStr]:
+def _stringify_path(filepath_or_buffer: FilePathOrBuffer,) -> FilePathOrBuffer:
     if hasattr(filepath_or_buffer, "__fspath__"):
         # https://github.com/python/mypy/issues/1424
         return filepath_or_buffer.__fspath__()  # type: ignore
@@ -63,9 +61,7 @@ def _stringify_path(
     return _expand_user(filepath_or_buffer)
 
 
-def _expand_user(
-    filepath_or_buffer: FilePathOrBuffer[AnyStr],
-) -> FilePathOrBuffer[AnyStr]:
+def _expand_user(filepath_or_buffer: FilePathOrBuffer,) -> FilePathOrBuffer:
     if isinstance(filepath_or_buffer, str):
         return expanduser(filepath_or_buffer)
     return filepath_or_buffer
@@ -82,7 +78,7 @@ def _is_file_like(obj: Any) -> bool:
 
 
 def retry(
-    error_cls: Union[List[Exception], Tuple[Exception], Exception],
+    error_cls: Union[List[Any], Tuple[Any], Any],
     retries: int = 5,
     wait_time_between_retries: int = 30,
     message: Optional[str] = None,

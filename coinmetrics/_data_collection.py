@@ -1,9 +1,8 @@
-import pathlib
 from copy import deepcopy
 from gzip import GzipFile
 from io import StringIO
 from logging import getLogger
-from typing import Any, Dict, Iterable, List, Optional, Iterator, cast, Union, AnyStr, IO
+from typing import Any, Dict, Iterable, Iterator, List, Optional, cast
 
 from coinmetrics._typing import DataRetrievalFuncType, FilePathOrBuffer, UrlParamTypes
 from coinmetrics._utils import get_file_path_or_buffer
@@ -57,7 +56,7 @@ class DataCollection:
 
     def export_to_csv(
         self,
-        path_or_bufstr: Optional[FilePathOrBuffer[AnyStr]] = None,
+        path_or_bufstr: FilePathOrBuffer = None,
         columns_to_store: Optional[List[str]] = None,
         compress: bool = False,
     ) -> None:
@@ -74,24 +73,24 @@ class DataCollection:
             f = path_or_bufstr
             close = False
         else:
-            f = open(path_or_bufstr, "wb" if compress else "w")
+            f = open(path_or_bufstr, "wb" if compress else "w")  # type: ignore
             close = True
 
         if compress:
-            output_file = GzipFile(fileobj=f)
+            output_file = GzipFile(fileobj=f)  # type: ignore
         else:
-            output_file = f
+            output_file = f  # type: ignore
 
         try:
             for line in self._get_data_lines(columns_to_store):
-                output_file.write(line.encode() if compress else line)
+                output_file.write(line.encode() if compress else line)  # type: ignore
         finally:
             if compress:
                 output_file.close()
             if close:
-                f.close()
+                f.close()  # type: ignore
 
-    def _get_data_lines(self, columns_to_store: List[str]) -> Iterable[str]:
+    def _get_data_lines(self, columns_to_store: Optional[List[str]]) -> Iterable[str]:
         first_data_el = None
         if columns_to_store is None:
             try:
