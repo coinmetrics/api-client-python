@@ -9,7 +9,7 @@ homepage = "https://coinmetrics-io.github.io/api-client-python/site/index.html"
 repository = "https://github.com/coinmetrics-io/api-client-python"
 packages = [{include = "coinmetrics"}]
 keywords = ["coin metrics", "coin", "metrics", "crypto", "bitcoin", "network-data", "market-data", "api", "handy"]
-documentation = "https://github.com/coinmetrics-io/api-client-python/blob/master/README.md"
+documentation = "https://coinmetrics-io.github.io/api-client-python/site/index.html"
 
 [tool.poetry.dependencies]
 python = "^3.6"
