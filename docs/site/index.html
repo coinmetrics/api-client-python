@@ -316,6 +316,8 @@
 <p><div class="highlight"><pre><span></span><code>print(client.catalog_assets(assets=[&#39;btc&#39;]))
 </code></pre></div>
 in this case you would get all the information for btc only</p>
+<p>You can use this client to connect to our API v4 and get catalog or timeseries data from python environment. It natively supports paging over the data so you can use it to iterate over timeseries entries seamlessly.</p>
+<p>The client can be used to query both pro and community data.</p>
 <h2 id="getting-timeseries-data">Getting timeseries data<a class="headerlink" href="#getting-timeseries-data" title="Permanent link">&para;</a></h2>
 <p>For getting timeseries data you want to use methods of the client class that start with <code>get_</code>.</p>
 <p>For example if you want to get a bunch of market data trades for coinbase btc-usd pair you can run something similar to the following:</p>
@@ -332,7 +334,7 @@ in this case you would get all the information for btc only</p>
     print(metric_data)
 </code></pre></div>
 This will print you the requested metrics for all the days where we have any of the metrics present. </p>
-<p>For more information about the available methods in the client please reference <a href="api_client.html">API Client Spec</a></p>
+<p>For more information about the available methods in the client please reference <a href="[https://coinmetrics-io.github.io/api-client-python/site/api_client.html]">API Client Spec</a></p>
                 
               
               

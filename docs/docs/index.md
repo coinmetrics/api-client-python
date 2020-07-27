@@ -36,6 +36,10 @@ print(client.catalog_assets(assets=['btc']))
 ```
 in this case you would get all the information for btc only
 
+You can use this client to connect to our API v4 and get catalog or timeseries data from python environment. It natively supports paging over the data so you can use it to iterate over timeseries entries seamlessly.
+
+The client can be used to query both pro and community data.
+
 ## Getting timeseries data
 
 For getting timeseries data you want to use methods of the client class that start with `get_`.
@@ -60,4 +64,4 @@ for metric_data in client.get_asset_metrics(assets='btc',
 This will print you the requested metrics for all the days where we have any of the metrics present. 
 
 
-For more information about the available methods in the client please reference [API Client Spec](api_client.md)
+For more information about the available methods in the client please reference [API Client Spec]([https://coinmetrics-io.github.io/api-client-python/site/api_client.html])
