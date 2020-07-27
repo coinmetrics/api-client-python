@@ -60,4 +60,4 @@ for metric_data in client.get_asset_metrics(assets='btc',
 This will print you the requested metrics for all the days where we have any of the metrics present. 
 
 
-For more information about the available methods in the client please reference [API Client Spec](api_client.md)
+For more information about the available methods in the client please reference [API Client Spec]([https://coinmetrics-io.github.io/api-client-python/site/api_client.html])
