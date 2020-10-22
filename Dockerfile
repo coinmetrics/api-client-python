@@ -1,4 +1,4 @@
-FROM python:3.7.3-alpine
+FROM python:3.8.6-alpine
 
 ARG POETRY_VERSION=1.1.1
 
@@ -11,6 +11,9 @@ RUN pip install --upgrade pip
 RUN pip install "poetry==$POETRY_VERSION"
 COPY pyproject.toml ./poetry.lock ./
 RUN poetry config virtualenvs.create false
+
+RUN poetry install --no-root
+
 
 COPY . .
 
