@@ -211,6 +211,26 @@
     Getting timeseries data
   </a>
   
+    <nav class="md-nav" aria-label="Getting timeseries data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paging" class="md-nav__link">
+    Paging
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extended-documentation" class="md-nav__link">
+    Extended documentation
+  </a>
+  
 </li>
       
     </ul>
@@ -276,6 +296,26 @@
     Getting timeseries data
   </a>
   
+    <nav class="md-nav" aria-label="Getting timeseries data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paging" class="md-nav__link">
+    Paging
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extended-documentation" class="md-nav__link">
+    Extended documentation
+  </a>
+  
 </li>
       
     </ul>
@@ -303,7 +343,12 @@
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>You can use this client for querying all kinds of data with your API.</p>
 <p>To initialize the client you should use your API key, and the CoinMetricsClient class like the following.
-<div class="highlight"><pre><span></span><code>client = CoinMetricsClient(environ.get(&quot;CM_API_KEY&quot;))
+<div class="highlight"><pre><span></span><code>from coinmetrics.api_client import CoinMetricsClient
+
+client = CoinMetricsClient(environ.get(&quot;CM_API_KEY&quot;))
+
+# or to use community API:
+client = CoinMetricsClient()
 </code></pre></div></p>
 <p>After that you can use the client object for getting stuff like available markets:
 <div class="highlight"><pre><span></span><code>print(client.catalog_markets())
@@ -328,12 +373,26 @@ in this case you would get all the information for btc only</p>
 
 <p>Or if you want to see daily btc asset metrics you can use something like this:</p>
 <p><div class="highlight"><pre><span></span><code>for metric_data in client.get_asset_metrics(assets=&#39;btc&#39;, 
-                                            metrics=[&#39;ReferenceRate&#39;, &#39;BlkHgt&#39;, &#39;AdrActCnt&#39;,  
+                                            metrics=[&#39;ReferenceRateUSD&#39;, &#39;BlkHgt&#39;, &#39;AdrActCnt&#39;,  
                                                      &#39;AdrActRecCnt&#39;, &#39;FlowOutBFXUSD&#39;], 
                                             frequency=&#39;1d&#39;):
     print(metric_data)
 </code></pre></div>
 This will print you the requested metrics for all the days where we have any of the metrics present. </p>
+<h3 id="paging">Paging<a class="headerlink" href="#paging" title="Permanent link">&para;</a></h3>
+<p>You can make the datapoints to iterate from start or from end (default).</p>
+<p>for that you should use a paging_from argument like the following:
+<div class="highlight"><pre><span></span><code>from coinmetrics.api_client import CoinMetricsClient
+from coinmetrics.constants import PagingFrom
+
+client = CoinMetricsClient()
+
+for metric_data in client.get_asset_metrics(assets=&#39;btc&#39;, metrics=[&#39;ReferenceRateUSD&#39;],
+                                            paging_from=PagingFrom.START):
+    print(metric_data)
+</code></pre></div></p>
+<p>PagingFrom.END: is available but it is also a default value also, so you might not want to set it.</p>
+<h2 id="extended-documentation">Extended documentation<a class="headerlink" href="#extended-documentation" title="Permanent link">&para;</a></h2>
 <p>For more information about the available methods in the client please reference <a href="[https://coinmetrics-io.github.io/api-client-python/site/api_client.html]">API Client Spec</a></p>
                 
               
