@@ -99,10 +99,10 @@ def export_data():
                         i * page_size,
                         min(((i + 1) * page_size - 1), max_block),
                     )
-                    if i == 0:
-                        dst_file_buffer.write(content[:-1])
-                    else:
-                        dst_file_buffer.write(content[content.find("\n") : -1])
+
+                    dst_file_buffer.write(
+                        content if i == 0 else content[content.find("\n") + 1 :]
+                    )
 
 
 if __name__ == "__main__":
