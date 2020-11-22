@@ -59,7 +59,7 @@ def export_data():
     dst_file = join(DST_ROOT, "{}_bbb_metrics.csv".format(asset))
     makedirs(DST_ROOT, exist_ok=True)
     logger.info(
-        "exporting metrics into a csv file (this might take awhile): %s",
+        "exporting metrics into a csv file (this might take 5-10+ minutes): %s",
         abspath(dst_file),
     )
     with open(dst_file, "w") as dst_file_buffer:
