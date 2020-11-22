@@ -341,6 +341,8 @@ class CoinMetricsClient:
         paging_from: Optional[Union[PagingFrom, str]] = None,
         start_time: Optional[Union[datetime, date, str]] = None,
         end_time: Optional[Union[datetime, date, str]] = None,
+        start_height: Optional[int] = None,
+        end_height: Optional[int] = None,
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
@@ -356,6 +358,8 @@ class CoinMetricsClient:
         :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
         :param start_time: Start time of the timeseries.
         :param end_time: End time of the timeseries.
+        :param start_height: Start block of the timeseries (only applicable when querying with frequency 1b).
+        :param end_height: End block of the timeseries (only applicable when querying with frequency 1b).
         :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present.
         :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present.
         :param timezone: timezone of the start/end times in db format for example: "America/Chicago".
@@ -371,6 +375,8 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
+            "start_height": start_height,
+            "end_height": end_height,
             "start_inclusive": start_inclusive,
             "end_inclusive": end_inclusive,
             "timezone": timezone,

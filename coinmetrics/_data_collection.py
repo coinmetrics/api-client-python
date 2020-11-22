@@ -103,7 +103,9 @@ class DataCollection:
         yield ",".join(columns_to_store) + "\n"
 
         if first_data_el is not None:
-            yield ",".join(first_data_el[column] for column in columns_to_store) + "\n"
+            yield ",".join(first_data_el[column] if first_data_el[column] is not None else ''
+                           for column in columns_to_store) + "\n"
 
         for data_el in self:
-            yield ",".join(data_el[column] for column in columns_to_store) + "\n"
+            yield ",".join(data_el[column] if data_el[column] is not None else ''
+                           for column in columns_to_store) + "\n"
