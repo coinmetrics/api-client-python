@@ -242,7 +242,7 @@ Market Order Books timeseries.
 #### get\_asset\_metrics
 
 ```python
- | get_asset_metrics(assets: Union[List[str], str], metrics: Union[List[str], str], frequency: Optional[str] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+ | get_asset_metrics(assets: Union[List[str], str], metrics: Union[List[str], str], frequency: Optional[str] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
 ```
 
 Returns asset metrics books for specified assets, metrics, date range and frequency.
@@ -257,6 +257,8 @@ typically you don't want to change this parameter unless you are interested in a
 - `paging_from`: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
 - `start_time`: Start time of the timeseries.
 - `end_time`: End time of the timeseries.
+- `start_height`: Start block of the timeseries (only applicable when querying with frequency 1b).
+- `end_height`: End block of the timeseries (only applicable when querying with frequency 1b).
 - `start_inclusive`: Flag to define if start timestamp must be included in the timeseries if present.
 - `end_inclusive`: Flag to define if end timestamp must be included in the timeseries if present.
 - `timezone`: timezone of the start/end times in db format for example: "America/Chicago".
