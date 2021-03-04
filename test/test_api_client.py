@@ -1,9 +1,10 @@
+from typing import Any
 from unittest.mock import Mock
 
 from coinmetrics.api_client import CoinMetricsClient, requests
 
 
-def test_catalog_assets_request(mocker):
+def test_catalog_assets_request(mocker: Any) -> None:
     client = CoinMetricsClient("xxx")
     mock = Mock()
     mock.content = '{"data": [{"asset": "btc", "markets": ["coinbase-btc-usd-spot"]}]}'
@@ -15,7 +16,7 @@ def test_catalog_assets_request(mocker):
     assert response == [{"asset": "btc", "markets": ["coinbase-btc-usd-spot"]}]
 
 
-def test_base_url():
+def test_base_url() -> None:
     assert CoinMetricsClient("xxx")._api_base_url == "https://api.coinmetrics.io/v4"
     assert CoinMetricsClient("xxx")._api_key_url_str == "api_key=xxx"
     assert (

@@ -1,6 +1,6 @@
 FROM python:3.8.6-alpine
 
-ARG POETRY_VERSION=1.1.1
+ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 
 RUN apk update && \
     apk add --virtual build-deps gcc python3-dev musl-dev protobuf libffi-dev && \
@@ -8,13 +8,13 @@ RUN apk update && \
 
 RUN pip install --upgrade pip
 
-RUN pip install "poetry==$POETRY_VERSION"
+RUN pip install "poetry==1.1.5"
 COPY pyproject.toml ./poetry.lock ./
 RUN poetry config virtualenvs.create false
 
 RUN poetry install --no-root
 
 
-COPY . .
+COPY ./ ./
 
 CMD [ "python" ]
