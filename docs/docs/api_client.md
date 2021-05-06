@@ -268,3 +268,31 @@ Default value is "UTC". For more details check out API documentation page.
 
 Asset Metrics timeseries.
 
+<a name="coinmetrics.api_client.CoinMetricsClient.get_mining_pool_tips_summary"></a>
+#### get\_mining\_pool\_tips\_summary
+
+```python
+ | get_mining_pool_tips_summary(assets: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+```
+
+Returns asset metrics books for specified assets, metrics, date range and frequency.
+
+**Arguments**:
+
+- `assets`: list of asset names
+- `page_size`: number of items returned per page,
+typically you don't want to change this parameter unless you are interested in a first retuned item only.
+- `paging_from`: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time`: Start time of the timeseries.
+- `end_time`: End time of the timeseries.
+- `start_height`: Start block of the timeseries (only applicable when querying with frequency 1b).
+- `end_height`: End block of the timeseries (only applicable when querying with frequency 1b).
+- `start_inclusive`: Flag to define if start timestamp must be included in the timeseries if present.
+- `end_inclusive`: Flag to define if end timestamp must be included in the timeseries if present.
+- `timezone`: timezone of the start/end times in db format for example: "America/Chicago".
+Default value is "UTC". For more details check out API documentation page.
+
+**Returns**:
+
+Asset Metrics timeseries.
+
