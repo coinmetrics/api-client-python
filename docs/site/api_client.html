@@ -289,6 +289,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#get_mining_pool_tips_summary" class="md-nav__link">
+    get_mining_pool_tips_summary
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -407,6 +414,13 @@
           <li class="md-nav__item">
   <a href="#get_asset_metrics" class="md-nav__link">
     get_asset_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_mining_pool_tips_summary" class="md-nav__link">
+    get_mining_pool_tips_summary
   </a>
   
 </li>
@@ -630,6 +644,29 @@ Default value is "UTC". For more details check out API documentation page.</li>
 <li><code>assets</code>: list of asset names</li>
 <li><code>metrics</code>: list of metric names</li>
 <li><code>frequency</code>: frequency of the returned timeseries, for e.g 1s, 1b, 1d, etc.</li>
+<li><code>page_size</code>: number of items returned per page,
+typically you don't want to change this parameter unless you are interested in a first retuned item only.</li>
+<li><code>paging_from</code>: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
+<li><code>start_time</code>: Start time of the timeseries.</li>
+<li><code>end_time</code>: End time of the timeseries.</li>
+<li><code>start_height</code>: Start block of the timeseries (only applicable when querying with frequency 1b).</li>
+<li><code>end_height</code>: End block of the timeseries (only applicable when querying with frequency 1b).</li>
+<li><code>start_inclusive</code>: Flag to define if start timestamp must be included in the timeseries if present.</li>
+<li><code>end_inclusive</code>: Flag to define if end timestamp must be included in the timeseries if present.</li>
+<li><code>timezone</code>: timezone of the start/end times in db format for example: "America/Chicago".
+Default value is "UTC". For more details check out API documentation page.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>Asset Metrics timeseries.</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.get_mining_pool_tips_summary"></a></p>
+<h4 id="get_mining_pool_tips_summary">get_mining_pool_tips_summary<a class="headerlink" href="#get_mining_pool_tips_summary" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_mining_pool_tips_summary</span><span class="p">(</span><span class="n">assets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+
+<p>Returns asset metrics books for specified assets, metrics, date range and frequency.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code>: list of asset names</li>
 <li><code>page_size</code>: number of items returned per page,
 typically you don't want to change this parameter unless you are interested in a first retuned item only.</li>
 <li><code>paging_from</code>: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
