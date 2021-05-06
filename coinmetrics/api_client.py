@@ -383,6 +383,47 @@ class CoinMetricsClient:
         }
         return DataCollection(self._get_data, "timeseries/asset-metrics", params)
 
+    def get_mining_pool_tips_summary(
+        self,
+        assets: Union[List[str], str],
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = None,
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        Returns asset metrics books for specified assets, metrics, date range and frequency.
+
+        :param assets: list of asset names
+        :param page_size: number of items returned per page,
+        typically you don't want to change this parameter unless you are interested in a first retuned item only.
+        :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+        :param start_time: Start time of the timeseries.
+        :param end_time: End time of the timeseries.
+        :param start_height: Start block of the timeseries (only applicable when querying with frequency 1b).
+        :param end_height: End block of the timeseries (only applicable when querying with frequency 1b).
+        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present.
+        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present.
+        :param timezone: timezone of the start/end times in db format for example: "America/Chicago".
+        Default value is "UTC". For more details check out API documentation page.
+        :return: Asset Metrics timeseries.
+        """
+
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "page_size": page_size or self._page_size,
+            "paging_from": paging_from,
+            "start_time": start_time,
+            "end_time": end_time,
+            "start_inclusive": start_inclusive,
+            "end_inclusive": end_inclusive,
+            "timezone": timezone,
+        }
+        return DataCollection(self._get_data, "timeseries/mining-pool-tips-summary", params)
+
     def _get_data(self, url: str, params: Dict[str, Any]) -> DataReturnType:
         if params:
             params_str = "&{}".format(
