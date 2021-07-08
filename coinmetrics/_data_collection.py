@@ -1,8 +1,8 @@
 from copy import deepcopy
 from gzip import GzipFile
-from io import BytesIO, StringIO
+from io import BytesIO
 from logging import getLogger
-from typing import Any, Dict, Generator, Iterable, Iterator, List, Optional, cast
+from typing import Any, Dict, Iterable, Iterator, List, Optional, cast
 
 from coinmetrics._typing import DataRetrievalFuncType, FilePathOrBuffer, UrlParamTypes
 from coinmetrics._utils import get_file_path_or_buffer
@@ -10,7 +10,7 @@ from coinmetrics._utils import get_file_path_or_buffer
 try:
     import orjson as json
 except ImportError:
-    import json
+    import json  # type: ignore
 
 
 logger = getLogger("cm_client_data_collection")
@@ -65,7 +65,7 @@ class DataCollection:
         path_or_bufstr: FilePathOrBuffer = None,
         columns_to_store: Optional[List[str]] = None,
         compress: bool = False,
-    ) -> None:
+    ) -> Optional[str]:
         if not self._csv_export_supported:
             raise CsvExportError(
                 "Sorry, csv export is not supported for this data type."
@@ -90,17 +90,19 @@ class DataCollection:
         yield (",".join(columns_to_store) + "\n").encode()
 
         if first_data_el is not None:
-            yield (",".join(
-                first_data_el.get(column) or "" for column in columns_to_store
-            ) + "\n").encode()
+            yield (
+                ",".join(first_data_el.get(column) or "" for column in columns_to_store)
+                + "\n"
+            ).encode()
         for data_el in self:
-            yield (",".join(
-                data_el.get(column) or "" for column in columns_to_store
-            ) + "\n").encode()
+            yield (
+                ",".join(data_el.get(column) or "" for column in columns_to_store)
+                + "\n"
+            ).encode()
 
     def export_to_json(
         self, path_or_bufstr: FilePathOrBuffer = None, compress: bool = False,
-    ) -> None:
+    ) -> Optional[str]:
         def _gen_json_lines() -> Iterable[bytes]:
             for data_row in self:
                 yield json.dumps(data_row) + b"\n"
@@ -115,7 +117,7 @@ class DataCollection:
     ) -> Optional[str]:
 
         if path_or_bufstr is None:
-            path_or_bufstr_obj = BytesIO()
+            path_or_bufstr_obj: FilePathOrBuffer = BytesIO()
         else:
             path_or_bufstr_obj = path_or_bufstr
 
@@ -124,7 +126,7 @@ class DataCollection:
             f = path_or_bufstr_obj
             close = False
         else:
-            f = open(path_or_bufstr_obj, "wb" if compress else "w")  # type: ignore
+            f = open(path_or_bufstr_obj, "wb")  # type: ignore
             close = True
         if compress:
             output_file = GzipFile(fileobj=f)  # type: ignore
@@ -132,7 +134,7 @@ class DataCollection:
             output_file = f  # type: ignore
         try:
             for line in data_generator:
-                output_file.write(line.encode() if compress else line)  # type: ignore
+                output_file.write(line)
         finally:
             if compress:
                 output_file.close()
@@ -140,4 +142,6 @@ class DataCollection:
                 f.close()  # type: ignore
 
         if path_or_bufstr is None:
-            return path_or_bufstr_obj.getvalue().decode()
+            return path_or_bufstr_obj.getvalue().decode()  # type: ignore
+
+        return None

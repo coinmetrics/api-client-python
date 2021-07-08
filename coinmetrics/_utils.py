@@ -39,7 +39,7 @@ def transform_url_params_values_to_str(
     return processed_params
 
 
-def get_file_path_or_buffer(filepath_or_buffer: FilePathOrBuffer,) -> FilePathOrBuffer:
+def get_file_path_or_buffer(filepath_or_buffer: FilePathOrBuffer) -> FilePathOrBuffer:
     if isinstance(filepath_or_buffer, (str, bytes, pathlib.Path)):
         return _stringify_path(filepath_or_buffer)
 
@@ -52,7 +52,7 @@ def get_file_path_or_buffer(filepath_or_buffer: FilePathOrBuffer,) -> FilePathOr
     return filepath_or_buffer
 
 
-def _stringify_path(filepath_or_buffer: FilePathOrBuffer,) -> FilePathOrBuffer:
+def _stringify_path(filepath_or_buffer: FilePathOrBuffer) -> FilePathOrBuffer:
     if hasattr(filepath_or_buffer, "__fspath__"):
         # https://github.com/python/mypy/issues/1424
         return filepath_or_buffer.__fspath__()  # type: ignore

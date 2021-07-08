@@ -175,7 +175,7 @@ def export_data_for_a_market(market, market_data_root, target_date):
     logger.info("downloading data to: %s", dst_csv_file_path)
     if s3 is not None:
         with s3.open(
-            dst_csv_file_path.split("s3://")[1], "wb" if COMPRESS_DATA else "w"
+            dst_csv_file_path.split("s3://")[1], "wb"
         ) as data_file:
             market_trades.export_to_csv(data_file, compress=COMPRESS_DATA)
     else:
