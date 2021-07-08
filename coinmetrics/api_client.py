@@ -422,7 +422,9 @@ class CoinMetricsClient:
             "end_inclusive": end_inclusive,
             "timezone": timezone,
         }
-        return DataCollection(self._get_data, "timeseries/mining-pool-tips-summary", params)
+        return DataCollection(
+            self._get_data, "timeseries/mining-pool-tips-summary", params
+        )
 
     def _get_data(self, url: str, params: Dict[str, Any]) -> DataReturnType:
         if params:

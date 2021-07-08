@@ -1,11 +1,17 @@
 from copy import deepcopy
 from gzip import GzipFile
-from io import StringIO
+from io import BytesIO, StringIO
 from logging import getLogger
-from typing import Any, Dict, Iterable, Iterator, List, Optional, cast
+from typing import Any, Dict, Generator, Iterable, Iterator, List, Optional, cast
 
 from coinmetrics._typing import DataRetrievalFuncType, FilePathOrBuffer, UrlParamTypes
 from coinmetrics._utils import get_file_path_or_buffer
+
+try:
+    import orjson as json
+except ImportError:
+    import json
+
 
 logger = getLogger("cm_client_data_collection")
 
@@ -64,33 +70,14 @@ class DataCollection:
             raise CsvExportError(
                 "Sorry, csv export is not supported for this data type."
             )
-        if path_or_bufstr is None:
-            path_or_bufstr = StringIO()
 
-        path_or_bufstr = get_file_path_or_buffer(path_or_bufstr)
+        return self._export_to_file(
+            self._get_csv_data_lines(columns_to_store), path_or_bufstr, compress
+        )
 
-        if hasattr(path_or_bufstr, "write"):
-            f = path_or_bufstr
-            close = False
-        else:
-            f = open(path_or_bufstr, "wb" if compress else "w")  # type: ignore
-            close = True
-
-        if compress:
-            output_file = GzipFile(fileobj=f)  # type: ignore
-        else:
-            output_file = f  # type: ignore
-
-        try:
-            for line in self._get_data_lines(columns_to_store):
-                output_file.write(line.encode() if compress else line)  # type: ignore
-        finally:
-            if compress:
-                output_file.close()
-            if close:
-                f.close()  # type: ignore
-
-    def _get_data_lines(self, columns_to_store: Optional[List[str]]) -> Iterable[str]:
+    def _get_csv_data_lines(
+        self, columns_to_store: Optional[List[str]]
+    ) -> Iterable[bytes]:
         first_data_el = None
         if columns_to_store is None:
             try:
@@ -100,14 +87,57 @@ class DataCollection:
                 return
             columns_to_store = list(first_data_el.keys())
 
-        yield ",".join(columns_to_store) + "\n"
+        yield (",".join(columns_to_store) + "\n").encode()
 
         if first_data_el is not None:
-            yield ",".join(
+            yield (",".join(
                 first_data_el.get(column) or "" for column in columns_to_store
-            ) + "\n"
-
+            ) + "\n").encode()
         for data_el in self:
-            yield ",".join(
+            yield (",".join(
                 data_el.get(column) or "" for column in columns_to_store
-            ) + "\n"
+            ) + "\n").encode()
+
+    def export_to_json(
+        self, path_or_bufstr: FilePathOrBuffer = None, compress: bool = False,
+    ) -> None:
+        def _gen_json_lines() -> Iterable[bytes]:
+            for data_row in self:
+                yield json.dumps(data_row) + b"\n"
+
+        return self._export_to_file(_gen_json_lines(), path_or_bufstr, compress)
+
+    def _export_to_file(
+        self,
+        data_generator: Iterable[bytes],
+        path_or_bufstr: FilePathOrBuffer = None,
+        compress: bool = False,
+    ) -> Optional[str]:
+
+        if path_or_bufstr is None:
+            path_or_bufstr_obj = BytesIO()
+        else:
+            path_or_bufstr_obj = path_or_bufstr
+
+        path_or_bufstr_obj = get_file_path_or_buffer(path_or_bufstr_obj)
+        if hasattr(path_or_bufstr_obj, "write"):
+            f = path_or_bufstr_obj
+            close = False
+        else:
+            f = open(path_or_bufstr_obj, "wb" if compress else "w")  # type: ignore
+            close = True
+        if compress:
+            output_file = GzipFile(fileobj=f)  # type: ignore
+        else:
+            output_file = f  # type: ignore
+        try:
+            for line in data_generator:
+                output_file.write(line.encode() if compress else line)  # type: ignore
+        finally:
+            if compress:
+                output_file.close()
+            if close:
+                f.close()  # type: ignore
+
+        if path_or_bufstr is None:
+            return path_or_bufstr_obj.getvalue().decode()
