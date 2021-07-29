@@ -5,11 +5,11 @@ description = "Python client for Coin Metrics API v4."
 authors = ["Coin Metrics <info@coinmetrics.io>", "Oleksandr Buchkovskyi <oleksandr@coinmetrics.io>"]
 license = "MIT"
 readme = "README.md"
-homepage = "https://coinmetrics-io.github.io/api-client-python/site/index.html"
-repository = "https://github.com/coinmetrics-io/api-client-python"
+homepage = "https://coinmetrics.github.io/api-client-python/site/index.html"
+repository = "https://github.com/coinmetrics/api-client-python"
 packages = [{include = "coinmetrics"}]
 keywords = ["coin metrics", "coin", "metrics", "crypto", "bitcoin", "network-data", "market-data", "api", "handy"]
-documentation = "https://coinmetrics-io.github.io/api-client-python/site/index.html"
+documentation = "https://coinmetrics.github.io/api-client-python/site/index.html"
 
 [tool.poetry.dependencies]
 python = "^3.6"
