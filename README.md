@@ -86,4 +86,4 @@ for metric_data in client.get_asset_metrics(assets='btc', metrics=['ReferenceRat
 PagingFrom.END: is available but it is also a default value also, so you might not want to set it.
 
 ## Extended documentation
-For more information about the available methods in the client please reference [API Client Spec]([https://coinmetrics.github.io/api-client-python/site/api_client.html])
+For more information about the available methods in the client please reference [API Client Spec](https://coinmetrics.github.io/api-client-python/site/api_client.html)
