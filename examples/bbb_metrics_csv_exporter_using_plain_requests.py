@@ -25,10 +25,7 @@ api_key = (
 
 DST_ROOT = "./data"
 
-asset = "btc"
-
-
-def export_data():
+def export_data(asset: str):
     logger.info("retrieving metric names")
     response = requests.get(
         "https://api.coinmetrics.io/v4/catalog/assets?assets=btc&api_key={}".format(
@@ -65,7 +62,7 @@ def export_data():
     with open(dst_file, "w") as dst_file_buffer:
         with Pool(4) as pool:
             tasks = []
-            page_size = 10000
+            page_size = 5000
 
             for start_height in range(0, max_block + 1, page_size):
                 tasks.append(
@@ -108,6 +105,6 @@ def export_data():
 if __name__ == "__main__":
     export_start_time = datetime.now()
     try:
-        export_data()
+        export_data("btc")
     finally:
         logger.info("export took: %s", datetime.now() - export_start_time)
