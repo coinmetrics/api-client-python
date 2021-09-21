@@ -45,7 +45,7 @@ def export_data(asset: str):
     dst_file = join(DST_ROOT, "{}_eod_metrics.csv".format(asset))
     makedirs(DST_ROOT, exist_ok=True)
     logger.info(
-        "exporting metrics into a csv file (this might take 5-10+ minutes): %s",
+        "exporting metrics into a csv file (this might take 30sec - 1min): %s",
         abspath(dst_file),
     )
     asset_metrics = client.get_asset_metrics(assets=asset, metrics=metric_names, frequency='1d', paging_from='start')
