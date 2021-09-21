@@ -19,13 +19,11 @@ Returns meta information about assets.
 
 **Arguments**:
 
-- `assets`: A single asset or a list of assets to return info for.
-If no assets provided, all available assets are returned.
+- `assets` (`list(str), str`): A single asset or a list of assets to return info for. If no assets provided, all available assets are returned.
 
 **Returns**:
 
-Information that is available for requested assets, like: Full name, metrics and available frequencies,
-markets, exchanges, etc.
+`list(dict(str, any))`: Information that is available for requested assets, like: Full name, metrics and available frequencies, markets, exchanges, etc.
 
 <a name="coinmetrics.api_client.CoinMetricsClient.catalog_exchanges"></a>
 #### catalog\_exchanges
@@ -38,12 +36,11 @@ Returns meta information about exchanges.
 
 **Arguments**:
 
-- `exchanges`: A single exchange name or a list of exchanges to return info for.
-If no exchanges provided, all available exchanges are returned.
+- `exchanges` (`list(str), str`): A single exchange name or a list of exchanges to return info for. If no exchanges provided, all available exchanges are returned.
 
 **Returns**:
 
-Information that is available for requested exchanges, like: markets, min and max time available.
+`list(dict(str, any))`: Information that is available for requested exchanges, like: markets, min and max time available.
 
 <a name="coinmetrics.api_client.CoinMetricsClient.catalog_indexes"></a>
 #### catalog\_indexes
@@ -56,12 +53,11 @@ Returns meta information about indexes.
 
 **Arguments**:
 
-- `indexes`: A single index name or a list of indexes to return info for.
-If no indexes provided, all available indexes are returned.
+- `indexes` (`list(str), str`): A single index name or a list of indexes to return info for. If no indexes provided, all available indexes are returned.
 
 **Returns**:
 
-Information that is available for requested indexes, like: Full name, and available frequencies.
+`list(dict(str, any))`: Information that is available for requested indexes, like: Full name, and available frequencies.
 
 <a name="coinmetrics.api_client.CoinMetricsClient.catalog_markets"></a>
 #### catalog\_markets
@@ -70,20 +66,19 @@ Information that is available for requested indexes, like: Full name, and availa
  | catalog_markets(exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> List[Dict[str, Any]]
 ```
 
-Returns list of markets that correspond to a filter, if no filter is set, returns all available asset.
+Returns list of markets that correspond to a filter. If no filter is set, returns all available assets.
 
 **Arguments**:
 
-- `exchange`: name of the exchange
-- `base`: name of base asset
-- `quote`: name of quote asset
-- `asset`: name of either base or quote asset
-- `symbol`: name of a symbol. Usually used for futures contracts.
+- `exchange` (`str`): name of the exchange
+- `base` (`str`): name of base asset
+- `quote` (`str`): name of quote asset
+- `asset` (`str`): name of either base or quote asset
+- `symbol` (`str`): name of a symbol. Usually used for futures contracts.
 
 **Returns**:
 
-Information about markets that correspond to a filter along with meta information like:
-type of market and min and max available time frames.
+`list(dict(str, any))`: Information about markets that correspond to a filter along with meta information like: type of market and min and max available time frames.
 
 <a name="coinmetrics.api_client.CoinMetricsClient.catalog_metrics"></a>
 #### catalog\_metrics
@@ -97,14 +92,12 @@ description, category, precision and assets for which a metric is available.
 
 **Arguments**:
 
-- `metrics`: A single metric name or a list of metrics to return info for.
-If no metrics provided, all available metrics are returned.
-- `reviewable`: Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+- `metrics` (`list(str), str`): A single metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+- `reviewable` (`bool`): Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
 
 **Returns**:
 
-Information about metrics that correspond to a filter along with meta information like:
-description, category, precision and assets for which a metric is available.
+`list(dict(str, any))`: Information about metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
 
 <a name="coinmetrics.api_client.CoinMetricsClient.get_index_levels"></a>
 #### get\_index\_levels
@@ -117,21 +110,19 @@ Returns index levels for specified indexes and date range.
 
 **Arguments**:
 
-- `indexes`: list of index names
-- `frequency`: frequency of the returned timeseries, for e.g 15s, 1d, etc.
-- `page_size`: number of items returned per page,
-typically you don't want to change this parameter unless you are interested in a first retuned item only.
-- `paging_from`: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time`: Start time of the timeseries.
-- `end_time`: End time of the timeseries.
-- `start_inclusive`: Flag to define if start timestamp must be included in the timeseries if present.
-- `end_inclusive`: Flag to define if end timestamp must be included in the timeseries if present.
-- `timezone`: timezone of the start/end times in db format for example: "America/Chicago".
-Default value is "UTC". For more details check out API documentation page.
+- `indexes` (`list(str), str`): list of index names, e.g. 'CMBI10'
+- `frequency` (`str`): frequency of the returned timeseries, e.g 15s, 1d, etc.
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
 
 **Returns**:
 
-Index Levels timeseries.
+`DataCollection`: Index Levels timeseries.
 
 <a name="coinmetrics.api_client.CoinMetricsClient.get_market_candles"></a>
 #### get\_market\_candles
@@ -144,21 +135,19 @@ Returns market candles for specified markets, frequency and date range.
 
 **Arguments**:
 
-- `markets`: list of market names
-- `frequency`: frequency of the returned timeseries, for e.g 5m, 1h, 1d, etc.
-- `page_size`: number of items returned per page,
-typically you don't want to change this parameter unless you are interested in a first retuned item only.
-- `paging_from`: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time`: Start time of the timeseries.
-- `end_time`: End time of the timeseries.
-- `start_inclusive`: Flag to define if start timestamp must be included in the timeseries if present.
-- `end_inclusive`: Flag to define if end timestamp must be included in the timeseries if present.
-- `timezone`: timezone of the start/end times in db format for example: "America/Chicago".
-Default value is "UTC". For more details check out API documentation page.
+- `markets` (`list(str), str`): list of market names, e.g. 'coinbase-btc-usd-spot'
+- `frequency` (`str`): frequency of the returned timeseries, e.g 15s, 1d, etc.
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
 
 **Returns**:
 
-Market Candles timeseries.
+`DataCollection`: Market Candles timeseries.
 
 <a name="coinmetrics.api_client.CoinMetricsClient.get_market_trades"></a>
 #### get\_market\_trades
@@ -171,20 +160,18 @@ Returns market trades for specified markets and date range.
 
 **Arguments**:
 
-- `markets`: list of market names
-- `page_size`: number of items returned per page,
-typically you don't want to change this parameter unless you are interested in a first retuned item only.
-- `paging_from`: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time`: Start time of the timeseries.
-- `end_time`: End time of the timeseries.
-- `start_inclusive`: Flag to define if start timestamp must be included in the timeseries if present.
-- `end_inclusive`: Flag to define if end timestamp must be included in the timeseries if present.
-- `timezone`: timezone of the start/end times in db format for example: "America/Chicago".
-Default value is "UTC". For more details check out API documentation page.
+- `markets` (`list(str), str`): list of market names, e.g. 'coinbase-btc-usd-spot'
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
 
 **Returns**:
 
-Market Trades timeseries.
+`DataCollection`: Market Trades timeseries.
 
 <a name="coinmetrics.api_client.CoinMetricsClient.get_market_quotes"></a>
 #### get\_market\_quotes
@@ -197,20 +184,18 @@ Returns market quotes for specified markets and date range.
 
 **Arguments**:
 
-- `markets`: list of market names
-- `page_size`: number of items returned per page,
-typically you don't want to change this parameter unless you are interested in a first retuned item only.
-- `paging_from`: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time`: Start time of the timeseries.
-- `end_time`: End time of the timeseries.
-- `start_inclusive`: Flag to define if start timestamp must be included in the timeseries if present.
-- `end_inclusive`: Flag to define if end timestamp must be included in the timeseries if present.
-- `timezone`: timezone of the start/end times in db format for example: "America/Chicago".
-Default value is "UTC". For more details check out API documentation page.
+- `markets` (`list(str), str`): list of market names, e.g. 'coinbase-btc-usd-spot'
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
 
 **Returns**:
 
-Market Quotes timeseries.
+`DataCollection`: Market Quotes timeseries.
 
 <a name="coinmetrics.api_client.CoinMetricsClient.get_market_orderbooks"></a>
 #### get\_market\_orderbooks
@@ -223,20 +208,18 @@ Returns market order books for specified markets and date range.
 
 **Arguments**:
 
-- `markets`: list of market names
-- `page_size`: number of items returned per page,
-typically you don't want to change this parameter unless you are interested in a first retuned item only.
-- `paging_from`: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time`: Start time of the timeseries.
-- `end_time`: End time of the timeseries.
-- `start_inclusive`: Flag to define if start timestamp must be included in the timeseries if present.
-- `end_inclusive`: Flag to define if end timestamp must be included in the timeseries if present.
-- `timezone`: timezone of the start/end times in db format for example: "America/Chicago".
-Default value is "UTC". For more details check out API documentation page.
+- `markets` (`list(str), str`): list of market names, e.g. 'coinbase-btc-usd-spot'
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
 
 **Returns**:
 
-Market Order Books timeseries.
+`DataCollection`: Market Order Books timeseries.
 
 <a name="coinmetrics.api_client.CoinMetricsClient.get_asset_metrics"></a>
 #### get\_asset\_metrics
@@ -249,24 +232,22 @@ Returns asset metrics books for specified assets, metrics, date range and freque
 
 **Arguments**:
 
-- `assets`: list of asset names
-- `metrics`: list of metric names
-- `frequency`: frequency of the returned timeseries, for e.g 1s, 1b, 1d, etc.
-- `page_size`: number of items returned per page,
-typically you don't want to change this parameter unless you are interested in a first retuned item only.
-- `paging_from`: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time`: Start time of the timeseries.
-- `end_time`: End time of the timeseries.
-- `start_height`: Start block of the timeseries (only applicable when querying with frequency 1b).
-- `end_height`: End block of the timeseries (only applicable when querying with frequency 1b).
-- `start_inclusive`: Flag to define if start timestamp must be included in the timeseries if present.
-- `end_inclusive`: Flag to define if end timestamp must be included in the timeseries if present.
-- `timezone`: timezone of the start/end times in db format for example: "America/Chicago".
-Default value is "UTC". For more details check out API documentation page.
+- `assets` (`list(str), str`): list of asset names, e.g. 'btc'
+- `metrics` (`list(str), str`): list of metric names, e.g. 'PriceUSD'
+- `frequency` (`str`): frequency of the returned timeseries, e.g 15s, 1d, etc.
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_height` (`int`): Start block of the timeseries (only applicable when querying with frequency 1b).
+- `end_height` (`int`): End block of the timeseries (only applicable when querying with frequency 1b).
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
 
 **Returns**:
 
-Asset Metrics timeseries.
+`DataCollection`: Asset Metrics timeseries.
 
 <a name="coinmetrics.api_client.CoinMetricsClient.get_mining_pool_tips_summary"></a>
 #### get\_mining\_pool\_tips\_summary
@@ -279,20 +260,18 @@ Returns asset metrics books for specified assets, metrics, date range and freque
 
 **Arguments**:
 
-- `assets`: list of asset names
-- `page_size`: number of items returned per page,
-typically you don't want to change this parameter unless you are interested in a first retuned item only.
-- `paging_from`: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time`: Start time of the timeseries.
-- `end_time`: End time of the timeseries.
-- `start_height`: Start block of the timeseries (only applicable when querying with frequency 1b).
-- `end_height`: End block of the timeseries (only applicable when querying with frequency 1b).
-- `start_inclusive`: Flag to define if start timestamp must be included in the timeseries if present.
-- `end_inclusive`: Flag to define if end timestamp must be included in the timeseries if present.
-- `timezone`: timezone of the start/end times in db format for example: "America/Chicago".
-Default value is "UTC". For more details check out API documentation page.
+- `assets` (`list(str), str`): list of asset names, e.g. 'btc'
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_height` (`int`): Start block of the timeseries (only applicable when querying with frequency 1b).
+- `end_height` (`int`): End block of the timeseries (only applicable when querying with frequency 1b).
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
 
 **Returns**:
 
-Asset Metrics timeseries.
+`DataCollection`: Asset Metrics timeseries.
 

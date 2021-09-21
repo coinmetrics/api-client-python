@@ -40,10 +40,10 @@ class CoinMetricsClient:
         """
         Returns meta information about assets.
 
-        :param assets: A single asset or a list of assets to return info for.
-        If no assets provided, all available assets are returned.
-        :return: Information that is available for requested assets, like: Full name, metrics and available frequencies,
-        markets, exchanges, etc.
+        :param assets: A single asset or a list of assets to return info for. If no assets provided, all available assets are returned.
+        :type assets: list(str), str
+        :return: Information that is available for requested assets, like: Full name, metrics and available frequencies, markets, exchanges, etc.
+        :rtype: list(dict(str, any))
         """
 
         return cast(
@@ -57,9 +57,10 @@ class CoinMetricsClient:
         """
         Returns meta information about exchanges.
 
-        :param exchanges: A single exchange name or a list of exchanges to return info for.
-        If no exchanges provided, all available exchanges are returned.
+        :param exchanges: A single exchange name or a list of exchanges to return info for. If no exchanges provided, all available exchanges are returned.
+        :type exchanges: list(str), str
         :return: Information that is available for requested exchanges, like: markets, min and max time available.
+        :rtype: list(dict(str, any))
         """
         return cast(
             List[Dict[str, Any]],
@@ -72,9 +73,10 @@ class CoinMetricsClient:
         """
         Returns meta information about indexes.
 
-        :param indexes: A single index name or a list of indexes to return info for.
-        If no indexes provided, all available indexes are returned.
+        :param indexes: A single index name or a list of indexes to return info for. If no indexes provided, all available indexes are returned.
+        :type indexes: list(str), str
         :return: Information that is available for requested indexes, like: Full name, and available frequencies.
+        :rtype: list(dict(str, any))
         """
         return cast(
             List[Dict[str, Any]],
@@ -90,15 +92,20 @@ class CoinMetricsClient:
         symbol: Optional[str] = None,
     ) -> List[Dict[str, Any]]:
         """
-        Returns list of markets that correspond to a filter, if no filter is set, returns all available asset.
+        Returns list of markets that correspond to a filter. If no filter is set, returns all available assets.
 
         :param exchange: name of the exchange
+        :type exchange: str
         :param base: name of base asset
+        :type base: str
         :param quote: name of quote asset
+        :type quote: str
         :param asset: name of either base or quote asset
+        :type asset: str
         :param symbol: name of a symbol. Usually used for futures contracts.
-        :return: Information about markets that correspond to a filter along with meta information like:
-        type of market and min and max available time frames.
+        :type symbol: str
+        :return: Information about markets that correspond to a filter along with meta information like: type of market and min and max available time frames.
+        :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {
             "exchange": exchange,
@@ -120,11 +127,12 @@ class CoinMetricsClient:
         Returns list of available metrics along with information for them like
         description, category, precision and assets for which a metric is available.
 
-        :param metrics: A single metric name or a list of metrics to return info for.
-        If no metrics provided, all available metrics are returned.
+        :param metrics: A single metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+        :type metrics: list(str), str
         :param reviewable: Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
-        :return: Information about metrics that correspond to a filter along with meta information like:
-        description, category, precision and assets for which a metric is available.
+        :type reviewable: bool
+        :return: Information about metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
+        :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
         return cast(
@@ -146,18 +154,26 @@ class CoinMetricsClient:
         """
         Returns index levels for specified indexes and date range.
 
-        :param indexes: list of index names
-        :param frequency: frequency of the returned timeseries, for e.g 15s, 1d, etc.
-        :param page_size: number of items returned per page,
-        typically you don't want to change this parameter unless you are interested in a first retuned item only.
+        :param indexes: list of index names, e.g. 'CMBI10'
+        :type indexes: list(str), str
+        :param frequency: frequency of the returned timeseries, e.g 15s, 1d, etc.
+        :type frequency: str
+        :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
+        :type page_size: int
         :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-        :param start_time: Start time of the timeseries.
-        :param end_time: End time of the timeseries.
-        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present.
-        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present.
-        :param timezone: timezone of the start/end times in db format for example: "America/Chicago".
-        Default value is "UTC". For more details check out API documentation page.
+        :type paging_from: PagingFrom, str
+        :param start_time: Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type start_time: datetime, date, str
+        :param end_time: End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type end_time: datetime, date, str
+        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
+        :type start_inclusive: bool
+        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
+        :type end_inclusive: bool
+        :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+        :type timezone: str
         :return: Index Levels timeseries.
+        :rtype: DataCollection
         """
 
         params: Dict[str, Any] = {
@@ -188,18 +204,26 @@ class CoinMetricsClient:
         """
         Returns market candles for specified markets, frequency and date range.
 
-        :param markets: list of market names
-        :param frequency: frequency of the returned timeseries, for e.g 5m, 1h, 1d, etc.
-        :param page_size: number of items returned per page,
-        typically you don't want to change this parameter unless you are interested in a first retuned item only.
+        :param markets: list of market names, e.g. 'coinbase-btc-usd-spot'
+        :type markets: list(str), str
+        :param frequency: frequency of the returned timeseries, e.g 15s, 1d, etc.
+        :type frequency: str
+        :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
+        :type page_size: int
         :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-        :param start_time: Start time of the timeseries.
-        :param end_time: End time of the timeseries.
-        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present.
-        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present.
-        :param timezone: timezone of the start/end times in db format for example: "America/Chicago".
-        Default value is "UTC". For more details check out API documentation page.
+        :type paging_from: PagingFrom, str
+        :param start_time: Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type start_time: datetime, date, str
+        :param end_time: End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type end_time: datetime, date, str
+        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
+        :type start_inclusive: bool
+        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
+        :type end_inclusive: bool
+        :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+        :type timezone: str
         :return: Market Candles timeseries.
+        :rtype: DataCollection
         """
 
         params: Dict[str, Any] = {
@@ -229,17 +253,24 @@ class CoinMetricsClient:
         """
         Returns market trades for specified markets and date range.
 
-        :param markets: list of market names
-        :param page_size: number of items returned per page,
-        typically you don't want to change this parameter unless you are interested in a first retuned item only.
+        :param markets: list of market names, e.g. 'coinbase-btc-usd-spot'
+        :type markets: list(str), str
+        :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
+        :type page_size: int
         :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-        :param start_time: Start time of the timeseries.
-        :param end_time: End time of the timeseries.
-        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present.
-        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present.
-        :param timezone: timezone of the start/end times in db format for example: "America/Chicago".
-        Default value is "UTC". For more details check out API documentation page.
+        :type paging_from: PagingFrom, str
+        :param start_time: Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type start_time: datetime, date, str
+        :param end_time: End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type end_time: datetime, date, str
+        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
+        :type start_inclusive: bool
+        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
+        :type end_inclusive: bool
+        :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+        :type timezone: str
         :return: Market Trades timeseries.
+        :rtype: DataCollection
         """
 
         params: Dict[str, Any] = {
@@ -268,17 +299,24 @@ class CoinMetricsClient:
         """
         Returns market quotes for specified markets and date range.
 
-        :param markets: list of market names
-        :param page_size: number of items returned per page,
-        typically you don't want to change this parameter unless you are interested in a first retuned item only.
+        :param markets: list of market names, e.g. 'coinbase-btc-usd-spot'
+        :type markets: list(str), str
+        :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
+        :type page_size: int
         :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-        :param start_time: Start time of the timeseries.
-        :param end_time: End time of the timeseries.
-        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present.
-        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present.
-        :param timezone: timezone of the start/end times in db format for example: "America/Chicago".
-        Default value is "UTC". For more details check out API documentation page.
+        :type paging_from: PagingFrom, str
+        :param start_time: Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type start_time: datetime, date, str
+        :param end_time: End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type end_time: datetime, date, str
+        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
+        :type start_inclusive: bool
+        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
+        :type end_inclusive: bool
+        :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+        :type timezone: str
         :return: Market Quotes timeseries.
+        :rtype: DataCollection
         """
 
         params: Dict[str, Any] = {
@@ -307,17 +345,24 @@ class CoinMetricsClient:
         """
         Returns market order books for specified markets and date range.
 
-        :param markets: list of market names
-        :param page_size: number of items returned per page,
-        typically you don't want to change this parameter unless you are interested in a first retuned item only.
+        :param markets: list of market names, e.g. 'coinbase-btc-usd-spot'
+        :type markets: list(str), str
+        :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
+        :type page_size: int
         :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-        :param start_time: Start time of the timeseries.
-        :param end_time: End time of the timeseries.
-        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present.
-        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present.
-        :param timezone: timezone of the start/end times in db format for example: "America/Chicago".
-        Default value is "UTC". For more details check out API documentation page.
+        :type paging_from: PagingFrom, str
+        :param start_time: Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type start_time: datetime, date, str
+        :param end_time: End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type end_time: datetime, date, str
+        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
+        :type start_inclusive: bool
+        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
+        :type end_inclusive: bool
+        :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+        :type timezone: str
         :return: Market Order Books timeseries.
+        :rtype: DataCollection
         """
 
         params: Dict[str, Any] = {
@@ -350,21 +395,32 @@ class CoinMetricsClient:
         """
         Returns asset metrics books for specified assets, metrics, date range and frequency.
 
-        :param assets: list of asset names
-        :param metrics: list of metric names
-        :param frequency: frequency of the returned timeseries, for e.g 1s, 1b, 1d, etc.
-        :param page_size: number of items returned per page,
-        typically you don't want to change this parameter unless you are interested in a first retuned item only.
+        :param assets: list of asset names, e.g. 'btc'
+        :type assets: list(str), str
+        :param metrics: list of metric names, e.g. 'PriceUSD'
+        :type metrics: list(str), str
+        :param frequency: frequency of the returned timeseries, e.g 15s, 1d, etc.
+        :type frequency: str
+        :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
+        :type page_size: int
         :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-        :param start_time: Start time of the timeseries.
-        :param end_time: End time of the timeseries.
+        :type paging_from: PagingFrom, str
+        :param start_time: Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type start_time: datetime, date, str
+        :param end_time: End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type end_time: datetime, date, str
         :param start_height: Start block of the timeseries (only applicable when querying with frequency 1b).
+        :type start_height: int
         :param end_height: End block of the timeseries (only applicable when querying with frequency 1b).
-        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present.
-        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present.
-        :param timezone: timezone of the start/end times in db format for example: "America/Chicago".
-        Default value is "UTC". For more details check out API documentation page.
+        :type end_height: int
+        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
+        :type start_inclusive: bool
+        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
+        :type end_inclusive: bool
+        :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+        :type timezone: str
         :return: Asset Metrics timeseries.
+        :rtype: DataCollection
         """
 
         params: Dict[str, Any] = {
@@ -397,19 +453,28 @@ class CoinMetricsClient:
         """
         Returns asset metrics books for specified assets, metrics, date range and frequency.
 
-        :param assets: list of asset names
-        :param page_size: number of items returned per page,
-        typically you don't want to change this parameter unless you are interested in a first retuned item only.
+        :param assets: list of asset names, e.g. 'btc'
+        :type assets: list(str), str
+        :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
+        :type page_size: int
         :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-        :param start_time: Start time of the timeseries.
-        :param end_time: End time of the timeseries.
+        :type paging_from: PagingFrom, str
+        :param start_time: Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type start_time: datetime, date, str
+        :param end_time: End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type end_time: datetime, date, str
         :param start_height: Start block of the timeseries (only applicable when querying with frequency 1b).
+        :type start_height: int
         :param end_height: End block of the timeseries (only applicable when querying with frequency 1b).
-        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present.
-        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present.
-        :param timezone: timezone of the start/end times in db format for example: "America/Chicago".
-        Default value is "UTC". For more details check out API documentation page.
+        :type end_height: int
+        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
+        :type start_inclusive: bool
+        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
+        :type end_inclusive: bool
+        :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+        :type timezone: str
         :return: Asset Metrics timeseries.
+        :rtype: DataCollection
         """
 
         params: Dict[str, Any] = {
