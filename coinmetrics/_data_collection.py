@@ -4,6 +4,7 @@ from io import BytesIO
 from logging import getLogger
 from typing import Any, Dict, Iterable, Iterator, List, Optional, cast
 
+import pandas
 import pandas as pd
 from pandas import DataFrame
 
@@ -78,20 +79,15 @@ class DataCollection:
             self._get_csv_data_lines(columns_to_store), path_or_bufstr, compress
         )
 
-    def to_dataframe(
-        self,
-        header: Optional[List[str]] = None
-    ):
+    def to_dataframe(self, header: Optional[List[str]] = None) -> pandas.DataFrame:
         data_generator = self._get_csv_data_lines(header)
-        columns = next(data_generator).decode('utf-8').strip().split(',')
+        columns = next(data_generator).decode("utf-8").strip().split(",")
 
         rows = []
         for row_byte in data_generator:
-            row_data = row_byte.decode('utf-8').strip().split(',')
+            row_data = row_byte.decode("utf-8").strip().split(",")
             rows.append(row_data)
-        return pd.DataFrame(
-            rows, columns=columns
-        )
+        return pd.DataFrame(rows, columns=columns)
 
     def _get_csv_data_lines(
         self, columns_to_store: Optional[List[str]]
