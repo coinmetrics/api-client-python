@@ -4,6 +4,9 @@ from io import BytesIO
 from logging import getLogger
 from typing import Any, Dict, Iterable, Iterator, List, Optional, cast
 
+import pandas as pd
+from pandas import DataFrame
+
 from coinmetrics._typing import DataRetrievalFuncType, FilePathOrBuffer, UrlParamTypes
 from coinmetrics._utils import get_file_path_or_buffer
 
@@ -73,6 +76,21 @@ class DataCollection:
 
         return self._export_to_file(
             self._get_csv_data_lines(columns_to_store), path_or_bufstr, compress
+        )
+
+    def to_dataframe(
+        self,
+        header: Optional[List[str]] = None
+    ):
+        data_generator = self._get_csv_data_lines(header)
+        columns = next(data_generator).decode('utf-8').strip().split(',')
+
+        rows = []
+        for row_byte in data_generator:
+            row_data = row_byte.decode('utf-8').strip().split(',')
+            rows.append(row_data)
+        return pd.DataFrame(
+            rows, columns=columns
         )
 
     def _get_csv_data_lines(
