@@ -87,13 +87,6 @@ class DataCollection:
                 return
             columns = list(first_data_el.keys())
 
-        # data_generator = self._get_csv_data_lines(header)
-        # try:
-        #     columns = next(data_generator).decode("utf-8").strip().split(",")
-        # except StopIteration:
-        #     logger.info("no data to export")
-        #     return
-
         rows = []
         for row_data in self:
             rows.append(list(row_data.values()))
