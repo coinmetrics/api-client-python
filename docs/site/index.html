@@ -212,6 +212,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#dataframes" class="md-nav__link">
+    DataFrames
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#paging" class="md-nav__link">
     Paging
   </a>
@@ -295,6 +302,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#dataframes" class="md-nav__link">
+    DataFrames
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#paging" class="md-nav__link">
     Paging
   </a>
@@ -372,6 +386,15 @@ in this case you would get all the information for btc only</p>
     print(metric_data)
 </code></pre></div>
 This will print you the requested metrics for all the days where we have any of the metrics present. </p>
+<h3 id="dataframes">DataFrames<a class="headerlink" href="#dataframes" title="Permanent link">&para;</a></h3>
+<p>Timeseries data can be transformed into a pandas dataframe by using the <code>to_dataframe()</code> method. The code snippet below shows how:</p>
+<div class="highlight"><pre><span></span><code>trades = client.get_market_trades(markets=&#39;coinbase-btc-usd-spot&#39;, start_time=&#39;2021-09-19T00:00:00Z&#39;, end_time=&#39;2021-09-19T00:01:00Z&#39;)
+trades_df = trades.to_dataframe()
+print(trades_df.head())
+</code></pre></div>
+<p>Note that this only works with requests that return the type <code>DataCollection</code>. Thus, <code>catalog</code> requests, which return lists cannot be returned as dataframes.
+Please see the <a href="https://coinmetrics.github.io/api-client-python/site/api_client.html">API Client Spec</a> for a full list
+of requests and their return types.</p>
 <h3 id="paging">Paging<a class="headerlink" href="#paging" title="Permanent link">&para;</a></h3>
 <p>You can make the datapoints to iterate from start or from end (default).</p>
 <p>for that you should use a paging_from argument like the following:
