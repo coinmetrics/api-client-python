@@ -4,7 +4,7 @@ from io import BytesIO
 from logging import getLogger
 from typing import Any, Dict, Iterable, Iterator, List, Optional, cast
 
-from pandas.core.frame import DataFrame # type: ignore
+from pandas.core.frame import DataFrame  # type: ignore
 
 from coinmetrics._typing import DataRetrievalFuncType, FilePathOrBuffer, UrlParamTypes
 from coinmetrics._utils import get_file_path_or_buffer
@@ -77,9 +77,7 @@ class DataCollection:
             self._get_csv_data_lines(columns_to_store), path_or_bufstr, compress
         )
 
-    def to_dataframe(
-            self, header: Optional[List[str]] = None
-    ) -> DataFrame:
+    def to_dataframe(self, header: Optional[List[str]] = None) -> DataFrame:
         columns = None
         if header is None:
             try:
