@@ -4,7 +4,7 @@ from io import BytesIO
 from logging import getLogger
 from typing import Any, Dict, Iterable, Iterator, List, Optional, cast
 
-from pandas import DataFrame
+from pandas.core.frame import DataFrame # type: ignore
 
 from coinmetrics._typing import DataRetrievalFuncType, FilePathOrBuffer, UrlParamTypes
 from coinmetrics._utils import get_file_path_or_buffer
@@ -77,14 +77,28 @@ class DataCollection:
             self._get_csv_data_lines(columns_to_store), path_or_bufstr, compress
         )
 
-    def to_dataframe(self, header: Optional[List[str]] = None) -> DataFrame:
-        data_generator = self._get_csv_data_lines(header)
-        columns = next(data_generator).decode("utf-8").strip().split(",")
+    def to_dataframe(
+            self, header: Optional[List[str]] = None
+    ) -> DataFrame:
+        columns = None
+        if header is None:
+            try:
+                first_data_el = next(self)
+            except StopIteration:
+                logger.info("no data to export")
+                return
+            columns = list(first_data_el.keys())
+
+        # data_generator = self._get_csv_data_lines(header)
+        # try:
+        #     columns = next(data_generator).decode("utf-8").strip().split(",")
+        # except StopIteration:
+        #     logger.info("no data to export")
+        #     return
 
         rows = []
-        for row_byte in data_generator:
-            row_data = row_byte.decode("utf-8").strip().split(",")
-            rows.append(row_data)
+        for row_data in self:
+            rows.append(list(row_data.values()))
         return DataFrame(rows, columns=columns)
 
     def _get_csv_data_lines(
