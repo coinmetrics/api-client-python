@@ -23,3 +23,18 @@ def test_base_url() -> None:
         CoinMetricsClient()._api_base_url == "https://community-api.coinmetrics.io/v4"
     )
     assert CoinMetricsClient()._api_key_url_str == ""
+
+def test_to_dataframe() -> None:
+    client = CoinMetricsClient()
+
+    df_blk_test = client.get_asset_metrics(
+        assets='btc',
+        metrics=['BlkCnt'],
+        start_time='2019-10-19T00:00:00Z',
+        end_time='2019-10-19T00:00:05Z',
+        limit_per_asset=1
+    ).to_dataframe()
+
+    assert (df_blk_test['BlkCnt'] == '142').all()
+    assert 'BlkCnt' in df_blk_test.columns
+    assert df_blk_test.shape[0] == 1
