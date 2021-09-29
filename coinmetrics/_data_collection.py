@@ -20,7 +20,9 @@ try:
     import pandas as pd  # type: ignore
 except ImportError:
     pd = None
-    logger.info("Pandas export is unavailable. Install pandas to unlock dataframe functions.")
+    logger.info(
+        "Pandas export is unavailable. Install pandas to unlock dataframe functions."
+    )
 
 
 class CsvExportError(Exception):
