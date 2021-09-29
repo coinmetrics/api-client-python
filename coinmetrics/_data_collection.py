@@ -155,9 +155,7 @@ class DataCollection:
 
         return None
 
-    def to_dataframe(
-        self, header: Optional[List[str]] = None
-    ) -> pd.core.frame.DataFrame:
+    def to_dataframe(self, header: Optional[List[str]] = None) -> pd.DataFrame:
         """
         Outputs a pandas dataframe
 
