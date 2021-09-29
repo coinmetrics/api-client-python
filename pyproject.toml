@@ -15,7 +15,7 @@ documentation = "https://coinmetrics.github.io/api-client-python/site/index.html
 python = "^3.7.1"
 requests = "^2.24.0"
 orjson = "^3.6.0"
-pandas = "^1.3.3"
+pandas = {version="^1.3.3", optional=true}
 
 [tool.poetry.dev-dependencies]
 mypy = "^0.782"
