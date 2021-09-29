@@ -175,7 +175,7 @@ class DataCollection:
 
         if header is None:
             header = list(first_data_el.keys())
-            
+
         rows.append(list(first_data_el.values()))
 
         for row_data in self:
