@@ -4,6 +4,7 @@ from io import BytesIO
 from logging import getLogger
 from typing import Any, Dict, Iterable, Iterator, List, Optional, cast
 
+
 from coinmetrics._typing import DataRetrievalFuncType, FilePathOrBuffer, UrlParamTypes
 from coinmetrics._utils import get_file_path_or_buffer
 
@@ -14,6 +15,14 @@ except ImportError:
 
 
 logger = getLogger("cm_client_data_collection")
+
+try:
+    import pandas as pd  # type: ignore
+except ImportError:
+    pd = None
+    logger.info(
+        "Pandas export is unavailable. Install pandas to unlock dataframe functions."
+    )
 
 
 class CsvExportError(Exception):
@@ -145,3 +154,29 @@ class DataCollection:
             return path_or_bufstr_obj.getvalue().decode()  # type: ignore
 
         return None
+
+    def to_dataframe(self, header: Optional[List[str]] = None) -> pd.DataFrame:
+        """
+        Outputs a pandas dataframe
+
+        :param header: Optional column names for outputted dataframe. List length must match the output.
+        :type header: list(str)
+        :return: Data in a pandas dataframe
+        :rtype: pandas.core.frame.DataFrame
+        """
+        rows = []
+        try:
+            first_data_el = next(self)
+        except StopIteration:
+            logger.info("no data to export")
+            return
+
+        if header is None:
+            header = list(first_data_el.keys())
+
+        rows.append(list(first_data_el.values()))
+
+        for row_data in self:
+            rows.append(list(row_data.values()))
+
+        return pd.DataFrame(rows, columns=header)
