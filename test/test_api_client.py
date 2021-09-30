@@ -2,6 +2,7 @@ from typing import Any
 from unittest.mock import Mock
 
 from coinmetrics.api_client import CoinMetricsClient, requests
+from coinmetrics._data_collection import DataCollection
 
 
 def test_catalog_assets_request(mocker: Any) -> None:
@@ -35,6 +36,6 @@ def test_to_dataframe() -> None:
         limit_per_asset=1
     ).to_dataframe()
 
-    assert (df_blk_test['BlkCnt'] == '142').all()
+    assert (df_blk_test['asset'] == 'btc').all()
     assert 'BlkCnt' in df_blk_test.columns
     assert df_blk_test.shape[0] == 1
