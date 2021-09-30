@@ -31,7 +31,7 @@ def test_to_dataframe() -> None:
     test_data_iter = iter([test_data_dict])
     test_header = ['col1', 'col2']
 
-    def test_data_retrieval_function(p1, p2): return test_data_dict
+    test_data_retrieval_function = lambda x, y: test_data_dict
 
     test_data_collection = DataCollection(
         data_retrieval_function=test_data_retrieval_function,
