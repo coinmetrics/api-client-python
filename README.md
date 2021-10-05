@@ -69,7 +69,9 @@ for metric_data in client.get_asset_metrics(assets='btc',
 This will print you the requested metrics for all the days where we have any of the metrics present. 
 
 
-### DataFrames
+### DataFrames 
+_(New in >=`2021.9.30.14.30`)_
+
 Timeseries data can be transformed into a pandas dataframe by using the `to_dataframe()` method. The code snippet below shows how:
 ```
 import pandas as pd
