@@ -1,10 +1,14 @@
-FROM python:3.8.6-alpine
+FROM python:3.8.6-slim
 
-ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
-
-RUN apk update && \
-    apk add --virtual build-deps gcc python3-dev musl-dev protobuf libffi-dev && \
-    apk add postgresql-dev make
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -qy \
+      cargo \
+      make \
+      postgresql-server-dev-all \
+      python3-dev \
+      python3-protobuf \
+      build-essential \
+      ;
 
 RUN pip install --upgrade pip
 
