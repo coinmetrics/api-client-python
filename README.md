@@ -77,14 +77,14 @@ from coinmetrics.api_client import CoinMetricsClient
 from os import environ
 
 client = CoinMetricsClient()
-asset_metrics = client.get_asset_metrics(
-    assets=['btc', 'eth'], 
-    metrics='PriceUSD', 
+trades = client.get_market_trades(
+    markets='coinbase-btc-usd-spot', 
     start_time='2021-09-19T00:00:00Z', 
-    end_time='2021-09-19T00:01:00Z'
+    limit_per_market=10
 )
-asset_metrics_df = asset_metrics.to_dataframe()
-print(asset_metrics_df.head())
+trades_df = trades.to_dataframe()
+print(trades_df.head())
+
 ```
 If you want to use dataframes, then you will need to install pandas
 
@@ -92,7 +92,7 @@ If you want to use dataframes, then you will need to install pandas
 * This only works with requests that return the type `DataCollection`. Thus, `catalog` requests, which return lists cannot be returned as dataframes.
 Please see the [API Client Spec](https://coinmetrics.github.io/api-client-python/site/api_client.html) for a full list
 of requests and their return types.
-* API restrictions apply.
+* API restrictions apply. Some requests may return empty results due to limited access to the API from you API key.
 
 
 ### Paging
