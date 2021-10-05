@@ -8,7 +8,7 @@ RUN apk update && \
 
 RUN pip install --upgrade pip
 
-RUN pip install "poetry==1.1.10"
+RUN pip install "poetry==1.1.11"
 COPY pyproject.toml ./poetry.lock ./
 RUN poetry config experimental.new-installer false
 RUN poetry config virtualenvs.create false
