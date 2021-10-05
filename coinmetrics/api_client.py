@@ -1622,9 +1622,11 @@ class CoinMetricsClient:
             raise
         else:
             if "error" in data:
-                logger.error(
-                    "error found for the query: %s, error content: %s", actual_url, data
+                error_msg = (
+                    f"Error found for the query: \n {actual_url}\n"
+                    f"Error details: {data['error']}"
                 )
+                logger.error(error_msg)
                 resp.raise_for_status()
             return cast(DataReturnType, data)
 
