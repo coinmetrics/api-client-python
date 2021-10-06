@@ -69,7 +69,9 @@ for metric_data in client.get_asset_metrics(assets='btc',
 This will print you the requested metrics for all the days where we have any of the metrics present. 
 
 
-### DataFrames
+### DataFrames 
+_(New in >=`2021.9.30.14.30`)_
+
 Timeseries data can be transformed into a pandas dataframe by using the `to_dataframe()` method. The code snippet below shows how:
 ```
 import pandas as pd
@@ -77,15 +79,22 @@ from coinmetrics.api_client import CoinMetricsClient
 from os import environ
 
 client = CoinMetricsClient()
-trades = client.get_market_trades(markets='coinbase-btc-usd-spot', start_time='2021-09-19T00:00:00Z', end_time='2021-09-19T00:01:00Z')
+trades = client.get_market_trades(
+    markets='coinbase-btc-usd-spot', 
+    start_time='2021-09-19T00:00:00Z', 
+    limit_per_market=10
+)
 trades_df = trades.to_dataframe()
 print(trades_df.head())
+
 ```
 If you want to use dataframes, then you will need to install pandas
 
-Note that this only works with requests that return the type `DataCollection`. Thus, `catalog` requests, which return lists cannot be returned as dataframes.
+**Notes**
+* This only works with requests that return the type `DataCollection`. Thus, `catalog` requests, which return lists cannot be returned as dataframes.
 Please see the [API Client Spec](https://coinmetrics.github.io/api-client-python/site/api_client.html) for a full list
 of requests and their return types.
+* API restrictions apply. Some requests may return empty results due to limited access to the API from you API key.
 
 
 ### Paging

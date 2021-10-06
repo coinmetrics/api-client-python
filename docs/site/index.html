@@ -387,20 +387,27 @@ in this case you would get all the information for btc only</p>
 </code></pre></div>
 This will print you the requested metrics for all the days where we have any of the metrics present. </p>
 <h3 id="dataframes">DataFrames<a class="headerlink" href="#dataframes" title="Permanent link">&para;</a></h3>
+<p><em>(New in &gt;=<code>2021.9.30.14.30</code>)</em></p>
 <p>Timeseries data can be transformed into a pandas dataframe by using the <code>to_dataframe()</code> method. The code snippet below shows how:
 <div class="highlight"><pre><span></span><code>import pandas as pd
 from coinmetrics.api_client import CoinMetricsClient
 from os import environ
 
 client = CoinMetricsClient()
-trades = client.get_market_trades(markets=&#39;coinbase-btc-usd-spot&#39;, start_time=&#39;2021-09-19T00:00:00Z&#39;, end_time=&#39;2021-09-19T00:01:00Z&#39;)
+trades = client.get_market_trades(
+    markets=&#39;coinbase-btc-usd-spot&#39;, 
+    start_time=&#39;2021-09-19T00:00:00Z&#39;, 
+    limit_per_market=10
+)
 trades_df = trades.to_dataframe()
 print(trades_df.head())
 </code></pre></div>
 If you want to use dataframes, then you will need to install pandas</p>
-<p>Note that this only works with requests that return the type <code>DataCollection</code>. Thus, <code>catalog</code> requests, which return lists cannot be returned as dataframes.
+<p><strong>Notes</strong>
+* This only works with requests that return the type <code>DataCollection</code>. Thus, <code>catalog</code> requests, which return lists cannot be returned as dataframes.
 Please see the <a href="https://coinmetrics.github.io/api-client-python/site/api_client.html">API Client Spec</a> for a full list
-of requests and their return types.</p>
+of requests and their return types.
+* API restrictions apply. Some requests may return empty results due to limited access to the API from you API key.</p>
 <h3 id="paging">Paging<a class="headerlink" href="#paging" title="Permanent link">&para;</a></h3>
 <p>You can make the datapoints to iterate from start or from end (default).</p>
 <p>for that you should use a paging_from argument like the following:

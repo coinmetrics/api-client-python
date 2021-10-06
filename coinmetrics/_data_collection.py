@@ -167,15 +167,17 @@ class DataCollection:
         rows = []
         try:
             first_data_el = next(self)
-        except StopIteration:
-            logger.info("no data to export")
-            return
-
+        except StopIteration as iter_exception:
+            error_msg = (
+                f"No data to export. "
+                f"Check the request parameters if such data is available "
+                f"or that your API key has access to the data you are requesting."
+            )
+            raise Exception(error_msg) from iter_exception
         if header is None:
             header = list(first_data_el.keys())
 
         rows.append(list(first_data_el.values()))
-
         for row_data in self:
             rows.append(list(row_data.values()))
 
