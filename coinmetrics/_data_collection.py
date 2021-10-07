@@ -169,9 +169,9 @@ class DataCollection:
             first_data_el = next(self)
         except StopIteration as iter_exception:
             error_msg = (
-                f"No data to export. "
-                f"Check the request parameters if such data is available "
-                f"or that your API key has access to the data you are requesting."
+                "No data to export. "
+                "Check the request parameters if such data is available "
+                "or that your API key has access to the data you are requesting."
             )
             raise Exception(error_msg) from iter_exception
         if header is None:

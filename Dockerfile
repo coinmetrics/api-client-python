@@ -1,4 +1,4 @@
-FROM python:3.8.6-slim
+FROM python:3.8.12-slim
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -qy \
@@ -18,6 +18,7 @@ RUN poetry config experimental.new-installer false
 RUN poetry config virtualenvs.create false
 
 RUN poetry install --no-root
+RUN poetry install --no-root --extras "pandas"
 
 
 COPY ./ ./
