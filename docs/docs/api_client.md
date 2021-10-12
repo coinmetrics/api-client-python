@@ -114,7 +114,7 @@ Returns meta information about _available_ institutions
 #### catalog\_markets
 
 ```python
- | catalog_markets(markets: Optional[Union[List[str], str]] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> List[Dict[str, Any]]
+ | catalog_markets(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> List[Dict[str, Any]]
 ```
 
 Returns list of _available_ markets that correspond to a filter. If no filter is set, returns all available assets.
@@ -122,6 +122,7 @@ Returns list of _available_ markets that correspond to a filter. If no filter is
 **Arguments**:
 
 - `markets` (`list(str), str`): list of market names, e.g. 'coinbase-btc-usd-spot'
+- `market_type` (`str`): Type of market: "spot", "future", "option"
 - `exchange` (`str`): name of the exchange
 - `base` (`str`): name of base asset
 - `quote` (`str`): name of quote asset
@@ -257,14 +258,15 @@ Returns meta information about _supported_ institutions
 #### catalog\_full\_markets
 
 ```python
- | catalog_full_markets(markets: Optional[Union[List[str], str]] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> List[Dict[str, Any]]
+ | catalog_full_markets(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> List[Dict[str, Any]]
 ```
 
 Returns list of _supported_ markets that correspond to a filter. If no filter is set, returns all supported assets.
 
 **Arguments**:
 
-- `markets`: list of market names, e.g. 'coinbase-btc-usd-spot'
+- `markets` (`list(str), str`): list of market names, e.g. 'coinbase-btc-usd-spot'
+- `market_type` (`str`): Type of market: "spot", "future", "option"
 - `exchange` (`str`): name of the exchange
 - `base` (`str`): name of base asset
 - `quote` (`str`): name of quote asset

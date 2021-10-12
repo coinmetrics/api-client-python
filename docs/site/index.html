@@ -354,7 +354,7 @@
 <p>To initialize the client you should use your API key, and the CoinMetricsClient class like the following.
 <div class="highlight"><pre><span></span><code>from coinmetrics.api_client import CoinMetricsClient
 
-client = CoinMetricsClient(environ.get(&quot;CM_API_KEY&quot;))
+client = CoinMetricsClient(&quot;&lt;cm_api_key&gt;&quot;)
 
 # or to use community API:
 client = CoinMetricsClient()
@@ -374,15 +374,20 @@ in this case you would get all the information for btc only</p>
 <h2 id="getting-timeseries-data">Getting timeseries data<a class="headerlink" href="#getting-timeseries-data" title="Permanent link">&para;</a></h2>
 <p>For getting timeseries data you want to use methods of the client class that start with <code>get_</code>.</p>
 <p>For example if you want to get a bunch of market data trades for coinbase btc-usd pair you can run something similar to the following:</p>
-<div class="highlight"><pre><span></span><code>for trade in client.get_market_trades(markets=&#39;coinbase-btc-usd-spot&#39;, 
-                                      start_time=&#39;2020-01-01&#39;, end_time=&#39;2020-01-03&#39;):
+<div class="highlight"><pre><span></span><code>for trade in client.get_market_trades(
+    markets=&#39;coinbase-btc-usd-spot&#39;, 
+    start_time=&#39;2020-01-01&#39;, 
+    end_time=&#39;2020-01-03&#39;,
+    limit_per_market=10
+):
     print(trade)
 </code></pre></div>
 <p>Or if you want to see daily btc asset metrics you can use something like this:</p>
 <p><div class="highlight"><pre><span></span><code>for metric_data in client.get_asset_metrics(assets=&#39;btc&#39;, 
                                             metrics=[&#39;ReferenceRateUSD&#39;, &#39;BlkHgt&#39;, &#39;AdrActCnt&#39;,  
                                                      &#39;AdrActRecCnt&#39;, &#39;FlowOutBFXUSD&#39;], 
-                                            frequency=&#39;1d&#39;):
+                                            frequency=&#39;1d&#39;,
+                                            limit_per_asset=10):
     print(metric_data)
 </code></pre></div>
 This will print you the requested metrics for all the days where we have any of the metrics present. </p>
@@ -403,11 +408,13 @@ trades_df = trades.to_dataframe()
 print(trades_df.head())
 </code></pre></div>
 If you want to use dataframes, then you will need to install pandas</p>
-<p><strong>Notes</strong>
-* This only works with requests that return the type <code>DataCollection</code>. Thus, <code>catalog</code> requests, which return lists cannot be returned as dataframes.
+<p><strong>Notes</strong></p>
+<ul>
+<li>This only works with requests that return the type <code>DataCollection</code>. Thus, <code>catalog</code> requests, which return lists cannot be returned as dataframes.
 Please see the <a href="https://coinmetrics.github.io/api-client-python/site/api_client.html">API Client Spec</a> for a full list
-of requests and their return types.
-* API restrictions apply. Some requests may return empty results due to limited access to the API from you API key.</p>
+of requests and their return types.</li>
+<li>API restrictions apply. Some requests may return empty results due to limited access to the API from you API key.</li>
+</ul>
 <h3 id="paging">Paging<a class="headerlink" href="#paging" title="Permanent link">&para;</a></h3>
 <p>You can make the datapoints to iterate from start or from end (default).</p>
 <p>for that you should use a paging_from argument like the following:

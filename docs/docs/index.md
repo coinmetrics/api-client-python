@@ -16,7 +16,7 @@ To initialize the client you should use your API key, and the CoinMetricsClient 
 ```
 from coinmetrics.api_client import CoinMetricsClient
 
-client = CoinMetricsClient(environ.get("CM_API_KEY"))
+client = CoinMetricsClient("<cm_api_key>")
 
 # or to use community API:
 client = CoinMetricsClient()
@@ -52,8 +52,12 @@ For getting timeseries data you want to use methods of the client class that sta
 For example if you want to get a bunch of market data trades for coinbase btc-usd pair you can run something similar to the following:
 
 ```
-for trade in client.get_market_trades(markets='coinbase-btc-usd-spot', 
-                                      start_time='2020-01-01', end_time='2020-01-03'):
+for trade in client.get_market_trades(
+    markets='coinbase-btc-usd-spot', 
+    start_time='2020-01-01', 
+    end_time='2020-01-03',
+    limit_per_market=10
+):
     print(trade)
 ```
 
@@ -63,7 +67,8 @@ Or if you want to see daily btc asset metrics you can use something like this:
 for metric_data in client.get_asset_metrics(assets='btc', 
                                             metrics=['ReferenceRateUSD', 'BlkHgt', 'AdrActCnt',  
                                                      'AdrActRecCnt', 'FlowOutBFXUSD'], 
-                                            frequency='1d'):
+                                            frequency='1d',
+                                            limit_per_asset=10):
     print(metric_data)
 ```
 This will print you the requested metrics for all the days where we have any of the metrics present. 
@@ -91,10 +96,11 @@ print(trades_df.head())
 If you want to use dataframes, then you will need to install pandas
 
 **Notes**
-* This only works with requests that return the type `DataCollection`. Thus, `catalog` requests, which return lists cannot be returned as dataframes.
+
+- This only works with requests that return the type `DataCollection`. Thus, `catalog` requests, which return lists cannot be returned as dataframes.
 Please see the [API Client Spec](https://coinmetrics.github.io/api-client-python/site/api_client.html) for a full list
 of requests and their return types.
-* API restrictions apply. Some requests may return empty results due to limited access to the API from you API key.
+- API restrictions apply. Some requests may return empty results due to limited access to the API from you API key.
 
 
 ### Paging
