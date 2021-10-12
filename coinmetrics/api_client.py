@@ -135,6 +135,7 @@ class CoinMetricsClient:
     def catalog_markets(
         self,
         markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
         exchange: Optional[str] = None,
         base: Optional[str] = None,
         quote: Optional[str] = None,
@@ -146,6 +147,8 @@ class CoinMetricsClient:
 
         :param markets: list of market names, e.g. 'coinbase-btc-usd-spot'
         :type markets: list(str), str
+        :param market_type: Type of market: "spot", "future", "option"
+        :type market_type: str
         :param exchange: name of the exchange
         :type exchange: str
         :param base: name of base asset
@@ -161,6 +164,7 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {
             "markets": markets,
+            "type": market_type,
             "exchange": exchange,
             "base": base,
             "quote": quote,
@@ -294,6 +298,7 @@ class CoinMetricsClient:
     def catalog_full_markets(
         self,
         markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
         exchange: Optional[str] = None,
         base: Optional[str] = None,
         quote: Optional[str] = None,
@@ -304,6 +309,9 @@ class CoinMetricsClient:
         Returns list of _supported_ markets that correspond to a filter. If no filter is set, returns all supported assets.
 
         :param markets: list of market names, e.g. 'coinbase-btc-usd-spot'
+        :type markets: list(str), str
+        :param market_type: Type of market: "spot", "future", "option"
+        :type market_type: str
         :param exchange: name of the exchange
         :type exchange: str
         :param base: name of base asset
@@ -319,6 +327,7 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {
             "markets": markets,
+            "type": market_type,
             "exchange": exchange,
             "base": base,
             "quote": quote,
