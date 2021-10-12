@@ -813,7 +813,7 @@ class CoinMetricsClient:
             "end_inclusive": end_inclusive,
             "timezone": timezone,
         }
-        return DataCollection(self._get_data, "timeseries/index-Constituents", params)
+        return DataCollection(self._get_data, "timeseries/index-constituents", params)
 
     def get_market_candles(
         self,
