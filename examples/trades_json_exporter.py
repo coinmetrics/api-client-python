@@ -4,6 +4,7 @@ from datetime import date, timedelta, datetime
 from multiprocessing import Pool, cpu_count
 from os import makedirs, environ
 from os.path import exists
+from typing import Optional
 
 from coinmetrics.api_client import CoinMetricsClient
 from coinmetrics.constants import PagingFrom
@@ -19,25 +20,43 @@ stream_handler.setFormatter(formatter)
 logger.addHandler(stream_handler)
 logger.level = level
 
+# use it if you want to get specific exchanges or leave it empty if you want to get all exchanges data
+# examples of echanges names:
+# "binance.us",
+# "binance",
+# "coinbase",
+# "okex",
+# "kraken",
+# "huobi",
+# "bitmex",
+# "bitfinex",
+# "deribit",
+EXCHANGES_TO_EXPORT = {}
 
-EXCHANGES_TO_EXPORT = [
-    "binance.us",
-    "binance",
-    "coinbase",
-    "okex",
-    "kraken",
-    "huobi",
-    "bitmex",
-    "bitfinex",
-    "deribit",
-]
+# use it if you want to get specific markets or leave it empty if you want to get all markets
+# example of market name to be used in this filter: "binance-BTCUSDT-future",
+# note that if you specified exchanges filter, it will act as selecting intersection with the markets to export
+# not as union.
+MARKETS_TO_EXPORT = {}
 
-FUTURES_MARKETS_TO_EXPORT = [
-    "binance-BTCUSDT-future",
-    "bitmex-XBTUSD-future",
-    "bitfinex-tBTCF0:USTF0-future",
-    "deribit-BTC-PERPETUAL-future",
-]
+
+# example values: "spot", "futures", "options"
+# you can use all 3 if you want or just a subset
+MARKET_TYPES_TO_COLLECT = {
+    "spot",
+    "futures",
+}
+
+# leave it empty to catch all
+BASE_MARKETS = {
+    "btc",
+}
+
+# leave it empty to catch all
+QUOTE_MARKETS = {
+    "usd",
+}
+
 
 # DST_ROOT is the path where you want the data to be saved to
 # start the path with 's3://' prefix to make the script save to AWS S3, example
@@ -47,8 +66,8 @@ FUTURES_MARKETS_TO_EXPORT = [
 # DST_ROOT = 's3://<bucket_name>/data'
 DST_ROOT = "./data"
 
-EXPORT_START_DATE = "2017-01-01"
-EXPORT_END_DATE = "2020-05-31"  # if you set this to None, then `today - 1 day` will be used as the end date
+EXPORT_START_DATE = "2019-01-01"
+EXPORT_END_DATE: Optional[str] = None  # if you set this to None, then `today - 1 day` will be used as the end date
 COMPRESS_DATA = True  # False - for raw json files; True - for gzipped json files
 
 # path to local file that is used to not reexport data if it was already exported
@@ -74,7 +93,7 @@ def export_data():
     min_export_date = date.fromisoformat(EXPORT_START_DATE)
     max_export_date = (
         date.fromisoformat(EXPORT_END_DATE)
-        if EXPORT_END_DATE
+        if EXPORT_END_DATE is not None
         else date.today() - timedelta(days=1)
     )
     processed_dates_and_markets = read_already_processed_files()
@@ -82,7 +101,6 @@ def export_data():
     markets = get_markets_to_process()
 
     logger.info("getting markets: %s", [market["market"] for market in markets])
-
     processes_count = cpu_count() * 2
 
     with Pool(processes_count) as pool:
@@ -137,13 +155,16 @@ def read_already_processed_files():
 
 def get_markets_to_process():
     markets = []
-    for exchange in EXCHANGES_TO_EXPORT:
+
+    for exchange in EXCHANGES_TO_EXPORT or [None]:
         for market in client.catalog_markets(exchange=exchange):
-            if market["market"] in FUTURES_MARKETS_TO_EXPORT or (
-                market["type"] == "spot"
+            if market["market"] in MARKETS_TO_EXPORT or (
+                (market["type"] in MARKET_TYPES_TO_COLLECT)
                 and (
-                    (market["base"] == "btc" and market["quote"] in ["usd", "usdt"])
-                    or (market["quote"] == "btc" and market["base"] in ["usd", "usdt"])
+                    (
+                        (market["base"] in BASE_MARKETS or not BASE_MARKETS)
+                        and (market["quote"] in QUOTE_MARKETS or not QUOTE_MARKETS)
+                    )
                 )
             ):
                 markets.append(market)
@@ -174,9 +195,7 @@ def export_data_for_a_market(market, market_data_root, target_date):
         dst_json_file_path = dst_json_file_path + ".gz"
     logger.info("downloading data to: %s", dst_json_file_path)
     if s3 is not None:
-        with s3.open(
-            dst_json_file_path.split("s3://")[1], "wb"
-        ) as data_file:
+        with s3.open(dst_json_file_path.split("s3://")[1], "wb") as data_file:
             market_trades.export_to_json(data_file, compress=COMPRESS_DATA)
     else:
         market_trades.export_to_json(dst_json_file_path, compress=COMPRESS_DATA)
