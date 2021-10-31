@@ -33,7 +33,7 @@ DST_ROOT = "./data"
 
 def export_data(asset: str):
     logger.info("retrieving metric names")
-    catalog_response = client.catalog_assets(assets="btc")
+    catalog_response = client.catalog_assets(assets=asset)
     metric_names = [
         metric_info["metric"]
         for metric_info in catalog_response[0]["metrics"]
@@ -51,7 +51,7 @@ def export_data(asset: str):
     )
     with open(dst_file, "wb") as dst_file_buffer:
         asset_metrics = client.get_asset_metrics(
-            assets="btc",
+            assets=asset,
             metrics=metric_names,
             frequency='1b',
             paging_from=PagingFrom.START,
