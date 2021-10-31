@@ -41,13 +41,6 @@ EXCHANGES_TO_EXPORT = {}
 MARKETS_TO_EXPORT = {}
 
 
-# example values: "spot", "futures", "options"
-# you can use all 3 if you want or just a subset
-MARKET_TYPES_TO_COLLECT = {
-    "spot",
-    "futures",
-}
-
 # leave it empty to catch all
 BASE_MARKETS = {
     "btc",
@@ -160,7 +153,7 @@ def get_markets_to_process():
     for exchange in EXCHANGES_TO_EXPORT or [None]:
         for market in client.catalog_markets(exchange=exchange):
             if market["market"] in MARKETS_TO_EXPORT or (
-                (market["type"] in MARKET_TYPES_TO_COLLECT)
+                (market["type"] == "future")
                 and (
                     (
                         (market["base"] in BASE_MARKETS or not BASE_MARKETS)
