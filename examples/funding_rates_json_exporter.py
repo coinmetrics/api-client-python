@@ -115,19 +115,16 @@ def export_data():
             else:
                 makedirs(market_data_root, exist_ok=True)
 
-            for target_date in get_days_to_export(
-                market, min_export_date, max_export_date
+            if (
+                get_registry_key(market, min_export_date)
+                not in processed_dates_and_markets
             ):
-                if (
-                    get_registry_key(market, target_date)
-                    not in processed_dates_and_markets
-                ):
-                    tasks.append(
-                        pool.apply_async(
-                            export_data_for_a_market,
-                            (market, market_data_root, target_date),
-                        )
+                tasks.append(
+                    pool.apply_async(
+                        export_data_for_a_market,
+                        (market, market_data_root, min_export_date, max_export_date),
                     )
+                )
 
         for i, task in enumerate(tasks, 1):
             task.get()
@@ -176,15 +173,15 @@ def get_days_to_export(market_info, min_export_date, max_export_date):
         yield min_date + timedelta(days=target_date_index)
 
 
-def export_data_for_a_market(market, market_data_root, target_date):
+def export_data_for_a_market(market, market_data_root, start_date, end_date):
     market_funding_rates = client.get_market_funding_rates(
         market["market"],
-        start_time=target_date,
-        end_time=target_date,
+        start_time=start_date,
+        end_time=end_date,
         page_size=10000,
         paging_from=PagingFrom.START,
     )
-    dst_json_file_path = "/".join((market_data_root, "funding_rates_" + target_date.isoformat())) + ".json"
+    dst_json_file_path = "/".join((market_data_root, "funding_rates")) + ".json"
     if COMPRESS_DATA:
         dst_json_file_path = dst_json_file_path + ".gz"
     logger.info("downloading data to: %s", dst_json_file_path)
@@ -197,7 +194,7 @@ def export_data_for_a_market(market, market_data_root, target_date):
         if Path(dst_json_file_path).stat().st_size == 0:
             remove(dst_json_file_path)
     with open(PROCESSED_DAYS_REGISTRY_FILE_PATH, "a") as registry_file:
-        registry_file.write(get_registry_key(market, target_date) + "\n")
+        registry_file.write(get_registry_key(market, start_date) + "\n")
 
 
 def get_registry_key(market, target_date):
