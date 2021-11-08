@@ -217,6 +217,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#catalog_asset_alerts" class="md-nav__link">
+    catalog_asset_alerts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#catalog_asset_pairs" class="md-nav__link">
     catalog_asset_pairs
   </a>
@@ -273,6 +280,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#catalog_full_asset_alerts" class="md-nav__link">
+    catalog_full_asset_alerts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#catalog_full_asset_pairs" class="md-nav__link">
     catalog_full_asset_pairs
   </a>
@@ -317,6 +331,20 @@
           <li class="md-nav__item">
   <a href="#catalog_full_metrics" class="md-nav__link">
     catalog_full_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_asset_alerts" class="md-nav__link">
+    get_asset_alerts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_asset_chains" class="md-nav__link">
+    get_asset_chains
   </a>
   
 </li>
@@ -540,6 +568,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#catalog_asset_alerts" class="md-nav__link">
+    catalog_asset_alerts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#catalog_asset_pairs" class="md-nav__link">
     catalog_asset_pairs
   </a>
@@ -596,6 +631,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#catalog_full_asset_alerts" class="md-nav__link">
+    catalog_full_asset_alerts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#catalog_full_asset_pairs" class="md-nav__link">
     catalog_full_asset_pairs
   </a>
@@ -640,6 +682,20 @@
           <li class="md-nav__item">
   <a href="#catalog_full_metrics" class="md-nav__link">
     catalog_full_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_asset_alerts" class="md-nav__link">
+    get_asset_alerts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_asset_chains" class="md-nav__link">
+    get_asset_chains
   </a>
   
 </li>
@@ -850,6 +906,18 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>list(dict(str, any))</code>: Information that is available for requested assets, like: Full name, metrics and available frequencies, markets, exchanges, etc.</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.catalog_asset_alerts"></a></p>
+<h4 id="catalog_asset_alerts">catalog_asset_alerts<a class="headerlink" href="#catalog_asset_alerts" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">catalog_asset_alerts</span><span class="p">(</span><span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">alerts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
+</code></pre></div>
+<p>Returns meta information about <em>available</em> assets.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>list(str), str</code>): A single asset or a list of assets to return info for. If no assets provided, all available assets are returned.</li>
+<li><code>alerts</code> (<code>list(str), str</code>): A single alert or alert name to return info for. If no alerts provided, all available alerts are returned.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>list(dict(str, any))</code>: Information that is available for requested assets alerts.</p>
 <p><a name="coinmetrics.api_client.CoinMetricsClient.catalog_asset_pairs"></a></p>
 <h4 id="catalog_asset_pairs">catalog_asset_pairs<a class="headerlink" href="#catalog_asset_pairs" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">catalog_asset_pairs</span><span class="p">(</span><span class="n">asset_pairs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
@@ -946,6 +1014,18 @@ description, category, precision and assets for which a metric is available.</p>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>list(dict(str, any))</code>: Information that is supported for requested assets, like: Full name, metrics and supported frequencies, markets, exchanges, etc.</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_alerts"></a></p>
+<h4 id="catalog_full_asset_alerts">catalog_full_asset_alerts<a class="headerlink" href="#catalog_full_asset_alerts" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">catalog_full_asset_alerts</span><span class="p">(</span><span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">alerts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
+</code></pre></div>
+<p>Returns meta information about <em>supported</em> assets.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>list(str), str</code>): A single asset or a list of assets to return info for. If no assets provided, all available assets are returned.</li>
+<li><code>alerts</code> (<code>list(str), str</code>): A single alert or alert name to return info for. If no alerts provided, all available alerts are returned.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>list(dict(str, any))</code>: Information that is available for requested assets alerts.</p>
 <p><a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_pairs"></a></p>
 <h4 id="catalog_full_asset_pairs">catalog_full_asset_pairs<a class="headerlink" href="#catalog_full_asset_pairs" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">catalog_full_asset_pairs</span><span class="p">(</span><span class="n">asset_pairs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
@@ -1031,6 +1111,43 @@ description, category, precision and assets for which a metric is supported.</p>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>list(dict(str, any))</code>: Information about metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is supported.</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.get_asset_alerts"></a></p>
+<h4 id="get_asset_alerts">get_asset_alerts<a class="headerlink" href="#get_asset_alerts" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_asset_alerts</span><span class="p">(</span><span class="n">assets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">alerts</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+<p>Returns asset alerts for the specified assets.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>list(str), str</code>): list of asset names, e.g. 'btc'</li>
+<li><code>alerts</code> (<code>list(str), str</code>): list of asset alert names</li>
+<li><code>page_size</code> (<code>int</code>): number of items returned per page when calling the API. If the request times out, try using a smaller number.</li>
+<li><code>paging_from</code> (<code>PagingFrom, str</code>): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
+<li><code>start_time</code> (<code>datetime, date, str</code>): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120</li>
+<li><code>end_time</code> (<code>datetime, date, str</code>): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120</li>
+<li><code>start_inclusive</code> (<code>bool</code>): Flag to define if start timestamp must be included in the timeseries if present. True by default.</li>
+<li><code>end_inclusive</code> (<code>bool</code>): Flag to define if end timestamp must be included in the timeseries if present. True by default.</li>
+<li><code>timezone</code> (<code>str</code>): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>DataCollection</code>: Asset alerts timeseries.</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.get_asset_chains"></a></p>
+<h4 id="get_asset_chains">get_asset_chains<a class="headerlink" href="#get_asset_chains" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_asset_chains</span><span class="p">(</span><span class="n">assets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+<p>Returns the chains of blocks for the specified assets.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>list(str), str</code>): list of asset names, e.g. 'btc'</li>
+<li><code>page_size</code> (<code>int</code>): number of items returned per page when calling the API. If the request times out, try using a smaller number.</li>
+<li><code>paging_from</code> (<code>PagingFrom, str</code>): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
+<li><code>start_time</code> (<code>datetime, date, str</code>): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120</li>
+<li><code>end_time</code> (<code>datetime, date, str</code>): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120</li>
+<li><code>start_inclusive</code> (<code>bool</code>): Flag to define if start timestamp must be included in the timeseries if present. True by default.</li>
+<li><code>end_inclusive</code> (<code>bool</code>): Flag to define if end timestamp must be included in the timeseries if present. True by default.</li>
+<li><code>timezone</code> (<code>str</code>): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>DataCollection</code>: Asset alerts timeseries.</p>
 <p><a name="coinmetrics.api_client.CoinMetricsClient.get_asset_metrics"></a></p>
 <h4 id="get_asset_metrics">get_asset_metrics<a class="headerlink" href="#get_asset_metrics" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_asset_metrics</span><span class="p">(</span><span class="n">assets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">metrics</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">frequency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_height</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_height</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">sort</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">limit_per_asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
