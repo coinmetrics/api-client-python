@@ -2,10 +2,17 @@ from copy import deepcopy
 from gzip import GzipFile
 from io import BytesIO
 from logging import getLogger
+from time import sleep
 from typing import Any, Dict, Iterable, Iterator, List, Optional, cast
 
+import requests
 
-from coinmetrics._typing import DataRetrievalFuncType, FilePathOrBuffer, UrlParamTypes
+from coinmetrics._typing import (
+    DataRetrievalFuncType,
+    DataReturnType,
+    FilePathOrBuffer,
+    UrlParamTypes,
+)
 from coinmetrics._utils import get_file_path_or_buffer
 
 try:
@@ -29,6 +36,13 @@ class CsvExportError(Exception):
     pass
 
 
+class DataFetchError(Exception):
+    pass
+
+
+NUMBER_OF_RETRIES = 3
+
+
 class DataCollection:
     def __init__(
         self,
@@ -47,7 +61,7 @@ class DataCollection:
     def first_page(self) -> List[Dict[str, Any]]:
         return cast(
             List[Dict[str, Any]],
-            self._data_retrieval_function(self._endpoint, self._url_params)["data"],
+            self._fetch_data_with_retries(self._url_params)["data"],
         )
 
     def __next__(self) -> Any:
@@ -68,6 +82,25 @@ class DataCollection:
 
     def __iter__(self) -> "DataCollection":
         return self
+
+    def _fetch_data_with_retries(
+        self, url_params: Dict[str, UrlParamTypes]
+    ) -> DataReturnType:
+        for i in range(1, NUMBER_OF_RETRIES + 1):
+            try:
+                return self._data_retrieval_function(self._endpoint, url_params)
+            except requests.exceptions.ProxyError as e:
+                if i == NUMBER_OF_RETRIES:
+                    raise
+                logger.warning(
+                    "failed to fetch data with error: %s, retrying in 1 second, try (%s/%s)",
+                    e,
+                    i,
+                    NUMBER_OF_RETRIES,
+                )
+                sleep(1)
+
+        raise DataFetchError("Failed to fetch data")
 
     def export_to_csv(
         self,
