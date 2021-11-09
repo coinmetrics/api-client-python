@@ -1,7 +1,6 @@
 
 
 
-
 <!doctype html>
 <html lang="en" class="no-js">
   <head>
@@ -12,7 +11,7 @@
       
       
       <link rel="shortcut icon" href="assets/images/logo.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.14">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.0">
     
     
       
@@ -20,14 +19,14 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.d3202873.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.b5d04df8.min.css">
       
-        <link rel="stylesheet" href="assets/stylesheets/palette.ff0a5ce4.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.9ab2c1f8.min.css">
       
       
         
         
-        <meta name="theme-color" content="#546d78">
+        <meta name="theme-color" content="#546e7a">
       
     
     
@@ -169,7 +168,9 @@
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
         Home
-        <span class="md-nav__icon md-icon"></span>
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
       </label>
     
     <a href="index.html" title="Home" class="md-nav__link md-nav__link--active">
@@ -184,7 +185,9 @@
   
   
     <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-scrollfix>
@@ -221,6 +224,13 @@
           <li class="md-nav__item">
   <a href="#paging" class="md-nav__link">
     Paging
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssl-certs-verification" class="md-nav__link">
+    SSL Certs verification
   </a>
   
 </li>
@@ -274,7 +284,9 @@
   
   
     <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-scrollfix>
@@ -311,6 +323,13 @@
           <li class="md-nav__item">
   <a href="#paging" class="md-nav__link">
     Paging
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssl-certs-verification" class="md-nav__link">
+    SSL Certs verification
   </a>
   
 </li>
@@ -365,6 +384,7 @@ client = CoinMetricsClient()
 <p>or to query all available assets along with what is available for those assets, like metrics, markets:</p>
 <div class="highlight"><pre><span></span><code>print(client.catalog_assets())
 </code></pre></div>
+
 <p>you can also use filters for the catalog endpoints like this:</p>
 <p><div class="highlight"><pre><span></span><code>print(client.catalog_assets(assets=[&#39;btc&#39;]))
 </code></pre></div>
@@ -382,6 +402,7 @@ in this case you would get all the information for btc only</p>
 ):
     print(trade)
 </code></pre></div>
+
 <p>Or if you want to see daily btc asset metrics you can use something like this:</p>
 <p><div class="highlight"><pre><span></span><code>for metric_data in client.get_asset_metrics(assets=&#39;btc&#39;, 
                                             metrics=[&#39;ReferenceRateUSD&#39;, &#39;BlkHgt&#39;, &#39;AdrActCnt&#39;,  
@@ -428,6 +449,15 @@ for metric_data in client.get_asset_metrics(assets=&#39;btc&#39;, metrics=[&#39;
     print(metric_data)
 </code></pre></div></p>
 <p>PagingFrom.END: is available but it is also a default value also, so you might not want to set it.</p>
+<h3 id="ssl-certs-verification">SSL Certs verification<a class="headerlink" href="#ssl-certs-verification" title="Permanent link">&para;</a></h3>
+<p>Sometimes your organization network have special rules on SSL certs verification and in this case you might face the following error when running the script:
+<div class="highlight"><pre><span></span><code>SSLError: HTTPSConnectionPool(host=&#39;api.coinmetrics.io&#39;, port=443): Max retries exceeded with url: &lt;some_url_path&gt; (Caused by SSLError(SSLCertVerificationError(1, &#39;[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1123)&#39;)))
+</code></pre></div></p>
+<p>In this case, you can pass an option during client initialization to disable ssl verification for requests like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">CoinMetricsClient</span><span class="p">(</span><span class="n">verify_ssl_certs</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+
+<p>We don't recommend setting it to False by default and you should make sure you understand the security risks of disabling SSL certs verification.  </p>
 <h2 id="extended-documentation">Extended documentation<a class="headerlink" href="#extended-documentation" title="Permanent link">&para;</a></h2>
 <p>For more information about the available methods in the client please reference <a href="https://coinmetrics.github.io/api-client-python/site/api_client.html">API Client Spec</a></p>
                 
@@ -482,15 +512,15 @@ for metric_data in client.get_asset_metrics(assets=&#39;btc&#39;, metrics=[&#39;
       
     </div>
     
-      <script src="assets/javascripts/vendor.2d1db4bd.min.js"></script>
-      <script src="assets/javascripts/bundle.6627ddf3.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      <script src="assets/javascripts/vendor.92ffa368.min.js"></script>
+      <script src="assets/javascripts/bundle.5123e3d4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
       
       <script>
         app = initialize({
           base: ".",
           features: [],
           search: Object.assign({
-            worker: "assets/javascripts/worker/search.5eca75d3.min.js"
+            worker: "assets/javascripts/worker/search.a68abb33.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>

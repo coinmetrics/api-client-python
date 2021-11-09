@@ -71,10 +71,10 @@ for metric_data in client.get_asset_metrics(assets='btc',
                                             limit_per_asset=10):
     print(metric_data)
 ```
-This will print you the requested metrics for all the days where we have any of the metrics present. 
+This will print you the requested metrics for all the days where we have any of the metrics present.
 
 
-### DataFrames 
+### DataFrames
 _(New in >=`2021.9.30.14.30`)_
 
 Timeseries data can be transformed into a pandas dataframe by using the `to_dataframe()` method. The code snippet below shows how:
@@ -98,8 +98,8 @@ If you want to use dataframes, then you will need to install pandas
 **Notes**
 
 - This only works with requests that return the type `DataCollection`. Thus, `catalog` requests, which return lists cannot be returned as dataframes.
-Please see the [API Client Spec](https://coinmetrics.github.io/api-client-python/site/api_client.html) for a full list
-of requests and their return types.
+  Please see the [API Client Spec](https://coinmetrics.github.io/api-client-python/site/api_client.html) for a full list
+  of requests and their return types.
 - API restrictions apply. Some requests may return empty results due to limited access to the API from you API key.
 
 
@@ -119,6 +119,22 @@ for metric_data in client.get_asset_metrics(assets='btc', metrics=['ReferenceRat
 ```
 
 PagingFrom.END: is available but it is also a default value also, so you might not want to set it.
+
+### SSL Certs verification
+
+Sometimes your organization network have special rules on SSL certs verification and in this case you might face the following error when running the script:
+```text
+SSLError: HTTPSConnectionPool(host='api.coinmetrics.io', port=443): Max retries exceeded with url: <some_url_path> (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1123)')))
+```
+
+In this case, you can pass an option during client initialization to disable ssl verification for requests like this:
+
+```python
+
+client = CoinMetricsClient(verify_ssl_certs=False)
+```
+
+We don't recommend setting it to False by default and you should make sure you understand the security risks of disabling SSL certs verification.
 
 ## Extended documentation
 For more information about the available methods in the client please reference [API Client Spec](https://coinmetrics.github.io/api-client-python/site/api_client.html)
