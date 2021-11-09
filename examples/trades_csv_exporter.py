@@ -83,7 +83,10 @@ def export_data():
 
     logger.info("getting markets: %s", [market["market"] for market in markets])
 
-    processes_count = cpu_count() * 2
+    processes_count = 2
+
+    if processes_count > 2:
+        logger.warning('Using more than two parallel processes will likely not result into faster export.')
 
     with Pool(processes_count) as pool:
         tasks = []

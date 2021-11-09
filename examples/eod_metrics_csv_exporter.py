@@ -1,11 +1,8 @@
 import logging
 import sys
 from datetime import datetime
-from multiprocessing import Pool
 from os import environ, makedirs
 from os.path import abspath, join
-
-import requests
 
 from coinmetrics.api_client import CoinMetricsClient
 
