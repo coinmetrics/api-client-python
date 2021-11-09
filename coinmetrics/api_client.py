@@ -50,6 +50,26 @@ class CoinMetricsClient:
             List[Dict[str, Any]], self._get_data("catalog/assets", params)["data"]
         )
 
+    def catalog_asset_alerts(
+        self,
+        assets: Optional[Union[List[str], str]] = None,
+        alerts: Optional[Union[List[str], str]] = None,
+    ) -> List[Dict[str, Any]]:
+        """
+        Returns meta information about _available_ assets.
+
+        :param assets: A single asset or a list of assets to return info for. If no assets provided, all available assets are returned.
+        :type assets: list(str), str
+        :param alerts: A single alert or alert name to return info for. If no alerts provided, all available alerts are returned.
+        :type alerts: list(str), str
+        :return: Information that is available for requested assets alerts.
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {"assets": assets, "alerts": alerts}
+        return cast(
+            List[Dict[str, Any]], self._get_data("catalog/alerts", params)["data"]
+        )
+
     def catalog_asset_pairs(
         self, asset_pairs: Optional[Union[List[str], str]] = None
     ) -> List[Dict[str, Any]]:
@@ -212,6 +232,26 @@ class CoinMetricsClient:
             List[Dict[str, Any]], self._get_data("catalog-all/assets", params)["data"]
         )
 
+    def catalog_full_asset_alerts(
+        self,
+        assets: Optional[Union[List[str], str]] = None,
+        alerts: Optional[Union[List[str], str]] = None,
+    ) -> List[Dict[str, Any]]:
+        """
+        Returns meta information about _supported_ assets.
+
+        :param assets: A single asset or a list of assets to return info for. If no assets provided, all available assets are returned.
+        :type assets: list(str), str
+        :param alerts: A single alert or alert name to return info for. If no alerts provided, all available alerts are returned.
+        :type alerts: list(str), str
+        :return: Information that is available for requested assets alerts.
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {"assets": assets, "alerts": alerts}
+        return cast(
+            List[Dict[str, Any]], self._get_data("catalog-all/alerts", params)["data"]
+        )
+
     def catalog_full_asset_pairs(
         self, asset_pairs: Optional[Union[List[str], str]] = None
     ) -> List[Dict[str, Any]]:
@@ -358,6 +398,102 @@ class CoinMetricsClient:
         return cast(
             List[Dict[str, Any]], self._get_data("catalog-all/metrics", params)["data"]
         )
+
+    def get_asset_alerts(
+        self,
+        assets: Union[List[str], str],
+        alerts: Union[List[str], str],
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = None,
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        Returns asset alerts for the specified assets.
+
+        :param assets: list of asset names, e.g. 'btc'
+        :type assets: list(str), str
+        :param alerts: list of asset alert names
+        :type alerts: list(str), str
+        :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
+        :type page_size: int
+        :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+        :type paging_from: PagingFrom, str
+        :param start_time: Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type start_time: datetime, date, str
+        :param end_time: End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type end_time: datetime, date, str
+        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
+        :type start_inclusive: bool
+        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
+        :type end_inclusive: bool
+        :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+        :type timezone: str
+        :return: Asset alerts timeseries.
+        :rtype: DataCollection
+        """
+
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "alerts": alerts,
+            "page_size": page_size or self._page_size,
+            "paging_from": paging_from,
+            "start_time": start_time,
+            "end_time": end_time,
+            "start_inclusive": start_inclusive,
+            "end_inclusive": end_inclusive,
+            "timezone": timezone,
+        }
+        return DataCollection(self._get_data, "timeseries/asset-alerts", params)
+
+    def get_asset_chains(
+        self,
+        assets: Union[List[str], str],
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = None,
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        Returns the chains of blocks for the specified assets.
+
+        :param assets: list of asset names, e.g. 'btc'
+        :type assets: list(str), str
+        :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
+        :type page_size: int
+        :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+        :type paging_from: PagingFrom, str
+        :param start_time: Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type start_time: datetime, date, str
+        :param end_time: End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type end_time: datetime, date, str
+        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
+        :type start_inclusive: bool
+        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
+        :type end_inclusive: bool
+        :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+        :type timezone: str
+        :return: Asset alerts timeseries.
+        :rtype: DataCollection
+        """
+
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "page_size": page_size or self._page_size,
+            "paging_from": paging_from,
+            "start_time": start_time,
+            "end_time": end_time,
+            "start_inclusive": start_inclusive,
+            "end_inclusive": end_inclusive,
+            "timezone": timezone,
+        }
+        return DataCollection(self._get_data, "timeseries/asset-chains", params)
 
     def get_asset_metrics(
         self,

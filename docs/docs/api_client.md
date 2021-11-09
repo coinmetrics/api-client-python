@@ -25,6 +25,24 @@ Returns meta information about _available_ assets.
 
 `list(dict(str, any))`: Information that is available for requested assets, like: Full name, metrics and available frequencies, markets, exchanges, etc.
 
+<a name="coinmetrics.api_client.CoinMetricsClient.catalog_asset_alerts"></a>
+#### catalog\_asset\_alerts
+
+```python
+ | catalog_asset_alerts(assets: Optional[Union[List[str], str]] = None, alerts: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]
+```
+
+Returns meta information about _available_ assets.
+
+**Arguments**:
+
+- `assets` (`list(str), str`): A single asset or a list of assets to return info for. If no assets provided, all available assets are returned.
+- `alerts` (`list(str), str`): A single alert or alert name to return info for. If no alerts provided, all available alerts are returned.
+
+**Returns**:
+
+`list(dict(str, any))`: Information that is available for requested assets alerts.
+
 <a name="coinmetrics.api_client.CoinMetricsClient.catalog_asset_pairs"></a>
 #### catalog\_asset\_pairs
 
@@ -169,6 +187,24 @@ Returns meta information about _supported_ assets.
 
 `list(dict(str, any))`: Information that is supported for requested assets, like: Full name, metrics and supported frequencies, markets, exchanges, etc.
 
+<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_alerts"></a>
+#### catalog\_full\_asset\_alerts
+
+```python
+ | catalog_full_asset_alerts(assets: Optional[Union[List[str], str]] = None, alerts: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]
+```
+
+Returns meta information about _supported_ assets.
+
+**Arguments**:
+
+- `assets` (`list(str), str`): A single asset or a list of assets to return info for. If no assets provided, all available assets are returned.
+- `alerts` (`list(str), str`): A single alert or alert name to return info for. If no alerts provided, all available alerts are returned.
+
+**Returns**:
+
+`list(dict(str, any))`: Information that is available for requested assets alerts.
+
 <a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_pairs"></a>
 #### catalog\_full\_asset\_pairs
 
@@ -295,6 +331,55 @@ description, category, precision and assets for which a metric is supported.
 **Returns**:
 
 `list(dict(str, any))`: Information about metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is supported.
+
+<a name="coinmetrics.api_client.CoinMetricsClient.get_asset_alerts"></a>
+#### get\_asset\_alerts
+
+```python
+ | get_asset_alerts(assets: Union[List[str], str], alerts: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+```
+
+Returns asset alerts for the specified assets.
+
+**Arguments**:
+
+- `assets` (`list(str), str`): list of asset names, e.g. 'btc'
+- `alerts` (`list(str), str`): list of asset alert names
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+
+**Returns**:
+
+`DataCollection`: Asset alerts timeseries.
+
+<a name="coinmetrics.api_client.CoinMetricsClient.get_asset_chains"></a>
+#### get\_asset\_chains
+
+```python
+ | get_asset_chains(assets: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+```
+
+Returns the chains of blocks for the specified assets.
+
+**Arguments**:
+
+- `assets` (`list(str), str`): list of asset names, e.g. 'btc'
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+
+**Returns**:
+
+`DataCollection`: Asset alerts timeseries.
 
 <a name="coinmetrics.api_client.CoinMetricsClient.get_asset_metrics"></a>
 #### get\_asset\_metrics
