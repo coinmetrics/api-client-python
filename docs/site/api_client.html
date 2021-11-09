@@ -448,6 +448,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get_market_contract_prices" class="md-nav__link">
+    get_market_contract_prices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_market_implied_volatility" class="md-nav__link">
+    get_market_implied_volatility
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_market_greeks" class="md-nav__link">
+    get_market_greeks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get_mining_pool_tips_summary" class="md-nav__link">
     get_mining_pool_tips_summary
   </a>
@@ -794,6 +815,27 @@
           <li class="md-nav__item">
   <a href="#get_market_quotes" class="md-nav__link">
     get_market_quotes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_market_contract_prices" class="md-nav__link">
+    get_market_contract_prices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_market_implied_volatility" class="md-nav__link">
+    get_market_implied_volatility
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_market_greeks" class="md-nav__link">
+    get_market_greeks
   </a>
   
 </li>
@@ -1448,6 +1490,63 @@ For more information on quotes, see: <a href="https://docs.coinmetrics.io/info/m
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: Market Quotes timeseries.</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.get_market_contract_prices"></a></p>
+<h4 id="get_market_contract_prices">get_market_contract_prices<a class="headerlink" href="#get_market_contract_prices" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_market_contract_prices</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">limit_per_market</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+<p>Returns contract prices for specified markets. This includes index price and mark price that are used by the exchange for settlement and risk management purposes.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code> (<code>list(str), str</code>): list of market ids. Market ids use the following naming convention: <code>exchangeName-baseAsset-quoteAsset-spot</code> for spot markets, <code>exchangeName-futuresSymbol-future</code> for futures markets, and <code>exchangeName-optionsSymbol-option</code> for options markets. e.g., <code>'coinbase-btc-usd-spot'</code>, <code>'bitmex-XBTUSD-future', 'deribit-ETH-25MAR22-1200-P-option'</code></li>
+<li><code>page_size</code> (<code>int</code>): number of items returned per page when calling the API. If the request times out, try using a smaller number.</li>
+<li><code>paging_from</code> (<code>PagingFrom, str</code>): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
+<li><code>start_time</code> (<code>datetime, date, str</code>): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120</li>
+<li><code>end_time</code> (<code>datetime, date, str</code>): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120</li>
+<li><code>start_inclusive</code> (<code>bool</code>): Flag to define if start timestamp must be included in the timeseries if present. True by default.</li>
+<li><code>end_inclusive</code> (<code>bool</code>): Flag to define if end timestamp must be included in the timeseries if present. True by default.</li>
+<li><code>timezone</code> (<code>str</code>): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.</li>
+<li><code>limit_per_market</code> (<code>int</code>): How many entries <em>per market</em> the result should contain.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>DataCollection</code>: Market Contract Prices timeseries.</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.get_market_implied_volatility"></a></p>
+<h4 id="get_market_implied_volatility">get_market_implied_volatility<a class="headerlink" href="#get_market_implied_volatility" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_market_implied_volatility</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">limit_per_market</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+<p>Returns implied volatility for specified markets.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code> (<code>list(str), str</code>): list of market ids. Market ids use the following naming convention: <code>exchangeName-baseAsset-quoteAsset-spot</code> for spot markets, <code>exchangeName-futuresSymbol-future</code> for futures markets, and <code>exchangeName-optionsSymbol-option</code> for options markets. e.g., <code>'coinbase-btc-usd-spot'</code>, <code>'bitmex-XBTUSD-future', 'deribit-ETH-25MAR22-1200-P-option'</code></li>
+<li><code>page_size</code> (<code>int</code>): number of items returned per page when calling the API. If the request times out, try using a smaller number.</li>
+<li><code>paging_from</code> (<code>PagingFrom, str</code>): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
+<li><code>start_time</code> (<code>datetime, date, str</code>): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120</li>
+<li><code>end_time</code> (<code>datetime, date, str</code>): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120</li>
+<li><code>start_inclusive</code> (<code>bool</code>): Flag to define if start timestamp must be included in the timeseries if present. True by default.</li>
+<li><code>end_inclusive</code> (<code>bool</code>): Flag to define if end timestamp must be included in the timeseries if present. True by default.</li>
+<li><code>timezone</code> (<code>str</code>): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.</li>
+<li><code>limit_per_market</code> (<code>int</code>): How many entries <em>per market</em> the result should contain.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>DataCollection</code>: Market Volatility timeseries.</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.get_market_greeks"></a></p>
+<h4 id="get_market_greeks">get_market_greeks<a class="headerlink" href="#get_market_greeks" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_market_greeks</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">limit_per_market</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+<p>Returns greeks for option markets.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code> (<code>list(str), str</code>): list of market ids. Market ids use the following naming convention: <code>exchangeName-baseAsset-quoteAsset-spot</code> for spot markets, <code>exchangeName-futuresSymbol-future</code> for futures markets, and <code>exchangeName-optionsSymbol-option</code> for options markets. e.g., <code>'coinbase-btc-usd-spot'</code>, <code>'bitmex-XBTUSD-future', 'deribit-ETH-25MAR22-1200-P-option'</code></li>
+<li><code>page_size</code> (<code>int</code>): number of items returned per page when calling the API. If the request times out, try using a smaller number.</li>
+<li><code>paging_from</code> (<code>PagingFrom, str</code>): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
+<li><code>start_time</code> (<code>datetime, date, str</code>): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120</li>
+<li><code>end_time</code> (<code>datetime, date, str</code>): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120</li>
+<li><code>start_inclusive</code> (<code>bool</code>): Flag to define if start timestamp must be included in the timeseries if present. True by default.</li>
+<li><code>end_inclusive</code> (<code>bool</code>): Flag to define if end timestamp must be included in the timeseries if present. True by default.</li>
+<li><code>timezone</code> (<code>str</code>): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.</li>
+<li><code>limit_per_market</code> (<code>int</code>): How many entries <em>per market</em> the result should contain.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>DataCollection</code>: Market Volatility timeseries.</p>
 <p><a name="coinmetrics.api_client.CoinMetricsClient.get_mining_pool_tips_summary"></a></p>
 <h4 id="get_mining_pool_tips_summary">get_mining_pool_tips_summary<a class="headerlink" href="#get_mining_pool_tips_summary" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_mining_pool_tips_summary</span><span class="p">(</span><span class="n">assets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>

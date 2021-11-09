@@ -1312,6 +1312,160 @@ class CoinMetricsClient:
         }
         return DataCollection(self._get_data, "timeseries/market-quotes", params)
 
+    def get_market_contract_prices(
+        self,
+        markets: Union[List[str], str],
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = None,
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        limit_per_market: Optional[int] = None,
+    ) -> DataCollection:
+        """
+        Returns contract prices for specified markets. This includes index price and mark price that are used by the exchange for settlement and risk management purposes.
+
+        :param markets: list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future', 'deribit-ETH-25MAR22-1200-P-option'`
+        :type markets: list(str), str
+        :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
+        :type page_size: int
+        :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+        :type paging_from: PagingFrom, str
+        :param start_time: Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type start_time: datetime, date, str
+        :param end_time: End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type end_time: datetime, date, str
+        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
+        :type start_inclusive: bool
+        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
+        :type end_inclusive: bool
+        :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+        :type timezone: str
+        :param limit_per_market: How many entries _per market_ the result should contain.
+        :type limit_per_market: int
+        :return: Market Contract Prices timeseries.
+        :rtype: DataCollection
+        """
+
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "page_size": page_size or self._page_size,
+            "paging_from": paging_from,
+            "start_time": start_time,
+            "end_time": end_time,
+            "start_inclusive": start_inclusive,
+            "end_inclusive": end_inclusive,
+            "timezone": timezone,
+            "limit_per_market": limit_per_market,
+        }
+        return DataCollection(
+            self._get_data, "timeseries/market-contract-prices", params
+        )
+
+    def get_market_implied_volatility(
+        self,
+        markets: Union[List[str], str],
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = None,
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        limit_per_market: Optional[int] = None,
+    ) -> DataCollection:
+        """
+        Returns implied volatility for specified markets.
+
+        :param markets: list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future', 'deribit-ETH-25MAR22-1200-P-option'`
+        :type markets: list(str), str
+        :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
+        :type page_size: int
+        :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+        :type paging_from: PagingFrom, str
+        :param start_time: Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type start_time: datetime, date, str
+        :param end_time: End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type end_time: datetime, date, str
+        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
+        :type start_inclusive: bool
+        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
+        :type end_inclusive: bool
+        :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+        :type timezone: str
+        :param limit_per_market: How many entries _per market_ the result should contain.
+        :type limit_per_market: int
+        :return: Market Volatility timeseries.
+        :rtype: DataCollection
+        """
+
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "page_size": page_size or self._page_size,
+            "paging_from": paging_from,
+            "start_time": start_time,
+            "end_time": end_time,
+            "start_inclusive": start_inclusive,
+            "end_inclusive": end_inclusive,
+            "timezone": timezone,
+            "limit_per_market": limit_per_market,
+        }
+        return DataCollection(
+            self._get_data, "timeseries/market-implied-volatility", params
+        )
+
+    def get_market_greeks(
+        self,
+        markets: Union[List[str], str],
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = None,
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        limit_per_market: Optional[int] = None,
+    ) -> DataCollection:
+        """
+        Returns greeks for option markets.
+
+        :param markets: list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future', 'deribit-ETH-25MAR22-1200-P-option'`
+        :type markets: list(str), str
+        :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
+        :type page_size: int
+        :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+        :type paging_from: PagingFrom, str
+        :param start_time: Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type start_time: datetime, date, str
+        :param end_time: End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type end_time: datetime, date, str
+        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
+        :type start_inclusive: bool
+        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
+        :type end_inclusive: bool
+        :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+        :type timezone: str
+        :param limit_per_market: How many entries _per market_ the result should contain.
+        :type limit_per_market: int
+        :return: Market Volatility timeseries.
+        :rtype: DataCollection
+        """
+
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "page_size": page_size or self._page_size,
+            "paging_from": paging_from,
+            "start_time": start_time,
+            "end_time": end_time,
+            "start_inclusive": start_inclusive,
+            "end_inclusive": end_inclusive,
+            "timezone": timezone,
+            "limit_per_market": limit_per_market,
+        }
+        return DataCollection(self._get_data, "timeseries/market-greeks", params)
+
     def get_mining_pool_tips_summary(
         self,
         assets: Union[List[str], str],

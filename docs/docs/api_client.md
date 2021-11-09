@@ -765,6 +765,81 @@ For more information on quotes, see: https://docs.coinmetrics.io/info/markets/qu
 
 `DataCollection`: Market Quotes timeseries.
 
+<a name="coinmetrics.api_client.CoinMetricsClient.get_market_contract_prices"></a>
+#### get\_market\_contract\_prices
+
+```python
+ | get_market_contract_prices(markets: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, limit_per_market: Optional[int] = None) -> DataCollection
+```
+
+Returns contract prices for specified markets. This includes index price and mark price that are used by the exchange for settlement and risk management purposes.
+
+**Arguments**:
+
+- `markets` (`list(str), str`): list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future', 'deribit-ETH-25MAR22-1200-P-option'`
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+- `limit_per_market` (`int`): How many entries _per market_ the result should contain.
+
+**Returns**:
+
+`DataCollection`: Market Contract Prices timeseries.
+
+<a name="coinmetrics.api_client.CoinMetricsClient.get_market_implied_volatility"></a>
+#### get\_market\_implied\_volatility
+
+```python
+ | get_market_implied_volatility(markets: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, limit_per_market: Optional[int] = None) -> DataCollection
+```
+
+Returns implied volatility for specified markets.
+
+**Arguments**:
+
+- `markets` (`list(str), str`): list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future', 'deribit-ETH-25MAR22-1200-P-option'`
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+- `limit_per_market` (`int`): How many entries _per market_ the result should contain.
+
+**Returns**:
+
+`DataCollection`: Market Volatility timeseries.
+
+<a name="coinmetrics.api_client.CoinMetricsClient.get_market_greeks"></a>
+#### get\_market\_greeks
+
+```python
+ | get_market_greeks(markets: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, limit_per_market: Optional[int] = None) -> DataCollection
+```
+
+Returns greeks for option markets.
+
+**Arguments**:
+
+- `markets` (`list(str), str`): list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future', 'deribit-ETH-25MAR22-1200-P-option'`
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+- `limit_per_market` (`int`): How many entries _per market_ the result should contain.
+
+**Returns**:
+
+`DataCollection`: Market Volatility timeseries.
+
 <a name="coinmetrics.api_client.CoinMetricsClient.get_mining_pool_tips_summary"></a>
 #### get\_mining\_pool\_tips\_summary
 
