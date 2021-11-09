@@ -120,5 +120,21 @@ for metric_data in client.get_asset_metrics(assets='btc', metrics=['ReferenceRat
 
 PagingFrom.END: is available but it is also a default value also, so you might not want to set it.
 
+### SSL Certs verification
+
+Sometimes your organization network have special rules on SSL certs verification and in this case you might face the following error when running the script:
+```text
+SSLError: HTTPSConnectionPool(host='api.coinmetrics.io', port=443): Max retries exceeded with url: <some_url_path> (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1123)')))
+```
+
+In this case, you can pass an option during client initialization to disable ssl verification for requests like this:
+
+```python
+
+client = CoinMetricsClient(verify_ssl_certs=False)
+```
+
+We don't recommend setting it to False by default and you should make sure you understand the security risks of disabling SSL certs verification.  
+
 ## Extended documentation
 For more information about the available methods in the client please reference [API Client Spec](https://coinmetrics.github.io/api-client-python/site/api_client.html)

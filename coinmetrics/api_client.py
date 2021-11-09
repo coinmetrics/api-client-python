@@ -24,10 +24,12 @@ logger = getLogger("cm_client")
 
 class CoinMetricsClient:
     def __init__(
-        self, api_key: str = "", page_size: int = 1000,
+        self, api_key: str = "", page_size: int = 1000, verify_ssl_certs: bool = True,
     ):
         self._page_size = page_size
         self._api_key_url_str = "api_key={}".format(api_key) if api_key else ""
+
+        self._verify_ssl_certs = verify_ssl_certs
 
         api_path_prefix = ""
         if not api_key:
@@ -1931,4 +1933,4 @@ class CoinMetricsClient:
 
     @retry((socket.gaierror, HTTPError), retries=5, wait_time_between_retries=5)
     def _send_request(self, actual_url: str) -> Response:
-        return requests.get(actual_url)
+        return requests.get(actual_url, verify=self._verify_ssl_certs)
