@@ -36,7 +36,8 @@ poetry export --without-hashes --format=requirements.txt > requirements.txt
 ## Publishing package to pypi
 **NOTE: Run this only when you merge your changes into master and actually want to release the updates**
 ```
-poetry build && poetry publish
+poetry build
+poetry publish
 ```
 
 
