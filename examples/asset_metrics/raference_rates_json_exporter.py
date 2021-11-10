@@ -32,25 +32,27 @@ DST_ROOT = "./data"
 
 # btc, eth, ...
 ASSETS_TO_EXPORT = {
-    'btc',
-    'eth',
+    "btc",
+    "eth",
 }
 
 
 # ReferenceRateUSD, ReferenceRateEUR, ReferenceRateBTC, ETH
 REFERENCE_RATES = {
-    'ReferenceRateUSD',
+    "ReferenceRateUSD",
 }
 
 # 1s, 1h, 1d
-FREQUENCY = '1h'
+FREQUENCY = "1h"
 
 
 def export_data():
     processes_count = 2
 
     if processes_count > 2:
-        logger.warning('Using more than two parallel processes will likely not result into faster export.')
+        logger.warning(
+            "Using more than two parallel processes will likely not result into faster export."
+        )
 
     with Pool(processes_count) as pool:
         tasks = []
@@ -76,7 +78,8 @@ def export_asset_data(asset: str) -> None:
     dst_file = join(DST_ROOT, "{}_reference_rates.json".format(asset))
     makedirs(DST_ROOT, exist_ok=True)
     logger.info(
-        "exporting rates for asset `%s` into a json file (this might take 5-10+ minutes for 1s frequency and a 1-30sec for 1h and 1d frequencies): %s",
+        "exporting rates for asset `%s` into a json file "
+        "(this might take 5-10+ minutes for 1s frequency and a 1-30sec for 1h and 1d frequencies): %s",
         abspath(dst_file),
     )
     # only pick metrics that are available for that asset

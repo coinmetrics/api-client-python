@@ -53,7 +53,7 @@ def export_data(asset: str):
         asset_metrics = client.get_asset_metrics(
             assets=asset,
             metrics=metric_names,
-            frequency='1b',
+            frequency="1b",
             paging_from=PagingFrom.START,
         )
         asset_metrics.export_to_json(dst_file_buffer)

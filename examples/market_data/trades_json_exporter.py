@@ -68,7 +68,9 @@ QUOTE_MARKETS = {
 DST_ROOT = "./data"
 
 EXPORT_START_DATE = "2019-01-01"
-EXPORT_END_DATE: Optional[str] = None  # if you set this to None, then `today - 1 day` will be used as the end date
+EXPORT_END_DATE: Optional[
+    str
+] = None  # if you set this to None, then `today - 1 day` will be used as the end date
 COMPRESS_DATA = False  # False - for raw json files; True - for gzipped json files
 
 # path to local file that is used to not reexport data if it was already exported
@@ -105,7 +107,9 @@ def export_data():
     processes_count = 2
 
     if processes_count > 2:
-        logger.warning('Using more than two parallel processes will likely not result into faster export.')
+        logger.warning(
+            "Using more than two parallel processes will likely not result into faster export."
+        )
 
     with Pool(processes_count) as pool:
         tasks = []
@@ -194,7 +198,9 @@ def export_data_for_a_market(market, market_data_root, target_date):
         page_size=10000,
         paging_from=PagingFrom.START,
     )
-    dst_json_file_path = "/".join((market_data_root, "trades_" + target_date.isoformat())) + ".json"
+    dst_json_file_path = (
+        "/".join((market_data_root, "trades_" + target_date.isoformat())) + ".json"
+    )
     if COMPRESS_DATA:
         dst_json_file_path = dst_json_file_path + ".gz"
     logger.info("downloading data to: %s", dst_json_file_path)

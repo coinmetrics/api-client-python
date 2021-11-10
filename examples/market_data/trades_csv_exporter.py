@@ -86,7 +86,9 @@ def export_data():
     processes_count = 2
 
     if processes_count > 2:
-        logger.warning('Using more than two parallel processes will likely not result into faster export.')
+        logger.warning(
+            "Using more than two parallel processes will likely not result into faster export."
+        )
 
     with Pool(processes_count) as pool:
         tasks = []
@@ -177,9 +179,7 @@ def export_data_for_a_market(market, market_data_root, target_date):
         dst_csv_file_path = dst_csv_file_path + ".gz"
     logger.info("downloading data to: %s", dst_csv_file_path)
     if s3 is not None:
-        with s3.open(
-            dst_csv_file_path.split("s3://")[1], "wb"
-        ) as data_file:
+        with s3.open(dst_csv_file_path.split("s3://")[1], "wb") as data_file:
             market_trades.export_to_csv(data_file, compress=COMPRESS_DATA)
     else:
         market_trades.export_to_csv(dst_csv_file_path, compress=COMPRESS_DATA)

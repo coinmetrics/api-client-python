@@ -59,7 +59,7 @@ QUOTE_MARKETS = {
 }
 
 # 1m, 5m, 10m, 15m, 30m, 1h, 4h, 1d
-FREQUENCY = '1h'
+FREQUENCY = "1h"
 
 # DST_ROOT is the path where you want the data to be saved to
 # start the path with 's3://' prefix to make the script save to AWS S3, example
@@ -70,7 +70,9 @@ FREQUENCY = '1h'
 DST_ROOT = "./data"
 
 EXPORT_START_DATE = "2019-01-01"
-EXPORT_END_DATE: Optional[str] = None  # if you set this to None, then `today - 1 day` will be used as the end date
+EXPORT_END_DATE: Optional[
+    str
+] = None  # if you set this to None, then `today - 1 day` will be used as the end date
 COMPRESS_DATA = False  # False - for raw json files; True - for gzipped json files
 
 # path to local file that is used to not reexport data if it was already exported
@@ -107,7 +109,9 @@ def export_data():
     processes_count = 2
 
     if processes_count > 2:
-        logger.warning('Using more than two parallel processes will likely not result into faster export.')
+        logger.warning(
+            "Using more than two parallel processes will likely not result into faster export."
+        )
 
     with Pool(processes_count) as pool:
         tasks = []
@@ -127,7 +131,7 @@ def export_data():
             else:
                 makedirs(market_data_root, exist_ok=True)
 
-            if FREQUENCY in {'1h', '4h', '1d'}:
+            if FREQUENCY in {"1h", "4h", "1d"}:
                 if (
                     get_registry_key(market, min_export_date)
                     not in processed_dates_and_markets
@@ -135,7 +139,12 @@ def export_data():
                     tasks.append(
                         pool.apply_async(
                             export_data_for_a_market,
-                            (market, market_data_root, min_export_date, max_export_date),
+                            (
+                                market,
+                                market_data_root,
+                                min_export_date,
+                                max_export_date,
+                            ),
                         )
                     )
             else:
@@ -212,7 +221,9 @@ def export_data_for_a_market(market, market_data_root, start_date, end_date):
     if start_date != end_date:
         dst_json_file_path = "/".join((market_data_root, "candles")) + ".json"
     else:
-        dst_json_file_path = "/".join((market_data_root, "candles_" + start_date.isoformat())) + ".json"
+        dst_json_file_path = (
+            "/".join((market_data_root, "candles_" + start_date.isoformat())) + ".json"
+        )
 
     if COMPRESS_DATA:
         dst_json_file_path = dst_json_file_path + ".gz"

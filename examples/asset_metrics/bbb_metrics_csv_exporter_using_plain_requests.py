@@ -25,6 +25,7 @@ api_key = (
 
 DST_ROOT = "./data"
 
+
 def export_data(asset: str):
     logger.info("retrieving metric names")
     response = requests.get(
