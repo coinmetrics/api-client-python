@@ -59,7 +59,7 @@ QUOTE_MARKETS = {
 }
 
 # 1m, 5m, 10m, 15m, 30m, 1h, 4h, 1d
-FREQUENCY = '1d'
+FREQUENCY = '1h'
 
 # DST_ROOT is the path where you want the data to be saved to
 # start the path with 's3://' prefix to make the script save to AWS S3, example
