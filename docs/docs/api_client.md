@@ -717,7 +717,7 @@ For more information on funding rates, see: https://docs.coinmetrics.io/info/mar
 #### get\_market\_orderbooks
 
 ```python
- | get_market_orderbooks(markets: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, limit_per_market: Optional[int] = None) -> DataCollection
+ | get_market_orderbooks(markets: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, depth_limit: Optional[str] = '100', timezone: Optional[str] = None, limit_per_market: Optional[int] = None) -> DataCollection
 ```
 
 Returns market order books for specified markets and date range.
@@ -732,6 +732,7 @@ For more information on order books, see: https://docs.coinmetrics.io/info/marke
 - `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `depth_limit` (`str`): book depth limit, 100 levels max or full book that is not limited and provided as is from the exchange. Full book snapshots are collected once per hour
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
 - `limit_per_market` (`int`): How many entries _per market_ the result should contain.
 

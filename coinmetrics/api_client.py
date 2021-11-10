@@ -1221,6 +1221,7 @@ class CoinMetricsClient:
         end_time: Optional[Union[datetime, date, str]] = None,
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
+        depth_limit: Optional[str] = '100',
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None,
     ) -> DataCollection:
@@ -1242,6 +1243,8 @@ class CoinMetricsClient:
         :type start_inclusive: bool
         :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
         :type end_inclusive: bool
+        :param depth_limit: book depth limit, 100 levels max or full book that is not limited and provided as is from the exchange. Full book snapshots are collected once per hour
+        :type depth_limit: str
         :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
         :type timezone: str
         :param limit_per_market: How many entries _per market_ the result should contain.
@@ -1259,6 +1262,7 @@ class CoinMetricsClient:
             "start_inclusive": start_inclusive,
             "end_inclusive": end_inclusive,
             "limit_per_market": limit_per_market,
+            "depth_limit": depth_limit,
             "timezone": timezone,
         }
         return DataCollection(self._get_data, "timeseries/market-orderbooks", params)

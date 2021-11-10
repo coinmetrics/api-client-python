@@ -59,6 +59,8 @@ QUOTE_MARKETS = {
     "usd",
 }
 
+# 100, full_book
+DEPTH_LIMIT = 'full_book'
 
 # DST_ROOT is the path where you want the data to be saved to
 # start the path with 's3://' prefix to make the script save to AWS S3, example
@@ -68,7 +70,7 @@ QUOTE_MARKETS = {
 # DST_ROOT = 's3://<bucket_name>/data'
 DST_ROOT = "./data"
 
-EXPORT_START_DATE = "2019-01-01"
+EXPORT_START_DATE = "2021-11-01"
 
 # if you set EXPORT_END_DATE to None, then `today - 1 day` will be used as the end date
 EXPORT_END_DATE: Optional[str] = None
@@ -199,6 +201,7 @@ def export_data_for_a_market(market, market_data_root, target_date):
         end_time=target_date,
         page_size=10000,
         paging_from=PagingFrom.START,
+        depth_limit=DEPTH_LIMIT,
     )
     dst_json_file_path = (
         "/".join((market_data_root, "books_" + target_date.isoformat())) + ".json"
