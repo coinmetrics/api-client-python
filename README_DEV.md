@@ -46,7 +46,9 @@ poetry build && poetry publish
 pydoc-markdown -m coinmetrics.api_client > docs\docs\api_client.md
 
 cp -f README.md docs\docs\index.md
-cd docs && mkdocs build && cd ..
+cd docs 
+mkdocs build 
+cd ..
 ```
 
 #### Mac
