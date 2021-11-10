@@ -1,8 +1,8 @@
 import logging
 import sys
-from datetime import date, timedelta, datetime
-from multiprocessing import Pool, cpu_count
-from os import makedirs, environ, remove
+from datetime import date, datetime, timedelta
+from multiprocessing import Pool
+from os import environ, makedirs, remove
 from os.path import exists
 from pathlib import Path
 from typing import Optional
@@ -32,6 +32,7 @@ logger.level = level
 # "bitmex",
 # "bitfinex",
 # "deribit",
+# "cme",
 EXCHANGES_TO_EXPORT = {}
 
 # use it if you want to get specific markets or leave it empty if you want to get all markets
@@ -68,9 +69,10 @@ QUOTE_MARKETS = {
 DST_ROOT = "./data"
 
 EXPORT_START_DATE = "2019-01-01"
-EXPORT_END_DATE: Optional[
-    str
-] = None  # if you set this to None, then `today - 1 day` will be used as the end date
+
+# if you set EXPORT_END_DATE to None, then `today - 1 day` will be used as the end date
+EXPORT_END_DATE: Optional[str] = None
+
 COMPRESS_DATA = False  # False - for raw json files; True - for gzipped json files
 
 # path to local file that is used to not reexport data if it was already exported

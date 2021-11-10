@@ -1,8 +1,8 @@
 import logging
 import sys
-from datetime import date, timedelta, datetime
-from multiprocessing import Pool, cpu_count
-from os import makedirs, environ
+from datetime import date, datetime, timedelta
+from multiprocessing import Pool
+from os import environ, makedirs
 from os.path import exists
 
 from coinmetrics.api_client import CoinMetricsClient
