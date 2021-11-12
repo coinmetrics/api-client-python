@@ -379,7 +379,7 @@ Returns the chains of blocks for the specified assets.
 
 **Returns**:
 
-`DataCollection`: Asset alerts timeseries.
+`DataCollection`: Asset chains timeseries.
 
 <a name="coinmetrics.api_client.CoinMetricsClient.get_asset_metrics"></a>
 #### get\_asset\_metrics
@@ -717,7 +717,7 @@ For more information on funding rates, see: https://docs.coinmetrics.io/info/mar
 #### get\_market\_orderbooks
 
 ```python
- | get_market_orderbooks(markets: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, depth_limit: Optional[str] = '100', timezone: Optional[str] = None, limit_per_market: Optional[int] = None) -> DataCollection
+ | get_market_orderbooks(markets: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, depth_limit: Optional[str] = "100", timezone: Optional[str] = None, limit_per_market: Optional[int] = None) -> DataCollection
 ```
 
 Returns market order books for specified markets and date range.

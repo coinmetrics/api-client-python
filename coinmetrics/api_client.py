@@ -481,7 +481,7 @@ class CoinMetricsClient:
         :type end_inclusive: bool
         :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
         :type timezone: str
-        :return: Asset alerts timeseries.
+        :return: Asset chains timeseries.
         :rtype: DataCollection
         """
 
@@ -1221,7 +1221,7 @@ class CoinMetricsClient:
         end_time: Optional[Union[datetime, date, str]] = None,
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
-        depth_limit: Optional[str] = '100',
+        depth_limit: Optional[str] = "100",
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None,
     ) -> DataCollection:
