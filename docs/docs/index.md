@@ -2,12 +2,18 @@
 
 This is an official Python API client for Coin Metrics API v4.
 
-## Installation
+## Installation and Updates
 To install the client you can run the following command:
 ```
 pip install coinmetrics-api-client
 ```
 
+Note that the client is updated regularly to reflect the changes made in [API v4](https://docs.coinmetrics.io/api/v4). Ensure that your latest version matches with what's in [pyPI](https://pypi.org/project/coinmetrics-api-client/) 
+
+To update your version, run the following command:
+```
+pip install coinmetrics-api-client -U
+```
 
 ## Introduction
 You can use this client for querying all kinds of data with your API.
@@ -45,6 +51,30 @@ You can use this client to connect to our API v4 and get catalog or timeseries d
 
 The client can be used to query both pro and community data.
 
+The full list of methods can be found in the [API Client Spec](https://coinmetrics.github.io/api-client-python/site/api_client.html).
+
+## Examples
+The API Client allows you to chain together workflows for importing, transforming, then exporting Coin Metrics data. Below are examples of common use-cases that can be altered to tailor your specific needs.
+
+**[Example Notebooks](/examples/notebooks)**
+
+* `walkthrough_community.ipynb`: Walks through the basic functionality available using the community client.
+
+**[Asset Metrics](/examples/asset_metrics)**
+
+* `bbb_metrics_csv_exporter_using_plain_requests.py`: Queries block-by-block metrics using the `requests` library and exports the output into a CSV file.
+* `bbb_metrics_json_exporter.py`: Queries block-by-block metrics and exports the output into a JSON file.
+* `eod_metrics_csv_exporter.py`: Exports a set of user-defined metrics and assets published at end-of-day and exports the output into a CSV file.
+* `reference_rates_json_exporter.py`: Queries Coin Metrics Reference Rates at a user-defined frequency for a set of assets, then exports the output into a JSON file.
+
+**[Market Data](/examples/market_data)** 
+
+* `books_json_exporter.py`: Queries market orderbook data then exports the output into a JSON file.
+* `candles_json_exporter.py`: Queries market candles data then exports the output into a JSON file.
+* `funding_rates_json_exporter.py`: Queries market funding rates data then exports the output into a JSON file.
+* `trades_csv_exporter.py`: Queries market trades data then exports the output into a CSV file.
+* `trades_json_exporter.py`: Queries market trades data then exports the output into a JSON file.
+
 ## Getting timeseries data
 
 For getting timeseries data you want to use methods of the client class that start with `get_`.
@@ -71,10 +101,10 @@ for metric_data in client.get_asset_metrics(assets='btc',
                                             limit_per_asset=10):
     print(metric_data)
 ```
-This will print you the requested metrics for all the days where we have any of the metrics present. 
+This will print you the requested metrics for all the days where we have any of the metrics present.
 
 
-### DataFrames 
+### DataFrames
 _(New in >=`2021.9.30.14.30`)_
 
 Timeseries data can be transformed into a pandas dataframe by using the `to_dataframe()` method. The code snippet below shows how:
@@ -98,8 +128,8 @@ If you want to use dataframes, then you will need to install pandas
 **Notes**
 
 - This only works with requests that return the type `DataCollection`. Thus, `catalog` requests, which return lists cannot be returned as dataframes.
-Please see the [API Client Spec](https://coinmetrics.github.io/api-client-python/site/api_client.html) for a full list
-of requests and their return types.
+  Please see the [API Client Spec](https://coinmetrics.github.io/api-client-python/site/api_client.html) for a full list
+  of requests and their return types.
 - API restrictions apply. Some requests may return empty results due to limited access to the API from you API key.
 
 
@@ -134,7 +164,7 @@ In this case, you can pass an option during client initialization to disable ssl
 client = CoinMetricsClient(verify_ssl_certs=False)
 ```
 
-We don't recommend setting it to False by default and you should make sure you understand the security risks of disabling SSL certs verification.  
+We don't recommend setting it to False by default and you should make sure you understand the security risks of disabling SSL certs verification.
 
 ## Extended documentation
 For more information about the available methods in the client please reference [API Client Spec](https://coinmetrics.github.io/api-client-python/site/api_client.html)
