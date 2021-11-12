@@ -56,18 +56,18 @@ The full list of methods can be found in the [API Client Spec](https://coinmetri
 ## Examples
 The API Client allows you to chain together workflows for importing, transforming, then exporting Coin Metrics data. Below are examples of common use-cases that can be altered to tailor your specific needs.
 
-**[Example Notebooks](/examples/notebooks)**
+**[Example Notebooks](https://github.com/coinmetrics/api-client-python/tree/master/examples/notebooks)**
 
 * `walkthrough_community.ipynb`: Walks through the basic functionality available using the community client.
 
-**[Asset Metrics](/examples/asset_metrics)**
+**[Asset Metrics](https://github.com/coinmetrics/api-client-python/tree/master/examples/asset_metrics)**
 
 * `bbb_metrics_csv_exporter_using_plain_requests.py`: Queries block-by-block metrics using the `requests` library and exports the output into a CSV file.
 * `bbb_metrics_json_exporter.py`: Queries block-by-block metrics and exports the output into a JSON file.
 * `eod_metrics_csv_exporter.py`: Exports a set of user-defined metrics and assets published at end-of-day and exports the output into a CSV file.
 * `reference_rates_json_exporter.py`: Queries Coin Metrics Reference Rates at a user-defined frequency for a set of assets, then exports the output into a JSON file.
 
-**[Market Data](/examples/market_data)** 
+**[Market Data](https://github.com/coinmetrics/api-client-python/tree/master/examples/market_data)** 
 
 * `books_json_exporter.py`: Queries market orderbook data then exports the output into a JSON file.
 * `candles_json_exporter.py`: Queries market candles data then exports the output into a JSON file.
