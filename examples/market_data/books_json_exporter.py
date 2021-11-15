@@ -1,14 +1,19 @@
 import logging
 import sys
-from datetime import date, timedelta, datetime
-from multiprocessing import Pool, cpu_count
-from os import makedirs, environ, remove
+from datetime import date, datetime, timedelta
+from multiprocessing import Pool
+from os import environ, makedirs, remove
 from os.path import exists
 from pathlib import Path
-from typing import Optional
+from typing import Iterable, Optional
 
 from coinmetrics.api_client import CoinMetricsClient
 from coinmetrics.constants import PagingFrom
+
+try:
+    import orjson as json
+except ImportError:
+    import json  # type: ignore
 
 logger = logging.getLogger()
 stream_handler = logging.StreamHandler()
@@ -59,8 +64,8 @@ QUOTE_MARKETS = {
     "usd",
 }
 
-# 100, full_book
-DEPTH_LIMIT = 'full_book'
+# 1 - 30000, or None for full_book
+DEPTH_LIMIT = 5
 
 # DST_ROOT is the path where you want the data to be saved to
 # start the path with 's3://' prefix to make the script save to AWS S3, example
@@ -201,7 +206,7 @@ def export_data_for_a_market(market, market_data_root, target_date):
         end_time=target_date,
         page_size=10000,
         paging_from=PagingFrom.START,
-        depth_limit=DEPTH_LIMIT,
+        depth_limit="full_book" if DEPTH_LIMIT is None or DEPTH_LIMIT > 100 else 100,
     )
     dst_json_file_path = (
         "/".join((market_data_root, "books_" + target_date.isoformat())) + ".json"
@@ -209,11 +214,26 @@ def export_data_for_a_market(market, market_data_root, target_date):
     if COMPRESS_DATA:
         dst_json_file_path = dst_json_file_path + ".gz"
     logger.info("downloading data to: %s", dst_json_file_path)
+
+    def _gen_json_lines() -> Iterable[bytes]:
+        if DEPTH_LIMIT in {None, 100, 30000}:
+            for data_row in market_orderbooks:
+                yield json.dumps(data_row) + b"\n"
+        else:
+            for data_row in market_orderbooks:
+                data_row["asks"] = data_row["asks"][:DEPTH_LIMIT]
+                data_row["bids"] = data_row["bids"][:DEPTH_LIMIT]
+                yield json.dumps(data_row) + b"\n"
+
     if s3 is not None:
         with s3.open(dst_json_file_path.split("s3://")[1], "wb") as data_file:
-            market_orderbooks.export_to_json(data_file, compress=COMPRESS_DATA)
+            market_orderbooks._export_to_file(
+                _gen_json_lines(), data_file, compress=COMPRESS_DATA
+            )
     else:
-        market_orderbooks.export_to_json(dst_json_file_path, compress=COMPRESS_DATA)
+        market_orderbooks._export_to_file(
+            _gen_json_lines(), dst_json_file_path, compress=COMPRESS_DATA
+        )
         # cleanup files without data
         if Path(dst_json_file_path).stat().st_size == 0:
             remove(dst_json_file_path)
