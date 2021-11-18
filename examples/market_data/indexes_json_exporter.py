@@ -4,6 +4,7 @@ from datetime import datetime
 from multiprocessing import Pool
 from os import environ, makedirs
 from os.path import abspath, join
+from typing import Optional
 
 import requests
 
@@ -30,20 +31,19 @@ client = CoinMetricsClient(api_key)
 
 DST_ROOT = "./data"
 
-# btc, eth, ...
-ASSETS_TO_EXPORT = {
-    "btc",
-    "eth",
+# CMBIBTC, CMBIETH, ...
+INDEXES_TO_EXPORT = {
+    "CMBIBTC",
+    "CMBIETH",
 }
 
-
-# ReferenceRateUSD, ReferenceRateEUR, ReferenceRateBTC, ETH
-REFERENCE_RATES = {
-    "ReferenceRateUSD",
-}
-
-# 1s, 1h, 1d
+# 15s, 1h, 1d
 FREQUENCY = "1h"
+
+EXPORT_START_DATE = "2019-01-01"
+
+# if you set EXPORT_END_DATE to None, then `today - 1 day` will be used as the end date
+EXPORT_END_DATE: Optional[str] = None
 
 
 def export_data():
@@ -56,7 +56,7 @@ def export_data():
 
     with Pool(processes_count) as pool:
         tasks = []
-        for asset in ASSETS_TO_EXPORT:
+        for asset in INDEXES_TO_EXPORT:
             tasks.append(pool.apply_async(export_asset_data, (asset,)))
 
         for i, task in enumerate(tasks, 1):
@@ -64,32 +64,23 @@ def export_data():
             logger.info("processed task: %s/%s", i, len(tasks))
 
 
-def export_asset_data(asset: str) -> None:
-    logger.info("retrieving metric names for asset: %s", asset)
-    catalog_response = client.catalog_assets(assets=asset)
-    metric_names = [
-        metric_info["metric"]
-        for metric_info in catalog_response[0]["metrics"]
-        if any(
-            frequency_info["frequency"] == FREQUENCY
-            for frequency_info in metric_info["frequencies"]
-        )
-    ]
-    dst_file = join(DST_ROOT, "{}_reference_rates.json".format(asset))
+def export_asset_data(index: str) -> None:
+    logger.info("retrieving indexes values for index: %s", index)
+    dst_file = join(DST_ROOT, "{}_index.json".format(index))
     makedirs(DST_ROOT, exist_ok=True)
     logger.info(
-        "exporting rates for asset `%s` into a json file "
+        "exporting indexes for index `%s` into a json file "
         "(this might take 5-10+ minutes for %s frequency and a 1-30sec for 1h and 1d frequencies): %s",
-        asset, FREQUENCY, abspath(dst_file),
+        index, FREQUENCY, abspath(dst_file),
     )
     # only pick metrics that are available for that asset
-    available_metrics = list(set(metric_names) & REFERENCE_RATES)
     with open(dst_file, "wb") as dst_file_buffer:
-        asset_metrics = client.get_asset_metrics(
-            assets=asset,
-            metrics=available_metrics,
+        asset_metrics = client.get_index_levels(
+            indexes=index,
             frequency=FREQUENCY,
             paging_from=PagingFrom.START,
+            start_time=EXPORT_START_DATE,
+            end_time=EXPORT_END_DATE,
         )
         asset_metrics.export_to_json(dst_file_buffer)
 
