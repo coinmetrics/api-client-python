@@ -20,7 +20,6 @@ RUN poetry config virtualenvs.create false
 RUN poetry install --no-root
 RUN poetry install --no-root --extras "pandas"
 
-
 COPY ./ ./
 
 CMD [ "python" ]

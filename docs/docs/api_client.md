@@ -889,6 +889,80 @@ Returns mempool feerates for the specified assets. Note: for this method, page_s
 
 `DataCollection`: Mempool Fee Rates timeseries.
 
+<a name="coinmetrics.api_client.CoinMetricsClient.get_stream_asset_metrics"></a>
+#### get\_stream\_asset\_metrics
+
+```python
+ | get_stream_asset_metrics(assets: Union[List[str], str], metrics: Union[List[str], str], frequency: Optional[str] = None, backfill: Optional[str] = None) -> CmStream
+```
+
+Returns timeseries stream of metrics for specified assets.
+
+**Arguments**:
+
+- `assets` (`list(str), str`): list of asset names, e.g. 'btc'
+- `metrics` (`list(str), str`): list of _asset-specific_ metric names, e.g. 'PriceUSD'
+- `frequency` (`str`): frequency of the returned timeseries, e.g 15s, 1d, etc.
+- `backfill` (`str`): What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+
+**Returns**:
+
+`CmStream`: Asset Metrics timeseries stream.
+
+<a name="coinmetrics.api_client.CoinMetricsClient.get_stream_market_trades"></a>
+#### get\_stream\_market\_trades
+
+```python
+ | get_stream_market_trades(markets: Union[List[str], str], backfill: Union[List[str], str]) -> CmStream
+```
+
+Returns timeseries stream of market trades.
+
+**Arguments**:
+
+- `markets` (`list(str), str`): list of markets or market patterns like exchange-* or exchange-*-spot or *USDT-future.
+- `backfill` (`str`): What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+
+**Returns**:
+
+`CmStream`: Market Trades timeseries stream.
+
+<a name="coinmetrics.api_client.CoinMetricsClient.get_stream_market_orderbooks"></a>
+#### get\_stream\_market\_orderbooks
+
+```python
+ | get_stream_market_orderbooks(markets: Union[List[str], str], backfill: Union[List[str], str]) -> CmStream
+```
+
+Returns timeseries stream of market orderbooks.
+
+**Arguments**:
+
+- `markets` (`list(str), str`): list of markets or market patterns like exchange-* or exchange-*-spot or *USDT-future.
+- `backfill` (`str`): What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+
+**Returns**:
+
+`CmStream`: Market Orderbooks timeseries stream.
+
+<a name="coinmetrics.api_client.CoinMetricsClient.get_stream_market_quotes"></a>
+#### get\_stream\_market\_quotes
+
+```python
+ | get_stream_market_quotes(markets: Union[List[str], str], backfill: Union[List[str], str]) -> CmStream
+```
+
+Returns timeseries stream of market quotes.
+
+**Arguments**:
+
+- `markets` (`list(str), str`): list of markets or market patterns like exchange-* or exchange-*-spot or *USDT-future.
+- `backfill` (`str`): What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+
+**Returns**:
+
+`CmStream`: Market Quotes timeseries stream.
+
 <a name="coinmetrics.api_client.CoinMetricsClient.get_list_of_blocks"></a>
 #### get\_list\_of\_blocks
 

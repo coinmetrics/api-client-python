@@ -6,6 +6,7 @@ from urllib.parse import urlencode
 
 import requests
 from requests import HTTPError, Response
+import websocket  # type: ignore
 
 from coinmetrics._utils import retry, transform_url_params_values_to_str
 
@@ -15,16 +16,45 @@ except ImportError:
     # fall back to std json package
     import json  # type: ignore
 
-from coinmetrics._typing import DataReturnType
+from coinmetrics._typing import DataReturnType, MessageHandlerType
 from coinmetrics.constants import PagingFrom
 from coinmetrics._data_collection import DataCollection
 
 logger = getLogger("cm_client")
 
 
+class CmStream:
+    def __init__(self, ws_url: str):
+        self.ws_url = ws_url
+
+    def run(
+        self, on_message: MessageHandlerType = None, on_error: MessageHandlerType = None
+    ) -> None:
+        if on_message is None:
+            on_message = self._on_message
+        if on_error is None:
+            on_error = self._on_error
+
+        ws = websocket.WebSocketApp(
+            self.ws_url, on_message=on_message, on_error=on_error
+        )
+        self.ws = ws
+        self.ws.run_forever()
+
+    def _on_message(self, stream: websocket.WebSocketApp, message: str) -> None:
+        print(f"{message}")
+
+    def _on_error(self, stream: websocket.WebSocketApp, message: str) -> None:
+        data = json.loads(message)
+        print(f"{data['error']}")
+
+
 class CoinMetricsClient:
     def __init__(
-        self, api_key: str = "", page_size: int = 1000, verify_ssl_certs: bool = True,
+        self,
+        api_key: str = "",
+        page_size: int = 1000,
+        verify_ssl_certs: bool = True,
     ):
         self._page_size = page_size
         self._api_key_url_str = "api_key={}".format(api_key) if api_key else ""
@@ -35,6 +65,7 @@ class CoinMetricsClient:
         if not api_key:
             api_path_prefix = "community-"
         self._api_base_url = "https://{}api.coinmetrics.io/v4".format(api_path_prefix)
+        self._ws_api_base_url = "wss://{}api.coinmetrics.io/v4".format(api_path_prefix)
 
     def catalog_assets(
         self, assets: Optional[Union[List[str], str]] = None
@@ -85,7 +116,8 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {"pairs": asset_pairs}
         return cast(
-            List[Dict[str, Any]], self._get_data("catalog/pairs", params)["data"],
+            List[Dict[str, Any]],
+            self._get_data("catalog/pairs", params)["data"],
         )
 
     def catalog_exchanges(
@@ -134,7 +166,8 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {"indexes": indexes}
         return cast(
-            List[Dict[str, Any]], self._get_data("catalog/indexes", params)["data"],
+            List[Dict[str, Any]],
+            self._get_data("catalog/indexes", params)["data"],
         )
 
     def catalog_institutions(
@@ -267,7 +300,8 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {"pairs": asset_pairs}
         return cast(
-            List[Dict[str, Any]], self._get_data("catalog-all/pairs", params)["data"],
+            List[Dict[str, Any]],
+            self._get_data("catalog-all/pairs", params)["data"],
         )
 
     def catalog_full_exchanges(
@@ -317,7 +351,8 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {"indexes": indexes}
         return cast(
-            List[Dict[str, Any]], self._get_data("catalog-all/indexes", params)["data"],
+            List[Dict[str, Any]],
+            self._get_data("catalog-all/indexes", params)["data"],
         )
 
     def catalog_full_institutions(
@@ -1566,6 +1601,93 @@ class CoinMetricsClient:
         }
         return DataCollection(self._get_data, "timeseries/mempool-feerates", params)
 
+    def get_stream_asset_metrics(
+        self,
+        assets: Union[List[str], str],
+        metrics: Union[List[str], str],
+        frequency: Optional[str] = None,
+        backfill: Optional[str] = None,
+    ) -> CmStream:
+        """
+        Returns timeseries stream of metrics for specified assets.
+
+        :param assets: list of asset names, e.g. 'btc'
+        :type assets: list(str), str
+        :param metrics: list of _asset-specific_ metric names, e.g. 'PriceUSD'
+        :type metrics: list(str), str
+        :param frequency: frequency of the returned timeseries, e.g 15s, 1d, etc.
+        :type frequency: str
+        :param backfill: What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+        :type backfill: str
+        :return: Asset Metrics timeseries stream.
+        :rtype: CmStream
+        """
+
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "metrics": metrics,
+            "frequency": frequency,
+            "backfill": backfill,
+        }
+        return self._get_stream_data("timeseries-stream/asset-metrics", params)
+
+    def get_stream_market_trades(
+        self,
+        markets: Union[List[str], str],
+        backfill: Union[List[str], str],
+    ) -> CmStream:
+        """
+        Returns timeseries stream of market trades.
+
+        :param markets: list of markets or market patterns like exchange-* or exchange-*-spot or *USDT-future.
+        :type markets: list(str), str
+        :param backfill: What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+        :type backfill: str
+        :return: Market Trades timeseries stream.
+        :rtype: CmStream
+        """
+
+        params: Dict[str, Any] = {"markets": markets, "backfill": backfill}
+        return self._get_stream_data("timeseries-stream/market-trades", params)
+
+    def get_stream_market_orderbooks(
+        self,
+        markets: Union[List[str], str],
+        backfill: Union[List[str], str],
+    ) -> CmStream:
+        """
+        Returns timeseries stream of market orderbooks.
+
+        :param markets: list of markets or market patterns like exchange-* or exchange-*-spot or *USDT-future.
+        :type markets: list(str), str
+        :param backfill: What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+        :type backfill: str
+        :return: Market Orderbooks timeseries stream.
+        :rtype: CmStream
+        """
+
+        params: Dict[str, Any] = {"markets": markets, "backfill": backfill}
+        return self._get_stream_data("timeseries-stream/market-orderbooks", params)
+
+    def get_stream_market_quotes(
+        self,
+        markets: Union[List[str], str],
+        backfill: Union[List[str], str],
+    ) -> CmStream:
+        """
+        Returns timeseries stream of market quotes.
+
+        :param markets: list of markets or market patterns like exchange-* or exchange-*-spot or *USDT-future.
+        :type markets: list(str), str
+        :param backfill: What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+        :type backfill: str
+        :return: Market Quotes timeseries stream.
+        :rtype: CmStream
+        """
+
+        params: Dict[str, Any] = {"markets": markets, "backfill": backfill}
+        return self._get_stream_data("timeseries-stream/market-quotes", params)
+
     def get_list_of_blocks(
         self,
         asset: str,
@@ -1915,7 +2037,6 @@ class CoinMetricsClient:
             )
         else:
             params_str = ""
-
         actual_url = "{}/{}?{}{}".format(
             self._api_base_url, url, self._api_key_url_str, params_str
         )
@@ -1934,6 +2055,18 @@ class CoinMetricsClient:
                 logger.error(error_msg)
                 resp.raise_for_status()
             return cast(DataReturnType, data)
+
+    def _get_stream_data(self, url: str, params: Dict[str, Any]) -> CmStream:
+        if params:
+            params_str = "&{}".format(
+                urlencode(transform_url_params_values_to_str(params))
+            )
+        else:
+            params_str = ""
+        actual_url = "{}/{}?{}{}".format(
+            self._ws_api_base_url, url, self._api_key_url_str, params_str
+        )
+        return CmStream(ws_url=actual_url)
 
     @retry((socket.gaierror, HTTPError), retries=5, wait_time_between_retries=5)
     def _send_request(self, actual_url: str) -> Response:
