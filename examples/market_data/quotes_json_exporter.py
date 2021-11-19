@@ -5,10 +5,15 @@ from multiprocessing import Pool
 from os import environ, makedirs, remove
 from os.path import exists
 from pathlib import Path
-from typing import Optional
+from typing import Iterable, Optional
 
 from coinmetrics.api_client import CoinMetricsClient
 from coinmetrics.constants import PagingFrom
+
+try:
+    import orjson as json
+except ImportError:
+    import json  # type: ignore
 
 logger = logging.getLogger()
 stream_handler = logging.StreamHandler()
@@ -45,20 +50,20 @@ MARKETS_TO_EXPORT = {}
 # example values: "spot", "future", "option"
 # you can use all 3 if you want or just a subset
 MARKET_TYPES_TO_COLLECT = {
-    "spot",
-    "future",
+    # "spot",
+    # "future",
+    "option"
 }
 
 # leave it empty to catch all
 BASE_MARKETS = {
-    "btc",
+    # "btc",
 }
 
 # leave it empty to catch all
 QUOTE_MARKETS = {
-    "usd",
+    # "usd",
 }
-
 
 # DST_ROOT is the path where you want the data to be saved to
 # start the path with 's3://' prefix to make the script save to AWS S3, example
@@ -68,7 +73,7 @@ QUOTE_MARKETS = {
 # DST_ROOT = 's3://<bucket_name>/data'
 DST_ROOT = "./data"
 
-EXPORT_START_DATE = "2019-01-01"
+EXPORT_START_DATE = "2021-10-01"
 
 # if you set EXPORT_END_DATE to None, then `today - 1 day` will be used as the end date
 EXPORT_END_DATE: Optional[str] = None
@@ -76,7 +81,7 @@ EXPORT_END_DATE: Optional[str] = None
 COMPRESS_DATA = False  # False - for raw json files; True - for gzipped json files
 
 # path to local file that is used to not reexport data if it was already exported
-PROCESSED_DAYS_REGISTRY_FILE_PATH = "trades_processed_days_registry.txt"
+PROCESSED_DAYS_REGISTRY_FILE_PATH = "books_processed_days_registry.txt"
 
 
 api_key = (
@@ -131,19 +136,31 @@ def export_data():
             else:
                 makedirs(market_data_root, exist_ok=True)
 
-            for target_date in get_days_to_export(
-                market, min_export_date, max_export_date
-            ):
+            if market['type'] == 'option':
                 if (
-                    get_registry_key(market, target_date)
+                    get_registry_key(market, min_export_date)
                     not in processed_dates_and_markets
                 ):
                     tasks.append(
                         pool.apply_async(
                             export_data_for_a_market,
-                            (market, market_data_root, target_date),
+                            (market, market_data_root, min_export_date, max_export_date),
                         )
                     )
+            else:
+                for target_date in get_days_to_export(
+                    market, min_export_date, max_export_date
+                ):
+                    if (
+                        get_registry_key(market, target_date)
+                        not in processed_dates_and_markets
+                    ):
+                        tasks.append(
+                            pool.apply_async(
+                                export_data_for_a_market,
+                                (market, market_data_root, target_date, target_date),
+                            )
+                        )
 
         for i, task in enumerate(tasks, 1):
             task.get()
@@ -192,30 +209,36 @@ def get_days_to_export(market_info, min_export_date, max_export_date):
         yield min_date + timedelta(days=target_date_index)
 
 
-def export_data_for_a_market(market, market_data_root, target_date):
-    market_trades = client.get_market_trades(
+def export_data_for_a_market(market, market_data_root, start_date, end_date):
+    market_quotes = client.get_market_quotes(
         market["market"],
-        start_time=target_date,
-        end_time=target_date,
+        start_time=start_date,
+        end_time=end_date,
         page_size=10000,
         paging_from=PagingFrom.START,
     )
-    dst_json_file_path = (
-        "/".join((market_data_root, "trades_" + target_date.isoformat())) + ".json"
-    )
+    if market['type'] == 'option':
+        dst_json_file_path = (
+                "/".join((market_data_root, "quotes")) + ".json"
+        )
+    else:
+        dst_json_file_path = (
+            "/".join((market_data_root, "quotes_" + start_date.isoformat())) + ".json"
+        )
     if COMPRESS_DATA:
         dst_json_file_path = dst_json_file_path + ".gz"
     logger.info("downloading data to: %s", dst_json_file_path)
+
     if s3 is not None:
         with s3.open(dst_json_file_path.split("s3://")[1], "wb") as data_file:
-            market_trades.export_to_json(data_file, compress=COMPRESS_DATA)
+            market_quotes.export_to_json(data_file, compress=COMPRESS_DATA)
     else:
-        market_trades.export_to_json(dst_json_file_path, compress=COMPRESS_DATA)
+        market_quotes.export_to_json(dst_json_file_path, compress=COMPRESS_DATA)
         # cleanup files without data
         if Path(dst_json_file_path).stat().st_size == 0:
             remove(dst_json_file_path)
     with open(PROCESSED_DAYS_REGISTRY_FILE_PATH, "a") as registry_file:
-        registry_file.write(get_registry_key(market, target_date) + "\n")
+        registry_file.write(get_registry_key(market, start_date) + "\n")
 
 
 def get_registry_key(market, target_date):

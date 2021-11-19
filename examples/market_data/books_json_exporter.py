@@ -47,11 +47,11 @@ EXCHANGES_TO_EXPORT = {}
 MARKETS_TO_EXPORT = {}
 
 
-# example values: "spot", "futures", "options"
+# example values: "spot", "future"
 # you can use all 3 if you want or just a subset
 MARKET_TYPES_TO_COLLECT = {
     "spot",
-    "futures",
+    "future",
 }
 
 # leave it empty to catch all
