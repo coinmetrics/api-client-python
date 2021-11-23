@@ -4,3 +4,4 @@ idna==3.3; python_version >= "3.5" and python_full_version < "3.0.0" or python_f
 orjson==3.6.4; python_version >= "3.7"
 requests==2.26.0; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.6.0")
 urllib3==1.26.7; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.6.0" and python_version < "4"
+websocket-client==1.2.1; python_version >= "3.6"

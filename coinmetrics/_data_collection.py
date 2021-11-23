@@ -143,7 +143,9 @@ class DataCollection:
             ).encode()
 
     def export_to_json(
-        self, path_or_bufstr: FilePathOrBuffer = None, compress: bool = False,
+        self,
+        path_or_bufstr: FilePathOrBuffer = None,
+        compress: bool = False,
     ) -> Optional[str]:
         def _gen_json_lines() -> Iterable[bytes]:
             for data_row in self:

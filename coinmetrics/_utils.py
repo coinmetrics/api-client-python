@@ -61,7 +61,9 @@ def _stringify_path(filepath_or_buffer: FilePathOrBuffer) -> FilePathOrBuffer:
     return _expand_user(filepath_or_buffer)
 
 
-def _expand_user(filepath_or_buffer: FilePathOrBuffer,) -> FilePathOrBuffer:
+def _expand_user(
+    filepath_or_buffer: FilePathOrBuffer,
+) -> FilePathOrBuffer:
     if isinstance(filepath_or_buffer, str):
         return expanduser(filepath_or_buffer)
     return filepath_or_buffer
