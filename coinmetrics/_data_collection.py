@@ -12,6 +12,7 @@ from coinmetrics._typing import (
     DataReturnType,
     FilePathOrBuffer,
     UrlParamTypes,
+    DataFrameType,
 )
 from coinmetrics._utils import get_file_path_or_buffer
 
@@ -190,30 +191,34 @@ class DataCollection:
 
         return None
 
-    def to_dataframe(self, header: Optional[List[str]] = None) -> pd.DataFrame:
+    def to_dataframe(self, header: Optional[List[str]] = None) -> DataFrameType:
         """
         Outputs a pandas dataframe
 
         :param header: Optional column names for outputted dataframe. List length must match the output.
         :type header: list(str)
         :return: Data in a pandas dataframe
-        :rtype: pandas.core.frame.DataFrame
+        :rtype: DataFrameType
         """
-        rows = []
-        try:
-            first_data_el = next(self)
-        except StopIteration as iter_exception:
-            error_msg = (
-                "No data to export. "
-                "Check the request parameters if such data is available "
-                "or that your API key has access to the data you are requesting."
-            )
-            raise Exception(error_msg) from iter_exception
-        if header is None:
-            header = list(first_data_el.keys())
+        if pd is None:
+            logger.info("Pandas not found; Returning None")
+            return None
+        else:
+            rows = []
+            try:
+                first_data_el = next(self)
+            except StopIteration as iter_exception:
+                error_msg = (
+                    "No data to export. "
+                    "Check the request parameters if such data is available "
+                    "or that your API key has access to the data you are requesting."
+                )
+                raise Exception(error_msg) from iter_exception
+            if header is None:
+                header = list(first_data_el.keys())
 
-        rows.append(list(first_data_el.values()))
-        for row_data in self:
-            rows.append(list(row_data.values()))
+            rows.append(list(first_data_el.values()))
+            for row_data in self:
+                rows.append(list(row_data.values()))
 
-        return pd.DataFrame(rows, columns=header)
+            return pd.DataFrame(rows, columns=header)
