@@ -204,21 +204,11 @@ class DataCollection:
             logger.info("Pandas not found; Returning None")
             return None
         else:
-            rows = []
-            try:
-                first_data_el = next(self)
-            except StopIteration as iter_exception:
-                error_msg = (
-                    "No data to export. "
-                    "Check the request parameters if such data is available "
-                    "or that your API key has access to the data you are requesting."
-                )
-                raise Exception(error_msg) from iter_exception
-            if header is None:
-                header = list(first_data_el.keys())
-
-            rows.append(list(first_data_el.values()))
-            for row_data in self:
-                rows.append(list(row_data.values()))
-
-            return pd.DataFrame(rows, columns=header)
+            records = list(self)
+            df = pd.DataFrame.from_dict(records)
+            if header is not None:
+                assert len(df.columns) == len(
+                    header
+                ), "header length does not match output values"
+                df.columns = header
+            return df
