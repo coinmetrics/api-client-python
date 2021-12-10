@@ -32,6 +32,10 @@ python -m pytest test
 poetry export --without-hashes --format=requirements.txt > requirements.txt
 ```
 
+Additionally, when updating the package to a new version, run this command:
+```
+sh update_version.sh <new_version>
+```
 
 ## Publishing package to pypi
 **NOTE: Run this only when you merge your changes into master and actually want to release the updates**
