@@ -67,7 +67,7 @@ class CoinMetricsClient:
             api_path_prefix = "community-"
         self._api_base_url = "https://{}api.coinmetrics.io/v4".format(api_path_prefix)
         self._ws_api_base_url = "wss://{}api.coinmetrics.io/v4".format(api_path_prefix)
-        self._http_header = {"Api-Client-Version": version, "Api-Key": api_key}
+        self._http_header = {"Api-Client-Version": version}
 
     def catalog_assets(
         self, assets: Optional[Union[List[str], str]] = None
