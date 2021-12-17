@@ -223,6 +223,19 @@
     DataFrames
   </a>
   
+    <nav class="md-nav" aria-label="DataFrames">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#type-conversion" class="md-nav__link">
+    Type Conversion
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -326,6 +339,19 @@
   <a href="#dataframes" class="md-nav__link">
     DataFrames
   </a>
+  
+    <nav class="md-nav" aria-label="DataFrames">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#type-conversion" class="md-nav__link">
+    Type Conversion
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -469,6 +495,45 @@ If you want to use dataframes, then you will need to install pandas</p>
   of requests and their return types.</li>
 <li>API restrictions apply. Some requests may return empty results due to limited access to the API from you API key.</li>
 </ul>
+<h4 id="type-conversion">Type Conversion<a class="headerlink" href="#type-conversion" title="Permanent link">&para;</a></h4>
+<p><em>(New in &gt;=<code>2021.12.17.18.00</code>)</em></p>
+<p>As of version <code>2021.12.17.18.00</code> or later, outputs from the  <code>to_dataframe</code> function automatically convert the dtypes for a dataframe to the optimal pandas types.
+<div class="highlight"><pre><span></span><code><span class="n">metrics_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;volume_trusted_spot_usd_1d&#39;</span><span class="p">,</span> <span class="s1">&#39;SplyFF&#39;</span><span class="p">,</span> <span class="s1">&#39;AdrBalUSD1Cnt&#39;</span><span class="p">]</span>
+<span class="n">asset_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;btc&#39;</span><span class="p">,</span><span class="s1">&#39;xmr&#39;</span><span class="p">]</span>
+<span class="n">start_time</span><span class="o">=</span><span class="s1">&#39;2021-12-01&#39;</span>
+<span class="n">df_metrics</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_asset_metrics</span><span class="p">(</span>
+  <span class="n">assets</span><span class="o">=</span><span class="n">asset_list</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="n">metrics_list</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="n">start_time</span><span class="p">,</span> <span class="n">limit_per_asset</span><span class="o">=</span><span class="mi">3</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_metrics</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>asset                          string
+time                           datetime64[ns, tzutc()]
+AdrBalUSD1Cnt                   Int64
+SplyFF                        Float64
+volume_trusted_spot_usd_1d    Float64
+dtype: object
+</code></pre></div></p>
+<p>Alternatively, you can manually enter your own type conversion by passing in a dictionary for <code>dtype_mapper</code>.
+<div class="highlight"><pre><span></span><code><span class="n">mapper</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;SplyFF&#39;</span><span class="p">:</span> <span class="s1">&#39;Float64&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;AdrBalUSD1Cnt&#39;</span><span class="p">:</span> <span class="s1">&#39;Int64&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">df_mapped</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_asset_metrics</span><span class="p">(</span>
+  <span class="n">assets</span><span class="o">=</span><span class="n">asset_list</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="n">metrics_list</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="n">start_time</span><span class="p">,</span> <span class="n">limit_per_asset</span><span class="o">=</span><span class="mi">3</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">dtype_mapper</span><span class="o">=</span><span class="n">mapper</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_mapped</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>asset                                          object
+time                          datetime64[ns, tzutc()]
+AdrBalUSD1Cnt                                   Int64
+SplyFF                                        Float64
+volume_trusted_spot_usd_1d                    float64
+dtype: object
+</code></pre></div>
+<p>However, pandas will throw an error if you manually map a datetime type using the above method, e.g. <code>{'time': 'datetime64'}</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="ne">TypeError</span><span class="p">:</span> <span class="n">the</span> <span class="n">dtype</span> <span class="n">datetime64</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">supported</span> <span class="k">for</span> <span class="n">parsing</span><span class="p">,</span> <span class="k">pass</span> <span class="n">this</span> <span class="n">column</span> <span class="n">using</span> <span class="n">parse_dates</span> <span class="n">instead</span>
+</code></pre></div>
+<p>We generally recommend sticking to automatically converted dtypes especially for datetimes.</p>
 <h3 id="paging">Paging<a class="headerlink" href="#paging" title="Permanent link">&para;</a></h3>
 <p>You can make the datapoints to iterate from start or from end (default).</p>
 <p>for that you should use a paging_from argument like the following:

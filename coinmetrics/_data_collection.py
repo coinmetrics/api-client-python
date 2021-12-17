@@ -4,6 +4,7 @@ from io import BytesIO
 from logging import getLogger
 from time import sleep
 from typing import Any, Dict, Iterable, Iterator, List, Optional, cast
+from dateutil.parser import isoparse
 
 import requests
 
@@ -191,12 +192,18 @@ class DataCollection:
 
         return None
 
-    def to_dataframe(self, header: Optional[List[str]] = None) -> DataFrameType:
+    def to_dataframe(
+        self,
+        header: Optional[List[str]] = None,
+        dtype_mapper: Optional[Dict[str, Any]] = None,
+    ) -> DataFrameType:
         """
-        Outputs a pandas dataframe
+        Outputs a pandas dataframe.
 
         :param header: Optional column names for outputted dataframe. List length must match the output.
         :type header: list(str)
+        :param dtype_mapper: Dictionary for converting columns to types, where keys are columns and values are types that pandas accepts in an `as_type()` call. This mapping is prioritized over the pandas dtype conversions.
+        :type dtype_mapper: dict
         :return: Data in a pandas dataframe
         :rtype: DataFrameType
         """
@@ -204,11 +211,23 @@ class DataCollection:
             logger.info("Pandas not found; Returning None")
             return None
         else:
-            records = list(self)
-            df = pd.DataFrame.from_dict(records)
+            f = BytesIO()
+            self.export_to_csv(f)
+            f.seek(0)
+            columns = BytesIO(f.getvalue()).readlines(1)[0].decode().strip().split(",")
+            datetime_cols = [c for c in columns if c.endswith("_time") or c == "time"]
+            df = pd.read_csv(
+                f,
+                parse_dates=datetime_cols,
+                dtype=dtype_mapper,
+                date_parser=isoparse,
+            )
+            if dtype_mapper is None:
+                df = df.convert_dtypes()
             if header is not None:
                 assert len(df.columns) == len(
                     header
                 ), "header length does not match output values"
                 df.columns = header
+
             return df

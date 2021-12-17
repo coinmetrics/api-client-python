@@ -132,6 +132,56 @@ If you want to use dataframes, then you will need to install pandas
   of requests and their return types.
 - API restrictions apply. Some requests may return empty results due to limited access to the API from you API key.
 
+#### Type Conversion 
+_(New in >=`2021.12.17.18.00`)_
+
+As of version `2021.12.17.18.00` or later, outputs from the  `to_dataframe` function automatically convert the dtypes for a dataframe to the optimal pandas types.
+```python
+metrics_list = ['volume_trusted_spot_usd_1d', 'SplyFF', 'AdrBalUSD1Cnt']
+asset_list = ['btc','xmr']
+start_time='2021-12-01'
+df_metrics = client.get_asset_metrics(
+  assets=asset_list, metrics=metrics_list, start_time=start_time, limit_per_asset=3
+).to_dataframe()
+print(df_metrics.dtypes)
+```
+```
+asset                          string
+time                           datetime64[ns, tzutc()]
+AdrBalUSD1Cnt                   Int64
+SplyFF                        Float64
+volume_trusted_spot_usd_1d    Float64
+dtype: object
+```
+
+Alternatively, you can manually enter your own type conversion by passing in a dictionary for `dtype_mapper`.
+```python
+mapper = {
+  'SplyFF': 'Float64',
+  'AdrBalUSD1Cnt': 'Int64',
+}
+df_mapped = client.get_asset_metrics(
+  assets=asset_list, metrics=metrics_list, start_time=start_time, limit_per_asset=3
+).to_dataframe(dtype_mapper=mapper)
+print(df_mapped.dtypes)
+```
+
+```
+asset                                          object
+time                          datetime64[ns, tzutc()]
+AdrBalUSD1Cnt                                   Int64
+SplyFF                                        Float64
+volume_trusted_spot_usd_1d                    float64
+dtype: object
+```
+
+However, pandas will throw an error if you manually map a datetime type using the above method, e.g. `{'time': 'datetime64'}`.
+
+```python
+TypeError: the dtype datetime64 is not supported for parsing, pass this column using parse_dates instead
+```
+
+We generally recommend sticking to automatically converted dtypes especially for datetimes.
 
 ### Paging
 You can make the datapoints to iterate from start or from end (default).
