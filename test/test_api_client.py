@@ -8,6 +8,7 @@ from coinmetrics._typing import (
     UrlParamTypes,
     Dict,
     DataReturnType,
+    DataFrameType,
 )
 
 
@@ -20,6 +21,7 @@ def test_catalog_assets_request(mocker: Any) -> None:
     mocked_obj.assert_called_once_with(
         "https://api.coinmetrics.io/v4/catalog/assets?api_key=xxx&assets=btc",
         verify=True,
+        headers=client._http_header,
     )
     assert response == [{"asset": "btc", "markets": ["coinbase-btc-usd-spot"]}]
 
@@ -45,7 +47,7 @@ def test_to_dataframe() -> None:
         endpoint="",
         url_params=test_param_dict,
     )
-    test_df = test_data_collection.to_dataframe()
+    test_df: DataFrameType = test_data_collection.to_dataframe()
     assert test_df.shape == (2, 2)
     assert list(test_param_dict.keys()) == list(test_df.columns)
     assert (test_df["asset"] == "btc").all()
@@ -55,5 +57,7 @@ def test_to_dataframe() -> None:
         endpoint="",
         url_params=test_param_dict,
     )
-    test_df_header = test_data_collection_header.to_dataframe(header=test_header)
+    test_df_header: DataFrameType = test_data_collection_header.to_dataframe(
+        header=test_header
+    )
     assert list(test_df_header.columns) == test_header

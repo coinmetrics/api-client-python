@@ -9,6 +9,7 @@ from requests import HTTPError, Response
 import websocket  # type: ignore
 
 from coinmetrics._utils import retry, transform_url_params_values_to_str
+from coinmetrics import __version__ as version
 
 try:
     import ujson as json
@@ -66,6 +67,7 @@ class CoinMetricsClient:
             api_path_prefix = "community-"
         self._api_base_url = "https://{}api.coinmetrics.io/v4".format(api_path_prefix)
         self._ws_api_base_url = "wss://{}api.coinmetrics.io/v4".format(api_path_prefix)
+        self._http_header = {"Api-Client-Version": version}
 
     def catalog_assets(
         self, assets: Optional[Union[List[str], str]] = None
@@ -2070,4 +2072,6 @@ class CoinMetricsClient:
 
     @retry((socket.gaierror, HTTPError), retries=5, wait_time_between_retries=5)
     def _send_request(self, actual_url: str) -> Response:
-        return requests.get(actual_url, verify=self._verify_ssl_certs)
+        return requests.get(
+            actual_url, verify=self._verify_ssl_certs, headers=self._http_header
+        )
