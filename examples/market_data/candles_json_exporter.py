@@ -160,7 +160,7 @@ def export_data():
                         tasks.append(
                             pool.apply_async(
                                 export_data_for_a_market,
-                                (market, market_data_root, target_date),
+                                (market, market_data_root, target_date, target_date),
                             )
                         )
 

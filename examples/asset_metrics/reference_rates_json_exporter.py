@@ -4,6 +4,7 @@ from datetime import datetime
 from multiprocessing import Pool
 from os import environ, makedirs
 from os.path import abspath, join
+from typing import Optional
 
 import requests
 
@@ -33,7 +34,6 @@ DST_ROOT = "./data"
 # btc, eth, ...
 ASSETS_TO_EXPORT = {
     "btc",
-    "eth",
 }
 
 
@@ -43,7 +43,12 @@ REFERENCE_RATES = {
 }
 
 # 1s, 1h, 1d
-FREQUENCY = "1h"
+FREQUENCY = "1m"
+
+EXPORT_START_DATE = "2019-01-01"
+
+# if you set EXPORT_END_DATE to None, then `today - 1 day` will be used as the end date
+EXPORT_END_DATE: Optional[str] = None
 
 
 def export_data():
@@ -90,6 +95,8 @@ def export_asset_data(asset: str) -> None:
             metrics=available_metrics,
             frequency=FREQUENCY,
             paging_from=PagingFrom.START,
+            start_time=EXPORT_START_DATE,
+            end_time=EXPORT_END_DATE,
         )
         asset_metrics.export_to_json(dst_file_buffer)
 

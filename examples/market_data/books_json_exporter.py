@@ -38,7 +38,7 @@ logger.level = level
 # "bitfinex",
 # "deribit",
 # "cme",
-EXCHANGES_TO_EXPORT = {}
+EXCHANGES_TO_EXPORT = {"binance"}
 
 # use it if you want to get specific markets or leave it empty if you want to get all markets
 # example of market name to be used in this filter: "binance-BTCUSDT-future",
@@ -65,7 +65,7 @@ QUOTE_MARKETS = {
 }
 
 # 1 - 30000, or None for full_book
-DEPTH_LIMIT = 5
+DEPTH_LIMIT = 100
 
 # DST_ROOT is the path where you want the data to be saved to
 # start the path with 's3://' prefix to make the script save to AWS S3, example
