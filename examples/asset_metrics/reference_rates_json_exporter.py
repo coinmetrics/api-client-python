@@ -6,8 +6,6 @@ from os import environ, makedirs
 from os.path import abspath, join
 from typing import Optional
 
-import requests
-
 from coinmetrics.api_client import CoinMetricsClient
 from coinmetrics.constants import PagingFrom
 
@@ -42,10 +40,10 @@ REFERENCE_RATES = {
     "ReferenceRateUSD",
 }
 
-# 1s, 1h, 1d
+# 1s, 1m, 1h, 1d
 FREQUENCY = "1m"
 
-EXPORT_START_DATE = "2019-01-01"
+EXPORT_START_DATE = "2021-01-01"
 
 # if you set EXPORT_END_DATE to None, then `today - 1 day` will be used as the end date
 EXPORT_END_DATE: Optional[str] = None
@@ -61,7 +59,23 @@ def export_data():
 
     with Pool(processes_count) as pool:
         tasks = []
-        for asset in ASSETS_TO_EXPORT:
+        if ASSETS_TO_EXPORT:
+            assets_to_export = ASSETS_TO_EXPORT
+        else:
+            assets_to_export = []
+            catalog_response = client.catalog_assets()
+            for asset_data in catalog_response:
+                metric_names = [
+                    metric_info["metric"]
+                    for metric_info in asset_data.get("metrics", [])
+                    if any(
+                        frequency_info["frequency"] == FREQUENCY
+                        for frequency_info in metric_info["frequencies"]
+                    )
+                ]
+                if metric_names:
+                    assets_to_export.append(asset_data['asset'])
+        for asset in assets_to_export:
             tasks.append(pool.apply_async(export_asset_data, (asset,)))
 
         for i, task in enumerate(tasks, 1):
