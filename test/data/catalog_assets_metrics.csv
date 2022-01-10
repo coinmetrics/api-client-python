@@ -1,0 +1,3 @@
+asset,full_name,exchanges,markets,metric,frequency,min_time,max_time,min_height,max_height,min_hash,max_hash
+btc,Bitcoin,"['binance', 'coinbase', 'kraken']","['binance-btc-usdt-spot', 'binance-eth-btc-spot', 'coinbase-btc-usd-spot', 'coinbase-eth-btc-spot', 'kraken-btc-usd-spot']",TestMetric,1b,2009-01-03 18:15:05+00:00,2020-06-08 20:22:17+00:00,0,10,0abc,0xyz
+btc,Bitcoin,"['binance', 'coinbase', 'kraken']","['binance-btc-usdt-spot', 'binance-eth-btc-spot', 'coinbase-btc-usd-spot', 'coinbase-eth-btc-spot', 'kraken-btc-usd-spot']",TestMetric,1d,2009-01-03 00:00:00+00:00,2020-06-07 00:00:00+00:00,,,,

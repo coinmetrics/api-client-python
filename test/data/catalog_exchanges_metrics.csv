@@ -1,0 +1,5 @@
+exchange,markets,min_time,max_time,metric,frequency
+0,bibox,"['bibox-abt-btc-spot', 'bibox-etc-usdt-spot']",2019-04-30 00:00:00+00:00,2019-06-16 00:00:00+00:00,volume_reported_spot_usd_1d,1d
+1,bibox,"['bibox-abt-btc-spot', 'bibox-etc-usdt-spot']",2019-04-29 21:00:00+00:00,2019-06-17 15:00:00+00:00,volume_reported_spot_usd_1h,1h
+2,binance,"['binance-BTCUSDT-future', 'binance-LTCUSDT-future', 'binance-ada-bnb-spot', 'binance-btc-usdt-spot', 'binance-bcpt-btc-spot', 'binance-bcd-eth-spot']",2019-04-30 00:00:00+00:00,2019-06-16 00:00:00+00:00,volume_reported_spot_usd_1d,1d
+3,binance,"['binance-BTCUSDT-future', 'binance-LTCUSDT-future', 'binance-ada-bnb-spot', 'binance-btc-usdt-spot', 'binance-bcpt-btc-spot', 'binance-bcd-eth-spot']",2019-04-29 21:00:00+00:00,2019-06-17 15:00:00+00:00,volume_reported_spot_usd_1h,1h

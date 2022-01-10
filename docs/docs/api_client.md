@@ -12,7 +12,7 @@ class CoinMetricsClient()
 #### catalog\_assets
 
 ```python
- | catalog_assets(assets: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]
+ | catalog_assets(assets: Optional[Union[List[str], str]] = None) -> CatalogAssetsData
 ```
 
 Returns meta information about _available_ assets.
@@ -29,7 +29,7 @@ Returns meta information about _available_ assets.
 #### catalog\_asset\_alerts
 
 ```python
- | catalog_asset_alerts(assets: Optional[Union[List[str], str]] = None, alerts: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]
+ | catalog_asset_alerts(assets: Optional[Union[List[str], str]] = None, alerts: Optional[Union[List[str], str]] = None) -> CatalogAssetAlertsData
 ```
 
 Returns meta information about _available_ assets.
@@ -47,7 +47,7 @@ Returns meta information about _available_ assets.
 #### catalog\_asset\_pairs
 
 ```python
- | catalog_asset_pairs(asset_pairs: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]
+ | catalog_asset_pairs(asset_pairs: Optional[Union[List[str], str]] = None) -> CatalogAssetPairsData
 ```
 
 Returns meta information about _available_ asset-asset pairs
@@ -55,6 +55,7 @@ Returns meta information about _available_ asset-asset pairs
 **Arguments**:
 
 - `asset_pairs` (`list(str), str`): A single asset-asset pair (e.g. "btc-eth") or a list of asset-asset pairs to return info for. If none are provided, all available pairs are returned.
+- `as_dataframe` (`bool`): Boolean flag for returning dataframe. By default, a List(Dict) is returned.
 
 **Returns**:
 
@@ -64,7 +65,7 @@ Returns meta information about _available_ asset-asset pairs
 #### catalog\_exchanges
 
 ```python
- | catalog_exchanges(exchanges: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]
+ | catalog_exchanges(exchanges: Optional[Union[List[str], str]] = None) -> CatalogExchangesData
 ```
 
 Returns meta information about exchanges.
@@ -81,7 +82,7 @@ Returns meta information about exchanges.
 #### catalog\_exchange\_assets
 
 ```python
- | catalog_exchange_assets(exchange_assets: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]
+ | catalog_exchange_assets(exchange_assets: Optional[Union[List[str], str]] = None) -> CatalogExchangeAssetsData
 ```
 
 Returns meta information about _available_ exchange-asset pairs
@@ -98,7 +99,7 @@ Returns meta information about _available_ exchange-asset pairs
 #### catalog\_indexes
 
 ```python
- | catalog_indexes(indexes: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]
+ | catalog_indexes(indexes: Optional[Union[List[str], str]] = None) -> CatalogIndexesData
 ```
 
 Returns meta information about _available_ indexes.
@@ -115,7 +116,7 @@ Returns meta information about _available_ indexes.
 #### catalog\_institutions
 
 ```python
- | catalog_institutions(institutions: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]
+ | catalog_institutions(institutions: Optional[Union[List[str], str]] = None) -> CatalogInstitutionsData
 ```
 
 Returns meta information about _available_ institutions
@@ -132,7 +133,7 @@ Returns meta information about _available_ institutions
 #### catalog\_markets
 
 ```python
- | catalog_markets(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> List[Dict[str, Any]]
+ | catalog_markets(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketsData
 ```
 
 Returns list of _available_ markets that correspond to a filter. If no filter is set, returns all available assets.
@@ -155,7 +156,7 @@ Returns list of _available_ markets that correspond to a filter. If no filter is
 #### catalog\_metrics
 
 ```python
- | catalog_metrics(metrics: Optional[Union[List[str], str]] = None, reviewable: Optional[bool] = None) -> List[Dict[str, Any]]
+ | catalog_metrics(metrics: Optional[Union[List[str], str]] = None, reviewable: Optional[bool] = None) -> CatalogMetricsData
 ```
 
 Returns list of _available_ metrics along with information for them like
@@ -165,6 +166,7 @@ description, category, precision and assets for which a metric is available.
 
 - `metrics` (`list(str), str`): A single metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
 - `reviewable` (`bool`): Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+- `as_dataframe` (`bool`): Boolean flag for returning dataframe. By default, a List(Dict) is returned.
 
 **Returns**:
 
@@ -174,7 +176,7 @@ description, category, precision and assets for which a metric is available.
 #### catalog\_full\_assets
 
 ```python
- | catalog_full_assets(assets: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]
+ | catalog_full_assets(assets: Optional[Union[List[str], str]] = None) -> CatalogAssetsData
 ```
 
 Returns meta information about _supported_ assets.
@@ -191,7 +193,7 @@ Returns meta information about _supported_ assets.
 #### catalog\_full\_asset\_alerts
 
 ```python
- | catalog_full_asset_alerts(assets: Optional[Union[List[str], str]] = None, alerts: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]
+ | catalog_full_asset_alerts(assets: Optional[Union[List[str], str]] = None, alerts: Optional[Union[List[str], str]] = None) -> CatalogAssetAlertsData
 ```
 
 Returns meta information about _supported_ assets.
@@ -209,7 +211,7 @@ Returns meta information about _supported_ assets.
 #### catalog\_full\_asset\_pairs
 
 ```python
- | catalog_full_asset_pairs(asset_pairs: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]
+ | catalog_full_asset_pairs(asset_pairs: Optional[Union[List[str], str]] = None) -> CatalogAssetPairsData
 ```
 
 Returns meta information about _supported_ asset-asset pairs
@@ -226,7 +228,7 @@ Returns meta information about _supported_ asset-asset pairs
 #### catalog\_full\_exchanges
 
 ```python
- | catalog_full_exchanges(exchanges: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]
+ | catalog_full_exchanges(exchanges: Optional[Union[List[str], str]] = None) -> CatalogExchangesData
 ```
 
 Returns meta information about exchanges.
@@ -243,7 +245,7 @@ Returns meta information about exchanges.
 #### catalog\_full\_exchange\_assets
 
 ```python
- | catalog_full_exchange_assets(exchange_assets: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]
+ | catalog_full_exchange_assets(exchange_assets: Optional[Union[List[str], str]] = None) -> CatalogExchangeAssetsData
 ```
 
 Returns meta information about _supported_ exchange-asset pairs
@@ -260,7 +262,7 @@ Returns meta information about _supported_ exchange-asset pairs
 #### catalog\_full\_indexes
 
 ```python
- | catalog_full_indexes(indexes: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]
+ | catalog_full_indexes(indexes: Optional[Union[List[str], str]] = None) -> CatalogIndexesData
 ```
 
 Returns meta information about _supported_ indexes.
@@ -277,7 +279,7 @@ Returns meta information about _supported_ indexes.
 #### catalog\_full\_institutions
 
 ```python
- | catalog_full_institutions(institutions: Optional[Union[List[str], str]] = None) -> List[Dict[str, Any]]
+ | catalog_full_institutions(institutions: Optional[Union[List[str], str]] = None) -> CatalogInstitutionsData
 ```
 
 Returns meta information about _supported_ institutions
@@ -294,7 +296,7 @@ Returns meta information about _supported_ institutions
 #### catalog\_full\_markets
 
 ```python
- | catalog_full_markets(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> List[Dict[str, Any]]
+ | catalog_full_markets(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketsData
 ```
 
 Returns list of _supported_ markets that correspond to a filter. If no filter is set, returns all supported assets.
@@ -317,7 +319,7 @@ Returns list of _supported_ markets that correspond to a filter. If no filter is
 #### catalog\_full\_metrics
 
 ```python
- | catalog_full_metrics(metrics: Optional[Union[List[str], str]] = None, reviewable: Optional[bool] = None) -> List[Dict[str, Any]]
+ | catalog_full_metrics(metrics: Optional[Union[List[str], str]] = None, reviewable: Optional[bool] = None) -> CatalogMetricsData
 ```
 
 Returns list of _supported_ metrics along with information for them like

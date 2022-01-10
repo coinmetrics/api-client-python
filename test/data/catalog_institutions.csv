@@ -1,0 +1,3 @@
+institution,metric,frequency,min_time,max_time
+0,grayscale,gbtc_total_assets,1d,2020-10-16 00:00:00+00:00,2021-01-05 00:00:00+00:00
+1,grayscale,gbtc_shares_outstanding,1h,2020-10-15 03:00:00+00:00,2021-01-06 12:00:00+00:00

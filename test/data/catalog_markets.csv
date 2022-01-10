@@ -1,0 +1,3 @@
+market,min_time,max_time,exchange,type,symbol,base,quote,size_asset,margin_asset,contract_size,tick_size,listing,expiration,min_time_trades,max_time_trades
+0,bitmex-XBTF15-future,2014-11-24 13:05:32.850000+00:00,2015-01-30 12:00:00+00:00,bitmex,future,XBTF15,btc,usd,XBT,USD,1,0.1,2014-11-24T13:05:32.850000000Z,2015-01-30T12:00:00.000000000Z,2014-11-24T13:05:32.850000000Z,2015-01-30T12:00:00.000000000Z
+1,bitfinex-agi-btc-spot,2018-04-07 16:25:55+00:00,2020-03-25 20:12:09.639000+00:00,bitfinex,spot,,agi,btc,,,,,,,2018-04-07T16:25:55.000000000Z,2020-03-25T20:12:09.639000000Z
