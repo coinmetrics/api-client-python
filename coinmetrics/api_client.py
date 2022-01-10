@@ -17,11 +17,33 @@ except ImportError:
     # fall back to std json package
     import json  # type: ignore
 
-from coinmetrics._typing import DataReturnType, MessageHandlerType
+from coinmetrics._typing import (
+    DataReturnType,
+    MessageHandlerType,
+)
 from coinmetrics.constants import PagingFrom
 from coinmetrics._data_collection import DataCollection
+from coinmetrics._catalogs import (
+    CatalogAssetsData,
+    CatalogAssetAlertsData,
+    CatalogAssetPairsData,
+    CatalogExchangeAssetsData,
+    CatalogExchangesData,
+    CatalogIndexesData,
+    CatalogInstitutionsData,
+    CatalogMarketsData,
+    CatalogMetricsData,
+)
 
 logger = getLogger("cm_client")
+
+try:
+    import pandas as pd  # type: ignore
+except ImportError:
+    pd = None
+    logger.warning(
+        "Pandas export is unavailable. Install pandas to unlock dataframe functions."
+    )
 
 
 class CmStream:
@@ -71,7 +93,7 @@ class CoinMetricsClient:
 
     def catalog_assets(
         self, assets: Optional[Union[List[str], str]] = None
-    ) -> List[Dict[str, Any]]:
+    ) -> CatalogAssetsData:
         """
         Returns meta information about _available_ assets.
 
@@ -81,15 +103,13 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"assets": assets}
-        return cast(
-            List[Dict[str, Any]], self._get_data("catalog/assets", params)["data"]
-        )
+        return CatalogAssetsData(self._get_data("catalog/assets", params)["data"])
 
     def catalog_asset_alerts(
         self,
         assets: Optional[Union[List[str], str]] = None,
         alerts: Optional[Union[List[str], str]] = None,
-    ) -> List[Dict[str, Any]]:
+    ) -> CatalogAssetAlertsData:
         """
         Returns meta information about _available_ assets.
 
@@ -101,30 +121,27 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"assets": assets, "alerts": alerts}
-        return cast(
-            List[Dict[str, Any]], self._get_data("catalog/alerts", params)["data"]
-        )
+        return CatalogAssetAlertsData(self._get_data("catalog/alerts", params)["data"])
 
     def catalog_asset_pairs(
         self, asset_pairs: Optional[Union[List[str], str]] = None
-    ) -> List[Dict[str, Any]]:
+    ) -> CatalogAssetPairsData:
         """
         Returns meta information about _available_ asset-asset pairs
 
         :param asset_pairs: A single asset-asset pair (e.g. "btc-eth") or a list of asset-asset pairs to return info for. If none are provided, all available pairs are returned.
         :type asset_pairs: list(str), str
+        :param as_dataframe: Boolean flag for returning dataframe. By default, a List(Dict) is returned.
+        :type as_dataframe: bool
         :return: Information that is available for requested asset-asset pair like metrics and their respective frequencies and time ranges
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"pairs": asset_pairs}
-        return cast(
-            List[Dict[str, Any]],
-            self._get_data("catalog/pairs", params)["data"],
-        )
+        return CatalogAssetPairsData(self._get_data("catalog/pairs", params)["data"])
 
     def catalog_exchanges(
         self, exchanges: Optional[Union[List[str], str]] = None
-    ) -> List[Dict[str, Any]]:
+    ) -> CatalogExchangesData:
         """
         Returns meta information about exchanges.
 
@@ -134,13 +151,11 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"exchanges": exchanges}
-        return cast(
-            List[Dict[str, Any]], self._get_data("catalog/exchanges", params)["data"]
-        )
+        return CatalogExchangesData(self._get_data("catalog/exchanges", params)["data"])
 
     def catalog_exchange_assets(
         self, exchange_assets: Optional[Union[List[str], str]] = None
-    ) -> List[Dict[str, Any]]:
+    ) -> CatalogExchangeAssetsData:
         """
         Returns meta information about _available_ exchange-asset pairs
 
@@ -150,14 +165,13 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"exchange_assets": exchange_assets}
-        return cast(
-            List[Dict[str, Any]],
-            self._get_data("catalog/exchange-assets", params)["data"],
+        return CatalogExchangeAssetsData(
+            self._get_data("catalog/exchange-assets", params)["data"]
         )
 
     def catalog_indexes(
         self, indexes: Optional[Union[List[str], str]] = None
-    ) -> List[Dict[str, Any]]:
+    ) -> CatalogIndexesData:
         """
         Returns meta information about _available_ indexes.
 
@@ -167,14 +181,11 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"indexes": indexes}
-        return cast(
-            List[Dict[str, Any]],
-            self._get_data("catalog/indexes", params)["data"],
-        )
+        return CatalogIndexesData(self._get_data("catalog/indexes", params)["data"])
 
     def catalog_institutions(
         self, institutions: Optional[Union[List[str], str]] = None
-    ) -> List[Dict[str, Any]]:
+    ) -> CatalogInstitutionsData:
         """
         Returns meta information about _available_ institutions
 
@@ -184,9 +195,8 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"institutions": institutions}
-        return cast(
-            List[Dict[str, Any]],
-            self._get_data("catalog/institutions", params)["data"],
+        return CatalogInstitutionsData(
+            self._get_data("catalog/institutions", params)["data"]
         )
 
     def catalog_markets(
@@ -198,7 +208,7 @@ class CoinMetricsClient:
         quote: Optional[str] = None,
         asset: Optional[str] = None,
         symbol: Optional[str] = None,
-    ) -> List[Dict[str, Any]]:
+    ) -> CatalogMarketsData:
         """
         Returns list of _available_ markets that correspond to a filter. If no filter is set, returns all available assets.
 
@@ -228,15 +238,13 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        return cast(
-            List[Dict[str, Any]], self._get_data("catalog/markets", params)["data"]
-        )
+        return CatalogMarketsData(self._get_data("catalog/markets", params)["data"])
 
     def catalog_metrics(
         self,
         metrics: Optional[Union[List[str], str]] = None,
         reviewable: Optional[bool] = None,
-    ) -> List[Dict[str, Any]]:
+    ) -> CatalogMetricsData:
         """
         Returns list of _available_ metrics along with information for them like
         description, category, precision and assets for which a metric is available.
@@ -245,17 +253,18 @@ class CoinMetricsClient:
         :type metrics: list(str), str
         :param reviewable: Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
         :type reviewable: bool
+        :param as_dataframe: Boolean flag for returning dataframe. By default, a List(Dict) is returned.
+        :type as_dataframe: bool
         :return: Information about metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
-        return cast(
-            List[Dict[str, Any]], self._get_data("catalog/metrics", params)["data"]
-        )
+        return CatalogMetricsData(self._get_data("catalog/metrics", params)["data"])
 
     def catalog_full_assets(
-        self, assets: Optional[Union[List[str], str]] = None
-    ) -> List[Dict[str, Any]]:
+        self,
+        assets: Optional[Union[List[str], str]] = None,
+    ) -> CatalogAssetsData:
         """
         Returns meta information about _supported_ assets.
 
@@ -265,15 +274,13 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"assets": assets}
-        return cast(
-            List[Dict[str, Any]], self._get_data("catalog-all/assets", params)["data"]
-        )
+        return CatalogAssetsData(self._get_data("catalog-all/assets", params)["data"])
 
     def catalog_full_asset_alerts(
         self,
         assets: Optional[Union[List[str], str]] = None,
         alerts: Optional[Union[List[str], str]] = None,
-    ) -> List[Dict[str, Any]]:
+    ) -> CatalogAssetAlertsData:
         """
         Returns meta information about _supported_ assets.
 
@@ -285,13 +292,14 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"assets": assets, "alerts": alerts}
-        return cast(
-            List[Dict[str, Any]], self._get_data("catalog-all/alerts", params)["data"]
+        return CatalogAssetAlertsData(
+            self._get_data("catalog-all/alerts", params)["data"]
         )
 
     def catalog_full_asset_pairs(
-        self, asset_pairs: Optional[Union[List[str], str]] = None
-    ) -> List[Dict[str, Any]]:
+        self,
+        asset_pairs: Optional[Union[List[str], str]] = None,
+    ) -> CatalogAssetPairsData:
         """
         Returns meta information about _supported_ asset-asset pairs
 
@@ -301,14 +309,14 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"pairs": asset_pairs}
-        return cast(
-            List[Dict[str, Any]],
-            self._get_data("catalog-all/pairs", params)["data"],
+        return CatalogAssetPairsData(
+            self._get_data("catalog-all/pairs", params)["data"]
         )
 
     def catalog_full_exchanges(
-        self, exchanges: Optional[Union[List[str], str]] = None
-    ) -> List[Dict[str, Any]]:
+        self,
+        exchanges: Optional[Union[List[str], str]] = None,
+    ) -> CatalogExchangesData:
         """
         Returns meta information about exchanges.
 
@@ -318,14 +326,13 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"exchanges": exchanges}
-        return cast(
-            List[Dict[str, Any]],
-            self._get_data("catalog-all/exchanges", params)["data"],
+        return CatalogExchangesData(
+            self._get_data("catalog-all/exchanges", params)["data"]
         )
 
     def catalog_full_exchange_assets(
         self, exchange_assets: Optional[Union[List[str], str]] = None
-    ) -> List[Dict[str, Any]]:
+    ) -> CatalogExchangeAssetsData:
         """
         Returns meta information about _supported_ exchange-asset pairs
 
@@ -335,14 +342,13 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"exchange_assets": exchange_assets}
-        return cast(
-            List[Dict[str, Any]],
-            self._get_data("catalog-all/exchange-assets", params)["data"],
+        return CatalogExchangeAssetsData(
+            self._get_data("catalog-all/exchange-assets", params)["data"]
         )
 
     def catalog_full_indexes(
         self, indexes: Optional[Union[List[str], str]] = None
-    ) -> List[Dict[str, Any]]:
+    ) -> CatalogIndexesData:
         """
         Returns meta information about _supported_ indexes.
 
@@ -352,14 +358,11 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"indexes": indexes}
-        return cast(
-            List[Dict[str, Any]],
-            self._get_data("catalog-all/indexes", params)["data"],
-        )
+        return CatalogIndexesData(self._get_data("catalog-all/indexes", params)["data"])
 
     def catalog_full_institutions(
         self, institutions: Optional[Union[List[str], str]] = None
-    ) -> List[Dict[str, Any]]:
+    ) -> CatalogInstitutionsData:
         """
         Returns meta information about _supported_ institutions
 
@@ -369,9 +372,8 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"institutions": institutions}
-        return cast(
-            List[Dict[str, Any]],
-            self._get_data("catalog-all/institutions", params)["data"],
+        return CatalogInstitutionsData(
+            self._get_data("catalog-all/institutions", params)["data"]
         )
 
     def catalog_full_markets(
@@ -383,7 +385,7 @@ class CoinMetricsClient:
         quote: Optional[str] = None,
         asset: Optional[str] = None,
         symbol: Optional[str] = None,
-    ) -> List[Dict[str, Any]]:
+    ) -> CatalogMarketsData:
         """
         Returns list of _supported_ markets that correspond to a filter. If no filter is set, returns all supported assets.
 
@@ -413,15 +415,13 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        return cast(
-            List[Dict[str, Any]], self._get_data("catalog-all/markets", params)["data"]
-        )
+        return CatalogMarketsData(self._get_data("catalog-all/markets", params)["data"])
 
     def catalog_full_metrics(
         self,
         metrics: Optional[Union[List[str], str]] = None,
         reviewable: Optional[bool] = None,
-    ) -> List[Dict[str, Any]]:
+    ) -> CatalogMetricsData:
         """
         Returns list of _supported_ metrics along with information for them like
         description, category, precision and assets for which a metric is supported.
@@ -434,9 +434,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
-        return cast(
-            List[Dict[str, Any]], self._get_data("catalog-all/metrics", params)["data"]
-        )
+        return CatalogMetricsData(self._get_data("catalog-all/metrics", params)["data"])
 
     def get_asset_alerts(
         self,
