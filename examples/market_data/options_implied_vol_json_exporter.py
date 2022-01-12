@@ -135,7 +135,10 @@ def export_data():
 
 
         for i, task in enumerate(tasks, 1):
-            task.get()
+            try:
+                task.get()
+            except Exception:
+                logger.warning('failed to get data for task %s', i)
             logger.info("processed task: %s/%s", i, len(tasks))
 
 
