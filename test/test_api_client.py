@@ -387,6 +387,8 @@ catalog_asset_alerts_test_data = [
         "constituents": ["block_count_empty_6b"],
     }
 ]
+def get_empty_data(x: Any, y: Any) -> DataReturnType:
+    return {"data": []}
 
 
 def test_catalog_assets_request(mocker: Any) -> None:
@@ -518,3 +520,12 @@ def test_catalog_asset_pairs_dataframe() -> None:
     df = data.to_dataframe().fillna("").astype(str)
     df_test = pd.read_csv("test/data/catalog_asset_pairs.csv", dtype=str).fillna("")
     assert (df.values == df_test.values).all()
+
+
+def test_empty_dataframe() -> None:
+    """Test client behavior when query results in no data"""
+    empty_response = DataCollection(get_empty_data, "", {})
+    assert empty_response
+    assert empty_response.first_page() == []
+    df = empty_response.to_dataframe()
+    assert df.empty

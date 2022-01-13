@@ -213,21 +213,29 @@ class DataCollection:
         else:
             f = BytesIO()
             self.export_to_csv(f)
-            f.seek(0)
-            columns = BytesIO(f.getvalue()).readlines(1)[0].decode().strip().split(",")
-            datetime_cols = [c for c in columns if c.endswith("_time") or c == "time"]
-            df = pd.read_csv(
-                f,
-                parse_dates=datetime_cols,
-                dtype=dtype_mapper,
-                date_parser=isoparse,
-            )
-            if dtype_mapper is None:
-                df = df.convert_dtypes()
-            if header is not None:
-                assert len(df.columns) == len(
-                    header
-                ), "header length does not match output values"
-                df.columns = header
+            if f.getbuffer().nbytes == 0:
+                logger.warning("Response is empty.")
+                df = pd.DataFrame()
+            else:
+                f.seek(0)
+                columns = (
+                    BytesIO(f.getvalue()).readlines(1)[0].decode().strip().split(",")
+                )
+                datetime_cols = [
+                    c for c in columns if c.endswith("_time") or c == "time"
+                ]
+                df = pd.read_csv(
+                    f,
+                    parse_dates=datetime_cols,
+                    dtype=dtype_mapper,
+                    date_parser=isoparse,
+                )
+                if dtype_mapper is None:
+                    df = df.convert_dtypes()
+                if header is not None:
+                    assert len(df.columns) == len(
+                        header
+                    ), "header length does not match output values"
+                    df.columns = header
 
             return df
