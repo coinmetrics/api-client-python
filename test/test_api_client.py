@@ -387,6 +387,8 @@ catalog_asset_alerts_test_data = [
         "constituents": ["block_count_empty_6b"],
     }
 ]
+
+
 def get_empty_data(x: Any, y: Any) -> DataReturnType:
     return {"data": []}
 
@@ -529,3 +531,98 @@ def test_empty_dataframe() -> None:
     assert empty_response.first_page() == []
     df = empty_response.to_dataframe()
     assert df.empty
+
+
+def test_nested_dataframe() -> None:
+    """Test the output for a dataframe with nested values"""
+    nested_data: Dict[str, Any] = {
+        "data": [
+            {
+                "time": "2020-05-01T22:00:00.000000000Z",
+                "constituents": [
+                    {"asset": "btc", "weight": "0.6"},
+                    {"asset": "eth", "weight": "0.4"},
+                ],
+            }
+        ]
+    }
+
+    def _get_test_data(x: Any, y: Any) -> DataReturnType:
+        return nested_data
+
+    test_data_collection = DataCollection(_get_test_data, "", {})
+    df_nested = test_data_collection.to_dataframe()
+    assert pd.api.types.is_datetime64tz_dtype(df_nested["time"])
+    assert pd.api.types.is_string_dtype(df_nested["constituents"])
+    assert pd.api.types.is_dict_like(df_nested["constituents"])
+    assert pd.api.types.is_list_like(df_nested["constituents"])
+
+
+def test_timeseries_dataframe() -> None:
+    """Test the output dataframe of a timeseries response"""
+    test_data: Dict[str, Any] = {
+        "data": [
+            {
+                "time": "2022-01-01T00:00:00.000000000Z",
+                "str_column": "str_value_1",
+                "int_column": "1",
+                "float_column": "1.5",
+            },
+            {
+                "time": "2022-01-01T01:00:00.000000000Z",
+                "str_column": "str_value_2",
+                "int_column": "2",
+                "float_column": "3.0",
+            },
+        ]
+    }
+
+    def _get_test_data(x: Any, y: Any) -> DataReturnType:
+        return test_data
+
+    test_data_collection = DataCollection(_get_test_data, "", {})
+    df_test = test_data_collection.to_dataframe()
+    assert pd.api.types.is_datetime64tz_dtype(df_test["time"])
+    assert pd.api.types.is_integer_dtype(df_test["int_column"])
+    assert pd.api.types.is_float_dtype(df_test["float_column"])
+    assert pd.api.types.is_string_dtype(df_test["str_column"])
+
+
+def test_export_to_csv() -> None:
+    """Test the export_to_csv function"""
+    test_data: Dict[str, Any] = {
+        "data": [
+            {
+                "time": "2022-01-01T00:00:00.000000000Z",
+                "test_column": "test_value1",
+                "test_nested": [
+                    {"asset": "btc", "weight": "0.6"},
+                    {"asset": "eth", "weight": "0.4"},
+                ],
+            },
+            {
+                "time": "2022-01-01T01:00:00.000000000Z",
+                "test_column": "test_value2",
+                "test_nested": [
+                    {"asset": "btc", "weight": "0.5"},
+                    {"asset": "eth", "weight": "0.5"},
+                ],
+            },
+        ]
+    }
+
+    def _get_test_data(x: Any, y: Any) -> DataReturnType:
+        return test_data
+
+    test_data_collection = DataCollection(_get_test_data, "", {})
+    test_csv_str = test_data_collection.export_to_csv()
+    if test_csv_str is not None:
+        assert test_csv_str.split("\n")[0] == "time,test_column,test_nested"
+        row1_str = test_csv_str.split("\n")[1]
+        row1_value = row1_str.strip('"').split('","')
+        assert len(row1_value) == len(test_data["data"][0].keys())
+        assert row1_value[0] == test_data["data"][0]["time"]
+        assert row1_value[1] == test_data["data"][0]["test_column"]
+        assert row1_value[2] == str(test_data["data"][0]["test_nested"])
+    else:
+        raise
