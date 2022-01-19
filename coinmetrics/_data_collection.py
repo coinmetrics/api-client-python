@@ -135,12 +135,17 @@ class DataCollection:
 
         if first_data_el is not None:
             yield (
-                ",".join(first_data_el.get(column) or "" for column in columns_to_store)
+                ",".join(
+                    f'"{first_data_el.get(column)}"' or ""
+                    for column in columns_to_store
+                )
                 + "\n"
             ).encode()
         for data_el in self:
             yield (
-                ",".join(data_el.get(column) or "" for column in columns_to_store)
+                ",".join(
+                    f'"{data_el.get(column)}"' or "" for column in columns_to_store
+                )
                 + "\n"
             ).encode()
 
@@ -215,7 +220,7 @@ class DataCollection:
             self.export_to_csv(f)
             if f.getbuffer().nbytes == 0:
                 logger.warning("Response is empty.")
-                df = pd.DataFrame()
+                return pd.DataFrame()
             else:
                 f.seek(0)
                 columns = (
@@ -237,5 +242,4 @@ class DataCollection:
                         header
                     ), "header length does not match output values"
                     df.columns = header
-
-            return df
+                return df
