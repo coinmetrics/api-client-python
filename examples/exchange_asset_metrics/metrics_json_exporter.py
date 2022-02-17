@@ -79,10 +79,15 @@ def export_data():
         for asset in assets_to_export:
             tasks.append(pool.apply_async(export_exchange_asset_data, (asset,)))
 
+        start_time = datetime.utcnow()
         for i, task in enumerate(tasks, 1):
-            task.get()
-            logger.info("processed task: %s/%s", i, len(tasks))
-
+            try:
+                task.get()
+            except Exception:
+                logger.warning('failed to get data for task %s', i)
+            time_since_start = datetime.utcnow() - start_time
+            logger.info("processed task: %s/%s, time since start: %s, completion ETA:: %s",
+                        i, len(tasks), time_since_start, time_since_start / i * (len(tasks) - i))
 
 def export_exchange_asset_data(exchange_asset: str) -> None:
     logger.info("retrieving metric names for asset: %s", exchange_asset)

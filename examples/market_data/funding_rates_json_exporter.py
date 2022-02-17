@@ -134,10 +134,15 @@ def export_data():
                     )
                 )
 
+        start_time = datetime.utcnow()
         for i, task in enumerate(tasks, 1):
-            task.get()
-            logger.info("processed task: %s/%s", i, len(tasks))
-
+            try:
+                task.get()
+            except Exception:
+                logger.warning('failed to get data for task %s', i)
+            time_since_start = datetime.utcnow() - start_time
+            logger.info("processed task: %s/%s, time since start: %s, completion ETA:: %s",
+                        i, len(tasks), time_since_start, time_since_start / i * (len(tasks) - i))
 
 def get_instrument_root(market):
     if market["type"] == "spot":
