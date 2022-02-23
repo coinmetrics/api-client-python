@@ -1644,7 +1644,7 @@ For more information on quotes, see: <a href="https://docs.coinmetrics.io/info/m
 <p><code>DataCollection</code>: Mempool Fee Rates timeseries.</p>
 <p><a name="coinmetrics.api_client.CoinMetricsClient.get_stream_asset_metrics"></a></p>
 <h4 id="get_stream_asset_metrics">get_stream_asset_metrics<a class="headerlink" href="#get_stream_asset_metrics" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_stream_asset_metrics</span><span class="p">(</span><span class="n">assets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">metrics</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">frequency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">backfill</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CmStream</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_stream_asset_metrics</span><span class="p">(</span><span class="n">assets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">metrics</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">frequency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">backfill</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Backfill</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Backfill</span><span class="o">.</span><span class="n">LATEST</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CmStream</span>
 </code></pre></div>
 <p>Returns timeseries stream of metrics for specified assets.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1652,43 +1652,43 @@ For more information on quotes, see: <a href="https://docs.coinmetrics.io/info/m
 <li><code>assets</code> (<code>list(str), str</code>): list of asset names, e.g. 'btc'</li>
 <li><code>metrics</code> (<code>list(str), str</code>): list of <em>asset-specific</em> metric names, e.g. 'PriceUSD'</li>
 <li><code>frequency</code> (<code>str</code>): frequency of the returned timeseries, e.g 15s, 1d, etc.</li>
-<li><code>backfill</code> (<code>str</code>): What data should be sent upon a connection. By default the latest values are sent just before real-time data.</li>
+<li><code>backfill</code> (<code>str</code>): What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CmStream</code>: Asset Metrics timeseries stream.</p>
 <p><a name="coinmetrics.api_client.CoinMetricsClient.get_stream_market_trades"></a></p>
 <h4 id="get_stream_market_trades">get_stream_market_trades<a class="headerlink" href="#get_stream_market_trades" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_stream_market_trades</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">backfill</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">CmStream</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_stream_market_trades</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">backfill</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Backfill</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Backfill</span><span class="o">.</span><span class="n">LATEST</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CmStream</span>
 </code></pre></div>
 <p>Returns timeseries stream of market trades.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>markets</code> (<code>list(str), str</code>): list of markets or market patterns like exchange-* or exchange-*-spot or *USDT-future.</li>
-<li><code>backfill</code> (<code>str</code>): What data should be sent upon a connection. By default the latest values are sent just before real-time data.</li>
+<li><code>backfill</code> (<code>str</code>): What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CmStream</code>: Market Trades timeseries stream.</p>
 <p><a name="coinmetrics.api_client.CoinMetricsClient.get_stream_market_orderbooks"></a></p>
 <h4 id="get_stream_market_orderbooks">get_stream_market_orderbooks<a class="headerlink" href="#get_stream_market_orderbooks" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_stream_market_orderbooks</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">backfill</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">CmStream</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_stream_market_orderbooks</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">backfill</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Backfill</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Backfill</span><span class="o">.</span><span class="n">LATEST</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CmStream</span>
 </code></pre></div>
 <p>Returns timeseries stream of market orderbooks.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>markets</code> (<code>list(str), str</code>): list of markets or market patterns like exchange-* or exchange-*-spot or *USDT-future.</li>
-<li><code>backfill</code> (<code>str</code>): What data should be sent upon a connection. By default the latest values are sent just before real-time data.</li>
+<li><code>backfill</code> (<code>str</code>): What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CmStream</code>: Market Orderbooks timeseries stream.</p>
 <p><a name="coinmetrics.api_client.CoinMetricsClient.get_stream_market_quotes"></a></p>
 <h4 id="get_stream_market_quotes">get_stream_market_quotes<a class="headerlink" href="#get_stream_market_quotes" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_stream_market_quotes</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">backfill</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">CmStream</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_stream_market_quotes</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">backfill</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Backfill</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Backfill</span><span class="o">.</span><span class="n">LATEST</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CmStream</span>
 </code></pre></div>
 <p>Returns timeseries stream of market quotes.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>markets</code> (<code>list(str), str</code>): list of markets or market patterns like exchange-* or exchange-*-spot or *USDT-future.</li>
-<li><code>backfill</code> (<code>str</code>): What data should be sent upon a connection. By default the latest values are sent just before real-time data.</li>
+<li><code>backfill</code> (<code>str</code>): What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CmStream</code>: Market Quotes timeseries stream.</p>

@@ -11,9 +11,8 @@ api_key = (
 
 client = CoinMetricsClient(api_key)
 
-stream = client.get_stream_asset_metrics(
-    assets=['btc', 'eth'], frequency='1s',
-    metrics=['ReferenceRateUSD', 'ReferenceRateBTC', 'ReferenceRateETH']
+stream = client.get_stream_market_trades(
+    markets=['coinbase-btc-usd-spot']
 )
 
 def on_message(
