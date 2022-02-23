@@ -21,7 +21,7 @@ from coinmetrics._typing import (
     DataReturnType,
     MessageHandlerType,
 )
-from coinmetrics.constants import PagingFrom
+from coinmetrics.constants import PagingFrom, Backfill
 from coinmetrics._data_collection import DataCollection
 from coinmetrics._catalogs import (
     CatalogAssetsData,
@@ -1606,7 +1606,7 @@ class CoinMetricsClient:
         assets: Union[List[str], str],
         metrics: Union[List[str], str],
         frequency: Optional[str] = None,
-        backfill: Optional[str] = None,
+        backfill: Union[Backfill, str] = Backfill.LATEST,
     ) -> CmStream:
         """
         Returns timeseries stream of metrics for specified assets.
@@ -1617,7 +1617,7 @@ class CoinMetricsClient:
         :type metrics: list(str), str
         :param frequency: frequency of the returned timeseries, e.g 15s, 1d, etc.
         :type frequency: str
-        :param backfill: What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+        :param backfill: What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.
         :type backfill: str
         :return: Asset Metrics timeseries stream.
         :rtype: CmStream
@@ -1634,14 +1634,14 @@ class CoinMetricsClient:
     def get_stream_market_trades(
         self,
         markets: Union[List[str], str],
-        backfill: Union[List[str], str],
+        backfill: Union[Backfill, str] = Backfill.LATEST,
     ) -> CmStream:
         """
         Returns timeseries stream of market trades.
 
         :param markets: list of markets or market patterns like exchange-* or exchange-*-spot or *USDT-future.
         :type markets: list(str), str
-        :param backfill: What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+        :param backfill: What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.
         :type backfill: str
         :return: Market Trades timeseries stream.
         :rtype: CmStream
@@ -1653,14 +1653,14 @@ class CoinMetricsClient:
     def get_stream_market_orderbooks(
         self,
         markets: Union[List[str], str],
-        backfill: Union[List[str], str],
+        backfill: Union[Backfill, str] = Backfill.LATEST,
     ) -> CmStream:
         """
         Returns timeseries stream of market orderbooks.
 
         :param markets: list of markets or market patterns like exchange-* or exchange-*-spot or *USDT-future.
         :type markets: list(str), str
-        :param backfill: What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+        :param backfill: What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.
         :type backfill: str
         :return: Market Orderbooks timeseries stream.
         :rtype: CmStream
@@ -1672,14 +1672,14 @@ class CoinMetricsClient:
     def get_stream_market_quotes(
         self,
         markets: Union[List[str], str],
-        backfill: Union[List[str], str],
+        backfill: Union[Backfill, str] = Backfill.LATEST,
     ) -> CmStream:
         """
         Returns timeseries stream of market quotes.
 
         :param markets: list of markets or market patterns like exchange-* or exchange-*-spot or *USDT-future.
         :type markets: list(str), str
-        :param backfill: What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+        :param backfill: What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.
         :type backfill: str
         :return: Market Quotes timeseries stream.
         :rtype: CmStream

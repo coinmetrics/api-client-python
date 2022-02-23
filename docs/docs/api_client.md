@@ -895,7 +895,7 @@ Returns mempool feerates for the specified assets. Note: for this method, page_s
 #### get\_stream\_asset\_metrics
 
 ```python
- | get_stream_asset_metrics(assets: Union[List[str], str], metrics: Union[List[str], str], frequency: Optional[str] = None, backfill: Optional[str] = None) -> CmStream
+ | get_stream_asset_metrics(assets: Union[List[str], str], metrics: Union[List[str], str], frequency: Optional[str] = None, backfill: Union[Backfill, str] = Backfill.LATEST) -> CmStream
 ```
 
 Returns timeseries stream of metrics for specified assets.
@@ -905,7 +905,7 @@ Returns timeseries stream of metrics for specified assets.
 - `assets` (`list(str), str`): list of asset names, e.g. 'btc'
 - `metrics` (`list(str), str`): list of _asset-specific_ metric names, e.g. 'PriceUSD'
 - `frequency` (`str`): frequency of the returned timeseries, e.g 15s, 1d, etc.
-- `backfill` (`str`): What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+- `backfill` (`str`): What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.
 
 **Returns**:
 
@@ -915,7 +915,7 @@ Returns timeseries stream of metrics for specified assets.
 #### get\_stream\_market\_trades
 
 ```python
- | get_stream_market_trades(markets: Union[List[str], str], backfill: Union[List[str], str]) -> CmStream
+ | get_stream_market_trades(markets: Union[List[str], str], backfill: Union[Backfill, str] = Backfill.LATEST) -> CmStream
 ```
 
 Returns timeseries stream of market trades.
@@ -923,7 +923,7 @@ Returns timeseries stream of market trades.
 **Arguments**:
 
 - `markets` (`list(str), str`): list of markets or market patterns like exchange-* or exchange-*-spot or *USDT-future.
-- `backfill` (`str`): What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+- `backfill` (`str`): What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.
 
 **Returns**:
 
@@ -933,7 +933,7 @@ Returns timeseries stream of market trades.
 #### get\_stream\_market\_orderbooks
 
 ```python
- | get_stream_market_orderbooks(markets: Union[List[str], str], backfill: Union[List[str], str]) -> CmStream
+ | get_stream_market_orderbooks(markets: Union[List[str], str], backfill: Union[Backfill, str] = Backfill.LATEST) -> CmStream
 ```
 
 Returns timeseries stream of market orderbooks.
@@ -941,7 +941,7 @@ Returns timeseries stream of market orderbooks.
 **Arguments**:
 
 - `markets` (`list(str), str`): list of markets or market patterns like exchange-* or exchange-*-spot or *USDT-future.
-- `backfill` (`str`): What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+- `backfill` (`str`): What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.
 
 **Returns**:
 
@@ -951,7 +951,7 @@ Returns timeseries stream of market orderbooks.
 #### get\_stream\_market\_quotes
 
 ```python
- | get_stream_market_quotes(markets: Union[List[str], str], backfill: Union[List[str], str]) -> CmStream
+ | get_stream_market_quotes(markets: Union[List[str], str], backfill: Union[Backfill, str] = Backfill.LATEST) -> CmStream
 ```
 
 Returns timeseries stream of market quotes.
@@ -959,7 +959,7 @@ Returns timeseries stream of market quotes.
 **Arguments**:
 
 - `markets` (`list(str), str`): list of markets or market patterns like exchange-* or exchange-*-spot or *USDT-future.
-- `backfill` (`str`): What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+- `backfill` (`str`): What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.
 
 **Returns**:
 
