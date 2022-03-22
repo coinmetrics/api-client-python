@@ -369,3 +369,64 @@ class CatalogMetricsData(List[Any]):
             .reset_index(drop=True)
         )
         return convert_catalog_dtypes(df_catalog_metrics)
+
+
+class CatalogMarketMetricsData(List[Any]):
+    """
+    Transforms catalog data in list form into a dataframe
+    :return: Catalog Data
+    """
+
+    def to_dataframe(self) -> DataFrameType:
+        df_catalog_market_metrics = pd.DataFrame(self)
+        df_catalog_market_metrics = (
+            df_catalog_market_metrics.explode("metrics")
+            .assign(metric=lambda df: _expand_df(key="metric", iterable=df.metrics))
+            .assign(
+                frequencies=lambda df: _expand_df(
+                    key="frequencies", iterable=df.metrics
+                )
+            )
+            .explode("frequencies")
+            .assign(
+                frequency=lambda df: _expand_df(
+                    key="frequency", iterable=df.frequencies
+                )
+            )
+            .assign(
+                min_time=lambda df: _expand_df(key="min_time", iterable=df.frequencies)
+            )
+            .assign(
+                max_time=lambda df: _expand_df(key="max_time", iterable=df.frequencies)
+            )
+            .reset_index(drop=True)
+            .drop(["metrics", "frequencies"], axis=1)
+        )
+        return convert_catalog_dtypes(df_catalog_market_metrics)
+
+
+class CatalogMarketCandlesData(List[Any]):
+    """
+    Transforms catalog data in list form into a dataframe
+    :return: Catalog Data
+    """
+
+    def to_dataframe(self) -> DataFrameType:
+        df_catalog_market_candles = pd.DataFrame(self)
+        df_catalog_market_candles = (
+            df_catalog_market_candles.explode("frequencies")
+            .assign(
+                frequency=lambda df: _expand_df(
+                    key="frequency", iterable=df.frequencies
+                )
+            )
+            .assign(
+                min_time=lambda df: _expand_df(key="min_time", iterable=df.frequencies)
+            )
+            .assign(
+                max_time=lambda df: _expand_df(key="max_time", iterable=df.frequencies)
+            )
+            .reset_index(drop=True)
+            .drop(["frequencies"], axis=1)
+        )
+        return convert_catalog_dtypes(df_catalog_market_candles)
