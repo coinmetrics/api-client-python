@@ -172,6 +172,52 @@ description, category, precision and assets for which a metric is available.
 
 `list(dict(str, any))`: Information about metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
 
+<a name="coinmetrics.api_client.CoinMetricsClient.catalog_market_metrics"></a>
+#### catalog\_market\_metrics
+
+```python
+ | catalog_market_metrics(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketMetricsData
+```
+
+Returns list of _available_ markets with metrics support along woth time ranges of available data per metric.
+
+**Arguments**:
+
+- `markets` (`list(str), str`): list of market names, e.g. 'coinbase-btc-usd-spot'
+- `market_type` (`str`): Type of market: "spot", "future", "option"
+- `exchange` (`str`): name of the exchange
+- `base` (`str`): name of base asset
+- `quote` (`str`): name of quote asset
+- `asset` (`str`): name of either base or quote asset
+- `symbol` (`str`): name of a symbol. Usually used for futures contracts.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about markets that correspond to a filter along with meta information like: type of market and min and max available time frames.
+
+<a name="coinmetrics.api_client.CoinMetricsClient.catalog_market_candles"></a>
+#### catalog\_market\_candles
+
+```python
+ | catalog_market_candles(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketCandlesData
+```
+
+Returns list of _available_ markets with candles support along woth time ranges of available data per metric.
+
+**Arguments**:
+
+- `markets` (`list(str), str`): list of market names, e.g. 'coinbase-btc-usd-spot'
+- `market_type` (`str`): Type of market: "spot", "future", "option"
+- `exchange` (`str`): name of the exchange
+- `base` (`str`): name of base asset
+- `quote` (`str`): name of quote asset
+- `asset` (`str`): name of either base or quote asset
+- `symbol` (`str`): name of a symbol. Usually used for futures contracts.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about markets that correspond to a filter along with meta information like: type of market and min and max available time frames.
+
 <a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_assets"></a>
 #### catalog\_full\_assets
 
@@ -333,6 +379,52 @@ description, category, precision and assets for which a metric is supported.
 **Returns**:
 
 `list(dict(str, any))`: Information about metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is supported.
+
+<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_metrics"></a>
+#### catalog\_full\_market\_metrics
+
+```python
+ | catalog_full_market_metrics(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketMetricsData
+```
+
+Returns list of _supported_ markets with metrics support along woth time ranges of available data per metric.
+
+**Arguments**:
+
+- `markets` (`list(str), str`): list of market names, e.g. 'coinbase-btc-usd-spot'
+- `market_type` (`str`): Type of market: "spot", "future", "option"
+- `exchange` (`str`): name of the exchange
+- `base` (`str`): name of base asset
+- `quote` (`str`): name of quote asset
+- `asset` (`str`): name of either base or quote asset
+- `symbol` (`str`): name of a symbol. Usually used for futures contracts.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about markets that correspond to a filter along with meta information like: type of market and min and max available time frames.
+
+<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_candles"></a>
+#### catalog\_full\_market\_candles
+
+```python
+ | catalog_full_market_candles(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketCandlesData
+```
+
+Returns list of _available_ markets with candles support along woth time ranges of available data per metric.
+
+**Arguments**:
+
+- `markets` (`list(str), str`): list of market names, e.g. 'coinbase-btc-usd-spot'
+- `market_type` (`str`): Type of market: "spot", "future", "option"
+- `exchange` (`str`): name of the exchange
+- `base` (`str`): name of base asset
+- `quote` (`str`): name of quote asset
+- `asset` (`str`): name of either base or quote asset
+- `symbol` (`str`): name of a symbol. Usually used for futures contracts.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about markets that correspond to a filter along with meta information like: type of market and min and max available time frames.
 
 <a name="coinmetrics.api_client.CoinMetricsClient.get_asset_alerts"></a>
 #### get\_asset\_alerts
@@ -583,6 +675,34 @@ Returns index constituents for specified indexes and date range.
 **Returns**:
 
 `DataCollection`: Index Constituents timeseries.
+
+<a name="coinmetrics.api_client.CoinMetricsClient.get_market_metrics"></a>
+#### get\_market\_metrics
+
+```python
+ | get_market_metrics(markets: Union[List[str], str], metrics: Union[List[str], str], frequency: Optional[str] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, limit_per_market: Optional[int] = None) -> DataCollection
+```
+
+Returns market metrics for specified markets, frequency and date range.
+For more information on market metrics, see: https://docs.coinmetrics.io/api/v4#operation/getTimeseriesMarketMetrics
+
+**Arguments**:
+
+- `markets` (`list(str), str`): list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future'`
+- `metrics` (`list(str), str`): list of metrics, i.e. 'liquidations_reported_future_buy_units_1d'. See market metrics catalog for a list of supported metrics: https://docs.coinmetrics.io/api/v4#operation/getCatalogMarketMetrics
+- `frequency` (`str`): frequency of the returned timeseries, e.g 15s, 1d, etc.
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+- `limit_per_market` (`int`): How many entries _per market_ the result should contain.
+
+**Returns**:
+
+`DataCollection`: Market Candles timeseries.
 
 <a name="coinmetrics.api_client.CoinMetricsClient.get_market_candles"></a>
 #### get\_market\_candles
@@ -969,7 +1089,7 @@ Returns timeseries stream of market quotes.
 #### get\_list\_of\_blocks
 
 ```python
- | get_list_of_blocks(asset: str, block_hashes: Optional[Union[List[str], str]] = None, heights: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+ | get_list_of_blocks(asset: str, block_hashes: Optional[Union[List[str], str]] = None, heights: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
 ```
 
 Returns a list of blockchain blocks metadata.
@@ -983,6 +1103,8 @@ Returns a list of blockchain blocks metadata.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
 - `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
 - `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
+- `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -995,7 +1117,7 @@ Returns a list of blockchain blocks metadata.
 #### get\_list\_of\_accounts
 
 ```python
- | get_list_of_accounts(asset: str, accounts: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+ | get_list_of_accounts(asset: str, accounts: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_chain_sequence_number: Optional[int] = None, end_chain_sequence_number: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
 ```
 
 Returns a list of blockchain accounts with their balances.
@@ -1008,6 +1130,10 @@ Returns a list of blockchain accounts with their balances.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
 - `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
 - `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
+- `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
+- `start_chain_sequence_number` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
+- `end_chain_sequence_number` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -1020,7 +1146,7 @@ Returns a list of blockchain accounts with their balances.
 #### get\_list\_of\_transactions
 
 ```python
- | get_list_of_transactions(asset: str, transaction_hashes: Optional[Union[List[str], str]] = None, block_hashes: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+ | get_list_of_transactions(asset: str, transaction_hashes: Optional[Union[List[str], str]] = None, block_hashes: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
 ```
 
 Returns a list of blockchain transactions metadata.
@@ -1034,6 +1160,8 @@ Returns a list of blockchain transactions metadata.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
 - `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
 - `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
+- `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -1046,7 +1174,7 @@ Returns a list of blockchain transactions metadata.
 #### get\_list\_of\_balance\_updates
 
 ```python
- | get_list_of_balance_updates(asset: str, accounts: Optional[Union[List[str], str]] = None, transaction_hashes: Optional[Union[List[str], str]] = None, block_hashes: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+ | get_list_of_balance_updates(asset: str, accounts: Optional[Union[List[str], str]] = None, transaction_hashes: Optional[Union[List[str], str]] = None, block_hashes: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_chain_sequence_number: Optional[int] = None, end_chain_sequence_number: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
 ```
 
 Returns a list of blockchain accounts balance updates.
@@ -1061,6 +1189,155 @@ Returns a list of blockchain accounts balance updates.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
 - `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
 - `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
+- `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
+- `start_chain_sequence_number` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
+- `end_chain_sequence_number` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+
+**Returns**:
+
+`DataCollection`: list of balance updates
+
+<a name="coinmetrics.api_client.CoinMetricsClient.get_list_of_blocks_v2"></a>
+#### get\_list\_of\_blocks\_v2
+
+```python
+ | get_list_of_blocks_v2(asset: str, block_hashes: Optional[Union[List[str], str]] = None, heights: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+```
+
+Returns a list of blockchain blocks metadata.
+
+**Arguments**:
+
+- `asset` (`str`): Asset name
+- `block_hashes` (`str, list(str)`): Optional comma separated list of block hashes to filter a response.
+- `heights` (`str, list(str)`): Optional comma separated list of block heights to filter a response.
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
+- `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+
+**Returns**:
+
+`DataCollection`: list of blockchain blocks metadata
+
+<a name="coinmetrics.api_client.CoinMetricsClient.get_list_of_accounts_v2"></a>
+#### get\_list\_of\_accounts\_v2
+
+```python
+ | get_list_of_accounts_v2(asset: str, accounts: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_chain_sequence_number: Optional[int] = None, end_chain_sequence_number: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+```
+
+Returns a list of blockchain accounts with their balances.
+
+**Arguments**:
+
+- `asset` (`str`): Asset name
+- `accounts` (`str, list(str)`): Optional comma separated list of accounts to filter a response.
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
+- `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
+- `start_chain_sequence_number` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
+- `end_chain_sequence_number` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+
+**Returns**:
+
+`DataCollection`: list of blockchain accounts metadata
+
+<a name="coinmetrics.api_client.CoinMetricsClient.get_list_of_sub_accounts_v2"></a>
+#### get\_list\_of\_sub\_accounts\_v2
+
+```python
+ | get_list_of_sub_accounts_v2(asset: str, accounts: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_chain_sequence_number: Optional[int] = None, end_chain_sequence_number: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+```
+
+Returns a list of blockchain sub-accounts with their balances.
+
+**Arguments**:
+
+- `asset` (`str`): Asset name
+- `accounts` (`str, list(str)`): Optional comma separated list of accounts to filter a response.
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
+- `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
+- `start_chain_sequence_number` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
+- `end_chain_sequence_number` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+
+**Returns**:
+
+`DataCollection`: list of blockchain accounts metadata
+
+<a name="coinmetrics.api_client.CoinMetricsClient.get_list_of_transactions_v2"></a>
+#### get\_list\_of\_transactions\_v2
+
+```python
+ | get_list_of_transactions_v2(asset: str, transaction_hashes: Optional[Union[List[str], str]] = None, block_hashes: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+```
+
+Returns a list of blockchain transactions metadata.
+
+**Arguments**:
+
+- `asset` (`str`): Asset name
+- `transaction_hashes` (`str, list(str)`): Optional comma separated list of transaction hashes to filter a response.
+- `block_hashes` (`str, list(str)`): Optional comma separated list of block hashes to filter a response.
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
+- `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+
+**Returns**:
+
+`DataCollection`: list of transaction metadata
+
+<a name="coinmetrics.api_client.CoinMetricsClient.get_list_of_balance_updates_v2"></a>
+#### get\_list\_of\_balance\_updates\_v2
+
+```python
+ | get_list_of_balance_updates_v2(asset: str, accounts: Optional[Union[List[str], str]] = None, transaction_hashes: Optional[Union[List[str], str]] = None, block_hashes: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = None, start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_chain_sequence_number: Optional[int] = None, end_chain_sequence_number: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+```
+
+Returns a list of blockchain accounts balance updates.
+
+**Arguments**:
+
+- `asset` (`str`): Asset name
+- `accounts` (`str, list(str)`): Optional comma separated list of accounts to filter a response.
+- `transaction_hashes` (`str, list(str)`): Optional comma separated list of transaction hashes to filter a response.
+- `block_hashes` (`str, list(str)`): Optional comma separated list of block hashes to filter a response.
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
+- `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
+- `start_chain_sequence_number` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
+- `end_chain_sequence_number` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -1119,6 +1396,64 @@ Returns a full blockchain transaction with all balance updates for a specific bl
 - `asset` (`str`): Asset name
 - `block_hash` (`str`): block hash
 - `transaction_hash` (`str`): transaction hash
+
+**Returns**:
+
+`list(dict(str, Any))`: block transaction data with balance updates
+
+<a name="coinmetrics.api_client.CoinMetricsClient.get_full_block_v2"></a>
+#### get\_full\_block\_v2
+
+```python
+ | get_full_block_v2(asset: str, block_hash: str, include_sub_accounts: Optional[bool]) -> List[Dict[str, Any]]
+```
+
+Returns a full blockchain block with all transactions and balance updates.
+
+**Arguments**:
+
+- `asset` (`str`): Asset name
+- `block_hash` (`str`): block hash
+- `include_sub_accounts` (`bool`): Boolean indicating if the response should contain sub-accounts
+
+**Returns**:
+
+`list(dict(str), any)`: blockchain block data
+
+<a name="coinmetrics.api_client.CoinMetricsClient.get_full_transaction_v2"></a>
+#### get\_full\_transaction\_v2
+
+```python
+ | get_full_transaction_v2(asset: str, txid: str, include_sub_accounts: Optional[bool]) -> List[Dict[str, Any]]
+```
+
+Returns a full blockchain transaction with all balance updates.
+
+**Arguments**:
+
+- `asset` (`str`): Asset name
+- `txid` (`str`): transaction identifier
+- `include_sub_accounts` (`bool`): Boolean indicating if the response should contain sub-accounts
+
+**Returns**:
+
+`list(dict(str), any)`: block transaction data
+
+<a name="coinmetrics.api_client.CoinMetricsClient.get_full_transaction_for_block_v2"></a>
+#### get\_full\_transaction\_for\_block\_v2
+
+```python
+ | get_full_transaction_for_block_v2(asset: str, block_hash: str, txid: str, include_sub_accounts: Optional[bool]) -> List[Dict[str, Any]]
+```
+
+Returns a full blockchain transaction with all balance updates for a specific block.
+
+**Arguments**:
+
+- `asset` (`str`): Asset name
+- `block_hash` (`str`): block hash
+- `txid` (`str`): transaction identifier
+- `include_sub_accounts` (`bool`): Boolean indicating if the response should contain sub-accounts
 
 **Returns**:
 
