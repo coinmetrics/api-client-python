@@ -252,6 +252,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#requests-proxy" class="md-nav__link">
+    Requests Proxy
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -365,6 +372,13 @@
           <li class="md-nav__item">
   <a href="#ssl-certs-verification" class="md-nav__link">
     SSL Certs verification
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requests-proxy" class="md-nav__link">
+    Requests Proxy
   </a>
   
 </li>
@@ -555,6 +569,14 @@ for metric_data in client.get_asset_metrics(assets=&#39;btc&#39;, metrics=[&#39;
 <div class="highlight"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">CoinMetricsClient</span><span class="p">(</span><span class="n">verify_ssl_certs</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </code></pre></div>
 <p>We don't recommend setting it to False by default and you should make sure you understand the security risks of disabling SSL certs verification.</p>
+<h3 id="requests-proxy">Requests Proxy<a class="headerlink" href="#requests-proxy" title="Permanent link">&para;</a></h3>
+<p>Sometimes your organization has special rules on making requests to third parties and you have to use proxies in order to comply with the rules.</p>
+<p>For proxies that don't require auth you can specify them similar to this example:
+<div class="highlight"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">CoinMetricsClient</span><span class="p">(</span><span class="n">proxy_url</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;http://&lt;hostname&gt;:&lt;port&gt;&#39;</span><span class="p">)</span>
+</code></pre></div></p>
+<p>For proxies that require auth, you should be able to specify username and password similar to this example:
+<div class="highlight"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">CoinMetricsClient</span><span class="p">(</span><span class="n">proxy_url</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;http://&lt;username&gt;:&lt;password&gt;@&lt;hostname&gt;:&lt;port&gt;&#39;</span><span class="p">)</span>
+</code></pre></div></p>
 <h2 id="extended-documentation">Extended documentation<a class="headerlink" href="#extended-documentation" title="Permanent link">&para;</a></h2>
 <p>For more information about the available methods in the client please reference <a href="https://coinmetrics.github.io/api-client-python/site/api_client.html">API Client Spec</a></p>
                 

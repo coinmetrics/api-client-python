@@ -80,6 +80,7 @@ class CoinMetricsClient:
         api_key: str = "",
         page_size: int = 1000,
         verify_ssl_certs: bool = True,
+        proxy_url: Optional[str] = None,
     ):
         self._page_size = page_size
         self._api_key_url_str = "api_key={}".format(api_key) if api_key else ""
@@ -92,6 +93,7 @@ class CoinMetricsClient:
         self._api_base_url = "https://{}api.coinmetrics.io/v4".format(api_path_prefix)
         self._ws_api_base_url = "wss://{}api.coinmetrics.io/v4".format(api_path_prefix)
         self._http_header = {"Api-Client-Version": version}
+        self._proxies = {"http": proxy_url, "https": proxy_url}
 
     def catalog_assets(
         self, assets: Optional[Union[List[str], str]] = None
@@ -2769,5 +2771,8 @@ class CoinMetricsClient:
     @retry((socket.gaierror, HTTPError), retries=5, wait_time_between_retries=5)
     def _send_request(self, actual_url: str) -> Response:
         return requests.get(
-            actual_url, verify=self._verify_ssl_certs, headers=self._http_header
+            actual_url,
+            verify=self._verify_ssl_certs,
+            headers=self._http_header,
+            proxies=self._proxies,
         )
