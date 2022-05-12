@@ -36,7 +36,8 @@ def _expand_df(key, iterable):
 def export_data():
     logging.info(f"Gathering orderbook data for {MARKETS} from {START_TIME} to {END_TIME}...")
     df_orderbooks = client.get_market_orderbooks(
-        markets=MARKETS, start_time=START_TIME, end_time=END_TIME, depth_limit=DEPTH_LIMIT
+        markets=MARKETS, start_time=START_TIME, end_time=END_TIME, depth_limit=DEPTH_LIMIT,
+        page_size=1000
     ).to_dataframe()
 
     df_orderbooks.asks = df_orderbooks.asks.apply(lambda x: ast.literal_eval(x))

@@ -86,6 +86,7 @@ def export_asset_data(index: str) -> None:
             paging_from=PagingFrom.START,
             start_time=EXPORT_START_DATE,
             end_time=EXPORT_END_DATE,
+            page_size=1000
         )
         asset_metrics.export_to_json(dst_file_buffer)
 

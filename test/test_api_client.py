@@ -403,7 +403,7 @@ def test_catalog_assets_request(mocker: Any) -> None:
         "https://api.coinmetrics.io/v4/catalog/assets?api_key=xxx&assets=btc",
         verify=True,
         headers=client._http_header,
-        proxies={'http': None, 'https': None},
+        proxies={"http": None, "https": None},
     )
     assert response == [{"asset": "btc", "markets": ["coinbase-btc-usd-spot"]}]
 
