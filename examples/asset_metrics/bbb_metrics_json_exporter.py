@@ -55,6 +55,7 @@ def export_data(asset: str):
             metrics=metric_names,
             frequency="1b",
             paging_from=PagingFrom.START,
+            page_size=1000
         )
         asset_metrics.export_to_json(dst_file_buffer)
 

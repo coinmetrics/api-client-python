@@ -117,6 +117,7 @@ def export_exchange_asset_data(exchange_asset: str) -> None:
             paging_from=PagingFrom.START,
             start_time=EXPORT_START_DATE,
             end_time=EXPORT_END_DATE,
+            page_size=1000
         )
         exchange_asset_metrics.export_to_json(dst_file_buffer)
 
