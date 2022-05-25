@@ -216,5 +216,21 @@ client = CoinMetricsClient(verify_ssl_certs=False)
 
 We don't recommend setting it to False by default and you should make sure you understand the security risks of disabling SSL certs verification.
 
+
+### Requests Proxy
+Sometimes your organization has special rules on making requests to third parties and you have to use proxies in order to comply with the rules.
+
+For proxies that don't require auth you can specify them similar to this example:
+```python
+
+client = CoinMetricsClient(proxy_url=f'http://<hostname>:<port>')
+```
+
+For proxies that require auth, you should be able to specify username and password similar to this example:
+```python
+
+client = CoinMetricsClient(proxy_url=f'http://<username>:<password>@<hostname>:<port>')
+```
+
 ## Extended documentation
 For more information about the available methods in the client please reference [API Client Spec](https://coinmetrics.github.io/api-client-python/site/api_client.html)

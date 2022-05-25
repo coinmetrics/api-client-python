@@ -46,7 +46,8 @@ def export_data(asset: str):
         abspath(dst_file),
     )
     asset_metrics = client.get_asset_metrics(
-        assets=asset, metrics=metric_names, frequency="1d", paging_from="start"
+        assets=asset, metrics=metric_names, frequency="1d", paging_from="start",
+        page_size=1000
     )
     asset_metrics.export_to_csv(dst_file)
 

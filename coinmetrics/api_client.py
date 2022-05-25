@@ -78,10 +78,9 @@ class CoinMetricsClient:
     def __init__(
         self,
         api_key: str = "",
-        page_size: int = 1000,
         verify_ssl_certs: bool = True,
+        proxy_url: Optional[str] = None,
     ):
-        self._page_size = page_size
         self._api_key_url_str = "api_key={}".format(api_key) if api_key else ""
 
         self._verify_ssl_certs = verify_ssl_certs
@@ -92,6 +91,7 @@ class CoinMetricsClient:
         self._api_base_url = "https://{}api.coinmetrics.io/v4".format(api_path_prefix)
         self._ws_api_base_url = "wss://{}api.coinmetrics.io/v4".format(api_path_prefix)
         self._http_header = {"Api-Client-Version": version}
+        self._proxies = {"http": proxy_url, "https": proxy_url}
 
     def catalog_assets(
         self, assets: Optional[Union[List[str], str]] = None
@@ -650,7 +650,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
             "alerts": alerts,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -696,7 +696,7 @@ class CoinMetricsClient:
 
         params: Dict[str, Any] = {
             "assets": assets,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -762,7 +762,7 @@ class CoinMetricsClient:
             "assets": assets,
             "metrics": metrics,
             "frequency": frequency,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -832,7 +832,7 @@ class CoinMetricsClient:
             "exchanges": exchanges,
             "metrics": metrics,
             "frequency": frequency,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -902,7 +902,7 @@ class CoinMetricsClient:
             "exchange_assets": exchange_assets,
             "metrics": metrics,
             "frequency": frequency,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -974,7 +974,7 @@ class CoinMetricsClient:
             "pairs": pairs,
             "metrics": metrics,
             "frequency": frequency,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -1044,7 +1044,7 @@ class CoinMetricsClient:
             "institutions": institutions,
             "metrics": metrics,
             "frequency": frequency,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -1101,7 +1101,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "indexes": indexes,
             "frequency": frequency,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -1152,7 +1152,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "indexes": indexes,
             "frequency": frequency,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -1210,7 +1210,7 @@ class CoinMetricsClient:
             "markets": markets,
             "metrics": metrics,
             "frequency": frequency,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -1265,7 +1265,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "markets": markets,
             "frequency": frequency,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -1316,7 +1316,7 @@ class CoinMetricsClient:
 
         params: Dict[str, Any] = {
             "markets": markets,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -1367,7 +1367,7 @@ class CoinMetricsClient:
 
         params: Dict[str, Any] = {
             "markets": markets,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -1418,7 +1418,7 @@ class CoinMetricsClient:
 
         params: Dict[str, Any] = {
             "markets": markets,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -1469,7 +1469,7 @@ class CoinMetricsClient:
 
         params: Dict[str, Any] = {
             "markets": markets,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -1523,7 +1523,7 @@ class CoinMetricsClient:
 
         params: Dict[str, Any] = {
             "markets": markets,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -1575,7 +1575,7 @@ class CoinMetricsClient:
 
         params: Dict[str, Any] = {
             "markets": markets,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -1625,7 +1625,7 @@ class CoinMetricsClient:
 
         params: Dict[str, Any] = {
             "markets": markets,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -1677,7 +1677,7 @@ class CoinMetricsClient:
 
         params: Dict[str, Any] = {
             "markets": markets,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -1729,7 +1729,7 @@ class CoinMetricsClient:
 
         params: Dict[str, Any] = {
             "markets": markets,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -1776,7 +1776,7 @@ class CoinMetricsClient:
 
         params: Dict[str, Any] = {
             "assets": assets,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -1824,7 +1824,7 @@ class CoinMetricsClient:
 
         params: Dict[str, Any] = {
             "assets": assets,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -1970,7 +1970,7 @@ class CoinMetricsClient:
             "asset": asset,
             "block_hashes": block_hashes,
             "heights": heights,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -2033,7 +2033,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "asset": asset,
             "accounts": accounts,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -2096,7 +2096,7 @@ class CoinMetricsClient:
             "asset": asset,
             "transaction_hashes": transaction_hashes,
             "block_hashes": block_hashes,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -2169,7 +2169,7 @@ class CoinMetricsClient:
             "accounts": accounts,
             "transaction_hashes": transaction_hashes,
             "block_hashes": block_hashes,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -2234,7 +2234,7 @@ class CoinMetricsClient:
             "asset": asset,
             "block_hashes": block_hashes,
             "heights": heights,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -2297,7 +2297,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "asset": asset,
             "accounts": accounts,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -2362,7 +2362,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "asset": asset,
             "accounts": accounts,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -2427,7 +2427,7 @@ class CoinMetricsClient:
             "asset": asset,
             "transaction_hashes": transaction_hashes,
             "block_hashes": block_hashes,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -2500,7 +2500,7 @@ class CoinMetricsClient:
             "accounts": accounts,
             "transaction_hashes": transaction_hashes,
             "block_hashes": block_hashes,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -2716,7 +2716,7 @@ class CoinMetricsClient:
             "txids": txids,
             "replacements_for_txids": replacements_for_txids,
             "replacements_only": replacements_only,
-            "page_size": page_size or self._page_size,
+            "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
             "end_time": end_time,
@@ -2769,5 +2769,8 @@ class CoinMetricsClient:
     @retry((socket.gaierror, HTTPError), retries=5, wait_time_between_retries=5)
     def _send_request(self, actual_url: str) -> Response:
         return requests.get(
-            actual_url, verify=self._verify_ssl_certs, headers=self._http_header
+            actual_url,
+            verify=self._verify_ssl_certs,
+            headers=self._http_header,
+            proxies=self._proxies,
         )
