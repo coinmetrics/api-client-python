@@ -22,7 +22,7 @@ logger.level = level
 
 
 api_key = (
-    environ.get("CM_API_KEY") or sys.argv[1]
+environ.get("CM_API_KEY") or sys.argv[1]
 )  # sys.argv[1] is executed only if CM_API_KEY is not found
 
 client = CoinMetricsClient(api_key)
@@ -30,26 +30,29 @@ client = CoinMetricsClient(api_key)
 DST_ROOT = "./data"
 
 # btc, eth, ...
+# leave empty to export all available assets
 ASSETS_TO_EXPORT = {
-    "btc",
+   "btc",
+}
+
+# ReferenceRateUSD, ReferenceRateBTC, AdrBalUSD10KCnt, NVTAdjFF, CapMrktFFUSD,...
+METRICS = {
+    "AdrBalUSD10KCnt",
+    "NVTAdjFF"
 }
 
 
-# ReferenceRateUSD, ReferenceRateEUR, ReferenceRateBTC, ETH
-REFERENCE_RATES = {
-    "ReferenceRateUSD",
-}
+# 1s, 1m, 1h, 1d, 1d-ny-close, etc...
+FREQUENCY = "1d"
 
-# 1s, 1m, 1h, 1d
-FREQUENCY = "1m"
-
-EXPORT_START_DATE = "2021-01-01"
+EXPORT_START_DATE = "2022-04-19"
 
 # if you set EXPORT_END_DATE to None, then `today - 1 day` will be used as the end date
 EXPORT_END_DATE: Optional[str] = None
 
 
 def export_data():
+    logger.info("Starting to export the data")
     processes_count = 2
 
     if processes_count > 2:
@@ -75,6 +78,8 @@ def export_data():
                 ]
                 if metric_names:
                     assets_to_export.append(asset_data['asset'])
+
+        logger.info("Launching exporting tasks for assets: %s, metrics: %s", assets_to_export, METRICS)
         for asset in assets_to_export:
             tasks.append(pool.apply_async(export_asset_data, (asset,)))
 
@@ -100,7 +105,7 @@ def export_asset_data(asset: str) -> None:
             for frequency_info in metric_info["frequencies"]
         )
     ]
-    dst_file = join(DST_ROOT, "{}_reference_rates.json".format(asset))
+    dst_file = join(DST_ROOT, "{}_metrics.json".format(asset))
     makedirs(DST_ROOT, exist_ok=True)
     logger.info(
         "exporting rates for asset `%s` into a json file "
@@ -108,7 +113,7 @@ def export_asset_data(asset: str) -> None:
         asset, abspath(dst_file),
     )
     # only pick metrics that are available for that asset
-    available_metrics = list(set(metric_names) & REFERENCE_RATES)
+    available_metrics = list(set(metric_names) & METRICS)
     with open(dst_file, "wb") as dst_file_buffer:
         asset_metrics = client.get_asset_metrics(
             assets=asset,
