@@ -133,8 +133,6 @@ class CoinMetricsClient:
 
         :param asset_pairs: A single asset-asset pair (e.g. "btc-eth") or a list of asset-asset pairs to return info for. If none are provided, all available pairs are returned.
         :type asset_pairs: list(str), str
-        :param as_dataframe: Boolean flag for returning dataframe. By default, a List(Dict) is returned.
-        :type as_dataframe: bool
         :return: Information that is available for requested asset-asset pair like metrics and their respective frequencies and time ranges
         :rtype: list(dict(str, any))
         """
@@ -255,8 +253,6 @@ class CoinMetricsClient:
         :type metrics: list(str), str
         :param reviewable: Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
         :type reviewable: bool
-        :param as_dataframe: Boolean flag for returning dataframe. By default, a List(Dict) is returned.
-        :type as_dataframe: bool
         :return: Information about metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
         :rtype: list(dict(str, any))
         """
