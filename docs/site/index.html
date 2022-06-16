@@ -527,14 +527,15 @@ SplyFF                        Float64
 volume_trusted_spot_usd_1d    Float64
 dtype: object
 </code></pre></div></p>
-<p>Alternatively, you can manually enter your own type conversion by passing in a dictionary for <code>dtype_mapper</code>.
+<p>This can be turned off by setting <code>optimize_pandas_types=False</code></p>
+<p>Alternatively, you can manually enter your own type conversion by passing in a dictionary for <code>dtype_mapper</code>. This can be done in conjunction with pandas' built in type optimizations.
 <div class="highlight"><pre><span></span><code><span class="n">mapper</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">&#39;SplyFF&#39;</span><span class="p">:</span> <span class="s1">&#39;Float64&#39;</span><span class="p">,</span>
   <span class="s1">&#39;AdrBalUSD1Cnt&#39;</span><span class="p">:</span> <span class="s1">&#39;Int64&#39;</span><span class="p">,</span>
 <span class="p">}</span>
 <span class="n">df_mapped</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_asset_metrics</span><span class="p">(</span>
   <span class="n">assets</span><span class="o">=</span><span class="n">asset_list</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="n">metrics_list</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="n">start_time</span><span class="p">,</span> <span class="n">limit_per_asset</span><span class="o">=</span><span class="mi">3</span>
-<span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">dtype_mapper</span><span class="o">=</span><span class="n">mapper</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">dtype_mapper</span><span class="o">=</span><span class="n">mapper</span><span class="p">,</span> <span class="n">optimize_pandas_types</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_mapped</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
 </code></pre></div></p>
 <div class="highlight"><pre><span></span><code>asset                                          object
@@ -544,10 +545,28 @@ SplyFF                                        Float64
 volume_trusted_spot_usd_1d                    float64
 dtype: object
 </code></pre></div>
-<p>However, pandas will throw an error if you manually map a datetime type using the above method, e.g. <code>{'time': 'datetime64'}</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="ne">TypeError</span><span class="p">:</span> <span class="n">the</span> <span class="n">dtype</span> <span class="n">datetime64</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">supported</span> <span class="k">for</span> <span class="n">parsing</span><span class="p">,</span> <span class="k">pass</span> <span class="n">this</span> <span class="n">column</span> <span class="n">using</span> <span class="n">parse_dates</span> <span class="n">instead</span>
+<p>Or as strictly the only types in the dataframe</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">dtype_mapper</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ReferenceRateUSD&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+    <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span>
+<span class="p">}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_asset_metrics</span><span class="p">(</span>
+  <span class="n">assets</span><span class="o">=</span><span class="s1">&#39;btc&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="s1">&#39;ReferenceRateUSD&#39;</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="s1">&#39;2022-06-15&#39;</span><span class="p">,</span> <span class="n">limit_per_asset</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">dtype_mapper</span><span class="o">=</span><span class="n">dtype_mapper</span><span class="p">,</span> <span class="n">optimize_pandas_types</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </code></pre></div>
-<p>We generally recommend sticking to automatically converted dtypes especially for datetimes.</p>
+<div class="highlight"><pre><span></span><code>RangeIndex: 1 entries, 0 to 0
+Data columns (total 3 columns):
+ #   Column            Non-Null Count  Dtype         
+---  ------            --------------  -----         
+ 0   asset             1 non-null      object        
+ 1   time              1 non-null      datetime64[ns]
+ 2   ReferenceRateUSD  1 non-null      float64       
+dtypes: datetime64[ns](1), float64(1), object(1)
+memory usage: 152.0+ bytes
+</code></pre></div></p>
+<p>Note that in order to pass a custom datetime object, setting a dtype_mapper is mandatory.</p>
+<p>Pandas type conversion tends to be more performant. But if there are custom operations that must be done using numpy datatypes, this option will let you perform them.</p>
 <h3 id="paging">Paging<a class="headerlink" href="#paging" title="Permanent link">&para;</a></h3>
 <p>You can make the datapoints to iterate from start or from end (default).</p>
 <p>for that you should use a paging_from argument like the following:

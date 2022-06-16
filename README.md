@@ -154,7 +154,9 @@ volume_trusted_spot_usd_1d    Float64
 dtype: object
 ```
 
-Alternatively, you can manually enter your own type conversion by passing in a dictionary for `dtype_mapper`.
+This can be turned off by setting `optimize_pandas_types=False`
+
+Alternatively, you can manually enter your own type conversion by passing in a dictionary for `dtype_mapper`. This can be done in conjunction with pandas' built in type optimizations.
 ```python
 mapper = {
   'SplyFF': 'Float64',
@@ -162,7 +164,7 @@ mapper = {
 }
 df_mapped = client.get_asset_metrics(
   assets=asset_list, metrics=metrics_list, start_time=start_time, limit_per_asset=3
-).to_dataframe(dtype_mapper=mapper)
+).to_dataframe(dtype_mapper=mapper, optimize_pandas_types=True)
 print(df_mapped.dtypes)
 ```
 
@@ -175,13 +177,33 @@ volume_trusted_spot_usd_1d                    float64
 dtype: object
 ```
 
-However, pandas will throw an error if you manually map a datetime type using the above method, e.g. `{'time': 'datetime64'}`.
+Or as strictly the only types in the dataframe
 
 ```python
-TypeError: the dtype datetime64 is not supported for parsing, pass this column using parse_dates instead
+dtype_mapper = {
+    'ReferenceRateUSD': np.float64,
+    'time': np.datetime64
+}
+df = client.get_asset_metrics(
+  assets='btc', metrics='ReferenceRateUSD', start_time='2022-06-15', limit_per_asset=1
+).to_dataframe(dtype_mapper=dtype_mapper, optimize_pandas_types=False)
+df.info()
+```
+```
+RangeIndex: 1 entries, 0 to 0
+Data columns (total 3 columns):
+ #   Column            Non-Null Count  Dtype         
+---  ------            --------------  -----         
+ 0   asset             1 non-null      object        
+ 1   time              1 non-null      datetime64[ns]
+ 2   ReferenceRateUSD  1 non-null      float64       
+dtypes: datetime64[ns](1), float64(1), object(1)
+memory usage: 152.0+ bytes
 ```
 
-We generally recommend sticking to automatically converted dtypes especially for datetimes.
+Note that in order to pass a custom datetime object, setting a dtype_mapper is mandatory.
+
+Pandas type conversion tends to be more performant. But if there are custom operations that must be done using numpy datatypes, this option will let you perform them.
 
 ### Paging
 You can make the datapoints to iterate from start or from end (default).

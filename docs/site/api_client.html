@@ -1206,7 +1206,6 @@
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>asset_pairs</code> (<code>list(str), str</code>): A single asset-asset pair (e.g. "btc-eth") or a list of asset-asset pairs to return info for. If none are provided, all available pairs are returned.</li>
-<li><code>as_dataframe</code> (<code>bool</code>): Boolean flag for returning dataframe. By default, a List(Dict) is returned.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>list(dict(str, any))</code>: Information that is available for requested asset-asset pair like metrics and their respective frequencies and time ranges</p>
@@ -1281,7 +1280,6 @@ description, category, precision and assets for which a metric is available.</p>
 <ul>
 <li><code>metrics</code> (<code>list(str), str</code>): A single metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.</li>
 <li><code>reviewable</code> (<code>bool</code>): Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.</li>
-<li><code>as_dataframe</code> (<code>bool</code>): Boolean flag for returning dataframe. By default, a List(Dict) is returned.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>list(dict(str, any))</code>: Information about metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.</p>

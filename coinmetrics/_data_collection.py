@@ -201,6 +201,7 @@ class DataCollection:
         self,
         header: Optional[List[str]] = None,
         dtype_mapper: Optional[Dict[str, Any]] = None,
+        optimize_pandas_types: Optional[bool] = True,
     ) -> DataFrameType:
         """
         Outputs a pandas dataframe.
@@ -209,6 +210,8 @@ class DataCollection:
         :type header: list(str)
         :param dtype_mapper: Dictionary for converting columns to types, where keys are columns and values are types that pandas accepts in an `as_type()` call. This mapping is prioritized over the pandas dtype conversions.
         :type dtype_mapper: dict
+        :param optimize_pandas_types: Boolean flag for using pandas typing for dataframes. If True and dtype_mapper is not specified, then the output will result in all columns with string dtype. If True and dtype_mapper is specified, then the output will convert the dataframe columns with the user-specified dtyoes.
+        :type optimize_pandas_types: Bool
         :return: Data in a pandas dataframe
         :rtype: DataFrameType
         """
@@ -216,30 +219,40 @@ class DataCollection:
             logger.info("Pandas not found; Returning None")
             return None
         else:
-            f = BytesIO()
-            self.export_to_csv(f)
-            if f.getbuffer().nbytes == 0:
-                logger.warning("Response is empty.")
-                return pd.DataFrame()
+            if optimize_pandas_types:
+                f = BytesIO()
+                self.export_to_csv(f)
+                if f.getbuffer().nbytes == 0:
+                    logger.warning("Response is empty.")
+                    return pd.DataFrame()
+                else:
+                    f.seek(0)
+                    columns = (
+                        BytesIO(f.getvalue())
+                        .readlines(1)[0]
+                        .decode()
+                        .strip()
+                        .split(",")
+                    )
+                    datetime_cols = [
+                        c for c in columns if c.endswith("_time") or c == "time"
+                    ]
+                    df = pd.read_csv(
+                        f,
+                        parse_dates=datetime_cols,
+                        dtype=dtype_mapper,
+                        date_parser=isoparse,
+                    )
+                    if dtype_mapper is None:
+                        df = df.convert_dtypes()
+                    if header is not None:
+                        assert len(df.columns) == len(
+                            header
+                        ), "header length does not match output values"
+                        df.columns = header
+                    return df
             else:
-                f.seek(0)
-                columns = (
-                    BytesIO(f.getvalue()).readlines(1)[0].decode().strip().split(",")
-                )
-                datetime_cols = [
-                    c for c in columns if c.endswith("_time") or c == "time"
-                ]
-                df = pd.read_csv(
-                    f,
-                    parse_dates=datetime_cols,
-                    dtype=dtype_mapper,
-                    date_parser=isoparse,
-                )
                 if dtype_mapper is None:
-                    df = df.convert_dtypes()
-                if header is not None:
-                    assert len(df.columns) == len(
-                        header
-                    ), "header length does not match output values"
-                    df.columns = header
-                return df
+                    return pd.DataFrame(self)
+                else:
+                    return pd.DataFrame(self).astype(dtype=dtype_mapper)

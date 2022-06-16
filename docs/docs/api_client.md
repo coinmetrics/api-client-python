@@ -55,7 +55,6 @@ Returns meta information about _available_ asset-asset pairs
 **Arguments**:
 
 - `asset_pairs` (`list(str), str`): A single asset-asset pair (e.g. "btc-eth") or a list of asset-asset pairs to return info for. If none are provided, all available pairs are returned.
-- `as_dataframe` (`bool`): Boolean flag for returning dataframe. By default, a List(Dict) is returned.
 
 **Returns**:
 
@@ -166,7 +165,6 @@ description, category, precision and assets for which a metric is available.
 
 - `metrics` (`list(str), str`): A single metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
 - `reviewable` (`bool`): Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
-- `as_dataframe` (`bool`): Boolean flag for returning dataframe. By default, a List(Dict) is returned.
 
 **Returns**:
 
