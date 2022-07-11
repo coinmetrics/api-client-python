@@ -1917,6 +1917,28 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {"markets": markets, "backfill": backfill}
         return self._get_stream_data("timeseries-stream/market-quotes", params)
 
+    def get_stream_market_candles(
+        self,
+        markets: Union[List[str], str],
+        frequency: Optional[str] = None,
+        backfill: Union[Backfill, str] = Backfill.LATEST,
+    ) -> CmStream:
+        """
+        Returns timeseries stream of market candles.
+
+        :param markets: list of markets or market patterns like exchange-* or exchange-*-spot or *USDT-future.
+        :type markets: list(str), str
+        :param frequency: Candle duration. Supported values are 1m, 5m, 10m, 15m, 30m, 1h, 4h, 1d.
+        :type frequency: str
+        :param backfill: What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.
+        :type backfill: str
+        :return: Market Candles timeseries stream.
+        :rtype: CmStream
+        """
+
+        params: Dict[str, Any] = {"markets": markets, "backfill": backfill, "frequency": frequency}
+        return self._get_stream_data("timeseries-stream/market-candles", params)
+
     def get_list_of_blocks(
         self,
         asset: str,
