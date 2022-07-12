@@ -14,7 +14,7 @@ from coinmetrics._catalogs import (
     CatalogMarketsData,
     CatalogMetricsData,
     CatalogAssetPairCandlesData,
-    CatalogMarketTradesData
+    CatalogMarketTradesData,
 )
 from coinmetrics._data_collection import DataCollection
 from coinmetrics._typing import (
@@ -70,81 +70,143 @@ catalog_assets_test_data = [
     }
 ]
 
-catalog_candles_test_data = [{'frequencies': [{'frequency': '1m',
-                   'max_time': '2022-07-12T17:50:00.000000000Z',
-                   'min_time': '2020-12-26T01:00:00.000000000Z'},
-                  {'frequency': '5m',
-                   'max_time': '2022-07-12T17:45:00.000000000Z',
-                   'min_time': '2020-12-26T01:00:00.000000000Z'},
-                  {'frequency': '10m',
-                   'max_time': '2022-07-12T17:40:00.000000000Z',
-                   'min_time': '2020-12-26T01:00:00.000000000Z'},
-                  {'frequency': '15m',
-                   'max_time': '2022-07-12T17:30:00.000000000Z',
-                   'min_time': '2020-12-26T01:00:00.000000000Z'},
-                  {'frequency': '30m',
-                   'max_time': '2022-07-12T17:00:00.000000000Z',
-                   'min_time': '2020-12-26T01:00:00.000000000Z'},
-                  {'frequency': '1h',
-                   'max_time': '2022-07-12T16:00:00.000000000Z',
-                   'min_time': '2020-12-26T01:00:00.000000000Z'},
-                  {'frequency': '4h',
-                   'max_time': '2022-07-12T12:00:00.000000000Z',
-                   'min_time': '2020-12-26T00:00:00.000000000Z'},
-                  {'frequency': '1d',
-                   'max_time': '2022-07-11T00:00:00.000000000Z',
-                   'min_time': '2020-12-26T00:00:00.000000000Z'}],
-  'pair': '1inch-usd'},
- {'frequencies': [{'frequency': '1m',
-                   'max_time': '2022-07-12T17:50:00.000000000Z',
-                   'min_time': '2020-10-10T08:13:00.000000000Z'},
-                  {'frequency': '5m',
-                   'max_time': '2022-07-12T17:45:00.000000000Z',
-                   'min_time': '2020-10-10T08:10:00.000000000Z'},
-                  {'frequency': '10m',
-                   'max_time': '2022-07-12T17:40:00.000000000Z',
-                   'min_time': '2020-10-10T08:10:00.000000000Z'},
-                  {'frequency': '15m',
-                   'max_time': '2022-07-12T17:30:00.000000000Z',
-                   'min_time': '2020-10-10T08:00:00.000000000Z'},
-                  {'frequency': '30m',
-                   'max_time': '2022-07-12T17:00:00.000000000Z',
-                   'min_time': '2020-10-10T08:00:00.000000000Z'},
-                  {'frequency': '1h',
-                   'max_time': '2022-07-12T16:00:00.000000000Z',
-                   'min_time': '2020-10-10T08:00:00.000000000Z'},
-                  {'frequency': '4h',
-                   'max_time': '2022-07-12T12:00:00.000000000Z',
-                   'min_time': '2020-10-10T08:00:00.000000000Z'},
-                  {'frequency': '1d',
-                   'max_time': '2022-07-11T00:00:00.000000000Z',
-                   'min_time': '2020-10-10T00:00:00.000000000Z'}],
-  'pair': 'aave-usd'},
- {'frequencies': [{'frequency': '1m',
-                   'max_time': '2022-07-12T17:50:00.000000000Z',
-                   'min_time': '2018-02-26T00:00:00.000000000Z'},
-                  {'frequency': '5m',
-                   'max_time': '2022-07-12T17:45:00.000000000Z',
-                   'min_time': '2018-02-26T00:00:00.000000000Z'},
-                  {'frequency': '10m',
-                   'max_time': '2022-07-12T17:40:00.000000000Z',
-                   'min_time': '2018-02-26T00:00:00.000000000Z'},
-                  {'frequency': '15m',
-                   'max_time': '2022-07-12T17:30:00.000000000Z',
-                   'min_time': '2018-02-26T00:00:00.000000000Z'},
-                  {'frequency': '30m',
-                   'max_time': '2022-07-12T17:00:00.000000000Z',
-                   'min_time': '2018-02-26T00:00:00.000000000Z'},
-                  {'frequency': '1h',
-                   'max_time': '2022-07-12T16:00:00.000000000Z',
-                   'min_time': '2018-02-26T00:00:00.000000000Z'},
-                  {'frequency': '4h',
-                   'max_time': '2022-07-12T12:00:00.000000000Z',
-                   'min_time': '2018-02-26T00:00:00.000000000Z'},
-                  {'frequency': '1d',
-                   'max_time': '2022-07-11T00:00:00.000000000Z',
-                   'min_time': '2018-02-26T00:00:00.000000000Z'}],
-  'pair': 'abt-usd'}]
+catalog_candles_test_data = [
+    {
+        "frequencies": [
+            {
+                "frequency": "1m",
+                "max_time": "2022-07-12T17:50:00.000000000Z",
+                "min_time": "2020-12-26T01:00:00.000000000Z",
+            },
+            {
+                "frequency": "5m",
+                "max_time": "2022-07-12T17:45:00.000000000Z",
+                "min_time": "2020-12-26T01:00:00.000000000Z",
+            },
+            {
+                "frequency": "10m",
+                "max_time": "2022-07-12T17:40:00.000000000Z",
+                "min_time": "2020-12-26T01:00:00.000000000Z",
+            },
+            {
+                "frequency": "15m",
+                "max_time": "2022-07-12T17:30:00.000000000Z",
+                "min_time": "2020-12-26T01:00:00.000000000Z",
+            },
+            {
+                "frequency": "30m",
+                "max_time": "2022-07-12T17:00:00.000000000Z",
+                "min_time": "2020-12-26T01:00:00.000000000Z",
+            },
+            {
+                "frequency": "1h",
+                "max_time": "2022-07-12T16:00:00.000000000Z",
+                "min_time": "2020-12-26T01:00:00.000000000Z",
+            },
+            {
+                "frequency": "4h",
+                "max_time": "2022-07-12T12:00:00.000000000Z",
+                "min_time": "2020-12-26T00:00:00.000000000Z",
+            },
+            {
+                "frequency": "1d",
+                "max_time": "2022-07-11T00:00:00.000000000Z",
+                "min_time": "2020-12-26T00:00:00.000000000Z",
+            },
+        ],
+        "pair": "1inch-usd",
+    },
+    {
+        "frequencies": [
+            {
+                "frequency": "1m",
+                "max_time": "2022-07-12T17:50:00.000000000Z",
+                "min_time": "2020-10-10T08:13:00.000000000Z",
+            },
+            {
+                "frequency": "5m",
+                "max_time": "2022-07-12T17:45:00.000000000Z",
+                "min_time": "2020-10-10T08:10:00.000000000Z",
+            },
+            {
+                "frequency": "10m",
+                "max_time": "2022-07-12T17:40:00.000000000Z",
+                "min_time": "2020-10-10T08:10:00.000000000Z",
+            },
+            {
+                "frequency": "15m",
+                "max_time": "2022-07-12T17:30:00.000000000Z",
+                "min_time": "2020-10-10T08:00:00.000000000Z",
+            },
+            {
+                "frequency": "30m",
+                "max_time": "2022-07-12T17:00:00.000000000Z",
+                "min_time": "2020-10-10T08:00:00.000000000Z",
+            },
+            {
+                "frequency": "1h",
+                "max_time": "2022-07-12T16:00:00.000000000Z",
+                "min_time": "2020-10-10T08:00:00.000000000Z",
+            },
+            {
+                "frequency": "4h",
+                "max_time": "2022-07-12T12:00:00.000000000Z",
+                "min_time": "2020-10-10T08:00:00.000000000Z",
+            },
+            {
+                "frequency": "1d",
+                "max_time": "2022-07-11T00:00:00.000000000Z",
+                "min_time": "2020-10-10T00:00:00.000000000Z",
+            },
+        ],
+        "pair": "aave-usd",
+    },
+    {
+        "frequencies": [
+            {
+                "frequency": "1m",
+                "max_time": "2022-07-12T17:50:00.000000000Z",
+                "min_time": "2018-02-26T00:00:00.000000000Z",
+            },
+            {
+                "frequency": "5m",
+                "max_time": "2022-07-12T17:45:00.000000000Z",
+                "min_time": "2018-02-26T00:00:00.000000000Z",
+            },
+            {
+                "frequency": "10m",
+                "max_time": "2022-07-12T17:40:00.000000000Z",
+                "min_time": "2018-02-26T00:00:00.000000000Z",
+            },
+            {
+                "frequency": "15m",
+                "max_time": "2022-07-12T17:30:00.000000000Z",
+                "min_time": "2018-02-26T00:00:00.000000000Z",
+            },
+            {
+                "frequency": "30m",
+                "max_time": "2022-07-12T17:00:00.000000000Z",
+                "min_time": "2018-02-26T00:00:00.000000000Z",
+            },
+            {
+                "frequency": "1h",
+                "max_time": "2022-07-12T16:00:00.000000000Z",
+                "min_time": "2018-02-26T00:00:00.000000000Z",
+            },
+            {
+                "frequency": "4h",
+                "max_time": "2022-07-12T12:00:00.000000000Z",
+                "min_time": "2018-02-26T00:00:00.000000000Z",
+            },
+            {
+                "frequency": "1d",
+                "max_time": "2022-07-11T00:00:00.000000000Z",
+                "min_time": "2018-02-26T00:00:00.000000000Z",
+            },
+        ],
+        "pair": "abt-usd",
+    },
+]
 
 catalog_metrics_test_data = [
     {
@@ -468,38 +530,52 @@ catalog_asset_alerts_test_data = [
 ]
 
 catalog_market_trades_data = [
-    {'market': 'binance-aave-btc-spot',
-     'min_time': '2020-10-15T03:00:01.286000000Z',
-     'max_time': '2022-07-12T21:00:39.933000000Z'
-     },
- {'market': 'binance-algo-usdc-spot',
-  'min_time': '2019-06-22T00:00:07.600000000Z',
-  'max_time': '2020-01-07T07:06:19.943000000Z'},
- {'market': 'binance-atom-usdc-spot',
-  'min_time': '2019-05-07T12:05:42.347000000Z',
-  'max_time': '2022-07-12T21:01:25.281000000Z'
-  }
+    {
+        "market": "binance-aave-btc-spot",
+        "min_time": "2020-10-15T03:00:01.286000000Z",
+        "max_time": "2022-07-12T21:00:39.933000000Z",
+    },
+    {
+        "market": "binance-algo-usdc-spot",
+        "min_time": "2019-06-22T00:00:07.600000000Z",
+        "max_time": "2020-01-07T07:06:19.943000000Z",
+    },
+    {
+        "market": "binance-atom-usdc-spot",
+        "min_time": "2019-05-07T12:05:42.347000000Z",
+        "max_time": "2022-07-12T21:01:25.281000000Z",
+    },
 ]
 
 catalog_market_quotes_data = [
-    {'market': 'coinbase-btc-usd-spot',
-     'min_time': '2019-03-25T18:46:25.000000000Z',
-     'max_time': '2022-07-12T21:01:40.000000000Z'},
- {'market': 'coinbase-btc-usdt-spot',
-  'min_time': '2021-08-20T13:00:00.000000000Z',
-  'max_time': '2022-07-12T21:00:00.000000000Z'},
- {'market': 'coinbase-eth-usd-spot',
-  'min_time': '2019-03-25T18:46:25.000000000Z',
-  'max_time': '2022-07-12T21:01:40.000000000Z'}]
+    {
+        "market": "coinbase-btc-usd-spot",
+        "min_time": "2019-03-25T18:46:25.000000000Z",
+        "max_time": "2022-07-12T21:01:40.000000000Z",
+    },
+    {
+        "market": "coinbase-btc-usdt-spot",
+        "min_time": "2021-08-20T13:00:00.000000000Z",
+        "max_time": "2022-07-12T21:00:00.000000000Z",
+    },
+    {
+        "market": "coinbase-eth-usd-spot",
+        "min_time": "2019-03-25T18:46:25.000000000Z",
+        "max_time": "2022-07-12T21:01:40.000000000Z",
+    },
+]
 
 catalog_market_orderbook_data = [
-    {'market': 'binance-aave-btc-spot',
-     'min_time': '2021-09-14T16:00:00.000000000Z',
-     'max_time': '2022-07-12T20:00:00.000000000Z'},
-    {'market': 'binance-atom-usdc-spot',
-     'min_time': '2021-09-14T16:00:00.000000000Z',
-     'max_time': '2022-07-12T21:00:00.000000000Z',
-     }
+    {
+        "market": "binance-aave-btc-spot",
+        "min_time": "2021-09-14T16:00:00.000000000Z",
+        "max_time": "2022-07-12T20:00:00.000000000Z",
+    },
+    {
+        "market": "binance-atom-usdc-spot",
+        "min_time": "2021-09-14T16:00:00.000000000Z",
+        "max_time": "2022-07-12T21:00:00.000000000Z",
+    },
 ]
 
 
@@ -639,28 +715,34 @@ def test_catalog_asset_pairs_dataframe() -> None:
     df_test = pd.read_csv("test/data/catalog_asset_pairs.csv", dtype=str).fillna("")
     assert (df.values == df_test.values).all()
 
+
 def test_catalog_asset_pairs_candles_dataframe() -> None:
     data = CatalogAssetPairCandlesData(catalog_candles_test_data)
     df = data.to_dataframe().fillna("").astype(str)
-    df_test = pd.read_csv("test/data/catalog_asset_pair_candles.csv", dtype=str).fillna("")
+    df_test = pd.read_csv("test/data/catalog_asset_pair_candles.csv", dtype=str).fillna(
+        ""
+    )
     assert (df.values == df_test.values).all()
+
 
 def test_catalog_market_trades_dataframe() -> None:
     data = CatalogMarketTradesData(catalog_market_trades_data)
     df = data.to_dataframe().fillna("").astype(str)
-    df_test = pd.read_csv("data/catalog_market_trades.csv", dtype=str).fillna("")
+    df_test = pd.read_csv("test/data/catalog_market_trades.csv", dtype=str).fillna("")
     assert (df.values == df_test.values).all()
+
 
 def test_catalog_market_orderbook_dataframe() -> None:
     data = CatalogMarketTradesData(catalog_market_orderbook_data)
     df = data.to_dataframe().fillna("").astype(str)
-    df_test = pd.read_csv("data/catalog_market_orderbooks.csv", dtype=str).fillna("")
+    df_test = pd.read_csv("test/data/catalog_market_orderbooks.csv", dtype=str).fillna("")
     assert (df.values == df_test.values).all()
+
 
 def test_catalog_market_quotes() -> None:
     data = CatalogMarketTradesData(catalog_market_quotes_data)
     df = data.to_dataframe().fillna("").astype(str)
-    df_test = pd.read_csv("data/catalog_market_quotes.csv", dtype=str).fillna("")
+    df_test = pd.read_csv("test/data/catalog_market_quotes.csv", dtype=str).fillna("")
     assert (df.values == df_test.values).all()
 
 

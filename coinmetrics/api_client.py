@@ -36,7 +36,7 @@ from coinmetrics._catalogs import (
     CatalogMetricsData,
     CatalogMarketMetricsData,
     CatalogMarketCandlesData,
-    CatalogMarketTradesData
+    CatalogMarketTradesData,
 )
 
 logger = getLogger("cm_client")
@@ -142,7 +142,7 @@ class CoinMetricsClient:
         return CatalogAssetPairsData(self._get_data("catalog/pairs", params)["data"])
 
     def catalog_asset_pair_candles(
-            self, asset_pairs: Optional[Union[List[str], str]] = None
+        self, asset_pairs: Optional[Union[List[str], str]] = None
     ) -> CatalogAssetPairCandlesData:
         """
         Returns meta information about _available_ asset-asset pairs
@@ -153,7 +153,9 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"pairs": asset_pairs}
-        return CatalogAssetPairCandlesData(self._get_data("catalog/pair-candles", params)["data"])
+        return CatalogAssetPairCandlesData(
+            self._get_data("catalog/pair-candles", params)["data"]
+        )
 
     def catalog_exchanges(
         self, exchanges: Optional[Union[List[str], str]] = None
@@ -265,7 +267,6 @@ class CoinMetricsClient:
         quote: Optional[str] = None,
         asset: Optional[str] = None,
         symbol: Optional[str] = None,
-
     ) -> CatalogMarketTradesData:
         """
         Returns a list of markets with trades support along with the time ranges of available data.
@@ -296,7 +297,9 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        return CatalogMarketTradesData(self._get_data("catalog/market-trades", params)["data"])
+        return CatalogMarketTradesData(
+            self._get_data("catalog/market-trades", params)["data"]
+        )
 
     def catalog_metrics(
         self,
@@ -617,7 +620,6 @@ class CoinMetricsClient:
         return CatalogMarketTradesData(
             self._get_data("catalog/market-liquidations", params)["data"]
         )
-
 
     def catalog_full_assets(
         self,
