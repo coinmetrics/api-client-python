@@ -6,7 +6,7 @@ from coinmetrics.constants import PagingFrom
 try:
     import pandas as pd  # type: ignore
 
-    DataFrameType = pd.core.frame.DataFrame
+    DataFrameType: pd.DataFrame = pd.core.frame.DataFrame
 except ImportError:
     pd = None
     DataFrameType = Any
