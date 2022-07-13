@@ -143,6 +143,15 @@ class CatalogAssetAlertsData(List[Any]):
         return convert_catalog_dtypes(pd.DataFrame(self).explode("constituents"))
 
 
+class CatalogMarketTradesData(List[Any]):
+    def to_dataframe(self) -> DataFrameType:
+        """
+        Transforms catalog data in list form into a dataframe
+        :return: Catalog Data
+        """
+        return convert_catalog_dtypes(pd.DataFrame(self))
+
+
 class CatalogAssetPairsData(List[Any]):
     def to_dataframe(self) -> DataFrameType:
         """
@@ -430,3 +439,30 @@ class CatalogMarketCandlesData(List[Any]):
             .drop(["frequencies"], axis=1)
         )
         return convert_catalog_dtypes(df_catalog_market_candles)
+
+
+class CatalogAssetPairCandlesData(List[Any]):
+    """
+    Transforms catalog data in list form into a dataframe
+    :return: Catalog Data
+    """
+
+    def to_dataframe(self) -> DataFrameType:
+        df_catalog_asset_candles = pd.DataFrame(self)
+        df_catalog_asset_candles = (
+            df_catalog_asset_candles.explode("frequencies")
+            .assign(
+                frequency=lambda df: _expand_df(
+                    key="frequency", iterable=df.frequencies
+                )
+            )
+            .assign(
+                min_time=lambda df: _expand_df(key="min_time", iterable=df.frequencies)
+            )
+            .assign(
+                max_time=lambda df: _expand_df(key="max_time", iterable=df.frequencies)
+            )
+            .reset_index(drop=True)
+            .drop(["frequencies"], axis=1)
+        )
+        return convert_catalog_dtypes(df_catalog_asset_candles)

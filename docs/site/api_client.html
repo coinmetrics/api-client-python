@@ -231,6 +231,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#catalog_asset_pair_candles" class="md-nav__link">
+    catalog_asset_pair_candles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#catalog_exchanges" class="md-nav__link">
     catalog_exchanges
   </a>
@@ -266,6 +273,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#catalog_market_trades" class="md-nav__link">
+    catalog_market_trades
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#catalog_metrics" class="md-nav__link">
     catalog_metrics
   </a>
@@ -282,6 +296,41 @@
           <li class="md-nav__item">
   <a href="#catalog_market_candles" class="md-nav__link">
     catalog_market_candles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_market_orderbooks" class="md-nav__link">
+    catalog_market_orderbooks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_market_quotes" class="md-nav__link">
+    catalog_market_quotes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_market_funding_rates" class="md-nav__link">
+    catalog_market_funding_rates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_market_open_interest" class="md-nav__link">
+    catalog_market_open_interest
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_market_liquidations" class="md-nav__link">
+    catalog_market_liquidations
   </a>
   
 </li>
@@ -729,6 +778,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#catalog_asset_pair_candles" class="md-nav__link">
+    catalog_asset_pair_candles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#catalog_exchanges" class="md-nav__link">
     catalog_exchanges
   </a>
@@ -764,6 +820,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#catalog_market_trades" class="md-nav__link">
+    catalog_market_trades
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#catalog_metrics" class="md-nav__link">
     catalog_metrics
   </a>
@@ -780,6 +843,41 @@
           <li class="md-nav__item">
   <a href="#catalog_market_candles" class="md-nav__link">
     catalog_market_candles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_market_orderbooks" class="md-nav__link">
+    catalog_market_orderbooks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_market_quotes" class="md-nav__link">
+    catalog_market_quotes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_market_funding_rates" class="md-nav__link">
+    catalog_market_funding_rates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_market_open_interest" class="md-nav__link">
+    catalog_market_open_interest
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_market_liquidations" class="md-nav__link">
+    catalog_market_liquidations
   </a>
   
 </li>
@@ -1223,6 +1321,17 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>list(dict(str, any))</code>: Information that is available for requested asset-asset pair like metrics and their respective frequencies and time ranges</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.catalog_asset_pair_candles"></a></p>
+<h4 id="catalog_asset_pair_candles">catalog_asset_pair_candles<a class="headerlink" href="#catalog_asset_pair_candles" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">catalog_asset_pair_candles</span><span class="p">(</span><span class="n">asset_pairs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogAssetPairCandlesData</span>
+</code></pre></div>
+<p>Returns meta information about <em>available</em> asset-asset pairs</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>asset_pairs</code> (<code>list(str), str</code>): A single asset-asset pair (e.g. "btc-eth") or a list of asset-asset pairs to return info for. If none are provided, all available pairs are returned.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>list(dict(str, any))</code>: Returns a list of available asset pair candles along with the time ranges of available data per candle duration.</p>
 <p><a name="coinmetrics.api_client.CoinMetricsClient.catalog_exchanges"></a></p>
 <h4 id="catalog_exchanges">catalog_exchanges<a class="headerlink" href="#catalog_exchanges" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">catalog_exchanges</span><span class="p">(</span><span class="n">exchanges</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogExchangesData</span>
@@ -1284,6 +1393,23 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>list(dict(str, any))</code>: Information about markets that correspond to a filter along with meta information like: type of market and min and max available time frames.</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.catalog_market_trades"></a></p>
+<h4 id="catalog_market_trades">catalog_market_trades<a class="headerlink" href="#catalog_market_trades" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">catalog_market_trades</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">base</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">quote</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMarketTradesData</span>
+</code></pre></div>
+<p>Returns a list of markets with trades support along with the time ranges of available data.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code> (<code>list(str), str</code>): list of market names, e.g. 'coinbase-btc-usd-spot'</li>
+<li><code>market_type</code> (<code>str</code>): Type of market: "spot", "future", "option"</li>
+<li><code>exchange</code> (<code>str</code>): name of the exchange</li>
+<li><code>base</code> (<code>str</code>): name of base asset</li>
+<li><code>quote</code> (<code>str</code>): name of quote asset</li>
+<li><code>asset</code> (<code>str</code>): name of either base or quote asset</li>
+<li><code>symbol</code> (<code>str</code>): name of a symbol. Usually used for futures contracts.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>list(dict(str, any))</code>: Information about market trades that are available for the provided filter, as well as the time frames they are available</p>
 <p><a name="coinmetrics.api_client.CoinMetricsClient.catalog_metrics"></a></p>
 <h4 id="catalog_metrics">catalog_metrics<a class="headerlink" href="#catalog_metrics" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">catalog_metrics</span><span class="p">(</span><span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">reviewable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMetricsData</span>
@@ -1331,6 +1457,91 @@ description, category, precision and assets for which a metric is available.</p>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>list(dict(str, any))</code>: Information about markets that correspond to a filter along with meta information like: type of market and min and max available time frames.</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.catalog_market_orderbooks"></a></p>
+<h4 id="catalog_market_orderbooks">catalog_market_orderbooks<a class="headerlink" href="#catalog_market_orderbooks" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">catalog_market_orderbooks</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">base</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">quote</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMarketTradesData</span>
+</code></pre></div>
+<p>Returns a list of markets with orderbooks support along with the time ranges of available data.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code> (<code>list(str), str</code>): list of market names, e.g. 'coinbase-btc-usd-spot'</li>
+<li><code>market_type</code> (<code>str</code>): Type of market: "spot", "future", "option"</li>
+<li><code>exchange</code> (<code>str</code>): name of the exchange</li>
+<li><code>base</code> (<code>str</code>): name of base asset</li>
+<li><code>quote</code> (<code>str</code>): name of quote asset</li>
+<li><code>asset</code> (<code>str</code>): name of either base or quote asset</li>
+<li><code>symbol</code> (<code>str</code>): name of a symbol. Usually used for futures contracts.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>list(dict(str, any))</code>: Information about markets orderbooks that correspond to a filter</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.catalog_market_quotes"></a></p>
+<h4 id="catalog_market_quotes">catalog_market_quotes<a class="headerlink" href="#catalog_market_quotes" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">catalog_market_quotes</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">base</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">quote</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMarketTradesData</span>
+</code></pre></div>
+<p>Returns a list of markets with quotes support along with the time ranges of available data.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code> (<code>list(str), str</code>): list of market names, e.g. 'coinbase-btc-usd-spot'</li>
+<li><code>market_type</code> (<code>str</code>): Type of market: "spot", "future", "option"</li>
+<li><code>exchange</code> (<code>str</code>): name of the exchange</li>
+<li><code>base</code> (<code>str</code>): name of base asset</li>
+<li><code>quote</code> (<code>str</code>): name of quote asset</li>
+<li><code>asset</code> (<code>str</code>): name of either base or quote asset</li>
+<li><code>symbol</code> (<code>str</code>): name of a symbol. Usually used for futures contracts.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>list(dict(str, any))</code>: Information about markets quotes that correspond to a filter</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.catalog_market_funding_rates"></a></p>
+<h4 id="catalog_market_funding_rates">catalog_market_funding_rates<a class="headerlink" href="#catalog_market_funding_rates" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">catalog_market_funding_rates</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">base</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">quote</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMarketTradesData</span>
+</code></pre></div>
+<p>Returns a list of markets with funding rates support along with the time ranges of available data.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code> (<code>list(str), str</code>): list of market names, e.g. 'coinbase-btc-usd-spot'</li>
+<li><code>market_type</code> (<code>str</code>): Type of market: "spot", "future", "option"</li>
+<li><code>exchange</code> (<code>str</code>): name of the exchange</li>
+<li><code>base</code> (<code>str</code>): name of base asset</li>
+<li><code>quote</code> (<code>str</code>): name of quote asset</li>
+<li><code>asset</code> (<code>str</code>): name of either base or quote asset</li>
+<li><code>symbol</code> (<code>str</code>): name of a symbol. Usually used for futures contracts.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>list(dict(str, any))</code>: Information about funding rates that correspond to a filter</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.catalog_market_open_interest"></a></p>
+<h4 id="catalog_market_open_interest">catalog_market_open_interest<a class="headerlink" href="#catalog_market_open_interest" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">catalog_market_open_interest</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">base</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">quote</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMarketTradesData</span>
+</code></pre></div>
+<p>Returns a list of markets with open interest support along with the time ranges of available data.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code> (<code>list(str), str</code>): list of market names, e.g. 'coinbase-btc-usd-spot'</li>
+<li><code>market_type</code> (<code>str</code>): Type of market: "spot", "future", "option"</li>
+<li><code>exchange</code> (<code>str</code>): name of the exchange</li>
+<li><code>base</code> (<code>str</code>): name of base asset</li>
+<li><code>quote</code> (<code>str</code>): name of quote asset</li>
+<li><code>asset</code> (<code>str</code>): name of either base or quote asset</li>
+<li><code>symbol</code> (<code>str</code>): name of a symbol. Usually used for futures contracts.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>list(dict(str, any))</code>: Information about market open interest that correspond to a filter</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.catalog_market_liquidations"></a></p>
+<h4 id="catalog_market_liquidations">catalog_market_liquidations<a class="headerlink" href="#catalog_market_liquidations" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">catalog_market_liquidations</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">base</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">quote</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMarketTradesData</span>
+</code></pre></div>
+<p>Returns a list of markets with liquidations support along with the time ranges of available data.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code> (<code>list(str), str</code>): list of market names, e.g. 'coinbase-btc-usd-spot'</li>
+<li><code>market_type</code> (<code>str</code>): Type of market: "spot", "future", "option"</li>
+<li><code>exchange</code> (<code>str</code>): name of the exchange</li>
+<li><code>base</code> (<code>str</code>): name of base asset</li>
+<li><code>quote</code> (<code>str</code>): name of quote asset</li>
+<li><code>asset</code> (<code>str</code>): name of either base or quote asset</li>
+<li><code>symbol</code> (<code>str</code>): name of a symbol. Usually used for futures contracts.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>list(dict(str, any))</code>: Information about market liquidations that correspond to a filter</p>
 <p><a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_assets"></a></p>
 <h4 id="catalog_full_assets">catalog_full_assets<a class="headerlink" href="#catalog_full_assets" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">catalog_full_assets</span><span class="p">(</span><span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogAssetsData</span>
