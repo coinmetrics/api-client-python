@@ -673,6 +673,22 @@ class CoinMetricsClient:
             self._get_data("catalog-all/pairs", params)["data"]
         )
 
+    def catalog_full_asset_pair_candles(
+        self, asset_pairs: Optional[Union[List[str], str]] = None
+    ) -> CatalogAssetPairCandlesData:
+        """
+        Returns meta information about _available_ asset-asset pairs
+
+        :param asset_pairs: A single asset-asset pair (e.g. "btc-eth") or a list of asset-asset pairs to return info for. If none are provided, all available pairs are returned.
+        :type asset_pairs: list(str), str
+        :return: Returns a list of available asset pair candles along with the time ranges of available data per candle duration.
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {"pairs": asset_pairs}
+        return CatalogAssetPairCandlesData(
+            self._get_data("catalog-all/pair-candles", params)["data"]
+        )
+
     def catalog_full_exchanges(
         self,
         exchanges: Optional[Union[List[str], str]] = None,
@@ -777,6 +793,49 @@ class CoinMetricsClient:
         }
         return CatalogMarketsData(self._get_data("catalog-all/markets", params)["data"])
 
+    def catalog_full_market_trades(
+        self,
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+    ) -> CatalogMarketTradesData:
+        """
+        Returns a list of all markets with trades support along with the time ranges of available data.
+
+        :param markets: list of market names, e.g. 'coinbase-btc-usd-spot'
+        :type markets: list(str), str
+        :param market_type: Type of market: "spot", "future", "option"
+        :type market_type: str
+        :param exchange: name of the exchange
+        :type exchange: str
+        :param base: name of base asset
+        :type base: str
+        :param quote: name of quote asset
+        :type quote: str
+        :param asset: name of either base or quote asset
+        :type asset: str
+        :param symbol: name of a symbol. Usually used for futures contracts.
+        :type symbol: str
+        :return: Information about market trades that are available for the provided filter, as well as the time frames they are available
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "type": market_type,
+            "exchange": exchange,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+        }
+        return CatalogMarketTradesData(
+            self._get_data("catalog-all/market-trades", params)["data"]
+        )
+
     def catalog_full_metrics(
         self,
         metrics: Optional[Union[List[str], str]] = None,
@@ -880,6 +939,221 @@ class CoinMetricsClient:
         }
         return CatalogMarketCandlesData(
             self._get_data("catalog-all/market-candles", params)["data"]
+        )
+
+    def catalog_full_market_orderbooks(
+        self,
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+    ) -> CatalogMarketTradesData:
+        """
+        Returns a list of markets with orderbooks support along with the time ranges of available data.
+
+        :param markets: list of market names, e.g. 'coinbase-btc-usd-spot'
+        :type markets: list(str), str
+        :param market_type: Type of market: "spot", "future", "option"
+        :type market_type: str
+        :param exchange: name of the exchange
+        :type exchange: str
+        :param base: name of base asset
+        :type base: str
+        :param quote: name of quote asset
+        :type quote: str
+        :param asset: name of either base or quote asset
+        :type asset: str
+        :param symbol: name of a symbol. Usually used for futures contracts.
+        :type symbol: str
+        :return: Information about markets orderbooks that correspond to a filter
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "type": market_type,
+            "exchange": exchange,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+        }
+        return CatalogMarketTradesData(
+            self._get_data("catalog-all/market-orderbooks", params)["data"]
+        )
+
+    def catalog_full_market_quotes(
+        self,
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+    ) -> CatalogMarketTradesData:
+        """
+        Returns a list of markets with quotes support along with the time ranges of available data.
+
+        :param markets: list of market names, e.g. 'coinbase-btc-usd-spot'
+        :type markets: list(str), str
+        :param market_type: Type of market: "spot", "future", "option"
+        :type market_type: str
+        :param exchange: name of the exchange
+        :type exchange: str
+        :param base: name of base asset
+        :type base: str
+        :param quote: name of quote asset
+        :type quote: str
+        :param asset: name of either base or quote asset
+        :type asset: str
+        :param symbol: name of a symbol. Usually used for futures contracts.
+        :type symbol: str
+        :return: Information about markets quotes that correspond to a filter
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "type": market_type,
+            "exchange": exchange,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+        }
+        return CatalogMarketTradesData(
+            self._get_data("catalog-all/market-quotes", params)["data"]
+        )
+
+    def catalog_full_market_funding_rates(
+        self,
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+    ) -> CatalogMarketTradesData:
+        """
+        Returns a list of all markets with funding rates support along with the time ranges of available data.
+
+        :param markets: list of market names, e.g. 'coinbase-btc-usd-spot'
+        :type markets: list(str), str
+        :param market_type: Type of market: "spot", "future", "option"
+        :type market_type: str
+        :param exchange: name of the exchange
+        :type exchange: str
+        :param base: name of base asset
+        :type base: str
+        :param quote: name of quote asset
+        :type quote: str
+        :param asset: name of either base or quote asset
+        :type asset: str
+        :param symbol: name of a symbol. Usually used for futures contracts.
+        :type symbol: str
+        :return: Information about funding rates that correspond to a filter
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "type": market_type,
+            "exchange": exchange,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+        }
+        return CatalogMarketTradesData(
+            self._get_data("catalog-all/market-funding-rates", params)["data"]
+        )
+
+    def catalog_full_market_open_interest(
+        self,
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+    ) -> CatalogMarketTradesData:
+        """
+        Returns a list of markets with open interest support along with the time ranges of available data.
+
+        :param markets: list of market names, e.g. 'coinbase-btc-usd-spot'
+        :type markets: list(str), str
+        :param market_type: Type of market: "spot", "future", "option"
+        :type market_type: str
+        :param exchange: name of the exchange
+        :type exchange: str
+        :param base: name of base asset
+        :type base: str
+        :param quote: name of quote asset
+        :type quote: str
+        :param asset: name of either base or quote asset
+        :type asset: str
+        :param symbol: name of a symbol. Usually used for futures contracts.
+        :type symbol: str
+        :return: Information about market open interest that correspond to a filter
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "type": market_type,
+            "exchange": exchange,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+        }
+        return CatalogMarketTradesData(
+            self._get_data("catalog-all/market-openinterest", params)["data"]
+        )
+
+    def catalog_full_market_liquidations(
+        self,
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+    ) -> CatalogMarketTradesData:
+        """
+        Returns a list of all markets with liquidations support along with the time ranges of available data.
+
+        :param markets: list of market names, e.g. 'coinbase-btc-usd-spot'
+        :type markets: list(str), str
+        :param market_type: Type of market: "spot", "future", "option"
+        :type market_type: str
+        :param exchange: name of the exchange
+        :type exchange: str
+        :param base: name of base asset
+        :type base: str
+        :param quote: name of quote asset
+        :type quote: str
+        :param asset: name of either base or quote asset
+        :type asset: str
+        :param symbol: name of a symbol. Usually used for futures contracts.
+        :type symbol: str
+        :return: Information about market liquidations that correspond to a filter
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "type": market_type,
+            "exchange": exchange,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+        }
+        return CatalogMarketTradesData(
+            self._get_data("catalog-all/market-liquidations", params)["data"]
         )
 
     def get_asset_alerts(
@@ -1259,6 +1533,69 @@ class CoinMetricsClient:
             "limit_per_pair": limit_per_pair,
         }
         return DataCollection(self._get_data, "timeseries/pair-metrics", params)
+
+    def get_pair_candles(
+        self,
+        pairs: Union[List[str], str],
+        frequency: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_height: Optional[int] = None,
+        end_height: Optional[int] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        limit_per_pair: Optional[int] = None,
+    ) -> DataCollection:
+        """
+        Returns candles for specified asset pairs.
+        Results are ordered by tuple (pair, time).
+
+        :param pairs: A single asset-asset pairs (e.g. "btc-usd") or a list of asset-asset-pairs to return info for.
+        :type pairs: list(str), str
+        :param frequency: frequency of the returned timeseries, e.g 15s, 1d, etc.
+        :type frequency: str
+        :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
+        :type page_size: int
+        :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+        :type paging_from: PagingFrom, str
+        :param start_time: Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type start_time: datetime, date, str
+        :param end_time: End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type end_time: datetime, date, str
+        :param start_height: Start block of the timeseries (only applicable when querying with frequency 1b).
+        :type start_height: int
+        :param end_height: End block of the timeseries (only applicable when querying with frequency 1b).
+        :type end_height: int
+        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
+        :type start_inclusive: bool
+        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
+        :type end_inclusive: bool
+        :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+        :type timezone: str
+        :param limit_per_pair: How many entries _per asset pair_ the result should contain.
+        :type limit_per_pair: int
+        :return: Asset pair candles timeseries.
+        :rtype: DataCollection
+        """
+
+        params: Dict[str, Any] = {
+            "pairs": pairs,
+            "frequency": frequency,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "start_time": start_time,
+            "end_time": end_time,
+            "start_height": start_height,
+            "end_height": end_height,
+            "start_inclusive": start_inclusive,
+            "end_inclusive": end_inclusive,
+            "timezone": timezone,
+            "limit_per_pair": limit_per_pair,
+        }
+        return DataCollection(self._get_data, "timeseries/pair-candles", params)
 
     def get_institution_metrics(
         self,
