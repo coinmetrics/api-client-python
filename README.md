@@ -206,7 +206,7 @@ Note that in order to pass a custom datetime object, setting a dtype_mapper is m
 Pandas type conversion tends to be more performant. But if there are custom operations that must be done using numpy datatypes, this option will let you perform them.
 
 ### Paging
-You can make the datapoints to iterate from start or from end (default).
+You can make the datapoints to iterate from start (default) or from end.
 
 for that you should use a paging_from argument like the following:
 ```
@@ -220,11 +220,12 @@ for metric_data in client.get_asset_metrics(assets='btc', metrics=['ReferenceRat
     print(metric_data)
 ```
 
-PagingFrom.END: is available but it is also a default value also, so you might not want to set it.
+PagingFrom.END: is available but by default it will page from the start.
 
 ### SSL Certs verification
 
-Sometimes your organization network have special rules on SSL certs verification and in this case you might face the following error when running the script:
+Sometimes your organization network have special rules on SSL certs verification and in this case you might face the
+following error when running the script:
 ```text
 SSLError: HTTPSConnectionPool(host='api.coinmetrics.io', port=443): Max retries exceeded with url: <some_url_path> (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1123)')))
 ```
@@ -238,6 +239,24 @@ client = CoinMetricsClient(verify_ssl_certs=False)
 
 We don't recommend setting it to False by default and you should make sure you understand the security risks of disabling SSL certs verification.
 
+### Installing and running coinmetrics package and other python packages behind a secure python network
+Related to SSL Certs verification, you may have trouble installing and updating PyPi packages to your local environment.
+So you may need to choose the best solution for your company and environment - either using package managers or
+installing offline.
+
+#### Installing using package managers
+Full instructions for setting up your environment to use conda, pip, yarn, npm, etc. can be [found here](https://medium.com/@iffi33/dealing-with-ssl-authentication-on-a-secure-corporate-network-pip-conda-git-npm-yarn-bower-73e5b93fd4b2).
+Additionally, a workaround to disable SSL verification when installing a trusted Python package is this:  
+```commandline
+pip install --trusted-host pypi.python.org <packagename>
+```  
+Although it is important to make sure you understand the risks associated with disabling SSL verification and ensure 
+compliance with company policies.
+
+#### Installing Python packages locally/ offline
+It may be easier to download and install the package locally. Steps:  
+1. Download the files for the [Coin Metrics API Client from PyPi](https://pypi.org/project/coinmetrics-api-client/#files)
+2. [Install it locally](https://packaging.python.org/en/latest/tutorials/installing-packages/#installing-from-local-archives)
 
 ### Requests Proxy
 Sometimes your organization has special rules on making requests to third parties and you have to use proxies in order to comply with the rules.
@@ -256,3 +275,4 @@ client = CoinMetricsClient(proxy_url=f'http://<username>:<password>@<hostname>:<
 
 ## Extended documentation
 For more information about the available methods in the client please reference [API Client Spec](https://coinmetrics.github.io/api-client-python/site/api_client.html)
+
