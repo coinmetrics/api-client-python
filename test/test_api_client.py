@@ -735,7 +735,9 @@ def test_catalog_market_trades_dataframe() -> None:
 def test_catalog_market_orderbook_dataframe() -> None:
     data = CatalogMarketTradesData(catalog_market_orderbook_data)
     df = data.to_dataframe().fillna("").astype(str)
-    df_test = pd.read_csv("test/data/catalog_market_orderbooks.csv", dtype=str).fillna("")
+    df_test = pd.read_csv("test/data/catalog_market_orderbooks.csv", dtype=str).fillna(
+        ""
+    )
     assert (df.values == df_test.values).all()
 
 

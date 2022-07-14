@@ -423,6 +423,23 @@ Returns meta information about _supported_ asset-asset pairs
 
 `list(dict(str, any))`: Information that is supported for requested asset-asset pair like metrics and their respective frequencies and time ranges
 
+<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_pair_candles"></a>
+#### catalog\_full\_asset\_pair\_candles
+
+```python
+ | catalog_full_asset_pair_candles(asset_pairs: Optional[Union[List[str], str]] = None) -> CatalogAssetPairCandlesData
+```
+
+Returns meta information about _available_ asset-asset pairs
+
+**Arguments**:
+
+- `asset_pairs` (`list(str), str`): A single asset-asset pair (e.g. "btc-eth") or a list of asset-asset pairs to return info for. If none are provided, all available pairs are returned.
+
+**Returns**:
+
+`list(dict(str, any))`: Returns a list of available asset pair candles along with the time ranges of available data per candle duration.
+
 <a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_exchanges"></a>
 #### catalog\_full\_exchanges
 
@@ -514,6 +531,29 @@ Returns list of _supported_ markets that correspond to a filter. If no filter is
 
 `list(dict(str, any))`: Information about markets that correspond to a filter along with meta information like: type of market and min and max supported time frames.
 
+<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_trades"></a>
+#### catalog\_full\_market\_trades
+
+```python
+ | catalog_full_market_trades(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketTradesData
+```
+
+Returns a list of all markets with trades support along with the time ranges of available data.
+
+**Arguments**:
+
+- `markets` (`list(str), str`): list of market names, e.g. 'coinbase-btc-usd-spot'
+- `market_type` (`str`): Type of market: "spot", "future", "option"
+- `exchange` (`str`): name of the exchange
+- `base` (`str`): name of base asset
+- `quote` (`str`): name of quote asset
+- `asset` (`str`): name of either base or quote asset
+- `symbol` (`str`): name of a symbol. Usually used for futures contracts.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about market trades that are available for the provided filter, as well as the time frames they are available
+
 <a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_metrics"></a>
 #### catalog\_full\_metrics
 
@@ -578,6 +618,121 @@ Returns list of _available_ markets with candles support along woth time ranges 
 **Returns**:
 
 `list(dict(str, any))`: Information about markets that correspond to a filter along with meta information like: type of market and min and max available time frames.
+
+<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_orderbooks"></a>
+#### catalog\_full\_market\_orderbooks
+
+```python
+ | catalog_full_market_orderbooks(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketTradesData
+```
+
+Returns a list of markets with orderbooks support along with the time ranges of available data.
+
+**Arguments**:
+
+- `markets` (`list(str), str`): list of market names, e.g. 'coinbase-btc-usd-spot'
+- `market_type` (`str`): Type of market: "spot", "future", "option"
+- `exchange` (`str`): name of the exchange
+- `base` (`str`): name of base asset
+- `quote` (`str`): name of quote asset
+- `asset` (`str`): name of either base or quote asset
+- `symbol` (`str`): name of a symbol. Usually used for futures contracts.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about markets orderbooks that correspond to a filter
+
+<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_quotes"></a>
+#### catalog\_full\_market\_quotes
+
+```python
+ | catalog_full_market_quotes(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketTradesData
+```
+
+Returns a list of markets with quotes support along with the time ranges of available data.
+
+**Arguments**:
+
+- `markets` (`list(str), str`): list of market names, e.g. 'coinbase-btc-usd-spot'
+- `market_type` (`str`): Type of market: "spot", "future", "option"
+- `exchange` (`str`): name of the exchange
+- `base` (`str`): name of base asset
+- `quote` (`str`): name of quote asset
+- `asset` (`str`): name of either base or quote asset
+- `symbol` (`str`): name of a symbol. Usually used for futures contracts.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about markets quotes that correspond to a filter
+
+<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_funding_rates"></a>
+#### catalog\_full\_market\_funding\_rates
+
+```python
+ | catalog_full_market_funding_rates(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketTradesData
+```
+
+Returns a list of all markets with funding rates support along with the time ranges of available data.
+
+**Arguments**:
+
+- `markets` (`list(str), str`): list of market names, e.g. 'coinbase-btc-usd-spot'
+- `market_type` (`str`): Type of market: "spot", "future", "option"
+- `exchange` (`str`): name of the exchange
+- `base` (`str`): name of base asset
+- `quote` (`str`): name of quote asset
+- `asset` (`str`): name of either base or quote asset
+- `symbol` (`str`): name of a symbol. Usually used for futures contracts.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about funding rates that correspond to a filter
+
+<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_open_interest"></a>
+#### catalog\_full\_market\_open\_interest
+
+```python
+ | catalog_full_market_open_interest(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketTradesData
+```
+
+Returns a list of markets with open interest support along with the time ranges of available data.
+
+**Arguments**:
+
+- `markets` (`list(str), str`): list of market names, e.g. 'coinbase-btc-usd-spot'
+- `market_type` (`str`): Type of market: "spot", "future", "option"
+- `exchange` (`str`): name of the exchange
+- `base` (`str`): name of base asset
+- `quote` (`str`): name of quote asset
+- `asset` (`str`): name of either base or quote asset
+- `symbol` (`str`): name of a symbol. Usually used for futures contracts.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about market open interest that correspond to a filter
+
+<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_liquidations"></a>
+#### catalog\_full\_market\_liquidations
+
+```python
+ | catalog_full_market_liquidations(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketTradesData
+```
+
+Returns a list of all markets with liquidations support along with the time ranges of available data.
+
+**Arguments**:
+
+- `markets` (`list(str), str`): list of market names, e.g. 'coinbase-btc-usd-spot'
+- `market_type` (`str`): Type of market: "spot", "future", "option"
+- `exchange` (`str`): name of the exchange
+- `base` (`str`): name of base asset
+- `quote` (`str`): name of quote asset
+- `asset` (`str`): name of either base or quote asset
+- `symbol` (`str`): name of a symbol. Usually used for futures contracts.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about market liquidations that correspond to a filter
 
 <a name="coinmetrics.api_client.CoinMetricsClient.get_asset_alerts"></a>
 #### get\_asset\_alerts
@@ -747,6 +902,35 @@ Returns metrics books for specified asset-asset pairs.
 **Returns**:
 
 `DataCollection`: Exchange-Asset Metrics timeseries.
+
+<a name="coinmetrics.api_client.CoinMetricsClient.get_pair_candles"></a>
+#### get\_pair\_candles
+
+```python
+ | get_pair_candles(pairs: Union[List[str], str], frequency: Optional[str] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, limit_per_pair: Optional[int] = None) -> DataCollection
+```
+
+Returns candles for specified asset pairs.
+Results are ordered by tuple (pair, time).
+
+**Arguments**:
+
+- `pairs` (`list(str), str`): A single asset-asset pairs (e.g. "btc-usd") or a list of asset-asset-pairs to return info for.
+- `frequency` (`str`): frequency of the returned timeseries, e.g 15s, 1d, etc.
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_height` (`int`): Start block of the timeseries (only applicable when querying with frequency 1b).
+- `end_height` (`int`): End block of the timeseries (only applicable when querying with frequency 1b).
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+- `limit_per_pair` (`int`): How many entries _per asset pair_ the result should contain.
+
+**Returns**:
+
+`DataCollection`: Asset pair candles timeseries.
 
 <a name="coinmetrics.api_client.CoinMetricsClient.get_institution_metrics"></a>
 #### get\_institution\_metrics
