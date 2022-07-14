@@ -253,6 +253,33 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#installing-and-running-coinmetrics-package-and-other-python-packages-behind-a-secure-python-network" class="md-nav__link">
+    Installing and running coinmetrics package and other python packages behind a secure python network
+  </a>
+  
+    <nav class="md-nav" aria-label="Installing and running coinmetrics package and other python packages behind a secure python network">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing-using-package-managers" class="md-nav__link">
+    Installing using package managers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-python-packages-locally-offline" class="md-nav__link">
+    Installing Python packages locally/ offline
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#requests-proxy" class="md-nav__link">
     Requests Proxy
   </a>
@@ -373,6 +400,33 @@
   <a href="#ssl-certs-verification" class="md-nav__link">
     SSL Certs verification
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-and-running-coinmetrics-package-and-other-python-packages-behind-a-secure-python-network" class="md-nav__link">
+    Installing and running coinmetrics package and other python packages behind a secure python network
+  </a>
+  
+    <nav class="md-nav" aria-label="Installing and running coinmetrics package and other python packages behind a secure python network">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing-using-package-managers" class="md-nav__link">
+    Installing using package managers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-python-packages-locally-offline" class="md-nav__link">
+    Installing Python packages locally/ offline
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -568,7 +622,7 @@ memory usage: 152.0+ bytes
 <p>Note that in order to pass a custom datetime object, setting a dtype_mapper is mandatory.</p>
 <p>Pandas type conversion tends to be more performant. But if there are custom operations that must be done using numpy datatypes, this option will let you perform them.</p>
 <h3 id="paging">Paging<a class="headerlink" href="#paging" title="Permanent link">&para;</a></h3>
-<p>You can make the datapoints to iterate from start or from end (default).</p>
+<p>You can make the datapoints to iterate from start (default) or from end.</p>
 <p>for that you should use a paging_from argument like the following:
 <div class="highlight"><pre><span></span><code>from coinmetrics.api_client import CoinMetricsClient
 from coinmetrics.constants import PagingFrom
@@ -579,15 +633,31 @@ for metric_data in client.get_asset_metrics(assets=&#39;btc&#39;, metrics=[&#39;
                                             paging_from=PagingFrom.START):
     print(metric_data)
 </code></pre></div></p>
-<p>PagingFrom.END: is available but it is also a default value also, so you might not want to set it.</p>
+<p>PagingFrom.END: is available but by default it will page from the start.</p>
 <h3 id="ssl-certs-verification">SSL Certs verification<a class="headerlink" href="#ssl-certs-verification" title="Permanent link">&para;</a></h3>
-<p>Sometimes your organization network have special rules on SSL certs verification and in this case you might face the following error when running the script:
+<p>Sometimes your organization network have special rules on SSL certs verification and in this case you might face the
+following error when running the script:
 <div class="highlight"><pre><span></span><code>SSLError: HTTPSConnectionPool(host=&#39;api.coinmetrics.io&#39;, port=443): Max retries exceeded with url: &lt;some_url_path&gt; (Caused by SSLError(SSLCertVerificationError(1, &#39;[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1123)&#39;)))
 </code></pre></div></p>
 <p>In this case, you can pass an option during client initialization to disable ssl verification for requests like this:</p>
 <div class="highlight"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">CoinMetricsClient</span><span class="p">(</span><span class="n">verify_ssl_certs</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </code></pre></div>
 <p>We don't recommend setting it to False by default and you should make sure you understand the security risks of disabling SSL certs verification.</p>
+<h3 id="installing-and-running-coinmetrics-package-and-other-python-packages-behind-a-secure-python-network">Installing and running coinmetrics package and other python packages behind a secure python network<a class="headerlink" href="#installing-and-running-coinmetrics-package-and-other-python-packages-behind-a-secure-python-network" title="Permanent link">&para;</a></h3>
+<p>Related to SSL Certs verification, you may have trouble installing and updating PyPi packages to your local environment.
+So you may need to choose the best solution for your company and environment - either using package managers or
+installing offline.</p>
+<h4 id="installing-using-package-managers">Installing using package managers<a class="headerlink" href="#installing-using-package-managers" title="Permanent link">&para;</a></h4>
+<p>Full instructions for setting up your environment to use conda, pip, yarn, npm, etc. can be <a href="https://medium.com/@iffi33/dealing-with-ssl-authentication-on-a-secure-corporate-network-pip-conda-git-npm-yarn-bower-73e5b93fd4b2">found here</a>.
+Additionally, a workaround to disable SSL verification when installing a trusted Python package is this:<br />
+<div class="highlight"><pre><span></span><code>pip install --trusted-host pypi.python.org &lt;packagename&gt;
+</code></pre></div>
+Although it is important to make sure you understand the risks associated with disabling SSL verification and ensure 
+compliance with company policies.</p>
+<h4 id="installing-python-packages-locally-offline">Installing Python packages locally/ offline<a class="headerlink" href="#installing-python-packages-locally-offline" title="Permanent link">&para;</a></h4>
+<p>It may be easier to download and install the package locally. Steps:<br />
+1. Download the files for the <a href="https://pypi.org/project/coinmetrics-api-client/#files">Coin Metrics API Client from PyPi</a>
+2. <a href="https://packaging.python.org/en/latest/tutorials/installing-packages/#installing-from-local-archives">Install it locally</a></p>
 <h3 id="requests-proxy">Requests Proxy<a class="headerlink" href="#requests-proxy" title="Permanent link">&para;</a></h3>
 <p>Sometimes your organization has special rules on making requests to third parties and you have to use proxies in order to comply with the rules.</p>
 <p>For proxies that don't require auth you can specify them similar to this example:
