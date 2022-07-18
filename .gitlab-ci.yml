@@ -9,6 +9,8 @@ stages:
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
+  PYPI_PASSWORD: $PYPI_PASSWORD
+  PYPI_USERNAME: $PYPI_USERNAME
 
 build-test-push-image:
   stage: build-test-push-image
@@ -26,3 +28,19 @@ build-test-push-image:
     - coinmetrics-build-runner
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+
+deploy:
+  stage: deploy
+  dependencies:
+    - build-test-push-image
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME || true
+    - docker build --cache-from $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA . --build-arg PYPI_USERNAME=$PYPI_USERNAME --build-arg PYPI_PASSWORD=$PYPI_PASSWORD
+    - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python -m poetry publish --build --username $PYPI_USERNAME --password $PYPI_PASSWORD
+  tags:
+    - linux
+    - docker
+    - coinmetrics-build-runner
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  when: manual
