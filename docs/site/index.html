@@ -643,6 +643,15 @@ following error when running the script:
 <div class="highlight"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">CoinMetricsClient</span><span class="p">(</span><span class="n">verify_ssl_certs</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </code></pre></div>
 <p>We don't recommend setting it to False by default and you should make sure you understand the security risks of disabling SSL certs verification.</p>
+<p>Additionally, you may choose to specify the path to the SSL certificates on your machine. This may cause errors where 
+Python is unable to locate the certificates on your machine, particularly when using Python virtual environments. </p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">coinmetrics.api_client</span> <span class="kn">import</span> <span class="n">CoinMetricsClient</span>
+<span class="n">SSL_CERT_LOCATION</span> <span class="o">=</span> <span class="s1">&#39;/Users/&lt;USER_NAME&gt;/Library/Python/3.8/lib/python/site-packages/certifi/cacert.pem&#39;</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">CoinMetricsClient</span><span class="p">(</span><span class="n">verify_ssl_certs</span><span class="o">=</span><span class="n">SSL_CERT_LOCATION</span><span class="p">)</span>
+</code></pre></div>
+<p>A quick way to find the certs on your machine is:<br />
+<code>python3 -c "import requests; print(requests.certs.where())"</code><br />
+And note that this will change based on whether or not you are using a <a href="https://realpython.com/python-virtual-environments-a-primer/">Python virtual environment or not</a></p>
 <h3 id="installing-and-running-coinmetrics-package-and-other-python-packages-behind-a-secure-python-network">Installing and running coinmetrics package and other python packages behind a secure python network<a class="headerlink" href="#installing-and-running-coinmetrics-package-and-other-python-packages-behind-a-secure-python-network" title="Permanent link">&para;</a></h3>
 <p>Related to SSL Certs verification, you may have trouble installing and updating PyPi packages to your local environment.
 So you may need to choose the best solution for your company and environment - either using package managers or

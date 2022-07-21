@@ -80,7 +80,7 @@ class CoinMetricsClient:
     def __init__(
         self,
         api_key: str = "",
-        verify_ssl_certs: bool = True,
+        verify_ssl_certs: Union[bool, str] = True,
         proxy_url: Optional[str] = None,
     ):
         self._api_key_url_str = "api_key={}".format(api_key) if api_key else ""
