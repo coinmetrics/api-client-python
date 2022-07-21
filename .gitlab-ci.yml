@@ -1,10 +1,21 @@
 image: docker:latest
 
+.check-for-changes: &check-for-changes |
+  DOCUMENTATION_ERROR_MESSAGE="Failing pipeline build because changes were made to the API Client without generating new documentation"
+  DOCUMENTATION_SUCCESS_MESSAGE="Documentation properly generated"
+  lines=$(git status --untracked-files no -s | wc -l) #ignoring changes to these files 
+  if [ $lines -gt 0 ]; then
+    echo $DOCUMENTATION_ERROR_MESSAGE && echo "git status output:" && git status && exit 1;
+  else
+    echo $DOCUMENTATION_SUCCESS_MESSAGE;
+  fi
+
 services:
   - docker:dind
 
 stages:
   - build-test-push-image
+  - documentation-check
   - deploy
 
 variables:
@@ -29,9 +40,46 @@ build-test-push-image:
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
+documentation-check:
+  image: python:3.9-alpine
+  stage: documentation-check
+  tags:
+    - linux
+    - docker
+    - coinmetrics-build-runner
+  before_script:
+    - apk add bash git
+    - git config --global user.name CiCDBot
+    - git config --global user.email ian.mclaughlin@coinmetrics.com
+    - apk add cargo
+    - export REQUESTS_CA_BUNDLE=`python -c "import certifi; print(certifi.where())"`
+    - apk add build-base
+    - python -m venv .venv
+    - source .venv/bin/activate
+    - python -m pip install --upgrade pip
+    - python -m pip install --upgrade regex
+    - python -m pip install poetry wheel
+    - poetry install
+    - apk add py3-dbus
+  script:
+    - cd $CI_PROJECT_DIR
+    - git fetch
+    - git checkout -b $CI_COMMIT_REF_NAME-$RANDOM origin/$CI_COMMIT_REF_NAME
+    - git branch --list
+    - git status
+    - export PYTHONPATH=/ && pydoc-markdown -m coinmetrics.api_client > docs/docs/api_client.md
+    - cp -f README.md docs/docs/index.md
+    - cd docs && mkdocs build
+    - git add docs/api_client.md
+    - git add site/api_client.html
+    - git add site/index.html
+    - git status
+    - *check-for-changes
+
 deploy:
   stage: deploy
   dependencies:
+    - documentation-check
     - build-test-push-image
   script:
     - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME || true
