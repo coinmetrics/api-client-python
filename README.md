@@ -239,6 +239,19 @@ client = CoinMetricsClient(verify_ssl_certs=False)
 
 We don't recommend setting it to False by default and you should make sure you understand the security risks of disabling SSL certs verification.
 
+Additionally, you may choose to specify the path to the SSL certificates on your machine. This may cause errors where 
+Python is unable to locate the certificates on your machine, particularly when using Python virtual environments. 
+
+```python
+from coinmetrics.api_client import CoinMetricsClient
+SSL_CERT_LOCATION = '/Users/<USER_NAME>/Library/Python/3.8/lib/python/site-packages/certifi/cacert.pem'
+client = CoinMetricsClient(verify_ssl_certs=SSL_CERT_LOCATION)
+```
+
+A quick way to find the certs on your machine is:  
+`python3 -c "import requests; print(requests.certs.where())"`  
+And note that this will change based on whether or not you are using a [Python virtual environment or not](https://realpython.com/python-virtual-environments-a-primer/)
+
 ### Installing and running coinmetrics package and other python packages behind a secure python network
 Related to SSL Certs verification, you may have trouble installing and updating PyPi packages to your local environment.
 So you may need to choose the best solution for your company and environment - either using package managers or
@@ -252,6 +265,8 @@ pip install --trusted-host pypi.python.org <packagename>
 ```  
 Although it is important to make sure you understand the risks associated with disabling SSL verification and ensure 
 compliance with company policies.
+
+
 
 #### Installing Python packages locally/ offline
 It may be easier to download and install the package locally. Steps:  
