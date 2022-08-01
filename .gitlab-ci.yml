@@ -92,3 +92,5 @@ deploy:
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   when: manual
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
