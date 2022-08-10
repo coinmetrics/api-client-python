@@ -325,6 +325,29 @@ Returns a list of markets with funding rates support along with the time ranges 
 
 `list(dict(str, any))`: Information about funding rates that correspond to a filter
 
+<a name="coinmetrics.api_client.CoinMetricsClient.catalog_market_greeks"></a>
+#### catalog\_market\_greeks
+
+```python
+ | catalog_market_greeks(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketTradesData
+```
+
+Returns a list of markets with greeks support along with the time ranges of available data.
+
+**Arguments**:
+
+- `markets` (`list(str), str`): list of market names, e.g. 'coinbase-btc-usd-spot'
+- `market_type` (`str`): Type of market: "spot", "future", "option"
+- `exchange` (`str`): name of the exchange
+- `base` (`str`): name of base asset
+- `quote` (`str`): name of quote asset
+- `asset` (`str`): name of either base or quote asset
+- `symbol` (`str`): name of a symbol. Usually used for futures contracts.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about market greeks that correspond to the filter
+
 <a name="coinmetrics.api_client.CoinMetricsClient.catalog_market_open_interest"></a>
 #### catalog\_market\_open\_interest
 

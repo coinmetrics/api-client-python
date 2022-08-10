@@ -546,7 +546,7 @@ class CoinMetricsClient:
         symbol: Optional[str] = None,
     ) -> CatalogMarketTradesData:
         """
-        Returns a list of markets with funding rates support along with the time ranges of available data.
+        Returns a list of markets with greeks support along with the time ranges of available data.
 
         :param markets: list of market names, e.g. 'coinbase-btc-usd-spot'
         :type markets: list(str), str
@@ -562,7 +562,7 @@ class CoinMetricsClient:
         :type asset: str
         :param symbol: name of a symbol. Usually used for futures contracts.
         :type symbol: str
-        :return: Information about funding rates that correspond to a filter
+        :return: Information about market greeks that correspond to the filter
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {

@@ -322,6 +322,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#catalog_market_greeks" class="md-nav__link">
+    catalog_market_greeks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#catalog_market_open_interest" class="md-nav__link">
     catalog_market_open_interest
   </a>
@@ -920,6 +927,13 @@
           <li class="md-nav__item">
   <a href="#catalog_market_funding_rates" class="md-nav__link">
     catalog_market_funding_rates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_market_greeks" class="md-nav__link">
+    catalog_market_greeks
   </a>
   
 </li>
@@ -1620,6 +1634,23 @@ description, category, precision and assets for which a metric is available.</p>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>list(dict(str, any))</code>: Information about funding rates that correspond to a filter</p>
+<p><a name="coinmetrics.api_client.CoinMetricsClient.catalog_market_greeks"></a></p>
+<h4 id="catalog_market_greeks">catalog_market_greeks<a class="headerlink" href="#catalog_market_greeks" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">catalog_market_greeks</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">base</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">quote</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMarketTradesData</span>
+</code></pre></div>
+<p>Returns a list of markets with greeks support along with the time ranges of available data.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code> (<code>list(str), str</code>): list of market names, e.g. 'coinbase-btc-usd-spot'</li>
+<li><code>market_type</code> (<code>str</code>): Type of market: "spot", "future", "option"</li>
+<li><code>exchange</code> (<code>str</code>): name of the exchange</li>
+<li><code>base</code> (<code>str</code>): name of base asset</li>
+<li><code>quote</code> (<code>str</code>): name of quote asset</li>
+<li><code>asset</code> (<code>str</code>): name of either base or quote asset</li>
+<li><code>symbol</code> (<code>str</code>): name of a symbol. Usually used for futures contracts.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>list(dict(str, any))</code>: Information about market greeks that correspond to the filter</p>
 <p><a name="coinmetrics.api_client.CoinMetricsClient.catalog_market_open_interest"></a></p>
 <h4 id="catalog_market_open_interest">catalog_market_open_interest<a class="headerlink" href="#catalog_market_open_interest" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">catalog_market_open_interest</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">base</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">quote</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMarketTradesData</span>
