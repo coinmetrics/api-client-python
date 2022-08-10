@@ -80,6 +80,21 @@ def test_catalog_full_market_quotes() -> None:
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalog_market_greeks() -> None:
+    """
+    Tests the catalog-full/market-quotes endpoints works as expected - data is returned and when converted to dataframe
+    it has the expected number of columns (3)
+    """
+    data = client.catalog_market_greeks()
+    assert len(data) != 0
+    data_df = data.to_dataframe()
+    assert len(data_df) != 0
+    assert len(data_df.columns) == 3
+    expected_cols = ["market", "max_time", "min_time"]
+    assert all(col in expected_cols for col in data_df.columns)
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_catalog_full_market_funding_rates() -> None:
     """
     Tests the catalog-full/market-funding-rates endpoints works as expected - data is returned and when converted to dataframe

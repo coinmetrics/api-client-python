@@ -535,6 +535,49 @@ class CoinMetricsClient:
             self._get_data("catalog/market-funding-rates", params)["data"]
         )
 
+    def catalog_market_greeks(
+        self,
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+    ) -> CatalogMarketTradesData:
+        """
+        Returns a list of markets with funding rates support along with the time ranges of available data.
+
+        :param markets: list of market names, e.g. 'coinbase-btc-usd-spot'
+        :type markets: list(str), str
+        :param market_type: Type of market: "spot", "future", "option"
+        :type market_type: str
+        :param exchange: name of the exchange
+        :type exchange: str
+        :param base: name of base asset
+        :type base: str
+        :param quote: name of quote asset
+        :type quote: str
+        :param asset: name of either base or quote asset
+        :type asset: str
+        :param symbol: name of a symbol. Usually used for futures contracts.
+        :type symbol: str
+        :return: Information about funding rates that correspond to a filter
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "type": market_type,
+            "exchange": exchange,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+        }
+        return CatalogMarketTradesData(
+            self._get_data("catalog/market-greeks", params)["data"]
+        )
+
     def catalog_market_open_interest(
         self,
         markets: Optional[Union[List[str], str]] = None,
