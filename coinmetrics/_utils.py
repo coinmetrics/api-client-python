@@ -6,7 +6,6 @@ from logging import getLogger
 from os.path import expanduser
 from time import sleep
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
-
 from coinmetrics._typing import FilePathOrBuffer, UrlParamTypes
 
 logger = getLogger("cm_client_utils")
