@@ -1,0 +1,616 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="assets/images/logo.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.14">
+    
+    
+      
+        <title>Flat Files Exporter - Coin Metrics Python API Client</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.d3202873.min.css">
+      
+        <link rel="stylesheet" href="assets/stylesheets/palette.ff0a5ce4.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#546d78">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue-grey" data-md-color-accent="">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#exporting-flat-files" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="." title="Coin Metrics Python API Client" class="md-header-nav__button md-logo" aria-label="Coin Metrics Python API Client">
+      
+  <img src="assets/images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Coin Metrics Python API Client
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Flat Files Exporter
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Coin Metrics Python API Client" class="md-nav__button md-logo" aria-label="Coin Metrics Python API Client">
+      
+  <img src="assets/images/logo.png" alt="logo">
+
+    </a>
+    Coin Metrics Python API Client
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="index.html" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="api_client.html" title="API Client Spec" class="md-nav__link">
+      API Client Spec
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Flat Files Exporter
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="FlatFilesExport.html" title="Flat Files Exporter" class="md-nav__link md-nav__link--active">
+      Flat Files Exporter
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#exporting-flat-files" class="md-nav__link">
+    Exporting flat files
+  </a>
+  
+    <nav class="md-nav" aria-label="Exporting flat files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation-and-set-up" class="md-nav__link">
+    Installation and set up
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exporting-market-trades-files" class="md-nav__link">
+    Exporting Market Trades Files
+  </a>
+  
+    <nav class="md-nav" aria-label="Exporting Market Trades Files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exporting-market-quotes" class="md-nav__link">
+    Exporting market quotes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exporting-market-candles" class="md-nav__link">
+    Exporting market candles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-api-key-without-setting-an-environment-variable" class="md-nav__link">
+    Using API Key without setting an environment variable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#downloading-files-in-parallel" class="md-nav__link">
+    Downloading files in parallel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-the-coinmetricsdataexporter-in-python-instead-of-cli" class="md-nav__link">
+    Using the CoinMetricsDataExporter in Python instead of CLI
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#exporting-flat-files" class="md-nav__link">
+    Exporting flat files
+  </a>
+  
+    <nav class="md-nav" aria-label="Exporting flat files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation-and-set-up" class="md-nav__link">
+    Installation and set up
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exporting-market-trades-files" class="md-nav__link">
+    Exporting Market Trades Files
+  </a>
+  
+    <nav class="md-nav" aria-label="Exporting Market Trades Files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exporting-market-quotes" class="md-nav__link">
+    Exporting market quotes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exporting-market-candles" class="md-nav__link">
+    Exporting market candles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-api-key-without-setting-an-environment-variable" class="md-nav__link">
+    Using API Key without setting an environment variable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#downloading-files-in-parallel" class="md-nav__link">
+    Downloading files in parallel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-the-coinmetricsdataexporter-in-python-instead-of-cli" class="md-nav__link">
+    Using the CoinMetricsDataExporter in Python instead of CLI
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                  <h1>Flat Files Exporter</h1>
+                
+                <h2 id="exporting-flat-files">Exporting flat files<a class="headerlink" href="#exporting-flat-files" title="Permanent link">&para;</a></h2>
+<p>Along with the API client we provide a data exporting tool which allow downloading large amount of data as flat files
+rather than from the API itself. The tool allows users to download daily files over our entire provided history for 
+market trades, market quotes, and market candles.  </p>
+<h3 id="installation-and-set-up">Installation and set up<a class="headerlink" href="#installation-and-set-up" title="Permanent link">&para;</a></h3>
+<p>The tool is installed a long with the <code>coinmetrics-api-client</code>, it's recommended to create a new Python [virtual environment] 
+for your project and install the package:  </p>
+<div class="highlight"><pre><span></span><code>python -m venv .venv 
+source .venv/bin/activate 
+pip install coinmetrics-api-client
+</code></pre></div>
+<p>The export tool requires access to a CoinMetrics API key, and is accessed with the environment variable <code>CM_API_KEY</code>,
+the easiest way to set this is to run <code>export CM_API_KEY=&lt;API_KEY&gt;</code> in your terminal on MacOS/Linux or just <code>set CM_API_KEY=&lt;API_KEY&gt;</code> 
+on Windows. Additionally, you have the option of passing it in which each command instead.</p>
+<p>To confirm the tool is installed correct execute the command <code>coinmetrics export --help</code> which brings up relevant 
+documentation. At the bottom of the help message all the available commands are shown:<br />
+<div class="highlight"><pre><span></span><code>Commands:
+  get-asset-pairs
+  get-exchanges
+  market-candles-future  Used to export data related to future market...
+  market-candles-spot    Used to export data related to spot market candles.
+  market-quotes-future   Used to export data related to future market...
+  market-quotes-spot     Used to export data related to spot market quotes...
+  market-trades-future   Used to export data related to future market...
+  market-trades-spot     Used to export data related to spot market trades.
+</code></pre></div></p>
+<h3 id="exporting-market-trades-files">Exporting Market Trades Files<a class="headerlink" href="#exporting-market-trades-files" title="Permanent link">&para;</a></h3>
+<p>Further documentation is available on any of the commands by running <code>coinmetrics export &lt;command&gt; --help</code>, for example
+running <code>coinmetrics export market-trades-spot --help</code> prints: 
+<div class="highlight"><pre><span></span><code>Usage: coinmetrics export market-trades-spot [OPTIONS] EXCHANGES [START_DATE]:
+                                             [%Y-%m-%d|%Y-%m-%dT%H:%M:%S|%Y-%m
+                                             -%d %H:%M:%S] [END_DATE]:[%Y-%m-%
+                                             d|%Y-%m-%dT%H:%M:%S|%Y-%m-%d
+                                             %H:%M:%S]
+
+  Used to export data related to spot market trades. Format: coinmetrics
+  export market-trades-spot &lt;exchanges&gt; &lt;start_date&gt; &lt;end_date&gt; Example:
+  coinmetrics export market-trades-spot coinbase,binance 2022-01-01
+  2022-01-03.
+
+Arguments:
+  EXCHANGES                       Pass in arguments as a list of strings
+                                  separated by by commas i.e.
+                                  binance,coinbase,bitmex  [required]
+
+  [START_DATE]:[%Y-%m-%d|%Y-%m-%dT%H:%M:%S|%Y-%m-%d %H:%M:%S]
+                                  [default: 2022-08-10]
+  [END_DATE]:[%Y-%m-%d|%Y-%m-%dT%H:%M:%S|%Y-%m-%d %H:%M:%S]
+                                  [default: 2022-08-10]
+
+Options:
+  --output-format TEXT        [default: json.gz]
+  --threaded / --no-threaded  [default: False]
+  --api-key TEXT
+  --help                      Show this message and exit.
+</code></pre></div></p>
+<h4 id="example">Example:<a class="headerlink" href="#example" title="Permanent link">&para;</a></h4>
+<p>If you want to get the flat files for spot-market-trades from coinbase and binance for the first 5 days of June 2022:
+<code>coinmetrics export market-trades-spot binance,coinbase 2022-06-01 2022-06-05</code>  </p>
+<p>In your current directory you will see:<br />
+<div class="highlight"><pre><span></span><code>market-trades-spot
+├── binance
+│   ├── 2022-06-01.json.gz
+│   ├── 2022-06-02.json.gz
+│   ├── 2022-06-03.json.gz
+│   ├── 2022-06-04.json.gz
+│   └── 2022-06-05.json.gz
+└── coinbase
+    ├── 2022-06-01.json.gz
+    ├── 2022-06-02.json.gz
+    ├── 2022-06-03.json.gz
+    ├── 2022-06-04.json.gz
+    └── 2022-06-05.json.gz
+</code></pre></div>
+By default the files are downloaded as <a href="https://fileinfo.com/extension/gz">gzipped json files</a> - they are compressed in 
+order to take up less space. If you instead wish to download the data as a csv or json you can use:<br />
+<code>coinmetrics export market-trades-spot binance,coinbase 2022-06-01 2022-06-05 --output-format csv</code></p>
+<p>The functionality for getting future, rather than spot market trades is the exact same, just replace <code>market-trades-spot</code>
+with <code>market-trades-future</code></p>
+<p>In order to figure out what exchanges are supported for a flat file type you can run <code>coinmetrics export get-exchanges &lt;command&gt;</code>, 
+so in this case running <code>coinmetrics export get-exchanges market-trades-spot</code></p>
+<h3 id="exporting-market-quotes">Exporting market quotes<a class="headerlink" href="#exporting-market-quotes" title="Permanent link">&para;</a></h3>
+<p>Market quotes are similar to market trades, except data is separated by exchange and by asset-pair. So you must provide
+both what exchanges you are querying as well the specific asset pairs.</p>
+<p>Example if you wanted to export files to market quotes for ETHUSDT and BTCUSDT over a certain timeframe as json files:<br />
+<code>coinmetrics export market-quotes-spot binance ETHUSDT,BTCUSDT 2022-03-03 2022-03-05 --output-format json</code>  </p>
+<p>In order to find what asset pairs are availible you can query this information with <code>coinmetrics export get-asset-pairs &lt;command&gt; &lt;exchange&gt;</code>
+so in this case, for Binance you would run <code>coinmetrics export get-asset-pairs market-quotes-spot binance</code>. If you are comfortable 
+with command line tools it may be helpful to string this with unix command line tools like <code>grep</code>. For example, to find all the BTC related pairs 
+for binance you might run <code>coinmetrics export get-asset-pairs market-quotes-spot binance | grep BTC</code>.</p>
+<p>The functionality is the same for <code>market-qutoes-futures</code>.</p>
+<h3 id="exporting-market-candles">Exporting market candles<a class="headerlink" href="#exporting-market-candles" title="Permanent link">&para;</a></h3>
+<p>Exporting market candles also functions similar to market trades, however you must specify a frequency in addition to
+an exchange and date range. The frequency denominates the range which the market candles cover. These frequencies are 
+currently <code>"1m", "5m", "10m", "15m", "30m", "1h", and "1d"</code>. </p>
+<p>Example to download 5m spot market candles for coinbase and binance for a date range:<br />
+<code>coinmetrics export market-candles-spot 5m coinbase,binance 2022-01-01 2022-01-05</code><br />
+Which creates these files:<br />
+<div class="highlight"><pre><span></span><code>market-candles-spot-5m
+├── binance
+│   ├── 2022-01-01.json.gz
+│   ├── 2022-01-02.json.gz
+│   ├── 2022-01-03.json.gz
+│   ├── 2022-01-04.json.gz
+│   └── 2022-01-05.json.gz
+└── coinbase
+    ├── 2022-01-01.json.gz
+    ├── 2022-01-02.json.gz
+    ├── 2022-01-03.json.gz
+    ├── 2022-01-04.json.gz
+    └── 2022-01-05.json.gz
+</code></pre></div></p>
+<p>The functionality is the same for <code>market-candles-future</code></p>
+<h3 id="using-api-key-without-setting-an-environment-variable">Using API Key without setting an environment variable<a class="headerlink" href="#using-api-key-without-setting-an-environment-variable" title="Permanent link">&para;</a></h3>
+<p>If you don't wish to put your CoinMetrics API key in your environment, you may also pass it in with any command with the
+flag <code>--api-key</code>. Example:<br />
+<code>coinmetrics export market-candles-spot 5m coinbase,binance 2022-01-01 2022-01-05 --api-key &lt;API_KEY&gt;</code></p>
+<h3 id="downloading-files-in-parallel">Downloading files in parallel<a class="headerlink" href="#downloading-files-in-parallel" title="Permanent link">&para;</a></h3>
+<p>If you are downloading many files and want to speed the process up there is an option to concurrently download multiple 
+rather than one at a time, using the <code>--threaded</code> flag. Example:<br />
+<code>coinmetrics export market-candles-spot 5m coinbase,binance 2022-01-01 2022-01-05 --threaded</code><br />
+Note that using this option will consume more system resources and network bandwith, and the download speed will still
+be limited by egress from the files server as well as the specs of your machine. </p>
+<h3 id="using-the-coinmetricsdataexporter-in-python-instead-of-cli">Using the CoinMetricsDataExporter in Python instead of CLI<a class="headerlink" href="#using-the-coinmetricsdataexporter-in-python-instead-of-cli" title="Permanent link">&para;</a></h3>
+<p>Depending on the use case it might be more convenient to use the CoinMetricsDataExporter directly in Python rather than
+from the CLI. There is several examples <a href="examples/files_download">here</a> as well as one below:
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">coinmetrics.data_exporter</span> <span class="kn">import</span> <span class="n">CoinMetricsDataExporter</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="n">CM_API_KEY</span> <span class="o">=</span> <span class="s2">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>
+<span class="n">data_exporter</span> <span class="o">=</span> <span class="n">CoinMetricsDataExporter</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">CM_API_KEY</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This script will export all the daily market-trades-spot files for Coinbase and Gemini for the month of January  </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">start_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">end_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span>
+    <span class="n">exchanges</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;coinbase&quot;</span><span class="p">,</span><span class="s2">&quot;gemini&quot;</span><span class="p">]</span>
+    <span class="n">data_exporter</span><span class="o">.</span><span class="n">export_market_trades_spot_data</span><span class="p">(</span><span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span> <span class="n">exchanges</span><span class="o">=</span><span class="n">exchanges</span><span class="p">,</span> <span class="n">threaded</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="api_client.html" title="API Client Spec" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                API Client Spec
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.2d1db4bd.min.js"></script>
+      <script src="assets/javascripts/bundle.6627ddf3.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
