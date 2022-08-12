@@ -67,6 +67,7 @@ documentation-check:
     - git checkout -b $CI_COMMIT_REF_NAME-$RANDOM origin/$CI_COMMIT_REF_NAME
     - git branch --list
     - git status
+    - pip install jinja2==3.0.3
     - export PYTHONPATH=/ && pydoc-markdown -m coinmetrics.api_client > docs/docs/api_client.md
     - cp -f README.md docs/docs/index.md
     - cd docs && mkdocs build
