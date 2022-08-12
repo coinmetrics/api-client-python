@@ -47,3 +47,4 @@ use_directory_urls: false
 nav:
   - Home: index.md
   - API Client Spec: api_client.md
+  - Flat Files Exporter: FlatFilesExport.md

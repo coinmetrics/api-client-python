@@ -53,7 +53,7 @@ poetry publish
 pydoc-markdown -m coinmetrics.api_client > docs\docs\api_client.md
 
 cp -f README.md docs\docs\index.md
-cd docs 
+cp -f FlatFilesExport.md docs\docs\FlatFilesExport.md
 mkdocs build 
 cd ..
 ```
@@ -63,6 +63,8 @@ cd ..
 pydoc-markdown -m coinmetrics.api_client > docs/docs/api_client.md
 
 cp -f README.md docs/docs/index.md
+cp -f FlatFilesExport.md docs/docs/FlatFilesExport.md
+
 cd docs && mkdocs build && cd ..
 ```
 

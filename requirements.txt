@@ -7,3 +7,4 @@ requests==2.27.1; (python_version >= "2.7" and python_full_version < "3.0.0") or
 six==1.16.0; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.3.0"
 urllib3==1.26.8; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.6.0" and python_version < "4"
 websocket-client==1.2.3; python_version >= "3.6"
+typer==0.6.1
