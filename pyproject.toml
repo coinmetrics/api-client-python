@@ -10,6 +10,7 @@ repository = "https://github.com/coinmetrics/api-client-python"
 packages = [{include = "coinmetrics"}]
 keywords = ["coin metrics", "coin", "metrics", "crypto", "bitcoin", "network-data", "market-data", "api", "handy"]
 documentation = "https://coinmetrics.github.io/api-client-python/site/index.html"
+include = ["test"]
 
 [tool.poetry.dependencies]
 python = "^3.7.1"
