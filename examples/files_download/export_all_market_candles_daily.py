@@ -7,7 +7,7 @@ data_exporter = CoinMetricsDataExporter(api_key=CM_API_KEY)
 if __name__ == "__main__":
     """
     This script will export all the daily market-candles-spot-5m files for all exchanges on the first day of the year in
-    2020. It is using the threaded option so there is many files being downlaoded at once  
+    2020. It is using the threaded option so there is many files being downloaded at once  
     """
     start_date = datetime(2020, 1, 1)
     end_date = datetime(2020, 1, 1)
