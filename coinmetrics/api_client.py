@@ -201,6 +201,20 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {"indexes": indexes}
         return CatalogIndexesData(self._get_data("catalog/indexes", params)["data"])
 
+    def catalog_index_candles(
+        self, indexes: Optional[Union[List[str], str]] = None
+    ) -> CatalogMarketCandlesData:
+        """
+        Returns meta information about _available_ index candles.
+
+        :param indexes: A single index name or a list of indexes to return info for. If no indexes provided, all available index candles are returned.
+        :type indexes: list(str), str
+        :return: Information that is available for requested index candles, like: Full name, and available frequencies.
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {"indexes": indexes}
+        return CatalogMarketCandlesData(self._get_data("catalog/index-candles", params)["data"])
+
     def catalog_institutions(
         self, institutions: Optional[Union[List[str], str]] = None
     ) -> CatalogInstitutionsData:
@@ -778,6 +792,20 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {"indexes": indexes}
         return CatalogIndexesData(self._get_data("catalog-all/indexes", params)["data"])
+
+    def catalog_full_index_candles(
+            self, indexes: Optional[Union[List[str], str]] = None
+    ) -> CatalogMarketCandlesData:
+        """
+        Returns meta information about _supported_ index candles.
+
+        :param indexes: A single index name or a list of indexes to return info for. If no indexes provided, all supported indexes are returned.
+        :type indexes: list(str), str
+        :return: Information that is supported for requested index candles, like: Full name, and supported frequencies.
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {"indexes": indexes}
+        return CatalogMarketCandlesData(self._get_data("catalog-all/index-candles", params)["data"])
 
     def catalog_full_institutions(
         self, institutions: Optional[Union[List[str], str]] = None
@@ -1709,6 +1737,60 @@ class CoinMetricsClient:
             "limit_per_institution": limit_per_institution,
         }
         return DataCollection(self._get_data, "timeseries/institution-metrics", params)
+
+    def get_index_candles(
+        self,
+        indexes: Union[List[str], str],
+        frequency: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        limit_per_index: Optional[int] = None,
+    ) -> DataCollection:
+        """
+        Returns index candles for specified indexes and date range.
+
+        :param indexes: list of index names, e.g. 'CMBI10'
+        :type indexes: list(str), str
+        :param frequency: frequency of the returned timeseries, e.g 15s, 1d, etc.
+        :type frequency: str
+        :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
+        :type page_size: int
+        :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+        :type paging_from: PagingFrom, str
+        :param start_time: Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type start_time: datetime, date, str
+        :param end_time: End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type end_time: datetime, date, str
+        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
+        :type start_inclusive: bool
+        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
+        :type end_inclusive: bool
+        :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+        :type timezone: str
+        :param limit_per_index: How many entries _per index_ the result should contain.
+        :type limit_per_index: int
+        :return: Index Candles timeseries.
+        :rtype: DataCollection
+        """
+
+        params: Dict[str, Any] = {
+            "indexes": indexes,
+            "frequency": frequency,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "start_time": start_time,
+            "end_time": end_time,
+            "start_inclusive": start_inclusive,
+            "end_inclusive": end_inclusive,
+            "timezone": timezone,
+            "limit_per_index": limit_per_index,
+        }
+        return DataCollection(self._get_data, "timeseries/index-candles", params)
 
     def get_index_levels(
         self,

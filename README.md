@@ -54,7 +54,9 @@ The client can be used to query both pro and community data.
 The full list of methods can be found in the [API Client Spec](https://coinmetrics.github.io/api-client-python/site/api_client.html).
 
 ## Examples
-The API Client allows you to chain together workflows for importing, transforming, then exporting Coin Metrics data. Below are examples of common use-cases that can be altered to tailor your specific needs.
+The API Client allows you to chain together workflows for importing, transforming, then exporting Coin Metrics data.
+Below are examples of common use-cases that can be altered to tailor your specific needs. In addition to the examples 
+listed below, there's examples covering all the API methods, found in the [examples directory](https://github.com/coinmetrics/api-client-python/tree/master/examples).
 
 **[Example Notebooks](https://github.com/coinmetrics/api-client-python/tree/master/examples/notebooks)**
 

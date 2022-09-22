@@ -1,18 +1,22 @@
-<a name="coinmetrics.api_client"></a>
+<a id="coinmetrics.api_client"></a>
+
 # coinmetrics.api\_client
 
-<a name="coinmetrics.api_client.CoinMetricsClient"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient"></a>
+
 ## CoinMetricsClient Objects
 
 ```python
 class CoinMetricsClient()
 ```
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_assets"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_assets"></a>
+
 #### catalog\_assets
 
 ```python
- | catalog_assets(assets: Optional[Union[List[str], str]] = None) -> CatalogAssetsData
+def catalog_assets(
+        assets: Optional[Union[List[str], str]] = None) -> CatalogAssetsData
 ```
 
 Returns meta information about _available_ assets.
@@ -25,11 +29,15 @@ Returns meta information about _available_ assets.
 
 `list(dict(str, any))`: Information that is available for requested assets, like: Full name, metrics and available frequencies, markets, exchanges, etc.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_asset_alerts"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_alerts"></a>
+
 #### catalog\_asset\_alerts
 
 ```python
- | catalog_asset_alerts(assets: Optional[Union[List[str], str]] = None, alerts: Optional[Union[List[str], str]] = None) -> CatalogAssetAlertsData
+def catalog_asset_alerts(
+        assets: Optional[Union[List[str], str]] = None,
+        alerts: Optional[Union[List[str],
+                               str]] = None) -> CatalogAssetAlertsData
 ```
 
 Returns meta information about _available_ assets.
@@ -43,11 +51,14 @@ Returns meta information about _available_ assets.
 
 `list(dict(str, any))`: Information that is available for requested assets alerts.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_asset_pairs"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_pairs"></a>
+
 #### catalog\_asset\_pairs
 
 ```python
- | catalog_asset_pairs(asset_pairs: Optional[Union[List[str], str]] = None) -> CatalogAssetPairsData
+def catalog_asset_pairs(
+    asset_pairs: Optional[Union[List[str],
+                                str]] = None) -> CatalogAssetPairsData
 ```
 
 Returns meta information about _available_ asset-asset pairs
@@ -60,11 +71,14 @@ Returns meta information about _available_ asset-asset pairs
 
 `list(dict(str, any))`: Information that is available for requested asset-asset pair like metrics and their respective frequencies and time ranges
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_asset_pair_candles"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_pair_candles"></a>
+
 #### catalog\_asset\_pair\_candles
 
 ```python
- | catalog_asset_pair_candles(asset_pairs: Optional[Union[List[str], str]] = None) -> CatalogAssetPairCandlesData
+def catalog_asset_pair_candles(
+    asset_pairs: Optional[Union[List[str], str]] = None
+) -> CatalogAssetPairCandlesData
 ```
 
 Returns meta information about _available_ asset-asset pairs
@@ -77,11 +91,14 @@ Returns meta information about _available_ asset-asset pairs
 
 `list(dict(str, any))`: Returns a list of available asset pair candles along with the time ranges of available data per candle duration.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_exchanges"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_exchanges"></a>
+
 #### catalog\_exchanges
 
 ```python
- | catalog_exchanges(exchanges: Optional[Union[List[str], str]] = None) -> CatalogExchangesData
+def catalog_exchanges(
+        exchanges: Optional[Union[List[str],
+                                  str]] = None) -> CatalogExchangesData
 ```
 
 Returns meta information about exchanges.
@@ -94,11 +111,14 @@ Returns meta information about exchanges.
 
 `list(dict(str, any))`: Information that is available for requested exchanges, like: markets, min and max time available.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_exchange_assets"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_exchange_assets"></a>
+
 #### catalog\_exchange\_assets
 
 ```python
- | catalog_exchange_assets(exchange_assets: Optional[Union[List[str], str]] = None) -> CatalogExchangeAssetsData
+def catalog_exchange_assets(
+    exchange_assets: Optional[Union[List[str], str]] = None
+) -> CatalogExchangeAssetsData
 ```
 
 Returns meta information about _available_ exchange-asset pairs
@@ -111,11 +131,13 @@ Returns meta information about _available_ exchange-asset pairs
 
 `list(dict(str, any))`: Information that is available for requested exchange-asset pair like metrics and their respective frequencies and time ranges
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_indexes"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_indexes"></a>
+
 #### catalog\_indexes
 
 ```python
- | catalog_indexes(indexes: Optional[Union[List[str], str]] = None) -> CatalogIndexesData
+def catalog_indexes(
+        indexes: Optional[Union[List[str], str]] = None) -> CatalogIndexesData
 ```
 
 Returns meta information about _available_ indexes.
@@ -128,11 +150,34 @@ Returns meta information about _available_ indexes.
 
 `list(dict(str, any))`: Information that is available for requested indexes, like: Full name, and available frequencies.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_institutions"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_index_candles"></a>
+
+#### catalog\_index\_candles
+
+```python
+def catalog_index_candles(
+    indexes: Optional[Union[List[str],
+                            str]] = None) -> CatalogMarketCandlesData
+```
+
+Returns meta information about _available_ index candles.
+
+**Arguments**:
+
+- `indexes` (`list(str), str`): A single index name or a list of indexes to return info for. If no indexes provided, all available index candles are returned.
+
+**Returns**:
+
+`list(dict(str, any))`: Information that is available for requested index candles, like: Full name, and available frequencies.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_institutions"></a>
+
 #### catalog\_institutions
 
 ```python
- | catalog_institutions(institutions: Optional[Union[List[str], str]] = None) -> CatalogInstitutionsData
+def catalog_institutions(
+    institutions: Optional[Union[List[str], str]] = None
+) -> CatalogInstitutionsData
 ```
 
 Returns meta information about _available_ institutions
@@ -145,11 +190,18 @@ Returns meta information about _available_ institutions
 
 `list(dict(str, any))`: Information that is available for requested institution like metrics and their respective frequencies and time ranges.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_markets"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_markets"></a>
+
 #### catalog\_markets
 
 ```python
- | catalog_markets(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketsData
+def catalog_markets(markets: Optional[Union[List[str], str]] = None,
+                    market_type: Optional[str] = None,
+                    exchange: Optional[str] = None,
+                    base: Optional[str] = None,
+                    quote: Optional[str] = None,
+                    asset: Optional[str] = None,
+                    symbol: Optional[str] = None) -> CatalogMarketsData
 ```
 
 Returns list of _available_ markets that correspond to a filter. If no filter is set, returns all available assets.
@@ -168,11 +220,19 @@ Returns list of _available_ markets that correspond to a filter. If no filter is
 
 `list(dict(str, any))`: Information about markets that correspond to a filter along with meta information like: type of market and min and max available time frames.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_market_trades"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_trades"></a>
+
 #### catalog\_market\_trades
 
 ```python
- | catalog_market_trades(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketTradesData
+def catalog_market_trades(
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None) -> CatalogMarketTradesData
 ```
 
 Returns a list of markets with trades support along with the time ranges of available data.
@@ -191,14 +251,17 @@ Returns a list of markets with trades support along with the time ranges of avai
 
 `list(dict(str, any))`: Information about market trades that are available for the provided filter, as well as the time frames they are available
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_metrics"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_metrics"></a>
+
 #### catalog\_metrics
 
 ```python
- | catalog_metrics(metrics: Optional[Union[List[str], str]] = None, reviewable: Optional[bool] = None) -> CatalogMetricsData
+def catalog_metrics(metrics: Optional[Union[List[str], str]] = None,
+                    reviewable: Optional[bool] = None) -> CatalogMetricsData
 ```
 
 Returns list of _available_ metrics along with information for them like
+
 description, category, precision and assets for which a metric is available.
 
 **Arguments**:
@@ -210,11 +273,19 @@ description, category, precision and assets for which a metric is available.
 
 `list(dict(str, any))`: Information about metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_market_metrics"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_metrics"></a>
+
 #### catalog\_market\_metrics
 
 ```python
- | catalog_market_metrics(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketMetricsData
+def catalog_market_metrics(
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None) -> CatalogMarketMetricsData
 ```
 
 Returns list of _available_ markets with metrics support along woth time ranges of available data per metric.
@@ -233,11 +304,19 @@ Returns list of _available_ markets with metrics support along woth time ranges 
 
 `list(dict(str, any))`: Information about markets that correspond to a filter along with meta information like: type of market and min and max available time frames.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_market_candles"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_candles"></a>
+
 #### catalog\_market\_candles
 
 ```python
- | catalog_market_candles(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketCandlesData
+def catalog_market_candles(
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None) -> CatalogMarketCandlesData
 ```
 
 Returns list of _available_ markets with candles support along woth time ranges of available data per metric.
@@ -256,11 +335,19 @@ Returns list of _available_ markets with candles support along woth time ranges 
 
 `list(dict(str, any))`: Information about markets that correspond to a filter along with meta information like: type of market and min and max available time frames.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_market_orderbooks"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_orderbooks"></a>
+
 #### catalog\_market\_orderbooks
 
 ```python
- | catalog_market_orderbooks(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketTradesData
+def catalog_market_orderbooks(
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None) -> CatalogMarketTradesData
 ```
 
 Returns a list of markets with orderbooks support along with the time ranges of available data.
@@ -279,11 +366,19 @@ Returns a list of markets with orderbooks support along with the time ranges of 
 
 `list(dict(str, any))`: Information about markets orderbooks that correspond to a filter
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_market_quotes"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_quotes"></a>
+
 #### catalog\_market\_quotes
 
 ```python
- | catalog_market_quotes(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketTradesData
+def catalog_market_quotes(
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None) -> CatalogMarketTradesData
 ```
 
 Returns a list of markets with quotes support along with the time ranges of available data.
@@ -302,11 +397,19 @@ Returns a list of markets with quotes support along with the time ranges of avai
 
 `list(dict(str, any))`: Information about markets quotes that correspond to a filter
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_market_funding_rates"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_funding_rates"></a>
+
 #### catalog\_market\_funding\_rates
 
 ```python
- | catalog_market_funding_rates(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketTradesData
+def catalog_market_funding_rates(
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None) -> CatalogMarketTradesData
 ```
 
 Returns a list of markets with funding rates support along with the time ranges of available data.
@@ -325,11 +428,19 @@ Returns a list of markets with funding rates support along with the time ranges 
 
 `list(dict(str, any))`: Information about funding rates that correspond to a filter
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_market_greeks"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_greeks"></a>
+
 #### catalog\_market\_greeks
 
 ```python
- | catalog_market_greeks(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketTradesData
+def catalog_market_greeks(
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None) -> CatalogMarketTradesData
 ```
 
 Returns a list of markets with greeks support along with the time ranges of available data.
@@ -348,11 +459,19 @@ Returns a list of markets with greeks support along with the time ranges of avai
 
 `list(dict(str, any))`: Information about market greeks that correspond to the filter
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_market_open_interest"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_open_interest"></a>
+
 #### catalog\_market\_open\_interest
 
 ```python
- | catalog_market_open_interest(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketTradesData
+def catalog_market_open_interest(
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None) -> CatalogMarketTradesData
 ```
 
 Returns a list of markets with open interest support along with the time ranges of available data.
@@ -371,11 +490,19 @@ Returns a list of markets with open interest support along with the time ranges 
 
 `list(dict(str, any))`: Information about market open interest that correspond to a filter
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_market_liquidations"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_liquidations"></a>
+
 #### catalog\_market\_liquidations
 
 ```python
- | catalog_market_liquidations(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketTradesData
+def catalog_market_liquidations(
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None) -> CatalogMarketTradesData
 ```
 
 Returns a list of markets with liquidations support along with the time ranges of available data.
@@ -394,11 +521,13 @@ Returns a list of markets with liquidations support along with the time ranges o
 
 `list(dict(str, any))`: Information about market liquidations that correspond to a filter
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_assets"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_assets"></a>
+
 #### catalog\_full\_assets
 
 ```python
- | catalog_full_assets(assets: Optional[Union[List[str], str]] = None) -> CatalogAssetsData
+def catalog_full_assets(
+        assets: Optional[Union[List[str], str]] = None) -> CatalogAssetsData
 ```
 
 Returns meta information about _supported_ assets.
@@ -411,11 +540,15 @@ Returns meta information about _supported_ assets.
 
 `list(dict(str, any))`: Information that is supported for requested assets, like: Full name, metrics and supported frequencies, markets, exchanges, etc.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_alerts"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_alerts"></a>
+
 #### catalog\_full\_asset\_alerts
 
 ```python
- | catalog_full_asset_alerts(assets: Optional[Union[List[str], str]] = None, alerts: Optional[Union[List[str], str]] = None) -> CatalogAssetAlertsData
+def catalog_full_asset_alerts(
+        assets: Optional[Union[List[str], str]] = None,
+        alerts: Optional[Union[List[str],
+                               str]] = None) -> CatalogAssetAlertsData
 ```
 
 Returns meta information about _supported_ assets.
@@ -429,11 +562,14 @@ Returns meta information about _supported_ assets.
 
 `list(dict(str, any))`: Information that is available for requested assets alerts.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_pairs"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_pairs"></a>
+
 #### catalog\_full\_asset\_pairs
 
 ```python
- | catalog_full_asset_pairs(asset_pairs: Optional[Union[List[str], str]] = None) -> CatalogAssetPairsData
+def catalog_full_asset_pairs(
+    asset_pairs: Optional[Union[List[str],
+                                str]] = None) -> CatalogAssetPairsData
 ```
 
 Returns meta information about _supported_ asset-asset pairs
@@ -446,11 +582,14 @@ Returns meta information about _supported_ asset-asset pairs
 
 `list(dict(str, any))`: Information that is supported for requested asset-asset pair like metrics and their respective frequencies and time ranges
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_pair_candles"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_pair_candles"></a>
+
 #### catalog\_full\_asset\_pair\_candles
 
 ```python
- | catalog_full_asset_pair_candles(asset_pairs: Optional[Union[List[str], str]] = None) -> CatalogAssetPairCandlesData
+def catalog_full_asset_pair_candles(
+    asset_pairs: Optional[Union[List[str], str]] = None
+) -> CatalogAssetPairCandlesData
 ```
 
 Returns meta information about _available_ asset-asset pairs
@@ -463,11 +602,14 @@ Returns meta information about _available_ asset-asset pairs
 
 `list(dict(str, any))`: Returns a list of available asset pair candles along with the time ranges of available data per candle duration.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_exchanges"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_exchanges"></a>
+
 #### catalog\_full\_exchanges
 
 ```python
- | catalog_full_exchanges(exchanges: Optional[Union[List[str], str]] = None) -> CatalogExchangesData
+def catalog_full_exchanges(
+        exchanges: Optional[Union[List[str],
+                                  str]] = None) -> CatalogExchangesData
 ```
 
 Returns meta information about exchanges.
@@ -480,11 +622,14 @@ Returns meta information about exchanges.
 
 `list(dict(str, any))`: Information that is supported for requested exchanges, like: markets, min and max time supported.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_exchange_assets"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_exchange_assets"></a>
+
 #### catalog\_full\_exchange\_assets
 
 ```python
- | catalog_full_exchange_assets(exchange_assets: Optional[Union[List[str], str]] = None) -> CatalogExchangeAssetsData
+def catalog_full_exchange_assets(
+    exchange_assets: Optional[Union[List[str], str]] = None
+) -> CatalogExchangeAssetsData
 ```
 
 Returns meta information about _supported_ exchange-asset pairs
@@ -497,11 +642,13 @@ Returns meta information about _supported_ exchange-asset pairs
 
 `list(dict(str, any))`: Information that is supported for requested exchange-asset pair like metrics and their respective frequencies and time ranges
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_indexes"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_indexes"></a>
+
 #### catalog\_full\_indexes
 
 ```python
- | catalog_full_indexes(indexes: Optional[Union[List[str], str]] = None) -> CatalogIndexesData
+def catalog_full_indexes(
+        indexes: Optional[Union[List[str], str]] = None) -> CatalogIndexesData
 ```
 
 Returns meta information about _supported_ indexes.
@@ -514,11 +661,34 @@ Returns meta information about _supported_ indexes.
 
 `list(dict(str, any))`: Information that is supported for requested indexes, like: Full name, and supported frequencies.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_institutions"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_index_candles"></a>
+
+#### catalog\_full\_index\_candles
+
+```python
+def catalog_full_index_candles(
+    indexes: Optional[Union[List[str],
+                            str]] = None) -> CatalogMarketCandlesData
+```
+
+Returns meta information about _supported_ index candles.
+
+**Arguments**:
+
+- `indexes` (`list(str), str`): A single index name or a list of indexes to return info for. If no indexes provided, all supported indexes are returned.
+
+**Returns**:
+
+`list(dict(str, any))`: Information that is supported for requested index candles, like: Full name, and supported frequencies.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_institutions"></a>
+
 #### catalog\_full\_institutions
 
 ```python
- | catalog_full_institutions(institutions: Optional[Union[List[str], str]] = None) -> CatalogInstitutionsData
+def catalog_full_institutions(
+    institutions: Optional[Union[List[str], str]] = None
+) -> CatalogInstitutionsData
 ```
 
 Returns meta information about _supported_ institutions
@@ -531,11 +701,18 @@ Returns meta information about _supported_ institutions
 
 `list(dict(str, any))`: Information that is supported for requested institution like metrics and their respective frequencies and time ranges.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_markets"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_markets"></a>
+
 #### catalog\_full\_markets
 
 ```python
- | catalog_full_markets(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketsData
+def catalog_full_markets(markets: Optional[Union[List[str], str]] = None,
+                         market_type: Optional[str] = None,
+                         exchange: Optional[str] = None,
+                         base: Optional[str] = None,
+                         quote: Optional[str] = None,
+                         asset: Optional[str] = None,
+                         symbol: Optional[str] = None) -> CatalogMarketsData
 ```
 
 Returns list of _supported_ markets that correspond to a filter. If no filter is set, returns all supported assets.
@@ -554,11 +731,19 @@ Returns list of _supported_ markets that correspond to a filter. If no filter is
 
 `list(dict(str, any))`: Information about markets that correspond to a filter along with meta information like: type of market and min and max supported time frames.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_trades"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_trades"></a>
+
 #### catalog\_full\_market\_trades
 
 ```python
- | catalog_full_market_trades(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketTradesData
+def catalog_full_market_trades(
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None) -> CatalogMarketTradesData
 ```
 
 Returns a list of all markets with trades support along with the time ranges of available data.
@@ -577,14 +762,18 @@ Returns a list of all markets with trades support along with the time ranges of 
 
 `list(dict(str, any))`: Information about market trades that are available for the provided filter, as well as the time frames they are available
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_metrics"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_metrics"></a>
+
 #### catalog\_full\_metrics
 
 ```python
- | catalog_full_metrics(metrics: Optional[Union[List[str], str]] = None, reviewable: Optional[bool] = None) -> CatalogMetricsData
+def catalog_full_metrics(
+        metrics: Optional[Union[List[str], str]] = None,
+        reviewable: Optional[bool] = None) -> CatalogMetricsData
 ```
 
 Returns list of _supported_ metrics along with information for them like
+
 description, category, precision and assets for which a metric is supported.
 
 **Arguments**:
@@ -596,11 +785,19 @@ description, category, precision and assets for which a metric is supported.
 
 `list(dict(str, any))`: Information about metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is supported.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_metrics"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_metrics"></a>
+
 #### catalog\_full\_market\_metrics
 
 ```python
- | catalog_full_market_metrics(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketMetricsData
+def catalog_full_market_metrics(
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None) -> CatalogMarketMetricsData
 ```
 
 Returns list of _supported_ markets with metrics support along woth time ranges of available data per metric.
@@ -619,11 +816,19 @@ Returns list of _supported_ markets with metrics support along woth time ranges 
 
 `list(dict(str, any))`: Information about markets that correspond to a filter along with meta information like: type of market and min and max available time frames.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_candles"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_candles"></a>
+
 #### catalog\_full\_market\_candles
 
 ```python
- | catalog_full_market_candles(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketCandlesData
+def catalog_full_market_candles(
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None) -> CatalogMarketCandlesData
 ```
 
 Returns list of _available_ markets with candles support along woth time ranges of available data per metric.
@@ -642,11 +847,19 @@ Returns list of _available_ markets with candles support along woth time ranges 
 
 `list(dict(str, any))`: Information about markets that correspond to a filter along with meta information like: type of market and min and max available time frames.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_orderbooks"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_orderbooks"></a>
+
 #### catalog\_full\_market\_orderbooks
 
 ```python
- | catalog_full_market_orderbooks(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketTradesData
+def catalog_full_market_orderbooks(
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None) -> CatalogMarketTradesData
 ```
 
 Returns a list of markets with orderbooks support along with the time ranges of available data.
@@ -665,11 +878,19 @@ Returns a list of markets with orderbooks support along with the time ranges of 
 
 `list(dict(str, any))`: Information about markets orderbooks that correspond to a filter
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_quotes"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_quotes"></a>
+
 #### catalog\_full\_market\_quotes
 
 ```python
- | catalog_full_market_quotes(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketTradesData
+def catalog_full_market_quotes(
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None) -> CatalogMarketTradesData
 ```
 
 Returns a list of markets with quotes support along with the time ranges of available data.
@@ -688,11 +909,19 @@ Returns a list of markets with quotes support along with the time ranges of avai
 
 `list(dict(str, any))`: Information about markets quotes that correspond to a filter
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_funding_rates"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_funding_rates"></a>
+
 #### catalog\_full\_market\_funding\_rates
 
 ```python
- | catalog_full_market_funding_rates(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketTradesData
+def catalog_full_market_funding_rates(
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None) -> CatalogMarketTradesData
 ```
 
 Returns a list of all markets with funding rates support along with the time ranges of available data.
@@ -711,11 +940,19 @@ Returns a list of all markets with funding rates support along with the time ran
 
 `list(dict(str, any))`: Information about funding rates that correspond to a filter
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_open_interest"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_open_interest"></a>
+
 #### catalog\_full\_market\_open\_interest
 
 ```python
- | catalog_full_market_open_interest(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketTradesData
+def catalog_full_market_open_interest(
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None) -> CatalogMarketTradesData
 ```
 
 Returns a list of markets with open interest support along with the time ranges of available data.
@@ -734,11 +971,19 @@ Returns a list of markets with open interest support along with the time ranges 
 
 `list(dict(str, any))`: Information about market open interest that correspond to a filter
 
-<a name="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_liquidations"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_liquidations"></a>
+
 #### catalog\_full\_market\_liquidations
 
 ```python
- | catalog_full_market_liquidations(markets: Optional[Union[List[str], str]] = None, market_type: Optional[str] = None, exchange: Optional[str] = None, base: Optional[str] = None, quote: Optional[str] = None, asset: Optional[str] = None, symbol: Optional[str] = None) -> CatalogMarketTradesData
+def catalog_full_market_liquidations(
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None) -> CatalogMarketTradesData
 ```
 
 Returns a list of all markets with liquidations support along with the time ranges of available data.
@@ -757,11 +1002,20 @@ Returns a list of all markets with liquidations support along with the time rang
 
 `list(dict(str, any))`: Information about market liquidations that correspond to a filter
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_asset_alerts"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_asset_alerts"></a>
+
 #### get\_asset\_alerts
 
 ```python
- | get_asset_alerts(assets: Union[List[str], str], alerts: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+def get_asset_alerts(assets: Union[List[str], str],
+                     alerts: Union[List[str], str],
+                     page_size: Optional[int] = None,
+                     paging_from: Optional[Union[PagingFrom, str]] = "start",
+                     start_time: Optional[Union[datetime, date, str]] = None,
+                     end_time: Optional[Union[datetime, date, str]] = None,
+                     start_inclusive: Optional[bool] = None,
+                     end_inclusive: Optional[bool] = None,
+                     timezone: Optional[str] = None) -> DataCollection
 ```
 
 Returns asset alerts for the specified assets.
@@ -782,11 +1036,19 @@ Returns asset alerts for the specified assets.
 
 `DataCollection`: Asset alerts timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_asset_chains"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_asset_chains"></a>
+
 #### get\_asset\_chains
 
 ```python
- | get_asset_chains(assets: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+def get_asset_chains(assets: Union[List[str], str],
+                     page_size: Optional[int] = None,
+                     paging_from: Optional[Union[PagingFrom, str]] = "start",
+                     start_time: Optional[Union[datetime, date, str]] = None,
+                     end_time: Optional[Union[datetime, date, str]] = None,
+                     start_inclusive: Optional[bool] = None,
+                     end_inclusive: Optional[bool] = None,
+                     timezone: Optional[str] = None) -> DataCollection
 ```
 
 Returns the chains of blocks for the specified assets.
@@ -806,11 +1068,25 @@ Returns the chains of blocks for the specified assets.
 
 `DataCollection`: Asset chains timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_asset_metrics"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_asset_metrics"></a>
+
 #### get\_asset\_metrics
 
 ```python
- | get_asset_metrics(assets: Union[List[str], str], metrics: Union[List[str], str], frequency: Optional[str] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, sort: Optional[str] = None, limit_per_asset: Optional[int] = None) -> DataCollection
+def get_asset_metrics(assets: Union[List[str], str],
+                      metrics: Union[List[str], str],
+                      frequency: Optional[str] = None,
+                      page_size: Optional[int] = None,
+                      paging_from: Optional[Union[PagingFrom, str]] = "start",
+                      start_time: Optional[Union[datetime, date, str]] = None,
+                      end_time: Optional[Union[datetime, date, str]] = None,
+                      start_height: Optional[int] = None,
+                      end_height: Optional[int] = None,
+                      start_inclusive: Optional[bool] = None,
+                      end_inclusive: Optional[bool] = None,
+                      timezone: Optional[str] = None,
+                      sort: Optional[str] = None,
+                      limit_per_asset: Optional[int] = None) -> DataCollection
 ```
 
 Returns requested metrics for specified assets.
@@ -836,11 +1112,26 @@ Returns requested metrics for specified assets.
 
 `DataCollection`: Asset Metrics timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_exchange_metrics"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_exchange_metrics"></a>
+
 #### get\_exchange\_metrics
 
 ```python
- | get_exchange_metrics(exchanges: Union[List[str], str], metrics: Union[List[str], str], frequency: Optional[str] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, sort: Optional[str] = None, limit_per_exchange: Optional[int] = None) -> DataCollection
+def get_exchange_metrics(
+        exchanges: Union[List[str], str],
+        metrics: Union[List[str], str],
+        frequency: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_height: Optional[int] = None,
+        end_height: Optional[int] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        sort: Optional[str] = None,
+        limit_per_exchange: Optional[int] = None) -> DataCollection
 ```
 
 Returns metrics for specified exchanges.
@@ -866,11 +1157,26 @@ Returns metrics for specified exchanges.
 
 `DataCollection`: Asset Metrics timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_exchange_asset_metrics"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_exchange_asset_metrics"></a>
+
 #### get\_exchange\_asset\_metrics
 
 ```python
- | get_exchange_asset_metrics(exchange_assets: Union[List[str], str], metrics: Union[List[str], str], frequency: Optional[str] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, sort: Optional[str] = None, limit_per_exchange_asset: Optional[int] = None) -> DataCollection
+def get_exchange_asset_metrics(
+        exchange_assets: Union[List[str], str],
+        metrics: Union[List[str], str],
+        frequency: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_height: Optional[int] = None,
+        end_height: Optional[int] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        sort: Optional[str] = None,
+        limit_per_exchange_asset: Optional[int] = None) -> DataCollection
 ```
 
 Returns metrics for specified exchange-asset.
@@ -896,11 +1202,25 @@ Returns metrics for specified exchange-asset.
 
 `DataCollection`: Exchange-Asset Metrics timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_pair_metrics"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_pair_metrics"></a>
+
 #### get\_pair\_metrics
 
 ```python
- | get_pair_metrics(pairs: Union[List[str], str], metrics: Union[List[str], str], frequency: Optional[str] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, sort: Optional[str] = None, limit_per_pair: Optional[int] = None) -> DataCollection
+def get_pair_metrics(pairs: Union[List[str], str],
+                     metrics: Union[List[str], str],
+                     frequency: Optional[str] = None,
+                     page_size: Optional[int] = None,
+                     paging_from: Optional[Union[PagingFrom, str]] = "start",
+                     start_time: Optional[Union[datetime, date, str]] = None,
+                     end_time: Optional[Union[datetime, date, str]] = None,
+                     start_height: Optional[int] = None,
+                     end_height: Optional[int] = None,
+                     start_inclusive: Optional[bool] = None,
+                     end_inclusive: Optional[bool] = None,
+                     timezone: Optional[str] = None,
+                     sort: Optional[str] = None,
+                     limit_per_pair: Optional[int] = None) -> DataCollection
 ```
 
 Returns metrics books for specified asset-asset pairs.
@@ -926,14 +1246,27 @@ Returns metrics books for specified asset-asset pairs.
 
 `DataCollection`: Exchange-Asset Metrics timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_pair_candles"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_pair_candles"></a>
+
 #### get\_pair\_candles
 
 ```python
- | get_pair_candles(pairs: Union[List[str], str], frequency: Optional[str] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, limit_per_pair: Optional[int] = None) -> DataCollection
+def get_pair_candles(pairs: Union[List[str], str],
+                     frequency: Optional[str] = None,
+                     page_size: Optional[int] = None,
+                     paging_from: Optional[Union[PagingFrom, str]] = "start",
+                     start_time: Optional[Union[datetime, date, str]] = None,
+                     end_time: Optional[Union[datetime, date, str]] = None,
+                     start_height: Optional[int] = None,
+                     end_height: Optional[int] = None,
+                     start_inclusive: Optional[bool] = None,
+                     end_inclusive: Optional[bool] = None,
+                     timezone: Optional[str] = None,
+                     limit_per_pair: Optional[int] = None) -> DataCollection
 ```
 
 Returns candles for specified asset pairs.
+
 Results are ordered by tuple (pair, time).
 
 **Arguments**:
@@ -955,11 +1288,26 @@ Results are ordered by tuple (pair, time).
 
 `DataCollection`: Asset pair candles timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_institution_metrics"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_institution_metrics"></a>
+
 #### get\_institution\_metrics
 
 ```python
- | get_institution_metrics(institutions: Union[List[str], str], metrics: Union[List[str], str], frequency: Optional[str] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, sort: Optional[str] = None, limit_per_institution: Optional[int] = None) -> DataCollection
+def get_institution_metrics(
+        institutions: Union[List[str], str],
+        metrics: Union[List[str], str],
+        frequency: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_height: Optional[int] = None,
+        end_height: Optional[int] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        sort: Optional[str] = None,
+        limit_per_institution: Optional[int] = None) -> DataCollection
 ```
 
 Returns metrics for specified institutions.
@@ -985,11 +1333,57 @@ Returns metrics for specified institutions.
 
 `DataCollection`: Asset Metrics timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_index_levels"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_index_candles"></a>
+
+#### get\_index\_candles
+
+```python
+def get_index_candles(indexes: Union[List[str], str],
+                      frequency: Optional[str] = None,
+                      page_size: Optional[int] = None,
+                      paging_from: Optional[Union[PagingFrom, str]] = "start",
+                      start_time: Optional[Union[datetime, date, str]] = None,
+                      end_time: Optional[Union[datetime, date, str]] = None,
+                      start_inclusive: Optional[bool] = None,
+                      end_inclusive: Optional[bool] = None,
+                      timezone: Optional[str] = None,
+                      limit_per_index: Optional[int] = None) -> DataCollection
+```
+
+Returns index candles for specified indexes and date range.
+
+**Arguments**:
+
+- `indexes` (`list(str), str`): list of index names, e.g. 'CMBI10'
+- `frequency` (`str`): frequency of the returned timeseries, e.g 15s, 1d, etc.
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+- `limit_per_index` (`int`): How many entries _per index_ the result should contain.
+
+**Returns**:
+
+`DataCollection`: Index Candles timeseries.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.get_index_levels"></a>
+
 #### get\_index\_levels
 
 ```python
- | get_index_levels(indexes: Union[List[str], str], frequency: Optional[str] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, limit_per_index: Optional[int] = None) -> DataCollection
+def get_index_levels(indexes: Union[List[str], str],
+                     frequency: Optional[str] = None,
+                     page_size: Optional[int] = None,
+                     paging_from: Optional[Union[PagingFrom, str]] = "start",
+                     start_time: Optional[Union[datetime, date, str]] = None,
+                     end_time: Optional[Union[datetime, date, str]] = None,
+                     start_inclusive: Optional[bool] = None,
+                     end_inclusive: Optional[bool] = None,
+                     timezone: Optional[str] = None,
+                     limit_per_index: Optional[int] = None) -> DataCollection
 ```
 
 Returns index levels for specified indexes and date range.
@@ -1011,11 +1405,23 @@ Returns index levels for specified indexes and date range.
 
 `DataCollection`: Index Levels timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_index_constituents"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_index_constituents"></a>
+
 #### get\_index\_constituents
 
 ```python
- | get_index_constituents(indexes: Union[List[str], str], frequency: Optional[str] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+def get_index_constituents(indexes: Union[List[str], str],
+                           frequency: Optional[str] = None,
+                           page_size: Optional[int] = None,
+                           paging_from: Optional[Union[PagingFrom,
+                                                       str]] = "start",
+                           start_time: Optional[Union[datetime, date,
+                                                      str]] = None,
+                           end_time: Optional[Union[datetime, date,
+                                                    str]] = None,
+                           start_inclusive: Optional[bool] = None,
+                           end_inclusive: Optional[bool] = None,
+                           timezone: Optional[str] = None) -> DataCollection
 ```
 
 Returns index constituents for specified indexes and date range.
@@ -1036,14 +1442,27 @@ Returns index constituents for specified indexes and date range.
 
 `DataCollection`: Index Constituents timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_market_metrics"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_market_metrics"></a>
+
 #### get\_market\_metrics
 
 ```python
- | get_market_metrics(markets: Union[List[str], str], metrics: Union[List[str], str], frequency: Optional[str] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, limit_per_market: Optional[int] = None) -> DataCollection
+def get_market_metrics(
+        markets: Union[List[str], str],
+        metrics: Union[List[str], str],
+        frequency: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        limit_per_market: Optional[int] = None) -> DataCollection
 ```
 
 Returns market metrics for specified markets, frequency and date range.
+
 For more information on market metrics, see: https://docs.coinmetrics.io/api/v4#operation/getTimeseriesMarketMetrics
 
 **Arguments**:
@@ -1064,14 +1483,26 @@ For more information on market metrics, see: https://docs.coinmetrics.io/api/v4#
 
 `DataCollection`: Market Candles timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_market_candles"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_market_candles"></a>
+
 #### get\_market\_candles
 
 ```python
- | get_market_candles(markets: Union[List[str], str], frequency: Optional[str] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, limit_per_market: Optional[int] = None) -> DataCollection
+def get_market_candles(
+        markets: Union[List[str], str],
+        frequency: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        limit_per_market: Optional[int] = None) -> DataCollection
 ```
 
 Returns market candles for specified markets, frequency and date range.
+
 For more information on market candles, see: https://docs.coinmetrics.io/info/markets/candles
 
 **Arguments**:
@@ -1091,14 +1522,25 @@ For more information on market candles, see: https://docs.coinmetrics.io/info/ma
 
 `DataCollection`: Market Candles timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_market_trades"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_market_trades"></a>
+
 #### get\_market\_trades
 
 ```python
- | get_market_trades(markets: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, limit_per_market: Optional[int] = None) -> DataCollection
+def get_market_trades(
+        markets: Union[List[str], str],
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        limit_per_market: Optional[int] = None) -> DataCollection
 ```
 
 Returns market trades for specified markets and date range.
+
 For more information on market trades, see: https://docs.coinmetrics.io/info/markets/trades
 
 **Arguments**:
@@ -1117,14 +1559,25 @@ For more information on market trades, see: https://docs.coinmetrics.io/info/mar
 
 `DataCollection`: Market Trades timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_market_open_interest"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_market_open_interest"></a>
+
 #### get\_market\_open\_interest
 
 ```python
- | get_market_open_interest(markets: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, limit_per_market: Optional[int] = None) -> DataCollection
+def get_market_open_interest(
+        markets: Union[List[str], str],
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        limit_per_market: Optional[int] = None) -> DataCollection
 ```
 
 Returns market open interest for specified markets and date range.
+
 For more information on open interest, see: https://docs.coinmetrics.io/info/markets/openinterest
 
 **Arguments**:
@@ -1143,14 +1596,25 @@ For more information on open interest, see: https://docs.coinmetrics.io/info/mar
 
 `DataCollection`: Market Open Interest timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_market_liquidations"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_market_liquidations"></a>
+
 #### get\_market\_liquidations
 
 ```python
- | get_market_liquidations(markets: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, limit_per_market: Optional[int] = None) -> DataCollection
+def get_market_liquidations(
+        markets: Union[List[str], str],
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        limit_per_market: Optional[int] = None) -> DataCollection
 ```
 
 Returns market liquidations for specified markets and date range.
+
 For more information on liquidations, see: https://docs.coinmetrics.io/info/markets/liquidations
 
 **Arguments**:
@@ -1169,14 +1633,25 @@ For more information on liquidations, see: https://docs.coinmetrics.io/info/mark
 
 `DataCollection`: Market Liquidations timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_market_funding_rates"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_market_funding_rates"></a>
+
 #### get\_market\_funding\_rates
 
 ```python
- | get_market_funding_rates(markets: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, limit_per_market: Optional[int] = None) -> DataCollection
+def get_market_funding_rates(
+        markets: Union[List[str], str],
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        limit_per_market: Optional[int] = None) -> DataCollection
 ```
 
 Returns market funding rates for specified markets and date range.
+
 For more information on funding rates, see: https://docs.coinmetrics.io/info/markets/fundingrates
 
 **Arguments**:
@@ -1195,14 +1670,26 @@ For more information on funding rates, see: https://docs.coinmetrics.io/info/mar
 
 `DataCollection`: Market Funding Rates timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_market_orderbooks"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_market_orderbooks"></a>
+
 #### get\_market\_orderbooks
 
 ```python
- | get_market_orderbooks(markets: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, depth_limit: Optional[str] = "100", timezone: Optional[str] = None, limit_per_market: Optional[int] = None) -> DataCollection
+def get_market_orderbooks(
+        markets: Union[List[str], str],
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        depth_limit: Optional[str] = "100",
+        timezone: Optional[str] = None,
+        limit_per_market: Optional[int] = None) -> DataCollection
 ```
 
 Returns market order books for specified markets and date range.
+
 For more information on order books, see: https://docs.coinmetrics.io/info/markets/orderbook
 
 **Arguments**:
@@ -1222,14 +1709,25 @@ For more information on order books, see: https://docs.coinmetrics.io/info/marke
 
 `DataCollection`: Market Order Books timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_market_quotes"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_market_quotes"></a>
+
 #### get\_market\_quotes
 
 ```python
- | get_market_quotes(markets: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, limit_per_market: Optional[int] = None) -> DataCollection
+def get_market_quotes(
+        markets: Union[List[str], str],
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        limit_per_market: Optional[int] = None) -> DataCollection
 ```
 
 Returns market quotes for specified markets and date range.
+
 For more information on quotes, see: https://docs.coinmetrics.io/info/markets/quotes
 
 **Arguments**:
@@ -1248,11 +1746,21 @@ For more information on quotes, see: https://docs.coinmetrics.io/info/markets/qu
 
 `DataCollection`: Market Quotes timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_market_contract_prices"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_market_contract_prices"></a>
+
 #### get\_market\_contract\_prices
 
 ```python
- | get_market_contract_prices(markets: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, limit_per_market: Optional[int] = None) -> DataCollection
+def get_market_contract_prices(
+        markets: Union[List[str], str],
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        limit_per_market: Optional[int] = None) -> DataCollection
 ```
 
 Returns contract prices for specified markets. This includes index price and mark price that are used by the exchange for settlement and risk management purposes.
@@ -1273,11 +1781,21 @@ Returns contract prices for specified markets. This includes index price and mar
 
 `DataCollection`: Market Contract Prices timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_market_implied_volatility"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_market_implied_volatility"></a>
+
 #### get\_market\_implied\_volatility
 
 ```python
- | get_market_implied_volatility(markets: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, limit_per_market: Optional[int] = None) -> DataCollection
+def get_market_implied_volatility(
+        markets: Union[List[str], str],
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        limit_per_market: Optional[int] = None) -> DataCollection
 ```
 
 Returns implied volatility for specified markets.
@@ -1298,11 +1816,21 @@ Returns implied volatility for specified markets.
 
 `DataCollection`: Market Volatility timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_market_greeks"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_market_greeks"></a>
+
 #### get\_market\_greeks
 
 ```python
- | get_market_greeks(markets: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None, limit_per_market: Optional[int] = None) -> DataCollection
+def get_market_greeks(
+        markets: Union[List[str], str],
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        limit_per_market: Optional[int] = None) -> DataCollection
 ```
 
 Returns greeks for option markets.
@@ -1323,11 +1851,20 @@ Returns greeks for option markets.
 
 `DataCollection`: Market Volatility timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_mining_pool_tips_summary"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_mining_pool_tips_summary"></a>
+
 #### get\_mining\_pool\_tips\_summary
 
 ```python
- | get_mining_pool_tips_summary(assets: Union[List[str], str], page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+def get_mining_pool_tips_summary(
+        assets: Union[List[str], str],
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None) -> DataCollection
 ```
 
 Returns mining pool tips summaries for specified assets.
@@ -1347,11 +1884,21 @@ Returns mining pool tips summaries for specified assets.
 
 `DataCollection`: Mining Pool Tips timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_mempool_feerates"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_mempool_feerates"></a>
+
 #### get\_mempool\_feerates
 
 ```python
- | get_mempool_feerates(assets: Union[List[str], str], page_size: Optional[int] = 200, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+def get_mempool_feerates(assets: Union[List[str], str],
+                         page_size: Optional[int] = 200,
+                         paging_from: Optional[Union[PagingFrom,
+                                                     str]] = "start",
+                         start_time: Optional[Union[datetime, date,
+                                                    str]] = None,
+                         end_time: Optional[Union[datetime, date, str]] = None,
+                         start_inclusive: Optional[bool] = None,
+                         end_inclusive: Optional[bool] = None,
+                         timezone: Optional[str] = None) -> DataCollection
 ```
 
 Returns mempool feerates for the specified assets. Note: for this method, page_size must be <= 200.
@@ -1371,11 +1918,16 @@ Returns mempool feerates for the specified assets. Note: for this method, page_s
 
 `DataCollection`: Mempool Fee Rates timeseries.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_stream_asset_metrics"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_stream_asset_metrics"></a>
+
 #### get\_stream\_asset\_metrics
 
 ```python
- | get_stream_asset_metrics(assets: Union[List[str], str], metrics: Union[List[str], str], frequency: Optional[str] = None, backfill: Union[Backfill, str] = Backfill.LATEST) -> CmStream
+def get_stream_asset_metrics(
+        assets: Union[List[str], str],
+        metrics: Union[List[str], str],
+        frequency: Optional[str] = None,
+        backfill: Union[Backfill, str] = Backfill.LATEST) -> CmStream
 ```
 
 Returns timeseries stream of metrics for specified assets.
@@ -1391,11 +1943,14 @@ Returns timeseries stream of metrics for specified assets.
 
 `CmStream`: Asset Metrics timeseries stream.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_stream_market_trades"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_stream_market_trades"></a>
+
 #### get\_stream\_market\_trades
 
 ```python
- | get_stream_market_trades(markets: Union[List[str], str], backfill: Union[Backfill, str] = Backfill.LATEST) -> CmStream
+def get_stream_market_trades(
+        markets: Union[List[str], str],
+        backfill: Union[Backfill, str] = Backfill.LATEST) -> CmStream
 ```
 
 Returns timeseries stream of market trades.
@@ -1409,11 +1964,14 @@ Returns timeseries stream of market trades.
 
 `CmStream`: Market Trades timeseries stream.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_stream_market_orderbooks"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_stream_market_orderbooks"></a>
+
 #### get\_stream\_market\_orderbooks
 
 ```python
- | get_stream_market_orderbooks(markets: Union[List[str], str], backfill: Union[Backfill, str] = Backfill.LATEST) -> CmStream
+def get_stream_market_orderbooks(
+        markets: Union[List[str], str],
+        backfill: Union[Backfill, str] = Backfill.LATEST) -> CmStream
 ```
 
 Returns timeseries stream of market orderbooks.
@@ -1427,11 +1985,14 @@ Returns timeseries stream of market orderbooks.
 
 `CmStream`: Market Orderbooks timeseries stream.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_stream_market_quotes"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_stream_market_quotes"></a>
+
 #### get\_stream\_market\_quotes
 
 ```python
- | get_stream_market_quotes(markets: Union[List[str], str], backfill: Union[Backfill, str] = Backfill.LATEST) -> CmStream
+def get_stream_market_quotes(
+        markets: Union[List[str], str],
+        backfill: Union[Backfill, str] = Backfill.LATEST) -> CmStream
 ```
 
 Returns timeseries stream of market quotes.
@@ -1445,11 +2006,15 @@ Returns timeseries stream of market quotes.
 
 `CmStream`: Market Quotes timeseries stream.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_stream_market_candles"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_stream_market_candles"></a>
+
 #### get\_stream\_market\_candles
 
 ```python
- | get_stream_market_candles(markets: Union[List[str], str], frequency: Optional[str] = None, backfill: Union[Backfill, str] = Backfill.LATEST) -> CmStream
+def get_stream_market_candles(
+        markets: Union[List[str], str],
+        frequency: Optional[str] = None,
+        backfill: Union[Backfill, str] = Backfill.LATEST) -> CmStream
 ```
 
 Returns timeseries stream of market candles.
@@ -1464,11 +2029,23 @@ Returns timeseries stream of market candles.
 
 `CmStream`: Market Candles timeseries stream.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_list_of_blocks"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_list_of_blocks"></a>
+
 #### get\_list\_of\_blocks
 
 ```python
- | get_list_of_blocks(asset: str, block_hashes: Optional[Union[List[str], str]] = None, heights: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+def get_list_of_blocks(asset: str,
+                       block_hashes: Optional[Union[List[str], str]] = None,
+                       heights: Optional[Union[List[str], str]] = None,
+                       page_size: Optional[int] = None,
+                       paging_from: Optional[Union[PagingFrom, str]] = "start",
+                       start_time: Optional[Union[datetime, date, str]] = None,
+                       end_time: Optional[Union[datetime, date, str]] = None,
+                       start_height: Optional[int] = None,
+                       end_height: Optional[int] = None,
+                       start_inclusive: Optional[bool] = None,
+                       end_inclusive: Optional[bool] = None,
+                       timezone: Optional[str] = None) -> DataCollection
 ```
 
 Returns a list of blockchain blocks metadata.
@@ -1492,11 +2069,26 @@ Returns a list of blockchain blocks metadata.
 
 `DataCollection`: list of blockchain blocks metadata
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_list_of_accounts"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_list_of_accounts"></a>
+
 #### get\_list\_of\_accounts
 
 ```python
- | get_list_of_accounts(asset: str, accounts: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_chain_sequence_number: Optional[int] = None, end_chain_sequence_number: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+def get_list_of_accounts(asset: str,
+                         accounts: Optional[Union[List[str], str]] = None,
+                         page_size: Optional[int] = None,
+                         paging_from: Optional[Union[PagingFrom,
+                                                     str]] = "start",
+                         start_time: Optional[Union[datetime, date,
+                                                    str]] = None,
+                         end_time: Optional[Union[datetime, date, str]] = None,
+                         start_height: Optional[int] = None,
+                         end_height: Optional[int] = None,
+                         start_chain_sequence_number: Optional[int] = None,
+                         end_chain_sequence_number: Optional[int] = None,
+                         start_inclusive: Optional[bool] = None,
+                         end_inclusive: Optional[bool] = None,
+                         timezone: Optional[str] = None) -> DataCollection
 ```
 
 Returns a list of blockchain accounts with their balances.
@@ -1521,11 +2113,28 @@ Returns a list of blockchain accounts with their balances.
 
 `DataCollection`: list of blockchain accounts metadata
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_list_of_transactions"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_list_of_transactions"></a>
+
 #### get\_list\_of\_transactions
 
 ```python
- | get_list_of_transactions(asset: str, transaction_hashes: Optional[Union[List[str], str]] = None, block_hashes: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+def get_list_of_transactions(asset: str,
+                             transaction_hashes: Optional[Union[List[str],
+                                                                str]] = None,
+                             block_hashes: Optional[Union[List[str],
+                                                          str]] = None,
+                             page_size: Optional[int] = None,
+                             paging_from: Optional[Union[PagingFrom,
+                                                         str]] = "start",
+                             start_time: Optional[Union[datetime, date,
+                                                        str]] = None,
+                             end_time: Optional[Union[datetime, date,
+                                                      str]] = None,
+                             start_height: Optional[int] = None,
+                             end_height: Optional[int] = None,
+                             start_inclusive: Optional[bool] = None,
+                             end_inclusive: Optional[bool] = None,
+                             timezone: Optional[str] = None) -> DataCollection
 ```
 
 Returns a list of blockchain transactions metadata.
@@ -1549,11 +2158,27 @@ Returns a list of blockchain transactions metadata.
 
 `DataCollection`: list of transaction metadata
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_list_of_balance_updates"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_list_of_balance_updates"></a>
+
 #### get\_list\_of\_balance\_updates
 
 ```python
- | get_list_of_balance_updates(asset: str, accounts: Optional[Union[List[str], str]] = None, transaction_hashes: Optional[Union[List[str], str]] = None, block_hashes: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_chain_sequence_number: Optional[int] = None, end_chain_sequence_number: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+def get_list_of_balance_updates(
+        asset: str,
+        accounts: Optional[Union[List[str], str]] = None,
+        transaction_hashes: Optional[Union[List[str], str]] = None,
+        block_hashes: Optional[Union[List[str], str]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_height: Optional[int] = None,
+        end_height: Optional[int] = None,
+        start_chain_sequence_number: Optional[int] = None,
+        end_chain_sequence_number: Optional[int] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None) -> DataCollection
 ```
 
 Returns a list of blockchain accounts balance updates.
@@ -1580,11 +2205,26 @@ Returns a list of blockchain accounts balance updates.
 
 `DataCollection`: list of balance updates
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_list_of_blocks_v2"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_list_of_blocks_v2"></a>
+
 #### get\_list\_of\_blocks\_v2
 
 ```python
- | get_list_of_blocks_v2(asset: str, block_hashes: Optional[Union[List[str], str]] = None, heights: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+def get_list_of_blocks_v2(asset: str,
+                          block_hashes: Optional[Union[List[str], str]] = None,
+                          heights: Optional[Union[List[str], str]] = None,
+                          page_size: Optional[int] = None,
+                          paging_from: Optional[Union[PagingFrom,
+                                                      str]] = "start",
+                          start_time: Optional[Union[datetime, date,
+                                                     str]] = None,
+                          end_time: Optional[Union[datetime, date,
+                                                   str]] = None,
+                          start_height: Optional[int] = None,
+                          end_height: Optional[int] = None,
+                          start_inclusive: Optional[bool] = None,
+                          end_inclusive: Optional[bool] = None,
+                          timezone: Optional[str] = None) -> DataCollection
 ```
 
 Returns a list of blockchain blocks metadata.
@@ -1608,11 +2248,27 @@ Returns a list of blockchain blocks metadata.
 
 `DataCollection`: list of blockchain blocks metadata
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_list_of_accounts_v2"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_list_of_accounts_v2"></a>
+
 #### get\_list\_of\_accounts\_v2
 
 ```python
- | get_list_of_accounts_v2(asset: str, accounts: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_chain_sequence_number: Optional[int] = None, end_chain_sequence_number: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+def get_list_of_accounts_v2(asset: str,
+                            accounts: Optional[Union[List[str], str]] = None,
+                            page_size: Optional[int] = None,
+                            paging_from: Optional[Union[PagingFrom,
+                                                        str]] = "start",
+                            start_time: Optional[Union[datetime, date,
+                                                       str]] = None,
+                            end_time: Optional[Union[datetime, date,
+                                                     str]] = None,
+                            start_height: Optional[int] = None,
+                            end_height: Optional[int] = None,
+                            start_chain_sequence_number: Optional[int] = None,
+                            end_chain_sequence_number: Optional[int] = None,
+                            start_inclusive: Optional[bool] = None,
+                            end_inclusive: Optional[bool] = None,
+                            timezone: Optional[str] = None) -> DataCollection
 ```
 
 Returns a list of blockchain accounts with their balances.
@@ -1637,11 +2293,25 @@ Returns a list of blockchain accounts with their balances.
 
 `DataCollection`: list of blockchain accounts metadata
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_list_of_sub_accounts_v2"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_list_of_sub_accounts_v2"></a>
+
 #### get\_list\_of\_sub\_accounts\_v2
 
 ```python
- | get_list_of_sub_accounts_v2(asset: str, accounts: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_chain_sequence_number: Optional[int] = None, end_chain_sequence_number: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+def get_list_of_sub_accounts_v2(
+        asset: str,
+        accounts: Optional[Union[List[str], str]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_height: Optional[int] = None,
+        end_height: Optional[int] = None,
+        start_chain_sequence_number: Optional[int] = None,
+        end_chain_sequence_number: Optional[int] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None) -> DataCollection
 ```
 
 Returns a list of blockchain sub-accounts with their balances.
@@ -1666,11 +2336,24 @@ Returns a list of blockchain sub-accounts with their balances.
 
 `DataCollection`: list of blockchain accounts metadata
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_list_of_transactions_v2"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_list_of_transactions_v2"></a>
+
 #### get\_list\_of\_transactions\_v2
 
 ```python
- | get_list_of_transactions_v2(asset: str, transaction_hashes: Optional[Union[List[str], str]] = None, block_hashes: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+def get_list_of_transactions_v2(
+        asset: str,
+        transaction_hashes: Optional[Union[List[str], str]] = None,
+        block_hashes: Optional[Union[List[str], str]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_height: Optional[int] = None,
+        end_height: Optional[int] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None) -> DataCollection
 ```
 
 Returns a list of blockchain transactions metadata.
@@ -1694,11 +2377,27 @@ Returns a list of blockchain transactions metadata.
 
 `DataCollection`: list of transaction metadata
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_list_of_balance_updates_v2"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_list_of_balance_updates_v2"></a>
+
 #### get\_list\_of\_balance\_updates\_v2
 
 ```python
- | get_list_of_balance_updates_v2(asset: str, accounts: Optional[Union[List[str], str]] = None, transaction_hashes: Optional[Union[List[str], str]] = None, block_hashes: Optional[Union[List[str], str]] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_height: Optional[int] = None, end_height: Optional[int] = None, start_chain_sequence_number: Optional[int] = None, end_chain_sequence_number: Optional[int] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+def get_list_of_balance_updates_v2(
+        asset: str,
+        accounts: Optional[Union[List[str], str]] = None,
+        transaction_hashes: Optional[Union[List[str], str]] = None,
+        block_hashes: Optional[Union[List[str], str]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_height: Optional[int] = None,
+        end_height: Optional[int] = None,
+        start_chain_sequence_number: Optional[int] = None,
+        end_chain_sequence_number: Optional[int] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None) -> DataCollection
 ```
 
 Returns a list of blockchain accounts balance updates.
@@ -1725,11 +2424,12 @@ Returns a list of blockchain accounts balance updates.
 
 `DataCollection`: list of balance updates
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_full_block"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_full_block"></a>
+
 #### get\_full\_block
 
 ```python
- | get_full_block(asset: str, block_hash: str) -> List[Dict[str, Any]]
+def get_full_block(asset: str, block_hash: str) -> List[Dict[str, Any]]
 ```
 
 Returns a full blockchain block with all transactions and balance updates.
@@ -1743,11 +2443,13 @@ Returns a full blockchain block with all transactions and balance updates.
 
 `list(dict(str), any)`: blockchain block data
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_full_transaction"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_full_transaction"></a>
+
 #### get\_full\_transaction
 
 ```python
- | get_full_transaction(asset: str, transaction_hash: str) -> List[Dict[str, Any]]
+def get_full_transaction(asset: str,
+                         transaction_hash: str) -> List[Dict[str, Any]]
 ```
 
 Returns a full blockchain transaction with all balance updates.
@@ -1761,11 +2463,14 @@ Returns a full blockchain transaction with all balance updates.
 
 `list(dict(str), any)`: block transaction data
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_full_transaction_for_block"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_full_transaction_for_block"></a>
+
 #### get\_full\_transaction\_for\_block
 
 ```python
- | get_full_transaction_for_block(asset: str, block_hash: str, transaction_hash: str) -> List[Dict[str, Any]]
+def get_full_transaction_for_block(
+        asset: str, block_hash: str,
+        transaction_hash: str) -> List[Dict[str, Any]]
 ```
 
 Returns a full blockchain transaction with all balance updates for a specific block.
@@ -1780,11 +2485,14 @@ Returns a full blockchain transaction with all balance updates for a specific bl
 
 `list(dict(str, Any))`: block transaction data with balance updates
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_full_block_v2"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_full_block_v2"></a>
+
 #### get\_full\_block\_v2
 
 ```python
- | get_full_block_v2(asset: str, block_hash: str, include_sub_accounts: Optional[bool]) -> List[Dict[str, Any]]
+def get_full_block_v2(
+        asset: str, block_hash: str,
+        include_sub_accounts: Optional[bool]) -> List[Dict[str, Any]]
 ```
 
 Returns a full blockchain block with all transactions and balance updates.
@@ -1799,11 +2507,14 @@ Returns a full blockchain block with all transactions and balance updates.
 
 `list(dict(str), any)`: blockchain block data
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_full_transaction_v2"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_full_transaction_v2"></a>
+
 #### get\_full\_transaction\_v2
 
 ```python
- | get_full_transaction_v2(asset: str, txid: str, include_sub_accounts: Optional[bool]) -> List[Dict[str, Any]]
+def get_full_transaction_v2(
+        asset: str, txid: str,
+        include_sub_accounts: Optional[bool]) -> List[Dict[str, Any]]
 ```
 
 Returns a full blockchain transaction with all balance updates.
@@ -1818,11 +2529,14 @@ Returns a full blockchain transaction with all balance updates.
 
 `list(dict(str), any)`: block transaction data
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_full_transaction_for_block_v2"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_full_transaction_for_block_v2"></a>
+
 #### get\_full\_transaction\_for\_block\_v2
 
 ```python
- | get_full_transaction_for_block_v2(asset: str, block_hash: str, txid: str, include_sub_accounts: Optional[bool]) -> List[Dict[str, Any]]
+def get_full_transaction_for_block_v2(
+        asset: str, block_hash: str, txid: str,
+        include_sub_accounts: Optional[bool]) -> List[Dict[str, Any]]
 ```
 
 Returns a full blockchain transaction with all balance updates for a specific block.
@@ -1838,11 +2552,26 @@ Returns a full blockchain transaction with all balance updates for a specific bl
 
 `list(dict(str, Any))`: block transaction data with balance updates
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_transaction_tracker"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_transaction_tracker"></a>
+
 #### get\_transaction\_tracker
 
 ```python
- | get_transaction_tracker(asset: str, txids: Optional[Union[List[str], str]] = None, replacements_for_txids: Optional[Union[List[str], str]] = None, replacements_only: Optional[bool] = None, page_size: Optional[int] = None, paging_from: Optional[Union[PagingFrom, str]] = "start", start_time: Optional[Union[datetime, date, str]] = None, end_time: Optional[Union[datetime, date, str]] = None, start_inclusive: Optional[bool] = None, end_inclusive: Optional[bool] = None, timezone: Optional[str] = None) -> DataCollection
+def get_transaction_tracker(asset: str,
+                            txids: Optional[Union[List[str], str]] = None,
+                            replacements_for_txids: Optional[Union[
+                                List[str], str]] = None,
+                            replacements_only: Optional[bool] = None,
+                            page_size: Optional[int] = None,
+                            paging_from: Optional[Union[PagingFrom,
+                                                        str]] = "start",
+                            start_time: Optional[Union[datetime, date,
+                                                       str]] = None,
+                            end_time: Optional[Union[datetime, date,
+                                                     str]] = None,
+                            start_inclusive: Optional[bool] = None,
+                            end_inclusive: Optional[bool] = None,
+                            timezone: Optional[str] = None) -> DataCollection
 ```
 
 Returns status updates for the specified or all transactions.
