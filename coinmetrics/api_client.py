@@ -37,6 +37,9 @@ from coinmetrics._catalogs import (
     CatalogMarketMetricsData,
     CatalogMarketCandlesData,
     CatalogMarketTradesData,
+    CatalogExchangeAssetMetricsData,
+    CatalogPairMetricsData,
+    CatalogInstitutionMetricsData,
 )
 
 logger = getLogger("cm_client")
@@ -141,6 +144,111 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {"pairs": asset_pairs}
         return CatalogAssetPairsData(self._get_data("catalog/pairs", params)["data"])
 
+    def catalog_asset_metrics(
+        self,
+        metrics: Optional[Union[List[str], str]] = None,
+        reviewable: Optional[bool] = None,
+    ) -> CatalogMetricsData:
+        """
+        Returns list of _available_ asset metrics along with information for them like
+        description, category, precision and assets for which a metric is available.
+
+        :param metrics: A single asset metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+        :type metrics: list(str), str
+        :param reviewable: Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+        :type reviewable: bool
+        :return: Information about asset metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        return CatalogMetricsData(
+            self._get_data("catalog/asset-metrics", params)["data"]
+        )
+
+    def catalog_exchange_metrics(
+        self,
+        metrics: Optional[Union[List[str], str]] = None,
+        reviewable: Optional[bool] = None,
+    ) -> CatalogMetricsData:
+        """
+        Returns list of _available_ exchange metrics along with information for them like
+        description, category, precision and assets for which a metric is available.
+
+        :param metrics: A single exchange metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+        :type metrics: list(str), str
+        :param reviewable: Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+        :type reviewable: bool
+        :return: Information about exchange metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        return CatalogMetricsData(
+            self._get_data("catalog/exchange-metrics", params)["data"]
+        )
+
+    def catalog_exchange_asset_metrics(
+        self,
+        metrics: Optional[Union[List[str], str]] = None,
+        reviewable: Optional[bool] = None,
+    ) -> CatalogExchangeAssetMetricsData:
+        """
+        Returns list of _available_ exchange metrics along with information for them like
+        description, category, precision and assets for which a metric is available.
+
+        :param metrics: A single exchange metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+        :type metrics: list(str), str
+        :param reviewable: Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+        :type reviewable: bool
+        :return: Information about exchange metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        return CatalogExchangeAssetMetricsData(
+            self._get_data("catalog/exchange-asset-metrics", params)["data"]
+        )
+
+    def catalog_pair_metrics(
+        self,
+        metrics: Optional[Union[List[str], str]] = None,
+        reviewable: Optional[bool] = None,
+    ) -> CatalogPairMetricsData:
+        """
+        Returns list of _available_ pair metrics along with information for them like
+        description, category, precision and assets for which a metric is available.
+
+        :param metrics: A single pair metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+        :type metrics: list(str), str
+        :param reviewable: Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+        :type reviewable: bool
+        :return: Information about pair metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        return CatalogPairMetricsData(
+            self._get_data("catalog/pair-metrics", params)["data"]
+        )
+
+    def catalog_institution_metrics(
+        self,
+        metrics: Optional[Union[List[str], str]] = None,
+        reviewable: Optional[bool] = None,
+    ) -> CatalogInstitutionMetricsData:
+        """
+        Returns list of _available_ institution metrics along with information for them like
+        description, category, precision and assets for which a metric is available.
+
+        :param metrics: A single institution metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+        :type metrics: list(str), str
+        :param reviewable: Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+        :type reviewable: bool
+        :return: Information about institution metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        return CatalogInstitutionMetricsData(
+            self._get_data("catalog/institution-metrics", params)["data"]
+        )
+
     def catalog_asset_pair_candles(
         self, asset_pairs: Optional[Union[List[str], str]] = None
     ) -> CatalogAssetPairCandlesData:
@@ -213,7 +321,9 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"indexes": indexes}
-        return CatalogMarketCandlesData(self._get_data("catalog/index-candles", params)["data"])
+        return CatalogMarketCandlesData(
+            self._get_data("catalog/index-candles", params)["data"]
+        )
 
     def catalog_institutions(
         self, institutions: Optional[Union[List[str], str]] = None
@@ -794,7 +904,7 @@ class CoinMetricsClient:
         return CatalogIndexesData(self._get_data("catalog-all/indexes", params)["data"])
 
     def catalog_full_index_candles(
-            self, indexes: Optional[Union[List[str], str]] = None
+        self, indexes: Optional[Union[List[str], str]] = None
     ) -> CatalogMarketCandlesData:
         """
         Returns meta information about _supported_ index candles.
@@ -805,7 +915,9 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"indexes": indexes}
-        return CatalogMarketCandlesData(self._get_data("catalog-all/index-candles", params)["data"])
+        return CatalogMarketCandlesData(
+            self._get_data("catalog-all/index-candles", params)["data"]
+        )
 
     def catalog_full_institutions(
         self, institutions: Optional[Union[List[str], str]] = None

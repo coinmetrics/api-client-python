@@ -7,6 +7,85 @@ client = CoinMetricsClient(str(os.environ.get("CM_API_KEY")))
 cm_api_key_set = os.environ.get("CM_API_KEY") is not None
 REASON_TO_SKIP = "Need to set CM_API_KEY as an env var in order to run this test"
 
+print("CM_API_KEY is set - tests will run") if cm_api_key_set else print("CM_API_KEY not set, tests will not run")
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalog_metrics() -> None:
+    """
+    Tests the catalog/market-metrics endpoint works as expected - some data is returned and when converted to dataframe
+    it has the expected amount of rows (5)
+    """
+    data = client.catalog_metrics()
+    assert len(data) != 0
+    data_df = data.to_dataframe()
+    assert len(data_df != 0)
+    assert len(data_df.columns == 5)
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalog_asset_metrics() -> None:
+    """
+    Tests the catalog/market-metrics endpoint works as expected - some data is returned and when converted to dataframe
+    it has the expected amount of rows (5)
+    """
+    data = client.catalog_asset_metrics()
+    assert len(data) != 0
+    data_df = data.to_dataframe()
+    assert len(data_df != 0)
+    assert len(data_df.columns == 5)
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalog_exchange_asset_metrics() -> None:
+    """
+    Tests the catalog/market-metrics endpoint works as expected - some data is returned and when converted to dataframe
+    it has the expected amount of rows (5)
+    """
+    data = client.catalog_exchange_asset_metrics()
+    assert len(data) != 0
+    data_df = data.to_dataframe()
+    assert len(data_df != 0)
+    assert len(data_df.columns == 5)
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalog_pair_metrics() -> None:
+    """
+    Tests the catalog/market-metrics endpoint works as expected - some data is returned and when converted to dataframe
+    it has the expected amount of rows (5)
+    """
+    data = client.catalog_pair_metrics()
+    assert len(data) != 0
+    data_df = data.to_dataframe()
+    assert len(data_df != 0)
+    assert len(data_df.columns == 5)
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalog_exchange_metrics() -> None:
+    """
+    Tests the catalog/market-metrics endpoint works as expected - some data is returned and when converted to dataframe
+    it has the expected amount of rows (5)
+    """
+    data = client.catalog_exchange_metrics()
+    assert len(data) != 0
+    data_df = data.to_dataframe()
+    assert len(data_df != 0)
+    assert len(data_df.columns == 5)
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalog_institution_metrics() -> None:
+    """
+    Tests the catalog/market-metrics endpoint works as expected - some data is returned and when converted to dataframe
+    it has the expected amount of rows (5)
+    """
+    data = client.catalog_institution_metrics()
+    assert len(data) != 0
+    data_df = data.to_dataframe()
+    assert len(data_df != 0)
+    assert len(data_df.columns == 5)
+
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_catalog_market_metrics() -> None:

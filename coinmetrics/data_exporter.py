@@ -16,10 +16,9 @@ from concurrent.futures import ThreadPoolExecutor
 DEFAULT_OUTPUT_FORMAT = "json.gz"
 Log_Format = "%(levelname)s %(asctime)s - %(message)s"
 
-logging.basicConfig(stream=sys.stdout,
-                    filemode="w",
-                    format=Log_Format,
-                    level=logging.INFO)
+logging.basicConfig(
+    stream=sys.stdout, filemode="w", format=Log_Format, level=logging.INFO
+)
 
 logger = logging.getLogger()
 
@@ -278,12 +277,16 @@ class CoinMetricsDataExporter:
         elif output_format == "csv":
             file_name = file_name.replace("json.gz", "csv")
             full_file_name = f"{rest_of_url}/{file_name}"
-            self._download_and_stream_data_to_csv(self._API_BASE_URL + url, full_file_name)
+            self._download_and_stream_data_to_csv(
+                self._API_BASE_URL + url, full_file_name
+            )
 
         elif output_format == "json":
             file_name = file_name.replace("json.gz", "json")
             full_file_name = f"{rest_of_url}/{file_name}"
-            self._download_and_stream_data_to_json(request_url=self._API_BASE_URL + url, file_name=full_file_name)
+            self._download_and_stream_data_to_json(
+                request_url=self._API_BASE_URL + url, file_name=full_file_name
+            )
 
         else:
             raise ValueError(f"Unsupported output type: {output_format}")
@@ -319,7 +322,9 @@ class CoinMetricsDataExporter:
         for exchange in exchanges:
             exchange_files_url = market_quotes_spot + f"/{exchange}"
             exchange_asset_pair_data = self._send_request(exchange_files_url).json()
-            exchange_asset_pair_folders = {folder["name"] for folder in exchange_asset_pair_data}
+            exchange_asset_pair_folders = {
+                folder["name"] for folder in exchange_asset_pair_data
+            }
 
             asset_pair_url_dict = {}
             for asset_pair in assets_pairs:
@@ -378,7 +383,9 @@ class CoinMetricsDataExporter:
 
         return list_of_files_to_download
 
-    def _download_and_stream_data_to_json(self, request_url: str, file_name: str) -> None:
+    def _download_and_stream_data_to_json(
+        self, request_url: str, file_name: str
+    ) -> None:
         """
         Streams gzipped data from url and decodes it to a valid json file
         :param request_url: str request url where json.gz file is stored
@@ -393,12 +400,14 @@ class CoinMetricsDataExporter:
                     file.write(full_line)
                 # This is done in order to remove trailing ',' and add a ']' to conform with JSON spec
                 file.seek(file.tell() - 1, os.SEEK_SET)
-                file.write('')
+                file.write("")
                 file.seek(file.tell() - 1, os.SEEK_SET)
-                file.write('')
+                file.write("")
                 file.write("]")
 
-    def _download_and_stream_data_to_csv(self, request_url: str, file_name: str) -> None:
+    def _download_and_stream_data_to_csv(
+        self, request_url: str, file_name: str
+    ) -> None:
         """
         Streams gzipped data from url and decodes it into a valid csv file
         :param request_url: str request url where json.gz file is stored
@@ -406,12 +415,14 @@ class CoinMetricsDataExporter:
         """
         with self._send_request(request_url, stream=True) as resp:
             decoded_dicts = stream_gzip_decompress_to_dicts(resp.iter_content(1024))
-            with open(file_name, 'w') as csvfile:
+            with open(file_name, "w") as csvfile:
                 first_iteration = True
                 for data in decoded_dicts:
                     if first_iteration:
                         writer = csv.DictWriter(
-                            csvfile, fieldnames=list(data[0].keys()), extrasaction="ignore"
+                            csvfile,
+                            fieldnames=list(data[0].keys()),
+                            extrasaction="ignore",
                         )
                         writer.writeheader()
                         first_iteration = False
@@ -448,14 +459,13 @@ class CoinMetricsDataExporter:
     @retry((socket.gaierror, HTTPError), retries=5, wait_time_between_retries=5)
     def _send_request(self, actual_url: str, stream: bool = False) -> Response:
         return requests.get(
-            actual_url,
-            verify=self._verify_ssl_certs,
-            auth=self._auth,
-            stream=stream
+            actual_url, verify=self._verify_ssl_certs, auth=self._auth, stream=stream
         )
 
 
-def stream_gzip_decompress_to_dicts(stream: Iterable[bytes]) -> Iterable[Dict[Any, Any]]:
+def stream_gzip_decompress_to_dicts(
+    stream: Iterable[bytes],
+) -> Iterable[Dict[Any, Any]]:
     dec = zlib.decompressobj(32 + zlib.MAX_WBITS)
     remainder = ""
     for chunk in stream:

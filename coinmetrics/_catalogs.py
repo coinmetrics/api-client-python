@@ -380,6 +380,83 @@ class CatalogMetricsData(List[Any]):
         return convert_catalog_dtypes(df_catalog_metrics)
 
 
+class CatalogExchangeAssetMetricsData(List[Any]):
+    """
+    Transforms catalog exchange asset data in list form into a dataframe
+    :return: Catalog Data
+    """
+
+    def to_dataframe(self) -> DataFrameType:
+        df_catalog_metrics = (
+            pd.DataFrame(self)
+            .explode("frequencies")
+            .assign(
+                frequency=lambda df: _expand_df(
+                    key="frequency", iterable=df.frequencies
+                )
+            )
+            .assign(
+                exchange_asset=lambda df: _expand_df(
+                    key="exchange-assets", iterable=df.frequencies
+                )
+            )
+            .explode("exchange_asset")
+            .drop("frequencies", axis=1)
+            .reset_index(drop=True)
+        )
+        return convert_catalog_dtypes(df_catalog_metrics)
+
+
+class CatalogPairMetricsData(List[Any]):
+    """
+    Transforms catalog pair asset data in list form into a dataframe
+    :return: Catalog Data
+    """
+
+    def to_dataframe(self) -> DataFrameType:
+        df_catalog_metrics = (
+            pd.DataFrame(self)
+            .explode("frequencies")
+            .assign(
+                frequency=lambda df: _expand_df(
+                    key="frequency", iterable=df.frequencies
+                )
+            )
+            .assign(pair=lambda df: _expand_df(key="pairs", iterable=df.frequencies))
+            .explode("pair")
+            .drop("frequencies", axis=1)
+            .reset_index(drop=True)
+        )
+        return convert_catalog_dtypes(df_catalog_metrics)
+
+
+class CatalogInstitutionMetricsData(List[Any]):
+    """
+    Transforms catalog institution asset data in list form into a dataframe
+    :return: Catalog Data
+    """
+
+    def to_dataframe(self) -> DataFrameType:
+        df_catalog_metrics = (
+            pd.DataFrame(self)
+            .explode("frequencies")
+            .assign(
+                frequency=lambda df: _expand_df(
+                    key="frequency", iterable=df.frequencies
+                )
+            )
+            .assign(
+                institution=lambda df: _expand_df(
+                    key="institutions", iterable=df.frequencies
+                )
+            )
+            .explode("institution")
+            .drop("frequencies", axis=1)
+            .reset_index(drop=True)
+        )
+        return convert_catalog_dtypes(df_catalog_metrics)
+
+
 class CatalogMarketMetricsData(List[Any]):
     """
     Transforms catalog data in list form into a dataframe

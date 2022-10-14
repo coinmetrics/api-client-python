@@ -5,6 +5,7 @@ from datetime import datetime
 from typing import List
 from coinmetrics.data_exporter import CoinMetricsDataExporter
 
+
 CM_API_KEY = os.environ.get("CM_API_KEY")
 data_exporter = CoinMetricsDataExporter(api_key=str(CM_API_KEY))
 cm_api_key_set = CM_API_KEY is not None
@@ -231,6 +232,7 @@ def test_download_market_trades_futures() -> None:
         output_format="json.gz",
     )
     files_downloaded_test_helper_end(list_of_expected_files)
+
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_download_json_market_trades_spot() -> None:
