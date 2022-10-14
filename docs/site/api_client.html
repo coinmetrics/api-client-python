@@ -231,6 +231,41 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#catalog_asset_metrics" class="md-nav__link">
+    catalog_asset_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_exchange_metrics" class="md-nav__link">
+    catalog_exchange_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_exchange_asset_metrics" class="md-nav__link">
+    catalog_exchange_asset_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_pair_metrics" class="md-nav__link">
+    catalog_pair_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_institution_metrics" class="md-nav__link">
+    catalog_institution_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#catalog_asset_pair_candles" class="md-nav__link">
     catalog_asset_pair_candles
   </a>
@@ -874,6 +909,41 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#catalog_asset_metrics" class="md-nav__link">
+    catalog_asset_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_exchange_metrics" class="md-nav__link">
+    catalog_exchange_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_exchange_asset_metrics" class="md-nav__link">
+    catalog_exchange_asset_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_pair_metrics" class="md-nav__link">
+    catalog_pair_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_institution_metrics" class="md-nav__link">
+    catalog_institution_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#catalog_asset_pair_candles" class="md-nav__link">
     catalog_asset_pair_candles
   </a>
@@ -1507,6 +1577,81 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>list(dict(str, any))</code>: Information that is available for requested asset-asset pair like metrics and their respective frequencies and time ranges</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_metrics"></a></p>
+<h4 id="catalog_asset_metrics">catalog_asset_metrics<a class="headerlink" href="#catalog_asset_metrics" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_asset_metrics</span><span class="p">(</span>
+        <span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">reviewable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMetricsData</span>
+</code></pre></div>
+<p>Returns list of <em>available</em> asset metrics along with information for them like</p>
+<p>description, category, precision and assets for which a metric is available.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>metrics</code> (<code>list(str), str</code>): A single asset metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.</li>
+<li><code>reviewable</code> (<code>bool</code>): Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>list(dict(str, any))</code>: Information about asset metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_exchange_metrics"></a></p>
+<h4 id="catalog_exchange_metrics">catalog_exchange_metrics<a class="headerlink" href="#catalog_exchange_metrics" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_exchange_metrics</span><span class="p">(</span>
+        <span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">reviewable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMetricsData</span>
+</code></pre></div>
+<p>Returns list of <em>available</em> exchange metrics along with information for them like</p>
+<p>description, category, precision and assets for which a metric is available.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>metrics</code> (<code>list(str), str</code>): A single exchange metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.</li>
+<li><code>reviewable</code> (<code>bool</code>): Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>list(dict(str, any))</code>: Information about exchange metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_exchange_asset_metrics"></a></p>
+<h4 id="catalog_exchange_asset_metrics">catalog_exchange_asset_metrics<a class="headerlink" href="#catalog_exchange_asset_metrics" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_exchange_asset_metrics</span><span class="p">(</span>
+        <span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">reviewable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogExchangeAssetMetricsData</span>
+</code></pre></div>
+<p>Returns list of <em>available</em> exchange metrics along with information for them like</p>
+<p>description, category, precision and assets for which a metric is available.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>metrics</code> (<code>list(str), str</code>): A single exchange metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.</li>
+<li><code>reviewable</code> (<code>bool</code>): Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>list(dict(str, any))</code>: Information about exchange metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_pair_metrics"></a></p>
+<h4 id="catalog_pair_metrics">catalog_pair_metrics<a class="headerlink" href="#catalog_pair_metrics" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_pair_metrics</span><span class="p">(</span>
+        <span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">reviewable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogPairMetricsData</span>
+</code></pre></div>
+<p>Returns list of <em>available</em> pair metrics along with information for them like</p>
+<p>description, category, precision and assets for which a metric is available.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>metrics</code> (<code>list(str), str</code>): A single pair metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.</li>
+<li><code>reviewable</code> (<code>bool</code>): Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>list(dict(str, any))</code>: Information about pair metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_institution_metrics"></a></p>
+<h4 id="catalog_institution_metrics">catalog_institution_metrics<a class="headerlink" href="#catalog_institution_metrics" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_institution_metrics</span><span class="p">(</span>
+        <span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">reviewable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogInstitutionMetricsData</span>
+</code></pre></div>
+<p>Returns list of <em>available</em> institution metrics along with information for them like</p>
+<p>description, category, precision and assets for which a metric is available.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>metrics</code> (<code>list(str), str</code>): A single institution metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.</li>
+<li><code>reviewable</code> (<code>bool</code>): Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>list(dict(str, any))</code>: Information about institution metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_pair_candles"></a></p>
 <h4 id="catalog_asset_pair_candles">catalog_asset_pair_candles<a class="headerlink" href="#catalog_asset_pair_candles" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_asset_pair_candles</span><span class="p">(</span>

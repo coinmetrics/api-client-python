@@ -71,6 +71,121 @@ Returns meta information about _available_ asset-asset pairs
 
 `list(dict(str, any))`: Information that is available for requested asset-asset pair like metrics and their respective frequencies and time ranges
 
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_metrics"></a>
+
+#### catalog\_asset\_metrics
+
+```python
+def catalog_asset_metrics(
+        metrics: Optional[Union[List[str], str]] = None,
+        reviewable: Optional[bool] = None) -> CatalogMetricsData
+```
+
+Returns list of _available_ asset metrics along with information for them like
+
+description, category, precision and assets for which a metric is available.
+
+**Arguments**:
+
+- `metrics` (`list(str), str`): A single asset metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+- `reviewable` (`bool`): Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about asset metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_exchange_metrics"></a>
+
+#### catalog\_exchange\_metrics
+
+```python
+def catalog_exchange_metrics(
+        metrics: Optional[Union[List[str], str]] = None,
+        reviewable: Optional[bool] = None) -> CatalogMetricsData
+```
+
+Returns list of _available_ exchange metrics along with information for them like
+
+description, category, precision and assets for which a metric is available.
+
+**Arguments**:
+
+- `metrics` (`list(str), str`): A single exchange metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+- `reviewable` (`bool`): Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about exchange metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_exchange_asset_metrics"></a>
+
+#### catalog\_exchange\_asset\_metrics
+
+```python
+def catalog_exchange_asset_metrics(
+        metrics: Optional[Union[List[str], str]] = None,
+        reviewable: Optional[bool] = None) -> CatalogExchangeAssetMetricsData
+```
+
+Returns list of _available_ exchange metrics along with information for them like
+
+description, category, precision and assets for which a metric is available.
+
+**Arguments**:
+
+- `metrics` (`list(str), str`): A single exchange metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+- `reviewable` (`bool`): Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about exchange metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_pair_metrics"></a>
+
+#### catalog\_pair\_metrics
+
+```python
+def catalog_pair_metrics(
+        metrics: Optional[Union[List[str], str]] = None,
+        reviewable: Optional[bool] = None) -> CatalogPairMetricsData
+```
+
+Returns list of _available_ pair metrics along with information for them like
+
+description, category, precision and assets for which a metric is available.
+
+**Arguments**:
+
+- `metrics` (`list(str), str`): A single pair metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+- `reviewable` (`bool`): Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about pair metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_institution_metrics"></a>
+
+#### catalog\_institution\_metrics
+
+```python
+def catalog_institution_metrics(
+        metrics: Optional[Union[List[str], str]] = None,
+        reviewable: Optional[bool] = None) -> CatalogInstitutionMetricsData
+```
+
+Returns list of _available_ institution metrics along with information for them like
+
+description, category, precision and assets for which a metric is available.
+
+**Arguments**:
+
+- `metrics` (`list(str), str`): A single institution metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+- `reviewable` (`bool`): Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about institution metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
+
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_pair_candles"></a>
 
 #### catalog\_asset\_pair\_candles
