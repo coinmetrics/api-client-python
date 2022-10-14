@@ -15,17 +15,18 @@ services:
 
 stages:
   - build-test-push-image
-  - documentation-check
+  - generate-docs
   - deploy
 
 variables:
-  GIT_SUBMODULE_STRATEGY: recursive
+#  GIT_SUBMODULE_STRATEGY: normal
   PYPI_PASSWORD: $PYPI_PASSWORD
   PYPI_USERNAME: $PYPI_USERNAME
 
 build-test-push-image:
   stage: build-test-push-image
   script:
+    - apk add git
     - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME || true
     - docker build --cache-from $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
     - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python -m mypy -p coinmetrics -p test
@@ -40,48 +41,63 @@ build-test-push-image:
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
-documentation-check:
+
+generate-docs:
   image: python:3.9-alpine
-  stage: documentation-check
+  stage: generate-docs
   tags:
     - linux
     - docker
     - coinmetrics-build-runner
   before_script:
-    - apk add bash git
-    - git config --global user.name CiCDBot
-    - git config --global user.email ian.mclaughlin@coinmetrics.com
-    - apk add cargo
-    - export REQUESTS_CA_BUNDLE=`python -c "import certifi; print(certifi.where())"`
+    # Git set up
+    - 'command -v ssh-agent >/dev/null || (apk add openssh-client)'
+    - apk add git
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - git config --global user.email "user@example.com"
+    - git config --global user.name "User name"
+    - git fetch
+    # Python build
     - apk add build-base
     - python -m venv .venv
     - source .venv/bin/activate
     - python -m pip install --upgrade pip
-    - python -m pip install --upgrade regex
-    - python -m pip install poetry wheel
+    - python -m pip install --upgrade regex pydoc-markdown
+    - python -m pip install wheel dulwich pyrsistent
+    - python -m pip install poetry jinja2==3.0.3 regex
     - poetry install
     - apk add py3-dbus
   script:
-    - cd $CI_PROJECT_DIR
-    - git fetch
     - git checkout -b $CI_COMMIT_REF_NAME-$RANDOM origin/$CI_COMMIT_REF_NAME
-    - git branch --list
-    - git status
-    - pip install jinja2==3.0.3
+    - url_host=$(echo "${CI_REPOSITORY_URL}" | sed -e 's|https\?://gitlab-ci-token:.*@|ssh://git@|g')
+    - echo "${url_host}"
+    - git remote set-url --push origin "${url_host}"
+    - git remote show origin
+    - cd $CI_PROJECT_DIR
+    - python -m pip install pytz
+    - export UPDATE_VERSION=`python get_utc_update_time.py`
+    - sh update_version.sh
     - export PYTHONPATH=/ && pydoc-markdown -m coinmetrics.api_client > docs/docs/api_client.md
     - cp -f README.md docs/docs/index.md
     - cp -f FlatFilesExport.md docs/docs/FlatFilesExport.md
     - cd docs && mkdocs build
-    - git add docs/api_client.md
-    - git add site/api_client.html
-    - git add site/index.html
+    - git add .
     - git status
-    - *check-for-changes
+    - git commit -m "Release version $UPDATE_VERSION" || echo "No changes, nothing to commit!"
+    - git push --follow-tags origin HEAD:$CI_COMMIT_REF_NAME
+  when: manual
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
 
 deploy:
   stage: deploy
   dependencies:
-    - documentation-check
+    - generate-docs
     - build-test-push-image
   script:
     - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME || true

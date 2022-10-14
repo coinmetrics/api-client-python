@@ -1,5 +1,5 @@
 #/bin/bash
-VERSION=$1
+VERSION=`python get_utc_update_time.py`
 new_line_py="__version__ = \"$VERSION\""
 new_line_toml="version = \"$VERSION\""
 init=coinmetrics/__init__.py
