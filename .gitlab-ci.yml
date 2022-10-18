@@ -88,7 +88,7 @@ generate-docs:
     - cp -f README.md docs/docs/index.md
     - cp -f FlatFilesExport.md docs/docs/FlatFilesExport.md
     - cd docs && mkdocs build
-    - git add .
+    - git add --all -- :!api-client-python/
     - git status
     - git commit -m "Release version $UPDATE_VERSION" || echo "No changes, nothing to commit!"
     - git push --follow-tags origin HEAD:$CI_COMMIT_REF_NAME
