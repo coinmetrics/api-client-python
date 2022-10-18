@@ -28,7 +28,7 @@ build-test-push-image:
   script:
     - apk add git
     - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME || true
-    - docker build .
+    - docker build --cache-from $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA  .
     - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python -m mypy -p coinmetrics -p test
     - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python -m flake8 coinmetrics
     - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python -m pytest test
@@ -81,7 +81,7 @@ generate-docs:
     - cd $CI_PROJECT_DIR
     - python -m pip install pytz
     - export UPDATE_VERSION=`python get_utc_update_time.py`
-    - /bin/bash update_version.sh
+    - /bin/bash update_version.sh $UPDATE_VERSION
     - export PYTHONPATH=/ && pydoc-markdown -m coinmetrics.api_client > docs/docs/api_client.md
     - cp -f README.md docs/docs/index.md
     - cp -f FlatFilesExport.md docs/docs/FlatFilesExport.md

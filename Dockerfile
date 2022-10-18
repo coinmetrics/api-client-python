@@ -14,7 +14,7 @@ RUN pip install --upgrade pip
 
 RUN pip install "poetry==1.1.5"
 COPY pyproject.toml ./poetry.lock ./
-# RUN poetry config experimental.new-installer false
+RUN poetry config experimental.new-installer false
 RUN poetry config virtualenvs.create false
 
 RUN poetry install --no-root
