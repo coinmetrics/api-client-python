@@ -81,7 +81,9 @@ generate-docs:
     - cd $CI_PROJECT_DIR
     - python -m pip install pytz
     - export UPDATE_VERSION=`python get_utc_update_time.py`
-    - /bin/bash update_version.sh $UPDATE_VERSION
+    - echo "update version:"
+    - echo $UPDATE_VERSION
+    - sh update_version.sh $UPDATE_VERSION
     - export PYTHONPATH=/ && pydoc-markdown -m coinmetrics.api_client > docs/docs/api_client.md
     - cp -f README.md docs/docs/index.md
     - cp -f FlatFilesExport.md docs/docs/FlatFilesExport.md
