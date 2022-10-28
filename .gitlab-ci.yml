@@ -72,6 +72,7 @@ generate-docs:
     - python -m pip install poetry jinja2==3.0.3 regex
     - poetry install
     - apk add py3-dbus
+    - apk add bash
   script:
     - git checkout -b $CI_COMMIT_REF_NAME-$RANDOM origin/$CI_COMMIT_REF_NAME
     - url_host=$(echo "${CI_REPOSITORY_URL}" | sed -e 's|https\?://gitlab-ci-token:.*@|ssh://git@|g')
@@ -83,7 +84,7 @@ generate-docs:
     - export UPDATE_VERSION=`python get_utc_update_time.py`
     - echo "update version:"
     - echo $UPDATE_VERSION
-    - sh update_version.sh $UPDATE_VERSION
+    - bash update_version.sh $UPDATE_VERSION
     - export PYTHONPATH=/ && pydoc-markdown -m coinmetrics.api_client > docs/docs/api_client.md
     - cp -f README.md docs/docs/index.md
     - cp -f FlatFilesExport.md docs/docs/FlatFilesExport.md
@@ -93,8 +94,8 @@ generate-docs:
     - git commit -m "Release version $UPDATE_VERSION" || echo "No changes, nothing to commit!"
     - git push --follow-tags origin HEAD:$CI_COMMIT_REF_NAME
   when: manual
-  rules:
-    - if: $CI_COMMIT_BRANCH == "master"
+#  rules:
+#    - if: $CI_COMMIT_BRANCH == "master"
 
 deploy:
   stage: deploy

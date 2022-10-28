@@ -30,7 +30,7 @@ client = CoinMetricsClient(api_key)
 DST_ROOT = "./data/market_open_interest/"
 
 # Will export all future markets with BTC as a base
-MARKETS_TO_EXPORT = [data['market'] for data in client.catalog_markets(base="btc", type="future")]
+MARKETS_TO_EXPORT = [data['market'] for data in client.catalog_markets(base="btc", market_type="future")]
 
 EXPORT_START_DATE = datetime(year=2020, month=1, day=1)
 
