@@ -3317,7 +3317,7 @@ class CoinMetricsClient:
         self,
         asset: str,
         accounts: Optional[Union[List[str], str]] = None,
-        transaction_hashes: Optional[Union[List[str], str]] = None,
+        txids: Optional[Union[List[str], str]] = None,
         block_hashes: Optional[Union[List[str], str]] = None,
         page_size: Optional[int] = None,
         paging_from: Optional[Union[PagingFrom, str]] = "start",
@@ -3338,8 +3338,8 @@ class CoinMetricsClient:
         :type asset: str
         :param accounts: Optional comma separated list of accounts to filter a response.
         :type accounts: str, list(str)
-        :param transaction_hashes: Optional comma separated list of transaction hashes to filter a response.
-        :type transaction_hashes: str, list(str)
+        :param txids: Optional comma separated list of transaction ids to filter a response.
+        :type txids: str, list(str)
         :param block_hashes: Optional comma separated list of block hashes to filter a response.
         :type block_hashes: str, list(str)
         :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
@@ -3370,7 +3370,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "asset": asset,
             "accounts": accounts,
-            "transaction_hashes": transaction_hashes,
+            "txids": txids,
             "block_hashes": block_hashes,
             "page_size": page_size,
             "paging_from": paging_from,
