@@ -30,7 +30,7 @@ client = CoinMetricsClient(api_key)
 DST_ROOT = "./data/market_contract_price/"
 
 # Will export prices for 100 contracts for options with ETH as the base currency
-MARKETS_TO_EXPORT = [data['market'] for data in client.catalog_markets(base="eth", type="option")][0:100]
+MARKETS_TO_EXPORT = [data['market'] for data in client.catalog_markets(base="eth", market_type="option")][0:100]
 
 EXPORT_START_DATE = datetime(year=2020, month=1, day=1)
 
