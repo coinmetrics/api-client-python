@@ -2500,7 +2500,7 @@ Returns a list of blockchain transactions metadata.
 def get_list_of_balance_updates_v2(
         asset: str,
         accounts: Optional[Union[List[str], str]] = None,
-        txids: Optional[Union[List[str], str]] = None,
+        transaction_hashes: Optional[Union[List[str], str]] = None,
         block_hashes: Optional[Union[List[str], str]] = None,
         page_size: Optional[int] = None,
         paging_from: Optional[Union[PagingFrom, str]] = "start",
@@ -2521,7 +2521,7 @@ Returns a list of blockchain accounts balance updates.
 
 - `asset` (`str`): Asset name
 - `accounts` (`str, list(str)`): Optional comma separated list of accounts to filter a response.
-- `txids` (`str, list(str)`): Optional comma separated list of transaction ids to filter a response.
+- `transaction_hashes` (`str, list(str)`): Optional comma separated list of transaction hashes to filter a response.
 - `block_hashes` (`str, list(str)`): Optional comma separated list of block hashes to filter a response.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
@@ -2709,24 +2709,38 @@ Returns status updates for the specified or all transactions.
 
 `DataCollection`: status updates for the specified or all transactions.
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_taxonomy_assets"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_taxonomy_assets"></a>
+
 #### get\_taxonomy\_assets
 
 ```python
- | get_taxonomy_assets(assets: Optional[List[str]], sector_ids: Optional[List[str]], industry_group_ids: Optional[List[str]], industry_ids: Optional[List[str]], start_time: Optional[str], end_time: Optional[str], page_size: Optional[int] = None, paging_from: Optional[str] = None, version: Optional[str] = None) -> DataCollection
+def get_taxonomy_assets(assets: Optional[List[str]] = None,
+                        class_ids: Optional[List[str]] = None,
+                        sector_ids: Optional[List[str]] = None,
+                        subsector_ids: Optional[List[str]] = None,
+                        classification_start_time: Optional[str] = None,
+                        classification_end_time: Optional[str] = None,
+                        end_inclusive: Optional[bool] = None,
+                        start_inclusive: Optional[bool] = None,
+                        page_size: Optional[int] = None,
+                        paging_from: Optional[str] = None,
+                        version: Optional[str] = None) -> DataCollection
 ```
 
 Returns assets with information about their sector, industry, and industry group IDs. By default reutrns all
+
 covered assets
 
 **Arguments**:
 
 - `assets` (`Optional[List[str]]`): Asset names
-- `sector_ids` (`Optional[List[str]]`): List of 2-digit sector IDs
-- `industry_group_ids` (`Optional[List[str]]`): List of 4 digit market IDs
-- `industry_ids` (`Optional[List[str]]`): List of 6 digit industry IDs
-- `start_time` (`Optional[str]`): Start time for the taxonomy assets. ISO-8601 format date. Inclusive by default
-- `end_time` (`Optional[str]`): End time for the taxonomy assets. ISO-8601 format date. Inclusive by default
+- `class_ids` (`Optional[List[str]]`): List of class identifiers.
+- `sector_ids` (`Optional[List[str]]`): Lst of sector identifiers.
+- `subsector_ids` (`Optional[List[str]]`): List of subsector identifiers
+- `classification_start_time` (`Optional[str]`): Start time for the taxonomy assets. ISO-8601 format date. Inclusive by default
+- `classification_end_time` (`Optional[str]`): End time for the taxonomy assets. ISO-8601 format date. Inclusive by default
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `page_size` (`Optional[int]`): Page size for # of assets to return, will default to 100
 - `paging_from` (`Optional[str]`): Which direction to page from "start" or "end". "end" by default
 - `version` (`Optional[str]`): Version to query, default is "latest".
@@ -2735,19 +2749,25 @@ covered assets
 
 `Datacollection`: Returns a data collection containing the taxonomy assets
 
-<a name="coinmetrics.api_client.CoinMetricsClient.get_taxonomy_assets_metadata"></a>
+<a id="coinmetrics.api_client.CoinMetricsClient.get_taxonomy_assets_metadata"></a>
+
 #### get\_taxonomy\_assets\_metadata
 
 ```python
- | get_taxonomy_assets_metadata(start_time: Optional[str] = None, end_time: Optional[str] = None, page_size: Optional[int] = None, paging_from: Optional[str] = None, version: Optional[str] = None) -> DataCollection
+def get_taxonomy_assets_metadata(
+        classification_start_time: Optional[str] = None,
+        classification_end_time: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        version: Optional[str] = None) -> DataCollection
 ```
 
 Returns metadata about the assets, sectors, and industries included in the CM taxonomy
 
 **Arguments**:
 
-- `start_time` (`str`): Start time for the taxonomy version file. ISO-8601 format date. Inclusive by default
-- `end_time` (`str`): End time for the taxonomy version file. ISO-8601 format date. Exclusive by default
+- `classification_start_time` (`str`): Start time for the taxonomy version file. ISO-8601 format date. Inclusive by default
+- `classification_end_time` (`str`): End time for the taxonomy version file. ISO-8601 format date. Exclusive by default
 - `page_size` (`Optional[int]`): Page size for # of asset metadata to return, will default to 100
 - `paging_from` (`Optional[str]`): Which direction to page from "start" or "end". "end" by default
 - `version` (`Optional[str]`): Version to query, default is "latest".
