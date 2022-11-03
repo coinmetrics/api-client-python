@@ -30,7 +30,7 @@ client = CoinMetricsClient(api_key)
 DST_ROOT = "./data/market_liquidations/"
 
 # Will export all future markets with ETH as a base on FTX
-MARKETS_TO_EXPORT = [data['market'] for data in client.catalog_markets(base="eth", type="future", exchange="ftx")]
+MARKETS_TO_EXPORT = [data['market'] for data in client.catalog_markets(base="eth", market_type="future", exchange="ftx")]
 
 EXPORT_START_DATE = datetime(year=2020, month=1, day=1)
 
