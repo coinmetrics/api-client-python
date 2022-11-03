@@ -2500,7 +2500,7 @@ Returns a list of blockchain transactions metadata.
 def get_list_of_balance_updates_v2(
         asset: str,
         accounts: Optional[Union[List[str], str]] = None,
-        transaction_hashes: Optional[Union[List[str], str]] = None,
+        txids: Optional[Union[List[str], str]] = None,
         block_hashes: Optional[Union[List[str], str]] = None,
         page_size: Optional[int] = None,
         paging_from: Optional[Union[PagingFrom, str]] = "start",
@@ -2521,7 +2521,7 @@ Returns a list of blockchain accounts balance updates.
 
 - `asset` (`str`): Asset name
 - `accounts` (`str, list(str)`): Optional comma separated list of accounts to filter a response.
-- `transaction_hashes` (`str, list(str)`): Optional comma separated list of transaction hashes to filter a response.
+- `txids` (`str, list(str)`): Optional comma separated list of transaction ids to filter a response.
 - `block_hashes` (`str, list(str)`): Optional comma separated list of block hashes to filter a response.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
