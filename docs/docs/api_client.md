@@ -2709,3 +2709,50 @@ Returns status updates for the specified or all transactions.
 
 `DataCollection`: status updates for the specified or all transactions.
 
+<a name="coinmetrics.api_client.CoinMetricsClient.get_taxonomy_assets"></a>
+#### get\_taxonomy\_assets
+
+```python
+ | get_taxonomy_assets(assets: Optional[List[str]], sector_ids: Optional[List[str]], industry_group_ids: Optional[List[str]], industry_ids: Optional[List[str]], start_time: Optional[str], end_time: Optional[str], page_size: Optional[int] = None, paging_from: Optional[str] = None, version: Optional[str] = None) -> DataCollection
+```
+
+Returns assets with information about their sector, industry, and industry group IDs. By default reutrns all
+covered assets
+
+**Arguments**:
+
+- `assets` (`Optional[List[str]]`): Asset names
+- `sector_ids` (`Optional[List[str]]`): List of 2-digit sector IDs
+- `industry_group_ids` (`Optional[List[str]]`): List of 4 digit market IDs
+- `industry_ids` (`Optional[List[str]]`): List of 6 digit industry IDs
+- `start_time` (`Optional[str]`): Start time for the taxonomy assets. ISO-8601 format date. Inclusive by default
+- `end_time` (`Optional[str]`): End time for the taxonomy assets. ISO-8601 format date. Inclusive by default
+- `page_size` (`Optional[int]`): Page size for # of assets to return, will default to 100
+- `paging_from` (`Optional[str]`): Which direction to page from "start" or "end". "end" by default
+- `version` (`Optional[str]`): Version to query, default is "latest".
+
+**Returns**:
+
+`Datacollection`: Returns a data collection containing the taxonomy assets
+
+<a name="coinmetrics.api_client.CoinMetricsClient.get_taxonomy_assets_metadata"></a>
+#### get\_taxonomy\_assets\_metadata
+
+```python
+ | get_taxonomy_assets_metadata(start_time: Optional[str] = None, end_time: Optional[str] = None, page_size: Optional[int] = None, paging_from: Optional[str] = None, version: Optional[str] = None) -> DataCollection
+```
+
+Returns metadata about the assets, sectors, and industries included in the CM taxonomy
+
+**Arguments**:
+
+- `start_time` (`str`): Start time for the taxonomy version file. ISO-8601 format date. Inclusive by default
+- `end_time` (`str`): End time for the taxonomy version file. ISO-8601 format date. Exclusive by default
+- `page_size` (`Optional[int]`): Page size for # of asset metadata to return, will default to 100
+- `paging_from` (`Optional[str]`): Which direction to page from "start" or "end". "end" by default
+- `version` (`Optional[str]`): Version to query, default is "latest".
+
+**Returns**:
+
+`Datacollection`: Returns a data collection containing the taxonomy assets
+

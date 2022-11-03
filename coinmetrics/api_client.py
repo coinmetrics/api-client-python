@@ -3317,7 +3317,7 @@ class CoinMetricsClient:
         self,
         asset: str,
         accounts: Optional[Union[List[str], str]] = None,
-        txids: Optional[Union[List[str], str]] = None,
+        transaction_hashes: Optional[Union[List[str], str]] = None,
         block_hashes: Optional[Union[List[str], str]] = None,
         page_size: Optional[int] = None,
         paging_from: Optional[Union[PagingFrom, str]] = "start",
@@ -3338,8 +3338,8 @@ class CoinMetricsClient:
         :type asset: str
         :param accounts: Optional comma separated list of accounts to filter a response.
         :type accounts: str, list(str)
-        :param txids: Optional comma separated list of transaction ids to filter a response.
-        :type txids: str, list(str)
+        :param transaction_hashes: Optional comma separated list of transaction hashes to filter a response.
+        :type transaction_hashes: str, list(str)
         :param block_hashes: Optional comma separated list of block hashes to filter a response.
         :type block_hashes: str, list(str)
         :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
@@ -3370,7 +3370,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "asset": asset,
             "accounts": accounts,
-            "txids": txids,
+            "transaction_hashes": transaction_hashes,
             "block_hashes": block_hashes,
             "page_size": page_size,
             "paging_from": paging_from,
@@ -3599,6 +3599,96 @@ class CoinMetricsClient:
         return DataCollection(
             self._get_data, f"blockchain/{asset}/transaction-tracker", params
         )
+
+    def get_taxonomy_assets(
+            self,
+            assets: Optional[List[str]] = None,
+            class_ids: Optional[List[str]] = None,
+            sector_ids: Optional[List[str]] = None,
+            subsector_ids: Optional[List[str]] = None,
+            classification_start_time: Optional[str] = None,
+            classification_end_time: Optional[str] = None,
+            end_inclusive: Optional[bool] = None,
+            start_inclusive: Optional[bool] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            version: Optional[str] = None
+    ) -> DataCollection:
+        """
+        Returns assets with information about their sector, industry, and industry group IDs. By default reutrns all
+        covered assets
+
+        :param assets: Asset names
+        :type assets: Optional[List[str]]
+        :param class_ids: List of class identifiers.
+        :type class_ids: Optional[List[str]]
+        :param sector_ids: Lst of sector identifiers.
+        :type sector_ids: Optional[List[str]]
+        :param subsector_ids: List of subsector identifiers
+        :type subsector_ids: Optional[List[str]]
+        :param classification_start_time: Start time for the taxonomy assets. ISO-8601 format date. Inclusive by default
+        :type classification_start_time: Optional[str]
+        :param classification_end_time: End time for the taxonomy assets. ISO-8601 format date. Inclusive by default
+        :type classification_end_time: Optional[str]
+        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
+        :type start_inclusive: bool
+        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
+        :type end_inclusive: bool
+        :param page_size: Page size for # of assets to return, will default to 100
+        :type page_size: Optional[int]
+        :param paging_from: Which direction to page from "start" or "end". "end" by default
+        :type paging_from: Optional[str]
+        :param version: Version to query, default is "latest".
+        :type version: Optional[str]
+        :return: Returns a data collection containing the taxonomy assets
+        :rtype: Datacollection
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "class_ids": class_ids,
+            "sector_ids": sector_ids,
+            "subsector_ids": subsector_ids,
+            "classification_start_time": classification_start_time,
+            "classification_end_time": classification_end_time,
+            "end_inclusive": end_inclusive,
+            "start_inclusive": start_inclusive,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "version": version,
+        }
+        return DataCollection(self._get_data, "/taxonomy/assets", params)
+
+    def get_taxonomy_assets_metadata(
+            self,
+            classification_start_time: Optional[str] = None,
+            classification_end_time: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            version: Optional[str] = None
+    ) -> DataCollection:
+        """
+        Returns metadata about the assets, sectors, and industries included in the CM taxonomy
+        :param classification_start_time: Start time for the taxonomy version file. ISO-8601 format date. Inclusive by default
+        :type classification_start_time: str
+        :param classification_end_time: End time for the taxonomy version file. ISO-8601 format date. Exclusive by default
+        :type classification_end_time: str
+        :param page_size: Page size for # of asset metadata to return, will default to 100
+        :type page_size: Optional[int]
+        :param paging_from: Which direction to page from "start" or "end". "end" by default
+        :type paging_from: Optional[str]
+        :param version: Version to query, default is "latest".
+        :type version: Optional[str]
+        :return: Returns a data collection containing the taxonomy assets
+        :rtype: Datacollection
+        """
+        params: Dict[str, Any] = {
+            "classification_start_time": classification_start_time,
+            "classification_end_time": classification_end_time,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "version": version
+        }
+        return DataCollection(self._get_data, "/taxonomy-metadata/assets", params)
 
     def _get_data(self, url: str, params: Dict[str, Any]) -> DataReturnType:
         if params:

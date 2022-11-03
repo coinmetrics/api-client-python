@@ -1,5 +1,3 @@
-import datetime
-
 import pytest
 
 from coinmetrics.api_client import CoinMetricsClient
@@ -236,13 +234,3 @@ def test_timeseries_pair_candles() -> None:
         "price_low",
     ]
     assert all(col in expected_cols for col in data.first_page()[0])
-
-
-@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
-def test_list_balance_updates_v2() -> None:
-    """
-    Tests that the list of balance updates v2 endpoints works with transaction ids as expected
-    """
-    transaction_id = "0x4cae913b99798d925a537bdb8170b5605e8f83a33b14375be8b7cf957f12638e"
-    data = client.get_asset_metrics(assets="eth", metrics=["ReferenceRateUSD"], frequency="1d", start_time=datetime.datetime.today() - datetime.timedelta(days=1)).to_dataframe()
-    print(data)
