@@ -587,12 +587,12 @@ def test_catalog_assets_request(mocker: Any) -> None:
     client = CoinMetricsClient("xxx")
     mock = Mock()
     mock.content = '{"data": [{"asset": "btc", "markets": ["coinbase-btc-usd-spot"]}]}'
-    mocked_obj = mocker.patch.object(requests, "get", return_value=mock)
+    mocked_obj = mocker.patch.object(requests.Session, "get", return_value=mock)
     response = client.catalog_assets(assets="btc")
     mocked_obj.assert_called_once_with(
         "https://api.coinmetrics.io/v4/catalog/assets?api_key=xxx&assets=btc",
         verify=True,
-        headers=client._http_header,
+        headers=client._session.headers,
         proxies={"http": None, "https": None},
     )
     assert response == [{"asset": "btc", "markets": ["coinbase-btc-usd-spot"]}]

@@ -36,11 +36,17 @@ class CoinMetricsDataExporter:
         api_key: str = "",
         verify_ssl_certs: Union[bool, str] = True,
         proxy_url: Optional[str] = None,
+        session: Optional[requests.Session] = None
     ):
         self._api_key = api_key
         self._verify_ssl_certs = verify_ssl_certs
         self._proxy_url = proxy_url
         self._auth = HTTPBasicAuth(self._api_key, "")
+        if session is None:
+            self._session = requests.Session()
+            self._session.verify = self._verify_ssl_certs
+        else:
+            self._session = session
 
     def export_market_candles_future_data(
         self,
@@ -458,7 +464,7 @@ class CoinMetricsDataExporter:
 
     @retry((socket.gaierror, HTTPError), retries=5, wait_time_between_retries=5)
     def _send_request(self, actual_url: str, stream: bool = False) -> Response:
-        return requests.get(
+        return self._session.get(
             actual_url, verify=self._verify_ssl_certs, auth=self._auth, stream=stream
         )
 

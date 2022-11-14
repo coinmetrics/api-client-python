@@ -85,6 +85,7 @@ class CoinMetricsClient:
         api_key: str = "",
         verify_ssl_certs: Union[bool, str] = True,
         proxy_url: Optional[str] = None,
+        session: Optional[requests.Session] = None
     ):
         self._api_key_url_str = "api_key={}".format(api_key) if api_key else ""
 
@@ -97,6 +98,13 @@ class CoinMetricsClient:
         self._ws_api_base_url = "wss://{}api.coinmetrics.io/v4".format(api_path_prefix)
         self._http_header = {"Api-Client-Version": version}
         self._proxies = {"http": proxy_url, "https": proxy_url}
+        if session is None:
+            self._session = requests.Session()
+            self._session.verify = self._verify_ssl_certs
+            self._session.headers.update({"Api-Client-Version": version})
+            self._session.proxies.update({"http": proxy_url, "https": proxy_url})  # type: ignore
+        else:
+            self._session = session
 
     def catalog_assets(
         self, assets: Optional[Union[List[str], str]] = None
@@ -3317,7 +3325,7 @@ class CoinMetricsClient:
         self,
         asset: str,
         accounts: Optional[Union[List[str], str]] = None,
-        transaction_hashes: Optional[Union[List[str], str]] = None,
+        txids: Optional[Union[List[str], str]] = None,
         block_hashes: Optional[Union[List[str], str]] = None,
         page_size: Optional[int] = None,
         paging_from: Optional[Union[PagingFrom, str]] = "start",
@@ -3338,8 +3346,8 @@ class CoinMetricsClient:
         :type asset: str
         :param accounts: Optional comma separated list of accounts to filter a response.
         :type accounts: str, list(str)
-        :param transaction_hashes: Optional comma separated list of transaction hashes to filter a response.
-        :type transaction_hashes: str, list(str)
+        :param txids: Optional comma separated list of transaction ids to filter a response.
+        :type txids: str, list(str)
         :param block_hashes: Optional comma separated list of block hashes to filter a response.
         :type block_hashes: str, list(str)
         :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
@@ -3370,7 +3378,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "asset": asset,
             "accounts": accounts,
-            "transaction_hashes": transaction_hashes,
+            "txids": txids,
             "block_hashes": block_hashes,
             "page_size": page_size,
             "paging_from": paging_from,
@@ -3730,9 +3738,5 @@ class CoinMetricsClient:
 
     @retry((socket.gaierror, HTTPError), retries=5, wait_time_between_retries=5)
     def _send_request(self, actual_url: str) -> Response:
-        return requests.get(
-            actual_url,
-            verify=self._verify_ssl_certs,
-            headers=self._http_header,
-            proxies=self._proxies,
-        )
+        return self._session.get(
+            actual_url, headers=self._session.headers, proxies=self._session.proxies, verify=self._session.verify)
