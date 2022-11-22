@@ -32,7 +32,6 @@ pydoc-markdown = "^4.6.3"
 pytest-mock = "^3.2.0"
 
 [tool.poetry.scripts]
-poetry = 'poetry.console:run'
 coinmetrics = 'coinmetrics.typer_cli:main'
 
 [build-system]
