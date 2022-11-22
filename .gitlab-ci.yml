@@ -59,8 +59,8 @@ generate-docs:
     - chmod 700 ~/.ssh
     - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
-    - git config --global user.email "user@example.com"
-    - git config --global user.name "User name"
+    - git config --global user.email "noreply@coinmetrics.io"
+    - git config --global user.name "Release Bot"
     - git fetch
     # Python build
     - apk add build-base

@@ -832,6 +832,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#get_taxonomy_assets" class="md-nav__link">
+    get_taxonomy_assets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_taxonomy_assets_metadata" class="md-nav__link">
+    get_taxonomy_assets_metadata
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1506,6 +1520,20 @@
           <li class="md-nav__item">
   <a href="#get_transaction_tracker" class="md-nav__link">
     get_transaction_tracker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_taxonomy_assets" class="md-nav__link">
+    get_taxonomy_assets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_taxonomy_assets_metadata" class="md-nav__link">
+    get_taxonomy_assets_metadata
   </a>
   
 </li>
@@ -3441,7 +3469,7 @@
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_list_of_balance_updates_v2</span><span class="p">(</span>
         <span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">accounts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">transaction_hashes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">txids</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">block_hashes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span>
@@ -3460,7 +3488,7 @@
 <ul>
 <li><code>asset</code> (<code>str</code>): Asset name</li>
 <li><code>accounts</code> (<code>str, list(str)</code>): Optional comma separated list of accounts to filter a response.</li>
-<li><code>transaction_hashes</code> (<code>str, list(str)</code>): Optional comma separated list of transaction hashes to filter a response.</li>
+<li><code>txids</code> (<code>str, list(str)</code>): Optional comma separated list of transaction ids to filter a response.</li>
 <li><code>block_hashes</code> (<code>str, list(str)</code>): Optional comma separated list of block hashes to filter a response.</li>
 <li><code>page_size</code> (<code>int</code>): number of items returned per page when calling the API. If the request times out, try using a smaller number.</li>
 <li><code>paging_from</code> (<code>PagingFrom, str</code>): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
@@ -3597,6 +3625,58 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: status updates for the specified or all transactions.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.get_taxonomy_assets"></a></p>
+<h4 id="get_taxonomy_assets">get_taxonomy_assets<a class="headerlink" href="#get_taxonomy_assets" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_taxonomy_assets</span><span class="p">(</span><span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                        <span class="n">class_ids</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                        <span class="n">sector_ids</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                        <span class="n">subsector_ids</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                        <span class="n">classification_start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                        <span class="n">classification_end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                        <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                        <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                        <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+<p>Returns assets with information about their sector, industry, and industry group IDs. By default reutrns all</p>
+<p>covered assets</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>Optional[List[str]]</code>): Asset names</li>
+<li><code>class_ids</code> (<code>Optional[List[str]]</code>): List of class identifiers.</li>
+<li><code>sector_ids</code> (<code>Optional[List[str]]</code>): Lst of sector identifiers.</li>
+<li><code>subsector_ids</code> (<code>Optional[List[str]]</code>): List of subsector identifiers</li>
+<li><code>classification_start_time</code> (<code>Optional[str]</code>): Start time for the taxonomy assets. ISO-8601 format date. Inclusive by default</li>
+<li><code>classification_end_time</code> (<code>Optional[str]</code>): End time for the taxonomy assets. ISO-8601 format date. Inclusive by default</li>
+<li><code>start_inclusive</code> (<code>bool</code>): Flag to define if start timestamp must be included in the timeseries if present. True by default.</li>
+<li><code>end_inclusive</code> (<code>bool</code>): Flag to define if end timestamp must be included in the timeseries if present. True by default.</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Page size for # of assets to return, will default to 100</li>
+<li><code>paging_from</code> (<code>Optional[str]</code>): Which direction to page from "start" or "end". "end" by default</li>
+<li><code>version</code> (<code>Optional[str]</code>): Version to query, default is "latest".</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>Datacollection</code>: Returns a data collection containing the taxonomy assets</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.get_taxonomy_assets_metadata"></a></p>
+<h4 id="get_taxonomy_assets_metadata">get_taxonomy_assets_metadata<a class="headerlink" href="#get_taxonomy_assets_metadata" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_taxonomy_assets_metadata</span><span class="p">(</span>
+        <span class="n">classification_start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">classification_end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+<p>Returns metadata about the assets, sectors, and industries included in the CM taxonomy</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>classification_start_time</code> (<code>str</code>): Start time for the taxonomy version file. ISO-8601 format date. Inclusive by default</li>
+<li><code>classification_end_time</code> (<code>str</code>): End time for the taxonomy version file. ISO-8601 format date. Exclusive by default</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Page size for # of asset metadata to return, will default to 100</li>
+<li><code>paging_from</code> (<code>Optional[str]</code>): Which direction to page from "start" or "end". "end" by default</li>
+<li><code>version</code> (<code>Optional[str]</code>): Version to query, default is "latest".</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>Datacollection</code>: Returns a data collection containing the taxonomy assets</p>
                 
               
               
