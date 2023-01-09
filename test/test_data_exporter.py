@@ -218,9 +218,9 @@ def test_download_jsongz_market_trades() -> None:
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_download_market_trades_futures() -> None:
     list_of_expected_files = [
-        "market-trades-future/binance/2022-07-15.json.gz"
-        "market-trades-future/binance/2022-07-16.json.gz"
-        "market-trades-future/binance/2022-07-17.json.gz"
+        "market-trades-future/binance/2022-07-15.json.gz",
+        "market-trades-future/binance/2022-07-16.json.gz",
+        "market-trades-future/binance/2022-07-17.json.gz",
     ]
     files_downloaded_test_helper_start(list_of_expected_files)
     start_date = datetime(2022, 7, 15)
@@ -237,9 +237,9 @@ def test_download_market_trades_futures() -> None:
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_download_json_market_trades_spot() -> None:
     list_of_expected_files = [
-        "market-trades-spot/binance/2019-07-15.json"
-        "market-trades-spot/binance/2019-07-16.json"
-        "market-trades-spot/binance/2019-07-17.json"
+        "market-trades-spot/binance/2019-07-15.json",
+        "market-trades-spot/binance/2019-07-16.json",
+        "market-trades-spot/binance/2019-07-17.json",
     ]
     files_downloaded_test_helper_start(list_of_expected_files)
     start_date = datetime(2019, 7, 15)

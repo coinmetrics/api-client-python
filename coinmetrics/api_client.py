@@ -40,6 +40,7 @@ from coinmetrics._catalogs import (
     CatalogExchangeAssetMetricsData,
     CatalogPairMetricsData,
     CatalogInstitutionMetricsData,
+    CatalogMarketOrderbooksData,
 )
 
 logger = getLogger("cm_client")
@@ -547,7 +548,7 @@ class CoinMetricsClient:
         quote: Optional[str] = None,
         asset: Optional[str] = None,
         symbol: Optional[str] = None,
-    ) -> CatalogMarketTradesData:
+    ) -> CatalogMarketOrderbooksData:
         """
         Returns a list of markets with orderbooks support along with the time ranges of available data.
 
@@ -577,7 +578,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        return CatalogMarketTradesData(
+        return CatalogMarketOrderbooksData(
             self._get_data("catalog/market-orderbooks", params)["data"]
         )
 

@@ -140,7 +140,7 @@ class CatalogAssetAlertsData(List[Any]):
         Transforms catalog data in list form into a dataframe
         :return: Catalog Data
         """
-        return convert_catalog_dtypes(pd.DataFrame(self).explode("constituents"))
+        return convert_catalog_dtypes(pd.DataFrame(self))
 
 
 class CatalogMarketTradesData(List[Any]):
@@ -150,6 +150,36 @@ class CatalogMarketTradesData(List[Any]):
         :return: Catalog Data
         """
         return convert_catalog_dtypes(pd.DataFrame(self))
+
+
+class CatalogMarketOrderbooksData(List[Any]):
+    def to_dataframe(self, secondary_level: Optional[str] = None) -> DataFrameType:
+        """
+        Transforms catalog data in list form into a dataframe
+        :return: Catalog Data
+        """
+        df_assets = pd.DataFrame(self)
+        if secondary_level is None:
+            pass
+        elif secondary_level == "depths":
+
+            def _assign(x: Any, key: str = "depth") -> Any:
+                try:
+                    return x[key]
+                except TypeError:
+                    return None
+
+            df_assets = df_assets.explode("depths").assign(
+                depth=lambda x: pd.Series(x["depths"])
+            )
+            df_assets["depth"] = df_assets["depths"].apply(_assign, key="depth")
+            df_assets["min_time"] = df_assets["depths"].apply(_assign, key="min_time")
+            df_assets["max_time"] = df_assets["depths"].apply(_assign, key="max_time")
+            df_assets.drop(["depths"], inplace=True, axis=1)
+        else:
+            raise ValueError
+
+        return convert_catalog_dtypes(df_assets)
 
 
 class CatalogAssetPairsData(List[Any]):
