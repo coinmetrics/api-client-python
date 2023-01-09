@@ -462,7 +462,7 @@ def catalog_market_orderbooks(
         base: Optional[str] = None,
         quote: Optional[str] = None,
         asset: Optional[str] = None,
-        symbol: Optional[str] = None) -> CatalogMarketTradesData
+        symbol: Optional[str] = None) -> CatalogMarketOrderbooksData
 ```
 
 Returns a list of markets with orderbooks support along with the time ranges of available data.
@@ -2143,6 +2143,27 @@ Returns timeseries stream of market candles.
 **Returns**:
 
 `CmStream`: Market Candles timeseries stream.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.get_stream_index_levels"></a>
+
+#### get\_stream\_index\_levels
+
+```python
+def get_stream_index_levels(
+        indexes: Union[List[str], str],
+        backfill: Union[Backfill, str] = Backfill.LATEST) -> CmStream
+```
+
+Returns timeseries stream of index levels.
+
+**Arguments**:
+
+- `indexes`: list of indxes or market patterns such as CMBIBTC
+- `backfill` (`str`): What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.
+
+**Returns**:
+
+`CmStream`: Index levels data timeseries stream.
 
 <a id="coinmetrics.api_client.CoinMetricsClient.get_list_of_blocks"></a>
 

@@ -246,6 +246,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#debugging-the-api-client" class="md-nav__link">
+    Debugging the API Client
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#ssl-certs-verification" class="md-nav__link">
     SSL Certs verification
   </a>
@@ -404,6 +411,13 @@
           <li class="md-nav__item">
   <a href="#paging" class="md-nav__link">
     Paging
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging-the-api-client" class="md-nav__link">
+    Debugging the API Client
   </a>
   
 </li>
@@ -679,6 +693,37 @@ for metric_data in client.get_asset_metrics(assets=&#39;btc&#39;, metrics=[&#39;
     print(metric_data)
 </code></pre></div></p>
 <p>PagingFrom.END: is available but by default it will page from the start.</p>
+<h3 id="debugging-the-api-client">Debugging the API Client<a class="headerlink" href="#debugging-the-api-client" title="Permanent link">&para;</a></h3>
+<p>There are two additional options for the API Client - <code>debug_mode</code> and <code>verbose</code>. These two options log network calls 
+to the console, and in the case of <code>debug_mode</code> it will generate a log file of all the network requests and the time
+it takes to call them. These tools can be used to diagnose issues in your code and also to get a better understanding 
+of request times so that users can write more performant code. For example, running the below code:
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">coinmetrics.api_client</span> <span class="kn">import</span> <span class="n">CoinMetricsClient</span>
+
+<span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;CM_API_KEY&#39;</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">CoinMetricsClient</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">,</span> <span class="n">debug_mode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">reference_rates_example</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_asset_metrics</span><span class="p">(</span><span class="n">assets</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;btc&#39;</span><span class="p">,</span> <span class="s1">&#39;algo&#39;</span><span class="p">,</span> <span class="s1">&#39;eth&#39;</span><span class="p">],</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ReferenceRateUSD&#39;</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">reference_rates_example</span><span class="p">:</span>
+        <span class="k">continue</span>
+</code></pre></div>
+The console output will look like:
+<div class="highlight"><pre><span></span><code>[DEBUG] 2023-01-09 11:01:02,044 - Starting API Client debugging session. logging to stdout and cm_api_client_debug_2023_01_09_11_01_02.txt
+[DEBUG] 2023-01-09 11:01:02,044 - Using coinmetrics version 2022.11.14.16
+[DEBUG] 2023-01-09 11:01:02,044 - Current state of API Client, excluding API KEY: {&#39;_verify_ssl_certs&#39;: True, &#39;_api_base_url&#39;: &#39;https://api.coinmetrics.io/v4&#39;, &#39;_ws_api_base_url&#39;: &#39;wss://api.coinmetrics.io/v4&#39;, &#39;_http_header&#39;: {&#39;Api-Client-Version&#39;: &#39;2022.11.14.16&#39;}, &#39;_proxies&#39;: {&#39;http&#39;: None, &#39;https&#39;: None}, &#39;debug_mode&#39;: True, &#39;verbose&#39;: False}
+[DEBUG] 2023-01-09 11:01:02,044 - Attempting to call url: timeseries/asset-metrics with params: {&#39;assets&#39;: [&#39;btc&#39;, &#39;algo&#39;, &#39;eth&#39;], &#39;metrics&#39;: [&#39;ReferenceRateUSD&#39;], &#39;frequency&#39;: None, &#39;page_size&#39;: None, &#39;paging_from&#39;: &#39;start&#39;, &#39;start_time&#39;: None, &#39;end_time&#39;: None, &#39;start_height&#39;: None, &#39;end_height&#39;: None, &#39;start_inclusive&#39;: None, &#39;end_inclusive&#39;: None, &#39;timezone&#39;: None, &#39;sort&#39;: None, &#39;limit_per_asset&#39;: None}
+[DEBUG] 2023-01-09 11:01:02,387 - Response status code: 200 for url: https://api.coinmetrics.io/v4/timeseries/asset-metrics?api_key=[REDACTED]&amp;assets=btc%2Calgo%2Ceth&amp;metrics=ReferenceRateUSD&amp;paging_from=start took: 0:00:00.342874 response body size (bytes): 9832
+[DEBUG] 2023-01-09 11:01:02,388 - Attempting to call url: timeseries/asset-metrics with params: {&#39;assets&#39;: [&#39;btc&#39;, &#39;algo&#39;, &#39;eth&#39;], &#39;metrics&#39;: [&#39;ReferenceRateUSD&#39;], &#39;frequency&#39;: None, &#39;page_size&#39;: None, &#39;paging_from&#39;: &#39;start&#39;, &#39;start_time&#39;: None, &#39;end_time&#39;: None, &#39;start_height&#39;: None, &#39;end_height&#39;: None, &#39;start_inclusive&#39;: None, &#39;end_inclusive&#39;: None, &#39;timezone&#39;: None, &#39;sort&#39;: None, &#39;limit_per_asset&#39;: None, &#39;next_page_token&#39;: &#39;0.MjAxOS0wOS0zMFQwMDowMDowMFo&#39;}
+[DEBUG] 2023-01-09 11:01:02,559 - Response status code: 200 for url: https://api.coinmetrics.io/v4/timeseries/asset-metrics?api_key=[REDACTED]&amp;assets=btc%2Calgo%2Ceth&amp;metrics=ReferenceRateUSD&amp;paging_from=start&amp;next_page_token=0.MjAxOS0wOS0zMFQwMDowMDowMFo took: 0:00:00.171487 response body size (bytes): 9857
+</code></pre></div>
+Then it can be easier to understand what network calls the API Client is making, and where any issues may exist. If you
+wish to dig even deeper, you may consider modifying the <code>_send_request()</code> method of the API Client to log additional 
+data about the state of your environment, or anything else that would help diagnose issues. You will notice a log file
+generated in the format <code>cm_api_client_debug_2023_01_09_11_01_02.txt</code>. This log file might be helpful for your own use
+or to give more context if you are working with Coin Metrics customer success. </p>
 <h3 id="ssl-certs-verification">SSL Certs verification<a class="headerlink" href="#ssl-certs-verification" title="Permanent link">&para;</a></h3>
 <p>Sometimes your organization network have special rules on SSL certs verification and in this case you might face the
 following error when running the script:

@@ -721,6 +721,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get_stream_index_levels" class="md-nav__link">
+    get_stream_index_levels
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get_list_of_blocks" class="md-nav__link">
     get_list_of_blocks
   </a>
@@ -1413,6 +1420,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get_stream_index_levels" class="md-nav__link">
+    get_stream_index_levels
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get_list_of_blocks" class="md-nav__link">
     get_list_of_blocks
   </a>
@@ -1875,7 +1889,7 @@
         <span class="n">base</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">quote</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">symbol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMarketTradesData</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMarketOrderbooksData</span>
 </code></pre></div>
 <p>Returns a list of markets with orderbooks support along with the time ranges of available data.</p>
 <p><strong>Arguments</strong>:</p>
@@ -3172,6 +3186,20 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CmStream</code>: Market Candles timeseries stream.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.get_stream_index_levels"></a></p>
+<h4 id="get_stream_index_levels">get_stream_index_levels<a class="headerlink" href="#get_stream_index_levels" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_stream_index_levels</span><span class="p">(</span>
+        <span class="n">indexes</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">backfill</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Backfill</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Backfill</span><span class="o">.</span><span class="n">LATEST</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CmStream</span>
+</code></pre></div>
+<p>Returns timeseries stream of index levels.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>indexes</code>: list of indxes or market patterns such as CMBIBTC</li>
+<li><code>backfill</code> (<code>str</code>): What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CmStream</code>: Index levels data timeseries stream.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.get_list_of_blocks"></a></p>
 <h4 id="get_list_of_blocks">get_list_of_blocks<a class="headerlink" href="#get_list_of_blocks" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_list_of_blocks</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
