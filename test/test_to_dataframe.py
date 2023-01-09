@@ -292,3 +292,7 @@ def test_catalog_market_liquidations() -> None:
     """
     catalog_liquidations = client.catalog_market_liquidations().to_dataframe()
     assert len(catalog_liquidations) > 100
+
+
+if __name__ == '__main__':
+    pytest.main()

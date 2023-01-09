@@ -1,3 +1,4 @@
+import logging
 import socket
 from datetime import date, datetime
 from logging import getLogger
@@ -88,6 +89,8 @@ class CoinMetricsClient:
         verify_ssl_certs: Union[bool, str] = True,
         proxy_url: Optional[str] = None,
         session: Optional[requests.Session] = None,
+        debug_mode: bool = False,
+        verbose: bool = False
     ):
         self._api_key_url_str = "api_key={}".format(api_key) if api_key else ""
 
@@ -107,6 +110,32 @@ class CoinMetricsClient:
             self._session.proxies.update({"http": proxy_url, "https": proxy_url})  # type: ignore
         else:
             self._session = session
+
+        self.debug_mode = debug_mode
+        self.verbose = verbose
+
+        if self.verbose:
+            logger.setLevel(level=logging.INFO)
+            format = logging.Formatter('[%(levelname)s] %(asctime)s - %(message)s')
+            handler = logging.StreamHandler()
+            handler.setFormatter(fmt=format)
+            logger.addHandler(handler)
+
+        if self.debug_mode:
+            logger.setLevel(level=logging.DEBUG)
+            format = logging.Formatter('[%(levelname)s] %(asctime)s - %(message)s')
+            handler = logging.StreamHandler()
+            handler.setFormatter(fmt=format)
+            logger.addHandler(handler)
+            file_name = f"cm_api_client_debug_{datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}.txt"
+            file_handler = logging.FileHandler(file_name)
+            file_handler.setFormatter(fmt=format)
+            logger.addHandler(file_handler)
+            logger.debug(msg=f"Starting API Client debugging session. logging to stdout and {file_name}")
+            logger.debug(msg=f"Using coinmetrics version {version}")
+            state_of_client = self.__dict__.copy()
+            del state_of_client['_api_key_url_str']
+            logger.debug(msg=f"Current state of API Client, excluding API KEY: {state_of_client}")
 
     def catalog_assets(
         self, assets: Optional[Union[List[str], str]] = None
@@ -3732,7 +3761,21 @@ class CoinMetricsClient:
         actual_url = "{}/{}?{}{}".format(
             self._api_base_url, url, self._api_key_url_str, params_str
         )
-        resp = self._send_request(actual_url)
+
+        if self.verbose:
+            logger.info(msg=f"Attempting to call url: {url.split('api_key')[0]} with params: {params}")
+            start_time = datetime.now()
+            resp = self._send_request(actual_url)
+            logger.info(f"Response status code: {resp.status_code} for url: {resp.url} "
+                        f"took: {datetime.now() - start_time} response body size (bytes): {len(resp.content)}")
+        elif self.debug_mode:
+            logger.debug(msg=f"Attempting to call url: {url.split('api_key')[0]} with params: {params}")
+            start_time = datetime.now()
+            resp = self._send_request(actual_url)
+            logger.debug(f"Response status code: {resp.status_code} for url: {resp.url} "
+                         f"took: {datetime.now() - start_time} response body size (bytes): {len(resp.content)}")
+        else:
+            resp = self._send_request(actual_url)
         try:
             data = json.loads(resp.content)
         except ValueError:
