@@ -85,7 +85,7 @@ class CoinMetricsClient:
         api_key: str = "",
         verify_ssl_certs: Union[bool, str] = True,
         proxy_url: Optional[str] = None,
-        session: Optional[requests.Session] = None
+        session: Optional[requests.Session] = None,
     ):
         self._api_key_url_str = "api_key={}".format(api_key) if api_key else ""
 
@@ -2801,6 +2801,28 @@ class CoinMetricsClient:
         }
         return self._get_stream_data("timeseries-stream/market-candles", params)
 
+    def get_stream_index_levels(
+        self,
+        indexes: Union[List[str], str],
+        backfill: Union[Backfill, str] = Backfill.LATEST,
+    ) -> CmStream:
+        """
+        Returns timeseries stream of index levels.
+
+        :param indexes: list of indxes or market patterns such as CMBIBTC
+        :type markets: list(str), str
+        :param backfill: What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.
+        :type backfill: str
+        :return: Index levels data timeseries stream.
+        :rtype: CmStream
+        """
+
+        params: Dict[str, Any] = {
+            "indexes": indexes,
+            "backfill": backfill,
+        }
+        return self._get_stream_data("timeseries-stream/index-levels", params)
+
     def get_list_of_blocks(
         self,
         asset: str,
@@ -3609,18 +3631,18 @@ class CoinMetricsClient:
         )
 
     def get_taxonomy_assets(
-            self,
-            assets: Optional[List[str]] = None,
-            class_ids: Optional[List[str]] = None,
-            sector_ids: Optional[List[str]] = None,
-            subsector_ids: Optional[List[str]] = None,
-            classification_start_time: Optional[str] = None,
-            classification_end_time: Optional[str] = None,
-            end_inclusive: Optional[bool] = None,
-            start_inclusive: Optional[bool] = None,
-            page_size: Optional[int] = None,
-            paging_from: Optional[str] = None,
-            version: Optional[str] = None
+        self,
+        assets: Optional[List[str]] = None,
+        class_ids: Optional[List[str]] = None,
+        sector_ids: Optional[List[str]] = None,
+        subsector_ids: Optional[List[str]] = None,
+        classification_start_time: Optional[str] = None,
+        classification_end_time: Optional[str] = None,
+        end_inclusive: Optional[bool] = None,
+        start_inclusive: Optional[bool] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        version: Optional[str] = None,
     ) -> DataCollection:
         """
         Returns assets with information about their sector, industry, and industry group IDs. By default reutrns all
@@ -3667,12 +3689,12 @@ class CoinMetricsClient:
         return DataCollection(self._get_data, "/taxonomy/assets", params)
 
     def get_taxonomy_assets_metadata(
-            self,
-            classification_start_time: Optional[str] = None,
-            classification_end_time: Optional[str] = None,
-            page_size: Optional[int] = None,
-            paging_from: Optional[str] = None,
-            version: Optional[str] = None
+        self,
+        classification_start_time: Optional[str] = None,
+        classification_end_time: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        version: Optional[str] = None,
     ) -> DataCollection:
         """
         Returns metadata about the assets, sectors, and industries included in the CM taxonomy
@@ -3694,7 +3716,7 @@ class CoinMetricsClient:
             "classification_end_time": classification_end_time,
             "page_size": page_size,
             "paging_from": paging_from,
-            "version": version
+            "version": version,
         }
         return DataCollection(self._get_data, "/taxonomy-metadata/assets", params)
 
@@ -3739,4 +3761,8 @@ class CoinMetricsClient:
     @retry((socket.gaierror, HTTPError), retries=5, wait_time_between_retries=5)
     def _send_request(self, actual_url: str) -> Response:
         return self._session.get(
-            actual_url, headers=self._session.headers, proxies=self._session.proxies, verify=self._session.verify)
+            actual_url,
+            headers=self._session.headers,
+            proxies=self._session.proxies,
+            verify=self._session.verify,
+        )

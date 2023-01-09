@@ -36,7 +36,7 @@ class CoinMetricsDataExporter:
         api_key: str = "",
         verify_ssl_certs: Union[bool, str] = True,
         proxy_url: Optional[str] = None,
-        session: Optional[requests.Session] = None
+        session: Optional[requests.Session] = None,
     ):
         self._api_key = api_key
         self._verify_ssl_certs = verify_ssl_certs

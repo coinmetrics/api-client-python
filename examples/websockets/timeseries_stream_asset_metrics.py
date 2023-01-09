@@ -34,4 +34,5 @@ def on_message(
         stream.close()
 
 # blocks until connection is closed or interrupted
-stream.run(on_message=on_message)
+if __name__ == '__main__':
+    stream.run(on_message=on_message)

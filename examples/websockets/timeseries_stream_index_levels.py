@@ -11,9 +11,7 @@ api_key = (
 
 client = CoinMetricsClient(api_key)
 
-stream = client.get_stream_market_trades(
-    markets=['coinbase-btc-usd-spot']
-)
+stream = client.get_stream_index_levels(indexes=["CMBIBTC", "CMBIETH"])
 
 def on_message(
         stream: CmStream, message: str
@@ -32,6 +30,7 @@ def on_message(
         print(f"Closing the connection after {max_cm_sequence_id} messages...")
         stream.close()
 
-# blocks until connection is closed or interrupted
+
 if __name__ == '__main__':
+    # blocks until connection is closed or interrupted
     stream.run(on_message=on_message)
