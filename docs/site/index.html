@@ -497,7 +497,7 @@ client = CoinMetricsClient(&quot;&lt;cm_api_key&gt;&quot;)
 # or to use community API:
 client = CoinMetricsClient()
 </code></pre></div></p>
-<p>After that you can use the client object for getting stuff like available markets:
+<p>After that you can use the client object for getting information such as available markets:
 <div class="highlight"><pre><span></span><code>print(client.catalog_markets())
 </code></pre></div></p>
 <p>or to query all available assets along with what is available for those assets, like metrics, markets:</p>
@@ -506,10 +506,41 @@ client = CoinMetricsClient()
 <p>you can also use filters for the catalog endpoints like this:</p>
 <p><div class="highlight"><pre><span></span><code>print(client.catalog_assets(assets=[&#39;btc&#39;]))
 </code></pre></div>
-in this case you would get all the information for btc only</p>
+in this case you would get all the information for btc only. </p>
 <p>You can use this client to connect to our API v4 and get catalog or timeseries data from python environment. It natively supports paging over the data so you can use it to iterate over timeseries entries seamlessly.</p>
 <p>The client can be used to query both pro and community data.</p>
 <p>The full list of methods can be found in the <a href="https://coinmetrics.github.io/api-client-python/site/api_client.html">API Client Spec</a>.</p>
+<p>If you'd like a more wholistic view of what is offered from an API endpoint you can use the <code>to_dataframe()</code> function 
+associated with our catalog endpoints. The code snippet below shows getting a dataframe of information on all the 
+assets that data is provided for:
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">catalog_assets</span><span class="p">()</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">())</span>
+</code></pre></div></p>
+<p>Output:
+<div class="highlight"><pre><span></span><code>      asset          full_name          exchanges  ... metrics atlas  experimental
+0      100x           100xCoin          [gate.io]  ...     NaN  &lt;NA&gt;          &lt;NA&gt;
+1     10set             Tenset   [gate.io, lbank]  ...     NaN  &lt;NA&gt;          &lt;NA&gt;
+2       18c           Block 18            [huobi]  ...     NaN  &lt;NA&gt;          &lt;NA&gt;
+3      1art          ArtWallet          [gate.io]  ...     NaN  &lt;NA&gt;          &lt;NA&gt;
+4      1box               1BOX           [zb.com]  ...     NaN  &lt;NA&gt;          &lt;NA&gt;
+</code></pre></div></p>
+<p>Now you can use the pandas Dataframe functionality to do useful transformations, such as filtering out the assets 
+without metrics available, then saving that data to a csv file:
+<div class="highlight"><pre><span></span><code><span class="n">catalog_assets_df</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">catalog_assets</span><span class="p">()</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
+<span class="n">only_assets_with_metrics</span> <span class="o">=</span> <span class="n">catalog_assets_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;metrics&#39;</span><span class="p">])</span>
+<span class="n">only_assets_with_metrics</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;cm_assets_with_metrics.csv&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<p>You may notice that in that data saved, the "metrics" column for example is a list of json data describing the metrics 
+offered and the frequency at which they are available. To help parse this information there is a keyword for all catalog
+endpoint data <code>secondary_level</code>:
+<div class="highlight"><pre><span></span><code><span class="n">catalog_assets_df</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">catalog_assets</span><span class="p">()</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">secondary_level</span><span class="o">=</span><span class="s2">&quot;metrics&quot;</span><span class="p">)</span>
+<span class="n">only_assets_with_metrics</span> <span class="o">=</span> <span class="n">catalog_assets_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;metric&#39;</span><span class="p">])</span>
+<span class="n">eth_metrics</span> <span class="o">=</span> <span class="n">only_assets_with_metrics</span><span class="p">[</span><span class="n">only_assets_with_metrics</span><span class="p">[</span><span class="s1">&#39;asset&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;eth&quot;</span><span class="p">]</span>
+<span class="n">eth_metrics</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;eth_metrics_granular.csv&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<p>The above example queries for eth metrics at the level of metrics and frequency, where it will have one row for each 
+metric and frequency related to Ethereum. This allows users to quickly get high level information about exactly what
+is offered from the Coin Metrics API and to make custom queries against the API from there. This example only covers 
+<code>catalog_assets()</code>, but the pattern can be used across all of our catalog endpoints. </p>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <p>The API Client allows you to chain together workflows for importing, transforming, then exporting Coin Metrics data.
 Below are examples of common use-cases that can be altered to tailor your specific needs. In addition to the examples 

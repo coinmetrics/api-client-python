@@ -28,7 +28,7 @@ client = CoinMetricsClient("<cm_api_key>")
 client = CoinMetricsClient()
 ```
 
-After that you can use the client object for getting stuff like available markets:
+After that you can use the client object for getting information such as available markets:
 ```
 print(client.catalog_markets())
 ```
@@ -45,13 +45,55 @@ you can also use filters for the catalog endpoints like this:
 ```
 print(client.catalog_assets(assets=['btc']))
 ```
-in this case you would get all the information for btc only
+in this case you would get all the information for btc only. 
 
 You can use this client to connect to our API v4 and get catalog or timeseries data from python environment. It natively supports paging over the data so you can use it to iterate over timeseries entries seamlessly.
 
 The client can be used to query both pro and community data.
 
 The full list of methods can be found in the [API Client Spec](https://coinmetrics.github.io/api-client-python/site/api_client.html).
+
+
+If you'd like a more wholistic view of what is offered from an API endpoint you can use the `to_dataframe()` function 
+associated with our catalog endpoints. The code snippet below shows getting a dataframe of information on all the 
+assets that data is provided for:
+```python
+print(client.catalog_assets().to_dataframe())
+```
+
+Output:
+```commandline
+      asset          full_name          exchanges  ... metrics atlas  experimental
+0      100x           100xCoin          [gate.io]  ...     NaN  <NA>          <NA>
+1     10set             Tenset   [gate.io, lbank]  ...     NaN  <NA>          <NA>
+2       18c           Block 18            [huobi]  ...     NaN  <NA>          <NA>
+3      1art          ArtWallet          [gate.io]  ...     NaN  <NA>          <NA>
+4      1box               1BOX           [zb.com]  ...     NaN  <NA>          <NA>
+```
+
+Now you can use the pandas Dataframe functionality to do useful transformations, such as filtering out the assets 
+without metrics available, then saving that data to a csv file:
+```python
+catalog_assets_df = client.catalog_assets().to_dataframe()
+only_assets_with_metrics = catalog_assets_df.dropna(subset=['metrics'])
+only_assets_with_metrics.to_csv("cm_assets_with_metrics.csv")
+```
+
+You may notice that in that data saved, the "metrics" column for example is a list of json data describing the metrics 
+offered and the frequency at which they are available. To help parse this information there is a keyword for all catalog
+endpoint data `secondary_level`:
+```python
+catalog_assets_df = client.catalog_assets().to_dataframe(secondary_level="metrics")
+only_assets_with_metrics = catalog_assets_df.dropna(subset=['metric'])
+eth_metrics = only_assets_with_metrics[only_assets_with_metrics['asset'] == "eth"]
+eth_metrics.to_csv("eth_metrics_granular.csv")
+```
+
+The above example queries for eth metrics at the level of metrics and frequency, where it will have one row for each 
+metric and frequency related to Ethereum. This allows users to quickly get high level information about exactly what
+is offered from the Coin Metrics API and to make custom queries against the API from there. This example only covers 
+`catalog_assets()`, but the pattern can be used across all of our catalog endpoints. 
+
 
 ## Examples
 The API Client allows you to chain together workflows for importing, transforming, then exporting Coin Metrics data.
