@@ -10,6 +10,7 @@ import websocket  # type: ignore
 
 from coinmetrics._utils import retry, transform_url_params_values_to_str
 from coinmetrics import __version__ as version
+from coinmetrics._exceptions import CoinMetricsClientQueryParamsException
 
 try:
     import ujson as json
@@ -3735,8 +3736,11 @@ class CoinMetricsClient:
         try:
             data = json.loads(resp.content)
         except ValueError:
-            resp.raise_for_status()
-            raise
+            if resp.status_code == 414:
+                raise CoinMetricsClientQueryParamsException(response=resp)
+            else:
+                resp.raise_for_status()
+                raise
         else:
             if "error" in data:
                 error_msg = (

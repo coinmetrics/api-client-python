@@ -141,8 +141,8 @@ def test_catalog_full_market_orderbooks() -> None:
     assert len(data) != 0
     data_df = data.to_dataframe()
     assert len(data_df) != 0
-    assert len(data_df.columns) == 3
-    expected_cols = ["market", "max_time", "min_time"]
+    assert len(data_df.columns) == 4
+    expected_cols = ["market", "max_time", "min_time", "depths"]
     assert all(col in expected_cols for col in data_df.columns)
 
 
@@ -237,3 +237,6 @@ def test_timeseries_pair_candles() -> None:
         "price_low",
     ]
     assert all(col in expected_cols for col in data.first_page()[0])
+
+if __name__ == '__main__':
+    pytest.main()
