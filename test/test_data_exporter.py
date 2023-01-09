@@ -12,13 +12,25 @@ cm_api_key_set = CM_API_KEY is not None
 REASON_TO_SKIP = "Need to set CM_API_KEY as an env var in order to run this test"
 
 
+@pytest.fixture()
+def setup_function() -> None:
+    folders_to_check_and_delete = ["data", "market-trades-spot", "market-trades-future",
+                                   "market-candles-future", "market-candles-spot"]
+    print(f"Deleting any folders that test folders that exist before tests are run: {folders_to_check_and_delete}")
+    for dir in folders_to_check_and_delete:
+        if os.path.exists(dir):
+            os.rmdir(dir)
+
+
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def files_downloaded_test_helper_start(list_of_expected_files: List[str]) -> None:
     """
     This is a helper function that test that the provided files do not exist at the time the tests start
     """
     for file in list_of_expected_files:
-        assert not (os.path.exists(file))
+        if os.path.exists(file):
+            print(f"The file {file} is not supposed to exist before this test is run, failing")
+            assert not (os.path.exists(file))
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
@@ -26,10 +38,15 @@ def files_downloaded_test_helper_end(list_of_file_locations: List[str]) -> None:
     """
     This is a helper function that tests that the expected files were created and then deletes them to clean up
     """
-    for file in list_of_file_locations:
-        assert os.path.exists(file)
-    for file in list_of_file_locations:
-        os.remove(file)
+    try:
+        for file in list_of_file_locations:
+            assert os.path.exists(file)
+    except Exception as e:
+        print("Exceptions found, removing files then raising exceptions")
+        for file in list_of_file_locations:
+            if os.path.exists(file):
+                os.remove(file)
+        raise e
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)

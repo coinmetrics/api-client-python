@@ -1,5 +1,8 @@
 FROM python:3.8.12-slim
 
+ARG CM_API_KEY=""
+ENV CM_API_KEY=$CM_API_KEY
+
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -qy \
       cargo \
