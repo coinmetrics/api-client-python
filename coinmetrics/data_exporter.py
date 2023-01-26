@@ -8,6 +8,8 @@ import zlib
 import sys
 from requests import Response, HTTPError
 from requests.auth import HTTPBasicAuth
+
+from coinmetrics._exceptions import CoinMetricsUnauthorizedException
 from coinmetrics._utils import retry
 from datetime import datetime
 from typing import Union, Optional, List, Dict, Any, Iterable
@@ -464,9 +466,12 @@ class CoinMetricsDataExporter:
 
     @retry((socket.gaierror, HTTPError), retries=5, wait_time_between_retries=5)
     def _send_request(self, actual_url: str, stream: bool = False) -> Response:
-        return self._session.get(
-            actual_url, verify=self._verify_ssl_certs, auth=self._auth, stream=stream
-        )
+        response = self._session.get(actual_url, verify=self._verify_ssl_certs, auth=self._auth, stream=stream)
+        if response.status_code == 403 or response.status_code == 401:
+            raise CoinMetricsUnauthorizedException(response=response)
+        if response.status_code != 200:
+            response.raise_for_status()
+        return response
 
 
 def stream_gzip_decompress_to_dicts(

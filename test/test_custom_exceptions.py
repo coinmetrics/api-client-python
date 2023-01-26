@@ -1,8 +1,12 @@
 import pytest
 import requests
-
-from coinmetrics._exceptions import CoinMetricsClientQueryParamsException
+from datetime import datetime
+from coinmetrics._exceptions import (
+    CoinMetricsClientQueryParamsException,
+    CoinMetricsUnauthorizedException,
+)
 from coinmetrics.api_client import CoinMetricsClient
+from coinmetrics.data_exporter import CoinMetricsDataExporter
 import os
 
 client = CoinMetricsClient(str(os.environ.get("CM_API_KEY")))
@@ -40,6 +44,22 @@ def test_custom_exception_not_raised_for_403() -> None:
         assert e.response.status_code == 401
     except Exception as e:
         assert False
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_403_error_message() -> None:
+    invalid_api_key = "invalid_key"
+    data_exporter = CoinMetricsDataExporter(api_key=invalid_api_key)
+    try:
+        start_date = datetime(2019, 1, 1)
+        end_date = datetime(2019, 1, 31)
+        exchanges = ["coinbase", "gemini"]
+        data_exporter.export_market_trades_spot_data(
+            start_date=start_date, end_date=end_date, exchanges=exchanges, threaded=True
+        )
+    except CoinMetricsUnauthorizedException as e:
+        assert e.response.status_code == 403 or e.response.status_code == 401
+        print(e)
 
 
 if __name__ == "__main__":

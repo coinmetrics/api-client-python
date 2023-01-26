@@ -41,6 +41,7 @@ def test_secondary_level_catalog_assets() -> None:
     usdc_markets_unqiue = set(usdc_markets)
     assert len(usdc_markets_unqiue) == len(catalog_assets_usdc_markets)
 
+
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_secondary_level_catalog_morderbooks() -> None:
     """
@@ -61,6 +62,7 @@ def test_secondary_level_catalog_morderbooks() -> None:
         catalog_orderbooks_depths_expansion_market
     )
     assert len(catalog_orderbooks_market_depths) > 1
+
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_secondary_level_catalog_asset_alerts() -> None:
@@ -294,5 +296,5 @@ def test_catalog_market_liquidations() -> None:
     assert len(catalog_liquidations) > 100
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pytest.main()

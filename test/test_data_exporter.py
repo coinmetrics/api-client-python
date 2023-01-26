@@ -14,9 +14,16 @@ REASON_TO_SKIP = "Need to set CM_API_KEY as an env var in order to run this test
 
 @pytest.fixture()
 def setup_function() -> None:
-    folders_to_check_and_delete = ["data", "market-trades-spot", "market-trades-future",
-                                   "market-candles-future", "market-candles-spot"]
-    print(f"Deleting any folders that test folders that exist before tests are run: {folders_to_check_and_delete}")
+    folders_to_check_and_delete = [
+        "data",
+        "market-trades-spot",
+        "market-trades-future",
+        "market-candles-future",
+        "market-candles-spot",
+    ]
+    print(
+        f"Deleting any folders that test folders that exist before tests are run: {folders_to_check_and_delete}"
+    )
     for dir in folders_to_check_and_delete:
         if os.path.exists(dir):
             os.rmdir(dir)
@@ -29,7 +36,9 @@ def files_downloaded_test_helper_start(list_of_expected_files: List[str]) -> Non
     """
     for file in list_of_expected_files:
         if os.path.exists(file):
-            print(f"The file {file} is not supposed to exist before this test is run, failing")
+            print(
+                f"The file {file} is not supposed to exist before this test is run, failing"
+            )
             assert not (os.path.exists(file))
 
 

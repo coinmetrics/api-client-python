@@ -238,5 +238,6 @@ def test_timeseries_pair_candles() -> None:
     ]
     assert all(col in expected_cols for col in data.first_page()[0])
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     pytest.main()

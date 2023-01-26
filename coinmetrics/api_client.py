@@ -90,7 +90,7 @@ class CoinMetricsClient:
         proxy_url: Optional[str] = None,
         session: Optional[requests.Session] = None,
         debug_mode: bool = False,
-        verbose: bool = False
+        verbose: bool = False,
     ):
         self._api_key_url_str = "api_key={}".format(api_key) if api_key else ""
 
@@ -116,14 +116,14 @@ class CoinMetricsClient:
 
         if self.verbose:
             logger.setLevel(level=logging.INFO)
-            format = logging.Formatter('[%(levelname)s] %(asctime)s - %(message)s')
+            format = logging.Formatter("[%(levelname)s] %(asctime)s - %(message)s")
             handler = logging.StreamHandler()
             handler.setFormatter(fmt=format)
             logger.addHandler(handler)
 
         if self.debug_mode:
             logger.setLevel(level=logging.DEBUG)
-            format = logging.Formatter('[%(levelname)s] %(asctime)s - %(message)s')
+            format = logging.Formatter("[%(levelname)s] %(asctime)s - %(message)s")
             handler = logging.StreamHandler()
             handler.setFormatter(fmt=format)
             logger.addHandler(handler)
@@ -131,11 +131,15 @@ class CoinMetricsClient:
             file_handler = logging.FileHandler(file_name)
             file_handler.setFormatter(fmt=format)
             logger.addHandler(file_handler)
-            logger.debug(msg=f"Starting API Client debugging session. logging to stdout and {file_name}")
+            logger.debug(
+                msg=f"Starting API Client debugging session. logging to stdout and {file_name}"
+            )
             logger.debug(msg=f"Using coinmetrics version {version}")
             state_of_client = self.__dict__.copy()
-            del state_of_client['_api_key_url_str']
-            logger.debug(msg=f"Current state of API Client, excluding API KEY: {state_of_client}")
+            del state_of_client["_api_key_url_str"]
+            logger.debug(
+                msg=f"Current state of API Client, excluding API KEY: {state_of_client}"
+            )
 
     def catalog_assets(
         self, assets: Optional[Union[List[str], str]] = None
@@ -3763,17 +3767,25 @@ class CoinMetricsClient:
         )
 
         if self.verbose:
-            logger.info(msg=f"Attempting to call url: {url.split('api_key')[0]} with params: {params}")
+            logger.info(
+                msg=f"Attempting to call url: {url.split('api_key')[0]} with params: {params}"
+            )
             start_time = datetime.now()
             resp = self._send_request(actual_url)
-            logger.info(f"Response status code: {resp.status_code} for url: {resp.url} "
-                        f"took: {datetime.now() - start_time} response body size (bytes): {len(resp.content)}")
+            logger.info(
+                f"Response status code: {resp.status_code} for url: {resp.url} "
+                f"took: {datetime.now() - start_time} response body size (bytes): {len(resp.content)}"
+            )
         elif self.debug_mode:
-            logger.debug(msg=f"Attempting to call url: {url.split('api_key')[0]} with params: {params}")
+            logger.debug(
+                msg=f"Attempting to call url: {url.split('api_key')[0]} with params: {params}"
+            )
             start_time = datetime.now()
             resp = self._send_request(actual_url)
-            logger.debug(f"Response status code: {resp.status_code} for url: {resp.url} "
-                         f"took: {datetime.now() - start_time} response body size (bytes): {len(resp.content)}")
+            logger.debug(
+                f"Response status code: {resp.status_code} for url: {resp.url} "
+                f"took: {datetime.now() - start_time} response body size (bytes): {len(resp.content)}"
+            )
         else:
             resp = self._send_request(actual_url)
         try:

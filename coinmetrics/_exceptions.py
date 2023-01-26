@@ -4,6 +4,25 @@ from urllib.parse import urlparse, parse_qs
 from functools import reduce
 
 
+class CoinMetricsUnauthorizedException(HTTPError):
+    """
+    Raised when a request is made that will return an error due to being unauthorized to flat files server
+    """
+
+    def __init__(self, response: Response, *args: Any, **kwargs: Any):
+        if response.status_code not in [401, 403]:
+            response.raise_for_status()
+        self.response = response
+        self.request = response.request
+        error_message = """The provided API key is not authorized to access the Coin Metrics Flat Files server. This product is separate from the API. If you'd like access granted or believe this is a mistake please contact Coin Metrics support.
+                    """
+        self.msg = error_message
+        super().__init__(response=response, request=response.request, *args, **kwargs)
+
+    def __str__(self) -> str:
+        return self.msg
+
+
 class CoinMetricsClientQueryParamsException(HTTPError):
     """
     Raised when a request is made that will return an error due to the logic or contents of the request
