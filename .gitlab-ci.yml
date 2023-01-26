@@ -92,7 +92,7 @@ generate-docs:
     - git add --all -- :!api-client-python/
     - git status
     - git commit -m "Release version $UPDATE_VERSION" || echo "No changes, nothing to commit!"
-    - git push -o ci.skip --follow-tags origin HEAD:$CI_COMMIT_REF_NAME
+    - git push --follow-tags origin HEAD:$CI_COMMIT_REF_NAME
   when: manual
 #  rules:
 #    - if: $CI_COMMIT_BRANCH == "master"
