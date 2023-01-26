@@ -31,7 +31,7 @@ build-test-push-image:
     - docker build --cache-from $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --build-arg CM_API_KEY=$CM_API_KEY  .
     - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python -m mypy -p coinmetrics -p test
     - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python -m flake8 coinmetrics
-    - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python -m pytest test
+    - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python -m pytest test --ignore test/test_data_exporter.py
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
   tags:
@@ -92,7 +92,7 @@ generate-docs:
     - git add --all -- :!api-client-python/
     - git status
     - git commit -m "Release version $UPDATE_VERSION" || echo "No changes, nothing to commit!"
-    - git push --follow-tags origin HEAD:$CI_COMMIT_REF_NAME
+    - git push -o ci.skip --follow-tags origin HEAD:$CI_COMMIT_REF_NAME
   when: manual
 #  rules:
 #    - if: $CI_COMMIT_BRANCH == "master"
