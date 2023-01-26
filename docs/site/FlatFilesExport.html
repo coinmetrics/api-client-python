@@ -214,7 +214,14 @@
     Exporting flat files
   </a>
   
-    <nav class="md-nav" aria-label="Exporting flat files">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authorization-for-flat-files-download" class="md-nav__link">
+    Authorization for flat files download
+  </a>
+  
+    <nav class="md-nav" aria-label="Authorization for flat files download">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -317,7 +324,14 @@
     Exporting flat files
   </a>
   
-    <nav class="md-nav" aria-label="Exporting flat files">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authorization-for-flat-files-download" class="md-nav__link">
+    Authorization for flat files download
+  </a>
+  
+    <nav class="md-nav" aria-label="Authorization for flat files download">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -409,6 +423,13 @@
 <p>Along with the API client we provide a data exporting tool which allow downloading large amount of data as flat files
 rather than from the API itself. The tool allows users to download daily files over our entire provided history for 
 market trades, market quotes, and market candles.  </p>
+<h2 id="authorization-for-flat-files-download">Authorization for flat files download<a class="headerlink" href="#authorization-for-flat-files-download" title="Permanent link">&para;</a></h2>
+<p>This program was set up to easily access a flat files server provided to Coin Metrics commercial clients. If you are a 
+community API user or a client without access to this server, a 403 error will be returned. If you are a community API 
+user and looking to get historical asset prices, Coin Metrics does offer <a href="https://coinmetrics.io/community-network-data/">historical asset prices for download</a>.<br />
+The <code>CoinMetricsDataExporter</code> class will return a <code>CoinMetricsUnauthorizedException</code> if your API key is not authorized
+to access this server. The flat files export is considered a separate product from the Coin Metrics API, if you would
+like to gain access or believe you should have access but do not, please contact coinmetrics support. </p>
 <h3 id="installation-and-set-up">Installation and set up<a class="headerlink" href="#installation-and-set-up" title="Permanent link">&para;</a></h3>
 <p>The tool is installed a long with the <code>coinmetrics-api-client</code>, it's recommended to create a new Python [virtual environment] 
 for your project and install the package:  </p>
