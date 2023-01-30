@@ -196,13 +196,14 @@ def get_markets_to_process():
                 (market["type"] in MARKET_TYPES_TO_COLLECT)
                 and (
                     (
-                        (market["base"] in BASE_MARKETS or not BASE_MARKETS)
+                        ('base' in market and market["base"] in BASE_MARKETS or not BASE_MARKETS)
                         and (market["quote"] in QUOTE_MARKETS or not QUOTE_MARKETS)
                     )
                 )
             ):
                 markets.append(market)
     return markets
+
 
 
 def get_days_to_export(market_info, min_export_date, max_export_date):

@@ -166,7 +166,7 @@ def get_markets_to_process():
                     (market["type"] == 'option')
                     and (
                             (
-                                    (market["base"] in BASE_MARKETS or not BASE_MARKETS)
+                                    ('base' in market and market["base"] in BASE_MARKETS or not BASE_MARKETS)
                                     and (market["quote"] in QUOTE_MARKETS or not QUOTE_MARKETS)
                             )
                     )

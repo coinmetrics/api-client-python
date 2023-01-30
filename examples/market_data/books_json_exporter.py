@@ -174,7 +174,6 @@ def read_already_processed_files():
             return set(registry_file.read().splitlines())
     return set()
 
-
 def get_markets_to_process():
     markets = []
 
@@ -184,7 +183,7 @@ def get_markets_to_process():
                 (market["type"] in MARKET_TYPES_TO_COLLECT)
                 and (
                     (
-                        (market["base"] in BASE_MARKETS or not BASE_MARKETS)
+                        ('base' in market and market["base"] in BASE_MARKETS or not BASE_MARKETS)
                         and (market["quote"] in QUOTE_MARKETS or not QUOTE_MARKETS)
                     )
                 )
