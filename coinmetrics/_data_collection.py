@@ -66,6 +66,9 @@ class DataCollection:
             self._fetch_data_with_retries(self._url_params)["data"],
         )
 
+    def to_list(self) -> List[Dict[str, Any]]:
+        return [data for data in self]
+
     def __next__(self) -> Any:
         try:
             if self._current_data_iterator is not None:
