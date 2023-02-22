@@ -3318,7 +3318,7 @@ class CoinMetricsClient:
     def get_list_of_transactions_v2(
         self,
         asset: str,
-        transaction_hashes: Optional[Union[List[str], str]] = None,
+        txids: Optional[Union[List[str], str]] = None,
         block_hashes: Optional[Union[List[str], str]] = None,
         page_size: Optional[int] = None,
         paging_from: Optional[Union[PagingFrom, str]] = "start",
@@ -3335,8 +3335,8 @@ class CoinMetricsClient:
 
         :param asset: Asset name
         :type asset: str
-        :param transaction_hashes: Optional comma separated list of transaction hashes to filter a response.
-        :type transaction_hashes: str, list(str)
+        :param txids: Optional comma separated list of transaction identifiers (txid) to filter a response.
+        :type txids: str, list(str)
         :param block_hashes: Optional comma separated list of block hashes to filter a response.
         :type block_hashes: str, list(str)
         :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
@@ -3362,7 +3362,7 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {
             "asset": asset,
-            "transaction_hashes": transaction_hashes,
+            "txids": txids,
             "block_hashes": block_hashes,
             "page_size": page_size,
             "paging_from": paging_from,
@@ -3382,6 +3382,8 @@ class CoinMetricsClient:
         self,
         asset: str,
         accounts: Optional[Union[List[str], str]] = None,
+        sub_accounts: Optional[Union[List[str], str]] = None,
+        limit_per_account: Optional[int] = None,
         txids: Optional[Union[List[str], str]] = None,
         block_hashes: Optional[Union[List[str], str]] = None,
         page_size: Optional[int] = None,
@@ -3392,6 +3394,8 @@ class CoinMetricsClient:
         end_height: Optional[int] = None,
         start_chain_sequence_number: Optional[int] = None,
         end_chain_sequence_number: Optional[int] = None,
+        include_sub_accounts: Optional[bool] = None,
+        chain: Optional[str] = None,
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
@@ -3403,6 +3407,8 @@ class CoinMetricsClient:
         :type asset: str
         :param accounts: Optional comma separated list of accounts to filter a response.
         :type accounts: str, list(str)
+        :param limit_per_account: How many entries per account the result should contain. It is applicable when multiple accounts are requested.
+        :type limit_per_account: int
         :param txids: Optional comma separated list of transaction ids to filter a response.
         :type txids: str, list(str)
         :param block_hashes: Optional comma separated list of block hashes to filter a response.
@@ -3423,6 +3429,10 @@ class CoinMetricsClient:
         :type start_chain_sequence_number: int
         :param end_chain_sequence_number: The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
         :type end_chain_sequence_number: int
+        :param include_sub_accounts: bool indicating if the response should contain sub-accounts.
+        :type include_sub_accounts: bool
+        :param chain: Chain type. Supported values are main and all (includes both main and stale).
+        :type: str
         :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
         :type start_inclusive: bool
         :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
@@ -3435,6 +3445,8 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "asset": asset,
             "accounts": accounts,
+            "limit_per_account": limit_per_account,
+            "sub_accounts": sub_accounts,
             "txids": txids,
             "block_hashes": block_hashes,
             "page_size": page_size,
@@ -3445,6 +3457,8 @@ class CoinMetricsClient:
             "end_height": end_height,
             "start_chain_sequence_number": start_chain_sequence_number,
             "end_chain_sequence_number": end_chain_sequence_number,
+            "include_sub_accounts": include_sub_accounts,
+            "chain": chain,
             "start_inclusive": start_inclusive,
             "end_inclusive": end_inclusive,
             "timezone": timezone,
@@ -3754,6 +3768,31 @@ class CoinMetricsClient:
             "version": version,
         }
         return DataCollection(self._get_data, "/taxonomy-metadata/assets", params)
+
+    def get_asset_profiles(self,
+                           assets: Optional[Union[List[str], str]] = None,
+                           full_name: Optional[Union[List[str], str]] = None,
+                           page_size: Optional[int] = None,
+                           paging_from: Optional[str] = None
+                           ) -> DataCollection:
+        """
+        Returns profile data for assets, ordered by asset
+        :param assets: Returns profile data for assets.
+        :type assets: Optional[Union[List[str], str]]
+        :param full_name: Comma separated list of asset full names. By default profile data for all assets is returned. Mutually exclusive with assets parameter.
+        :type full_name: Optional[Union[List[str], str]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: int
+        :param paging_from: Where does the first page start, at the "start" of the interval or at the "end"
+        :type paging_from: int
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "full_name": full_name,
+            "page_size": page_size,
+            "paging_from": paging_from,
+        }
+        return DataCollection(self._get_data, "/profile/assets", params)
 
     def _get_data(self, url: str, params: Dict[str, Any]) -> DataReturnType:
         if params:
