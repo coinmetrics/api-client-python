@@ -121,7 +121,14 @@ listed below, there's examples covering all the API methods, found in the [examp
 
 ## Getting timeseries data
 
-For getting timeseries data you want to use methods of the client class that start with `get_`.
+For getting timeseries data you want to use methods of the client class that start with `get_`. It's important to note
+that the timeseries endpoints return data of a parent class type `DataCollection`. The `DataCollection` class is meant
+to support a variety of different data export and data manipulation use cases, so just calling one of the client
+methods such as `data = client.get_market_trades(markets="coinbase-btc-usd-spot")` will not actually retrieve the data related
+to this API call. You must then call a function on this `DataCollection` such as `data.export_to_csv("coinbase_btc_usd_spot_trades.csv)`
+or `data.to_dataframe()` in order to access the data. There is more explicit examples below.If you are curious to see
+how the API calls are being made and with what parameters, instantiating the client with the `verbose` argument like 
+`CoinMetricsClient(api_key=<YOUR_API_KEY>, verbose=True)` will print the API calls as well as information on performance to console. 
 
 For example if you want to get a bunch of market data trades for coinbase btc-usd pair you can run something similar to the following:
 
@@ -134,6 +141,10 @@ for trade in client.get_market_trades(
 ):
     print(trade)
 ```
+This example uses the `DataCollection` as a Python iterator, so with each iteration of the Python for loop it will
+call the Coin Metrics API and return data. The default `page_size` for calls to the API is 100, so each call will return
+100 trades until it reaches the end of the query. To get more trades in each API call, you can add the parameter
+`page_size` to the `.get_market_trades()` method call, up to a maximum of 10000. 
 
 Or if you want to see daily btc asset metrics you can use something like this:
 
@@ -189,6 +200,7 @@ df_metrics = client.get_asset_metrics(
 ).to_dataframe()
 print(df_metrics.dtypes)
 ```
+
 ```
 asset                          string
 time                           datetime64[ns, tzutc()]
@@ -249,6 +261,18 @@ Note that in order to pass a custom datetime object, setting a dtype_mapper is m
 
 Pandas type conversion tends to be more performant. But if there are custom operations that must be done using numpy datatypes, this option will let you perform them.
 
+### Exporting to csv and json files:
+You can also easily export timeseries data to csv and json files with builtin functions on the `DataCollection` type. 
+For example this script will export Coinbase btc and eth trades for a date to csv and json files respectively:
+```python
+    start_date = datetime.date(year=2022, month=1, day=1)
+    end_date = datetime.datetime(year=2022, month=1, day=1)
+    market_trades_btc = client.get_market_trades(page_size=1000, markets="coinbase-btc-usd-spot", start_time=start_date, end_time=end_date)
+    market_trades_btc.export_to_csv("jan_1_2022_coinbase_btc_trades.csv")
+    market_trades_eth = client.get_market_trades(page_size=1000, markets="coinbase-eth-usd-spot", start_time=start_date, end_time=end_date)
+    market_trades_eth.export_to_json("jan_1_2022_coinbase_eth.json")
+```
+
 ### Paging
 You can make the datapoints to iterate from start (default) or from end.
 
@@ -285,6 +309,7 @@ if __name__ == '__main__':
     for data in reference_rates_example:
         continue
 ```
+
 The console output will look like:
 ```commandline
 [DEBUG] 2023-01-09 11:01:02,044 - Starting API Client debugging session. logging to stdout and cm_api_client_debug_2023_01_09_11_01_02.txt

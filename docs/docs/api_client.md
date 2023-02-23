@@ -2479,7 +2479,7 @@ Returns a list of blockchain sub-accounts with their balances.
 ```python
 def get_list_of_transactions_v2(
         asset: str,
-        transaction_hashes: Optional[Union[List[str], str]] = None,
+        txids: Optional[Union[List[str], str]] = None,
         block_hashes: Optional[Union[List[str], str]] = None,
         page_size: Optional[int] = None,
         paging_from: Optional[Union[PagingFrom, str]] = "start",
@@ -2497,7 +2497,7 @@ Returns a list of blockchain transactions metadata.
 **Arguments**:
 
 - `asset` (`str`): Asset name
-- `transaction_hashes` (`str, list(str)`): Optional comma separated list of transaction hashes to filter a response.
+- `txids` (`str, list(str)`): Optional comma separated list of transaction identifiers (txid) to filter a response.
 - `block_hashes` (`str, list(str)`): Optional comma separated list of block hashes to filter a response.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
@@ -2521,6 +2521,8 @@ Returns a list of blockchain transactions metadata.
 def get_list_of_balance_updates_v2(
         asset: str,
         accounts: Optional[Union[List[str], str]] = None,
+        sub_accounts: Optional[Union[List[str], str]] = None,
+        limit_per_account: Optional[int] = None,
         txids: Optional[Union[List[str], str]] = None,
         block_hashes: Optional[Union[List[str], str]] = None,
         page_size: Optional[int] = None,
@@ -2531,6 +2533,8 @@ def get_list_of_balance_updates_v2(
         end_height: Optional[int] = None,
         start_chain_sequence_number: Optional[int] = None,
         end_chain_sequence_number: Optional[int] = None,
+        include_sub_accounts: Optional[bool] = None,
+        chain: Optional[str] = None,
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None) -> DataCollection
@@ -2542,6 +2546,7 @@ Returns a list of blockchain accounts balance updates.
 
 - `asset` (`str`): Asset name
 - `accounts` (`str, list(str)`): Optional comma separated list of accounts to filter a response.
+- `limit_per_account` (`int`): How many entries per account the result should contain. It is applicable when multiple accounts are requested.
 - `txids` (`str, list(str)`): Optional comma separated list of transaction ids to filter a response.
 - `block_hashes` (`str, list(str)`): Optional comma separated list of block hashes to filter a response.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
@@ -2552,6 +2557,8 @@ Returns a list of blockchain accounts balance updates.
 - `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
 - `start_chain_sequence_number` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
 - `end_chain_sequence_number` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
+- `include_sub_accounts` (`bool`): bool indicating if the response should contain sub-accounts.
+- `chain`: Chain type. Supported values are main and all (includes both main and stale).
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -2796,4 +2803,24 @@ Returns metadata about the assets, sectors, and industries included in the CM ta
 **Returns**:
 
 `Datacollection`: Returns a data collection containing the taxonomy assets
+
+<a id="coinmetrics.api_client.CoinMetricsClient.get_asset_profiles"></a>
+
+#### get\_asset\_profiles
+
+```python
+def get_asset_profiles(assets: Optional[Union[List[str], str]] = None,
+                       full_name: Optional[Union[List[str], str]] = None,
+                       page_size: Optional[int] = None,
+                       paging_from: Optional[str] = None) -> DataCollection
+```
+
+Returns profile data for assets, ordered by asset
+
+**Arguments**:
+
+- `assets` (`Optional[Union[List[str], str]]`): Returns profile data for assets.
+- `full_name` (`Optional[Union[List[str], str]]`): Comma separated list of asset full names. By default profile data for all assets is returned. Mutually exclusive with assets parameter.
+- `page_size` (`int`): Number of items per single page of results.
+- `paging_from` (`int`): Where does the first page start, at the "start" of the interval or at the "end"
 

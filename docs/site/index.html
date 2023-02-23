@@ -239,6 +239,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#exporting-to-csv-and-json-files" class="md-nav__link">
+    Exporting to csv and json files:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#paging" class="md-nav__link">
     Paging
   </a>
@@ -405,6 +412,13 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exporting-to-csv-and-json-files" class="md-nav__link">
+    Exporting to csv and json files:
+  </a>
   
 </li>
         
@@ -579,9 +593,16 @@ listed below, there's examples covering all the API methods, found in the <a hre
 <li><code>trades_json_exporter.py</code>: Queries market trades data then exports the output into a JSON file.</li>
 </ul>
 <h2 id="getting-timeseries-data">Getting timeseries data<a class="headerlink" href="#getting-timeseries-data" title="Permanent link">&para;</a></h2>
-<p>For getting timeseries data you want to use methods of the client class that start with <code>get_</code>.</p>
+<p>For getting timeseries data you want to use methods of the client class that start with <code>get_</code>. It's important to note
+that the timeseries endpoints return data of a parent class type <code>DataCollection</code>. The <code>DataCollection</code> class is meant
+to support a variety of different data export and data manipulation use cases, so just calling one of the client
+methods such as <code>data = client.get_market_trades(markets="coinbase-btc-usd-spot")</code> will not actually retrieve the data related
+to this API call. You must then call a function on this <code>DataCollection</code> such as <code>data.export_to_csv("coinbase_btc_usd_spot_trades.csv)</code>
+or <code>data.to_dataframe()</code> in order to access the data. There is more explicit examples below.If you are curious to see
+how the API calls are being made and with what parameters, instantiating the client with the <code>verbose</code> argument like 
+<code>CoinMetricsClient(api_key=&lt;YOUR_API_KEY&gt;, verbose=True)</code> will print the API calls as well as information on performance to console. </p>
 <p>For example if you want to get a bunch of market data trades for coinbase btc-usd pair you can run something similar to the following:</p>
-<div class="highlight"><pre><span></span><code>for trade in client.get_market_trades(
+<p><div class="highlight"><pre><span></span><code>for trade in client.get_market_trades(
     markets=&#39;coinbase-btc-usd-spot&#39;, 
     start_time=&#39;2020-01-01&#39;, 
     end_time=&#39;2020-01-03&#39;,
@@ -589,6 +610,10 @@ listed below, there's examples covering all the API methods, found in the <a hre
 ):
     print(trade)
 </code></pre></div>
+This example uses the <code>DataCollection</code> as a Python iterator, so with each iteration of the Python for loop it will
+call the Coin Metrics API and return data. The default <code>page_size</code> for calls to the API is 100, so each call will return
+100 trades until it reaches the end of the query. To get more trades in each API call, you can add the parameter
+<code>page_size</code> to the <code>.get_market_trades()</code> method call, up to a maximum of 10000. </p>
 <p>Or if you want to see daily btc asset metrics you can use something like this:</p>
 <p><div class="highlight"><pre><span></span><code>for metric_data in client.get_asset_metrics(assets=&#39;btc&#39;, 
                                             metrics=[&#39;ReferenceRateUSD&#39;, &#39;BlkHgt&#39;, &#39;AdrActCnt&#39;,  
@@ -632,14 +657,14 @@ If you want to use dataframes, then you will need to install pandas</p>
   <span class="n">assets</span><span class="o">=</span><span class="n">asset_list</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="n">metrics_list</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="n">start_time</span><span class="p">,</span> <span class="n">limit_per_asset</span><span class="o">=</span><span class="mi">3</span>
 <span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_metrics</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
-</code></pre></div>
+</code></pre></div></p>
 <div class="highlight"><pre><span></span><code>asset                          string
 time                           datetime64[ns, tzutc()]
 AdrBalUSD1Cnt                   Int64
 SplyFF                        Float64
 volume_trusted_spot_usd_1d    Float64
 dtype: object
-</code></pre></div></p>
+</code></pre></div>
 <p>This can be turned off by setting <code>optimize_pandas_types=False</code></p>
 <p>Alternatively, you can manually enter your own type conversion by passing in a dictionary for <code>dtype_mapper</code>. This can be done in conjunction with pandas' built in type optimizations.
 <div class="highlight"><pre><span></span><code><span class="n">mapper</span> <span class="o">=</span> <span class="p">{</span>
@@ -680,6 +705,16 @@ memory usage: 152.0+ bytes
 </code></pre></div></p>
 <p>Note that in order to pass a custom datetime object, setting a dtype_mapper is mandatory.</p>
 <p>Pandas type conversion tends to be more performant. But if there are custom operations that must be done using numpy datatypes, this option will let you perform them.</p>
+<h3 id="exporting-to-csv-and-json-files">Exporting to csv and json files:<a class="headerlink" href="#exporting-to-csv-and-json-files" title="Permanent link">&para;</a></h3>
+<p>You can also easily export timeseries data to csv and json files with builtin functions on the <code>DataCollection</code> type. 
+For example this script will export Coinbase btc and eth trades for a date to csv and json files respectively:
+<div class="highlight"><pre><span></span><code>    <span class="n">start_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2022</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">end_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2022</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">market_trades_btc</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_market_trades</span><span class="p">(</span><span class="n">page_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">markets</span><span class="o">=</span><span class="s2">&quot;coinbase-btc-usd-spot&quot;</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end_time</span><span class="o">=</span><span class="n">end_date</span><span class="p">)</span>
+    <span class="n">market_trades_btc</span><span class="o">.</span><span class="n">export_to_csv</span><span class="p">(</span><span class="s2">&quot;jan_1_2022_coinbase_btc_trades.csv&quot;</span><span class="p">)</span>
+    <span class="n">market_trades_eth</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_market_trades</span><span class="p">(</span><span class="n">page_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">markets</span><span class="o">=</span><span class="s2">&quot;coinbase-eth-usd-spot&quot;</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end_time</span><span class="o">=</span><span class="n">end_date</span><span class="p">)</span>
+    <span class="n">market_trades_eth</span><span class="o">.</span><span class="n">export_to_json</span><span class="p">(</span><span class="s2">&quot;jan_1_2022_coinbase_eth.json&quot;</span><span class="p">)</span>
+</code></pre></div></p>
 <h3 id="paging">Paging<a class="headerlink" href="#paging" title="Permanent link">&para;</a></h3>
 <p>You can make the datapoints to iterate from start (default) or from end.</p>
 <p>for that you should use a paging_from argument like the following:
@@ -709,8 +744,8 @@ of request times so that users can write more performant code. For example, runn
     <span class="n">reference_rates_example</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_asset_metrics</span><span class="p">(</span><span class="n">assets</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;btc&#39;</span><span class="p">,</span> <span class="s1">&#39;algo&#39;</span><span class="p">,</span> <span class="s1">&#39;eth&#39;</span><span class="p">],</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ReferenceRateUSD&#39;</span><span class="p">])</span>
     <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">reference_rates_example</span><span class="p">:</span>
         <span class="k">continue</span>
-</code></pre></div>
-The console output will look like:
+</code></pre></div></p>
+<p>The console output will look like:
 <div class="highlight"><pre><span></span><code>[DEBUG] 2023-01-09 11:01:02,044 - Starting API Client debugging session. logging to stdout and cm_api_client_debug_2023_01_09_11_01_02.txt
 [DEBUG] 2023-01-09 11:01:02,044 - Using coinmetrics version 2022.11.14.16
 [DEBUG] 2023-01-09 11:01:02,044 - Current state of API Client, excluding API KEY: {&#39;_verify_ssl_certs&#39;: True, &#39;_api_base_url&#39;: &#39;https://api.coinmetrics.io/v4&#39;, &#39;_ws_api_base_url&#39;: &#39;wss://api.coinmetrics.io/v4&#39;, &#39;_http_header&#39;: {&#39;Api-Client-Version&#39;: &#39;2022.11.14.16&#39;}, &#39;_proxies&#39;: {&#39;http&#39;: None, &#39;https&#39;: None}, &#39;debug_mode&#39;: True, &#39;verbose&#39;: False}

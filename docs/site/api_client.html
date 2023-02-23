@@ -853,6 +853,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#get_asset_profiles" class="md-nav__link">
+    get_asset_profiles
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1548,6 +1555,13 @@
           <li class="md-nav__item">
   <a href="#get_taxonomy_assets_metadata" class="md-nav__link">
     get_taxonomy_assets_metadata
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_asset_profiles" class="md-nav__link">
+    get_asset_profiles
   </a>
   
 </li>
@@ -3462,7 +3476,7 @@
 <h4 id="get_list_of_transactions_v2">get_list_of_transactions_v2<a class="headerlink" href="#get_list_of_transactions_v2" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_list_of_transactions_v2</span><span class="p">(</span>
         <span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">transaction_hashes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">txids</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">block_hashes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span>
@@ -3478,7 +3492,7 @@
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>asset</code> (<code>str</code>): Asset name</li>
-<li><code>transaction_hashes</code> (<code>str, list(str)</code>): Optional comma separated list of transaction hashes to filter a response.</li>
+<li><code>txids</code> (<code>str, list(str)</code>): Optional comma separated list of transaction identifiers (txid) to filter a response.</li>
 <li><code>block_hashes</code> (<code>str, list(str)</code>): Optional comma separated list of block hashes to filter a response.</li>
 <li><code>page_size</code> (<code>int</code>): number of items returned per page when calling the API. If the request times out, try using a smaller number.</li>
 <li><code>paging_from</code> (<code>PagingFrom, str</code>): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
@@ -3497,6 +3511,8 @@
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_list_of_balance_updates_v2</span><span class="p">(</span>
         <span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">accounts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">sub_accounts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">limit_per_account</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">txids</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">block_hashes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3507,6 +3523,8 @@
         <span class="n">end_height</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">start_chain_sequence_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">end_chain_sequence_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">include_sub_accounts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">chain</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
@@ -3516,6 +3534,7 @@
 <ul>
 <li><code>asset</code> (<code>str</code>): Asset name</li>
 <li><code>accounts</code> (<code>str, list(str)</code>): Optional comma separated list of accounts to filter a response.</li>
+<li><code>limit_per_account</code> (<code>int</code>): How many entries per account the result should contain. It is applicable when multiple accounts are requested.</li>
 <li><code>txids</code> (<code>str, list(str)</code>): Optional comma separated list of transaction ids to filter a response.</li>
 <li><code>block_hashes</code> (<code>str, list(str)</code>): Optional comma separated list of block hashes to filter a response.</li>
 <li><code>page_size</code> (<code>int</code>): number of items returned per page when calling the API. If the request times out, try using a smaller number.</li>
@@ -3526,6 +3545,8 @@
 <li><code>end_height</code> (<code>int</code>): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time</li>
 <li><code>start_chain_sequence_number</code> (<code>int</code>): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time</li>
 <li><code>end_chain_sequence_number</code> (<code>int</code>): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time</li>
+<li><code>include_sub_accounts</code> (<code>bool</code>): bool indicating if the response should contain sub-accounts.</li>
+<li><code>chain</code>: Chain type. Supported values are main and all (includes both main and stale).</li>
 <li><code>start_inclusive</code> (<code>bool</code>): Flag to define if start timestamp must be included in the timeseries if present. True by default.</li>
 <li><code>end_inclusive</code> (<code>bool</code>): Flag to define if end timestamp must be included in the timeseries if present. True by default.</li>
 <li><code>timezone</code> (<code>str</code>): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.</li>
@@ -3705,6 +3726,21 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>Datacollection</code>: Returns a data collection containing the taxonomy assets</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.get_asset_profiles"></a></p>
+<h4 id="get_asset_profiles">get_asset_profiles<a class="headerlink" href="#get_asset_profiles" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_asset_profiles</span><span class="p">(</span><span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">full_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+<p>Returns profile data for assets, ordered by asset</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>Optional[Union[List[str], str]]</code>): Returns profile data for assets.</li>
+<li><code>full_name</code> (<code>Optional[Union[List[str], str]]</code>): Comma separated list of asset full names. By default profile data for all assets is returned. Mutually exclusive with assets parameter.</li>
+<li><code>page_size</code> (<code>int</code>): Number of items per single page of results.</li>
+<li><code>paging_from</code> (<code>int</code>): Where does the first page start, at the "start" of the interval or at the "end"</li>
+</ul>
                 
               
               
