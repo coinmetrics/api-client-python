@@ -16,7 +16,9 @@ class CoinMetricsClient()
 
 ```python
 def catalog_assets(
-        assets: Optional[Union[List[str], str]] = None) -> CatalogAssetsData
+        assets: Optional[Union[List[str], str]] = None,
+        include: Optional[Union[List[str], str]] = None,
+        exclude: Optional[Union[List[str], str]] = None) -> CatalogAssetsData
 ```
 
 Returns meta information about _available_ assets.
@@ -24,6 +26,8 @@ Returns meta information about _available_ assets.
 **Arguments**:
 
 - `assets` (`list(str), str`): A single asset or a list of assets to return info for. If no assets provided, all available assets are returned.
+- `include` (`list(str), str`): list of fields to include in response. Supported values are metrics, markets, exchanges. Included by default if omitted.
+- `exclude` (`list(str), str`): list of fields to include in response. Supported values are metrics, markets, exchanges. Included by default if omitted.
 
 **Returns**:
 
@@ -310,13 +314,16 @@ Returns meta information about _available_ institutions
 #### catalog\_markets
 
 ```python
-def catalog_markets(markets: Optional[Union[List[str], str]] = None,
-                    market_type: Optional[str] = None,
-                    exchange: Optional[str] = None,
-                    base: Optional[str] = None,
-                    quote: Optional[str] = None,
-                    asset: Optional[str] = None,
-                    symbol: Optional[str] = None) -> CatalogMarketsData
+def catalog_markets(
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        include: Optional[Union[List[str], str]] = None,
+        exclude: Optional[Union[List[str], str]] = None) -> CatalogMarketsData
 ```
 
 Returns list of _available_ markets that correspond to a filter. If no filter is set, returns all available assets.
@@ -330,6 +337,10 @@ Returns list of _available_ markets that correspond to a filter. If no filter is
 - `quote` (`str`): name of quote asset
 - `asset` (`str`): name of either base or quote asset
 - `symbol` (`str`): name of a symbol. Usually used for futures contracts.
+- `include` (`list(str), str`): list of fields to include in response. Supported values are trades, orderbooks,
+quotes, funding_rates, openinterest, liquidations. Included by default if omitted.
+- `exclude` (`list(str), str`): list of fields to exclude from response. Supported values are trades, orderbooks,
+quotes, funding_rates, openinterest, liquidations. Included by default if omitted.
 
 **Returns**:
 
@@ -642,7 +653,9 @@ Returns a list of markets with liquidations support along with the time ranges o
 
 ```python
 def catalog_full_assets(
-        assets: Optional[Union[List[str], str]] = None) -> CatalogAssetsData
+        assets: Optional[Union[List[str], str]] = None,
+        include: Optional[Union[List[str], str]] = None,
+        exclude: Optional[Union[List[str], str]] = None) -> CatalogAssetsData
 ```
 
 Returns meta information about _supported_ assets.
@@ -650,10 +663,37 @@ Returns meta information about _supported_ assets.
 **Arguments**:
 
 - `assets` (`list(str), str`): A single asset or a list of assets to return info for. If no assets provided, all supported assets are returned.
+- `include` (`list(str), str`): list of fields to include in response. Supported values are metrics, markets,
+exchanges. Included by default if omitted.
+- `exclude` (`list(str), str`): list of fields to exclude from response. Supported values are metrics, markets,
+exchanges. Included by default if omitted.
 
 **Returns**:
 
 `list(dict(str, any))`: Information that is supported for requested assets, like: Full name, metrics and supported frequencies, markets, exchanges, etc.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_metrics"></a>
+
+#### catalog\_full\_asset\_metrics
+
+```python
+def catalog_full_asset_metrics(
+        metrics: Optional[Union[List[str], str]] = None,
+        reviewable: Optional[bool] = None) -> CatalogMetricsData
+```
+
+Returns list of all _available_ asset metrics along with information for them like
+
+description, category, precision and assets for which a metric is available.
+
+**Arguments**:
+
+- `metrics` (`list(str), str`): A single asset metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+- `reviewable` (`bool`): Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about asset metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
 
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_alerts"></a>
 
@@ -697,6 +737,52 @@ Returns meta information about _supported_ asset-asset pairs
 
 `list(dict(str, any))`: Information that is supported for requested asset-asset pair like metrics and their respective frequencies and time ranges
 
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_pair_metrics"></a>
+
+#### catalog\_full\_pair\_metrics
+
+```python
+def catalog_full_pair_metrics(
+        metrics: Optional[Union[List[str], str]] = None,
+        reviewable: Optional[bool] = None) -> CatalogPairMetricsData
+```
+
+Returns list of all _available_ pair metrics along with information for them like
+
+description, category, precision and assets for which a metric is available.
+
+**Arguments**:
+
+- `metrics` (`list(str), str`): A single pair metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+- `reviewable` (`bool`): Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about pair metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_institution_metrics"></a>
+
+#### catalog\_full\_institution\_metrics
+
+```python
+def catalog_full_institution_metrics(
+        metrics: Optional[Union[List[str], str]] = None,
+        reviewable: Optional[bool] = None) -> CatalogInstitutionMetricsData
+```
+
+Returns list of _available_ institution metrics along with information for them like
+
+description, category, precision and assets for which a metric is available.
+
+**Arguments**:
+
+- `metrics` (`list(str), str`): A single institution metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+- `reviewable` (`bool`): Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about institution metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
+
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_pair_candles"></a>
 
 #### catalog\_full\_asset\_pair\_candles
@@ -731,7 +817,8 @@ Returns meta information about exchanges.
 
 **Arguments**:
 
-- `exchanges` (`list(str), str`): A single exchange name or a list of exchanges to return info for. If no exchanges provided, all supported exchanges are returned.
+- `exchanges` (`list(str), str`): A single exchange name or a list of exchanges to return info for. If no exchanges provided,
+all supported exchanges are returned.
 
 **Returns**:
 
@@ -756,6 +843,52 @@ Returns meta information about _supported_ exchange-asset pairs
 **Returns**:
 
 `list(dict(str, any))`: Information that is supported for requested exchange-asset pair like metrics and their respective frequencies and time ranges
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_exchange_metrics"></a>
+
+#### catalog\_full\_exchange\_metrics
+
+```python
+def catalog_full_exchange_metrics(
+        metrics: Optional[Union[List[str], str]] = None,
+        reviewable: Optional[bool] = None) -> CatalogMetricsData
+```
+
+Returns list of all _available_ exchange metrics along with information for them like
+
+description, category, precision and assets for which a metric is available.
+
+**Arguments**:
+
+- `metrics` (`list(str), str`): A single exchange metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+- `reviewable` (`bool`): Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about exchange metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_exchange_asset_metrics"></a>
+
+#### catalog\_full\_exchange\_asset\_metrics
+
+```python
+def catalog_full_exchange_asset_metrics(
+        metrics: Optional[Union[List[str], str]] = None,
+        reviewable: Optional[bool] = None) -> CatalogExchangeAssetMetricsData
+```
+
+Returns list of _available_ exchange metrics along with information for them like
+
+description, category, precision and assets for which a metric is available.
+
+**Arguments**:
+
+- `metrics` (`list(str), str`): A single exchange metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+- `reviewable` (`bool`): Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about exchange metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
 
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_indexes"></a>
 
@@ -827,7 +960,9 @@ def catalog_full_markets(markets: Optional[Union[List[str], str]] = None,
                          base: Optional[str] = None,
                          quote: Optional[str] = None,
                          asset: Optional[str] = None,
-                         symbol: Optional[str] = None) -> CatalogMarketsData
+                         symbol: Optional[str] = None,
+                         include: Optional[str] = None,
+                         exclude: Optional[str] = None) -> CatalogMarketsData
 ```
 
 Returns list of _supported_ markets that correspond to a filter. If no filter is set, returns all supported assets.
@@ -841,6 +976,10 @@ Returns list of _supported_ markets that correspond to a filter. If no filter is
 - `quote` (`str`): name of quote asset
 - `asset` (`str`): name of either base or quote asset
 - `symbol` (`str`): name of a symbol. Usually used for futures contracts.
+- `include` (`list(str), str`): ist of fields to include in response. Supported values are trades, orderbooks, quotes,
+funding_rates, openinterest, liquidations. Included by default if omitted.
+- `exclude` (`list(str), str`): list of fields to exclude from response. Supported values are trades, orderbooks, quotes,
+funding_rates, openinterest, liquidations. Included by default if omitted.
 
 **Returns**:
 
@@ -1055,6 +1194,37 @@ Returns a list of all markets with funding rates support along with the time ran
 
 `list(dict(str, any))`: Information about funding rates that correspond to a filter
 
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_greeks"></a>
+
+#### catalog\_full\_market\_greeks
+
+```python
+def catalog_full_market_greeks(
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None) -> CatalogMarketTradesData
+```
+
+Returns a list of all markets with greeks support along with the time ranges of available data.
+
+**Arguments**:
+
+- `markets` (`list(str), str`): list of market names, e.g. 'coinbase-btc-usd-spot'
+- `market_type` (`str`): Type of market: "spot", "future", "option"
+- `exchange` (`str`): name of the exchange
+- `base` (`str`): name of base asset
+- `quote` (`str`): name of quote asset
+- `asset` (`str`): name of either base or quote asset
+- `symbol` (`str`): name of a symbol. Usually used for futures contracts.
+
+**Returns**:
+
+`list(dict(str, any))`: Information about market greeks that correspond to the filter
+
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_open_interest"></a>
 
 #### catalog\_full\_market\_open\_interest
@@ -1151,6 +1321,45 @@ Returns asset alerts for the specified assets.
 
 `DataCollection`: Asset alerts timeseries.
 
+<a id="coinmetrics.api_client.CoinMetricsClient.get_defi_balance_sheets"></a>
+
+#### get\_defi\_balance\_sheets
+
+```python
+def get_defi_balance_sheets(defi_protocols: Union[str, List[str]],
+                            page_size: Optional[int] = None,
+                            paging_from: Optional[Union[PagingFrom,
+                                                        str]] = "start",
+                            start_time: Optional[Union[datetime, date,
+                                                       str]] = None,
+                            end_time: Optional[Union[datetime, date,
+                                                     str]] = None,
+                            start_height: Optional[int] = None,
+                            end_height: Optional[int] = None,
+                            start_inclusive: Optional[bool] = None,
+                            end_inclusive: Optional[bool] = None,
+                            timezone: Optional[str] = None) -> DataCollection
+```
+
+Returns Defi Balance Sheet records for specified DeFi protocols.
+
+**Arguments**:
+
+- `defi_protocols` (`str, List[str]`): list of DeFi protocols like aave_v2_eth or protocol patterns like aave_v2_* or aave_*_eth or *_eth.
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
+- `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+
+**Returns**:
+
+`DataCollection`: list of blockchain blocks metadata
+
 <a id="coinmetrics.api_client.CoinMetricsClient.get_asset_chains"></a>
 
 #### get\_asset\_chains
@@ -1201,7 +1410,12 @@ def get_asset_metrics(assets: Union[List[str], str],
                       end_inclusive: Optional[bool] = None,
                       timezone: Optional[str] = None,
                       sort: Optional[str] = None,
-                      limit_per_asset: Optional[int] = None) -> DataCollection
+                      limit_per_asset: Optional[int] = None,
+                      status: Optional[str] = None,
+                      start_hash: Optional[str] = None,
+                      end_hash: Optional[str] = None,
+                      min_confirmations: Optional[int] = None,
+                      null_as_zero: Optional[bool] = None) -> DataCollection
 ```
 
 Returns requested metrics for specified assets.
@@ -1222,6 +1436,15 @@ Returns requested metrics for specified assets.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
 - `sort` (`str`): How results will be sorted, e.g. "asset", "height", or "time". Default is "asset". Metrics with 1b frequency are sorted by (asset, height, block_hash) tuples by default. Metrics with other frequencies are sorted by (asset, time) by default. If you want to sort 1d metrics by (time, asset) you should choose time as value for the sort parameter. Sorting by time is useful if you request metrics for a set of assets.
 - `limit_per_asset` (`int`): How many entries _per asset_ the result should contain.
+- `status` (`str`): Which metric values do you want to see. Applicable only for "reviewable" metrics.
+You can find them in the /catalog/metrics endpoint. Default: "all". Supported: "all" "flash" "reviewed" "revised"
+- `start_hash` (`str`): The start hash indicates the beginning block height for the set of data that are returned.
+Inclusive by default. Mutually exclusive with start_time and start_height.
+- `end_hash` (`str`): The end hash indicates the ending block height for the set of data that are returned.
+Inclusive by default. Mutually exclusive with end_time and end_height.
+- `min_confirmations` (`int`): Specifies how many blocks behind the chain tip block by block metrics
+(1b frequency) are based on. Default for btc is 2 and 99 for eth.
+- `null_as_zero` (`bool`): Default: false. Nulls are represented as zeros in the response.
 
 **Returns**:
 
@@ -1562,18 +1785,18 @@ Returns index constituents for specified indexes and date range.
 #### get\_market\_metrics
 
 ```python
-def get_market_metrics(
-        markets: Union[List[str], str],
-        metrics: Union[List[str], str],
-        frequency: Optional[str] = None,
-        page_size: Optional[int] = None,
-        paging_from: Optional[Union[PagingFrom, str]] = "start",
-        start_time: Optional[Union[datetime, date, str]] = None,
-        end_time: Optional[Union[datetime, date, str]] = None,
-        start_inclusive: Optional[bool] = None,
-        end_inclusive: Optional[bool] = None,
-        timezone: Optional[str] = None,
-        limit_per_market: Optional[int] = None) -> DataCollection
+def get_market_metrics(markets: Union[List[str], str],
+                       metrics: Union[List[str], str],
+                       frequency: Optional[str] = None,
+                       page_size: Optional[int] = None,
+                       paging_from: Optional[Union[PagingFrom, str]] = "start",
+                       start_time: Optional[Union[datetime, date, str]] = None,
+                       end_time: Optional[Union[datetime, date, str]] = None,
+                       start_inclusive: Optional[bool] = None,
+                       end_inclusive: Optional[bool] = None,
+                       timezone: Optional[str] = None,
+                       limit_per_market: Optional[int] = None,
+                       sort: Optional[str] = None) -> DataCollection
 ```
 
 Returns market metrics for specified markets, frequency and date range.
@@ -1593,6 +1816,9 @@ For more information on market metrics, see: https://docs.coinmetrics.io/api/v4#
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
 - `limit_per_market` (`int`): How many entries _per market_ the result should contain.
+- `sort` (`str`): How results will be sorted. Metrics are sorted by (market, time) by default. If you want to sort
+1d metrics by (time, market) you should choose time as value for the sort parameter. Sorting by time is useful
+if you request metrics for a set of markets.
 
 **Returns**:
 
@@ -1651,7 +1877,8 @@ def get_market_trades(
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
-        limit_per_market: Optional[int] = None) -> DataCollection
+        limit_per_market: Optional[int] = None,
+        min_confirmations: Optional[int] = None) -> DataCollection
 ```
 
 Returns market trades for specified markets and date range.
@@ -1669,6 +1896,7 @@ For more information on market trades, see: https://docs.coinmetrics.io/info/mar
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
 - `limit_per_market` (`int`): How many entries _per market_ the result should contain.
+- `min_confirmations` (`int`): Specifies how many blocks behind the chain tip trades are based on. Default is 2.
 
 **Returns**:
 
@@ -1838,7 +2066,8 @@ def get_market_quotes(
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
-        limit_per_market: Optional[int] = None) -> DataCollection
+        limit_per_market: Optional[int] = None,
+        include_one_sided: Optional[bool] = None) -> DataCollection
 ```
 
 Returns market quotes for specified markets and date range.
@@ -1856,6 +2085,7 @@ For more information on quotes, see: https://docs.coinmetrics.io/info/markets/qu
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
 - `limit_per_market` (`int`): How many entries _per market_ the result should contain.
+- `include_one_sided` (`bool`): Default: false Include one-side and empty books in quotes response.
 
 **Returns**:
 
@@ -2086,7 +2316,8 @@ Returns timeseries stream of market trades.
 ```python
 def get_stream_market_orderbooks(
         markets: Union[List[str], str],
-        backfill: Union[Backfill, str] = Backfill.LATEST) -> CmStream
+        backfill: Union[Backfill, str] = Backfill.LATEST,
+        depth_limit: Optional[str] = None) -> CmStream
 ```
 
 Returns timeseries stream of market orderbooks.
@@ -2095,6 +2326,7 @@ Returns timeseries stream of market orderbooks.
 
 - `markets` (`list(str), str`): list of markets or market patterns like exchange-* or exchange-*-spot or *USDT-future.
 - `backfill` (`str`): What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.
+- `depth_limit` (`str`): Default: 100. Supported Values: 100 "full_book". Book depth limit.
 
 **Returns**:
 
@@ -2107,7 +2339,8 @@ Returns timeseries stream of market orderbooks.
 ```python
 def get_stream_market_quotes(
         markets: Union[List[str], str],
-        backfill: Union[Backfill, str] = Backfill.LATEST) -> CmStream
+        backfill: Union[Backfill, str] = Backfill.LATEST,
+        include_one_sided: Optional[bool] = None) -> CmStream
 ```
 
 Returns timeseries stream of market quotes.
@@ -2116,6 +2349,7 @@ Returns timeseries stream of market quotes.
 
 - `markets` (`list(str), str`): list of markets or market patterns like exchange-* or exchange-*-spot or *USDT-future.
 - `backfill` (`str`): What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.
+- `include_one_sided` (`bool`): Default: false. Include one-side and empty books in quotes response.
 
 **Returns**:
 
@@ -2358,6 +2592,7 @@ def get_list_of_blocks_v2(asset: str,
                                                    str]] = None,
                           start_height: Optional[int] = None,
                           end_height: Optional[int] = None,
+                          chain: Optional[bool] = None,
                           start_inclusive: Optional[bool] = None,
                           end_inclusive: Optional[bool] = None,
                           timezone: Optional[str] = None) -> DataCollection
@@ -2376,6 +2611,7 @@ Returns a list of blockchain blocks metadata.
 - `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
 - `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
 - `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
+- `chain` (`str`): Default: "main" Chain type. Supported values are main and all (includes both main and stale).
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -2487,6 +2723,7 @@ def get_list_of_transactions_v2(
         end_time: Optional[Union[datetime, date, str]] = None,
         start_height: Optional[int] = None,
         end_height: Optional[int] = None,
+        chain: Optional[str] = None,
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None) -> DataCollection
@@ -2505,6 +2742,7 @@ Returns a list of blockchain transactions metadata.
 - `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
 - `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
 - `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
+- `chain` (`str`): Default: "main". Chain type. Supported values are main and all (includes both main and stale).
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -2783,8 +3021,10 @@ covered assets
 
 ```python
 def get_taxonomy_assets_metadata(
-        classification_start_time: Optional[str] = None,
-        classification_end_time: Optional[str] = None,
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
         page_size: Optional[int] = None,
         paging_from: Optional[str] = None,
         version: Optional[str] = None) -> DataCollection
@@ -2794,8 +3034,10 @@ Returns metadata about the assets, sectors, and industries included in the CM ta
 
 **Arguments**:
 
-- `classification_start_time` (`str`): Start time for the taxonomy version file. ISO-8601 format date. Inclusive by default
-- `classification_end_time` (`str`): End time for the taxonomy version file. ISO-8601 format date. Exclusive by default
+- `start_time` (`Optional[Union[datetime, date, str]]`): Start time for the taxonomy version file. ISO-8601 format date. Inclusive by default
+- `end_time` (`Optional[Union[datetime, date, str]]`): End time for the taxonomy version file. ISO-8601 format date. Exclusive by default
+- `start_inclusive` (`str`): Start time of taxonomy version.
+- `end_inclusive` (`str`): End time of taxonomy version.
 - `page_size` (`Optional[int]`): Page size for # of asset metadata to return, will default to 100
 - `paging_from` (`Optional[str]`): Which direction to page from "start" or "end". "end" by default
 - `version` (`Optional[str]`): Version to query, default is "latest".
@@ -2810,7 +3052,7 @@ Returns metadata about the assets, sectors, and industries included in the CM ta
 
 ```python
 def get_asset_profiles(assets: Optional[Union[List[str], str]] = None,
-                       full_name: Optional[Union[List[str], str]] = None,
+                       full_names: Optional[Union[List[str], str]] = None,
                        page_size: Optional[int] = None,
                        paging_from: Optional[str] = None) -> DataCollection
 ```
@@ -2820,7 +3062,7 @@ Returns profile data for assets, ordered by asset
 **Arguments**:
 
 - `assets` (`Optional[Union[List[str], str]]`): Returns profile data for assets.
-- `full_name` (`Optional[Union[List[str], str]]`): Comma separated list of asset full names. By default profile data for all assets is returned. Mutually exclusive with assets parameter.
+- `full_names` (`Optional[Union[List[str], str]]`): Comma separated list of asset full names. By default profile data for all assets is returned. Mutually exclusive with assets parameter.
 - `page_size` (`int`): Number of items per single page of results.
 - `paging_from` (`int`): Where does the first page start, at the "start" of the interval or at the "end"
 
