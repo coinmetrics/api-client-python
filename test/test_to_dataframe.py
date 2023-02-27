@@ -296,5 +296,17 @@ def test_catalog_market_liquidations() -> None:
     assert len(catalog_liquidations) > 100
 
 
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_defi_balance_sheets() -> None:
+    """
+    Testing this works for aave
+    """
+    aave_balance_sheets = client.get_defi_balance_sheets(
+        defi_protocols="aave_v2_eth"
+    ).to_dataframe()
+    assert len(aave_balance_sheets) > 100
+    assert aave_balance_sheets.iloc[:1]["defi_protocol"][0] == "aave_v2_eth"
+
+
 if __name__ == "__main__":
     pytest.main()

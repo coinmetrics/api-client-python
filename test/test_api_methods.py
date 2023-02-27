@@ -244,17 +244,30 @@ def test_get_list_of_transactions_v2_eth() -> None:
     """
     Tests the timeseries get list of transactions v2 for eth
     """
-    transactions = client.get_list_of_transactions_v2(asset="eth", start_height= 16644700,end_height=16644767).to_list()
+    transactions = client.get_list_of_transactions_v2(
+        asset="eth", start_height=16644700, end_height=16644767
+    ).to_list()
     assert len(transactions) >= 9800
-    transactions_called_by_id = client.get_list_of_transactions_v2(asset="eth", txids="1ec9982bee6cd96049b0ac7745df4374bcd37dce996bae46d09c3d25c5cfd413").first_page()[0]
-    assert transactions_called_by_id['height'] =='16644767' and transactions_called_by_id['n_balance_updates'] == '9'
+    transactions_called_by_id = client.get_list_of_transactions_v2(
+        asset="eth",
+        txids="1ec9982bee6cd96049b0ac7745df4374bcd37dce996bae46d09c3d25c5cfd413",
+    ).first_page()[0]
+    assert (
+        transactions_called_by_id["height"] == "16644767"
+        and transactions_called_by_id["n_balance_updates"] == "9"
+    )
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_get_list_of_balance_updates_v2() -> None:
     asset = "usdc"
-    accounts = ['4a30ff596cc84c630b2998012b0586ff36113cba', "4dd384f41f3e91f2e204fd462dc0fa73aef029d4"]
-    updates = client.get_list_of_balance_updates_v2(asset=asset, accounts=accounts, limit_per_account=1).to_list()
+    accounts = [
+        "4a30ff596cc84c630b2998012b0586ff36113cba",
+        "4dd384f41f3e91f2e204fd462dc0fa73aef029d4",
+    ]
+    updates = client.get_list_of_balance_updates_v2(
+        asset=asset, accounts=accounts, limit_per_account=1
+    ).to_list()
     assert len(updates) == 2
 
 
@@ -264,10 +277,12 @@ def test_get_asset_profiles() -> None:
     print(data)
     assert len(data) > 10
     one_inch = client.get_asset_profiles(assets="1inch").first_page()[0]
-    assert one_inch['asset'] == '1inch'
+    assert one_inch["asset"] == "1inch"
 
 
 if __name__ == "__main__":
-    for data in client.get_list_of_transactions_v2(asset="eth", start_time="2023-02-17", end_time="2023-02-17"):
+    for data in client.get_list_of_transactions_v2(
+        asset="eth", start_time="2023-02-17", end_time="2023-02-17"
+    ):
         print(data)
     pytest.main()

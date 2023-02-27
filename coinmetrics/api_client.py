@@ -142,17 +142,26 @@ class CoinMetricsClient:
             )
 
     def catalog_assets(
-        self, assets: Optional[Union[List[str], str]] = None
+            self,
+            assets: Optional[Union[List[str], str]] = None,
+            include: Optional[Union[List[str], str]] = None,
+            exclude: Optional[Union[List[str], str]] = None
     ) -> CatalogAssetsData:
         """
         Returns meta information about _available_ assets.
 
         :param assets: A single asset or a list of assets to return info for. If no assets provided, all available assets are returned.
         :type assets: list(str), str
+        :param include: list of fields to include in response. Supported values are metrics, markets, exchanges. Included by default if omitted.
+        :type include: list(str), str
+        :param exclude: list of fields to include in response. Supported values are metrics, markets, exchanges. Included by default if omitted.
+        :type exclude: list(str), str
         :return: Information that is available for requested assets, like: Full name, metrics and available frequencies, markets, exchanges, etc.
         :rtype: list(dict(str, any))
         """
-        params: Dict[str, Any] = {"assets": assets}
+        params: Dict[str, Any] = {"assets": assets,
+                                  "include": include,
+                                  "exclude": exclude}
         return CatalogAssetsData(self._get_data("catalog/assets", params)["data"])
 
     def catalog_asset_alerts(
@@ -393,6 +402,8 @@ class CoinMetricsClient:
         quote: Optional[str] = None,
         asset: Optional[str] = None,
         symbol: Optional[str] = None,
+        include: Optional[Union[List[str], str]] = None,
+        exclude: Optional[Union[List[str], str]] = None
     ) -> CatalogMarketsData:
         """
         Returns list of _available_ markets that correspond to a filter. If no filter is set, returns all available assets.
@@ -411,6 +422,12 @@ class CoinMetricsClient:
         :type asset: str
         :param symbol: name of a symbol. Usually used for futures contracts.
         :type symbol: str
+        :param include: list of fields to include in response. Supported values are trades, orderbooks,
+        quotes, funding_rates, openinterest, liquidations. Included by default if omitted.
+        :type include: list(str), str
+        :param exclude: list of fields to exclude from response. Supported values are trades, orderbooks,
+         quotes, funding_rates, openinterest, liquidations. Included by default if omitted.
+        :type exclude: list(str), str
         :return: Information about markets that correspond to a filter along with meta information like: type of market and min and max available time frames.
         :rtype: list(dict(str, any))
         """
@@ -422,6 +439,8 @@ class CoinMetricsClient:
             "quote": quote,
             "asset": asset,
             "symbol": symbol,
+            "include": include,
+            "exclude": exclude
         }
         return CatalogMarketsData(self._get_data("catalog/markets", params)["data"])
 
@@ -832,19 +851,51 @@ class CoinMetricsClient:
         )
 
     def catalog_full_assets(
-        self,
-        assets: Optional[Union[List[str], str]] = None,
+            self,
+            assets: Optional[Union[List[str], str]] = None,
+            include: Optional[Union[List[str], str]] = None,
+            exclude: Optional[Union[List[str], str]] = None
     ) -> CatalogAssetsData:
         """
         Returns meta information about _supported_ assets.
-
         :param assets: A single asset or a list of assets to return info for. If no assets provided, all supported assets are returned.
         :type assets: list(str), str
+        :param include: list of fields to include in response. Supported values are metrics, markets,
+        exchanges. Included by default if omitted.
+        :type include: list(str), str
+        :param exclude:  list of fields to exclude from response. Supported values are metrics, markets,
+        exchanges. Included by default if omitted.
+        :type exclude: list(str), str
         :return: Information that is supported for requested assets, like: Full name, metrics and supported frequencies, markets, exchanges, etc.
         :rtype: list(dict(str, any))
         """
-        params: Dict[str, Any] = {"assets": assets}
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "include": include,
+            "exclude": exclude
+        }
         return CatalogAssetsData(self._get_data("catalog-all/assets", params)["data"])
+
+    def catalog_full_asset_metrics(
+        self,
+        metrics: Optional[Union[List[str], str]] = None,
+        reviewable: Optional[bool] = None,
+    ) -> CatalogMetricsData:
+        """
+        Returns list of all _available_ asset metrics along with information for them like
+        description, category, precision and assets for which a metric is available.
+
+        :param metrics: A single asset metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+        :type metrics: list(str), str
+        :param reviewable: Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+        :type reviewable: bool
+        :return: Information about asset metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        return CatalogMetricsData(
+            self._get_data("catalog-all/asset-metrics", params)["data"]
+        )
 
     def catalog_full_asset_alerts(
         self,
@@ -883,6 +934,48 @@ class CoinMetricsClient:
             self._get_data("catalog-all/pairs", params)["data"]
         )
 
+    def catalog_full_pair_metrics(
+        self,
+        metrics: Optional[Union[List[str], str]] = None,
+        reviewable: Optional[bool] = None,
+    ) -> CatalogPairMetricsData:
+        """
+        Returns list of all _available_ pair metrics along with information for them like
+        description, category, precision and assets for which a metric is available.
+
+        :param metrics: A single pair metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+        :type metrics: list(str), str
+        :param reviewable: Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+        :type reviewable: bool
+        :return: Information about pair metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        return CatalogPairMetricsData(
+            self._get_data("catalog-all/pair-metrics", params)["data"]
+        )
+
+    def catalog_full_institution_metrics(
+        self,
+        metrics: Optional[Union[List[str], str]] = None,
+        reviewable: Optional[bool] = None,
+    ) -> CatalogInstitutionMetricsData:
+        """
+        Returns list of _available_ institution metrics along with information for them like
+        description, category, precision and assets for which a metric is available.
+
+        :param metrics: A single institution metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+        :type metrics: list(str), str
+        :param reviewable: Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+        :type reviewable: bool
+        :return: Information about institution metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        return CatalogInstitutionMetricsData(
+            self._get_data("catalog-all/institution-metrics", params)["data"]
+        )
+
     def catalog_full_asset_pair_candles(
         self, asset_pairs: Optional[Union[List[str], str]] = None
     ) -> CatalogAssetPairCandlesData:
@@ -906,7 +999,8 @@ class CoinMetricsClient:
         """
         Returns meta information about exchanges.
 
-        :param exchanges: A single exchange name or a list of exchanges to return info for. If no exchanges provided, all supported exchanges are returned.
+        :param exchanges: A single exchange name or a list of exchanges to return info for. If no exchanges provided,
+         all supported exchanges are returned.
         :type exchanges: list(str), str
         :return: Information that is supported for requested exchanges, like: markets, min and max time supported.
         :rtype: list(dict(str, any))
@@ -930,6 +1024,48 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {"exchange_assets": exchange_assets}
         return CatalogExchangeAssetsData(
             self._get_data("catalog-all/exchange-assets", params)["data"]
+        )
+
+    def catalog_full_exchange_metrics(
+        self,
+        metrics: Optional[Union[List[str], str]] = None,
+        reviewable: Optional[bool] = None,
+    ) -> CatalogMetricsData:
+        """
+        Returns list of all _available_ exchange metrics along with information for them like
+        description, category, precision and assets for which a metric is available.
+
+        :param metrics: A single exchange metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+        :type metrics: list(str), str
+        :param reviewable: Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+        :type reviewable: bool
+        :return: Information about exchange metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        return CatalogMetricsData(
+            self._get_data("catalog-all/exchange-metrics", params)["data"]
+        )
+
+    def catalog_full_exchange_asset_metrics(
+        self,
+        metrics: Optional[Union[List[str], str]] = None,
+        reviewable: Optional[bool] = None,
+    ) -> CatalogExchangeAssetMetricsData:
+        """
+        Returns list of _available_ exchange metrics along with information for them like
+        description, category, precision and assets for which a metric is available.
+
+        :param metrics: A single exchange metric name or a list of metrics to return info for. If no metrics provided, all available metrics are returned.
+        :type metrics: list(str), str
+        :param reviewable: Show only reviewable or non-reviewable by human metrics. By default all metrics are shown.
+        :type reviewable: bool
+        :return: Information about exchange metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        return CatalogExchangeAssetMetricsData(
+            self._get_data("catalog-all/exchange-asset-metrics", params)["data"]
         )
 
     def catalog_full_indexes(
@@ -987,6 +1123,8 @@ class CoinMetricsClient:
         quote: Optional[str] = None,
         asset: Optional[str] = None,
         symbol: Optional[str] = None,
+        include: Optional[str] = None,
+        exclude: Optional[str] = None
     ) -> CatalogMarketsData:
         """
         Returns list of _supported_ markets that correspond to a filter. If no filter is set, returns all supported assets.
@@ -1005,6 +1143,12 @@ class CoinMetricsClient:
         :type asset: str
         :param symbol: name of a symbol. Usually used for futures contracts.
         :type symbol: str
+        :param include: ist of fields to include in response. Supported values are trades, orderbooks, quotes,
+         funding_rates, openinterest, liquidations. Included by default if omitted.
+        :type include: list(str), str
+        :param exclude: list of fields to exclude from response. Supported values are trades, orderbooks, quotes,
+         funding_rates, openinterest, liquidations. Included by default if omitted.
+        :type exclude: list(str), str
         :return: Information about markets that correspond to a filter along with meta information like: type of market and min and max supported time frames.
         :rtype: list(dict(str, any))
         """
@@ -1016,6 +1160,8 @@ class CoinMetricsClient:
             "quote": quote,
             "asset": asset,
             "symbol": symbol,
+            "include": include,
+            "exclude": exclude
         }
         return CatalogMarketsData(self._get_data("catalog-all/markets", params)["data"])
 
@@ -1296,6 +1442,49 @@ class CoinMetricsClient:
             self._get_data("catalog-all/market-funding-rates", params)["data"]
         )
 
+    def catalog_full_market_greeks(
+        self,
+        markets: Optional[Union[List[str], str]] = None,
+        market_type: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+    ) -> CatalogMarketTradesData:
+        """
+        Returns a list of all markets with greeks support along with the time ranges of available data.
+
+        :param markets: list of market names, e.g. 'coinbase-btc-usd-spot'
+        :type markets: list(str), str
+        :param market_type: Type of market: "spot", "future", "option"
+        :type market_type: str
+        :param exchange: name of the exchange
+        :type exchange: str
+        :param base: name of base asset
+        :type base: str
+        :param quote: name of quote asset
+        :type quote: str
+        :param asset: name of either base or quote asset
+        :type asset: str
+        :param symbol: name of a symbol. Usually used for futures contracts.
+        :type symbol: str
+        :return: Information about market greeks that correspond to the filter
+        :rtype: list(dict(str, any))
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "type": market_type,
+            "exchange": exchange,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+        }
+        return CatalogMarketTradesData(
+            self._get_data("catalog-all/market-greeks", params)["data"]
+        )
+
     def catalog_full_market_open_interest(
         self,
         markets: Optional[Union[List[str], str]] = None,
@@ -1432,6 +1621,59 @@ class CoinMetricsClient:
         }
         return DataCollection(self._get_data, "timeseries/asset-alerts", params)
 
+    def get_defi_balance_sheets(
+        self,
+        defi_protocols: Union[str, List[str]],
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_height: Optional[int] = None,
+        end_height: Optional[int] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        Returns Defi Balance Sheet records for specified DeFi protocols.
+
+        :param defi_protocols:  list of DeFi protocols like aave_v2_eth or protocol patterns like aave_v2_* or aave_*_eth or *_eth.
+        :type defi_protocols: str, List[str]
+        :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
+        :type page_size: int
+        :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+        :type paging_from: PagingFrom, str
+        :param start_time: Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type start_time: datetime, date, str
+        :param end_time: End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type end_time: datetime, date, str
+        :param start_height: The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
+        :type start_height: int
+        :param end_height: The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
+        :type end_height: int
+        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
+        :type start_inclusive: bool
+        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
+        :type end_inclusive: bool
+        :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+        :type timezone: str
+        :return: list of blockchain blocks metadata
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "defi_protocols": defi_protocols,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "start_time": start_time,
+            "end_time": end_time,
+            "start_height": start_height,
+            "end_height": end_height,
+            "start_inclusive": start_inclusive,
+            "end_inclusive": end_inclusive,
+            "timezone": timezone,
+        }
+        return DataCollection(self._get_data, "timeseries/defi-balance-sheets", params)
+
     def get_asset_chains(
         self,
         assets: Union[List[str], str],
@@ -1494,6 +1736,11 @@ class CoinMetricsClient:
         timezone: Optional[str] = None,
         sort: Optional[str] = None,
         limit_per_asset: Optional[int] = None,
+        status: Optional[str] = None,
+        start_hash: Optional[str] = None,
+        end_hash: Optional[str] = None,
+        min_confirmations: Optional[int] = None,
+        null_as_zero: Optional[bool] = None,
     ) -> DataCollection:
         """
         Returns requested metrics for specified assets.
@@ -1526,6 +1773,20 @@ class CoinMetricsClient:
         :type sort: str
         :param limit_per_asset: How many entries _per asset_ the result should contain.
         :type limit_per_asset: int
+        :param status: Which metric values do you want to see. Applicable only for "reviewable" metrics.
+        You can find them in the /catalog/metrics endpoint. Default: "all". Supported: "all" "flash" "reviewed" "revised"
+        :type status: str
+        :param start_hash: The start hash indicates the beginning block height for the set of data that are returned.
+        Inclusive by default. Mutually exclusive with start_time and start_height.
+        :type start_hash: str
+        :param end_hash: The end hash indicates the ending block height for the set of data that are returned.
+        Inclusive by default. Mutually exclusive with end_time and end_height.
+        :type end_hash: str
+        :param min_confirmations: Specifies how many blocks behind the chain tip block by block metrics
+        (1b frequency) are based on. Default for btc is 2 and 99 for eth.
+        :type min_confirmations: int
+        :param null_as_zero: Default: false. Nulls are represented as zeros in the response.
+        :type null_as_zero: bool
         :return: Asset Metrics timeseries.
         :rtype: DataCollection
         """
@@ -1545,6 +1806,11 @@ class CoinMetricsClient:
             "timezone": timezone,
             "sort": sort,
             "limit_per_asset": limit_per_asset,
+            "status": status,
+            "start_hash": start_hash,
+            "end_hash": end_hash,
+            "min_confirmations": min_confirmations,
+            "null_as_zero": null_as_zero,
         }
         return DataCollection(self._get_data, "timeseries/asset-metrics", params)
 
@@ -2064,6 +2330,7 @@ class CoinMetricsClient:
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None,
+        sort: Optional[str] = None
     ) -> DataCollection:
         """
         Returns market metrics for specified markets, frequency and date range.
@@ -2091,6 +2358,10 @@ class CoinMetricsClient:
         :type timezone: str
         :param limit_per_market: How many entries _per market_ the result should contain.
         :type limit_per_market: int
+        :param sort: How results will be sorted. Metrics are sorted by (market, time) by default. If you want to sort
+        1d metrics by (time, market) you should choose time as value for the sort parameter. Sorting by time is useful
+        if you request metrics for a set of markets.
+        :type sort: str
         :return: Market Candles timeseries.
         :rtype: DataCollection
         """
@@ -2107,6 +2378,7 @@ class CoinMetricsClient:
             "end_inclusive": end_inclusive,
             "timezone": timezone,
             "limit_per_market": limit_per_market,
+            "sort": sort
         }
         return DataCollection(self._get_data, "timeseries/market-metrics", params)
 
@@ -2176,6 +2448,7 @@ class CoinMetricsClient:
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None,
+        min_confirmations: Optional[int] = None
     ) -> DataCollection:
         """
         Returns market trades for specified markets and date range.
@@ -2199,6 +2472,8 @@ class CoinMetricsClient:
         :type timezone: str
         :param limit_per_market: How many entries _per market_ the result should contain.
         :type limit_per_market: int
+        :param min_confirmations: Specifies how many blocks behind the chain tip trades are based on. Default is 2.
+        :type min_confirmations: int
         :return: Market Trades timeseries.
         :rtype: DataCollection
         """
@@ -2213,6 +2488,7 @@ class CoinMetricsClient:
             "end_inclusive": end_inclusive,
             "timezone": timezone,
             "limit_per_market": limit_per_market,
+            "min_confirmations": min_confirmations,
         }
         return DataCollection(self._get_data, "timeseries/market-trades", params)
 
@@ -2435,6 +2711,7 @@ class CoinMetricsClient:
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None,
+        include_one_sided: Optional[bool] = None
     ) -> DataCollection:
         """
         Returns market quotes for specified markets and date range.
@@ -2458,6 +2735,8 @@ class CoinMetricsClient:
         :type timezone: str
         :param limit_per_market: How many entries _per market_ the result should contain.
         :type limit_per_market: int
+        :param include_one_sided: Default: false Include one-side and empty books in quotes response.
+        :type include_one_sided: bool
         :return: Market Quotes timeseries.
         :rtype: DataCollection
         """
@@ -2472,6 +2751,7 @@ class CoinMetricsClient:
             "end_inclusive": end_inclusive,
             "timezone": timezone,
             "limit_per_market": limit_per_market,
+            "include_one_sided": include_one_sided
         }
         return DataCollection(self._get_data, "timeseries/market-quotes", params)
 
@@ -2776,6 +3056,7 @@ class CoinMetricsClient:
         self,
         markets: Union[List[str], str],
         backfill: Union[Backfill, str] = Backfill.LATEST,
+        depth_limit: Optional[str] = None
     ) -> CmStream:
         """
         Returns timeseries stream of market orderbooks.
@@ -2784,17 +3065,24 @@ class CoinMetricsClient:
         :type markets: list(str), str
         :param backfill: What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.
         :type backfill: str
+        :param depth_limit: Default: 100. Supported Values: 100 "full_book". Book depth limit.
+        :type depth_limit: str
         :return: Market Orderbooks timeseries stream.
         :rtype: CmStream
         """
 
-        params: Dict[str, Any] = {"markets": markets, "backfill": backfill}
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "backfill": backfill,
+            "depth_limit": depth_limit
+        }
         return self._get_stream_data("timeseries-stream/market-orderbooks", params)
 
     def get_stream_market_quotes(
         self,
         markets: Union[List[str], str],
         backfill: Union[Backfill, str] = Backfill.LATEST,
+        include_one_sided: Optional[bool] = None
     ) -> CmStream:
         """
         Returns timeseries stream of market quotes.
@@ -2803,11 +3091,17 @@ class CoinMetricsClient:
         :type markets: list(str), str
         :param backfill: What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.
         :type backfill: str
+        :param include_one_sided: Default: false. Include one-side and empty books in quotes response.
+        :type include_one_sided: bool
         :return: Market Quotes timeseries stream.
         :rtype: CmStream
         """
 
-        params: Dict[str, Any] = {"markets": markets, "backfill": backfill}
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "backfill": backfill,
+            "include_one_sided": include_one_sided
+        }
         return self._get_stream_data("timeseries-stream/market-quotes", params)
 
     def get_stream_market_candles(
@@ -3133,6 +3427,7 @@ class CoinMetricsClient:
         end_time: Optional[Union[datetime, date, str]] = None,
         start_height: Optional[int] = None,
         end_height: Optional[int] = None,
+        chain: Optional[bool] = None,
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
@@ -3158,6 +3453,8 @@ class CoinMetricsClient:
         :type start_height: int
         :param end_height: The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
         :type end_height: int
+        :param chain: Default: "main" Chain type. Supported values are main and all (includes both main and stale).
+        :type chain: str
         :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
         :type start_inclusive: bool
         :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
@@ -3326,6 +3623,7 @@ class CoinMetricsClient:
         end_time: Optional[Union[datetime, date, str]] = None,
         start_height: Optional[int] = None,
         end_height: Optional[int] = None,
+        chain: Optional[str] = None,
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
@@ -3351,6 +3649,8 @@ class CoinMetricsClient:
         :type start_height: int
         :param end_height: The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
         :type end_height: int
+        :param chain: Default: "main". Chain type. Supported values are main and all (includes both main and stale).
+        :type chain: str
         :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
         :type start_inclusive: bool
         :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
@@ -3370,6 +3670,7 @@ class CoinMetricsClient:
             "end_time": end_time,
             "start_height": start_height,
             "end_height": end_height,
+            "chain": chain,
             "start_inclusive": start_inclusive,
             "end_inclusive": end_inclusive,
             "timezone": timezone,
@@ -3739,18 +4040,24 @@ class CoinMetricsClient:
 
     def get_taxonomy_assets_metadata(
         self,
-        classification_start_time: Optional[str] = None,
-        classification_end_time: Optional[str] = None,
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
         page_size: Optional[int] = None,
         paging_from: Optional[str] = None,
         version: Optional[str] = None,
     ) -> DataCollection:
         """
         Returns metadata about the assets, sectors, and industries included in the CM taxonomy
-        :param classification_start_time: Start time for the taxonomy version file. ISO-8601 format date. Inclusive by default
-        :type classification_start_time: str
-        :param classification_end_time: End time for the taxonomy version file. ISO-8601 format date. Exclusive by default
-        :type classification_end_time: str
+        :param start_time: Start time for the taxonomy version file. ISO-8601 format date. Inclusive by default
+        :type start_time: Optional[Union[datetime, date, str]]
+        :param end_time: End time for the taxonomy version file. ISO-8601 format date. Exclusive by default
+        :type end_time: Optional[Union[datetime, date, str]]
+        :param start_inclusive: Start time of taxonomy version.
+        :type start_inclusive: str
+        :param end_inclusive: End time of taxonomy version.
+        :type end_inclusive: str
         :param page_size: Page size for # of asset metadata to return, will default to 100
         :type page_size: Optional[int]
         :param paging_from: Which direction to page from "start" or "end". "end" by default
@@ -3761,26 +4068,29 @@ class CoinMetricsClient:
         :rtype: Datacollection
         """
         params: Dict[str, Any] = {
-            "classification_start_time": classification_start_time,
-            "classification_end_time": classification_end_time,
+            "start_time": start_time,
+            "end_time": end_time,
+            "start_inclusive": start_inclusive,
+            "end_inclusive": end_inclusive,
             "page_size": page_size,
             "paging_from": paging_from,
             "version": version,
         }
         return DataCollection(self._get_data, "/taxonomy-metadata/assets", params)
 
-    def get_asset_profiles(self,
-                           assets: Optional[Union[List[str], str]] = None,
-                           full_name: Optional[Union[List[str], str]] = None,
-                           page_size: Optional[int] = None,
-                           paging_from: Optional[str] = None
-                           ) -> DataCollection:
+    def get_asset_profiles(
+        self,
+        assets: Optional[Union[List[str], str]] = None,
+        full_names: Optional[Union[List[str], str]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+    ) -> DataCollection:
         """
         Returns profile data for assets, ordered by asset
         :param assets: Returns profile data for assets.
         :type assets: Optional[Union[List[str], str]]
-        :param full_name: Comma separated list of asset full names. By default profile data for all assets is returned. Mutually exclusive with assets parameter.
-        :type full_name: Optional[Union[List[str], str]]
+        :param full_names: Comma separated list of asset full names. By default profile data for all assets is returned. Mutually exclusive with assets parameter.
+        :type full_names: Optional[Union[List[str], str]]
         :param page_size: Number of items per single page of results.
         :type page_size: int
         :param paging_from: Where does the first page start, at the "start" of the interval or at the "end"
@@ -3788,7 +4098,7 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {
             "assets": assets,
-            "full_name": full_name,
+            "full_names": full_names,
             "page_size": page_size,
             "paging_from": paging_from,
         }
