@@ -3474,6 +3474,7 @@ class CoinMetricsClient:
             "end_time": end_time,
             "start_height": start_height,
             "end_height": end_height,
+            "chain": chain,
             "start_inclusive": start_inclusive,
             "end_inclusive": end_inclusive,
             "timezone": timezone,
