@@ -44,9 +44,11 @@ class CoinMetricsDataExporter:
         self._verify_ssl_certs = verify_ssl_certs
         self._proxy_url = proxy_url
         self._auth = HTTPBasicAuth(self._api_key, "")
+        self.proxies = {"http": proxy_url, "https": proxy_url}
         if session is None:
             self._session = requests.Session()
             self._session.verify = self._verify_ssl_certs
+            self._session.proxies.update({"http": proxy_url, "https": proxy_url})
         else:
             self._session = session
 
@@ -467,7 +469,7 @@ class CoinMetricsDataExporter:
     @retry((socket.gaierror, HTTPError), retries=5, wait_time_between_retries=5)
     def _send_request(self, actual_url: str, stream: bool = False) -> Response:
         response = self._session.get(
-            actual_url, verify=self._verify_ssl_certs, auth=self._auth, stream=stream
+            actual_url, verify=self._verify_ssl_certs, auth=self._auth, stream=stream, proxies=self.proxies
         )
         if response.status_code == 403 or response.status_code == 401:
             raise CoinMetricsUnauthorizedException(response=response)
