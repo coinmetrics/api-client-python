@@ -3104,6 +3104,52 @@ class CoinMetricsClient:
         }
         return self._get_stream_data("timeseries-stream/market-quotes", params)
 
+    def get_stream_pair_quotes(
+            self,
+            pairs: Union[str, List[str]],
+            aggregation_method: Optional[str] = None,
+            backfill: Optional[str] = None,
+    ) -> CmStream:
+        """
+        :param pairs: Comma separated list of asset pairs. Use the /catalog-all/pairs endpoint for the full list of supported asset pairs.
+        :type pairs: Optional[Union[str, List[str]]]
+        :param aggregation_method: The method to use for aggregation.
+        :type aggregation_method: str
+        :param backfill: What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+        :type backfill: str
+        :return:
+        :rtype: CmStream
+        """
+        params = {
+            "pairs": pairs,
+            "aggregation_method": aggregation_method,
+            "backfill": backfill,
+        }
+        return self._get_stream_data("timeseries-stream/pair-quotes", params)
+
+    def get_stream_asset_quotes(
+            self,
+            assets: Union[str, List[str]],
+            aggregation_method: Optional[str] = None,
+            backfill: Optional[str] = None,
+    ) -> CmStream:
+        """
+        :param assets: Comma separated list of assets. Use the /catalog-all/assets endpoint for the full list of supported assets.
+        :type assets: Union[str, List[str]]
+        :param aggregation_method: The method to use for aggregation.
+        :type aggregation_method: str
+        :param backfill: What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+        :type backfill: str
+        :return:
+        :rtype: CmStream
+        """
+        params = {
+            "assets": assets,
+            "aggregation_method": aggregation_method,
+            "backfill": backfill,
+        }
+        return self._get_stream_data("/timeseries-stream/asset-quotes", params)
+
     def get_stream_market_candles(
         self,
         markets: Union[List[str], str],

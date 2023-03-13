@@ -763,6 +763,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get_stream_pair_quotes" class="md-nav__link">
+    get_stream_pair_quotes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_stream_asset_quotes" class="md-nav__link">
+    get_stream_asset_quotes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get_stream_market_candles" class="md-nav__link">
     get_stream_market_candles
   </a>
@@ -1513,6 +1527,20 @@
           <li class="md-nav__item">
   <a href="#get_stream_market_quotes" class="md-nav__link">
     get_stream_market_quotes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_stream_pair_quotes" class="md-nav__link">
+    get_stream_pair_quotes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_stream_asset_quotes" class="md-nav__link">
+    get_stream_asset_quotes
   </a>
   
 </li>
@@ -3462,6 +3490,34 @@ if you request metrics for a set of markets.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CmStream</code>: Market Quotes timeseries stream.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.get_stream_pair_quotes"></a></p>
+<h4 id="get_stream_pair_quotes">get_stream_pair_quotes<a class="headerlink" href="#get_stream_pair_quotes" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_stream_pair_quotes</span><span class="p">(</span><span class="n">pairs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+                           <span class="n">aggregation_method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                           <span class="n">backfill</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CmStream</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>pairs</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of asset pairs. Use the /catalog-all/pairs endpoint for the full list of supported asset pairs.</li>
+<li><code>aggregation_method</code> (<code>str</code>): The method to use for aggregation.</li>
+<li><code>backfill</code> (<code>str</code>): What data should be sent upon a connection. By default the latest values are sent just before real-time data.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CmStream</code>: </p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.get_stream_asset_quotes"></a></p>
+<h4 id="get_stream_asset_quotes">get_stream_asset_quotes<a class="headerlink" href="#get_stream_asset_quotes" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_stream_asset_quotes</span><span class="p">(</span><span class="n">assets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+                            <span class="n">aggregation_method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                            <span class="n">backfill</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CmStream</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>Union[str, List[str]]</code>): Comma separated list of assets. Use the /catalog-all/assets endpoint for the full list of supported assets.</li>
+<li><code>aggregation_method</code> (<code>str</code>): The method to use for aggregation.</li>
+<li><code>backfill</code> (<code>str</code>): What data should be sent upon a connection. By default the latest values are sent just before real-time data.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CmStream</code>: </p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.get_stream_market_candles"></a></p>
 <h4 id="get_stream_market_candles">get_stream_market_candles<a class="headerlink" href="#get_stream_market_candles" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_stream_market_candles</span><span class="p">(</span>

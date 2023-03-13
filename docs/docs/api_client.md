@@ -2355,6 +2355,46 @@ Returns timeseries stream of market quotes.
 
 `CmStream`: Market Quotes timeseries stream.
 
+<a id="coinmetrics.api_client.CoinMetricsClient.get_stream_pair_quotes"></a>
+
+#### get\_stream\_pair\_quotes
+
+```python
+def get_stream_pair_quotes(pairs: Union[str, List[str]],
+                           aggregation_method: Optional[str] = None,
+                           backfill: Optional[str] = None) -> CmStream
+```
+
+**Arguments**:
+
+- `pairs` (`Optional[Union[str, List[str]]]`): Comma separated list of asset pairs. Use the /catalog-all/pairs endpoint for the full list of supported asset pairs.
+- `aggregation_method` (`str`): The method to use for aggregation.
+- `backfill` (`str`): What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+
+**Returns**:
+
+`CmStream`: 
+
+<a id="coinmetrics.api_client.CoinMetricsClient.get_stream_asset_quotes"></a>
+
+#### get\_stream\_asset\_quotes
+
+```python
+def get_stream_asset_quotes(assets: Union[str, List[str]],
+                            aggregation_method: Optional[str] = None,
+                            backfill: Optional[str] = None) -> CmStream
+```
+
+**Arguments**:
+
+- `assets` (`Union[str, List[str]]`): Comma separated list of assets. Use the /catalog-all/assets endpoint for the full list of supported assets.
+- `aggregation_method` (`str`): The method to use for aggregation.
+- `backfill` (`str`): What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+
+**Returns**:
+
+`CmStream`: 
+
 <a id="coinmetrics.api_client.CoinMetricsClient.get_stream_market_candles"></a>
 
 #### get\_stream\_market\_candles

@@ -117,6 +117,20 @@ def on_message_asset_metrics_rr_test(stream: CmStream, message: str) -> None:
         assert col in data
     stream.close()
 
+def on_message_pair_quotes_test(stream: CmStream, message: str) -> None:
+    data = orjson.loads(message)
+    expected_cols = ["pair", "time", "ask_price", "mid_price"]
+    for col in expected_cols:
+        assert col in data
+    stream.close()
+
+
+def on_message_assets_quotes_test(stream: CmStream, message: str) -> None:
+    data = orjson.loads(message)
+    expected_cols = ["pair", "time", "ask_price", "ask_size", "bid_price", "mid_price"]
+    for col in expected_cols:
+        assert col in data
+    stream.close()
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_index_levels_stream() -> None:
@@ -162,3 +176,15 @@ def test_market_candles_stream() -> None:
         markets=["coinbase-btc-usd-spot"], frequency="1m"
     )
     stream.run(on_message_market_candles_test)
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_get_pair_quotes_stream() -> None:
+    stream = client.get_stream_pair_quotes(pairs="btc-usdt")
+    stream.run(on_message=on_message_pair_quotes_test)
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_get_asset_quotes_stream() -> None:
+    stream = client.get_stream_asset_quotes(assets="btc")
+    stream.run(on_message=on_message_assets_quotes_test)
