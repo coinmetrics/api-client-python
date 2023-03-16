@@ -469,7 +469,7 @@ class CoinMetricsDataExporter:
     @retry((socket.gaierror, HTTPError), retries=5, wait_time_between_retries=5)
     def _send_request(self, actual_url: str, stream: bool = False) -> Response:
         response = self._session.get(
-            actual_url, verify=self._verify_ssl_certs, auth=self._auth, stream=stream, proxies=self.proxies
+            actual_url, verify=self._verify_ssl_certs, auth=self._auth, stream=stream, proxies=self.proxies  # type: ignore
         )
         if response.status_code == 403 or response.status_code == 401:
             raise CoinMetricsUnauthorizedException(response=response)
