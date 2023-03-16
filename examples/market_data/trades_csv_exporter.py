@@ -52,7 +52,7 @@ EXPORT_END_DATE = "2020-05-31"  # if you set this to None, then `today - 1 day` 
 COMPRESS_DATA = True  # False - for raw csv files; True - for gzipped csv files
 
 # path to local file that is used to not reexport data if it was already exported
-PROCESSED_DAYS_REGISTRY_FILE_PATH = "processed_days_registry.txt"
+REGISTRY_FILE_PATH = "trades_processed_days_registry.txt"
 
 
 api_key = (
@@ -140,8 +140,8 @@ def get_instrument_root(market):
 
 
 def read_already_processed_files():
-    if exists(PROCESSED_DAYS_REGISTRY_FILE_PATH):
-        with open(PROCESSED_DAYS_REGISTRY_FILE_PATH) as registry_file:
+    if exists(REGISTRY_FILE_PATH):
+        with open(REGISTRY_FILE_PATH) as registry_file:
             return set(registry_file.read().splitlines())
     return set()
 
@@ -189,7 +189,7 @@ def export_data_for_a_market(market, market_data_root, target_date):
             market_trades.export_to_csv(data_file, compress=COMPRESS_DATA)
     else:
         market_trades.export_to_csv(dst_csv_file_path, compress=COMPRESS_DATA)
-    with open(PROCESSED_DAYS_REGISTRY_FILE_PATH, "a") as registry_file:
+    with open(REGISTRY_FILE_PATH, "a") as registry_file:
         registry_file.write(get_registry_key(market, target_date) + "\n")
 
 

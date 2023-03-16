@@ -78,7 +78,7 @@ EXPORT_END_DATE: Optional[str] = None
 COMPRESS_DATA = False  # False - for raw json files; True - for gzipped json files
 
 # path to local file that is used to not reexport data if it was already exported
-PROCESSED_DAYS_REGISTRY_FILE_PATH = "candles_processed_days_registry.txt"
+REGISTRY_FILE_PATH = "candles_processed_days_registry.txt"
 
 
 api_key = (
@@ -181,9 +181,12 @@ def get_instrument_root(market):
 
 
 def read_already_processed_files():
-    if exists(PROCESSED_DAYS_REGISTRY_FILE_PATH):
-        with open(PROCESSED_DAYS_REGISTRY_FILE_PATH) as registry_file:
-            return set(registry_file.read().splitlines())
+    if exists(REGISTRY_FILE_PATH):
+        with open(REGISTRY_FILE_PATH) as registry_file:
+            exports_to_skip = set(registry_file.read().splitlines())
+            logging.warning(f"Registry file: {registry_file} exists, this means that the following exports will be skipped."
+                         f"if this is not intended delete or modify file {registry_file}. \n {exports_to_skip}")
+            return exports_to_skip
     return set()
 
 
@@ -244,7 +247,7 @@ def export_data_for_a_market(market, market_data_root, start_date, end_date):
         # cleanup files without data
         if Path(dst_json_file_path).stat().st_size == 0:
             remove(dst_json_file_path)
-    with open(PROCESSED_DAYS_REGISTRY_FILE_PATH, "a") as registry_file:
+    with open(REGISTRY_FILE_PATH, "a") as registry_file:
         registry_file.write(get_registry_key(market, start_date) + "\n")
 
 
