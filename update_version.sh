@@ -2,8 +2,10 @@
 VERSION=$1
 new_line_py="__version__ = \"$VERSION\""
 new_line_toml="version = \"$VERSION\""
+new_line_nix="version = \"$VERSION\";"
 init=coinmetrics/__init__.py
 pyproject=pyproject.toml
+nix_default=default.nix
 cat $init | while read line; do
 
   if [[ $line =~ "__version__ = " ]]; then sed -i '' -e "s/$line/$new_line_py/" $init
@@ -15,3 +17,9 @@ cat $pyproject | while read line; do
   fi
 
 done < $pyproject
+
+cat $nix_default | while read line; do
+  if [[ $line =~ "version = " ]]; then sed -i '' -e "s/$line/$new_line_nix/" $nix_default
+  fi
+
+done < $nix_default

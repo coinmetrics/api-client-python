@@ -19,7 +19,7 @@
 
 buildPythonPackage rec {
   pname = "coinmetrics-api-client";
-  version = "2023.3.15.20";
+  version = "2023.3.16.17";
   format = "pyproject";
 
   disabled = pythonOlder "3.9";

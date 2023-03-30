@@ -3120,7 +3120,7 @@ class CoinMetricsClient:
         :return:
         :rtype: CmStream
         """
-        params = {
+        params: Dict[str, Any] = {
             "pairs": pairs,
             "aggregation_method": aggregation_method,
             "backfill": backfill,
@@ -3143,7 +3143,7 @@ class CoinMetricsClient:
         :return:
         :rtype: CmStream
         """
-        params = {
+        params: Dict[str, Any] = {
             "assets": assets,
             "aggregation_method": aggregation_method,
             "backfill": backfill,
