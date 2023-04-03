@@ -142,10 +142,10 @@ class CoinMetricsClient:
             )
 
     def catalog_assets(
-            self,
-            assets: Optional[Union[List[str], str]] = None,
-            include: Optional[Union[List[str], str]] = None,
-            exclude: Optional[Union[List[str], str]] = None
+        self,
+        assets: Optional[Union[List[str], str]] = None,
+        include: Optional[Union[List[str], str]] = None,
+        exclude: Optional[Union[List[str], str]] = None,
     ) -> CatalogAssetsData:
         """
         Returns meta information about _available_ assets.
@@ -159,28 +159,33 @@ class CoinMetricsClient:
         :return: Information that is available for requested assets, like: Full name, metrics and available frequencies, markets, exchanges, etc.
         :rtype: list(dict(str, any))
         """
-        params: Dict[str, Any] = {"assets": assets,
-                                  "include": include,
-                                  "exclude": exclude}
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "include": include,
+            "exclude": exclude,
+        }
         return CatalogAssetsData(self._get_data("catalog/assets", params)["data"])
 
     def catalog_asset_alerts(
         self,
-        assets: Optional[Union[List[str], str]] = None,
-        alerts: Optional[Union[List[str], str]] = None,
+        assets: Optional[Union[str, List[str]]] = None,
+        alerts: Optional[Union[str, List[str]]] = None,
     ) -> CatalogAssetAlertsData:
         """
-        Returns meta information about _available_ assets.
-
-        :param assets: A single asset or a list of assets to return info for. If no assets provided, all available assets are returned.
-        :type assets: list(str), str
-        :param alerts: A single alert or alert name to return info for. If no alerts provided, all available alerts are returned.
-        :type alerts: list(str), str
-        :return: Information that is available for requested assets alerts.
-        :rtype: list(dict(str, any))
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Union[str, List[str]]
+        :param alerts: Comma separated list of asset alert names. By default all asset alerts are returned.
+        :type alerts: Union[str, List[str]]
+        :return: List of asset alerts.
+        :rtype: CatalogAssetAlertsData
         """
-        params: Dict[str, Any] = {"assets": assets, "alerts": alerts}
-        return CatalogAssetAlertsData(self._get_data("catalog/alerts", params)["data"])
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "alerts": alerts,
+        }
+        return CatalogAssetAlertsData(
+            self._get_data("catalog/asset-alerts", params)["data"]
+        )
 
     def catalog_asset_pairs(
         self, asset_pairs: Optional[Union[List[str], str]] = None
@@ -403,7 +408,7 @@ class CoinMetricsClient:
         asset: Optional[str] = None,
         symbol: Optional[str] = None,
         include: Optional[Union[List[str], str]] = None,
-        exclude: Optional[Union[List[str], str]] = None
+        exclude: Optional[Union[List[str], str]] = None,
     ) -> CatalogMarketsData:
         """
         Returns list of _available_ markets that correspond to a filter. If no filter is set, returns all available assets.
@@ -440,7 +445,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
             "include": include,
-            "exclude": exclude
+            "exclude": exclude,
         }
         return CatalogMarketsData(self._get_data("catalog/markets", params)["data"])
 
@@ -851,10 +856,10 @@ class CoinMetricsClient:
         )
 
     def catalog_full_assets(
-            self,
-            assets: Optional[Union[List[str], str]] = None,
-            include: Optional[Union[List[str], str]] = None,
-            exclude: Optional[Union[List[str], str]] = None
+        self,
+        assets: Optional[Union[List[str], str]] = None,
+        include: Optional[Union[List[str], str]] = None,
+        exclude: Optional[Union[List[str], str]] = None,
     ) -> CatalogAssetsData:
         """
         Returns meta information about _supported_ assets.
@@ -872,7 +877,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
             "include": include,
-            "exclude": exclude
+            "exclude": exclude,
         }
         return CatalogAssetsData(self._get_data("catalog-all/assets", params)["data"])
 
@@ -899,22 +904,23 @@ class CoinMetricsClient:
 
     def catalog_full_asset_alerts(
         self,
-        assets: Optional[Union[List[str], str]] = None,
-        alerts: Optional[Union[List[str], str]] = None,
+        assets: Optional[Union[str, List[str]]] = None,
+        alerts: Optional[Union[str, List[str]]] = None,
     ) -> CatalogAssetAlertsData:
         """
-        Returns meta information about _supported_ assets.
-
-        :param assets: A single asset or a list of assets to return info for. If no assets provided, all available assets are returned.
-        :type assets: list(str), str
-        :param alerts: A single alert or alert name to return info for. If no alerts provided, all available alerts are returned.
-        :type alerts: list(str), str
-        :return: Information that is available for requested assets alerts.
-        :rtype: list(dict(str, any))
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Union[str, List[str]]
+        :param alerts: Comma separated list of asset alert names. By default all asset alerts are returned.
+        :type alerts: Union[str, List[str]]
+        :return: List of asset alerts.
+        :rtype: CatalogAssetAlertsData
         """
-        params: Dict[str, Any] = {"assets": assets, "alerts": alerts}
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "alerts": alerts,
+        }
         return CatalogAssetAlertsData(
-            self._get_data("catalog-all/alerts", params)["data"]
+            self._get_data("catalog-all/asset-alerts", params)["data"]
         )
 
     def catalog_full_asset_pairs(
@@ -1124,7 +1130,7 @@ class CoinMetricsClient:
         asset: Optional[str] = None,
         symbol: Optional[str] = None,
         include: Optional[str] = None,
-        exclude: Optional[str] = None
+        exclude: Optional[str] = None,
     ) -> CatalogMarketsData:
         """
         Returns list of _supported_ markets that correspond to a filter. If no filter is set, returns all supported assets.
@@ -1161,7 +1167,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
             "include": include,
-            "exclude": exclude
+            "exclude": exclude,
         }
         return CatalogMarketsData(self._get_data("catalog-all/markets", params)["data"])
 
@@ -2330,7 +2336,7 @@ class CoinMetricsClient:
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None,
-        sort: Optional[str] = None
+        sort: Optional[str] = None,
     ) -> DataCollection:
         """
         Returns market metrics for specified markets, frequency and date range.
@@ -2378,7 +2384,7 @@ class CoinMetricsClient:
             "end_inclusive": end_inclusive,
             "timezone": timezone,
             "limit_per_market": limit_per_market,
-            "sort": sort
+            "sort": sort,
         }
         return DataCollection(self._get_data, "timeseries/market-metrics", params)
 
@@ -2448,7 +2454,7 @@ class CoinMetricsClient:
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None,
-        min_confirmations: Optional[int] = None
+        min_confirmations: Optional[int] = None,
     ) -> DataCollection:
         """
         Returns market trades for specified markets and date range.
@@ -2711,7 +2717,7 @@ class CoinMetricsClient:
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None,
-        include_one_sided: Optional[bool] = None
+        include_one_sided: Optional[bool] = None,
     ) -> DataCollection:
         """
         Returns market quotes for specified markets and date range.
@@ -2751,7 +2757,7 @@ class CoinMetricsClient:
             "end_inclusive": end_inclusive,
             "timezone": timezone,
             "limit_per_market": limit_per_market,
-            "include_one_sided": include_one_sided
+            "include_one_sided": include_one_sided,
         }
         return DataCollection(self._get_data, "timeseries/market-quotes", params)
 
@@ -3056,7 +3062,7 @@ class CoinMetricsClient:
         self,
         markets: Union[List[str], str],
         backfill: Union[Backfill, str] = Backfill.LATEST,
-        depth_limit: Optional[str] = None
+        depth_limit: Optional[str] = None,
     ) -> CmStream:
         """
         Returns timeseries stream of market orderbooks.
@@ -3074,7 +3080,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "markets": markets,
             "backfill": backfill,
-            "depth_limit": depth_limit
+            "depth_limit": depth_limit,
         }
         return self._get_stream_data("timeseries-stream/market-orderbooks", params)
 
@@ -3082,7 +3088,7 @@ class CoinMetricsClient:
         self,
         markets: Union[List[str], str],
         backfill: Union[Backfill, str] = Backfill.LATEST,
-        include_one_sided: Optional[bool] = None
+        include_one_sided: Optional[bool] = None,
     ) -> CmStream:
         """
         Returns timeseries stream of market quotes.
@@ -3100,15 +3106,15 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "markets": markets,
             "backfill": backfill,
-            "include_one_sided": include_one_sided
+            "include_one_sided": include_one_sided,
         }
         return self._get_stream_data("timeseries-stream/market-quotes", params)
 
     def get_stream_pair_quotes(
-            self,
-            pairs: Union[str, List[str]],
-            aggregation_method: Optional[str] = None,
-            backfill: Optional[str] = None,
+        self,
+        pairs: Union[str, List[str]],
+        aggregation_method: Optional[str] = None,
+        backfill: Optional[str] = None,
     ) -> CmStream:
         """
         :param pairs: Comma separated list of asset pairs. Use the /catalog-all/pairs endpoint for the full list of supported asset pairs.
@@ -3128,10 +3134,10 @@ class CoinMetricsClient:
         return self._get_stream_data("timeseries-stream/pair-quotes", params)
 
     def get_stream_asset_quotes(
-            self,
-            assets: Union[str, List[str]],
-            aggregation_method: Optional[str] = None,
-            backfill: Optional[str] = None,
+        self,
+        assets: Union[str, List[str]],
+        aggregation_method: Optional[str] = None,
+        backfill: Optional[str] = None,
     ) -> CmStream:
         """
         :param assets: Comma separated list of assets. Use the /catalog-all/assets endpoint for the full list of supported assets.
@@ -3815,69 +3821,32 @@ class CoinMetricsClient:
             self._get_data, f"blockchain-v2/{asset}/balance-updates", params
         )
 
-    def get_full_block(self, asset: str, block_hash: str) -> List[Dict[str, Any]]:
-        """
-        Returns a full blockchain block with all transactions and balance updates.
-
-        :param asset: Asset name
-        :type asset: str
-        :param block_hash: block hash
-        :type block_hash: str
-        :return: blockchain block data
-        :rtype: list(dict(str), any)
-        """
-        params: Dict[str, Any] = {"asset": asset, "block_hash": block_hash}
-
-        return cast(
-            List[Dict[str, Any]],
-            self._get_data(f"blockchain/{asset}/blocks/{block_hash}", params),
-        )
-
-    def get_full_transaction(
-        self, asset: str, transaction_hash: str
-    ) -> List[Dict[str, Any]]:
-        """
-        Returns a full blockchain transaction with all balance updates.
-
-        :param asset: Asset name
-        :type asset: str
-        :param transaction_hash: transaction hash
-        :type transaction_hash: str
-        :return: block transaction data
-        :rtype: list(dict(str), any)
-        """
-        params: Dict[str, Any] = {"asset": asset, "transaction_hash": transaction_hash}
-        return cast(
-            List[Dict[str, Any]],
-            self._get_data(
-                f"blockchain/{asset}/transactions/{transaction_hash}", params
-            ),
-        )
-
     def get_full_transaction_for_block(
-        self, asset: str, block_hash: str, transaction_hash: str
+        self,
+        asset: str,
+        block_hash: str,
+        txid: str,
     ) -> List[Dict[str, Any]]:
         """
-        Returns a full blockchain transaction with all balance updates for a specific block.
-
-        :param asset: Asset name
+        :param asset: Asset name.
         :type asset: str
-        :param block_hash: block hash
+        :param block_hash: Block hash.
         :type block_hash: str
-        :param transaction_hash: transaction hash
-        :type transaction_hash: str
-        :return: block transaction data with balance updates
-        :rtype: list(dict(str, Any))
+        :param txid: Transaction identifier (txid).
+        :type txid: str
+
+        :return: Blockchain full transaction.
+        :rtype: DataCollection
         """
         params: Dict[str, Any] = {
             "asset": asset,
             "block_hash": block_hash,
-            "transaction_hash": transaction_hash,
+            "txid": txid,
         }
         return cast(
             List[Dict[str, Any]],
             self._get_data(
-                f"blockchain/{asset}/blocks/{block_hash}/transactions/{transaction_hash}",
+                f"blockchain/{asset}/blocks/{block_hash}/transactions/{txid}",
                 params,
             ),
         )
@@ -3906,6 +3875,29 @@ class CoinMetricsClient:
         return cast(
             List[Dict[str, Any]],
             self._get_data(f"blockchain-v2/{asset}/blocks/{block_hash}", params),
+        )
+
+    def get_full_transaction(
+        self,
+        asset: str,
+        txid: str,
+    ) -> List[Dict[str, Any]]:
+        """
+        :param asset: Asset name.
+        :type asset: Optional[str]
+        :param txid: Transaction identifier (txid).
+        :type txid: Optional[str]
+
+        :return: Blockchain full transaction.
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "asset": asset,
+            "txid": txid,
+        }
+        return cast(
+            List[Dict[str, Any]],
+            self._get_data(f"blockchain/{asset}/transactions/{txid}", params),
         )
 
     def get_full_transaction_v2(

@@ -39,21 +39,19 @@ Returns meta information about _available_ assets.
 
 ```python
 def catalog_asset_alerts(
-        assets: Optional[Union[List[str], str]] = None,
-        alerts: Optional[Union[List[str],
-                               str]] = None) -> CatalogAssetAlertsData
+        assets: Optional[Union[str, List[str]]] = None,
+        alerts: Optional[Union[str,
+                               List[str]]] = None) -> CatalogAssetAlertsData
 ```
-
-Returns meta information about _available_ assets.
 
 **Arguments**:
 
-- `assets` (`list(str), str`): A single asset or a list of assets to return info for. If no assets provided, all available assets are returned.
-- `alerts` (`list(str), str`): A single alert or alert name to return info for. If no alerts provided, all available alerts are returned.
+- `assets` (`Union[str, List[str]]`): Comma separated list of assets. By default all assets are returned.
+- `alerts` (`Union[str, List[str]]`): Comma separated list of asset alert names. By default all asset alerts are returned.
 
 **Returns**:
 
-`list(dict(str, any))`: Information that is available for requested assets alerts.
+`CatalogAssetAlertsData`: List of asset alerts.
 
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_pairs"></a>
 
@@ -701,21 +699,19 @@ description, category, precision and assets for which a metric is available.
 
 ```python
 def catalog_full_asset_alerts(
-        assets: Optional[Union[List[str], str]] = None,
-        alerts: Optional[Union[List[str],
-                               str]] = None) -> CatalogAssetAlertsData
+        assets: Optional[Union[str, List[str]]] = None,
+        alerts: Optional[Union[str,
+                               List[str]]] = None) -> CatalogAssetAlertsData
 ```
-
-Returns meta information about _supported_ assets.
 
 **Arguments**:
 
-- `assets` (`list(str), str`): A single asset or a list of assets to return info for. If no assets provided, all available assets are returned.
-- `alerts` (`list(str), str`): A single alert or alert name to return info for. If no alerts provided, all available alerts are returned.
+- `assets` (`Union[str, List[str]]`): Comma separated list of assets. By default all assets are returned.
+- `alerts` (`Union[str, List[str]]`): Comma separated list of asset alert names. By default all asset alerts are returned.
 
 **Returns**:
 
-`list(dict(str, any))`: Information that is available for requested assets alerts.
+`CatalogAssetAlertsData`: List of asset alerts.
 
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_pairs"></a>
 
@@ -2845,66 +2841,24 @@ Returns a list of blockchain accounts balance updates.
 
 `DataCollection`: list of balance updates
 
-<a id="coinmetrics.api_client.CoinMetricsClient.get_full_block"></a>
-
-#### get\_full\_block
-
-```python
-def get_full_block(asset: str, block_hash: str) -> List[Dict[str, Any]]
-```
-
-Returns a full blockchain block with all transactions and balance updates.
-
-**Arguments**:
-
-- `asset` (`str`): Asset name
-- `block_hash` (`str`): block hash
-
-**Returns**:
-
-`list(dict(str), any)`: blockchain block data
-
-<a id="coinmetrics.api_client.CoinMetricsClient.get_full_transaction"></a>
-
-#### get\_full\_transaction
-
-```python
-def get_full_transaction(asset: str,
-                         transaction_hash: str) -> List[Dict[str, Any]]
-```
-
-Returns a full blockchain transaction with all balance updates.
-
-**Arguments**:
-
-- `asset` (`str`): Asset name
-- `transaction_hash` (`str`): transaction hash
-
-**Returns**:
-
-`list(dict(str), any)`: block transaction data
-
 <a id="coinmetrics.api_client.CoinMetricsClient.get_full_transaction_for_block"></a>
 
 #### get\_full\_transaction\_for\_block
 
 ```python
-def get_full_transaction_for_block(
-        asset: str, block_hash: str,
-        transaction_hash: str) -> List[Dict[str, Any]]
+def get_full_transaction_for_block(asset: str, block_hash: str,
+                                   txid: str) -> List[Dict[str, Any]]
 ```
-
-Returns a full blockchain transaction with all balance updates for a specific block.
 
 **Arguments**:
 
-- `asset` (`str`): Asset name
-- `block_hash` (`str`): block hash
-- `transaction_hash` (`str`): transaction hash
+- `asset` (`str`): Asset name.
+- `block_hash` (`str`): Block hash.
+- `txid` (`str`): Transaction identifier (txid).
 
 **Returns**:
 
-`list(dict(str, Any))`: block transaction data with balance updates
+`DataCollection`: Blockchain full transaction.
 
 <a id="coinmetrics.api_client.CoinMetricsClient.get_full_block_v2"></a>
 
@@ -2927,6 +2881,23 @@ Returns a full blockchain block with all transactions and balance updates.
 **Returns**:
 
 `list(dict(str), any)`: blockchain block data
+
+<a id="coinmetrics.api_client.CoinMetricsClient.get_full_transaction"></a>
+
+#### get\_full\_transaction
+
+```python
+def get_full_transaction(asset: str, txid: str) -> List[Dict[str, Any]]
+```
+
+**Arguments**:
+
+- `asset` (`Optional[str]`): Asset name.
+- `txid` (`Optional[str]`): Transaction identifier (txid).
+
+**Returns**:
+
+`DataCollection`: Blockchain full transaction.
 
 <a id="coinmetrics.api_client.CoinMetricsClient.get_full_transaction_v2"></a>
 

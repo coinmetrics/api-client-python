@@ -169,7 +169,6 @@ class DataCollection:
         path_or_bufstr: FilePathOrBuffer = None,
         compress: bool = False,
     ) -> Optional[str]:
-
         if path_or_bufstr is None:
             path_or_bufstr_obj: FilePathOrBuffer = BytesIO()
         else:

@@ -281,8 +281,4 @@ def test_get_asset_profiles() -> None:
 
 
 if __name__ == "__main__":
-    for data in client.get_list_of_transactions_v2(
-        asset="eth", start_time="2023-02-17", end_time="2023-02-17"
-    ):
-        print(data)
     pytest.main()

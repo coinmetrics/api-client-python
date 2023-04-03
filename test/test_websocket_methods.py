@@ -117,6 +117,7 @@ def on_message_asset_metrics_rr_test(stream: CmStream, message: str) -> None:
         assert col in data
     stream.close()
 
+
 def on_message_pair_quotes_test(stream: CmStream, message: str) -> None:
     data = orjson.loads(message)
     expected_cols = ["pair", "time", "ask_price", "mid_price"]
@@ -131,6 +132,7 @@ def on_message_assets_quotes_test(stream: CmStream, message: str) -> None:
     for col in expected_cols:
         assert col in data
     stream.close()
+
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_index_levels_stream() -> None:

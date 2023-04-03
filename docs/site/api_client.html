@@ -887,20 +887,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get_full_block" class="md-nav__link">
-    get_full_block
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get_full_transaction" class="md-nav__link">
-    get_full_transaction
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#get_full_transaction_for_block" class="md-nav__link">
     get_full_transaction_for_block
   </a>
@@ -910,6 +896,13 @@
           <li class="md-nav__item">
   <a href="#get_full_block_v2" class="md-nav__link">
     get_full_block_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_full_transaction" class="md-nav__link">
+    get_full_transaction
   </a>
   
 </li>
@@ -1663,20 +1656,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get_full_block" class="md-nav__link">
-    get_full_block
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get_full_transaction" class="md-nav__link">
-    get_full_transaction
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#get_full_transaction_for_block" class="md-nav__link">
     get_full_transaction_for_block
   </a>
@@ -1686,6 +1665,13 @@
           <li class="md-nav__item">
   <a href="#get_full_block_v2" class="md-nav__link">
     get_full_block_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_full_transaction" class="md-nav__link">
+    get_full_transaction
   </a>
   
 </li>
@@ -1777,18 +1763,17 @@
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_alerts"></a></p>
 <h4 id="catalog_asset_alerts">catalog_asset_alerts<a class="headerlink" href="#catalog_asset_alerts" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_asset_alerts</span><span class="p">(</span>
-        <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">alerts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-                               <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogAssetAlertsData</span>
+        <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">alerts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span>
+                               <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogAssetAlertsData</span>
 </code></pre></div>
-<p>Returns meta information about <em>available</em> assets.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>assets</code> (<code>list(str), str</code>): A single asset or a list of assets to return info for. If no assets provided, all available assets are returned.</li>
-<li><code>alerts</code> (<code>list(str), str</code>): A single alert or alert name to return info for. If no alerts provided, all available alerts are returned.</li>
+<li><code>assets</code> (<code>Union[str, List[str]]</code>): Comma separated list of assets. By default all assets are returned.</li>
+<li><code>alerts</code> (<code>Union[str, List[str]]</code>): Comma separated list of asset alert names. By default all asset alerts are returned.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p><code>list(dict(str, any))</code>: Information that is available for requested assets alerts.</p>
+<p><code>CatalogAssetAlertsData</code>: List of asset alerts.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_pairs"></a></p>
 <h4 id="catalog_asset_pairs">catalog_asset_pairs<a class="headerlink" href="#catalog_asset_pairs" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_asset_pairs</span><span class="p">(</span>
@@ -2250,18 +2235,17 @@ exchanges. Included by default if omitted.</li>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_alerts"></a></p>
 <h4 id="catalog_full_asset_alerts">catalog_full_asset_alerts<a class="headerlink" href="#catalog_full_asset_alerts" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_asset_alerts</span><span class="p">(</span>
-        <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">alerts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-                               <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogAssetAlertsData</span>
+        <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">alerts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span>
+                               <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogAssetAlertsData</span>
 </code></pre></div>
-<p>Returns meta information about <em>supported</em> assets.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>assets</code> (<code>list(str), str</code>): A single asset or a list of assets to return info for. If no assets provided, all available assets are returned.</li>
-<li><code>alerts</code> (<code>list(str), str</code>): A single alert or alert name to return info for. If no alerts provided, all available alerts are returned.</li>
+<li><code>assets</code> (<code>Union[str, List[str]]</code>): Comma separated list of assets. By default all assets are returned.</li>
+<li><code>alerts</code> (<code>Union[str, List[str]]</code>): Comma separated list of asset alert names. By default all asset alerts are returned.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p><code>list(dict(str, any))</code>: Information that is available for requested assets alerts.</p>
+<p><code>CatalogAssetAlertsData</code>: List of asset alerts.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_pairs"></a></p>
 <h4 id="catalog_full_asset_pairs">catalog_full_asset_pairs<a class="headerlink" href="#catalog_full_asset_pairs" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_asset_pairs</span><span class="p">(</span>
@@ -3930,46 +3914,19 @@ if you request metrics for a set of markets.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: list of balance updates</p>
-<p><a id="coinmetrics.api_client.CoinMetricsClient.get_full_block"></a></p>
-<h4 id="get_full_block">get_full_block<a class="headerlink" href="#get_full_block" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_full_block</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">block_hash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
-</code></pre></div>
-<p>Returns a full blockchain block with all transactions and balance updates.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>asset</code> (<code>str</code>): Asset name</li>
-<li><code>block_hash</code> (<code>str</code>): block hash</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p><code>list(dict(str), any)</code>: blockchain block data</p>
-<p><a id="coinmetrics.api_client.CoinMetricsClient.get_full_transaction"></a></p>
-<h4 id="get_full_transaction">get_full_transaction<a class="headerlink" href="#get_full_transaction" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_full_transaction</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                         <span class="n">transaction_hash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
-</code></pre></div>
-<p>Returns a full blockchain transaction with all balance updates.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>asset</code> (<code>str</code>): Asset name</li>
-<li><code>transaction_hash</code> (<code>str</code>): transaction hash</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p><code>list(dict(str), any)</code>: block transaction data</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.get_full_transaction_for_block"></a></p>
 <h4 id="get_full_transaction_for_block">get_full_transaction_for_block<a class="headerlink" href="#get_full_transaction_for_block" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_full_transaction_for_block</span><span class="p">(</span>
-        <span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">block_hash</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">transaction_hash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_full_transaction_for_block</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">block_hash</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                                   <span class="n">txid</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
 </code></pre></div>
-<p>Returns a full blockchain transaction with all balance updates for a specific block.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>asset</code> (<code>str</code>): Asset name</li>
-<li><code>block_hash</code> (<code>str</code>): block hash</li>
-<li><code>transaction_hash</code> (<code>str</code>): transaction hash</li>
+<li><code>asset</code> (<code>str</code>): Asset name.</li>
+<li><code>block_hash</code> (<code>str</code>): Block hash.</li>
+<li><code>txid</code> (<code>str</code>): Transaction identifier (txid).</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p><code>list(dict(str, Any))</code>: block transaction data with balance updates</p>
+<p><code>DataCollection</code>: Blockchain full transaction.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.get_full_block_v2"></a></p>
 <h4 id="get_full_block_v2">get_full_block_v2<a class="headerlink" href="#get_full_block_v2" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_full_block_v2</span><span class="p">(</span>
@@ -3985,6 +3942,17 @@ if you request metrics for a set of markets.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>list(dict(str), any)</code>: blockchain block data</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.get_full_transaction"></a></p>
+<h4 id="get_full_transaction">get_full_transaction<a class="headerlink" href="#get_full_transaction" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_full_transaction</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">txid</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>asset</code> (<code>Optional[str]</code>): Asset name.</li>
+<li><code>txid</code> (<code>Optional[str]</code>): Transaction identifier (txid).</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>DataCollection</code>: Blockchain full transaction.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.get_full_transaction_v2"></a></p>
 <h4 id="get_full_transaction_v2">get_full_transaction_v2<a class="headerlink" href="#get_full_transaction_v2" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_full_transaction_v2</span><span class="p">(</span>
