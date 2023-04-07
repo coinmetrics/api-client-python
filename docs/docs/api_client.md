@@ -2860,6 +2860,23 @@ def get_full_transaction_for_block(asset: str, block_hash: str,
 
 `DataCollection`: Blockchain full transaction.
 
+<a id="coinmetrics.api_client.CoinMetricsClient.get_full_block"></a>
+
+#### get\_full\_block
+
+```python
+def get_full_block(asset: str, block_hash: str) -> Dict[str, Any]
+```
+
+**Arguments**:
+
+- `asset` (`str`): Asset name.
+- `block_hash` (`str`): Block hash.
+
+**Returns**:
+
+`Dict[str, Any]`: Blockchain full block.
+
 <a id="coinmetrics.api_client.CoinMetricsClient.get_full_block_v2"></a>
 
 #### get\_full\_block\_v2
@@ -2943,6 +2960,59 @@ Returns a full blockchain transaction with all balance updates for a specific bl
 **Returns**:
 
 `list(dict(str, Any))`: block transaction data with balance updates
+
+<a id="coinmetrics.api_client.CoinMetricsClient.get_list_of_balance_updates_for_account_v2"></a>
+
+#### get\_list\_of\_balance\_updates\_for\_account\_v2
+
+```python
+def get_list_of_balance_updates_for_account_v2(
+        asset: str,
+        account: str,
+        txids: Optional[Union[str, List[str]]] = None,
+        block_hashes: Optional[Union[str, List[str]]] = None,
+        include_counterparties: Optional[bool] = None,
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_height: Optional[int] = None,
+        end_height: Optional[int] = None,
+        start_chain_sequence_number: Optional[int] = None,
+        end_chain_sequence_number: Optional[int] = None,
+        include_sub_accounts: Optional[bool] = None,
+        chain: Optional[str] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> DataCollection
+```
+
+**Arguments**:
+
+- `asset` (`Optional[str]`): Asset name.
+- `account` (`Optional[str]`): Account id.
+- `txids` (`Union[str, List[str]]`): Optional comma separated list of transaction identifiers (txid) to filter a response. The list must contain a single element for Community users.
+- `block_hashes` (`Union[str, List[str]]`): Optional comma separated list of block hashes to filter a response. The list must contain a single element for Community users.
+- `include_counterparties` (`bool`): Include information about the counterparties balance updates.
+- `start_time` (`str`): Start of the time interval. This field refers to the `time` field in the response. Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789Z`, `2006-01-20`, `20060120`. Inclusive by default. Mutually exclusive with `start_height`. UTC timezone by default. `Z` suffix is optional and `timezone` parameter has a priority over it. If `start_time` is omitted, response will include time series from the **earliest** time available. This parameter is disabled for Community users.
+- `end_time` (`str`): End of the time interval. This field refers to the `time` field in the response. Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789Z`, `2006-01-20`, `20060120`. Inclusive by default. Mutually exclusive with `end_height`. UTC timezone by default. `Z` suffix is optional and `timezone` parameter has a priority over it. If `end_time` is omitted, response will include time series up to the **latest** time available. This parameter is disabled for Community users.
+- `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Inclusive by default. Mutually exclusive with `start_time`. This parameter is disabled for Community users.
+- `end_height` (`int`): The end height indicates the ending block height for the set of data that are returned. Inclusive by default. Mutually exclusive with `end_time`. This parameter is disabled for Community users.
+- `start_chain_sequence_number` (`int`): Start of the `chain_sequence_number` interval. This parameter is disabled for Community users.
+- `end_chain_sequence_number` (`int`): End of the `chain_sequence_number` interval. This parameter is disabled for Community users.
+- `include_sub_accounts` (`bool`): Boolean indicating if the response should contain sub-accounts. This parameter is disabled for Community users.
+- `chain` (`str`): Chain type. Supported values are `main` and `all` (includes both main and stale). This parameter is disabled for Community users.
+- `start_inclusive` (`bool`): Inclusive or exclusive corresponding `start_*` parameters. This parameter is disabled for Community users.
+- `end_inclusive` (`bool`): Inclusive or exclusive corresponding `end_*` parameters. This parameter is disabled for Community users.
+- `timezone` (`str`): Timezone name for `start_time` and `end_time` timestamps. This parameter does not modify the output times, which are always `UTC`. Format is defined by TZ database.
+- `page_size` (`int`): Number of items per single page of results. This parameter is disabled for Community users.
+- `paging_from` (`str`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`str`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`DataCollection`: Blockchain balance updates for account.
 
 <a id="coinmetrics.api_client.CoinMetricsClient.get_transaction_tracker"></a>
 

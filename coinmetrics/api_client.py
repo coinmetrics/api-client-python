@@ -3851,6 +3851,32 @@ class CoinMetricsClient:
             ),
         )
 
+    def get_full_block(
+            self,
+            asset: str,
+            block_hash: str,
+    ) -> Dict[str, Any]:
+        """
+        :param asset: Asset name.
+        :type asset: str
+        :param block_hash: Block hash.
+        :type block_hash: str
+
+        :return: Blockchain full block.
+        :rtype: Dict[str, Any]
+        """
+        params: Dict[str, Any] = {
+            "asset": asset,
+            "block_hash": block_hash,
+        }
+        return cast(
+            Dict[str, Any],
+            self._get_data(
+                f"blockchain/{asset}/blocks/{block_hash}",
+                params,
+            ),
+        )
+
     def get_full_block_v2(
         self, asset: str, block_hash: str, include_sub_accounts: Optional[bool]
     ) -> List[Dict[str, Any]]:
@@ -3959,6 +3985,94 @@ class CoinMetricsClient:
                 params,
             ),
         )
+
+    def get_list_of_balance_updates_for_account_v2(
+            self,
+            asset: str,
+            account: str,
+            txids: Optional[Union[str, List[str]]] = None,
+            block_hashes: Optional[Union[str, List[str]]] = None,
+            include_counterparties: Optional[bool] = None,
+            start_time: Optional[Union[datetime, date, str]] = None,
+            end_time: Optional[Union[datetime, date, str]] = None,
+            start_height: Optional[int] = None,
+            end_height: Optional[int] = None,
+            start_chain_sequence_number: Optional[int] = None,
+            end_chain_sequence_number: Optional[int] = None,
+            include_sub_accounts: Optional[bool] = None,
+            chain: Optional[str] = None,
+            start_inclusive: Optional[bool] = None,
+            end_inclusive: Optional[bool] = None,
+            timezone: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        :param asset: Asset name.
+        :type asset: Optional[str]
+        :param account: Account id.
+        :type account: Optional[str]
+        :param txids: Optional comma separated list of transaction identifiers (txid) to filter a response. The list must contain a single element for Community users.
+        :type txids: Union[str, List[str]]
+        :param block_hashes: Optional comma separated list of block hashes to filter a response. The list must contain a single element for Community users.
+        :type block_hashes: Union[str, List[str]]
+        :param include_counterparties: Include information about the counterparties balance updates.
+        :type include_counterparties: bool
+        :param start_time: Start of the time interval. This field refers to the `time` field in the response. Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789Z`, `2006-01-20`, `20060120`. Inclusive by default. Mutually exclusive with `start_height`. UTC timezone by default. `Z` suffix is optional and `timezone` parameter has a priority over it. If `start_time` is omitted, response will include time series from the **earliest** time available. This parameter is disabled for Community users.
+        :type start_time: str
+        :param end_time: End of the time interval. This field refers to the `time` field in the response. Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789Z`, `2006-01-20`, `20060120`. Inclusive by default. Mutually exclusive with `end_height`. UTC timezone by default. `Z` suffix is optional and `timezone` parameter has a priority over it. If `end_time` is omitted, response will include time series up to the **latest** time available. This parameter is disabled for Community users.
+        :type end_time: str
+        :param start_height: The start height indicates the beginning block height for the set of data that are returned. Inclusive by default. Mutually exclusive with `start_time`. This parameter is disabled for Community users.
+        :type start_height: int
+        :param end_height: The end height indicates the ending block height for the set of data that are returned. Inclusive by default. Mutually exclusive with `end_time`. This parameter is disabled for Community users.
+        :type end_height: int
+        :param start_chain_sequence_number: Start of the `chain_sequence_number` interval. This parameter is disabled for Community users.
+        :type start_chain_sequence_number: int
+        :param end_chain_sequence_number: End of the `chain_sequence_number` interval. This parameter is disabled for Community users.
+        :type end_chain_sequence_number: int
+        :param include_sub_accounts: Boolean indicating if the response should contain sub-accounts. This parameter is disabled for Community users.
+        :type include_sub_accounts: bool
+        :param chain: Chain type. Supported values are `main` and `all` (includes both main and stale). This parameter is disabled for Community users.
+        :type chain: str
+        :param start_inclusive: Inclusive or exclusive corresponding `start_*` parameters. This parameter is disabled for Community users.
+        :type start_inclusive: bool
+        :param end_inclusive: Inclusive or exclusive corresponding `end_*` parameters. This parameter is disabled for Community users.
+        :type end_inclusive: bool
+        :param timezone: Timezone name for `start_time` and `end_time` timestamps. This parameter does not modify the output times, which are always `UTC`. Format is defined by TZ database.
+        :type timezone: str
+        :param page_size: Number of items per single page of results. This parameter is disabled for Community users.
+        :type page_size: int
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: str
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: str
+
+        :return: Blockchain balance updates for account.
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "asset": asset,
+            "account": account,
+            "txids": txids,
+            "block_hashes": block_hashes,
+            "include_counterparties": include_counterparties,
+            "start_time": start_time,
+            "end_time": end_time,
+            "start_height": start_height,
+            "end_height": end_height,
+            "start_chain_sequence_number": start_chain_sequence_number,
+            "end_chain_sequence_number": end_chain_sequence_number,
+            "include_sub_accounts": include_sub_accounts,
+            "chain": chain,
+            "start_inclusive": start_inclusive,
+            "end_inclusive": end_inclusive,
+            "timezone": timezone,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return DataCollection(self._get_data, f"/blockchain-v2/{asset}/accounts/{account}/balance-updates", params)
 
     def get_transaction_tracker(
         self,

@@ -894,6 +894,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get_full_block" class="md-nav__link">
+    get_full_block
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get_full_block_v2" class="md-nav__link">
     get_full_block_v2
   </a>
@@ -917,6 +924,13 @@
           <li class="md-nav__item">
   <a href="#get_full_transaction_for_block_v2" class="md-nav__link">
     get_full_transaction_for_block_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_list_of_balance_updates_for_account_v2" class="md-nav__link">
+    get_list_of_balance_updates_for_account_v2
   </a>
   
 </li>
@@ -1663,6 +1677,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get_full_block" class="md-nav__link">
+    get_full_block
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get_full_block_v2" class="md-nav__link">
     get_full_block_v2
   </a>
@@ -1686,6 +1707,13 @@
           <li class="md-nav__item">
   <a href="#get_full_transaction_for_block_v2" class="md-nav__link">
     get_full_transaction_for_block_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_list_of_balance_updates_for_account_v2" class="md-nav__link">
+    get_list_of_balance_updates_for_account_v2
   </a>
   
 </li>
@@ -3927,6 +3955,17 @@ if you request metrics for a set of markets.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: Blockchain full transaction.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.get_full_block"></a></p>
+<h4 id="get_full_block">get_full_block<a class="headerlink" href="#get_full_block" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_full_block</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">block_hash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>asset</code> (<code>str</code>): Asset name.</li>
+<li><code>block_hash</code> (<code>str</code>): Block hash.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>Dict[str, Any]</code>: Blockchain full block.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.get_full_block_v2"></a></p>
 <h4 id="get_full_block_v2">get_full_block_v2<a class="headerlink" href="#get_full_block_v2" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_full_block_v2</span><span class="p">(</span>
@@ -3984,6 +4023,53 @@ if you request metrics for a set of markets.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>list(dict(str, Any))</code>: block transaction data with balance updates</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.get_list_of_balance_updates_for_account_v2"></a></p>
+<h4 id="get_list_of_balance_updates_for_account_v2">get_list_of_balance_updates_for_account_v2<a class="headerlink" href="#get_list_of_balance_updates_for_account_v2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_list_of_balance_updates_for_account_v2</span><span class="p">(</span>
+        <span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">account</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">txids</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">block_hashes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">include_counterparties</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">start_height</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end_height</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">start_chain_sequence_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end_chain_sequence_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">include_sub_accounts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">chain</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">next_page_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>asset</code> (<code>Optional[str]</code>): Asset name.</li>
+<li><code>account</code> (<code>Optional[str]</code>): Account id.</li>
+<li><code>txids</code> (<code>Union[str, List[str]]</code>): Optional comma separated list of transaction identifiers (txid) to filter a response. The list must contain a single element for Community users.</li>
+<li><code>block_hashes</code> (<code>Union[str, List[str]]</code>): Optional comma separated list of block hashes to filter a response. The list must contain a single element for Community users.</li>
+<li><code>include_counterparties</code> (<code>bool</code>): Include information about the counterparties balance updates.</li>
+<li><code>start_time</code> (<code>str</code>): Start of the time interval. This field refers to the <code>time</code> field in the response. Multiple formats of ISO 8601 are supported: <code>2006-01-20T00:00:00Z</code>, <code>2006-01-20T00:00:00.000Z</code>, <code>2006-01-20T00:00:00.123456Z</code>, <code>2006-01-20T00:00:00.123456789Z</code>, <code>2006-01-20</code>, <code>20060120</code>. Inclusive by default. Mutually exclusive with <code>start_height</code>. UTC timezone by default. <code>Z</code> suffix is optional and <code>timezone</code> parameter has a priority over it. If <code>start_time</code> is omitted, response will include time series from the <strong>earliest</strong> time available. This parameter is disabled for Community users.</li>
+<li><code>end_time</code> (<code>str</code>): End of the time interval. This field refers to the <code>time</code> field in the response. Multiple formats of ISO 8601 are supported: <code>2006-01-20T00:00:00Z</code>, <code>2006-01-20T00:00:00.000Z</code>, <code>2006-01-20T00:00:00.123456Z</code>, <code>2006-01-20T00:00:00.123456789Z</code>, <code>2006-01-20</code>, <code>20060120</code>. Inclusive by default. Mutually exclusive with <code>end_height</code>. UTC timezone by default. <code>Z</code> suffix is optional and <code>timezone</code> parameter has a priority over it. If <code>end_time</code> is omitted, response will include time series up to the <strong>latest</strong> time available. This parameter is disabled for Community users.</li>
+<li><code>start_height</code> (<code>int</code>): The start height indicates the beginning block height for the set of data that are returned. Inclusive by default. Mutually exclusive with <code>start_time</code>. This parameter is disabled for Community users.</li>
+<li><code>end_height</code> (<code>int</code>): The end height indicates the ending block height for the set of data that are returned. Inclusive by default. Mutually exclusive with <code>end_time</code>. This parameter is disabled for Community users.</li>
+<li><code>start_chain_sequence_number</code> (<code>int</code>): Start of the <code>chain_sequence_number</code> interval. This parameter is disabled for Community users.</li>
+<li><code>end_chain_sequence_number</code> (<code>int</code>): End of the <code>chain_sequence_number</code> interval. This parameter is disabled for Community users.</li>
+<li><code>include_sub_accounts</code> (<code>bool</code>): Boolean indicating if the response should contain sub-accounts. This parameter is disabled for Community users.</li>
+<li><code>chain</code> (<code>str</code>): Chain type. Supported values are <code>main</code> and <code>all</code> (includes both main and stale). This parameter is disabled for Community users.</li>
+<li><code>start_inclusive</code> (<code>bool</code>): Inclusive or exclusive corresponding <code>start_*</code> parameters. This parameter is disabled for Community users.</li>
+<li><code>end_inclusive</code> (<code>bool</code>): Inclusive or exclusive corresponding <code>end_*</code> parameters. This parameter is disabled for Community users.</li>
+<li><code>timezone</code> (<code>str</code>): Timezone name for <code>start_time</code> and <code>end_time</code> timestamps. This parameter does not modify the output times, which are always <code>UTC</code>. Format is defined by TZ database.</li>
+<li><code>page_size</code> (<code>int</code>): Number of items per single page of results. This parameter is disabled for Community users.</li>
+<li><code>paging_from</code> (<code>str</code>): Where does the first page start, at the start of the interval or at the end.</li>
+<li><code>next_page_token</code> (<code>str</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>DataCollection</code>: Blockchain balance updates for account.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.get_transaction_tracker"></a></p>
 <h4 id="get_transaction_tracker">get_transaction_tracker<a class="headerlink" href="#get_transaction_tracker" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_transaction_tracker</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
