@@ -53,6 +53,78 @@ def catalog_asset_alerts(
 
 `CatalogAssetAlertsData`: List of asset alerts.
 
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_chains"></a>
+
+#### catalog\_asset\_chains
+
+```python
+def catalog_asset_chains(
+        assets: Optional[Union[str,
+                               List[str]]] = None) -> CatalogAssetChainsData
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+
+**Returns**:
+
+`CatalogAssetChainsData`: List of asset chains assets
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_mempool_feerates"></a>
+
+#### catalog\_mempool\_feerates
+
+```python
+def catalog_mempool_feerates(
+    assets: Optional[Union[str,
+                           List[str]]] = None) -> CatalogMempoolFeeratesData
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+
+**Returns**:
+
+`CatalogMempoolFeeratesData`: List of mempool feerates assets
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_mining_pool_tips_summaries"></a>
+
+#### catalog\_mining\_pool\_tips\_summaries
+
+```python
+def catalog_mining_pool_tips_summaries(
+    assets: Optional[Union[str,
+                           List[str]]] = None) -> CatalogMiningPoolTipsData
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+
+**Returns**:
+
+`CatalogMiningPoolTipsData`: List of mining pool tips assets
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_transaction_tracker_assets"></a>
+
+#### catalog\_transaction\_tracker\_assets
+
+```python
+def catalog_transaction_tracker_assets(
+    assets: Optional[Union[str, List[str]]] = None
+) -> CatalogTransactionTrackerData
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+
+**Returns**:
+
+`CatalogTransactionTrackerData`: List of transaction tracker assets
+
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_pairs"></a>
 
 #### catalog\_asset\_pairs
@@ -712,6 +784,78 @@ def catalog_full_asset_alerts(
 **Returns**:
 
 `CatalogAssetAlertsData`: List of asset alerts.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_chains"></a>
+
+#### catalog\_full\_asset\_chains
+
+```python
+def catalog_full_asset_chains(
+        assets: Optional[Union[str,
+                               List[str]]] = None) -> CatalogAssetChainsData
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+
+**Returns**:
+
+`CatalogAssetChainsData`: List of asset chains assets
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_mempool_feerates"></a>
+
+#### catalog\_full\_mempool\_feerates
+
+```python
+def catalog_full_mempool_feerates(
+    assets: Optional[Union[str,
+                           List[str]]] = None) -> CatalogMempoolFeeratesData
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+
+**Returns**:
+
+`CatalogMempoolFeeratesData`: List of mempool feerates assets
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_mining_pool_tips_summaries"></a>
+
+#### catalog\_full\_mining\_pool\_tips\_summaries
+
+```python
+def catalog_full_mining_pool_tips_summaries(
+    assets: Optional[Union[str,
+                           List[str]]] = None) -> CatalogMiningPoolTipsData
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+
+**Returns**:
+
+`CatalogMiningPoolTipsData`: List of mining pool tips assets
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_transaction_tracker_assets"></a>
+
+#### catalog\_full\_transaction\_tracker\_assets
+
+```python
+def catalog_full_transaction_tracker_assets(
+    assets: Optional[Union[str, List[str]]] = None
+) -> CatalogTransactionTrackerData
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+
+**Returns**:
+
+`CatalogTransactionTrackerData`: List of transaction tracker assets
 
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_pairs"></a>
 

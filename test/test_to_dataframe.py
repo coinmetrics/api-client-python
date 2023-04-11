@@ -307,6 +307,47 @@ def test_defi_balance_sheets() -> None:
     assert len(aave_balance_sheets) > 100
     assert aave_balance_sheets.iloc[:1]["defi_protocol"][0] == "aave_v2_eth"
 
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_asset_chains() -> None:
+    data = client.catalog_asset_chains().to_dataframe()
+    assert len(data) >= 2
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_asset_chains_all() -> None:
+    data = client.catalog_full_asset_chains().to_dataframe()
+    assert len(data) >= 2
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_mempool_feerates() -> None:
+    data = client.catalog_mempool_feerates().to_dataframe()
+    assert len(data) >= 1
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_mempool_feerates_full() -> None:
+    data = client.catalog_full_mempool_feerates().to_dataframe()
+    assert len(data) >= 1
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_mining_pool_tips() -> None:
+    data = client.catalog_mining_pool_tips_summaries().to_dataframe()
+    assert len(data) >= 1
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_mining_pool_tips_full() -> None:
+    data = client.catalog_full_mining_pool_tips_summaries().to_dataframe()
+    assert len(data) >= 1
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_transaction_tracker_catalog_full() -> None:
+    data = client.catalog_full_transaction_tracker_assets().to_dataframe()
+    assert len(data) >= 2
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_transaction_tracker_catalog() -> None:
+    data = client.catalog_transaction_tracker_assets().to_dataframe()
+    assert len(data) >= 2
 
 if __name__ == "__main__":
     pytest.main()

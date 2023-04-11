@@ -257,6 +257,34 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#catalog_asset_chains" class="md-nav__link">
+    catalog_asset_chains
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_mempool_feerates" class="md-nav__link">
+    catalog_mempool_feerates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_mining_pool_tips_summaries" class="md-nav__link">
+    catalog_mining_pool_tips_summaries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_transaction_tracker_assets" class="md-nav__link">
+    catalog_transaction_tracker_assets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#catalog_asset_pairs" class="md-nav__link">
     catalog_asset_pairs
   </a>
@@ -434,6 +462,34 @@
           <li class="md-nav__item">
   <a href="#catalog_full_asset_alerts" class="md-nav__link">
     catalog_full_asset_alerts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_asset_chains" class="md-nav__link">
+    catalog_full_asset_chains
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_mempool_feerates" class="md-nav__link">
+    catalog_full_mempool_feerates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_mining_pool_tips_summaries" class="md-nav__link">
+    catalog_full_mining_pool_tips_summaries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_transaction_tracker_assets" class="md-nav__link">
+    catalog_full_transaction_tracker_assets
   </a>
   
 </li>
@@ -1040,6 +1096,34 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#catalog_asset_chains" class="md-nav__link">
+    catalog_asset_chains
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_mempool_feerates" class="md-nav__link">
+    catalog_mempool_feerates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_mining_pool_tips_summaries" class="md-nav__link">
+    catalog_mining_pool_tips_summaries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_transaction_tracker_assets" class="md-nav__link">
+    catalog_transaction_tracker_assets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#catalog_asset_pairs" class="md-nav__link">
     catalog_asset_pairs
   </a>
@@ -1217,6 +1301,34 @@
           <li class="md-nav__item">
   <a href="#catalog_full_asset_alerts" class="md-nav__link">
     catalog_full_asset_alerts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_asset_chains" class="md-nav__link">
+    catalog_full_asset_chains
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_mempool_feerates" class="md-nav__link">
+    catalog_full_mempool_feerates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_mining_pool_tips_summaries" class="md-nav__link">
+    catalog_full_mining_pool_tips_summaries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_transaction_tracker_assets" class="md-nav__link">
+    catalog_full_transaction_tracker_assets
   </a>
   
 </li>
@@ -1802,6 +1914,54 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogAssetAlertsData</code>: List of asset alerts.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_chains"></a></p>
+<h4 id="catalog_asset_chains">catalog_asset_chains<a class="headerlink" href="#catalog_asset_chains" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_asset_chains</span><span class="p">(</span>
+        <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span>
+                               <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogAssetChainsData</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of assets. By default all assets are returned.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogAssetChainsData</code>: List of asset chains assets</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_mempool_feerates"></a></p>
+<h4 id="catalog_mempool_feerates">catalog_mempool_feerates<a class="headerlink" href="#catalog_mempool_feerates" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_mempool_feerates</span><span class="p">(</span>
+    <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span>
+                           <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMempoolFeeratesData</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of assets. By default all assets are returned.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogMempoolFeeratesData</code>: List of mempool feerates assets</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_mining_pool_tips_summaries"></a></p>
+<h4 id="catalog_mining_pool_tips_summaries">catalog_mining_pool_tips_summaries<a class="headerlink" href="#catalog_mining_pool_tips_summaries" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_mining_pool_tips_summaries</span><span class="p">(</span>
+    <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span>
+                           <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMiningPoolTipsData</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of assets. By default all assets are returned.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogMiningPoolTipsData</code>: List of mining pool tips assets</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_transaction_tracker_assets"></a></p>
+<h4 id="catalog_transaction_tracker_assets">catalog_transaction_tracker_assets<a class="headerlink" href="#catalog_transaction_tracker_assets" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_transaction_tracker_assets</span><span class="p">(</span>
+    <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogTransactionTrackerData</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of assets. By default all assets are returned.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogTransactionTrackerData</code>: List of transaction tracker assets</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_pairs"></a></p>
 <h4 id="catalog_asset_pairs">catalog_asset_pairs<a class="headerlink" href="#catalog_asset_pairs" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_asset_pairs</span><span class="p">(</span>
@@ -2274,6 +2434,54 @@ exchanges. Included by default if omitted.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogAssetAlertsData</code>: List of asset alerts.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_chains"></a></p>
+<h4 id="catalog_full_asset_chains">catalog_full_asset_chains<a class="headerlink" href="#catalog_full_asset_chains" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_asset_chains</span><span class="p">(</span>
+        <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span>
+                               <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogAssetChainsData</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of assets. By default all assets are returned.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogAssetChainsData</code>: List of asset chains assets</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_mempool_feerates"></a></p>
+<h4 id="catalog_full_mempool_feerates">catalog_full_mempool_feerates<a class="headerlink" href="#catalog_full_mempool_feerates" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_mempool_feerates</span><span class="p">(</span>
+    <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span>
+                           <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMempoolFeeratesData</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of assets. By default all assets are returned.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogMempoolFeeratesData</code>: List of mempool feerates assets</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_mining_pool_tips_summaries"></a></p>
+<h4 id="catalog_full_mining_pool_tips_summaries">catalog_full_mining_pool_tips_summaries<a class="headerlink" href="#catalog_full_mining_pool_tips_summaries" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_mining_pool_tips_summaries</span><span class="p">(</span>
+    <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span>
+                           <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMiningPoolTipsData</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of assets. By default all assets are returned.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogMiningPoolTipsData</code>: List of mining pool tips assets</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_transaction_tracker_assets"></a></p>
+<h4 id="catalog_full_transaction_tracker_assets">catalog_full_transaction_tracker_assets<a class="headerlink" href="#catalog_full_transaction_tracker_assets" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_transaction_tracker_assets</span><span class="p">(</span>
+    <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogTransactionTrackerData</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of assets. By default all assets are returned.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogTransactionTrackerData</code>: List of transaction tracker assets</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_pairs"></a></p>
 <h4 id="catalog_full_asset_pairs">catalog_full_asset_pairs<a class="headerlink" href="#catalog_full_asset_pairs" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_asset_pairs</span><span class="p">(</span>

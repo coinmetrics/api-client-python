@@ -143,6 +143,42 @@ class CatalogAssetAlertsData(List[Any]):
         return convert_catalog_dtypes(pd.DataFrame(self))
 
 
+class CatalogAssetChainsData(List[Any]):
+    def to_dataframe(self) -> DataFrameType:
+        """
+        Transforms catalog data in list form into a dataframe
+        :return: Catalog Data
+        """
+        return convert_catalog_dtypes(pd.DataFrame(self))
+
+
+class CatalogMempoolFeeratesData(List[Any]):
+    def to_dataframe(self) -> DataFrameType:
+        """
+        Transforms catalog data in list form into a dataframe
+        :return: Catalog Data
+        """
+        return convert_catalog_dtypes(pd.DataFrame(self))
+
+
+class CatalogMiningPoolTipsData(List[Any]):
+    def to_dataframe(self) -> DataFrameType:
+        """
+        Transforms catalog data in list form into a dataframe
+        :return: Catalog Data
+        """
+        return convert_catalog_dtypes(pd.DataFrame(self))
+
+
+class CatalogTransactionTrackerData(List[Any]):
+    def to_dataframe(self) -> DataFrameType:
+        """
+        Transforms catalog data in list form into a dataframe
+        :return: Catalog Data
+        """
+        return convert_catalog_dtypes(pd.DataFrame(self))
+
+
 class CatalogMarketTradesData(List[Any]):
     def to_dataframe(self) -> DataFrameType:
         """

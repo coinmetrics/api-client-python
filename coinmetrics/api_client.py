@@ -43,6 +43,10 @@ from coinmetrics._catalogs import (
     CatalogPairMetricsData,
     CatalogInstitutionMetricsData,
     CatalogMarketOrderbooksData,
+    CatalogAssetChainsData,
+    CatalogMempoolFeeratesData,
+    CatalogMiningPoolTipsData,
+    CatalogTransactionTrackerData
 )
 
 logger = getLogger("cm_client")
@@ -186,6 +190,70 @@ class CoinMetricsClient:
         return CatalogAssetAlertsData(
             self._get_data("catalog/asset-alerts", params)["data"]
         )
+
+    def catalog_asset_chains(
+            self,
+            assets: Optional[Union[str, List[str]]] = None,
+    ) -> CatalogAssetChainsData:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+
+        :return: List of asset chains assets
+        :rtype: CatalogAssetChainsData
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+        }
+        return CatalogAssetChainsData(self._get_data("catalog/asset-chains", params)['data'])
+
+    def catalog_mempool_feerates(
+            self,
+            assets: Optional[Union[str, List[str]]] = None,
+    ) -> CatalogMempoolFeeratesData:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+
+        :return: List of mempool feerates assets
+        :rtype: CatalogMempoolFeeratesData
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+        }
+        return CatalogMempoolFeeratesData(self._get_data("catalog/mempool-feerates", params)['data'])
+
+    def catalog_mining_pool_tips_summaries(
+            self,
+            assets: Optional[Union[str, List[str]]] = None,
+    ) -> CatalogMiningPoolTipsData:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+
+        :return: List of mining pool tips assets
+        :rtype: CatalogMiningPoolTipsData
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+        }
+        return CatalogMiningPoolTipsData(self._get_data("catalog/mining-pool-tips-summary", params)['data'])
+
+    def catalog_transaction_tracker_assets(
+            self,
+            assets: Optional[Union[str, List[str]]] = None,
+    ) -> CatalogTransactionTrackerData:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+
+        :return: List of transaction tracker assets
+        :rtype: CatalogTransactionTrackerData
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+        }
+        return CatalogTransactionTrackerData(self._get_data("catalog/transaction-tracker", params)['data'])
 
     def catalog_asset_pairs(
         self, asset_pairs: Optional[Union[List[str], str]] = None
@@ -922,6 +990,70 @@ class CoinMetricsClient:
         return CatalogAssetAlertsData(
             self._get_data("catalog-all/asset-alerts", params)["data"]
         )
+
+    def catalog_full_asset_chains(
+            self,
+            assets: Optional[Union[str, List[str]]] = None,
+    ) -> CatalogAssetChainsData:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+
+        :return: List of asset chains assets
+        :rtype: CatalogAssetChainsData
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+        }
+        return CatalogAssetChainsData(self._get_data("catalog-all/asset-chains", params)['data'])
+
+    def catalog_full_mempool_feerates(
+            self,
+            assets: Optional[Union[str, List[str]]] = None,
+    ) -> CatalogMempoolFeeratesData:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+
+        :return: List of mempool feerates assets
+        :rtype: CatalogMempoolFeeratesData
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+        }
+        return CatalogMempoolFeeratesData(self._get_data("catalog-all/mempool-feerates", params)['data'])
+
+    def catalog_full_mining_pool_tips_summaries(
+            self,
+            assets: Optional[Union[str, List[str]]] = None,
+    ) -> CatalogMiningPoolTipsData:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+
+        :return: List of mining pool tips assets
+        :rtype: CatalogMiningPoolTipsData
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+        }
+        return CatalogMiningPoolTipsData(self._get_data("catalog-all/mining-pool-tips-summary", params)['data'])
+
+    def catalog_full_transaction_tracker_assets(
+            self,
+            assets: Optional[Union[str, List[str]]] = None,
+    ) -> CatalogTransactionTrackerData:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+
+        :return: List of transaction tracker assets
+        :rtype: CatalogTransactionTrackerData
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+        }
+        return CatalogTransactionTrackerData(self._get_data("catalog-all/transaction-tracker", params)['data'])
 
     def catalog_full_asset_pairs(
         self,
@@ -4072,7 +4204,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return DataCollection(self._get_data, f"/blockchain-v2/{asset}/accounts/{account}/balance-updates", params)
+        return DataCollection(self._get_data, f"blockchain-v2/{asset}/accounts/{account}/balance-updates", params)
 
     def get_transaction_tracker(
         self,
