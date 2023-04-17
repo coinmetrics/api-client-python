@@ -24,7 +24,7 @@ from coinmetrics._typing import (
     MessageHandlerType,
 )
 from coinmetrics.constants import PagingFrom, Backfill
-from coinmetrics._data_collection import DataCollection
+from coinmetrics._data_collection import DataCollection, AssetChainsDataCollection, TransactionTrackerDataCollection
 from coinmetrics._catalogs import (
     CatalogAssetsData,
     CatalogAssetAlertsData,
@@ -1822,7 +1822,7 @@ class CoinMetricsClient:
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
-    ) -> DataCollection:
+    ) -> AssetChainsDataCollection:
         """
         Returns the chains of blocks for the specified assets.
 
@@ -1843,7 +1843,7 @@ class CoinMetricsClient:
         :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
         :type timezone: str
         :return: Asset chains timeseries.
-        :rtype: DataCollection
+        :rtype: AssetChainsDataCollection
         """
 
         params: Dict[str, Any] = {
@@ -1856,7 +1856,7 @@ class CoinMetricsClient:
             "end_inclusive": end_inclusive,
             "timezone": timezone,
         }
-        return DataCollection(self._get_data, "timeseries/asset-chains", params)
+        return AssetChainsDataCollection(self._get_data, "timeseries/asset-chains", params)
 
     def get_asset_metrics(
         self,
@@ -4219,7 +4219,7 @@ class CoinMetricsClient:
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
-    ) -> DataCollection:
+    ) -> TransactionTrackerDataCollection:
         """
         Returns status updates for the specified or all transactions.
 
@@ -4246,7 +4246,7 @@ class CoinMetricsClient:
         :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
         :type timezone: str
         :return: status updates for the specified or all transactions.
-        :rtype: DataCollection
+        :rtype: TransactionTrackerDataCollection
         """
         params: Dict[str, Any] = {
             "asset": asset,
@@ -4261,7 +4261,7 @@ class CoinMetricsClient:
             "end_inclusive": end_inclusive,
             "timezone": timezone,
         }
-        return DataCollection(
+        return TransactionTrackerDataCollection(
             self._get_data, f"blockchain/{asset}/transaction-tracker", params
         )
 

@@ -1505,14 +1505,15 @@ Returns Defi Balance Sheet records for specified DeFi protocols.
 #### get\_asset\_chains
 
 ```python
-def get_asset_chains(assets: Union[List[str], str],
-                     page_size: Optional[int] = None,
-                     paging_from: Optional[Union[PagingFrom, str]] = "start",
-                     start_time: Optional[Union[datetime, date, str]] = None,
-                     end_time: Optional[Union[datetime, date, str]] = None,
-                     start_inclusive: Optional[bool] = None,
-                     end_inclusive: Optional[bool] = None,
-                     timezone: Optional[str] = None) -> DataCollection
+def get_asset_chains(
+        assets: Union[List[str], str],
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None) -> AssetChainsDataCollection
 ```
 
 Returns the chains of blocks for the specified assets.
@@ -1530,7 +1531,7 @@ Returns the chains of blocks for the specified assets.
 
 **Returns**:
 
-`DataCollection`: Asset chains timeseries.
+`AssetChainsDataCollection`: Asset chains timeseries.
 
 <a id="coinmetrics.api_client.CoinMetricsClient.get_asset_metrics"></a>
 
@@ -3163,21 +3164,18 @@ def get_list_of_balance_updates_for_account_v2(
 #### get\_transaction\_tracker
 
 ```python
-def get_transaction_tracker(asset: str,
-                            txids: Optional[Union[List[str], str]] = None,
-                            replacements_for_txids: Optional[Union[
-                                List[str], str]] = None,
-                            replacements_only: Optional[bool] = None,
-                            page_size: Optional[int] = None,
-                            paging_from: Optional[Union[PagingFrom,
-                                                        str]] = "start",
-                            start_time: Optional[Union[datetime, date,
-                                                       str]] = None,
-                            end_time: Optional[Union[datetime, date,
-                                                     str]] = None,
-                            start_inclusive: Optional[bool] = None,
-                            end_inclusive: Optional[bool] = None,
-                            timezone: Optional[str] = None) -> DataCollection
+def get_transaction_tracker(
+        asset: str,
+        txids: Optional[Union[List[str], str]] = None,
+        replacements_for_txids: Optional[Union[List[str], str]] = None,
+        replacements_only: Optional[bool] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None) -> TransactionTrackerDataCollection
 ```
 
 Returns status updates for the specified or all transactions.
@@ -3198,7 +3196,7 @@ Returns status updates for the specified or all transactions.
 
 **Returns**:
 
-`DataCollection`: status updates for the specified or all transactions.
+`TransactionTrackerDataCollection`: status updates for the specified or all transactions.
 
 <a id="coinmetrics.api_client.CoinMetricsClient.get_taxonomy_assets"></a>
 

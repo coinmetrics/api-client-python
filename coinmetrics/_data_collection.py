@@ -3,7 +3,7 @@ from gzip import GzipFile
 from io import BytesIO
 from logging import getLogger
 from time import sleep
-from typing import Any, Dict, Iterable, Iterator, List, Optional, cast
+from typing import Any, Dict, Iterable, Iterator, List, Optional, cast, Type
 from dateutil.parser import isoparse
 
 import requests
@@ -16,7 +16,7 @@ from coinmetrics._typing import (
     DataFrameType,
 )
 from coinmetrics._utils import get_file_path_or_buffer
-
+from coinmetrics._models import AssetChainsData, CoinMetricsAPIModel, TransactionTrackerData
 try:
     import orjson as json
 except ImportError:
@@ -46,6 +46,9 @@ NUMBER_OF_RETRIES = 3
 
 
 class DataCollection:
+
+    API_RETURN_MODEL: Optional[Type[CoinMetricsAPIModel]] = None
+
     def __init__(
         self,
         data_retrieval_function: DataRetrievalFuncType,
@@ -132,7 +135,10 @@ class DataCollection:
             except StopIteration:
                 logger.info("no data to export")
                 return
-            columns_to_store = list(first_data_el.keys())
+            if self.API_RETURN_MODEL:
+                columns_to_store = self.API_RETURN_MODEL.get_dataframe_cols()
+            else:
+                columns_to_store = list(first_data_el.keys())
 
         yield (",".join(columns_to_store) + "\n").encode()
 
@@ -169,6 +175,7 @@ class DataCollection:
         path_or_bufstr: FilePathOrBuffer = None,
         compress: bool = False,
     ) -> Optional[str]:
+
         if path_or_bufstr is None:
             path_or_bufstr_obj: FilePathOrBuffer = BytesIO()
         else:
@@ -229,6 +236,9 @@ class DataCollection:
                     return pd.DataFrame()
                 else:
                     f.seek(0)
+                    # if self.API_RETURN_MODEL:
+                    #     columns = self.API_RETURN_MODEL.get_dataframe_cols()
+                    # else:
                     columns = (
                         BytesIO(f.getvalue())
                         .readlines(1)[0]
@@ -258,3 +268,24 @@ class DataCollection:
                     return pd.DataFrame(self)
                 else:
                     return pd.DataFrame(self).astype(dtype=dtype_mapper)
+
+
+class AssetChainsDataCollection(DataCollection):
+
+    API_RETURN_MODEL = AssetChainsData
+
+    def to_dataframe(
+        self,
+        header: Optional[List[str]] = None,
+        dtype_mapper: Optional[Dict[str, Any]] = None,
+        optimize_pandas_types: Optional[bool] = True,
+    ) -> DataFrameType:
+        df = super().to_dataframe(header=header, dtype_mapper=dtype_mapper, optimize_pandas_types=optimize_pandas_types)
+        if 'reorg' in df.columns:
+            df['reorg'] = df['reorg'].apply(lambda reorg: True if reorg == "true" else False)
+        return df
+
+
+class TransactionTrackerDataCollection(DataCollection):
+
+    API_RETURN_MODEL = TransactionTrackerData
