@@ -624,6 +624,72 @@ Returns a list of markets with funding rates support along with the time ranges 
 
 `list(dict(str, any))`: Information about funding rates that correspond to a filter
 
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_contract_prices"></a>
+
+#### catalog\_market\_contract\_prices
+
+```python
+def catalog_market_contract_prices(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        limit: Optional[str] = None) -> CatalogMarketContractPrices
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `limit` (`Optional[str]`): Limit of response items. `none` means no limit.
+
+**Returns**:
+
+`CatalogMarketContractPrices`: List of contract prices statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_implied_volatility"></a>
+
+#### catalog\_market\_implied\_volatility
+
+```python
+def catalog_market_implied_volatility(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        limit: Optional[str] = None) -> CatalogMarketImpliedVolatility
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `limit` (`Optional[str]`): Limit of response items. `none` means no limit.
+
+**Returns**:
+
+`CatalogMarketImpliedVolatility`: List of implied volatility statistics.
+
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_greeks"></a>
 
 #### catalog\_market\_greeks
@@ -1333,6 +1399,72 @@ Returns a list of all markets with funding rates support along with the time ran
 **Returns**:
 
 `list(dict(str, any))`: Information about funding rates that correspond to a filter
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_contract_prices"></a>
+
+#### catalog\_full\_market\_contract\_prices
+
+```python
+def catalog_full_market_contract_prices(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        limit: Optional[str] = None) -> CatalogMarketContractPrices
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `limit` (`Optional[str]`): Limit of response items. `none` means no limit.
+
+**Returns**:
+
+`CatalogMarketContractPrices`: List of contract prices statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_implied_volatility"></a>
+
+#### catalog\_full\_market\_implied\_volatility
+
+```python
+def catalog_full_market_implied_volatility(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        limit: Optional[str] = None) -> CatalogMarketImpliedVolatility
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `limit` (`Optional[str]`): Limit of response items. `none` means no limit.
+
+**Returns**:
+
+`CatalogMarketImpliedVolatility`: List of implied volatility statistics.
 
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_greeks"></a>
 

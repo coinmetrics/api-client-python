@@ -46,7 +46,9 @@ from coinmetrics._catalogs import (
     CatalogAssetChainsData,
     CatalogMempoolFeeratesData,
     CatalogMiningPoolTipsData,
-    CatalogTransactionTrackerData
+    CatalogTransactionTrackerData,
+    CatalogMarketContractPrices,
+    CatalogMarketImpliedVolatility
 )
 
 logger = getLogger("cm_client")
@@ -793,6 +795,102 @@ class CoinMetricsClient:
         return CatalogMarketTradesData(
             self._get_data("catalog/market-funding-rates", params)["data"]
         )
+
+    def catalog_market_contract_prices(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            limit: Optional[str] = None,
+    ) -> CatalogMarketContractPrices:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param type: Type of markets.
+        :type type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param limit: Limit of response items. `none` means no limit.
+        :type limit: Optional[str]
+
+        :return: List of contract prices statistics.
+        :rtype: CatalogMarketContractPrices
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "limit": limit,
+        }
+        return CatalogMarketContractPrices(self._get_data("catalog/market-contract-prices", params)['data'])
+
+    def catalog_market_implied_volatility(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            limit: Optional[str] = None,
+    ) -> CatalogMarketImpliedVolatility:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param type: Type of markets.
+        :type type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param limit: Limit of response items. `none` means no limit.
+        :type limit: Optional[str]
+
+        :return: List of implied volatility statistics.
+        :rtype: CatalogMarketImpliedVolatility
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "limit": limit,
+        }
+        return CatalogMarketImpliedVolatility(self._get_data("catalog/market-implied-volatility", params)['data'])
 
     def catalog_market_greeks(
         self,
@@ -1579,6 +1677,102 @@ class CoinMetricsClient:
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-funding-rates", params)["data"]
         )
+
+    def catalog_full_market_contract_prices(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            limit: Optional[str] = None,
+    ) -> CatalogMarketContractPrices:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param type: Type of markets.
+        :type type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param limit: Limit of response items. `none` means no limit.
+        :type limit: Optional[str]
+
+        :return: List of contract prices statistics.
+        :rtype: CatalogMarketContractPrices
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "limit": limit,
+        }
+        return CatalogMarketContractPrices(self._get_data("catalog-full/market-contract-prices", params)['data'])
+
+    def catalog_full_market_implied_volatility(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            limit: Optional[str] = None,
+    ) -> CatalogMarketImpliedVolatility:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param type: Type of markets.
+        :type type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param limit: Limit of response items. `none` means no limit.
+        :type limit: Optional[str]
+
+        :return: List of implied volatility statistics.
+        :rtype: CatalogMarketImpliedVolatility
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "limit": limit,
+        }
+        return CatalogMarketImpliedVolatility(self._get_data("catalog-all/market-implied-volatility", params)['data'])
 
     def catalog_full_market_greeks(
         self,

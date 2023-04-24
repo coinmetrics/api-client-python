@@ -609,3 +609,21 @@ class CatalogAssetPairCandlesData(List[Any]):
             .drop(["frequencies"], axis=1)
         )
         return convert_catalog_dtypes(df_catalog_asset_candles)
+
+
+class CatalogMarketContractPrices(List[Any]):
+    def to_dataframe(self) -> DataFrameType:
+        """
+        Transforms catalog data in list form into a dataframe
+        :return: Catalog Data
+        """
+        return convert_catalog_dtypes(pd.DataFrame(self))
+
+
+class CatalogMarketImpliedVolatility(List[Any]):
+    def to_dataframe(self) -> DataFrameType:
+        """
+        Transforms catalog data in list form into a dataframe
+        :return: Catalog Data
+        """
+        return convert_catalog_dtypes(pd.DataFrame(self))

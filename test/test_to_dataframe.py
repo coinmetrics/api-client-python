@@ -349,5 +349,38 @@ def test_transaction_tracker_catalog() -> None:
     data = client.catalog_transaction_tracker_assets().to_dataframe()
     assert len(data) >= 2
 
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_market_contract_prices_catalog() -> None:
+    data = client.catalog_market_contract_prices(markets='deribit-BTC-11APR22-42000-C-option').to_dataframe()
+    assert len(data) == 1
+    expected_cols = ["market", "min_time", "max_time"]
+    assert all([col in data.columns for col in expected_cols])
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_market_contract_prices_catalog_all() -> None:
+    data = client.catalog_market_contract_prices(markets='deribit-BTC-11APR22-42000-C-option').to_dataframe()
+    assert len(data) == 1
+    expected_cols = ["market", "min_time", "max_time"]
+    assert all([col in data.columns for col in expected_cols])
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_market_implied_vol_catalog() -> None:
+    data = client.catalog_market_implied_volatility().to_dataframe()
+    assert len(data) > 100
+    expected_cols = ["market", "min_time", "max_time"]
+    assert all([col in data.columns for col in expected_cols])
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_market_implied_vol_catalog_full() -> None:
+    data = client.catalog_full_market_implied_volatility().to_dataframe()
+    assert len(data) > 100
+    expected_cols = ["market", "min_time", "max_time"]
+    assert all([col in data.columns for col in expected_cols])
+
+
 if __name__ == "__main__":
     pytest.main()

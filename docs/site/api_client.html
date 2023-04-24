@@ -425,6 +425,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#catalog_market_contract_prices" class="md-nav__link">
+    catalog_market_contract_prices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_market_implied_volatility" class="md-nav__link">
+    catalog_market_implied_volatility
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#catalog_market_greeks" class="md-nav__link">
     catalog_market_greeks
   </a>
@@ -623,6 +637,20 @@
           <li class="md-nav__item">
   <a href="#catalog_full_market_funding_rates" class="md-nav__link">
     catalog_full_market_funding_rates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_market_contract_prices" class="md-nav__link">
+    catalog_full_market_contract_prices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_market_implied_volatility" class="md-nav__link">
+    catalog_full_market_implied_volatility
   </a>
   
 </li>
@@ -1264,6 +1292,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#catalog_market_contract_prices" class="md-nav__link">
+    catalog_market_contract_prices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_market_implied_volatility" class="md-nav__link">
+    catalog_market_implied_volatility
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#catalog_market_greeks" class="md-nav__link">
     catalog_market_greeks
   </a>
@@ -1462,6 +1504,20 @@
           <li class="md-nav__item">
   <a href="#catalog_full_market_funding_rates" class="md-nav__link">
     catalog_full_market_funding_rates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_market_contract_prices" class="md-nav__link">
+    catalog_full_market_contract_prices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_market_implied_volatility" class="md-nav__link">
+    catalog_full_market_implied_volatility
   </a>
   
 </li>
@@ -2315,6 +2371,60 @@ quotes, funding_rates, openinterest, liquidations. Included by default if omitte
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>list(dict(str, any))</code>: Information about funding rates that correspond to a filter</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_contract_prices"></a></p>
+<h4 id="catalog_market_contract_prices">catalog_market_contract_prices<a class="headerlink" href="#catalog_market_contract_prices" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_market_contract_prices</span><span class="p">(</span>
+        <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">base</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">quote</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">limit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMarketContractPrices</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of markets. By default all markets are returned.</li>
+<li><code>exchange</code> (<code>Optional[str]</code>): Unique name of an exchange.</li>
+<li><code>type</code> (<code>Optional[str]</code>): Type of markets.</li>
+<li><code>base</code> (<code>Optional[str]</code>): Base asset of markets.</li>
+<li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
+<li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
+<li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Format of the response. Supported values are <code>json</code>, <code>json_stream</code>.</li>
+<li><code>limit</code> (<code>Optional[str]</code>): Limit of response items. <code>none</code> means no limit.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogMarketContractPrices</code>: List of contract prices statistics.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_implied_volatility"></a></p>
+<h4 id="catalog_market_implied_volatility">catalog_market_implied_volatility<a class="headerlink" href="#catalog_market_implied_volatility" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_market_implied_volatility</span><span class="p">(</span>
+        <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">base</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">quote</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">limit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMarketImpliedVolatility</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of markets. By default all markets are returned.</li>
+<li><code>exchange</code> (<code>Optional[str]</code>): Unique name of an exchange.</li>
+<li><code>type</code> (<code>Optional[str]</code>): Type of markets.</li>
+<li><code>base</code> (<code>Optional[str]</code>): Base asset of markets.</li>
+<li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
+<li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
+<li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Format of the response. Supported values are <code>json</code>, <code>json_stream</code>.</li>
+<li><code>limit</code> (<code>Optional[str]</code>): Limit of response items. <code>none</code> means no limit.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogMarketImpliedVolatility</code>: List of implied volatility statistics.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_greeks"></a></p>
 <h4 id="catalog_market_greeks">catalog_market_greeks<a class="headerlink" href="#catalog_market_greeks" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_market_greeks</span><span class="p">(</span>
@@ -2821,6 +2931,60 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>list(dict(str, any))</code>: Information about funding rates that correspond to a filter</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_contract_prices"></a></p>
+<h4 id="catalog_full_market_contract_prices">catalog_full_market_contract_prices<a class="headerlink" href="#catalog_full_market_contract_prices" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_market_contract_prices</span><span class="p">(</span>
+        <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">base</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">quote</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">limit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMarketContractPrices</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of markets. By default all markets are returned.</li>
+<li><code>exchange</code> (<code>Optional[str]</code>): Unique name of an exchange.</li>
+<li><code>type</code> (<code>Optional[str]</code>): Type of markets.</li>
+<li><code>base</code> (<code>Optional[str]</code>): Base asset of markets.</li>
+<li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
+<li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
+<li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Format of the response. Supported values are <code>json</code>, <code>json_stream</code>.</li>
+<li><code>limit</code> (<code>Optional[str]</code>): Limit of response items. <code>none</code> means no limit.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogMarketContractPrices</code>: List of contract prices statistics.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_implied_volatility"></a></p>
+<h4 id="catalog_full_market_implied_volatility">catalog_full_market_implied_volatility<a class="headerlink" href="#catalog_full_market_implied_volatility" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_market_implied_volatility</span><span class="p">(</span>
+        <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">base</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">quote</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">limit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMarketImpliedVolatility</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of markets. By default all markets are returned.</li>
+<li><code>exchange</code> (<code>Optional[str]</code>): Unique name of an exchange.</li>
+<li><code>type</code> (<code>Optional[str]</code>): Type of markets.</li>
+<li><code>base</code> (<code>Optional[str]</code>): Base asset of markets.</li>
+<li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
+<li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
+<li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Format of the response. Supported values are <code>json</code>, <code>json_stream</code>.</li>
+<li><code>limit</code> (<code>Optional[str]</code>): Limit of response items. <code>none</code> means no limit.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogMarketImpliedVolatility</code>: List of implied volatility statistics.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_greeks"></a></p>
 <h4 id="catalog_full_market_greeks">catalog_full_market_greeks<a class="headerlink" href="#catalog_full_market_greeks" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_market_greeks</span><span class="p">(</span>
