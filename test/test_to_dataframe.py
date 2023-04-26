@@ -360,7 +360,7 @@ def test_market_contract_prices_catalog() -> None:
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_market_contract_prices_catalog_all() -> None:
-    data = client.catalog_market_contract_prices(markets='deribit-BTC-11APR22-42000-C-option').to_dataframe()
+    data = client.catalog_full_market_contract_prices(markets='deribit-BTC-11APR22-42000-C-option').to_dataframe()
     assert len(data) == 1
     expected_cols = ["market", "min_time", "max_time"]
     assert all([col in data.columns for col in expected_cols])

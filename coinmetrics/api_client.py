@@ -1724,7 +1724,7 @@ class CoinMetricsClient:
             "format": format,
             "limit": limit,
         }
-        return CatalogMarketContractPrices(self._get_data("catalog-full/market-contract-prices", params)['data'])
+        return CatalogMarketContractPrices(self._get_data("catalog-all/market-contract-prices", params)['data'])
 
     def catalog_full_market_implied_volatility(
             self,
