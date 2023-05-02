@@ -1,5 +1,6 @@
 import logging
 import socket
+import time
 from datetime import date, datetime
 from logging import getLogger
 from typing import Any, Dict, List, Optional, Union, cast
@@ -4648,9 +4649,15 @@ class CoinMetricsClient:
 
     @retry((socket.gaierror, HTTPError), retries=5, wait_time_between_retries=5)
     def _send_request(self, actual_url: str) -> Response:
-        return self._session.get(
+        response = self._session.get(
             actual_url,
             headers=self._session.headers,
             proxies=self._session.proxies,
             verify=self._session.verify,
         )
+        if response.status_code == 429 or response.headers.get("x-ratelimit-remaining", None) == "0":
+            logger.info("Sleeping for a rate limit window because 429 (too many requests) error was returned. Please"
+                        "see Coin Metrics APIV4 documentation for more information: https://docs.coinmetrics.io/api/v4/#tag/Rate-limits")
+            time.sleep(int(response.headers["x-ratelimit-reset"]))
+            response = self._send_request(actual_url=actual_url)
+        return response

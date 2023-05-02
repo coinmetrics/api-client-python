@@ -190,3 +190,7 @@ def test_get_pair_quotes_stream() -> None:
 def test_get_asset_quotes_stream() -> None:
     stream = client.get_stream_asset_quotes(assets="btc")
     stream.run(on_message=on_message_assets_quotes_test)
+
+
+if __name__ == '__main__':
+    pytest.main()
