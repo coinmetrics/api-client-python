@@ -1564,15 +1564,17 @@ Returns a list of all markets with liquidations support along with the time rang
 #### get\_asset\_alerts
 
 ```python
-def get_asset_alerts(assets: Union[List[str], str],
-                     alerts: Union[List[str], str],
-                     page_size: Optional[int] = None,
-                     paging_from: Optional[Union[PagingFrom, str]] = "start",
-                     start_time: Optional[Union[datetime, date, str]] = None,
-                     end_time: Optional[Union[datetime, date, str]] = None,
-                     start_inclusive: Optional[bool] = None,
-                     end_inclusive: Optional[bool] = None,
-                     timezone: Optional[str] = None) -> DataCollection
+def get_asset_alerts(
+        assets: Union[List[str], str],
+        alerts: Union[List[str], str],
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        include_heartbeats: Optional[bool] = None) -> DataCollection
 ```
 
 Returns asset alerts for the specified assets.
@@ -1588,6 +1590,7 @@ Returns asset alerts for the specified assets.
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+- `include_heartbeats` (`bool`): If set to true, includes information about most recent time asset was successfully evaluated.
 
 **Returns**:
 
@@ -3297,17 +3300,20 @@ def get_list_of_balance_updates_for_account_v2(
 
 ```python
 def get_transaction_tracker(
-        asset: str,
-        txids: Optional[Union[List[str], str]] = None,
-        replacements_for_txids: Optional[Union[List[str], str]] = None,
-        replacements_only: Optional[bool] = None,
-        page_size: Optional[int] = None,
-        paging_from: Optional[Union[PagingFrom, str]] = "start",
-        start_time: Optional[Union[datetime, date, str]] = None,
-        end_time: Optional[Union[datetime, date, str]] = None,
-        start_inclusive: Optional[bool] = None,
-        end_inclusive: Optional[bool] = None,
-        timezone: Optional[str] = None) -> TransactionTrackerDataCollection
+    asset: str,
+    addresses: Optional[Union[List[str], str]] = None,
+    txids: Optional[Union[List[str], str]] = None,
+    replacements_for_txids: Optional[Union[List[str], str]] = None,
+    replacements_only: Optional[bool] = None,
+    page_size: Optional[int] = None,
+    paging_from: Optional[Union[PagingFrom, str]] = "start",
+    start_time: Optional[Union[datetime, date, str]] = None,
+    end_time: Optional[Union[datetime, date, str]] = None,
+    start_inclusive: Optional[bool] = None,
+    end_inclusive: Optional[bool] = None,
+    timezone: Optional[str] = None,
+    unconfirmed_only: Optional[bool] = None
+) -> TransactionTrackerDataCollection
 ```
 
 Returns status updates for the specified or all transactions.
