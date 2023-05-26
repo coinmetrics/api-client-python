@@ -1915,6 +1915,7 @@ class CoinMetricsClient:
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
+        include_heartbeats: Optional[bool] = None
     ) -> DataCollection:
         """
         Returns asset alerts for the specified assets.
@@ -1937,6 +1938,8 @@ class CoinMetricsClient:
         :type end_inclusive: bool
         :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
         :type timezone: str
+        :param include_heartbeats:  If set to true, includes information about most recent time asset was successfully evaluated.
+        :type include_heartbeats: bool
         :return: Asset alerts timeseries.
         :rtype: DataCollection
         """
@@ -1951,6 +1954,7 @@ class CoinMetricsClient:
             "start_inclusive": start_inclusive,
             "end_inclusive": end_inclusive,
             "timezone": timezone,
+            "include_heartbeats": include_heartbeats
         }
         return DataCollection(self._get_data, "timeseries/asset-alerts", params)
 
