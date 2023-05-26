@@ -4408,6 +4408,7 @@ class CoinMetricsClient:
     def get_transaction_tracker(
         self,
         asset: str,
+        addresses: Optional[Union[List[str], str]] = None,
         txids: Optional[Union[List[str], str]] = None,
         replacements_for_txids: Optional[Union[List[str], str]] = None,
         replacements_only: Optional[bool] = None,
@@ -4418,6 +4419,7 @@ class CoinMetricsClient:
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
+        unconfirmed_only: Optional[bool] = None
     ) -> TransactionTrackerDataCollection:
         """
         Returns status updates for the specified or all transactions.
@@ -4449,6 +4451,7 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {
             "asset": asset,
+            "addresses": addresses,
             "txids": txids,
             "replacements_for_txids": replacements_for_txids,
             "replacements_only": replacements_only,
@@ -4459,6 +4462,7 @@ class CoinMetricsClient:
             "start_inclusive": start_inclusive,
             "end_inclusive": end_inclusive,
             "timezone": timezone,
+            "unconfirmed_only": unconfirmed_only
         }
         return TransactionTrackerDataCollection(
             self._get_data, f"blockchain/{asset}/transaction-tracker", params

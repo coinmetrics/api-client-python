@@ -41,3 +41,5 @@ class TransactionTrackerData(CoinMetricsAPIModel):
     block_hash: str = field(default="None")
     geo: str = field(default="None")
     replacement_for_txid: str = field(default="None")
+    inputs: List[str] = field(default_factory=list)
+    outputs: List[str] = field(default_factory=list)
