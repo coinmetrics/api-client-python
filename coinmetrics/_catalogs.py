@@ -403,17 +403,11 @@ class CatalogMarketsData(List[Any]):
 
     def to_dataframe(self) -> DataFrameType:
         df_markets = pd.DataFrame(self)
-        df_markets = df_markets.join(
-            df_markets["trades"].apply(pd.Series).drop(0, axis=1, errors="ignore"),
-            rsuffix="_trades",
-        )
-        metadata = ["funding_rates", "openinterest", "liquidations"]
+        metadata = ["trades", "funding_rates", "openinterest", "liquidations"]
         for col in metadata:
             if col in df_markets.columns:
-                df_markets = df_markets.join(
-                    df_markets[col].apply(pd.Series).drop(0, axis=1, errors="ignore"),
-                    rsuffix=f"_{col}",
-                )
+                for time_col in ["min_time", "max_time"]:
+                    df_markets[f'{time_col}_{col}'] = df_markets[col].apply(lambda item: None if isinstance(item, float) else item.get(time_col, None))
 
         df_markets = df_markets.drop(
             ["trades", "funding_rates", "openinterest", "liquidations"],
@@ -531,29 +525,15 @@ class CatalogMarketMetricsData(List[Any]):
 
     def to_dataframe(self) -> DataFrameType:
         df_catalog_market_metrics = pd.DataFrame(self)
-        df_catalog_market_metrics = (
-            df_catalog_market_metrics.explode("metrics")
-            .assign(metric=lambda df: _expand_df(key="metric", iterable=df.metrics))
-            .assign(
-                frequencies=lambda df: _expand_df(
-                    key="frequencies", iterable=df.metrics
-                )
-            )
-            .explode("frequencies")
-            .assign(
-                frequency=lambda df: _expand_df(
-                    key="frequency", iterable=df.frequencies
-                )
-            )
-            .assign(
-                min_time=lambda df: _expand_df(key="min_time", iterable=df.frequencies)
-            )
-            .assign(
-                max_time=lambda df: _expand_df(key="max_time", iterable=df.frequencies)
-            )
-            .reset_index(drop=True)
-            .drop(["metrics", "frequencies"], axis=1)
-        )
+        df_catalog_market_metrics = df_catalog_market_metrics.explode("metrics")
+        df_metrics = pd.json_normalize(df_catalog_market_metrics['metrics'])
+        df_catalog_market_metrics = df_catalog_market_metrics.join(df_metrics)
+        df_catalog_market_metrics = df_catalog_market_metrics.explode("frequencies")
+        df_frequencies = pd.json_normalize(df_catalog_market_metrics['frequencies'])
+        df_catalog_market_metrics = df_catalog_market_metrics.join(df_frequencies)
+        df_catalog_market_metrics = df_catalog_market_metrics.drop(["metrics", "frequencies"], axis=1)
+        df_catalog_market_metrics = df_catalog_market_metrics.reset_index(drop=True)
+
         return convert_catalog_dtypes(df_catalog_market_metrics)
 
 
