@@ -382,5 +382,20 @@ def test_market_implied_vol_catalog_full() -> None:
     assert all([col in data.columns for col in expected_cols])
 
 
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalog_market_metrics_row_counts() -> None:
+    """
+    Tests that data is the same coming from both the as a list and to_dataframe
+    """
+    list_data = client.catalog_market_metrics(exchange="coinbase")
+    count_markets_and_frequencies = 0
+    for catalog_data in list_data:
+        for metric_data in catalog_data['metrics']:
+            count_markets_and_frequencies += len(metric_data['frequencies'])
+    as_data_frame = list_data.to_dataframe()
+    count_df_rows = len(as_data_frame)
+    assert count_df_rows == count_markets_and_frequencies
+
+
 if __name__ == "__main__":
     pytest.main()

@@ -525,15 +525,29 @@ class CatalogMarketMetricsData(List[Any]):
 
     def to_dataframe(self) -> DataFrameType:
         df_catalog_market_metrics = pd.DataFrame(self)
-        df_catalog_market_metrics = df_catalog_market_metrics.explode("metrics")
-        df_metrics = pd.json_normalize(df_catalog_market_metrics['metrics'])
-        df_catalog_market_metrics = df_catalog_market_metrics.join(df_metrics)
-        df_catalog_market_metrics = df_catalog_market_metrics.explode("frequencies")
-        df_frequencies = pd.json_normalize(df_catalog_market_metrics['frequencies'])
-        df_catalog_market_metrics = df_catalog_market_metrics.join(df_frequencies)
-        df_catalog_market_metrics = df_catalog_market_metrics.drop(["metrics", "frequencies"], axis=1)
-        df_catalog_market_metrics = df_catalog_market_metrics.reset_index(drop=True)
-
+        df_catalog_market_metrics = (
+            df_catalog_market_metrics.explode("metrics")
+            .assign(metric=lambda df: _expand_df(key="metric", iterable=df.metrics))
+            .assign(
+                frequencies=lambda df: _expand_df(
+                    key="frequencies", iterable=df.metrics
+                )
+            )
+            .explode("frequencies")
+            .assign(
+                frequency=lambda df: _expand_df(
+                    key="frequency", iterable=df.frequencies
+                )
+            )
+            .assign(
+                min_time=lambda df: _expand_df(key="min_time", iterable=df.frequencies)
+            )
+            .assign(
+                max_time=lambda df: _expand_df(key="max_time", iterable=df.frequencies)
+            )
+            .reset_index(drop=True)
+            .drop(["metrics", "frequencies"], axis=1)
+        )
         return convert_catalog_dtypes(df_catalog_market_metrics)
 
 
