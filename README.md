@@ -393,5 +393,6 @@ client = CoinMetricsClient(proxy_url=f'http://<username>:<password>@<hostname>:<
 ```
 
 ## Extended documentation
+
 For more information about the available methods in the client please reference [API Client Spec](https://coinmetrics.github.io/api-client-python/site/api_client.html)
 
