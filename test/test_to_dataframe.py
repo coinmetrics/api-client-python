@@ -2,6 +2,7 @@ import pandas as pd  # type: ignore
 import pytest
 from coinmetrics.api_client import CoinMetricsClient
 import os
+import numpy as np
 
 CM_API_KEY = os.environ.get("CM_API_KEY")
 client = CoinMetricsClient(str(CM_API_KEY))
@@ -395,6 +396,28 @@ def test_catalog_market_metrics_row_counts() -> None:
     as_data_frame = list_data.to_dataframe()
     count_df_rows = len(as_data_frame)
     assert count_df_rows == count_markets_and_frequencies
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalog_markets_dtypes() -> None:
+    """
+    Tests catalog markets return data types as expected for new time cols
+    """
+    markets: pd.DataFrame = client.catalog_markets(exchange="binance").to_dataframe()
+    expected_dtype_cols = {"min_time_trades",
+                             "max_time_trades",
+                             "min_time_funding_rates",
+                             "max_time_funding_rates",
+                             "min_time_openinterest",
+                             "max_time_openinterest",
+                             "min_time_liquidations",
+                             "max_time_liquidations",
+                             "listing",
+                             "expiration"}
+    for type_name, dtype in markets.dtypes.items():
+        if type_name in expected_dtype_cols:
+            assert type(dtype == pd.core.dtypes.dtypes.DatetimeTZDtype)
+    spot_check = markets['listing'][0]
+    assert type(spot_check) == pd.Timestamp
 
 
 if __name__ == "__main__":

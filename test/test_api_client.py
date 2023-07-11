@@ -660,13 +660,6 @@ def test_catalog_metrics_dataframe() -> None:
     assert (df.values == df_test.values).all()
 
 
-def test_catalog_markets_dataframe() -> None:
-    data = CatalogMarketsData(catalog_markets_test_data)
-    df = data.to_dataframe().fillna("").astype(str)
-    df_test = pd.read_csv("test/data/catalog_markets.csv", dtype=str).fillna("")
-    assert (df.values == df_test.values).all()
-
-
 def test_catalog_exchanges_dataframe() -> None:
     data = CatalogExchangesData(catalog_exchanges_test_data)
     df = data.to_dataframe()

@@ -34,7 +34,8 @@ def _expand_df(key: str, iterable: Iterable[Any]) -> List[Any]:
 def convert_catalog_dtypes(df: DataFrameType) -> DataFrameType:
     df = df.convert_dtypes()
     columns = df.columns
-    datetime_cols = [c for c in columns if c.endswith("_time") or c == "time"]
+    date_cols = {"expiration", "listing"}
+    datetime_cols = [c for c in columns if "time" in c.split("_") or c == "time" or c in date_cols]
     for col in datetime_cols:
         df[col] = df[col].apply(_convert_utc)
     return df
