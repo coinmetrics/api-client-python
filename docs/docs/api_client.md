@@ -1433,6 +1433,43 @@ def catalog_full_market_contract_prices(
 
 `CatalogMarketContractPrices`: List of contract prices statistics.
 
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_contract_prices_v2"></a>
+
+#### catalog\_full\_contract\_prices\_v2
+
+```python
+def catalog_full_contract_prices_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of contract prices statistics.
+
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_implied_volatility"></a>
 
 #### catalog\_full\_market\_implied\_volatility
@@ -1558,6 +1595,820 @@ Returns a list of all markets with liquidations support along with the time rang
 **Returns**:
 
 `list(dict(str, any))`: Information about market liquidations that correspond to a filter
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_trades_v2"></a>
+
+#### catalog\_market\_trades\_v2
+
+```python
+def catalog_market_trades_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of market trades statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_candles_v2"></a>
+
+#### catalog\_market\_candles\_v2
+
+```python
+def catalog_market_candles_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of market candles statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_orderbooks_v2"></a>
+
+#### catalog\_market\_orderbooks\_v2
+
+```python
+def catalog_market_orderbooks_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of market orderbooks statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_quotes_v2"></a>
+
+#### catalog\_market\_quotes\_v2
+
+```python
+def catalog_market_quotes_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of market quotes statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_funding_rates_v2"></a>
+
+#### catalog\_market\_funding\_rates\_v2
+
+```python
+def catalog_market_funding_rates_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of market funding rates statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_contract_prices_v2"></a>
+
+#### catalog\_market\_contract\_prices\_v2
+
+```python
+def catalog_market_contract_prices_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of contract prices statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_implied_volatility_v2"></a>
+
+#### catalog\_market\_implied\_volatility\_v2
+
+```python
+def catalog_market_implied_volatility_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of implied volatility statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_greeks_v2"></a>
+
+#### catalog\_market\_greeks\_v2
+
+```python
+def catalog_market_greeks_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of greeks statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_open_interest_v2"></a>
+
+#### catalog\_market\_open\_interest\_v2
+
+```python
+def catalog_market_open_interest_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of market open interest statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_liquidations_v2"></a>
+
+#### catalog\_market\_liquidations\_v2
+
+```python
+def catalog_market_liquidations_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of market liquidations statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_metrics_v2"></a>
+
+#### catalog\_market\_metrics\_v2
+
+```python
+def catalog_market_metrics_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of market metrics statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_trades_v2"></a>
+
+#### catalog\_full\_market\_trades\_v2
+
+```python
+def catalog_full_market_trades_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of market trades statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_candles_v2"></a>
+
+#### catalog\_full\_market\_candles\_v2
+
+```python
+def catalog_full_market_candles_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of market candles statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_orderbooks_v2"></a>
+
+#### catalog\_full\_market\_orderbooks\_v2
+
+```python
+def catalog_full_market_orderbooks_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of market orderbooks statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_quotes_v2"></a>
+
+#### catalog\_full\_market\_quotes\_v2
+
+```python
+def catalog_full_market_quotes_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of market quotes statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_funding_rates_v2"></a>
+
+#### catalog\_full\_market\_funding\_rates\_v2
+
+```python
+def catalog_full_market_funding_rates_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of market funding rates statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_contract_prices_v2"></a>
+
+#### catalog\_full\_market\_contract\_prices\_v2
+
+```python
+def catalog_full_market_contract_prices_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of contract prices statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_implied_volatility_v2"></a>
+
+#### catalog\_full\_market\_implied\_volatility\_v2
+
+```python
+def catalog_full_market_implied_volatility_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of implied volatility statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_greeks_v2"></a>
+
+#### catalog\_full\_market\_greeks\_v2
+
+```python
+def catalog_full_market_greeks_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of greeks statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_open_interest_v2"></a>
+
+#### catalog\_full\_market\_open\_interest\_v2
+
+```python
+def catalog_full_market_open_interest_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of market open interest statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_liquidations_v2"></a>
+
+#### catalog\_full\_market\_liquidations\_v2
+
+```python
+def catalog_full_market_liquidations_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of market liquidations statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_metrics_v2"></a>
+
+#### catalog\_full\_market\_metrics\_v2
+
+```python
+def catalog_full_market_metrics_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of market metrics statistics.
 
 <a id="coinmetrics.api_client.CoinMetricsClient.get_asset_alerts"></a>
 

@@ -1,13 +1,12 @@
+import requests
 from copy import deepcopy
 from gzip import GzipFile
 from io import BytesIO
 from logging import getLogger
 from time import sleep
-from typing import Any, Dict, Iterable, Iterator, List, Optional, cast, Type
+from datetime import datetime
+from typing import Any, Dict, Iterable, Iterator, List, Optional, cast, Type, Callable, Union
 from dateutil.parser import isoparse
-
-import requests
-
 from coinmetrics._typing import (
     DataRetrievalFuncType,
     DataReturnType,
@@ -17,18 +16,26 @@ from coinmetrics._typing import (
 )
 from coinmetrics._utils import get_file_path_or_buffer
 from coinmetrics._models import AssetChainsData, CoinMetricsAPIModel, TransactionTrackerData
+from importlib import import_module
+orjson_found = True
 try:
+    json = import_module("orjson")
+except ModuleNotFoundError:
+    orjson_found = False
+
+if not orjson_found:
+    import json
+else:
     import orjson as json
-except ImportError:
-    import json  # type: ignore
+
+isoparse_typed: Callable[[Union[str, bytes]], datetime] = isoparse
 
 
 logger = getLogger("cm_client_data_collection")
 
 try:
-    import pandas as pd  # type: ignore
+    import pandas as pd
 except ImportError:
-    pd = None
     logger.info(
         "Pandas export is unavailable. Install pandas to unlock dataframe functions."
     )
@@ -249,11 +256,13 @@ class DataCollection:
                     datetime_cols = [
                         c for c in columns if c.endswith("_time") or c == "time"
                     ]
-                    df = pd.read_csv(
-                        f,
-                        parse_dates=datetime_cols,
-                        dtype=dtype_mapper,
-                        date_parser=isoparse,
+                    buffer: BytesIO = f
+                    cols: List[str] = datetime_cols
+                    dtype_map: Optional[Dict[str, Any]] = dtype_mapper
+                    df: pd.DataFrame = pd.read_csv(
+                        buffer,
+                        parse_dates=cols,
+                        dtype=dtype_map,
                     )
                     if dtype_mapper is None:
                         df = df.convert_dtypes()
@@ -261,7 +270,7 @@ class DataCollection:
                         assert len(df.columns) == len(
                             header
                         ), "header length does not match output values"
-                        df.columns = header
+                        df.columns = pd.Index(header)
                     return df
             else:
                 if dtype_mapper is None:
@@ -289,3 +298,9 @@ class AssetChainsDataCollection(DataCollection):
 class TransactionTrackerDataCollection(DataCollection):
 
     API_RETURN_MODEL = TransactionTrackerData
+
+
+class CatalogV2DataCollection(DataCollection):
+    """
+    This class will be used to implement functionality specific to catalog-v2 endpoints.
+    """

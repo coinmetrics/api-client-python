@@ -1,5 +1,6 @@
+import logging
 import os
-from typing import Any
+from typing import Any, Type
 from unittest.mock import Mock
 
 from coinmetrics.api_client import CoinMetricsClient, requests
@@ -21,17 +22,15 @@ from coinmetrics._typing import (
     DataRetrievalFuncType,
     UrlParamTypes,
     Dict,
-    DataReturnType,
-    DataFrameType,
+    DataReturnType
 )
 
 try:
-    import pandas as pd  # type: ignore
+    import pandas as pd
 
-    DataFrameType = pd.core.frame.DataFrame
+    DataFrameType: Type[pd.core.frame.DataFrame] = pd.core.frame.DataFrame
 except ImportError:
-    pd = None
-    DataFrameType = Any
+    logging.info("Pandas not imported")
 
 catalog_assets_test_data = [
     {
@@ -619,7 +618,7 @@ def test_to_dataframe() -> None:
         endpoint="",
         url_params=test_param_dict,
     )
-    test_df: DataFrameType = test_data_collection.to_dataframe()
+    test_df: pd.DataFrame = test_data_collection.to_dataframe()
     assert test_df.shape == (2, 2)
     assert list(test_param_dict.keys()) == list(test_df.columns)
     assert (test_df["asset"] == "btc").all()
@@ -629,7 +628,7 @@ def test_to_dataframe() -> None:
         endpoint="",
         url_params=test_param_dict,
     )
-    test_df_header: DataFrameType = test_data_collection_header.to_dataframe(
+    test_df_header: pd.DataFrame = test_data_collection_header.to_dataframe(
         header=test_header
     )
     assert list(test_df_header.columns) == test_header

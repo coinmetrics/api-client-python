@@ -1,3 +1,5 @@
+import datetime
+
 from dateutil.parser import isoparse
 from typing import Iterable
 from coinmetrics._typing import DataFrameType, List, Any, Optional
@@ -6,15 +8,14 @@ from logging import getLogger
 logger = getLogger("cm_client")
 
 try:
-    import pandas as pd  # type: ignore
+    import pandas as pd
 except ImportError:
-    pd = None
     logger.warning(
         "Pandas export is unavailable. Install pandas to unlock dataframe functions."
     )
 
 
-def _convert_utc(x: Any) -> DataFrameType:
+def _convert_utc(x: Any) -> Optional[datetime.datetime]:
     try:
         return isoparse(x)
     except TypeError:

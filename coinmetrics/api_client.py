@@ -8,24 +8,17 @@ from urllib.parse import urlencode
 
 import requests
 from requests import HTTPError, Response
-import websocket  # type: ignore
+import websocket
 
 from coinmetrics._utils import retry, transform_url_params_values_to_str
 from coinmetrics import __version__ as version
 from coinmetrics._exceptions import CoinMetricsClientQueryParamsException
-
-try:
-    import ujson as json
-except ImportError:
-    # fall back to std json package
-    import json  # type: ignore
-
 from coinmetrics._typing import (
     DataReturnType,
     MessageHandlerType,
 )
 from coinmetrics.constants import PagingFrom, Backfill
-from coinmetrics._data_collection import DataCollection, AssetChainsDataCollection, TransactionTrackerDataCollection
+from coinmetrics._data_collection import DataCollection, AssetChainsDataCollection, TransactionTrackerDataCollection, CatalogV2DataCollection
 from coinmetrics._catalogs import (
     CatalogAssetsData,
     CatalogAssetAlertsData,
@@ -52,15 +45,18 @@ from coinmetrics._catalogs import (
     CatalogMarketImpliedVolatility
 )
 
-logger = getLogger("cm_client")
-
+from importlib import import_module
+ujson_found = True
 try:
-    import pandas as pd  # type: ignore
-except ImportError:
-    pd = None
-    logger.warning(
-        "Pandas export is unavailable. Install pandas to unlock dataframe functions."
-    )
+    json = import_module('ujson')
+except ModuleNotFoundError:
+    ujson_found = False
+
+if not ujson_found:
+    import json
+else:
+    import ujson as json
+logger = getLogger("cm_client")
 
 
 class CmStream:
@@ -1727,6 +1723,62 @@ class CoinMetricsClient:
         }
         return CatalogMarketContractPrices(self._get_data("catalog-all/market-contract-prices", params)['data'])
 
+    def catalog_full_contract_prices_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of contract prices statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-contract-prices", params)
+
     def catalog_full_market_implied_volatility(
             self,
             markets: Optional[Union[str, List[str]]] = None,
@@ -1903,6 +1955,1238 @@ class CoinMetricsClient:
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-liquidations", params)["data"]
         )
+
+    def catalog_market_trades_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of market trades statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-trades", params)
+
+    def catalog_market_candles_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of market candles statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-candles", params)
+
+    def catalog_market_orderbooks_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of market orderbooks statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-orderbooks", params)
+
+    def catalog_market_quotes_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of market quotes statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-quotes", params)
+
+    def catalog_market_funding_rates_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of market funding rates statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-funding-rates", params)
+
+    def catalog_market_contract_prices_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of contract prices statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-contract-prices", params)
+
+    def catalog_market_implied_volatility_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of implied volatility statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-implied-volatility", params)
+
+    def catalog_market_greeks_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of greeks statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-greeks", params)
+
+    def catalog_market_open_interest_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of market open interest statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-openinterest", params)
+
+    def catalog_market_liquidations_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of market liquidations statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-liquidations", params)
+
+    def catalog_market_metrics_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of market metrics statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-metrics", params)
+
+    def catalog_full_market_trades_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of market trades statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-trades", params)
+
+    def catalog_full_market_candles_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of market candles statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-candles", params)
+
+    def catalog_full_market_orderbooks_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of market orderbooks statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-orderbooks", params)
+
+    def catalog_full_market_quotes_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of market quotes statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-quotes", params)
+
+    def catalog_full_market_funding_rates_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of market funding rates statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-funding-rates", params)
+
+    def catalog_full_market_contract_prices_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of contract prices statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-contract-prices", params)
+
+    def catalog_full_market_implied_volatility_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of implied volatility statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-implied-volatility", params)
+
+    def catalog_full_market_greeks_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of greeks statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-greeks", params)
+
+    def catalog_full_market_open_interest_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of market open interest statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-openinterest", params)
+
+    def catalog_full_market_liquidations_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of market liquidations statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-liquidations", params)
+
+    def catalog_full_market_metrics_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of market metrics statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-metrics", params)
 
     def get_asset_alerts(
         self,

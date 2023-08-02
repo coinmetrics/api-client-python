@@ -2,14 +2,14 @@ from datetime import date, datetime
 from pathlib import Path
 from typing import Any, Callable, Dict, IO, List, Tuple, Union, Optional
 from coinmetrics.constants import PagingFrom
+pandas_found = True
 
 try:
-    import pandas as pd  # type: ignore
+    import pandas as pd
 
-    DataFrameType = pd.core.frame.DataFrame
+    DataFrameType = pd.DataFrame
 except ImportError:
-    pd = None
-    DataFrameType = Any
+    pandas_found = False
 
 FilePathOrBuffer = Union[str, Path, IO[str], IO[bytes], None]
 DataReturnType = Dict[str, Union[str, Dict[str, str], List[Dict[str, Any]]]]

@@ -1,4 +1,4 @@
-import pandas as pd  # type: ignore
+import pandas as pd
 import pytest
 from coinmetrics.api_client import CoinMetricsClient
 import os
