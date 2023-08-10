@@ -2,6 +2,7 @@
 import pytest
 import orjson
 import os
+import websocket
 from coinmetrics.api_client import CoinMetricsClient, CmStream
 
 client = CoinMetricsClient(str(os.environ.get("CM_API_KEY")))
@@ -13,7 +14,7 @@ print("CM_API_KEY is set - tests will run") if cm_api_key_set else print(
 )
 
 
-def on_message_index_levels_test(stream: CmStream, message: str) -> None:
+def on_message_index_levels_test(stream: websocket.WebSocketApp, message: str) -> None:
     """
     Tests that data with the expected keys can be loaded by orjson
     """
@@ -24,7 +25,7 @@ def on_message_index_levels_test(stream: CmStream, message: str) -> None:
     stream.close()
 
 
-def on_message_market_trades_test(stream: CmStream, message: str) -> None:
+def on_message_market_trades_test(stream: websocket.WebSocketApp, message: str) -> None:
     """
     Tests that data with the expected keys can be loaded by orjson
     """
@@ -41,10 +42,11 @@ def on_message_market_trades_test(stream: CmStream, message: str) -> None:
     ]
     for col in expected_cols_index_levels:
         assert col in data
+
     stream.close()
 
 
-def on_message_market_orderbooks_test(stream: CmStream, message: str) -> None:
+def on_message_market_orderbooks_test(stream: websocket.WebSocketApp, message: str) -> None:
     """
     Tests that data with the expected keys can be loaded by orjson
     """
@@ -64,7 +66,7 @@ def on_message_market_orderbooks_test(stream: CmStream, message: str) -> None:
     stream.close()
 
 
-def on_message_market_candles_test(stream: CmStream, message: str) -> None:
+def on_message_market_candles_test(stream: websocket.WebSocketApp, message: str) -> None:
     """
     Tests that data with the expected keys can be loaded by orjson
     """
@@ -87,7 +89,7 @@ def on_message_market_candles_test(stream: CmStream, message: str) -> None:
     stream.close()
 
 
-def on_message_market_quotes_test(stream: CmStream, message: str) -> None:
+def on_message_market_quotes_test(stream: websocket.WebSocketApp, message: str) -> None:
     """
     Tests that data with the expected keys can be loaded by orjson
     """
@@ -107,7 +109,7 @@ def on_message_market_quotes_test(stream: CmStream, message: str) -> None:
     stream.close()
 
 
-def on_message_asset_metrics_rr_test(stream: CmStream, message: str) -> None:
+def on_message_asset_metrics_rr_test(stream: websocket.WebSocketApp, message: str) -> None:
     """
     Tests that data with the expected keys can be loaded by orjson
     """
@@ -118,7 +120,7 @@ def on_message_asset_metrics_rr_test(stream: CmStream, message: str) -> None:
     stream.close()
 
 
-def on_message_pair_quotes_test(stream: CmStream, message: str) -> None:
+def on_message_pair_quotes_test(stream: websocket.WebSocketApp, message: str) -> None:
     data = orjson.loads(message)
     expected_cols = ["pair", "time", "ask_price", "mid_price"]
     for col in expected_cols:
@@ -126,7 +128,7 @@ def on_message_pair_quotes_test(stream: CmStream, message: str) -> None:
     stream.close()
 
 
-def on_message_assets_quotes_test(stream: CmStream, message: str) -> None:
+def on_message_assets_quotes_test(stream: websocket.WebSocketApp, message: str) -> None:
     data = orjson.loads(message)
     expected_cols = ["pair", "time", "ask_price", "ask_size", "bid_price", "mid_price"]
     for col in expected_cols:
@@ -190,6 +192,17 @@ def test_get_pair_quotes_stream() -> None:
 def test_get_asset_quotes_stream() -> None:
     stream = client.get_stream_asset_quotes(assets="btc")
     stream.run(on_message=on_message_assets_quotes_test)
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_on_close() -> None:
+    on_close_ran = False
+    def on_close(stream: websocket.WebSocketApp, close_status_code: int, close_msg: str) -> None:
+        nonlocal on_close_ran
+        on_close_ran = True
+    stream = client.get_stream_asset_quotes(assets="btc")
+    stream.run(on_message=on_message_assets_quotes_test, on_close=on_close)
+    assert on_close_ran
 
 
 if __name__ == '__main__':

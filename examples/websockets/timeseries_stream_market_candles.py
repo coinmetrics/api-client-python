@@ -1,4 +1,5 @@
 import sys
+import websocket
 from os import environ
 
 import orjson
@@ -17,7 +18,7 @@ stream = client.get_stream_market_candles(
 )
 
 def on_message(
-        stream: CmStream, message: str
+        stream: websocket.WebSocketApp, message: str
 ) -> None:
     """
     Custom message callable to be passed in the streaming object

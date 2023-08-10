@@ -3,7 +3,7 @@ import socket
 import time
 from datetime import date, datetime
 from logging import getLogger
-from typing import Any, Dict, List, Optional, Union, cast
+from typing import Dict, List, Optional, Union, cast, Callable, Any
 from urllib.parse import urlencode
 
 import requests
@@ -64,15 +64,16 @@ class CmStream:
         self.ws_url = ws_url
 
     def run(
-        self, on_message: MessageHandlerType = None, on_error: MessageHandlerType = None
-    ) -> None:
+            self, on_message: MessageHandlerType = None, on_error: MessageHandlerType = None, on_close: Optional[Callable[[websocket.WebSocketApp, int, str], None]] = None) -> None:
         if on_message is None:
             on_message = self._on_message
         if on_error is None:
             on_error = self._on_error
+        if on_close is None:
+            on_close = self._on_close
 
         ws = websocket.WebSocketApp(
-            self.ws_url, on_message=on_message, on_error=on_error
+            self.ws_url, on_message=on_message, on_error=on_error, on_close=on_close
         )
         self.ws = ws
         self.ws.run_forever()
@@ -83,6 +84,9 @@ class CmStream:
     def _on_error(self, stream: websocket.WebSocketApp, message: str) -> None:
         data = json.loads(message)
         print(f"{data['error']}")
+
+    def _on_close(self, *args: Any, **kwargs: Any) -> None:
+        return
 
 
 class CoinMetricsClient:

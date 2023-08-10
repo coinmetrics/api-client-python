@@ -1,4 +1,5 @@
 import sys
+import websocket
 from os import environ
 
 import orjson
@@ -14,7 +15,7 @@ client = CoinMetricsClient(api_key)
 stream = client.get_stream_index_levels(indexes=["CMBIBTC", "CMBIETH"])
 
 def on_message(
-        stream: CmStream, message: str
+        stream: websocket.WebSocketApp, message: str
 ) -> None:
     """
     Custom message callable to be passed in the streaming object

@@ -2,6 +2,7 @@ import sys
 from os import environ
 
 import orjson
+import websocket
 
 from coinmetrics.api_client import CoinMetricsClient, CmStream
 
@@ -17,7 +18,7 @@ stream = client.get_stream_asset_metrics(
 )
 
 def on_message(
-        stream: CmStream, message: str
+        stream: websocket.WebSocketApp, message: str
 ) -> None:
     """
     Custom message callable to be passed in the streaming object
