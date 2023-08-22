@@ -212,9 +212,9 @@ def export_data_for_a_market(market, market_data_root, target_date):
         market["market"],
         start_time=target_date,
         end_time=target_date,
-        page_size=10000,
+        page_size=10000 if isinstance(DEPTH_LIMIT, int) and DEPTH_LIMIT <= 100 else 100,
         paging_from=PagingFrom.START,
-        depth_limit="full_book" if DEPTH_LIMIT is None or DEPTH_LIMIT > 100 else 100,
+        depth_limit="full_book" if DEPTH_LIMIT is None else DEPTH_LIMIT,
     )
     dst_json_file_path = (
         "/".join((market_data_root, "books_" + target_date.isoformat())) + ".json"

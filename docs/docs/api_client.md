@@ -2410,6 +2410,296 @@ def catalog_full_market_metrics_v2(
 
 `CatalogV2DataCollection`: List of market metrics statistics.
 
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_metrics_v2"></a>
+
+#### catalog\_asset\_metrics\_v2
+
+```python
+def catalog_asset_metrics_v2(
+        assets: Optional[Union[str, List[str]]] = None,
+        metrics: Optional[Union[str, List[str]]] = None,
+        reviewable: Optional[bool] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+- `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
+- `reviewable` (`Optional[bool]`): Limit to human-reviewable metrics. By default all metrics are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of asset metrics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_metrics_v2"></a>
+
+#### catalog\_full\_asset\_metrics\_v2
+
+```python
+def catalog_full_asset_metrics_v2(
+        assets: Optional[Union[str, List[str]]] = None,
+        metrics: Optional[Union[str, List[str]]] = None,
+        reviewable: Optional[bool] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+- `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
+- `reviewable` (`Optional[bool]`): Limit to human-reviewable metrics. By default all metrics are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of asset metrics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_exchange_metrics_v2"></a>
+
+#### catalog\_exchange\_metrics\_v2
+
+```python
+def catalog_exchange_metrics_v2(
+        exchanges: Optional[Union[str, List[str]]] = None,
+        metrics: Optional[Union[str, List[str]]] = None,
+        reviewable: Optional[bool] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `exchanges` (`Optional[Union[str, List[str]]]`): Comma separated list of exchanges. By default all exchanges are returned.
+- `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
+- `reviewable` (`Optional[bool]`): Limit to human-reviewable metrics. By default all metrics are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of exchange metrics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_exchange_metrics_v2"></a>
+
+#### catalog\_full\_exchange\_metrics\_v2
+
+```python
+def catalog_full_exchange_metrics_v2(
+        exchanges: Optional[Union[str, List[str]]] = None,
+        metrics: Optional[Union[str, List[str]]] = None,
+        reviewable: Optional[bool] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `exchanges` (`Optional[Union[str, List[str]]]`): Comma separated list of exchanges. By default all exchanges are returned.
+- `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
+- `reviewable` (`Optional[bool]`): Limit to human-reviewable metrics. By default all metrics are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of exchange metrics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_exchange_asset_metrics_v2"></a>
+
+#### catalog\_exchange\_asset\_metrics\_v2
+
+```python
+def catalog_exchange_asset_metrics_v2(
+        exchange_assets: Optional[Union[str, List[str]]] = None,
+        metrics: Optional[Union[str, List[str]]] = None,
+        reviewable: Optional[bool] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `exchange_assets` (`Optional[Union[str, List[str]]]`): Comma separated list of exchange-assets. By default, all exchange-assets pairs are returned.
+- `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
+- `reviewable` (`Optional[bool]`): Limit to human-reviewable metrics. By default all metrics are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of exchange-asset metrics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_exchange_asset_metrics_v2"></a>
+
+#### catalog\_full\_exchange\_asset\_metrics\_v2
+
+```python
+def catalog_full_exchange_asset_metrics_v2(
+        exchange_assets: Optional[Union[str, List[str]]] = None,
+        metrics: Optional[Union[str, List[str]]] = None,
+        reviewable: Optional[bool] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `exchange_assets` (`Optional[Union[str, List[str]]]`): Comma separated list of exchange-assets. By default, all exchange-assets pairs are returned.
+- `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
+- `reviewable` (`Optional[bool]`): Limit to human-reviewable metrics. By default all metrics are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of exchange-asset metrics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_pair_metrics_v2"></a>
+
+#### catalog\_pair\_metrics\_v2
+
+```python
+def catalog_pair_metrics_v2(
+        pairs: Optional[Union[str, List[str]]] = None,
+        metrics: Optional[Union[str, List[str]]] = None,
+        reviewable: Optional[bool] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `pairs` (`Optional[Union[str, List[str]]]`): Comma separated list of asset pairs. By default, all asset pairs are returned.
+- `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
+- `reviewable` (`Optional[bool]`): Limit to human-reviewable metrics. By default all metrics are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of pair metrics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_pair_metrics_v2"></a>
+
+#### catalog\_full\_pair\_metrics\_v2
+
+```python
+def catalog_full_pair_metrics_v2(
+        pairs: Optional[Union[str, List[str]]] = None,
+        metrics: Optional[Union[str, List[str]]] = None,
+        reviewable: Optional[bool] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `pairs` (`Optional[Union[str, List[str]]]`): Comma separated list of asset pairs. By default, all asset pairs are returned.
+- `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
+- `reviewable` (`Optional[bool]`): Limit to human-reviewable metrics. By default all metrics are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of pair metrics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_institution_metrics_v2"></a>
+
+#### catalog\_institution\_metrics\_v2
+
+```python
+def catalog_institution_metrics_v2(
+        institutions: Optional[Union[str, List[str]]] = None,
+        metrics: Optional[Union[str, List[str]]] = None,
+        reviewable: Optional[bool] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `institutions` (`Optional[Union[str, List[str]]]`): Comma separated list of institutions. By default, all institutions are returned.
+- `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
+- `reviewable` (`Optional[bool]`): Limit to human-reviewable metrics. By default all metrics are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of institution metrics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_institution_metrics_v2"></a>
+
+#### catalog\_full\_institution\_metrics\_v2
+
+```python
+def catalog_full_institution_metrics_v2(
+        institutions: Optional[Union[str, List[str]]] = None,
+        metrics: Optional[Union[str, List[str]]] = None,
+        reviewable: Optional[bool] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `institutions` (`Optional[Union[str, List[str]]]`): Comma separated list of institutions. By default, all institutions are returned.
+- `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
+- `reviewable` (`Optional[bool]`): Limit to human-reviewable metrics. By default all metrics are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of institution metrics.
+
 <a id="coinmetrics.api_client.CoinMetricsClient.get_asset_alerts"></a>
 
 #### get\_asset\_alerts

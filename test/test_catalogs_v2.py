@@ -1,4 +1,3 @@
-import datetime
 
 import pytest
 
@@ -200,6 +199,84 @@ def test_catalogv2_market_metrics() -> None:
     assert len(catalog_market_metrics) == 10
     assert all(['market' in catalog for catalog in catalog_market_metrics])
     assert all(['metrics' in catalog for catalog in catalog_market_metrics])
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_asset_metrics() -> None:
+    catalog_asset_metrics = client.catalog_asset_metrics_v2(page_size=10).first_page()
+    assert len(catalog_asset_metrics) == 10
+    assert all(['asset' in catalog for catalog in catalog_asset_metrics])
+    assert all(['metrics' in catalog for catalog in catalog_asset_metrics])
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_full_asset_metrics() -> None:
+    catalog_asset_metrics = client.catalog_full_asset_metrics_v2(page_size=10).first_page()
+    assert len(catalog_asset_metrics) == 10
+    assert all(['asset' in catalog for catalog in catalog_asset_metrics])
+    assert all(['metrics' in catalog for catalog in catalog_asset_metrics])
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_exchange_metrics() -> None:
+    catalog_exchange_metrics = client.catalog_exchange_metrics_v2(page_size=10).first_page()
+    assert len(catalog_exchange_metrics) == 10
+    assert all(['exchange' in catalog for catalog in catalog_exchange_metrics])
+    assert all(['metrics' in catalog for catalog in catalog_exchange_metrics])
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_full_exchange_metrics() -> None:
+    catalog_exchange_metrics = client.catalog_full_exchange_metrics_v2(page_size=10).first_page()
+    assert len(catalog_exchange_metrics) == 10
+    assert all(['exchange' in catalog for catalog in catalog_exchange_metrics])
+    assert all(['metrics' in catalog for catalog in catalog_exchange_metrics])
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_exchange_asset_metrics() -> None:
+    catalog_exchange_metrics = client.catalog_exchange_asset_metrics_v2(page_size=10).first_page()
+    assert len(catalog_exchange_metrics) == 10
+    assert all(['exchange_asset' in catalog for catalog in catalog_exchange_metrics])
+    assert all(['metrics' in catalog for catalog in catalog_exchange_metrics])
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_full_exchange_asset_metrics() -> None:
+    catalog_exchange_metrics = client.catalog_full_exchange_asset_metrics_v2(page_size=10).first_page()
+    assert len(catalog_exchange_metrics) == 10
+    assert all(['exchange_asset' in catalog for catalog in catalog_exchange_metrics])
+    assert all(['metrics' in catalog for catalog in catalog_exchange_metrics])
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_exchange_pair_metrics() -> None:
+    catalog_pair_metrics = client.catalog_pair_metrics_v2(page_size=10).first_page()
+    assert len(catalog_pair_metrics) == 10
+    assert all(['pair' in catalog for catalog in catalog_pair_metrics])
+    assert all(['metrics' in catalog for catalog in catalog_pair_metrics])
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_exchange_full_pair_metrics() -> None:
+    catalog_pair_metrics = client.catalog_full_pair_metrics_v2(page_size=10).first_page()
+    assert len(catalog_pair_metrics) == 10
+    assert all(['pair' in catalog for catalog in catalog_pair_metrics])
+    assert all(['metrics' in catalog for catalog in catalog_pair_metrics])
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_institution_pair_metrics() -> None:
+    catalog_institution_metrics = client.catalog_institution_metrics_v2(page_size=10).first_page()
+    assert all(['institution' in catalog for catalog in catalog_institution_metrics])
+    assert all(['metrics' in catalog for catalog in catalog_institution_metrics])
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_full_institution_pair_metrics() -> None:
+    catalog_institution_metrics = client.catalog_full_institution_metrics_v2(page_size=10).first_page()
+    assert all(['institution' in catalog for catalog in catalog_institution_metrics])
+    assert all(['metrics' in catalog for catalog in catalog_institution_metrics])
 
 
 if __name__ == '__main__':

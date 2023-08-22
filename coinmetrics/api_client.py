@@ -3192,6 +3192,406 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-metrics", params)
 
+    def catalog_asset_metrics_v2(
+            self,
+            assets: Optional[Union[str, List[str]]] = None,
+            metrics: Optional[Union[str, List[str]]] = None,
+            reviewable: Optional[bool] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+            format: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+        :param metrics: Comma separated list of metrics. By default all metrics are returned.
+        :type metrics: Optional[Union[str, List[str]]]
+        :param reviewable: Limit to human-reviewable metrics. By default all metrics are returned.
+        :type reviewable: Optional[bool]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+
+        :return: List of asset metrics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "metrics": metrics,
+            "reviewable": reviewable,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+            "format": format,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/asset-metrics", params)
+
+    def catalog_full_asset_metrics_v2(
+            self,
+            assets: Optional[Union[str, List[str]]] = None,
+            metrics: Optional[Union[str, List[str]]] = None,
+            reviewable: Optional[bool] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+            format: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+        :param metrics: Comma separated list of metrics. By default all metrics are returned.
+        :type metrics: Optional[Union[str, List[str]]]
+        :param reviewable: Limit to human-reviewable metrics. By default all metrics are returned.
+        :type reviewable: Optional[bool]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+
+        :return: List of asset metrics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "metrics": metrics,
+            "reviewable": reviewable,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+            "format": format,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/asset-metrics", params)
+
+    def catalog_exchange_metrics_v2(
+            self,
+            exchanges: Optional[Union[str, List[str]]] = None,
+            metrics: Optional[Union[str, List[str]]] = None,
+            reviewable: Optional[bool] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+            format: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param exchanges: Comma separated list of exchanges. By default all exchanges are returned.
+        :type exchanges: Optional[Union[str, List[str]]]
+        :param metrics: Comma separated list of metrics. By default all metrics are returned.
+        :type metrics: Optional[Union[str, List[str]]]
+        :param reviewable: Limit to human-reviewable metrics. By default all metrics are returned.
+        :type reviewable: Optional[bool]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+
+        :return: List of exchange metrics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "exchanges": exchanges,
+            "metrics": metrics,
+            "reviewable": reviewable,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+            "format": format,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/exchange-metrics", params)
+
+    def catalog_full_exchange_metrics_v2(
+            self,
+            exchanges: Optional[Union[str, List[str]]] = None,
+            metrics: Optional[Union[str, List[str]]] = None,
+            reviewable: Optional[bool] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+            format: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param exchanges: Comma separated list of exchanges. By default all exchanges are returned.
+        :type exchanges: Optional[Union[str, List[str]]]
+        :param metrics: Comma separated list of metrics. By default all metrics are returned.
+        :type metrics: Optional[Union[str, List[str]]]
+        :param reviewable: Limit to human-reviewable metrics. By default all metrics are returned.
+        :type reviewable: Optional[bool]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+
+        :return: List of exchange metrics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "exchanges": exchanges,
+            "metrics": metrics,
+            "reviewable": reviewable,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+            "format": format,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/exchange-metrics", params)
+
+    def catalog_exchange_asset_metrics_v2(
+            self,
+            exchange_assets: Optional[Union[str, List[str]]] = None,
+            metrics: Optional[Union[str, List[str]]] = None,
+            reviewable: Optional[bool] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+            format: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param exchange_assets: Comma separated list of exchange-assets. By default, all exchange-assets pairs are returned.
+        :type exchange_assets: Optional[Union[str, List[str]]]
+        :param metrics: Comma separated list of metrics. By default all metrics are returned.
+        :type metrics: Optional[Union[str, List[str]]]
+        :param reviewable: Limit to human-reviewable metrics. By default all metrics are returned.
+        :type reviewable: Optional[bool]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+
+        :return: List of exchange-asset metrics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "exchange_assets": exchange_assets,
+            "metrics": metrics,
+            "reviewable": reviewable,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+            "format": format,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/exchange-asset-metrics", params)
+
+    def catalog_full_exchange_asset_metrics_v2(
+            self,
+            exchange_assets: Optional[Union[str, List[str]]] = None,
+            metrics: Optional[Union[str, List[str]]] = None,
+            reviewable: Optional[bool] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+            format: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param exchange_assets: Comma separated list of exchange-assets. By default, all exchange-assets pairs are returned.
+        :type exchange_assets: Optional[Union[str, List[str]]]
+        :param metrics: Comma separated list of metrics. By default all metrics are returned.
+        :type metrics: Optional[Union[str, List[str]]]
+        :param reviewable: Limit to human-reviewable metrics. By default all metrics are returned.
+        :type reviewable: Optional[bool]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+
+        :return: List of exchange-asset metrics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "exchange_assets": exchange_assets,
+            "metrics": metrics,
+            "reviewable": reviewable,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+            "format": format,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/exchange-asset-metrics", params)
+
+    def catalog_pair_metrics_v2(
+            self,
+            pairs: Optional[Union[str, List[str]]] = None,
+            metrics: Optional[Union[str, List[str]]] = None,
+            reviewable: Optional[bool] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+            format: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param pairs: Comma separated list of asset pairs. By default, all asset pairs are returned.
+        :type pairs: Optional[Union[str, List[str]]]
+        :param metrics: Comma separated list of metrics. By default all metrics are returned.
+        :type metrics: Optional[Union[str, List[str]]]
+        :param reviewable: Limit to human-reviewable metrics. By default all metrics are returned.
+        :type reviewable: Optional[bool]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+
+        :return: List of pair metrics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "pairs": pairs,
+            "metrics": metrics,
+            "reviewable": reviewable,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+            "format": format,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/pair-metrics", params)
+
+    def catalog_full_pair_metrics_v2(
+            self,
+            pairs: Optional[Union[str, List[str]]] = None,
+            metrics: Optional[Union[str, List[str]]] = None,
+            reviewable: Optional[bool] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+            format: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param pairs: Comma separated list of asset pairs. By default, all asset pairs are returned.
+        :type pairs: Optional[Union[str, List[str]]]
+        :param metrics: Comma separated list of metrics. By default all metrics are returned.
+        :type metrics: Optional[Union[str, List[str]]]
+        :param reviewable: Limit to human-reviewable metrics. By default all metrics are returned.
+        :type reviewable: Optional[bool]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+
+        :return: List of pair metrics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "pairs": pairs,
+            "metrics": metrics,
+            "reviewable": reviewable,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+            "format": format,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/pair-metrics", params)
+
+    def catalog_institution_metrics_v2(
+            self,
+            institutions: Optional[Union[str, List[str]]] = None,
+            metrics: Optional[Union[str, List[str]]] = None,
+            reviewable: Optional[bool] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+            format: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param institutions: Comma separated list of institutions. By default, all institutions are returned.
+        :type institutions: Optional[Union[str, List[str]]]
+        :param metrics: Comma separated list of metrics. By default all metrics are returned.
+        :type metrics: Optional[Union[str, List[str]]]
+        :param reviewable: Limit to human-reviewable metrics. By default all metrics are returned.
+        :type reviewable: Optional[bool]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+
+        :return: List of institution metrics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "institutions": institutions,
+            "metrics": metrics,
+            "reviewable": reviewable,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+            "format": format,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/institution-metrics", params)
+
+    def catalog_full_institution_metrics_v2(
+            self,
+            institutions: Optional[Union[str, List[str]]] = None,
+            metrics: Optional[Union[str, List[str]]] = None,
+            reviewable: Optional[bool] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+            format: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param institutions: Comma separated list of institutions. By default, all institutions are returned.
+        :type institutions: Optional[Union[str, List[str]]]
+        :param metrics: Comma separated list of metrics. By default all metrics are returned.
+        :type metrics: Optional[Union[str, List[str]]]
+        :param reviewable: Limit to human-reviewable metrics. By default all metrics are returned.
+        :type reviewable: Optional[bool]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+
+        :return: List of institution metrics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "institutions": institutions,
+            "metrics": metrics,
+            "reviewable": reviewable,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+            "format": format,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/institution-metrics", params)
+
     def get_asset_alerts(
         self,
         assets: Union[List[str], str],
