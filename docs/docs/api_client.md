@@ -3437,6 +3437,7 @@ For more information on funding rates, see: https://docs.coinmetrics.io/info/mar
 ```python
 def get_market_orderbooks(
         markets: Union[List[str], str],
+        frequency: Optional[str] = None,
         page_size: Optional[int] = None,
         paging_from: Optional[Union[PagingFrom, str]] = "start",
         start_time: Optional[Union[datetime, date, str]] = None,
@@ -3455,6 +3456,7 @@ For more information on order books, see: https://docs.coinmetrics.io/info/marke
 **Arguments**:
 
 - `markets` (`list(str), str`): list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future'`
+- `frequency` (`str`): Default: "10s" The frequency at which market order books and quotes are provided. Supported values: 10s, 1m, 1h, 1d.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
 - `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
@@ -3476,6 +3478,7 @@ For more information on order books, see: https://docs.coinmetrics.io/info/marke
 ```python
 def get_market_quotes(
         markets: Union[List[str], str],
+        frequency: Optional[str] = None,
         page_size: Optional[int] = None,
         paging_from: Optional[Union[PagingFrom, str]] = "start",
         start_time: Optional[Union[datetime, date, str]] = None,
@@ -3494,6 +3497,7 @@ For more information on quotes, see: https://docs.coinmetrics.io/info/markets/qu
 **Arguments**:
 
 - `markets` (`list(str), str`): list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future'`
+- `frequency` (`str`): Default: "10s" The frequency at which market order books and quotes are provided. Supported values: 10s, 1m, 1h, 1d.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
 - `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
@@ -4567,4 +4571,111 @@ Returns profile data for assets, ordered by asset
 - `full_names` (`Optional[Union[List[str], str]]`): Comma separated list of asset full names. By default profile data for all assets is returned. Mutually exclusive with assets parameter.
 - `page_size` (`int`): Number of items per single page of results.
 - `paging_from` (`int`): Where does the first page start, at the "start" of the interval or at the "end"
+
+<a id="coinmetrics.api_client.CoinMetricsClient.reference_data_asset_metrics"></a>
+
+#### reference\_data\_asset\_metrics
+
+```python
+def reference_data_asset_metrics(
+        metrics: Optional[Union[str, List[str]]] = None,
+        reviewable: Optional[bool] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None) -> DataCollection
+```
+
+**Arguments**:
+
+- `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
+- `reviewable` (`Optional[bool]`): Limit to human-reviewable metrics. By default all metrics are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+
+**Returns**:
+
+`DataCollection`: List of asset metrics metadata.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.reference_data_exchange_metrics"></a>
+
+#### reference\_data\_exchange\_metrics
+
+```python
+def reference_data_exchange_metrics(
+        metrics: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None) -> DataCollection
+```
+
+**Arguments**:
+
+- `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+
+**Returns**:
+
+`DataCollection`: List of exchange metrics metadata.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.reference_data_exchange_asset_metrics"></a>
+
+#### reference\_data\_exchange\_asset\_metrics
+
+```python
+def reference_data_exchange_asset_metrics(
+        metrics: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None) -> DataCollection
+```
+
+**Arguments**:
+
+- `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+
+**Returns**:
+
+`DataCollection`: List of exchange asset metrics metadata.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.reference_data_pair_metrics"></a>
+
+#### reference\_data\_pair\_metrics
+
+```python
+def reference_data_pair_metrics(
+        metrics: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None) -> DataCollection
+```
+
+**Arguments**:
+
+- `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+
+**Returns**:
+
+`DataCollection`: List of pair metrics metadata.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.reference_data_institution_metrics"></a>
+
+#### reference\_data\_institution\_metrics
+
+```python
+def reference_data_institution_metrics(
+        metrics: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None) -> DataCollection
+```
+
+**Arguments**:
+
+- `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+
+**Returns**:
+
+`DataCollection`: List of institution metrics metadata.
 

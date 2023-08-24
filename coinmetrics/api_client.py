@@ -4673,6 +4673,7 @@ class CoinMetricsClient:
     def get_market_orderbooks(
         self,
         markets: Union[List[str], str],
+        frequency: Optional[str] = None,
         page_size: Optional[int] = None,
         paging_from: Optional[Union[PagingFrom, str]] = "start",
         start_time: Optional[Union[datetime, date, str]] = None,
@@ -4689,6 +4690,8 @@ class CoinMetricsClient:
 
         :param markets: list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future'`
         :type markets: list(str), str
+        :param frequency: Default: "10s" The frequency at which market order books and quotes are provided. Supported values: 10s, 1m, 1h, 1d.
+        :type frequency: str
         :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
         :type page_size: int
         :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
@@ -4713,6 +4716,7 @@ class CoinMetricsClient:
 
         params: Dict[str, Any] = {
             "markets": markets,
+            "frequency": frequency,
             "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
@@ -4728,6 +4732,7 @@ class CoinMetricsClient:
     def get_market_quotes(
         self,
         markets: Union[List[str], str],
+        frequency: Optional[str] = None,
         page_size: Optional[int] = None,
         paging_from: Optional[Union[PagingFrom, str]] = "start",
         start_time: Optional[Union[datetime, date, str]] = None,
@@ -4744,6 +4749,8 @@ class CoinMetricsClient:
 
         :param markets: list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future'`
         :type markets: list(str), str
+        :param frequency: Default: "10s" The frequency at which market order books and quotes are provided. Supported values: 10s, 1m, 1h, 1d.
+        :type frequency: str
         :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
         :type page_size: int
         :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
@@ -4768,6 +4775,7 @@ class CoinMetricsClient:
 
         params: Dict[str, Any] = {
             "markets": markets,
+            "frequency": frequency,
             "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
@@ -6279,6 +6287,130 @@ class CoinMetricsClient:
             "paging_from": paging_from,
         }
         return DataCollection(self._get_data, "/profile/assets", params)
+
+    def reference_data_asset_metrics(
+            self,
+            metrics: Optional[Union[str, List[str]]] = None,
+            reviewable: Optional[bool] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        :param metrics: Comma separated list of metrics. By default all metrics are returned.
+        :type metrics: Optional[Union[str, List[str]]]
+        :param reviewable: Limit to human-reviewable metrics. By default all metrics are returned.
+        :type reviewable: Optional[bool]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+
+        :return: List of asset metrics metadata.
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "metrics": metrics,
+            "reviewable": reviewable,
+            "page_size": page_size,
+            "paging_from": paging_from,
+        }
+        return DataCollection(self._get_data, "/reference-data/asset-metrics", params)
+
+    def reference_data_exchange_metrics(
+            self,
+            metrics: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        :param metrics: Comma separated list of metrics. By default all metrics are returned.
+        :type metrics: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+
+        :return: List of exchange metrics metadata.
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "metrics": metrics,
+            "page_size": page_size,
+            "paging_from": paging_from,
+        }
+        return DataCollection(self._get_data, "/reference-data/exchange-metrics", params)
+
+    def reference_data_exchange_asset_metrics(
+            self,
+            metrics: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        :param metrics: Comma separated list of metrics. By default all metrics are returned.
+        :type metrics: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+
+        :return: List of exchange asset metrics metadata.
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "metrics": metrics,
+            "page_size": page_size,
+            "paging_from": paging_from,
+        }
+        return DataCollection(self._get_data, "/reference-data/exchange-asset-metrics", params)
+
+    def reference_data_pair_metrics(
+            self,
+            metrics: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        :param metrics: Comma separated list of metrics. By default all metrics are returned.
+        :type metrics: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+
+        :return: List of pair metrics metadata.
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "metrics": metrics,
+            "page_size": page_size,
+            "paging_from": paging_from,
+        }
+        return DataCollection(self._get_data, "/reference-data/pair-metrics", params)
+
+    def reference_data_institution_metrics(
+            self,
+            metrics: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        :param metrics: Comma separated list of metrics. By default all metrics are returned.
+        :type metrics: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+
+        :return: List of institution metrics metadata.
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "metrics": metrics,
+            "page_size": page_size,
+            "paging_from": paging_from,
+        }
+        return DataCollection(self._get_data, "/reference-data/institution-metrics", params)
 
     def _get_data(self, url: str, params: Dict[str, Any]) -> DataReturnType:
         if params:

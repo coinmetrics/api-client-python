@@ -1280,6 +1280,41 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#reference_data_asset_metrics" class="md-nav__link">
+    reference_data_asset_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference_data_exchange_metrics" class="md-nav__link">
+    reference_data_exchange_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference_data_exchange_asset_metrics" class="md-nav__link">
+    reference_data_exchange_asset_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference_data_pair_metrics" class="md-nav__link">
+    reference_data_pair_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference_data_institution_metrics" class="md-nav__link">
+    reference_data_institution_metrics
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2374,6 +2409,41 @@
           <li class="md-nav__item">
   <a href="#get_asset_profiles" class="md-nav__link">
     get_asset_profiles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference_data_asset_metrics" class="md-nav__link">
+    reference_data_asset_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference_data_exchange_metrics" class="md-nav__link">
+    reference_data_exchange_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference_data_exchange_asset_metrics" class="md-nav__link">
+    reference_data_exchange_asset_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference_data_pair_metrics" class="md-nav__link">
+    reference_data_pair_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference_data_institution_metrics" class="md-nav__link">
+    reference_data_institution_metrics
   </a>
   
 </li>
@@ -5065,6 +5135,7 @@ if you request metrics for a set of markets.</li>
 <h4 id="get_market_orderbooks">get_market_orderbooks<a class="headerlink" href="#get_market_orderbooks" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_market_orderbooks</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">frequency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span>
         <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -5080,6 +5151,7 @@ if you request metrics for a set of markets.</li>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>markets</code> (<code>list(str), str</code>): list of market ids. Market ids use the following naming convention: <code>exchangeName-baseAsset-quoteAsset-spot</code> for spot markets, <code>exchangeName-futuresSymbol-future</code> for futures markets, and <code>exchangeName-optionsSymbol-option</code> for options markets. e.g., <code>'coinbase-btc-usd-spot'</code>, <code>'bitmex-XBTUSD-future'</code></li>
+<li><code>frequency</code> (<code>str</code>): Default: "10s" The frequency at which market order books and quotes are provided. Supported values: 10s, 1m, 1h, 1d.</li>
 <li><code>page_size</code> (<code>int</code>): number of items returned per page when calling the API. If the request times out, try using a smaller number.</li>
 <li><code>paging_from</code> (<code>PagingFrom, str</code>): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
 <li><code>start_time</code> (<code>datetime, date, str</code>): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120</li>
@@ -5096,6 +5168,7 @@ if you request metrics for a set of markets.</li>
 <h4 id="get_market_quotes">get_market_quotes<a class="headerlink" href="#get_market_quotes" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_market_quotes</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">frequency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span>
         <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -5111,6 +5184,7 @@ if you request metrics for a set of markets.</li>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>markets</code> (<code>list(str), str</code>): list of market ids. Market ids use the following naming convention: <code>exchangeName-baseAsset-quoteAsset-spot</code> for spot markets, <code>exchangeName-futuresSymbol-future</code> for futures markets, and <code>exchangeName-optionsSymbol-option</code> for options markets. e.g., <code>'coinbase-btc-usd-spot'</code>, <code>'bitmex-XBTUSD-future'</code></li>
+<li><code>frequency</code> (<code>str</code>): Default: "10s" The frequency at which market order books and quotes are provided. Supported values: 10s, 1m, 1h, 1d.</li>
 <li><code>page_size</code> (<code>int</code>): number of items returned per page when calling the API. If the request times out, try using a smaller number.</li>
 <li><code>paging_from</code> (<code>PagingFrom, str</code>): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
 <li><code>start_time</code> (<code>datetime, date, str</code>): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120</li>
@@ -5959,6 +6033,83 @@ if you request metrics for a set of markets.</li>
 <li><code>page_size</code> (<code>int</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>int</code>): Where does the first page start, at the "start" of the interval or at the "end"</li>
 </ul>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.reference_data_asset_metrics"></a></p>
+<h4 id="reference_data_asset_metrics">reference_data_asset_metrics<a class="headerlink" href="#reference_data_asset_metrics" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">reference_data_asset_metrics</span><span class="p">(</span>
+        <span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">reviewable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>metrics</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of metrics. By default all metrics are returned.</li>
+<li><code>reviewable</code> (<code>Optional[bool]</code>): Limit to human-reviewable metrics. By default all metrics are returned.</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
+<li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>DataCollection</code>: List of asset metrics metadata.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.reference_data_exchange_metrics"></a></p>
+<h4 id="reference_data_exchange_metrics">reference_data_exchange_metrics<a class="headerlink" href="#reference_data_exchange_metrics" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">reference_data_exchange_metrics</span><span class="p">(</span>
+        <span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>metrics</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of metrics. By default all metrics are returned.</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
+<li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>DataCollection</code>: List of exchange metrics metadata.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.reference_data_exchange_asset_metrics"></a></p>
+<h4 id="reference_data_exchange_asset_metrics">reference_data_exchange_asset_metrics<a class="headerlink" href="#reference_data_exchange_asset_metrics" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">reference_data_exchange_asset_metrics</span><span class="p">(</span>
+        <span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>metrics</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of metrics. By default all metrics are returned.</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
+<li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>DataCollection</code>: List of exchange asset metrics metadata.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.reference_data_pair_metrics"></a></p>
+<h4 id="reference_data_pair_metrics">reference_data_pair_metrics<a class="headerlink" href="#reference_data_pair_metrics" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">reference_data_pair_metrics</span><span class="p">(</span>
+        <span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>metrics</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of metrics. By default all metrics are returned.</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
+<li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>DataCollection</code>: List of pair metrics metadata.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.reference_data_institution_metrics"></a></p>
+<h4 id="reference_data_institution_metrics">reference_data_institution_metrics<a class="headerlink" href="#reference_data_institution_metrics" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">reference_data_institution_metrics</span><span class="p">(</span>
+        <span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>metrics</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of metrics. By default all metrics are returned.</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
+<li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>DataCollection</code>: List of institution metrics metadata.</p>
 
 
 
