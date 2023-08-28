@@ -279,5 +279,74 @@ def test_catalogv2_full_institution_pair_metrics() -> None:
     assert all(['metrics' in catalog for catalog in catalog_institution_metrics])
 
 
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_pair_candles() -> None:
+    catalog_pair_candles = client.catalog_pair_candles_v2(page_size=10).first_page()
+    catalog_full_pair_candles = client.catalog_full_pair_candles_v2(page_size=10).first_page()
+    assert all(['pair' in catalog for catalog in catalog_pair_candles])
+    assert all(['pair' in catalog for catalog in catalog_full_pair_candles])
+    assert all(['frequencies' in catalog for catalog in catalog_pair_candles])
+    assert all(['frequencies' in catalog for catalog in catalog_full_pair_candles])
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_index_candles() -> None:
+    catalog_index_candles = client.catalog_index_candles_v2(page_size=10).first_page()
+    catalog_full_index_candles = client.catalog_full_index_candles_v2(page_size=10).first_page()
+    assert all(['index' in catalog for catalog in catalog_index_candles])
+    assert all(['index' in catalog for catalog in catalog_full_index_candles])
+    assert all(['frequencies' in catalog for catalog in catalog_index_candles])
+    assert all(['frequencies' in catalog for catalog in catalog_full_index_candles])
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_asset_chains() -> None:
+    catalog_asset_chains = client.catalog_asset_chains_v2(page_size=10).first_page()
+    catalog_full_asset_chains = client.catalog_full_asset_chains_v2(page_size=10).first_page()
+    assert all(['asset' in catalog for catalog in catalog_asset_chains])
+    assert all(['asset' in catalog for catalog in catalog_full_asset_chains])
+    assert all(['min_time' in catalog for catalog in catalog_asset_chains])
+    assert all(['min_time' in catalog for catalog in catalog_full_asset_chains])
+    assert all(['max_time' in catalog for catalog in catalog_asset_chains])
+    assert all(['max_time' in catalog for catalog in catalog_full_asset_chains])
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_mempool_feerates() -> None:
+    catalog_mempool_feerates = client.catalog_mempool_feerates_v2(page_size=10).first_page()
+    catalog_full_mempool_feerates = client.catalog_full_mempool_feerates_v2(page_size=10).first_page()
+    assert all(['asset' in catalog for catalog in catalog_mempool_feerates])
+    assert all(['asset' in catalog for catalog in catalog_full_mempool_feerates])
+    assert all(['min_time' in catalog for catalog in catalog_mempool_feerates])
+    assert all(['min_time' in catalog for catalog in catalog_full_mempool_feerates])
+    assert all(['max_time' in catalog for catalog in catalog_mempool_feerates])
+    assert all(['max_time' in catalog for catalog in catalog_full_mempool_feerates])
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_mining_pool_tips() -> None:
+    catalog_mining_pool_tips = client.catalog_asset_chains_v2(page_size=10).first_page()
+    catalog_full_mining_pool_tips = client.catalog_full_asset_chains_v2(page_size=10).first_page()
+    assert all(['asset' in catalog for catalog in catalog_mining_pool_tips])
+    assert all(['asset' in catalog for catalog in catalog_full_mining_pool_tips])
+    assert all(['min_time' in catalog for catalog in catalog_mining_pool_tips])
+    assert all(['min_time' in catalog for catalog in catalog_full_mining_pool_tips])
+    assert all(['max_time' in catalog for catalog in catalog_mining_pool_tips])
+    assert all(['max_time' in catalog for catalog in catalog_full_mining_pool_tips])
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_transaction_tracker() -> None:
+    catalog_transaction_tracker = client.catalog_transaction_tracker_assets_v2(page_size=10).first_page()
+    catalog_full_transaction_tracker = client.catalog_full_transaction_tracker_assets_v2(page_size=10).first_page()
+    assert all(['asset' in catalog for catalog in catalog_transaction_tracker])
+    assert all(['asset' in catalog for catalog in catalog_full_transaction_tracker])
+    assert all(['min_time' in catalog for catalog in catalog_transaction_tracker])
+    assert all(['min_time' in catalog for catalog in catalog_full_transaction_tracker])
+    assert all(['max_time' in catalog for catalog in catalog_transaction_tracker])
+    assert all(['max_time' in catalog for catalog in catalog_full_transaction_tracker])
+
+
+
 if __name__ == '__main__':
     pytest.main()

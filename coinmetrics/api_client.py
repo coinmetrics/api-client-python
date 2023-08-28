@@ -3592,6 +3592,342 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/institution-metrics", params)
 
+    def catalog_pair_candles_v2(
+            self,
+            pairs: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param pairs: Comma separated list of asset pairs. By default, all asset pairs are returned.
+        :type pairs: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of asset pair candles statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "pairs": pairs,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/pair-candles", params)
+
+    def catalog_index_candles_v2(
+            self,
+            indexes: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param indexes: Comma separated list of indexes. By default all assets are returned.
+        :type indexes: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of index candles statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "indexes": indexes,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/index-candles", params)
+
+    def catalog_asset_chains_v2(
+            self,
+            assets: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of asset chains assets
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/asset-chains", params)
+
+    def catalog_mempool_feerates_v2(
+            self,
+            assets: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of mempool feerates assets
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/mempool-feerates", params)
+
+    def catalog_mining_pool_tips_summaries_v2(
+            self,
+            assets: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of mining pool tips assets
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/mining-pool-tips-summary", params)
+
+    def catalog_transaction_tracker_assets_v2(
+            self,
+            assets: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of transaction tracker assets
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/transaction-tracker", params)
+
+    def catalog_full_pair_candles_v2(
+            self,
+            pairs: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param pairs: Comma separated list of asset pairs. By default, all asset pairs are returned.
+        :type pairs: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of asset pair candles statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "pairs": pairs,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/pair-candles", params)
+
+    def catalog_full_index_candles_v2(
+            self,
+            indexes: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param indexes: Comma separated list of indexes. By default all assets are returned.
+        :type indexes: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of index candles statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "indexes": indexes,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/index-candles", params)
+
+    def catalog_full_asset_chains_v2(
+            self,
+            assets: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of asset chains assets
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/asset-chains", params)
+
+    def catalog_full_mempool_feerates_v2(
+            self,
+            assets: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of mempool feerates assets
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/mempool-feerates", params)
+
+    def catalog_full_mining_pool_tips_summaries_v2(
+            self,
+            assets: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of mining pool tips assets
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/mining-pool-tips-summary", params)
+
+    def catalog_full_transaction_tracker_assets_v2(
+            self,
+            assets: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of transaction tracker assets
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/transaction-tracker", params)
+
     def get_asset_alerts(
         self,
         assets: Union[List[str], str],
@@ -4250,6 +4586,7 @@ class CoinMetricsClient:
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
         limit_per_index: Optional[int] = None,
+        include_verification: Optional[bool] = None
     ) -> DataCollection:
         """
         Returns index levels for specified indexes and date range.
@@ -4274,6 +4611,8 @@ class CoinMetricsClient:
         :type timezone: str
         :param limit_per_index: How many entries _per index_ the result should contain.
         :type limit_per_index: int
+        :param include_verification: Default: False set to true, includes information about verification.
+        :type: bool
         :return: Index Levels timeseries.
         :rtype: DataCollection
         """
@@ -4289,6 +4628,7 @@ class CoinMetricsClient:
             "end_inclusive": end_inclusive,
             "timezone": timezone,
             "limit_per_index": limit_per_index,
+            "include_verification": include_verification
         }
         return DataCollection(self._get_data, "timeseries/index-levels", params)
 
@@ -5212,6 +5552,7 @@ class CoinMetricsClient:
     def get_stream_index_levels(
         self,
         indexes: Union[List[str], str],
+        include_verification: Optional[bool] = None,
         backfill: Union[Backfill, str] = Backfill.LATEST,
     ) -> CmStream:
         """
@@ -5221,6 +5562,7 @@ class CoinMetricsClient:
         :type markets: list(str), str
         :param backfill: What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.
         :type backfill: str
+        :param include_verification: Default: False If set to true, includes information about verification.
         :return: Index levels data timeseries stream.
         :rtype: CmStream
         """
@@ -5228,6 +5570,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "indexes": indexes,
             "backfill": backfill,
+            "include_verification": include_verification
         }
         return self._get_stream_data("timeseries-stream/index-levels", params)
 

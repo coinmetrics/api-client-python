@@ -2700,6 +2700,282 @@ def catalog_full_institution_metrics_v2(
 
 `CatalogV2DataCollection`: List of institution metrics.
 
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_pair_candles_v2"></a>
+
+#### catalog\_pair\_candles\_v2
+
+```python
+def catalog_pair_candles_v2(
+        pairs: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `pairs` (`Optional[Union[str, List[str]]]`): Comma separated list of asset pairs. By default, all asset pairs are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of asset pair candles statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_index_candles_v2"></a>
+
+#### catalog\_index\_candles\_v2
+
+```python
+def catalog_index_candles_v2(
+        indexes: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `indexes` (`Optional[Union[str, List[str]]]`): Comma separated list of indexes. By default all assets are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of index candles statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_chains_v2"></a>
+
+#### catalog\_asset\_chains\_v2
+
+```python
+def catalog_asset_chains_v2(
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of asset chains assets
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_mempool_feerates_v2"></a>
+
+#### catalog\_mempool\_feerates\_v2
+
+```python
+def catalog_mempool_feerates_v2(
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of mempool feerates assets
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_mining_pool_tips_summaries_v2"></a>
+
+#### catalog\_mining\_pool\_tips\_summaries\_v2
+
+```python
+def catalog_mining_pool_tips_summaries_v2(
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of mining pool tips assets
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_transaction_tracker_assets_v2"></a>
+
+#### catalog\_transaction\_tracker\_assets\_v2
+
+```python
+def catalog_transaction_tracker_assets_v2(
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of transaction tracker assets
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_pair_candles_v2"></a>
+
+#### catalog\_full\_pair\_candles\_v2
+
+```python
+def catalog_full_pair_candles_v2(
+        pairs: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `pairs` (`Optional[Union[str, List[str]]]`): Comma separated list of asset pairs. By default, all asset pairs are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of asset pair candles statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_index_candles_v2"></a>
+
+#### catalog\_full\_index\_candles\_v2
+
+```python
+def catalog_full_index_candles_v2(
+        indexes: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `indexes` (`Optional[Union[str, List[str]]]`): Comma separated list of indexes. By default all assets are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of index candles statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_chains_v2"></a>
+
+#### catalog\_full\_asset\_chains\_v2
+
+```python
+def catalog_full_asset_chains_v2(
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of asset chains assets
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_mempool_feerates_v2"></a>
+
+#### catalog\_full\_mempool\_feerates\_v2
+
+```python
+def catalog_full_mempool_feerates_v2(
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of mempool feerates assets
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_mining_pool_tips_summaries_v2"></a>
+
+#### catalog\_full\_mining\_pool\_tips\_summaries\_v2
+
+```python
+def catalog_full_mining_pool_tips_summaries_v2(
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of mining pool tips assets
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_transaction_tracker_assets_v2"></a>
+
+#### catalog\_full\_transaction\_tracker\_assets\_v2
+
+```python
+def catalog_full_transaction_tracker_assets_v2(
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of transaction tracker assets
+
 <a id="coinmetrics.api_client.CoinMetricsClient.get_asset_alerts"></a>
 
 #### get\_asset\_alerts
@@ -3129,16 +3405,18 @@ Returns index candles for specified indexes and date range.
 #### get\_index\_levels
 
 ```python
-def get_index_levels(indexes: Union[List[str], str],
-                     frequency: Optional[str] = None,
-                     page_size: Optional[int] = None,
-                     paging_from: Optional[Union[PagingFrom, str]] = "start",
-                     start_time: Optional[Union[datetime, date, str]] = None,
-                     end_time: Optional[Union[datetime, date, str]] = None,
-                     start_inclusive: Optional[bool] = None,
-                     end_inclusive: Optional[bool] = None,
-                     timezone: Optional[str] = None,
-                     limit_per_index: Optional[int] = None) -> DataCollection
+def get_index_levels(
+        indexes: Union[List[str], str],
+        frequency: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        limit_per_index: Optional[int] = None,
+        include_verification: Optional[bool] = None) -> DataCollection
 ```
 
 Returns index levels for specified indexes and date range.
@@ -3155,6 +3433,7 @@ Returns index levels for specified indexes and date range.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
 - `limit_per_index` (`int`): How many entries _per index_ the result should contain.
+- `include_verification`: Default: False set to true, includes information about verification.
 
 **Returns**:
 
@@ -3846,6 +4125,7 @@ Returns timeseries stream of market candles.
 ```python
 def get_stream_index_levels(
         indexes: Union[List[str], str],
+        include_verification: Optional[bool] = None,
         backfill: Union[Backfill, str] = Backfill.LATEST) -> CmStream
 ```
 
@@ -3855,6 +4135,7 @@ Returns timeseries stream of index levels.
 
 - `indexes`: list of indxes or market patterns such as CMBIBTC
 - `backfill` (`str`): What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.
+- `include_verification`: Default: False If set to true, includes information about verification.
 
 **Returns**:
 
