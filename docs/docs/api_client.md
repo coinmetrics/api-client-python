@@ -3805,7 +3805,8 @@ def get_market_contract_prices(
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
-        limit_per_market: Optional[int] = None) -> DataCollection
+        limit_per_market: Optional[int] = None,
+        frequency: Optional[str] = None) -> DataCollection
 ```
 
 Returns contract prices for specified markets. This includes index price and mark price that are used by the exchange for settlement and risk management purposes.
@@ -4959,4 +4960,62 @@ def reference_data_institution_metrics(
 **Returns**:
 
 `DataCollection`: List of institution metrics metadata.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.security_master_assets"></a>
+
+#### security\_master\_assets
+
+```python
+def security_master_assets(
+        assets: Optional[Union[str, List[str]]] = None,
+        codes: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> DataCollection
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma-separated list of assets to query. Mutually exclusive with `codes`.
+- `codes` (`Optional[Union[str, List[str]]]`): Comma-separated list of ten-digit alphanumeric identifying codes. Mutually exclusive with `assets`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`DataCollection`: List of assets and their metadata in security master
+
+<a id="coinmetrics.api_client.CoinMetricsClient.security_master_markets"></a>
+
+#### security\_master\_markets
+
+```python
+def security_master_markets(
+        type: Optional[str] = None,
+        markets: Optional[Union[str, List[str]]] = None,
+        symbol: Optional[str] = None,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> DataCollection
+```
+
+**Arguments**:
+
+- `type` (`Optional[str]`): Type of markets.
+- `markets` (`Optional[Union[str, List[str]]]`): List of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`DataCollection`: List of security master entries.
 

@@ -1423,6 +1423,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#security_master_assets" class="md-nav__link">
+    security_master_assets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security_master_markets" class="md-nav__link">
+    security_master_markets
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2640,6 +2654,20 @@
           <li class="md-nav__item">
   <a href="#reference_data_institution_metrics" class="md-nav__link">
     reference_data_institution_metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security_master_assets" class="md-nav__link">
+    security_master_assets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security_master_markets" class="md-nav__link">
+    security_master_markets
   </a>
   
 </li>
@@ -5611,7 +5639,8 @@ if you request metrics for a set of markets.</li>
         <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">limit_per_market</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+        <span class="n">limit_per_market</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">frequency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
 </code></pre></div>
 <p>Returns contract prices for specified markets. This includes index price and mark price that are used by the exchange for settlement and risk management purposes.</p>
 <p><strong>Arguments</strong>:</p>
@@ -6515,6 +6544,52 @@ if you request metrics for a set of markets.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: List of institution metrics metadata.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.security_master_assets"></a></p>
+<h4 id="security_master_assets">security_master_assets<a class="headerlink" href="#security_master_assets" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">security_master_assets</span><span class="p">(</span>
+        <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">codes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">next_page_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma-separated list of assets to query. Mutually exclusive with <code>codes</code>.</li>
+<li><code>codes</code> (<code>Optional[Union[str, List[str]]]</code>): Comma-separated list of ten-digit alphanumeric identifying codes. Mutually exclusive with <code>assets</code>.</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
+<li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
+<li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>DataCollection</code>: List of assets and their metadata in security master</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.security_master_markets"></a></p>
+<h4 id="security_master_markets">security_master_markets<a class="headerlink" href="#security_master_markets" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">security_master_markets</span><span class="p">(</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">base</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">quote</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">next_page_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>type</code> (<code>Optional[str]</code>): Type of markets.</li>
+<li><code>markets</code> (<code>Optional[Union[str, List[str]]]</code>): List of markets.</li>
+<li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
+<li><code>exchange</code> (<code>Optional[str]</code>): Unique name of an exchange.</li>
+<li><code>base</code> (<code>Optional[str]</code>): Base asset of markets.</li>
+<li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
+<li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
+<li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>DataCollection</code>: List of security master entries.</p>
 
 
 

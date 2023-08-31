@@ -5139,6 +5139,7 @@ class CoinMetricsClient:
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None,
+        frequency: Optional[str] = None
     ) -> DataCollection:
         """
         Returns contract prices for specified markets. This includes index price and mark price that are used by the exchange for settlement and risk management purposes.
@@ -5175,6 +5176,7 @@ class CoinMetricsClient:
             "end_inclusive": end_inclusive,
             "timezone": timezone,
             "limit_per_market": limit_per_market,
+            "frequency": frequency
         }
         return DataCollection(
             self._get_data, "timeseries/market-contract-prices", params
@@ -6754,6 +6756,86 @@ class CoinMetricsClient:
             "paging_from": paging_from,
         }
         return DataCollection(self._get_data, "/reference-data/institution-metrics", params)
+
+    def security_master_assets(
+            self,
+            assets: Optional[Union[str, List[str]]] = None,
+            codes: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        :param assets: Comma-separated list of assets to query. Mutually exclusive with `codes`.
+        :type assets: Optional[Union[str, List[str]]]
+        :param codes: Comma-separated list of ten-digit alphanumeric identifying codes. Mutually exclusive with `assets`.
+        :type codes: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of assets and their metadata in security master
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "codes": codes,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return DataCollection(self._get_data, "/security-master/assets", params)
+
+    def security_master_markets(
+            self,
+            type: Optional[str] = None,
+            markets: Optional[Union[str, List[str]]] = None,
+            symbol: Optional[str] = None,
+            exchange: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        :param type: Type of markets.
+        :type type: Optional[str]
+        :param markets: List of markets.
+        :type markets: Optional[Union[str, List[str]]]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of security master entries.
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "type": type,
+            "markets": markets,
+            "symbol": symbol,
+            "exchange": exchange,
+            "base": base,
+            "quote": quote,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return DataCollection(self._get_data, "/security-master/markets", params)
 
     def _get_data(self, url: str, params: Dict[str, Any]) -> DataReturnType:
         if params:

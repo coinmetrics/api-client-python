@@ -4,7 +4,7 @@ import pytest
 
 from coinmetrics.api_client import CoinMetricsClient
 
-client = CoinMetricsClient()
+client = CoinMetricsClient(str(os.environ.get("CM_API_KEY")))
 cm_api_key_set = os.environ.get("CM_API_KEY") is not None
 REASON_TO_SKIP = "Need to set CM_API_KEY as an env var in order to run this test"
 
