@@ -4866,6 +4866,7 @@ class CoinMetricsClient:
         end_time: Optional[Union[datetime, date, str]] = None,
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
+        granularity: Optional[str] = None,
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None,
     ) -> DataCollection:
@@ -4887,6 +4888,8 @@ class CoinMetricsClient:
         :type start_inclusive: bool
         :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
         :type end_inclusive: bool
+        :param granularity: Downsampling granularity of market open interest. Supported values are raw, 1m, 1h, and 1d.
+        :type granularity: str
         :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
         :type timezone: str
         :param limit_per_market: How many entries _per market_ the result should contain.
@@ -4903,6 +4906,7 @@ class CoinMetricsClient:
             "end_time": end_time,
             "start_inclusive": start_inclusive,
             "end_inclusive": end_inclusive,
+            "granularity": granularity,
             "timezone": timezone,
             "limit_per_market": limit_per_market,
         }
@@ -5013,7 +5017,7 @@ class CoinMetricsClient:
     def get_market_orderbooks(
         self,
         markets: Union[List[str], str],
-        frequency: Optional[str] = None,
+        granularity: Optional[str] = None,
         page_size: Optional[int] = None,
         paging_from: Optional[Union[PagingFrom, str]] = "start",
         start_time: Optional[Union[datetime, date, str]] = None,
@@ -5030,8 +5034,8 @@ class CoinMetricsClient:
 
         :param markets: list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future'`
         :type markets: list(str), str
-        :param frequency: Default: "10s" The frequency at which market order books and quotes are provided. Supported values: 10s, 1m, 1h, 1d.
-        :type frequency: str
+        :param granularity: Downsampling granularity of market order books and quotes. Supported values are raw, 1m, 1h, and 1d.
+        :type granularity: str
         :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
         :type page_size: int
         :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
@@ -5056,7 +5060,7 @@ class CoinMetricsClient:
 
         params: Dict[str, Any] = {
             "markets": markets,
-            "frequency": frequency,
+            "granularity": granularity,
             "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
@@ -5072,7 +5076,7 @@ class CoinMetricsClient:
     def get_market_quotes(
         self,
         markets: Union[List[str], str],
-        frequency: Optional[str] = None,
+        granularity: Optional[str] = None,
         page_size: Optional[int] = None,
         paging_from: Optional[Union[PagingFrom, str]] = "start",
         start_time: Optional[Union[datetime, date, str]] = None,
@@ -5089,8 +5093,8 @@ class CoinMetricsClient:
 
         :param markets: list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future'`
         :type markets: list(str), str
-        :param frequency: Default: "10s" The frequency at which market order books and quotes are provided. Supported values: 10s, 1m, 1h, 1d.
-        :type frequency: str
+        :param granularity: Downsampling granularity of market order books and quotes. Supported values are raw, 1m, 1h, and 1d.
+        :type granularity:
         :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
         :type page_size: int
         :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
@@ -5115,7 +5119,7 @@ class CoinMetricsClient:
 
         params: Dict[str, Any] = {
             "markets": markets,
-            "frequency": frequency,
+            "granularity": granularity,
             "page_size": page_size,
             "paging_from": paging_from,
             "start_time": start_time,
@@ -5137,6 +5141,7 @@ class CoinMetricsClient:
         end_time: Optional[Union[datetime, date, str]] = None,
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
+        granularity: Optional[str] = None,
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None,
         frequency: Optional[str] = None
@@ -5158,6 +5163,8 @@ class CoinMetricsClient:
         :type start_inclusive: bool
         :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
         :type end_inclusive: bool
+        :param granularity: Downsampling granularity of market contract prices. Supported values are raw, 1m, 1h, and 1d.
+        :type granularity: str
         :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
         :type timezone: str
         :param limit_per_market: How many entries _per market_ the result should contain.
@@ -5174,6 +5181,7 @@ class CoinMetricsClient:
             "end_time": end_time,
             "start_inclusive": start_inclusive,
             "end_inclusive": end_inclusive,
+            "granularity": granularity,
             "timezone": timezone,
             "limit_per_market": limit_per_market,
             "frequency": frequency
@@ -6756,6 +6764,146 @@ class CoinMetricsClient:
             "paging_from": paging_from,
         }
         return DataCollection(self._get_data, "/reference-data/institution-metrics", params)
+
+    def reference_data_assets(
+            self,
+            assets: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of assets metadata.
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return DataCollection(self._get_data, "/reference-data/assets", params)
+
+    def reference_data_exchanges(
+            self,
+            exchanges: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        :param exchanges: Comma separated list of exchanges. By default all exchanges are returned.
+        :type exchanges: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of exchanges metadata.
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "exchanges": exchanges,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return DataCollection(self._get_data, "/reference-data/exchanges", params)
+
+    def reference_data_indexes(
+            self,
+            indexes: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        :param indexes: Comma separated list of indexes. By default all indexes are returned.
+        :type indexes: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of indexes metadata.
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "indexes": indexes,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return DataCollection(self._get_data, "/reference-data/indexes", params)
+
+    def reference_data_pairs(
+            self,
+            pairs: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        :param pairs: Comma separated list of asset pairs. By default, all asset pairs are returned.
+        :type pairs: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of pairs metadata.
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "pairs": pairs,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return DataCollection(self._get_data, "/reference-data/pairs", params)
+
+    def reference_data_market_metrics(
+            self,
+            metrics: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        :param metrics: Comma separated list of metrics. By default all metrics are returned.
+        :type metrics: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of market metrics metadata.
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "metrics": metrics,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return DataCollection(self._get_data, "/reference-data/market-metrics", params)
 
     def security_master_assets(
             self,

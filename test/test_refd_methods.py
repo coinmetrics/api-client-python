@@ -58,5 +58,33 @@ def test_refd_asset_metrics() -> None:
     assert all([col in asset_metrics for col in expected_cols])
 
 
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_refd_assets() -> None:
+    expected_cols = ["asset", "full_name"]
+    assets = client.reference_data_assets().first_page()[0]
+    assert all([col in assets for col in expected_cols])
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_refd_indexes() -> None:
+    expected_cols = ["index", "full_name", "description", "type"]
+    indexes = client.reference_data_indexes().first_page()[0]
+    assert all([col in indexes for col in expected_cols])
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_refd_pairs() -> None:
+    expected_cols = ["pair", "full_name"]
+    pairs = client.reference_data_pairs().first_page()[0]
+    assert all([col in pairs for col in expected_cols])
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_refd_market_metrics() -> None:
+    expected_cols = ["metric", "full_name", "description", "product", "category", "subcategory", "unit", "data_type", "display_name"]
+    pairs = client.reference_data_market_metrics().first_page()[0]
+    assert all([col in pairs for col in expected_cols])
+
+
 if __name__ == '__main__':
     pytest.main()

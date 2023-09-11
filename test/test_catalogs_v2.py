@@ -155,8 +155,7 @@ def test_catalogv2_market_orderbooks() -> None:
     catalog_market_orderbooks = client.catalog_market_orderbooks_v2(page_size=10).first_page()
     assert len(catalog_market_orderbooks) == 10
     assert all(['market' in catalog for catalog in catalog_market_orderbooks])
-    assert all(['min_time' in catalog for catalog in catalog_market_orderbooks])
-    assert all(['max_time' in catalog for catalog in catalog_market_orderbooks])
+    assert all(['depths' in catalog for catalog in catalog_market_orderbooks])
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
@@ -182,8 +181,7 @@ def test_catalogv2_full_market_orderbooks() -> None:
     catalog_market_orderbooks = client.catalog_full_market_orderbooks_v2(page_size=10).first_page()
     assert len(catalog_market_orderbooks) == 10
     assert all(['market' in catalog for catalog in catalog_market_orderbooks])
-    assert all(['min_time' in catalog for catalog in catalog_market_orderbooks])
-    assert all(['max_time' in catalog for catalog in catalog_market_orderbooks])
+    assert all(['depths' in catalog for catalog in catalog_market_orderbooks])
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_catalogv2_full_market_metrics() -> None:

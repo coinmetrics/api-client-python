@@ -3611,6 +3611,7 @@ def get_market_open_interest(
         end_time: Optional[Union[datetime, date, str]] = None,
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
+        granularity: Optional[str] = None,
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None) -> DataCollection
 ```
@@ -3628,6 +3629,7 @@ For more information on open interest, see: https://docs.coinmetrics.io/info/mar
 - `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `granularity` (`str`): Downsampling granularity of market open interest. Supported values are raw, 1m, 1h, and 1d.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
 - `limit_per_market` (`int`): How many entries _per market_ the result should contain.
 
@@ -3716,7 +3718,7 @@ For more information on funding rates, see: https://docs.coinmetrics.io/info/mar
 ```python
 def get_market_orderbooks(
         markets: Union[List[str], str],
-        frequency: Optional[str] = None,
+        granularity: Optional[str] = None,
         page_size: Optional[int] = None,
         paging_from: Optional[Union[PagingFrom, str]] = "start",
         start_time: Optional[Union[datetime, date, str]] = None,
@@ -3735,7 +3737,7 @@ For more information on order books, see: https://docs.coinmetrics.io/info/marke
 **Arguments**:
 
 - `markets` (`list(str), str`): list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future'`
-- `frequency` (`str`): Default: "10s" The frequency at which market order books and quotes are provided. Supported values: 10s, 1m, 1h, 1d.
+- `granularity` (`str`): Downsampling granularity of market order books and quotes. Supported values are raw, 1m, 1h, and 1d.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
 - `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
@@ -3757,7 +3759,7 @@ For more information on order books, see: https://docs.coinmetrics.io/info/marke
 ```python
 def get_market_quotes(
         markets: Union[List[str], str],
-        frequency: Optional[str] = None,
+        granularity: Optional[str] = None,
         page_size: Optional[int] = None,
         paging_from: Optional[Union[PagingFrom, str]] = "start",
         start_time: Optional[Union[datetime, date, str]] = None,
@@ -3776,7 +3778,7 @@ For more information on quotes, see: https://docs.coinmetrics.io/info/markets/qu
 **Arguments**:
 
 - `markets` (`list(str), str`): list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future'`
-- `frequency` (`str`): Default: "10s" The frequency at which market order books and quotes are provided. Supported values: 10s, 1m, 1h, 1d.
+- `granularity` (``): Downsampling granularity of market order books and quotes. Supported values are raw, 1m, 1h, and 1d.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
 - `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
@@ -3804,6 +3806,7 @@ def get_market_contract_prices(
         end_time: Optional[Union[datetime, date, str]] = None,
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
+        granularity: Optional[str] = None,
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None,
         frequency: Optional[str] = None) -> DataCollection
@@ -3820,6 +3823,7 @@ Returns contract prices for specified markets. This includes index price and mar
 - `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `granularity` (`str`): Downsampling granularity of market contract prices. Supported values are raw, 1m, 1h, and 1d.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
 - `limit_per_market` (`int`): How many entries _per market_ the result should contain.
 
@@ -4960,6 +4964,121 @@ def reference_data_institution_metrics(
 **Returns**:
 
 `DataCollection`: List of institution metrics metadata.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.reference_data_assets"></a>
+
+#### reference\_data\_assets
+
+```python
+def reference_data_assets(
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> DataCollection
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`DataCollection`: List of assets metadata.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.reference_data_exchanges"></a>
+
+#### reference\_data\_exchanges
+
+```python
+def reference_data_exchanges(
+        exchanges: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> DataCollection
+```
+
+**Arguments**:
+
+- `exchanges` (`Optional[Union[str, List[str]]]`): Comma separated list of exchanges. By default all exchanges are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`DataCollection`: List of exchanges metadata.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.reference_data_indexes"></a>
+
+#### reference\_data\_indexes
+
+```python
+def reference_data_indexes(
+        indexes: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> DataCollection
+```
+
+**Arguments**:
+
+- `indexes` (`Optional[Union[str, List[str]]]`): Comma separated list of indexes. By default all indexes are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`DataCollection`: List of indexes metadata.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.reference_data_pairs"></a>
+
+#### reference\_data\_pairs
+
+```python
+def reference_data_pairs(
+        pairs: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> DataCollection
+```
+
+**Arguments**:
+
+- `pairs` (`Optional[Union[str, List[str]]]`): Comma separated list of asset pairs. By default, all asset pairs are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`DataCollection`: List of pairs metadata.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.reference_data_market_metrics"></a>
+
+#### reference\_data\_market\_metrics
+
+```python
+def reference_data_market_metrics(
+        metrics: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> DataCollection
+```
+
+**Arguments**:
+
+- `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`DataCollection`: List of market metrics metadata.
 
 <a id="coinmetrics.api_client.CoinMetricsClient.security_master_assets"></a>
 
