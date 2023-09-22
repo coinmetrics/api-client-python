@@ -296,6 +296,23 @@ class DataCollection:
                  progress_bar: Optional[bool] = None,
                  time_increment: Optional[Union[relativedelta, timedelta]] = None
                  ) -> "ParallelDataCollection":
+        """
+        This method will convert the DataCollection into a ParallelDataCollection - enabling the ability to split
+        one http request into many HTTP requests for faster data export. By default this will be split based on the
+        primary query parameter. For example if you query get_asset_metrics(assets=....) it will split into many requests
+        based on the assets.
+        :param parallelize_on: parameter(s) to parallelize on. Can be any list type parameters
+        :type parallelize_on: List[str], str
+        :param executor: By defualt the ParallelDataCollection will use a ProcessPoolExecutor, but this can be changed
+        :type executor: Executor
+        :param max_workers: Specify the number of parallel threads. By default this is 10 and cannot be increased beyond 10
+        :type: int
+        :param progress_bar: flag to show a progress bar for data export or not, by default is true
+        :type progress_bar: bool
+        :param time_increment: option to parallelize by a time. Can use timedelta for time periods in weeks and relativedelta for longer time periods like a month or year
+        :type time_increment: timedelta, relativedelta
+        :return: ParallelDataCollection that matches the existing one
+        """
         return ParallelDataCollection(self,
                                       parallelize_on=parallelize_on,
                                       executor=executor,
@@ -577,7 +594,7 @@ class ParallelDataCollection(DataCollection):
 
             result = concatenated_dfs[0]
             for df in concatenated_dfs[1:]:
-                result = pd.merge(result, df, on=['time', self._ENDPOINT_FIRST_PARAM_DICT[self._endpoint].rstrip("s")], how='outer')
+                result = pd.merge(result, df, on=['time', self._get_first_param_from_endpoint().rstrip("s")], how='outer')
             return result
 
         data_collections = self.get_parallel_datacollections()
@@ -587,7 +604,7 @@ class ParallelDataCollection(DataCollection):
             else:
                 combined_dataframes = list(processor.map(ParallelDataCollection._helper_to_dataframe, data_collections))
 
-        if len(self._parallelize_on) > 1 or (len(self._parallelize_on) == 1 and self._ENDPOINT_FIRST_PARAM_DICT[self._endpoint] != self._parallelize_on[0]):
+        if len(self._parallelize_on) > 1 or (len(self._parallelize_on) == 1 and self._get_first_param_from_endpoint() != self._parallelize_on[0]):
             combined_df = group_and_merge(combined_dataframes)
         else:
             combined_df = pd.concat(combined_dataframes, axis=0)
@@ -671,14 +688,14 @@ class ParallelDataCollection(DataCollection):
         compress_args = [compress] * len(data_collections)
         with self._executor(max_workers=self._max_workers) as processor:
             if self._progress_bar:
-                list(tqdm(processor.map(ParallelDataCollection._helper_to_json_file, data_collections, data_directorys, compress_args), total=len(data_collections), desc="Exporting to Json Files"))
+                list(tqdm(processor.map(self._helper_to_json_file, data_collections, data_directorys, compress_args), total=len(data_collections), desc="Exporting to Json Files"))
             else:
-                processor.map(ParallelDataCollection._helper_to_json_file, data_collections, data_directorys,
+                processor.map(self._helper_to_json_file, data_collections, data_directorys,
                               compress_args)
 
     def _get_parallelize_on(self, parallelize_on: Optional[Union[List[str], str]]) -> List[str]:
         if parallelize_on is None:
-            return [self._ENDPOINT_FIRST_PARAM_DICT[self._endpoint]]
+            return [self._get_first_param_from_endpoint()]
         if isinstance(parallelize_on, str):
             self._validate_parallelization_param(parallelize_on)
             return [parallelize_on]
@@ -723,15 +740,29 @@ class ParallelDataCollection(DataCollection):
         full_file_path = os.path.join(data_directory, file_name)
         data_collection.export_to_csv(full_file_path, *args)
 
-    @staticmethod
-    def _helper_to_json_file(data_collection: DataCollection, data_directory: str, compress: bool = False) -> Optional[str]:
-        endpoint = data_collection._endpoint
-        first_param_arg = ParallelDataCollection._ENDPOINT_FIRST_PARAM_DICT[endpoint]
+    def _helper_to_json_file(self, data_collection: DataCollection, data_directory: str, compress: bool = False) -> Optional[str]:
+        # endpoint = data_collection._endpoint
+        first_param_arg = self._get_first_param_from_endpoint()
         data_name = data_collection._url_params[first_param_arg]
         friendly_endpoint_name = data_collection._endpoint.split("/")[-1]
         file_name = f"{data_name}_{friendly_endpoint_name}.json"
         full_file_path = os.path.join(data_directory, file_name)
         return data_collection.export_to_json(full_file_path, compress)
+
+    def _get_first_param_from_endpoint(self) -> str:
+        try:
+            if self._endpoint.startswith("blockchain"):
+                blockchain_endpoints_split = list(map(lambda e: e.split("/"), [endpoint for endpoint in self._ENDPOINT_FIRST_PARAM_DICT.keys() if endpoint.startswith("blockchain")]))
+                self_endpoint_split = self._endpoint.split("/")
+                for blockchain_split in blockchain_endpoints_split:
+                    if all([keyword in self_endpoint_split or keyword.startswith("{") for keyword in blockchain_split]):
+                        endpoint = "/".join(blockchain_split)
+                        return self._ENDPOINT_FIRST_PARAM_DICT[endpoint]
+                raise ValueError(f"Endpoint: {self._endpoint} not supported for parallel requests")
+            else:
+                return self._ENDPOINT_FIRST_PARAM_DICT[self._endpoint]
+        except KeyError:
+            raise ValueError(f"Endpoint: {self._endpoint} not supported for parallel requests")
 
     @staticmethod
     def _helper_to_json(data_collection: DataCollection, compress: bool = False) -> Optional[str]:
