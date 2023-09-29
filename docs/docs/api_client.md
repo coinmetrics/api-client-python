@@ -1973,6 +1973,7 @@ def catalog_market_liquidations_v2(
 ```python
 def catalog_market_metrics_v2(
         markets: Optional[Union[str, List[str]]] = None,
+        metrics: Optional[Union[str, List[str]]] = None,
         exchange: Optional[str] = None,
         market_type: Optional[str] = None,
         base: Optional[str] = None,
@@ -2380,6 +2381,7 @@ def catalog_full_market_liquidations_v2(
 ```python
 def catalog_full_market_metrics_v2(
         markets: Optional[Union[str, List[str]]] = None,
+        metrics: Optional[Union[str, List[str]]] = None,
         exchange: Optional[str] = None,
         market_type: Optional[str] = None,
         base: Optional[str] = None,
@@ -2746,6 +2748,29 @@ def catalog_index_candles_v2(
 
 `CatalogV2DataCollection`: List of index candles statistics.
 
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_index_levels_v2"></a>
+
+#### catalog\_index\_levels\_v2
+
+```python
+def catalog_index_levels_v2(
+        indexes: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `indexes` (`Optional[Union[str, List[str]]]`): Comma separated list of indexes. By default all indexes are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of index levels.
+
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_chains_v2"></a>
 
 #### catalog\_asset\_chains\_v2
@@ -2883,6 +2908,29 @@ def catalog_full_index_candles_v2(
 **Returns**:
 
 `CatalogV2DataCollection`: List of index candles statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_index_levels_v2"></a>
+
+#### catalog\_full\_index\_levels\_v2
+
+```python
+def catalog_full_index_levels_v2(
+        indexes: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `indexes` (`Optional[Union[str, List[str]]]`): Comma separated list of indexes. By default all indexes are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of index levels.
 
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_chains_v2"></a>
 
@@ -3844,6 +3892,7 @@ def get_market_implied_volatility(
         end_time: Optional[Union[datetime, date, str]] = None,
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
+        granularity: Optional[str] = None,
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None) -> DataCollection
 ```
@@ -3859,6 +3908,7 @@ Returns implied volatility for specified markets.
 - `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `granularity` (`str - one of raw, 1m, 1h, and 1d`): Downsampling granularity of market implied volatility. Supported values are raw, 1m, 1h, and 1d.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
 - `limit_per_market` (`int`): How many entries _per market_ the result should contain.
 
@@ -3879,6 +3929,7 @@ def get_market_greeks(
         end_time: Optional[Union[datetime, date, str]] = None,
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
+        granularity: Optional[str] = None,
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None) -> DataCollection
 ```
@@ -3894,6 +3945,7 @@ Returns greeks for option markets.
 - `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `granularity` (`str - one of raw, 1m, 1h, and 1d`): Downsampling granularity of market greeks. Supported values are raw, 1m, 1h, and 1d
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
 - `limit_per_market` (`int`): How many entries _per market_ the result should contain.
 
@@ -4880,6 +4932,41 @@ def reference_data_asset_metrics(
 **Returns**:
 
 `DataCollection`: List of asset metrics metadata.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.reference_data_markets"></a>
+
+#### reference\_data\_markets
+
+```python
+def reference_data_markets(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`DataCollection`: List of markets metadata.
 
 <a id="coinmetrics.api_client.CoinMetricsClient.reference_data_exchange_metrics"></a>
 

@@ -2523,6 +2523,7 @@ class CoinMetricsClient:
     def catalog_market_metrics_v2(
             self,
             markets: Optional[Union[str, List[str]]] = None,
+            metrics: Optional[Union[str, List[str]]] = None,
             exchange: Optional[str] = None,
             market_type: Optional[str] = None,
             base: Optional[str] = None,
@@ -2563,6 +2564,7 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {
             "markets": markets,
+            "metrics": metrics,
             "exchange": exchange,
             "type": market_type,
             "base": base,
@@ -3139,6 +3141,7 @@ class CoinMetricsClient:
     def catalog_full_market_metrics_v2(
             self,
             markets: Optional[Union[str, List[str]]] = None,
+            metrics: Optional[Union[str, List[str]]] = None,
             exchange: Optional[str] = None,
             market_type: Optional[str] = None,
             base: Optional[str] = None,
@@ -3179,6 +3182,7 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {
             "markets": markets,
+            "metrics": metrics,
             "exchange": exchange,
             "type": market_type,
             "base": base,
@@ -3648,6 +3652,34 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(self._get_data, "/catalog-v2/index-candles", params)
 
+    def catalog_index_levels_v2(
+            self,
+            indexes: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param indexes: Comma separated list of indexes. By default all indexes are returned.
+        :type indexes: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of index levels.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "indexes": indexes,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/index-levels", params)
+
     def catalog_asset_chains_v2(
             self,
             assets: Optional[Union[str, List[str]]] = None,
@@ -3815,6 +3847,34 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
         }
         return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/index-candles", params)
+
+    def catalog_full_index_levels_v2(
+            self,
+            indexes: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param indexes: Comma separated list of indexes. By default all indexes are returned.
+        :type indexes: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of index levels.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "indexes": indexes,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/index-levels", params)
 
     def catalog_full_asset_chains_v2(
             self,
@@ -5199,6 +5259,7 @@ class CoinMetricsClient:
         end_time: Optional[Union[datetime, date, str]] = None,
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
+        granularity: Optional[str] = None,
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None,
     ) -> DataCollection:
@@ -5219,6 +5280,8 @@ class CoinMetricsClient:
         :type start_inclusive: bool
         :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
         :type end_inclusive: bool
+        :param granularity: Downsampling granularity of market implied volatility. Supported values are raw, 1m, 1h, and 1d.
+        :type granularity: str - one of raw, 1m, 1h, and 1d
         :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
         :type timezone: str
         :param limit_per_market: How many entries _per market_ the result should contain.
@@ -5235,6 +5298,7 @@ class CoinMetricsClient:
             "end_time": end_time,
             "start_inclusive": start_inclusive,
             "end_inclusive": end_inclusive,
+            "granularity": granularity,
             "timezone": timezone,
             "limit_per_market": limit_per_market,
         }
@@ -5251,6 +5315,7 @@ class CoinMetricsClient:
         end_time: Optional[Union[datetime, date, str]] = None,
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
+        granularity: Optional[str] = None,
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None,
     ) -> DataCollection:
@@ -5271,6 +5336,8 @@ class CoinMetricsClient:
         :type start_inclusive: bool
         :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
         :type end_inclusive: bool
+        :param granularity: Downsampling granularity of market greeks. Supported values are raw, 1m, 1h, and 1d
+        :type granularity: str - one of raw, 1m, 1h, and 1d
         :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
         :type timezone: str
         :param limit_per_market: How many entries _per market_ the result should contain.
@@ -5287,6 +5354,7 @@ class CoinMetricsClient:
             "end_time": end_time,
             "start_inclusive": start_inclusive,
             "end_inclusive": end_inclusive,
+            "granularity": granularity,
             "timezone": timezone,
             "limit_per_market": limit_per_market,
         }
@@ -6668,6 +6736,58 @@ class CoinMetricsClient:
             "paging_from": paging_from,
         }
         return DataCollection(self._get_data, "/reference-data/asset-metrics", params)
+
+    def reference_data_markets(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param type: Type of markets.
+        :type type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of markets metadata.
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return DataCollection(self._get_data, "/reference-data/markets", params)
 
     def reference_data_exchange_metrics(
             self,

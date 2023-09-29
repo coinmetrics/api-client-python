@@ -345,6 +345,15 @@ def test_catalogv2_transaction_tracker() -> None:
     assert all(['max_time' in catalog for catalog in catalog_full_transaction_tracker])
 
 
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_index_levels() -> None:
+    catalog_index_levels = client.catalog_index_levels_v2(page_size=10).first_page()
+    catalog_all_index_levels = client.catalog_index_levels_v2(page_size=10).first_page()
+    assert all(['index' in catalog for catalog in catalog_all_index_levels])
+    assert all(['index' in catalog for catalog in catalog_all_index_levels])
+    assert all(['frequencies' in catalog for catalog in catalog_index_levels])
+    assert all(['frequencies' in catalog for catalog in catalog_all_index_levels])
+
 
 if __name__ == '__main__':
     pytest.main()

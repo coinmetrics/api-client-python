@@ -86,5 +86,12 @@ def test_refd_market_metrics() -> None:
     assert all([col in pairs for col in expected_cols])
 
 
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_refd_markets() -> None:
+    expected_cols = ["market", "exchange", "type"]
+    markets = client.reference_data_markets().first_page()[0]
+    assert all([col in markets for col in expected_cols])
+
+
 if __name__ == '__main__':
     pytest.main()

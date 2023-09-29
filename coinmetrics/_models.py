@@ -36,6 +36,7 @@ class TransactionTrackerData(CoinMetricsAPIModel):
     status_update_time: str
     status_updates: List[str]
     details: str
+    height: str = field(default="0")
     mempool_approx_queue_position: str = field(default="None")
     next_block_approx_settlement_probability_pct: str = field(default="0")
     block_hash: str = field(default="None")
