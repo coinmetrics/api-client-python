@@ -136,6 +136,22 @@ def on_message_assets_quotes_test(stream: websocket.WebSocketApp, message: str) 
     stream.close()
 
 
+def on_message_market_liquidations_test(stream: websocket.WebSocketApp, message: str) -> None:
+    data = orjson.loads(message)
+    expected_cols = [
+        "market",
+        "time",
+        "coin_metrics_id",
+        "price",
+        "type",
+        "side",
+        "cm_sequence_id"
+    ]
+    for col in expected_cols:
+        assert col in data
+    stream.close()
+
+
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_index_levels_stream() -> None:
     indexes = ["CMBIBTC", "CMBIETH"]
@@ -192,6 +208,12 @@ def test_get_pair_quotes_stream() -> None:
 def test_get_asset_quotes_stream() -> None:
     stream = client.get_stream_asset_quotes(assets="btc")
     stream.run(on_message=on_message_assets_quotes_test)
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_get_market_liquidations() -> None:
+    stream = client.get_stream_market_liquidations(markets='binance-BTCBUSD-future')
+    stream.run(on_message=on_message_market_liquidations_test)
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)

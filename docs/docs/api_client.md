@@ -4198,6 +4198,26 @@ Returns timeseries stream of index levels.
 
 `CmStream`: Index levels data timeseries stream.
 
+<a id="coinmetrics.api_client.CoinMetricsClient.get_stream_market_liquidations"></a>
+
+#### get\_stream\_market\_liquidations
+
+```python
+def get_stream_market_liquidations(markets: Union[str, List[str]],
+                                   backfill: Optional[str] = None) -> CmStream
+```
+
+Returns timeseries stream for market liquidations
+
+**Arguments**:
+
+- `markets` (`Union[str, List[str]]`): Comma separated list of markets or market patterns like `exchange-*` or `exchange-*-spot` or `*USDT-future`. Use the /catalog-all/markets endpoint for the full list of supported markets.
+- `backfill` (`Optional[str]`): What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+
+**Returns**:
+
+`CmStream`: Market liquidations timeseries stream
+
 <a id="coinmetrics.api_client.CoinMetricsClient.get_list_of_blocks"></a>
 
 #### get\_list\_of\_blocks

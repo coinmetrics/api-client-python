@@ -41,6 +41,7 @@ def test_custom_exception_not_raised_for_403() -> None:
     try:
         intentional_401 = unauthorized_client.catalog_markets()
     except requests.HTTPError as e:
+        assert e.response is not None
         assert e.response.status_code == 401
     except Exception as e:
         assert False
@@ -58,6 +59,7 @@ def test_403_error_message() -> None:
             start_date=start_date, end_date=end_date, exchanges=exchanges, threaded=True
         )
     except CoinMetricsUnauthorizedException as e:
+        assert e.response is not None
         assert e.response.status_code == 403 or e.response.status_code == 401
         print(e)
 

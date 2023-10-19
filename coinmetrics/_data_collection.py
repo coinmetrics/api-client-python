@@ -25,7 +25,7 @@ from coinmetrics._typing import (
 from coinmetrics._utils import get_file_path_or_buffer
 from coinmetrics._models import AssetChainsData, CoinMetricsAPIModel, TransactionTrackerData
 from importlib import import_module
-from concurrent.futures import ProcessPoolExecutor, Executor
+from concurrent.futures import ThreadPoolExecutor, Executor
 from tqdm import tqdm
 from collections import defaultdict
 
@@ -455,7 +455,7 @@ class ParallelDataCollection(DataCollection):
         super().__init__(parent_data_collection._data_retrieval_function, parent_data_collection._endpoint,
                          parent_data_collection._url_params, parent_data_collection._csv_export_supported)
         self._parallelize_on = self._get_parallelize_on(parallelize_on)
-        self._executor: Callable[..., Executor] = executor if executor else ProcessPoolExecutor  # type: ignore
+        self._executor: Callable[..., Executor] = executor if executor else ThreadPoolExecutor  # type: ignore
         self._max_workers = max_workers if max_workers else 10
         if self._max_workers > 10:
             warnings.warn("Max workers greater than 10 are not permitted due to rate limits restrictions")
