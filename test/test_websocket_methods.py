@@ -65,6 +65,22 @@ def on_message_market_orderbooks_test(stream: websocket.WebSocketApp, message: s
         assert col in data
     stream.close()
 
+def on_message_market_openinterest(stream: websocket.WebSocketApp, message: str) -> None:
+    """
+    Tests that data with the expected keys can be loaded by orjson
+    """
+    data = orjson.loads(message)
+    expected_cols_index_levels = [
+        "market",
+        "time",
+        "contract_count",
+        "value_usd",
+        "cm_sequence_id"
+    ]
+    for col in expected_cols_index_levels:
+        assert col in data
+    stream.close()
+
 
 def on_message_market_candles_test(stream: websocket.WebSocketApp, message: str) -> None:
     """
@@ -217,6 +233,12 @@ def test_get_market_liquidations() -> None:
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_get_market_openinterest() -> None:
+    stream = client.get_stream_market_open_interest(markets='binance-BTCBUSD-future')
+    stream.run(on_message=on_message_market_openinterest)
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_on_close() -> None:
     on_close_ran = False
     def on_close(stream: websocket.WebSocketApp, close_status_code: int, close_msg: str) -> None:
@@ -225,6 +247,8 @@ def test_on_close() -> None:
     stream = client.get_stream_asset_quotes(assets="btc")
     stream.run(on_message=on_message_assets_quotes_test, on_close=on_close)
     assert on_close_ran
+
+
 
 
 if __name__ == '__main__':

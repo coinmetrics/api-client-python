@@ -5673,6 +5673,25 @@ class CoinMetricsClient:
         }
         return self._get_stream_data("/timeseries-stream/market-liquidations", params)
 
+    def get_stream_market_open_interest(
+            self,
+            markets: Union[str, List[str]],
+            backfill: Optional[str] = None,
+    ) -> CmStream:
+        """
+        :param markets: Comma separated list of markets or market patterns like `exchange-*` or `exchange-*-spot` or `*USDT-future`. Use the /catalog-all/markets endpoint for the full list of supported markets.
+        :type markets: Union[str, List[str]]
+        :param backfill: What data should be sent upon a connection. By default the latest values are sent just before real-time data.
+        :type backfill: Optional[str]
+        :return:
+        :rtype: CmStream
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "backfill": backfill,
+        }
+        return self._get_stream_data("/timeseries-stream/market-openinterest", params)
+
     def get_list_of_blocks(
         self,
         asset: str,

@@ -1270,6 +1270,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get_stream_market_open_interest" class="md-nav__link">
+    get_stream_market_open_interest
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get_list_of_blocks" class="md-nav__link">
     get_list_of_blocks
   </a>
@@ -2563,6 +2570,13 @@
           <li class="md-nav__item">
   <a href="#get_stream_market_liquidations" class="md-nav__link">
     get_stream_market_liquidations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_stream_market_open_interest" class="md-nav__link">
+    get_stream_market_open_interest
   </a>
   
 </li>
@@ -6073,6 +6087,19 @@ if you request metrics for a set of markets.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CmStream</code>: Market liquidations timeseries stream</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.get_stream_market_open_interest"></a></p>
+<h4 id="get_stream_market_open_interest">get_stream_market_open_interest<a class="headerlink" href="#get_stream_market_open_interest" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_stream_market_open_interest</span><span class="p">(</span>
+        <span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+        <span class="n">backfill</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CmStream</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code> (<code>Union[str, List[str]]</code>): Comma separated list of markets or market patterns like <code>exchange-*</code> or <code>exchange-*-spot</code> or <code>*USDT-future</code>. Use the /catalog-all/markets endpoint for the full list of supported markets.</li>
+<li><code>backfill</code> (<code>Optional[str]</code>): What data should be sent upon a connection. By default the latest values are sent just before real-time data.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CmStream</code>: </p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.get_list_of_blocks"></a></p>
 <h4 id="get_list_of_blocks">get_list_of_blocks<a class="headerlink" href="#get_list_of_blocks" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_list_of_blocks</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
