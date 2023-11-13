@@ -4190,7 +4190,7 @@ Returns timeseries stream of index levels.
 
 **Arguments**:
 
-- `indexes`: list of indxes or market patterns such as CMBIBTC
+- `indexes` (`list(str), str`): list of indxes or market patterns such as CMBIBTC
 - `backfill` (`str`): What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.
 - `include_verification`: Default: False If set to true, includes information about verification.
 
@@ -5263,4 +5263,64 @@ def security_master_markets(
 **Returns**:
 
 `DataCollection`: List of security master entries.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.get_snapshots_of_asset_metric_constituents"></a>
+
+#### get\_snapshots\_of\_asset\_metric\_constituents
+
+```python
+def get_snapshots_of_asset_metric_constituents(
+        metric: str,
+        at_time: Optional[str] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_time: Optional[Union[datetime, date, str]] = None,
+        next_page_token: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None) -> DataCollection
+```
+
+**Arguments**:
+
+- `metric` (`str`): Target metric name.
+- `at_time` (`Optional[str]`): Returns constituents at a specified date.         Value `now` can be specified to get the current constituents.         Mutually exclusive with `start_time` and/or `end_time`.
+- `end_time` (`Optional[Union[datetime, date, str]]`): Start of the time interval, inclusive.         Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789Z`, `2006-01-20`, `20060120`.         Mutually exclusive with `at_time`.
+- `start_time` (`Optional[Union[datetime, date, str]]`): End of the time interval, inclusive.         Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789Z`, `2006-01-20`, `20060120`.         Mutually exclusive with `at_time`.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+
+**Returns**:
+
+`DataCollection`: Snapshots of asset metric constituents.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.get_timeframes_of_asset_metric_constituents"></a>
+
+#### get\_timeframes\_of\_asset\_metric\_constituents
+
+```python
+def get_timeframes_of_asset_metric_constituents(
+        metric: str,
+        constituents: Optional[Union[str, List[str]]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_time: Optional[Union[datetime, date, str]] = None,
+        next_page_token: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None) -> DataCollection
+```
+
+**Arguments**:
+
+- `metric` (`str`): Target metric name.
+- `constituents` (`Optional[Union[str, List[str]]]`): Comma separated list of constituents. By default all constituents are returned.
+Different asset metrics may have different constituents.
+For example, constituents for `volume_trusted_spot_usd_1d` are exchanges.
+- `end_time` (`Optional[Union[datetime, date, str]]`): Start of the time interval, inclusive.         Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789Z`, `2006-01-20`, `20060120`.         Mutually exclusive with `at_time`.
+- `start_time` (`Optional[Union[datetime, date, str]]`): End of the time interval, inclusive.         Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789Z`, `2006-01-20`, `20060120`.         Mutually exclusive with `at_time`.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+
+**Returns**:
+
+`DataCollection`: List of timeframes.
 

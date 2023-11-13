@@ -5637,7 +5637,7 @@ class CoinMetricsClient:
         Returns timeseries stream of index levels.
 
         :param indexes: list of indxes or market patterns such as CMBIBTC
-        :type markets: list(str), str
+        :type indexes: list(str), str
         :param backfill: What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.
         :type backfill: str
         :param include_verification: Default: False If set to true, includes information about verification.
@@ -7144,6 +7144,102 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
         }
         return DataCollection(self._get_data, "/security-master/markets", params)
+
+    def get_snapshots_of_asset_metric_constituents(
+            self,
+            metric: str,
+            at_time: Optional[str] = None,
+            end_time: Optional[Union[datetime, date, str]] = None,
+            start_time: Optional[Union[datetime, date, str]] = None,
+            next_page_token: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None) -> DataCollection:
+        """
+        :param metric: Target metric name.
+        :type metric: str
+        :param at_time: Returns constituents at a specified date. \
+        Value `now` can be specified to get the current constituents. \
+        Mutually exclusive with `start_time` and/or `end_time`.
+
+        :type at_time: Optional[str]
+        :param end_time: Start of the time interval, inclusive. \
+        Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789Z`, `2006-01-20`, `20060120`. \
+        Mutually exclusive with `at_time`.
+
+        :type end_time: Optional[Union[datetime, date, str]]
+        :param start_time: End of the time interval, inclusive. \
+        Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789Z`, `2006-01-20`, `20060120`. \
+        Mutually exclusive with `at_time`.
+
+        :type start_time: Optional[Union[datetime, date, str]]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+
+        :return: Snapshots of asset metric constituents.
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "metric": metric,
+            "at_time": at_time,
+            "end_time": end_time,
+            "start_time": start_time,
+            "next_page_token": next_page_token,
+            "page_size": page_size,
+            "paging_from": paging_from,
+        }
+        return DataCollection(self._get_data, "/constituent-snapshots/asset-metrics", params)
+
+    def get_timeframes_of_asset_metric_constituents(
+            self,
+            metric: str,
+            constituents: Optional[Union[str, List[str]]] = None,
+            end_time: Optional[Union[datetime, date, str]] = None,
+            start_time: Optional[Union[datetime, date, str]] = None,
+            next_page_token: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None) -> DataCollection:
+        """
+        :param metric: Target metric name.
+        :type metric: str
+        :param constituents: Comma separated list of constituents. By default all constituents are returned.
+        Different asset metrics may have different constituents.
+        For example, constituents for `volume_trusted_spot_usd_1d` are exchanges.
+
+        :type constituents: Optional[Union[str, List[str]]]
+        :param end_time: Start of the time interval, inclusive. \
+        Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789Z`, `2006-01-20`, `20060120`. \
+        Mutually exclusive with `at_time`.
+
+        :type end_time: Optional[Union[datetime, date, str]]
+        :param start_time: End of the time interval, inclusive. \
+        Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789Z`, `2006-01-20`, `20060120`. \
+        Mutually exclusive with `at_time`.
+
+        :type start_time: Optional[Union[datetime, date, str]]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+
+        :return: List of timeframes.
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "metric": metric,
+            "constituents": constituents,
+            "end_time": end_time,
+            "start_time": start_time,
+            "next_page_token": next_page_token,
+            "page_size": page_size,
+            "paging_from": paging_from,
+        }
+        return DataCollection(self._get_data, "/constituent-timeframes/asset-metrics", params)
 
     def _get_data(self, url: str, params: Dict[str, Any]) -> DataReturnType:
         if params:
