@@ -5324,3 +5324,49 @@ For example, constituents for `volume_trusted_spot_usd_1d` are exchanges.
 
 `DataCollection`: List of timeframes.
 
+<a id="coinmetrics.api_client.CoinMetricsClient.blockchain_metadata_tags"></a>
+
+#### blockchain\_metadata\_tags
+
+```python
+def blockchain_metadata_tags(
+        type: Optional[str] = None,
+        page_size: Optional[int] = None,
+        next_page_token: Optional[str] = None) -> DataCollection
+```
+
+**Arguments**:
+
+- `type` (`Optional[str]`): The type of a tag.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`DataCollection`: List of tags.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.blockchain_metadata_tagged_entities"></a>
+
+#### blockchain\_metadata\_tagged\_entities
+
+```python
+def blockchain_metadata_tagged_entities(
+        tags: Optional[Union[str, List[str]]] = None,
+        entities: Optional[Union[str, List[str]]] = None,
+        locations: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        next_page_token: Optional[str] = None) -> DataCollection
+```
+
+**Arguments**:
+
+- `tags` (`Optional[Union[str, List[str]]]`): Comma separated list of tags. Mutually exclusive with `entities` parameter. Currently a single tag is allowed per each request.
+- `entities` (`Optional[Union[str, List[str]]]`): Comma separated list of entities. Mutually exclusive with `tags` parameter.
+- `locations` (`Optional[Union[str, List[str]]]`): Comma separated list of entity locations (asset representation where the entity has been tagged). Currently a single entity location is allowed per each request.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`DataCollection`: List of tagged entities. Ordered by tuple `(entity, tag, location, start_time)` if requested by providing `entities` parameter. Ordered by tuple `(tag, location, entity, started_time)` if requested by providing `tags` parameter.
+

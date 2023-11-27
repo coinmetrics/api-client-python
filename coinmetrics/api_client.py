@@ -7241,6 +7241,62 @@ class CoinMetricsClient:
         }
         return DataCollection(self._get_data, "/constituent-timeframes/asset-metrics", params)
 
+    def blockchain_metadata_tags(
+            self,
+            type: Optional[str] = None,
+            page_size: Optional[int] = None,
+            next_page_token: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        :param type: The type of a tag.
+        :type type: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of tags.
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "type": type,
+            "page_size": page_size,
+            "next_page_token": next_page_token,
+        }
+        return DataCollection(self._get_data, "/blockchain-metadata/tags", params)
+
+    def blockchain_metadata_tagged_entities(
+            self,
+            tags: Optional[Union[str, List[str]]] = None,
+            entities: Optional[Union[str, List[str]]] = None,
+            locations: Optional[Union[str, List[str]]] = None,
+            page_size: Optional[int] = None,
+            next_page_token: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        :param tags: Comma separated list of tags. Mutually exclusive with `entities` parameter. Currently a single tag is allowed per each request.
+        :type tags: Optional[Union[str, List[str]]]
+        :param entities: Comma separated list of entities. Mutually exclusive with `tags` parameter.
+        :type entities: Optional[Union[str, List[str]]]
+        :param locations: Comma separated list of entity locations (asset representation where the entity has been tagged). Currently a single entity location is allowed per each request.
+        :type locations: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of tagged entities. Ordered by tuple `(entity, tag, location, start_time)` if requested by providing `entities` parameter. Ordered by tuple `(tag, location, entity, started_time)` if requested by providing `tags` parameter.
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "tags": tags,
+            "entities": entities,
+            "locations": locations,
+            "page_size": page_size,
+            "next_page_token": next_page_token,
+        }
+        return DataCollection(self._get_data, "/blockchain-metadata/tagged-entities", params)
+
     def _get_data(self, url: str, params: Dict[str, Any]) -> DataReturnType:
         if params:
             params_str = "&{}".format(

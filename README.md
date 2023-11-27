@@ -28,24 +28,38 @@ client = CoinMetricsClient("<cm_api_key>")
 client = CoinMetricsClient()
 ```
 
-After that you can use the client object for getting information such as available markets:
+After that you can use the client object for getting information such as available market trades as a list of dictionaries:
 ```
-print(client.catalog_markets())
+print(client.catalog_market_trades_v2().to_list())
 ```
 
-or to query all available assets along with what is available for those assets, like metrics, markets:
+or to iterate over each page of data:
 
-```
-print(client.catalog_assets())
+```python
+for data in client.catalog_market_trades_v2():
+    print(data)
 ```
 
 
 you can also use filters for the catalog endpoints like this:
 
 ```
-print(client.catalog_assets(assets=['btc']))
+print(client.catalog_market_trades_v2(exchange="binance").to_list())
 ```
-in this case you would get all the information for btc only. 
+
+All the catalog V2 endpoints meant to help access the historical data served by other endpoints. For example, you can
+get all the BTC market trades for a certain day from binance like this:
+
+```python
+import os
+from coinmetrics.api_client import CoinMetricsClient
+client = CoinMetricsClient(os.environ['CM_API_KEY'])
+btc_binance_markets = [market['market'] for market in client.catalog_market_trades_v2(exchange="binance", asset="btc").to_list()]
+start_time = "2023-01-01"
+end_time = "2023-01-02"
+binance_market_trades = client.get_market_trades(markets=btc_binance_markets, start_time=start_time, end_time=end_time, page_size=1000).export_to_csv("binance_trades.csv")
+```
+in this case you would get all the information markets that trade on binance only. 
 
 You can use this client to connect to our API v4 and get catalog or timeseries data from python environment. It natively supports paging over the data so you can use it to iterate over timeseries entries seamlessly.
 
@@ -54,47 +68,39 @@ The client can be used to query both pro and community data.
 The full list of methods can be found in the [API Client Spec](https://coinmetrics.github.io/api-client-python/site/api_client.html).
 
 
-If you'd like a more wholistic view of what is offered from an API endpoint you can use the `to_dataframe()` function 
+If you'd like a more holistic view of what is offered from an API endpoint you can use the `to_dataframe()` function 
 associated with our catalog endpoints. The code snippet below shows getting a dataframe of information on all the 
 assets that data is provided for:
 ```python
-print(client.catalog_assets().to_dataframe())
+print(client.catalog_market_metrics_v2(exchange="binance", page_size=1000).to_dataframe())
 ```
 
 Output:
 ```commandline
-      asset          full_name          exchanges  ... metrics atlas  experimental
-0      100x           100xCoin          [gate.io]  ...     NaN  <NA>          <NA>
-1     10set             Tenset   [gate.io, lbank]  ...     NaN  <NA>          <NA>
-2       18c           Block 18            [huobi]  ...     NaN  <NA>          <NA>
-3      1art          ArtWallet          [gate.io]  ...     NaN  <NA>          <NA>
-4      1box               1BOX           [zb.com]  ...     NaN  <NA>          <NA>
+                             market                                            metrics
+0       binance-1000BTTCUSDT-future  [{'metric': 'liquidity_depth_0_1_percent_ask_v...
+1      binance-1000FLOKIUSDT-future  [{'metric': 'liquidations_reported_future_buy_...
+2       binance-1000LUNCBUSD-future  [{'metric': 'liquidations_reported_future_buy_...
+3       binance-1000LUNCUSDT-future  [{'metric': 'liquidations_reported_future_buy_...
+4       binance-1000PEPEUSDT-future  [{'metric': 'liquidations_reported_future_buy_...
 ```
 
 Now you can use the pandas Dataframe functionality to do useful transformations, such as filtering out the assets 
 without metrics available, then saving that data to a csv file:
 ```python
-catalog_assets_df = client.catalog_assets().to_dataframe()
-only_assets_with_metrics = catalog_assets_df.dropna(subset=['metrics'])
-only_assets_with_metrics.to_csv("cm_assets_with_metrics.csv")
+import pandas as pd
+import os
+from coinmetrics.api_client import CoinMetricsClient
+from datetime import timedelta
+client = CoinMetricsClient(os.environ['CM_API_KEY'])
+binance_markets = client.catalog_market_trades_v2(exchange="binance", page_size=1000).to_dataframe()
+binance_markets['max_time'] = pd.to_datetime(binance_markets['max_time'], utc=True)
+current_utc_time = pd.Timestamp.now(tz='UTC')
+one_day_ago = current_utc_time - timedelta(days=1)
+filtered_binance_markets = binance_markets[binance_markets['max_time'] > one_day_ago]
 ```
 
-You may notice that in that data saved, the "metrics" column for example is a list of json data describing the metrics 
-offered and the frequency at which they are available. To help parse this information there is a keyword for all catalog
-endpoint data `secondary_level`:
-```python
-catalog_assets_df = client.catalog_assets().to_dataframe(secondary_level="metrics")
-only_assets_with_metrics = catalog_assets_df.dropna(subset=['metric'])
-eth_metrics = only_assets_with_metrics[only_assets_with_metrics['asset'] == "eth"]
-eth_metrics.to_csv("eth_metrics_granular.csv")
-```
-
-The above example queries for eth metrics at the level of metrics and frequency, where it will have one row for each 
-metric and frequency related to Ethereum. This allows users to quickly get high level information about exactly what
-is offered from the Coin Metrics API and to make custom queries against the API from there. This example only covers 
-`catalog_assets()`, but the pattern can be used across all of our catalog endpoints. 
-
-## Parallel execution for faster execution
+## Parallel execution for faster data export
 There are times when it may be useful to pull in large amounts of data at once. The most effective way to do this 
 when calling the CoinMetrics API is to split your request into many different queries. This functionality is now 
 built into the API Client directly to allow for faster data export:
