@@ -225,18 +225,16 @@ def test_get_asset_quotes_stream() -> None:
     stream = client.get_stream_asset_quotes(assets="btc")
     stream.run(on_message=on_message_assets_quotes_test)
 
-
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_get_market_liquidations() -> None:
-    stream = client.get_stream_market_liquidations(markets='binance-BTCBUSD-future')
+    stream = client.get_stream_market_liquidations(markets='binance-LEVERUSDT-future')
     stream.run(on_message=on_message_market_liquidations_test)
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_get_market_openinterest() -> None:
-    stream = client.get_stream_market_open_interest(markets='binance-BTCBUSD-future')
+    stream = client.get_stream_market_open_interest(markets='binance-LEVERUSDT-future')
     stream.run(on_message=on_message_market_openinterest)
-
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_on_close() -> None:

@@ -31,7 +31,7 @@ build-test-push-image:
     - docker build --cache-from $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --build-arg CM_API_KEY=$CM_API_KEY  .
     - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python -m mypy -p coinmetrics -p test --install-types --non-interactive
     - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python -m flake8 coinmetrics
-    - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python -m pytest -n auto test --ignore test/test_data_exporter.py --ignore test/test_rate_limits.py
+    - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python -m pytest -n auto --timeout=60 test --ignore test/test_data_exporter.py --ignore test/test_rate_limits.py
     - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python -m pytest test/test_rate_limits.py
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME

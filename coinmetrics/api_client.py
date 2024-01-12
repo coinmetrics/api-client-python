@@ -7263,7 +7263,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "next_page_token": next_page_token,
         }
-        return DataCollection(self._get_data, "/blockchain-metadata/tags", params)
+        return DataCollection(self._get_data, "blockchain-metadata/tags", params)
 
     def blockchain_metadata_tagged_entities(
             self,
@@ -7295,7 +7295,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "next_page_token": next_page_token,
         }
-        return DataCollection(self._get_data, "/blockchain-metadata/tagged-entities", params)
+        return DataCollection(self._get_data, "blockchain-metadata/tagged-entities", params)
 
     def _get_data(self, url: str, params: Dict[str, Any]) -> DataReturnType:
         if params:
