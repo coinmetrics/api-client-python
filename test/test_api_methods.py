@@ -279,6 +279,16 @@ def test_get_asset_profiles() -> None:
     one_inch = client.get_asset_profiles(assets="1inch").first_page()[0]
     assert one_inch["asset"] == "1inch"
 
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_get_predicted_market_funding_rates() -> None:
+    data = client.get_predicted_market_funding_rates(
+        markets="bybit-1000000VINUUSDT-future"
+    ).first_page()
+    print(data)
+    assert len(data) > 1
+    predicted_funding_rate = data[0]
+    assert predicted_funding_rate["market"] == "bybit-1000000VINUUSDT-future"
+
 
 if __name__ == "__main__":
     pytest.main()

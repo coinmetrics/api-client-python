@@ -2240,6 +2240,62 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-funding-rates", params)
 
+    def catalog_market_funding_rates_predicted_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of market funding rates statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-funding-rates-predicted", params)
+
     def catalog_market_contract_prices_v2(
             self,
             markets: Optional[Union[str, List[str]]] = None,
@@ -2857,6 +2913,62 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
         }
         return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-funding-rates", params)
+
+    def catalog_full_market_funding_rates_predicted_v2(
+            self,
+            markets: Optional[Union[str, List[str]]] = None,
+            exchange: Optional[str] = None,
+            market_type: Optional[str] = None,
+            base: Optional[str] = None,
+            quote: Optional[str] = None,
+            asset: Optional[str] = None,
+            symbol: Optional[str] = None,
+            format: Optional[str] = None,
+            page_size: Optional[int] = None,
+            paging_from: Optional[str] = None,
+            next_page_token: Optional[str] = None,
+    ) -> CatalogV2DataCollection:
+        """
+        :param markets: Comma separated list of markets. By default all markets are returned.
+        :type markets: Optional[Union[str, List[str]]]
+        :param exchange: Unique name of an exchange.
+        :type exchange: Optional[str]
+        :param market_type: Type of markets.
+        :type market_type: Optional[str]
+        :param base: Base asset of markets.
+        :type base: Optional[str]
+        :param quote: Quote asset of markets.
+        :type quote: Optional[str]
+        :param asset: Any asset of markets.
+        :type asset: Optional[str]
+        :param symbol: Symbol of derivative markets, full instrument name.
+        :type symbol: Optional[str]
+        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :type format: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of market funding rates statistics.
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "exchange": exchange,
+            "type": market_type,
+            "base": base,
+            "quote": quote,
+            "asset": asset,
+            "symbol": symbol,
+            "format": format,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+        }
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-funding-rates-predicted", params)
 
     def catalog_full_market_contract_prices_v2(
             self,
@@ -4162,6 +4274,8 @@ class CoinMetricsClient:
         end_hash: Optional[str] = None,
         min_confirmations: Optional[int] = None,
         null_as_zero: Optional[bool] = None,
+        ignore_forbidden_errors: Optional[bool] = None,
+        ignore_unsupported_errors: Optional[bool] = None,
     ) -> DataCollection:
         """
         Returns requested metrics for specified assets.
@@ -4208,6 +4322,10 @@ class CoinMetricsClient:
         :type min_confirmations: int
         :param null_as_zero: Default: false. Nulls are represented as zeros in the response.
         :type null_as_zero: bool
+        :param ignore_forbidden_errors: Default: false. Ignore HTTP 403 Forbidden errors
+        :type ignore_forbidden_errors: bool
+        :param ignore_unsupported_errors: Default: false. Ignore errors for unsupported assets, metrics or frequencies.
+        :type ignore_unsupported_errors: bool
         :return: Asset Metrics timeseries.
         :rtype: DataCollection
         """
@@ -4232,6 +4350,8 @@ class CoinMetricsClient:
             "end_hash": end_hash,
             "min_confirmations": min_confirmations,
             "null_as_zero": null_as_zero,
+            "ignore_forbidden_errors": ignore_forbidden_errors,
+            "ignore_unsupported_errors": ignore_unsupported_errors
         }
         return DataCollection(self._get_data, "timeseries/asset-metrics", params)
 
@@ -5073,6 +5193,57 @@ class CoinMetricsClient:
             "limit_per_market": limit_per_market,
         }
         return DataCollection(self._get_data, "timeseries/market-funding-rates", params)
+
+    def get_predicted_market_funding_rates(
+        self,
+        markets: Union[List[str], str],
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        limit_per_market: Optional[int] = None,
+    ) -> DataCollection:
+        """
+        Returns predicted funding rates for specified futures markets. Results are ordered by tuple (market, time).
+        For more information on funding rates, see: https://docs.coinmetrics.io/info/markets/fundingrates
+
+        :param markets: list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future'`
+        :type markets: list(str), str
+        :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
+        :type page_size: int
+        :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+        :type paging_from: PagingFrom, str
+        :param start_time: Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type start_time: datetime, date, str
+        :param end_time: End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+        :type end_time: datetime, date, str
+        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
+        :type start_inclusive: bool
+        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
+        :type end_inclusive: bool
+        :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+        :type timezone: str
+        :param limit_per_market: How many entries _per market_ the result should contain.
+        :type limit_per_market: int
+        :return: Market Funding Rates timeseries.
+        :rtype: DataCollection
+        """
+
+        params: Dict[str, Any] = {
+            "markets": markets,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "start_time": start_time,
+            "end_time": end_time,
+            "start_inclusive": start_inclusive,
+            "end_inclusive": end_inclusive,
+            "timezone": timezone,
+            "limit_per_market": limit_per_market,
+        }
+        return DataCollection(self._get_data, "timeseries/market-funding-rates-predicted", params)
 
     def get_market_orderbooks(
         self,

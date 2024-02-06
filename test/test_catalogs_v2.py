@@ -68,6 +68,13 @@ def test_catalogv2_full_market_funding_rates() -> None:
     assert all(['min_time' in catalog for catalog in catalog_funding_rates])
     assert all(['max_time' in catalog for catalog in catalog_funding_rates])
 
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_full_market_funding_rates_predicted() -> None:
+    catalog_funding_rates = client.catalog_full_market_funding_rates_predicted_v2(page_size=10).first_page()
+    assert len(catalog_funding_rates) == 10
+    assert all(['market' in catalog for catalog in catalog_funding_rates])
+    assert all(['min_time' in catalog for catalog in catalog_funding_rates])
+    assert all(['max_time' in catalog for catalog in catalog_funding_rates])
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_catalogv2_market_funding_rates() -> None:
@@ -77,6 +84,13 @@ def test_catalogv2_market_funding_rates() -> None:
     assert all(['min_time' in catalog for catalog in catalog_funding_rates])
     assert all(['max_time' in catalog for catalog in catalog_funding_rates])
 
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_market_funding_rates_predicted() -> None:
+    catalog_funding_rates = client.catalog_market_funding_rates_predicted_v2(page_size=10).first_page()
+    assert len(catalog_funding_rates) == 10
+    assert all(['market' in catalog for catalog in catalog_funding_rates])
+    assert all(['min_time' in catalog for catalog in catalog_funding_rates])
+    assert all(['max_time' in catalog for catalog in catalog_funding_rates])
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_catalogv2_market_greeks() -> None:
