@@ -745,6 +745,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#catalog_market_funding_rates_predicted_v2" class="md-nav__link">
+    catalog_market_funding_rates_predicted_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#catalog_market_contract_prices_v2" class="md-nav__link">
     catalog_market_contract_prices_v2
   </a>
@@ -817,6 +824,13 @@
           <li class="md-nav__item">
   <a href="#catalog_full_market_funding_rates_v2" class="md-nav__link">
     catalog_full_market_funding_rates_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_market_funding_rates_predicted_v2" class="md-nav__link">
+    catalog_full_market_funding_rates_predicted_v2
   </a>
   
 </li>
@@ -1153,6 +1167,13 @@
           <li class="md-nav__item">
   <a href="#get_market_funding_rates" class="md-nav__link">
     get_market_funding_rates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_predicted_market_funding_rates" class="md-nav__link">
+    get_predicted_market_funding_rates
   </a>
   
 </li>
@@ -2078,6 +2099,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#catalog_market_funding_rates_predicted_v2" class="md-nav__link">
+    catalog_market_funding_rates_predicted_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#catalog_market_contract_prices_v2" class="md-nav__link">
     catalog_market_contract_prices_v2
   </a>
@@ -2150,6 +2178,13 @@
           <li class="md-nav__item">
   <a href="#catalog_full_market_funding_rates_v2" class="md-nav__link">
     catalog_full_market_funding_rates_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_market_funding_rates_predicted_v2" class="md-nav__link">
+    catalog_full_market_funding_rates_predicted_v2
   </a>
   
 </li>
@@ -2486,6 +2521,13 @@
           <li class="md-nav__item">
   <a href="#get_market_funding_rates" class="md-nav__link">
     get_market_funding_rates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_predicted_market_funding_rates" class="md-nav__link">
+    get_predicted_market_funding_rates
   </a>
   
 </li>
@@ -4197,6 +4239,37 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of market funding rates statistics.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_funding_rates_predicted_v2"></a></p>
+<h4 id="catalog_market_funding_rates_predicted_v2">catalog_market_funding_rates_predicted_v2<a class="headerlink" href="#catalog_market_funding_rates_predicted_v2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_market_funding_rates_predicted_v2</span><span class="p">(</span>
+        <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">base</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">quote</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">next_page_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogV2DataCollection</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of markets. By default all markets are returned.</li>
+<li><code>exchange</code> (<code>Optional[str]</code>): Unique name of an exchange.</li>
+<li><code>market_type</code> (<code>Optional[str]</code>): Type of markets.</li>
+<li><code>base</code> (<code>Optional[str]</code>): Base asset of markets.</li>
+<li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
+<li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
+<li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Format of the response. Supported values are <code>json</code>, <code>json_stream</code>.</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
+<li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
+<li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogV2DataCollection</code>: List of market funding rates statistics.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_contract_prices_v2"></a></p>
 <h4 id="catalog_market_contract_prices_v2">catalog_market_contract_prices_v2<a class="headerlink" href="#catalog_market_contract_prices_v2" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_market_contract_prices_v2</span><span class="p">(</span>
@@ -4511,6 +4584,37 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_funding_rates_v2"></a></p>
 <h4 id="catalog_full_market_funding_rates_v2">catalog_full_market_funding_rates_v2<a class="headerlink" href="#catalog_full_market_funding_rates_v2" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_market_funding_rates_v2</span><span class="p">(</span>
+        <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">base</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">quote</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">next_page_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogV2DataCollection</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of markets. By default all markets are returned.</li>
+<li><code>exchange</code> (<code>Optional[str]</code>): Unique name of an exchange.</li>
+<li><code>market_type</code> (<code>Optional[str]</code>): Type of markets.</li>
+<li><code>base</code> (<code>Optional[str]</code>): Base asset of markets.</li>
+<li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
+<li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
+<li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Format of the response. Supported values are <code>json</code>, <code>json_stream</code>.</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
+<li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
+<li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogV2DataCollection</code>: List of market funding rates statistics.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_funding_rates_predicted_v2"></a></p>
+<h4 id="catalog_full_market_funding_rates_predicted_v2">catalog_full_market_funding_rates_predicted_v2<a class="headerlink" href="#catalog_full_market_funding_rates_predicted_v2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_market_funding_rates_predicted_v2</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -5284,25 +5388,28 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <p><code>AssetChainsDataCollection</code>: Asset chains timeseries.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.get_asset_metrics"></a></p>
 <h4 id="get_asset_metrics">get_asset_metrics<a class="headerlink" href="#get_asset_metrics" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_asset_metrics</span><span class="p">(</span><span class="n">assets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
-                      <span class="n">metrics</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
-                      <span class="n">frequency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                      <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                      <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span>
-                      <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                      <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                      <span class="n">start_height</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                      <span class="n">end_height</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                      <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                      <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                      <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                      <span class="n">sort</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                      <span class="n">limit_per_asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                      <span class="n">status</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                      <span class="n">start_hash</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                      <span class="n">end_hash</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                      <span class="n">min_confirmations</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                      <span class="n">null_as_zero</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_asset_metrics</span><span class="p">(</span>
+        <span class="n">assets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">metrics</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">frequency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span>
+        <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">start_height</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end_height</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">sort</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">limit_per_asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">status</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">start_hash</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end_hash</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">min_confirmations</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">null_as_zero</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">ignore_forbidden_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">ignore_unsupported_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
 </code></pre></div>
 <p>Returns requested metrics for specified assets.</p>
 <p><strong>Arguments</strong>:</p>
@@ -5330,6 +5437,8 @@ Inclusive by default. Mutually exclusive with end_time and end_height.</li>
 <li><code>min_confirmations</code> (<code>int</code>): Specifies how many blocks behind the chain tip block by block metrics
 (1b frequency) are based on. Default for btc is 2 and 99 for eth.</li>
 <li><code>null_as_zero</code> (<code>bool</code>): Default: false. Nulls are represented as zeros in the response.</li>
+<li><code>ignore_forbidden_errors</code> (<code>bool</code>): Default: false. Ignore HTTP 403 Forbidden errors</li>
+<li><code>ignore_unsupported_errors</code> (<code>bool</code>): Default: false. Ignore errors for unsupported assets, metrics or frequencies.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: Asset Metrics timeseries.</p>
@@ -5781,6 +5890,35 @@ if you request metrics for a set of markets.</li>
         <span class="n">limit_per_market</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
 </code></pre></div>
 <p>Returns market funding rates for specified markets and date range.</p>
+<p>For more information on funding rates, see: <a href="https://docs.coinmetrics.io/info/markets/fundingrates">https://docs.coinmetrics.io/info/markets/fundingrates</a></p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>markets</code> (<code>list(str), str</code>): list of market ids. Market ids use the following naming convention: <code>exchangeName-baseAsset-quoteAsset-spot</code> for spot markets, <code>exchangeName-futuresSymbol-future</code> for futures markets, and <code>exchangeName-optionsSymbol-option</code> for options markets. e.g., <code>'coinbase-btc-usd-spot'</code>, <code>'bitmex-XBTUSD-future'</code></li>
+<li><code>page_size</code> (<code>int</code>): number of items returned per page when calling the API. If the request times out, try using a smaller number.</li>
+<li><code>paging_from</code> (<code>PagingFrom, str</code>): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
+<li><code>start_time</code> (<code>datetime, date, str</code>): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120</li>
+<li><code>end_time</code> (<code>datetime, date, str</code>): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120</li>
+<li><code>start_inclusive</code> (<code>bool</code>): Flag to define if start timestamp must be included in the timeseries if present. True by default.</li>
+<li><code>end_inclusive</code> (<code>bool</code>): Flag to define if end timestamp must be included in the timeseries if present. True by default.</li>
+<li><code>timezone</code> (<code>str</code>): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.</li>
+<li><code>limit_per_market</code> (<code>int</code>): How many entries <em>per market</em> the result should contain.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>DataCollection</code>: Market Funding Rates timeseries.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.get_predicted_market_funding_rates"></a></p>
+<h4 id="get_predicted_market_funding_rates">get_predicted_market_funding_rates<a class="headerlink" href="#get_predicted_market_funding_rates" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_predicted_market_funding_rates</span><span class="p">(</span>
+        <span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span>
+        <span class="n">limit_per_market</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+<p>Returns predicted funding rates for specified futures markets. Results are ordered by tuple (market, time).</p>
 <p>For more information on funding rates, see: <a href="https://docs.coinmetrics.io/info/markets/fundingrates">https://docs.coinmetrics.io/info/markets/fundingrates</a></p>
 <p><strong>Arguments</strong>:</p>
 <ul>

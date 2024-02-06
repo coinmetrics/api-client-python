@@ -1781,6 +1781,43 @@ def catalog_market_funding_rates_v2(
 
 `CatalogV2DataCollection`: List of market funding rates statistics.
 
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_funding_rates_predicted_v2"></a>
+
+#### catalog\_market\_funding\_rates\_predicted\_v2
+
+```python
+def catalog_market_funding_rates_predicted_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of market funding rates statistics.
+
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_contract_prices_v2"></a>
 
 #### catalog\_market\_contract\_prices\_v2
@@ -2158,6 +2195,43 @@ def catalog_full_market_quotes_v2(
 
 ```python
 def catalog_full_market_funding_rates_v2(
+        markets: Optional[Union[str, List[str]]] = None,
+        exchange: Optional[str] = None,
+        market_type: Optional[str] = None,
+        base: Optional[str] = None,
+        quote: Optional[str] = None,
+        asset: Optional[str] = None,
+        symbol: Optional[str] = None,
+        format: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None) -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `exchange` (`Optional[str]`): Unique name of an exchange.
+- `market_type` (`Optional[str]`): Type of markets.
+- `base` (`Optional[str]`): Base asset of markets.
+- `quote` (`Optional[str]`): Quote asset of markets.
+- `asset` (`Optional[str]`): Any asset of markets.
+- `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
+- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of market funding rates statistics.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_funding_rates_predicted_v2"></a>
+
+#### catalog\_full\_market\_funding\_rates\_predicted\_v2
+
+```python
+def catalog_full_market_funding_rates_predicted_v2(
         markets: Optional[Union[str, List[str]]] = None,
         exchange: Optional[str] = None,
         market_type: Optional[str] = None,
@@ -3138,25 +3212,28 @@ Returns the chains of blocks for the specified assets.
 #### get\_asset\_metrics
 
 ```python
-def get_asset_metrics(assets: Union[List[str], str],
-                      metrics: Union[List[str], str],
-                      frequency: Optional[str] = None,
-                      page_size: Optional[int] = None,
-                      paging_from: Optional[Union[PagingFrom, str]] = "start",
-                      start_time: Optional[Union[datetime, date, str]] = None,
-                      end_time: Optional[Union[datetime, date, str]] = None,
-                      start_height: Optional[int] = None,
-                      end_height: Optional[int] = None,
-                      start_inclusive: Optional[bool] = None,
-                      end_inclusive: Optional[bool] = None,
-                      timezone: Optional[str] = None,
-                      sort: Optional[str] = None,
-                      limit_per_asset: Optional[int] = None,
-                      status: Optional[str] = None,
-                      start_hash: Optional[str] = None,
-                      end_hash: Optional[str] = None,
-                      min_confirmations: Optional[int] = None,
-                      null_as_zero: Optional[bool] = None) -> DataCollection
+def get_asset_metrics(
+        assets: Union[List[str], str],
+        metrics: Union[List[str], str],
+        frequency: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_height: Optional[int] = None,
+        end_height: Optional[int] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        sort: Optional[str] = None,
+        limit_per_asset: Optional[int] = None,
+        status: Optional[str] = None,
+        start_hash: Optional[str] = None,
+        end_hash: Optional[str] = None,
+        min_confirmations: Optional[int] = None,
+        null_as_zero: Optional[bool] = None,
+        ignore_forbidden_errors: Optional[bool] = None,
+        ignore_unsupported_errors: Optional[bool] = None) -> DataCollection
 ```
 
 Returns requested metrics for specified assets.
@@ -3186,6 +3263,8 @@ Inclusive by default. Mutually exclusive with end_time and end_height.
 - `min_confirmations` (`int`): Specifies how many blocks behind the chain tip block by block metrics
 (1b frequency) are based on. Default for btc is 2 and 99 for eth.
 - `null_as_zero` (`bool`): Default: false. Nulls are represented as zeros in the response.
+- `ignore_forbidden_errors` (`bool`): Default: false. Ignore HTTP 403 Forbidden errors
+- `ignore_unsupported_errors` (`bool`): Default: false. Ignore errors for unsupported assets, metrics or frequencies.
 
 **Returns**:
 
@@ -3740,6 +3819,43 @@ def get_market_funding_rates(
 ```
 
 Returns market funding rates for specified markets and date range.
+
+For more information on funding rates, see: https://docs.coinmetrics.io/info/markets/fundingrates
+
+**Arguments**:
+
+- `markets` (`list(str), str`): list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future'`
+- `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
+- `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
+- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
+- `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
+- `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
+- `limit_per_market` (`int`): How many entries _per market_ the result should contain.
+
+**Returns**:
+
+`DataCollection`: Market Funding Rates timeseries.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.get_predicted_market_funding_rates"></a>
+
+#### get\_predicted\_market\_funding\_rates
+
+```python
+def get_predicted_market_funding_rates(
+        markets: Union[List[str], str],
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        limit_per_market: Optional[int] = None) -> DataCollection
+```
+
+Returns predicted funding rates for specified futures markets. Results are ordered by tuple (market, time).
 
 For more information on funding rates, see: https://docs.coinmetrics.io/info/markets/fundingrates
 
