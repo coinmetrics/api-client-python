@@ -6,6 +6,7 @@ import pandas as pd
 import pytest
 
 from coinmetrics.api_client import CoinMetricsClient
+from coinmetrics._data_collection import ParallelDataCollection
 import os
 
 client = CoinMetricsClient(str(os.environ.get("CM_API_KEY")))
@@ -267,7 +268,18 @@ def test_blockchain_parallel_export() -> None:
         end_inclusive=False
     ).parallel(time_increment=timedelta(days=1)).to_dataframe()
     assert len(df_temp) > 2000
-
+    
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_parse_date() -> None:
+    pdc = ParallelDataCollection
+    t_naive_date = "2024-01-02"
+    t_naive_digit = "20240102"
+    t_naive_s = "2024-01-02T00:03:04"
+    t_naive_sz = "2024-01-02T00:03:04Z"
+    assert pdc.parse_date(t_naive_date) == datetime.datetime(year=2024, month=1, day=2)
+    assert pdc.parse_date(t_naive_digit) == datetime.datetime(year=2024, month=1, day=2)
+    assert pdc.parse_date(t_naive_s) == datetime.datetime(year=2024, month=1, day=2, hour=0, minute=3, second=4)
+    assert pdc.parse_date(t_naive_sz) == datetime.datetime(year=2024, month=1, day=2, hour=0, minute=3, second=4)
 
 if __name__ == '__main__':
     pytest.main()

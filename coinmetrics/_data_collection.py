@@ -12,7 +12,7 @@ from gzip import GzipFile
 from io import BytesIO
 from logging import getLogger
 from time import sleep
-from datetime import datetime, timedelta, date
+from datetime import datetime, timedelta, date, timezone
 from typing import Any, Dict, Iterable, Iterator, List, Optional, cast, Type, Callable, Union, Generator, Tuple
 from dateutil.parser import isoparse
 from coinmetrics._typing import (
@@ -782,17 +782,30 @@ class ParallelDataCollection(DataCollection):
 
     @staticmethod
     def parse_date(date_input: Union[datetime, date, str]) -> datetime:
+        """
+        Parses a datetime object or datetime string into a datetime object. Datetime string must be a valid
+        ISO 8601 format. Timezone aware objects are converted to UTC
+        :param date_input: Union[datetime, date, str] date to parse into datetime
+        :return: datetime
+        """
         if isinstance(date_input, datetime):
-            return date_input
+            if date_input.tzname() is None:
+                return date_input
+            else:
+                return date_input.astimezone(timezone.utc).replace(tzinfo=None)
         if isinstance(date_input, date):
             return datetime(date_input.year, date_input.month, date_input.day)
         formats = [
-            "%Y-%m-%dT%H:%M:%SZ",
-            "%Y-%m-%dT%H:%M:%S.%fZ",
-            "%Y-%m-%dT%H:%M:%S.%fZ",
+            "%Y-%m-%dT%H:%M:%S",
+            "%Y-%m-%dT%H%M%S",
+            "%Y-%m-%dT%H:%M:%S.%f",
+            "%Y-%m-%dT%H%M%S.%f",
             "%Y-%m-%d",
-            "%Y%m%d"
+            "%Y%m%d",
         ]
+        # -Z => UTC time
+        if date_input.endswith('Z'):
+            date_input = date_input[:-1]
         for fmt in formats:
             try:
                 return datetime.strptime(date_input, fmt)
