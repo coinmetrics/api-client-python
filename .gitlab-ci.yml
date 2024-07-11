@@ -81,7 +81,6 @@ generate-docs:
     - python -m pip install wheel dulwich pyrsistent
     - python -m pip install poetry jinja2==3.0.3 regex
     - poetry install
-    - poetry lock
     - apk add py3-dbus
     - apk add bash
   script:
