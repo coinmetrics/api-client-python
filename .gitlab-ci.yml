@@ -80,6 +80,7 @@ generate-docs:
     - python -m pip install --upgrade regex pydoc-markdown
     - python -m pip install wheel dulwich pyrsistent
     - python -m pip install poetry jinja2==3.0.3 regex
+    - poetry lock --no-update
     - poetry install
     - apk add py3-dbus
     - apk add bash

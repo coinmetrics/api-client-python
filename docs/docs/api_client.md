@@ -3124,8 +3124,8 @@ Returns asset alerts for the specified assets.
 - `alerts` (`list(str), str`): list of asset alert names
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -3162,8 +3162,8 @@ Returns Defi Balance Sheet records for specified DeFi protocols.
 - `defi_protocols` (`str, List[str]`): list of DeFi protocols like aave_v2_eth or protocol patterns like aave_v2_* or aave_*_eth or *_eth.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
 - `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
@@ -3197,8 +3197,8 @@ Returns the chains of blocks for the specified assets.
 - `assets` (`list(str), str`): list of asset names, e.g. 'btc'
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -3245,8 +3245,8 @@ Returns requested metrics for specified assets.
 - `frequency` (`str`): frequency of the returned timeseries, e.g 15s, 1d, etc.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_height` (`int`): Start block of the timeseries (only applicable when querying with frequency 1b).
 - `end_height` (`int`): End block of the timeseries (only applicable when querying with frequency 1b).
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
@@ -3301,8 +3301,8 @@ Returns metrics for specified exchanges.
 - `frequency` (`str`): frequency of the returned timeseries, e.g 15s, 1d, etc.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_height` (`int`): Start block of the timeseries (only applicable when querying with frequency 1b).
 - `end_height` (`int`): End block of the timeseries (only applicable when querying with frequency 1b).
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
@@ -3346,8 +3346,8 @@ Returns metrics for specified exchange-asset.
 - `frequency` (`str`): frequency of the returned timeseries, e.g 15s, 1d, etc.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_height` (`int`): Start block of the timeseries (only applicable when querying with frequency 1b).
 - `end_height` (`int`): End block of the timeseries (only applicable when querying with frequency 1b).
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
@@ -3390,8 +3390,8 @@ Returns metrics books for specified asset-asset pairs.
 - `frequency` (`str`): frequency of the returned timeseries, e.g 15s, 1d, etc.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_height` (`int`): Start block of the timeseries (only applicable when querying with frequency 1b).
 - `end_height` (`int`): End block of the timeseries (only applicable when querying with frequency 1b).
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
@@ -3433,8 +3433,8 @@ Results are ordered by tuple (pair, time).
 - `frequency` (`str`): frequency of the returned timeseries, e.g 15s, 1d, etc.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_height` (`int`): Start block of the timeseries (only applicable when querying with frequency 1b).
 - `end_height` (`int`): End block of the timeseries (only applicable when querying with frequency 1b).
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
@@ -3477,8 +3477,8 @@ Returns metrics for specified institutions.
 - `frequency` (`str`): frequency of the returned timeseries, e.g 15s, 1d, etc.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_height` (`int`): Start block of the timeseries (only applicable when querying with frequency 1b).
 - `end_height` (`int`): End block of the timeseries (only applicable when querying with frequency 1b).
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
@@ -3516,8 +3516,8 @@ Returns index candles for specified indexes and date range.
 - `frequency` (`str`): frequency of the returned timeseries, e.g 15s, 1d, etc.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -3554,8 +3554,8 @@ Returns index levels for specified indexes and date range.
 - `frequency` (`str`): frequency of the returned timeseries, e.g 15s, 1d, etc.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -3593,8 +3593,8 @@ Returns index constituents for specified indexes and date range.
 - `frequency` (`str`): frequency of the returned timeseries, e.g 15s, 1d, etc.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -3633,8 +3633,8 @@ For more information on market metrics, see: https://docs.coinmetrics.io/api/v4#
 - `frequency` (`str`): frequency of the returned timeseries, e.g 15s, 1d, etc.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -3675,8 +3675,8 @@ For more information on market candles, see: https://docs.coinmetrics.io/info/ma
 - `frequency` (`str`): frequency of the returned timeseries, e.g 15s, 1d, etc.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -3713,8 +3713,8 @@ For more information on market trades, see: https://docs.coinmetrics.io/info/mar
 - `markets` (`list(str), str`): list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future'`
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -3752,8 +3752,8 @@ For more information on open interest, see: https://docs.coinmetrics.io/info/mar
 - `markets` (`list(str), str`): list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future'`
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `granularity` (`str`): Downsampling granularity of market open interest. Supported values are raw, 1m, 1h, and 1d.
@@ -3790,8 +3790,8 @@ For more information on liquidations, see: https://docs.coinmetrics.io/info/mark
 - `markets` (`list(str), str`): list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future'`
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -3827,8 +3827,8 @@ For more information on funding rates, see: https://docs.coinmetrics.io/info/mar
 - `markets` (`list(str), str`): list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future'`
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -3864,8 +3864,8 @@ For more information on funding rates, see: https://docs.coinmetrics.io/info/mar
 - `markets` (`list(str), str`): list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future'`
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -3904,8 +3904,8 @@ For more information on order books, see: https://docs.coinmetrics.io/info/marke
 - `granularity` (`str`): Downsampling granularity of market order books and quotes. Supported values are raw, 1m, 1h, and 1d.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `depth_limit` (`str`): book depth limit, 100 levels max or full book that is not limited and provided as is from the exchange. Full book snapshots are collected once per hour
@@ -3945,8 +3945,8 @@ For more information on quotes, see: https://docs.coinmetrics.io/info/markets/qu
 - `granularity` (``): Downsampling granularity of market order books and quotes. Supported values are raw, 1m, 1h, and 1d.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -3983,8 +3983,8 @@ Returns contract prices for specified markets. This includes index price and mar
 - `markets` (`list(str), str`): list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future', 'deribit-ETH-25MAR22-1200-P-option'`
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `granularity` (`str`): Downsampling granularity of market contract prices. Supported values are raw, 1m, 1h, and 1d.
@@ -4020,8 +4020,8 @@ Returns implied volatility for specified markets.
 - `markets` (`list(str), str`): list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future', 'deribit-ETH-25MAR22-1200-P-option'`
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `granularity` (`str - one of raw, 1m, 1h, and 1d`): Downsampling granularity of market implied volatility. Supported values are raw, 1m, 1h, and 1d.
@@ -4057,8 +4057,8 @@ Returns greeks for option markets.
 - `markets` (`list(str), str`): list of market ids. Market ids use the following naming convention: `exchangeName-baseAsset-quoteAsset-spot` for spot markets, `exchangeName-futuresSymbol-future` for futures markets, and `exchangeName-optionsSymbol-option` for options markets. e.g., `'coinbase-btc-usd-spot'`, `'bitmex-XBTUSD-future', 'deribit-ETH-25MAR22-1200-P-option'`
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `granularity` (`str - one of raw, 1m, 1h, and 1d`): Downsampling granularity of market greeks. Supported values are raw, 1m, 1h, and 1d
@@ -4092,8 +4092,8 @@ Returns mining pool tips summaries for specified assets.
 - `assets` (`list(str), str`): list of asset names, e.g. 'btc'
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -4126,8 +4126,8 @@ Returns mempool feerates for the specified assets. Note: for this method, page_s
 - `assets` (`list(str), str`): list of asset names, e.g. 'btc'
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -4381,8 +4381,8 @@ Returns a list of blockchain blocks metadata.
 - `heights` (`str, list(str)`): Optional comma separated list of block heights to filter a response.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
 - `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
@@ -4423,8 +4423,8 @@ Returns a list of blockchain accounts with their balances.
 - `accounts` (`str, list(str)`): Optional comma separated list of accounts to filter a response.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
 - `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
 - `start_chain_sequence_number` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
@@ -4470,8 +4470,8 @@ Returns a list of blockchain transactions metadata.
 - `block_hashes` (`str, list(str)`): Optional comma separated list of block hashes to filter a response.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
 - `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
@@ -4515,8 +4515,8 @@ Returns a list of blockchain accounts balance updates.
 - `block_hashes` (`str, list(str)`): Optional comma separated list of block hashes to filter a response.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
 - `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
 - `start_chain_sequence_number` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
@@ -4561,8 +4561,8 @@ Returns a list of blockchain blocks metadata.
 - `heights` (`str, list(str)`): Optional comma separated list of block heights to filter a response.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
 - `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
 - `chain` (`str`): Default: "main" Chain type. Supported values are main and all (includes both main and stale).
@@ -4605,8 +4605,8 @@ Returns a list of blockchain accounts with their balances.
 - `accounts` (`str, list(str)`): Optional comma separated list of accounts to filter a response.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
 - `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
 - `start_chain_sequence_number` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
@@ -4648,8 +4648,8 @@ Returns a list of blockchain sub-accounts with their balances.
 - `accounts` (`str, list(str)`): Optional comma separated list of accounts to filter a response.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
 - `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
 - `start_chain_sequence_number` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
@@ -4692,8 +4692,8 @@ Returns a list of blockchain transactions metadata.
 - `block_hashes` (`str, list(str)`): Optional comma separated list of block hashes to filter a response.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
 - `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
 - `chain` (`str`): Default: "main". Chain type. Supported values are main and all (includes both main and stale).
@@ -4743,8 +4743,8 @@ Returns a list of blockchain accounts balance updates.
 - `block_hashes` (`str, list(str)`): Optional comma separated list of block hashes to filter a response.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
 - `end_height` (`int`): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
 - `start_chain_sequence_number` (`int`): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
@@ -4913,8 +4913,8 @@ def get_list_of_balance_updates_for_account_v2(
 - `txids` (`Union[str, List[str]]`): Optional comma separated list of transaction identifiers (txid) to filter a response. The list must contain a single element for Community users.
 - `block_hashes` (`Union[str, List[str]]`): Optional comma separated list of block hashes to filter a response. The list must contain a single element for Community users.
 - `include_counterparties` (`bool`): Include information about the counterparties balance updates.
-- `start_time` (`str`): Start of the time interval. This field refers to the `time` field in the response. Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789Z`, `2006-01-20`, `20060120`. Inclusive by default. Mutually exclusive with `start_height`. UTC timezone by default. `Z` suffix is optional and `timezone` parameter has a priority over it. If `start_time` is omitted, response will include time series from the **earliest** time available. This parameter is disabled for Community users.
-- `end_time` (`str`): End of the time interval. This field refers to the `time` field in the response. Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789Z`, `2006-01-20`, `20060120`. Inclusive by default. Mutually exclusive with `end_height`. UTC timezone by default. `Z` suffix is optional and `timezone` parameter has a priority over it. If `end_time` is omitted, response will include time series up to the **latest** time available. This parameter is disabled for Community users.
+- `start_time` (`str`): Start of the time interval. This field refers to the `time` field in the response. Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789, 2006-01-20, 20060120Z`, `2006-01-20`, `20060120`. Inclusive by default. Mutually exclusive with `start_height`. UTC timezone by default. `Z` suffix is optional and `timezone` parameter has a priority over it. If `start_time` is omitted, response will include time series from the **earliest** time available. This parameter is disabled for Community users.
+- `end_time` (`str`): End of the time interval. This field refers to the `time` field in the response. Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789, 2006-01-20, 20060120Z`, `2006-01-20`, `20060120`. Inclusive by default. Mutually exclusive with `end_height`. UTC timezone by default. `Z` suffix is optional and `timezone` parameter has a priority over it. If `end_time` is omitted, response will include time series up to the **latest** time available. This parameter is disabled for Community users.
 - `start_height` (`int`): The start height indicates the beginning block height for the set of data that are returned. Inclusive by default. Mutually exclusive with `start_time`. This parameter is disabled for Community users.
 - `end_height` (`int`): The end height indicates the ending block height for the set of data that are returned. Inclusive by default. Mutually exclusive with `end_time`. This parameter is disabled for Community users.
 - `start_chain_sequence_number` (`int`): Start of the `chain_sequence_number` interval. This parameter is disabled for Community users.
@@ -4964,8 +4964,8 @@ Returns status updates for the specified or all transactions.
 - `replacements_only` (`bool`): Boolean indicating if the response should contain only the replacement transactions.
 - `page_size` (`int`): number of items returned per page when calling the API. If the request times out, try using a smaller number.
 - `paging_from` (`PagingFrom, str`): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-- `start_time` (`datetime, date, str`): Start time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
-- `end_time` (`datetime, date, str`): End time of the timeseries. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789Z, 2006-01-20, 20060120
+- `start_time` (`datetime, date, str`): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
+- `end_time` (`datetime, date, str`): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
 - `start_inclusive` (`bool`): Flag to define if start timestamp must be included in the timeseries if present. True by default.
 - `end_inclusive` (`bool`): Flag to define if end timestamp must be included in the timeseries if present. True by default.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
@@ -5399,8 +5399,8 @@ def get_snapshots_of_asset_metric_constituents(
 
 - `metric` (`str`): Target metric name.
 - `at_time` (`Optional[str]`): Returns constituents at a specified date.         Value `now` can be specified to get the current constituents.         Mutually exclusive with `start_time` and/or `end_time`.
-- `end_time` (`Optional[Union[datetime, date, str]]`): Start of the time interval, inclusive.         Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789Z`, `2006-01-20`, `20060120`.         Mutually exclusive with `at_time`.
-- `start_time` (`Optional[Union[datetime, date, str]]`): End of the time interval, inclusive.         Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789Z`, `2006-01-20`, `20060120`.         Mutually exclusive with `at_time`.
+- `end_time` (`Optional[Union[datetime, date, str]]`): Start of the time interval, inclusive.         Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789, 2006-01-20, 20060120Z`, `2006-01-20`, `20060120`.         Mutually exclusive with `at_time`.
+- `start_time` (`Optional[Union[datetime, date, str]]`): End of the time interval, inclusive.         Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789, 2006-01-20, 20060120Z`, `2006-01-20`, `20060120`.         Mutually exclusive with `at_time`.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
@@ -5430,8 +5430,8 @@ def get_timeframes_of_asset_metric_constituents(
 - `constituents` (`Optional[Union[str, List[str]]]`): Comma separated list of constituents. By default all constituents are returned.
 Different asset metrics may have different constituents.
 For example, constituents for `volume_trusted_spot_usd_1d` are exchanges.
-- `end_time` (`Optional[Union[datetime, date, str]]`): Start of the time interval, inclusive.         Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789Z`, `2006-01-20`, `20060120`.         Mutually exclusive with `at_time`.
-- `start_time` (`Optional[Union[datetime, date, str]]`): End of the time interval, inclusive.         Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789Z`, `2006-01-20`, `20060120`.         Mutually exclusive with `at_time`.
+- `end_time` (`Optional[Union[datetime, date, str]]`): Start of the time interval, inclusive.         Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789, 2006-01-20, 20060120Z`, `2006-01-20`, `20060120`.         Mutually exclusive with `at_time`.
+- `start_time` (`Optional[Union[datetime, date, str]]`): End of the time interval, inclusive.         Multiple formats of ISO 8601 are supported: `2006-01-20T00:00:00Z`, `2006-01-20T00:00:00.000Z`, `2006-01-20T00:00:00.123456Z`, `2006-01-20T00:00:00.123456789, 2006-01-20, 20060120Z`, `2006-01-20`, `20060120`.         Mutually exclusive with `at_time`.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
