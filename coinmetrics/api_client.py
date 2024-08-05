@@ -6946,7 +6946,15 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
         }
-        return DataCollection(self._get_data, "/reference-data/asset-metrics", params)
+        return DataCollection(
+            self._get_data,
+            "/reference-data/asset-metrics",
+            params,
+            columns_to_store=[
+                'metric', 'full_name', 'description', 'product', 'category',
+                'subcategory', 'unit', 'data_type', 'type'
+            ]
+        )
 
     def reference_data_markets(
             self,
@@ -6998,7 +7006,19 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return DataCollection(self._get_data, "/reference-data/markets", params)
+        return DataCollection(
+            self._get_data,
+            "/reference-data/markets",
+            params,
+            columns_to_store=[
+                'market', 'exchange', 'base', 'quote', 'pair', 'symbol', 'type', 'size_asset', 'margin_asset',
+                'strike', 'option_contract_type', 'is_european', 'contract_size', 'tick_size', 'multiplier_size',
+                'listing', 'expiration', 'settlement_price', 'pool_config_id', 'contract_address', 'fee',
+                'price_includes_fee', 'variable_fee', 'base_address', 'quote_address', 'status',
+                'order_amount_increment', 'order_amount_min', 'order_amount_max', 'order_price_increment',
+                'order_price_min', 'order_price_max', 'order_size_min', 'order_taker_fee', 'order_maker_fee',
+                'margin_trading_enabled', 'experimental']
+        )
 
     def reference_data_exchange_metrics(
             self,
@@ -7022,7 +7042,15 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
         }
-        return DataCollection(self._get_data, "/reference-data/exchange-metrics", params)
+        return DataCollection(
+            self._get_data,
+            "/reference-data/exchange-metrics",
+            params,
+            columns_to_store=[
+                'metric', 'full_name', 'description', 'product', 'category',
+                'subcategory', 'unit', 'data_type', 'type'
+            ]
+        )
 
     def reference_data_exchange_asset_metrics(
             self,
@@ -7046,7 +7074,15 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
         }
-        return DataCollection(self._get_data, "/reference-data/exchange-asset-metrics", params)
+        return DataCollection(
+            self._get_data,
+            "/reference-data/exchange-asset-metrics",
+            params,
+            columns_to_store=[
+                'metric', 'full_name', 'description', 'product', 'category',
+                'subcategory', 'unit', 'data_type', 'type'
+            ]
+        )
 
     def reference_data_pair_metrics(
             self,
@@ -7070,7 +7106,15 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
         }
-        return DataCollection(self._get_data, "/reference-data/pair-metrics", params)
+        return DataCollection(
+            self._get_data,
+            "/reference-data/pair-metrics",
+            params,
+            columns_to_store=[
+                'metric', 'full_name', 'description', 'product', 'category',
+                'subcategory', 'unit', 'data_type', 'type'
+            ]
+        )
 
     def reference_data_institution_metrics(
             self,
@@ -7094,7 +7138,15 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
         }
-        return DataCollection(self._get_data, "/reference-data/institution-metrics", params)
+        return DataCollection(
+            self._get_data,
+            "/reference-data/institution-metrics",
+            params,
+            columns_to_store=[
+                'metric', 'full_name', 'description', 'product', 'category',
+                'subcategory', 'unit', 'data_type', 'type'
+            ]
+        )
 
     def reference_data_assets(
             self,
@@ -7122,7 +7174,12 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return DataCollection(self._get_data, "/reference-data/assets", params)
+        return DataCollection(
+            self._get_data,
+            "/reference-data/assets",
+            params,
+            columns_to_store=['asset', 'full_name']
+        )
 
     def reference_data_exchanges(
             self,
@@ -7150,7 +7207,12 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return DataCollection(self._get_data, "/reference-data/exchanges", params)
+        return DataCollection(
+            self._get_data,
+            "/reference-data/exchanges",
+            params,
+            columns_to_store=['exchange', 'full_name']
+        )
 
     def reference_data_indexes(
             self,
@@ -7178,7 +7240,12 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return DataCollection(self._get_data, "/reference-data/indexes", params)
+        return DataCollection(
+            self._get_data,
+            "/reference-data/indexes",
+            params,
+            columns_to_store=["index", "full_name"]
+        )
 
     def reference_data_pairs(
             self,
@@ -7206,7 +7273,12 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return DataCollection(self._get_data, "/reference-data/pairs", params)
+        return DataCollection(
+            self._get_data,
+            "/reference-data/pairs",
+            params,
+            columns_to_store=["pair", "full_name"]
+        )
 
     def reference_data_market_metrics(
             self,
@@ -7234,7 +7306,15 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return DataCollection(self._get_data, "/reference-data/market-metrics", params)
+        return DataCollection(
+            self._get_data,
+            "/reference-data/market-metrics",
+            params,
+            columns_to_store=[
+                'metric', 'full_name', 'description', 'product', 'category',
+                'subcategory', 'unit', 'data_type', 'type'
+            ]
+        )
 
     def security_master_assets(
             self,
@@ -7266,7 +7346,16 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return DataCollection(self._get_data, "/security-master/assets", params)
+        return DataCollection(
+            self._get_data,
+            "/security-master/assets",
+            params,
+            columns_to_store=[
+                'asset', 'code', 'description', 'overview', 'website', 'whitepaper',
+                'consensus_mechanism', 'decimals', 'creation_date', 'type', 'parent_asset',
+                'pricing_asset', 'erc20_token_contract', 'fiat'
+            ]
+        )
 
     def security_master_markets(
             self,
@@ -7314,7 +7403,30 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return DataCollection(self._get_data, "/security-master/markets", params)
+        return DataCollection(
+            self._get_data,
+            "/security-master/markets",
+            params,
+            columns_to_store=[
+                'market', 'code', 'pair', 'trades_min_time', 'trades_max_time',
+                'orderbooks_min_time', 'orderbooks_max_time',
+                'quotes_min_time', 'quotes_max_time',
+                'funding_rates_min_time', 'funding_rates_max_time',
+                'openinterest_min_time', 'openinterest_max_time',
+                'liquidations_min_time', 'liquidations_max_time',
+                'exchange', 'base', 'quote', 'symbol', 'type',
+                'size_asset', 'margin_asset', 'strike', 'option_contract_type',
+                'is_european', 'contract_size', 'tick_size', 'multiplier_size',
+                'listing', 'expiration', 'settlement_price', 'pool_config_id',
+                'contract_address', 'fee', 'price_includes_fee', 'variable_fee',
+                'base_address', 'quote_address', 'status', 'order_amount_increment',
+                'order_amount_min', 'order_amount_max', 'order_price_increment',
+                'order_price_min', 'order_price_max', 'order_size_min',
+                'order_taker_fee', 'order_maker_fee', 'margin_trading_enabled',
+                'experimental', 'price_open', 'price_close', 'price_high',
+                'price_low', 'vwap', 'volume', 'candle_usd_volume', 'candle_trades_count'
+            ]
+        )
 
     def get_snapshots_of_asset_metric_constituents(
             self,

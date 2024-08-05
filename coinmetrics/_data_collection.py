@@ -74,6 +74,7 @@ class DataCollection:
         endpoint: str,
         url_params: Dict[str, UrlParamTypes],
         csv_export_supported: bool = True,
+        columns_to_store: List[str] = []
     ) -> None:
         self._csv_export_supported = csv_export_supported
         self._data_retrieval_function = data_retrieval_function
@@ -81,6 +82,7 @@ class DataCollection:
         self._url_params = url_params
         self._next_page_token: Optional[str] = ""
         self._current_data_iterator: Optional[Iterator[Any]] = None
+        self._columns_to_store = columns_to_store
 
     def first_page(self) -> List[Dict[str, Any]]:
         return cast(
@@ -156,6 +158,8 @@ class DataCollection:
                 return
             if self.API_RETURN_MODEL:
                 columns_to_store = self.API_RETURN_MODEL.get_dataframe_cols()
+            elif self._columns_to_store:
+                columns_to_store = self._columns_to_store
             else:
                 columns_to_store = list(first_data_el.keys())
 
