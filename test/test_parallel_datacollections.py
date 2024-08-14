@@ -281,6 +281,18 @@ def test_parse_date() -> None:
     assert pdc.parse_date(t_naive_s) == datetime.datetime(year=2024, month=1, day=2, hour=0, minute=3, second=4)
     assert pdc.parse_date(t_naive_sz) == datetime.datetime(year=2024, month=1, day=2, hour=0, minute=3, second=4)
 
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_height_increment() -> None:
+    df_blocks = client.get_list_of_blocks_v2(
+        asset="btc",
+        start_height=10,
+        end_height=100,
+        end_inclusive=False
+    ).parallel(height_increment=10).to_dataframe()
+    assert len(df_blocks) == 90
+
+
 if __name__ == '__main__':
     pytest.main()
 

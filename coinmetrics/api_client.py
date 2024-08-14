@@ -2014,7 +2014,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-trades", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-trades", params, client=self)
 
     def catalog_market_candles_v2(
             self,
@@ -2070,7 +2070,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-candles", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-candles", params, client=self)
 
     def catalog_market_orderbooks_v2(
             self,
@@ -2126,7 +2126,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-orderbooks", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-orderbooks", params, client=self)
 
     def catalog_market_quotes_v2(
             self,
@@ -2182,7 +2182,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-quotes", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-quotes", params, client=self)
 
     def catalog_market_funding_rates_v2(
             self,
@@ -2238,7 +2238,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-funding-rates", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-funding-rates", params, client=self)
 
     def catalog_market_funding_rates_predicted_v2(
             self,
@@ -2294,7 +2294,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-funding-rates-predicted", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-funding-rates-predicted", params, client=self)
 
     def catalog_market_contract_prices_v2(
             self,
@@ -2350,7 +2350,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-contract-prices", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-contract-prices", params, client=self)
 
     def catalog_market_implied_volatility_v2(
             self,
@@ -2406,7 +2406,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-implied-volatility", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-implied-volatility", params, client=self)
 
     def catalog_market_greeks_v2(
             self,
@@ -2462,7 +2462,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-greeks", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-greeks", params, client=self)
 
     def catalog_market_open_interest_v2(
             self,
@@ -2518,7 +2518,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-openinterest", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-openinterest", params, client=self)
 
     def catalog_market_liquidations_v2(
             self,
@@ -2574,7 +2574,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-liquidations", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-liquidations", params, client=self)
 
     def catalog_market_metrics_v2(
             self,
@@ -2632,7 +2632,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-metrics", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-metrics", params, client=self)
 
     def catalog_full_market_trades_v2(
             self,
@@ -2688,7 +2688,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-trades", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-trades", params, client=self)
 
     def catalog_full_market_candles_v2(
             self,
@@ -2744,7 +2744,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-candles", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-candles", params, client=self)
 
     def catalog_full_market_orderbooks_v2(
             self,
@@ -2800,7 +2800,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-orderbooks", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-orderbooks", params, client=self)
 
     def catalog_full_market_quotes_v2(
             self,
@@ -2856,7 +2856,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-quotes", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-quotes", params, client=self)
 
     def catalog_full_market_funding_rates_v2(
             self,
@@ -2912,7 +2912,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-funding-rates", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-funding-rates", params, client=self)
 
     def catalog_full_market_funding_rates_predicted_v2(
             self,
@@ -2968,7 +2968,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-funding-rates-predicted", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-funding-rates-predicted", params, client=self)
 
     def catalog_full_market_contract_prices_v2(
             self,
@@ -3024,7 +3024,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-contract-prices", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-contract-prices", params, client=self)
 
     def catalog_full_market_implied_volatility_v2(
             self,
@@ -3080,7 +3080,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-implied-volatility", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-implied-volatility", params, client=self)
 
     def catalog_full_market_greeks_v2(
             self,
@@ -3136,7 +3136,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-greeks", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-greeks", params, client=self)
 
     def catalog_full_market_open_interest_v2(
             self,
@@ -3192,7 +3192,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-openinterest", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-openinterest", params, client=self)
 
     def catalog_full_market_liquidations_v2(
             self,
@@ -3248,7 +3248,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-liquidations", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-liquidations", params, client=self)
 
     def catalog_full_market_metrics_v2(
             self,
@@ -3306,7 +3306,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-metrics", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-metrics", params, client=self)
 
     def catalog_asset_metrics_v2(
             self,
@@ -3346,7 +3346,7 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
             "format": format,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/asset-metrics", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/asset-metrics", params, client=self)
 
     def catalog_full_asset_metrics_v2(
             self,
@@ -3386,7 +3386,7 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
             "format": format,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/asset-metrics", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/asset-metrics", params, client=self)
 
     def catalog_exchange_metrics_v2(
             self,
@@ -3426,7 +3426,7 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
             "format": format,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/exchange-metrics", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/exchange-metrics", params, client=self)
 
     def catalog_full_exchange_metrics_v2(
             self,
@@ -3466,7 +3466,7 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
             "format": format,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/exchange-metrics", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/exchange-metrics", params, client=self)
 
     def catalog_exchange_asset_metrics_v2(
             self,
@@ -3506,7 +3506,7 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
             "format": format,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/exchange-asset-metrics", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/exchange-asset-metrics", params, client=self)
 
     def catalog_full_exchange_asset_metrics_v2(
             self,
@@ -3546,7 +3546,7 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
             "format": format,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/exchange-asset-metrics", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/exchange-asset-metrics", params, client=self)
 
     def catalog_pair_metrics_v2(
             self,
@@ -3586,7 +3586,7 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
             "format": format,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/pair-metrics", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/pair-metrics", params, client=self)
 
     def catalog_full_pair_metrics_v2(
             self,
@@ -3626,7 +3626,7 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
             "format": format,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/pair-metrics", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/pair-metrics", params, client=self)
 
     def catalog_institution_metrics_v2(
             self,
@@ -3666,7 +3666,7 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
             "format": format,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/institution-metrics", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/institution-metrics", params, client=self)
 
     def catalog_full_institution_metrics_v2(
             self,
@@ -3706,7 +3706,7 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
             "format": format,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/institution-metrics", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/institution-metrics", params, client=self)
 
     def catalog_pair_candles_v2(
             self,
@@ -3734,7 +3734,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/pair-candles", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/pair-candles", params, client=self)
 
     def catalog_index_candles_v2(
             self,
@@ -3762,7 +3762,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/index-candles", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/index-candles", params, client=self)
 
     def catalog_index_levels_v2(
             self,
@@ -3790,7 +3790,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/index-levels", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/index-levels", params, client=self)
 
     def catalog_asset_chains_v2(
             self,
@@ -3818,7 +3818,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/asset-chains", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/asset-chains", params, client=self)
 
     def catalog_mempool_feerates_v2(
             self,
@@ -3846,7 +3846,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/mempool-feerates", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/mempool-feerates", params, client=self)
 
     def catalog_mining_pool_tips_summaries_v2(
             self,
@@ -3874,7 +3874,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/mining-pool-tips-summary", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/mining-pool-tips-summary", params, client=self)
 
     def catalog_transaction_tracker_assets_v2(
             self,
@@ -3902,7 +3902,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/transaction-tracker", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-v2/transaction-tracker", params, client=self)
 
     def catalog_full_pair_candles_v2(
             self,
@@ -3930,7 +3930,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/pair-candles", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/pair-candles", params, client=self)
 
     def catalog_full_index_candles_v2(
             self,
@@ -3958,7 +3958,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/index-candles", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/index-candles", params, client=self)
 
     def catalog_full_index_levels_v2(
             self,
@@ -3986,7 +3986,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/index-levels", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/index-levels", params, client=self)
 
     def catalog_full_asset_chains_v2(
             self,
@@ -4014,7 +4014,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/asset-chains", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/asset-chains", params, client=self)
 
     def catalog_full_mempool_feerates_v2(
             self,
@@ -4042,7 +4042,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/mempool-feerates", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/mempool-feerates", params, client=self)
 
     def catalog_full_mining_pool_tips_summaries_v2(
             self,
@@ -4070,7 +4070,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/mining-pool-tips-summary", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/mining-pool-tips-summary", params, client=self)
 
     def catalog_full_transaction_tracker_assets_v2(
             self,
@@ -4098,7 +4098,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/transaction-tracker", params)
+        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/transaction-tracker", params, client=self)
 
     def get_asset_alerts(
         self,
@@ -4152,7 +4152,7 @@ class CoinMetricsClient:
             "timezone": timezone,
             "include_heartbeats": include_heartbeats
         }
-        return DataCollection(self._get_data, "timeseries/asset-alerts", params)
+        return DataCollection(self._get_data, "timeseries/asset-alerts", params, client=self)
 
     def get_defi_balance_sheets(
         self,
@@ -4205,7 +4205,7 @@ class CoinMetricsClient:
             "end_inclusive": end_inclusive,
             "timezone": timezone,
         }
-        return DataCollection(self._get_data, "timeseries/defi-balance-sheets", params)
+        return DataCollection(self._get_data, "timeseries/defi-balance-sheets", params, client=self)
 
     def get_asset_chains(
         self,
@@ -4251,7 +4251,7 @@ class CoinMetricsClient:
             "end_inclusive": end_inclusive,
             "timezone": timezone,
         }
-        return AssetChainsDataCollection(self._get_data, "timeseries/asset-chains", params)
+        return AssetChainsDataCollection(self._get_data, "timeseries/asset-chains", params, client=self)
 
     def get_asset_metrics(
         self,
@@ -4353,7 +4353,7 @@ class CoinMetricsClient:
             "ignore_forbidden_errors": ignore_forbidden_errors,
             "ignore_unsupported_errors": ignore_unsupported_errors
         }
-        return DataCollection(self._get_data, "timeseries/asset-metrics", params)
+        return DataCollection(self._get_data, "timeseries/asset-metrics", params, client=self)
 
     def get_exchange_metrics(
         self,
@@ -4423,7 +4423,7 @@ class CoinMetricsClient:
             "sort": sort,
             "limit_per_exchange": limit_per_exchange,
         }
-        return DataCollection(self._get_data, "timeseries/exchange-metrics", params)
+        return DataCollection(self._get_data, "timeseries/exchange-metrics", params, client=self)
 
     def get_exchange_asset_metrics(
         self,
@@ -4565,7 +4565,7 @@ class CoinMetricsClient:
             "sort": sort,
             "limit_per_pair": limit_per_pair,
         }
-        return DataCollection(self._get_data, "timeseries/pair-metrics", params)
+        return DataCollection(self._get_data, "timeseries/pair-metrics", params, client=self)
 
     def get_pair_candles(
         self,
@@ -4628,7 +4628,7 @@ class CoinMetricsClient:
             "timezone": timezone,
             "limit_per_pair": limit_per_pair,
         }
-        return DataCollection(self._get_data, "timeseries/pair-candles", params)
+        return DataCollection(self._get_data, "timeseries/pair-candles", params, client=self)
 
     def get_institution_metrics(
         self,
@@ -4698,7 +4698,7 @@ class CoinMetricsClient:
             "sort": sort,
             "limit_per_institution": limit_per_institution,
         }
-        return DataCollection(self._get_data, "timeseries/institution-metrics", params)
+        return DataCollection(self._get_data, "timeseries/institution-metrics", params, client=self)
 
     def get_index_candles(
         self,
@@ -4752,7 +4752,7 @@ class CoinMetricsClient:
             "timezone": timezone,
             "limit_per_index": limit_per_index,
         }
-        return DataCollection(self._get_data, "timeseries/index-candles", params)
+        return DataCollection(self._get_data, "timeseries/index-candles", params, client=self)
 
     def get_index_levels(
         self,
@@ -4810,7 +4810,7 @@ class CoinMetricsClient:
             "limit_per_index": limit_per_index,
             "include_verification": include_verification
         }
-        return DataCollection(self._get_data, "timeseries/index-levels", params)
+        return DataCollection(self._get_data, "timeseries/index-levels", params, client=self)
 
     def get_index_constituents(
         self,
@@ -4860,7 +4860,7 @@ class CoinMetricsClient:
             "end_inclusive": end_inclusive,
             "timezone": timezone,
         }
-        return DataCollection(self._get_data, "timeseries/index-constituents", params)
+        return DataCollection(self._get_data, "timeseries/index-constituents", params, client=self)
 
     def get_market_metrics(
         self,
@@ -4925,7 +4925,7 @@ class CoinMetricsClient:
             "limit_per_market": limit_per_market,
             "sort": sort,
         }
-        return DataCollection(self._get_data, "timeseries/market-metrics", params)
+        return DataCollection(self._get_data, "timeseries/market-metrics", params, client=self)
 
     def get_market_candles(
         self,
@@ -4980,7 +4980,7 @@ class CoinMetricsClient:
             "timezone": timezone,
             "limit_per_market": limit_per_market,
         }
-        return DataCollection(self._get_data, "timeseries/market-candles", params)
+        return DataCollection(self._get_data, "timeseries/market-candles", params, client=self)
 
     def get_market_trades(
         self,
@@ -5035,7 +5035,7 @@ class CoinMetricsClient:
             "limit_per_market": limit_per_market,
             "min_confirmations": min_confirmations,
         }
-        return DataCollection(self._get_data, "timeseries/market-trades", params)
+        return DataCollection(self._get_data, "timeseries/market-trades", params, client=self)
 
     def get_market_open_interest(
         self,
@@ -5090,7 +5090,7 @@ class CoinMetricsClient:
             "timezone": timezone,
             "limit_per_market": limit_per_market,
         }
-        return DataCollection(self._get_data, "timeseries/market-openinterest", params)
+        return DataCollection(self._get_data, "timeseries/market-openinterest", params, client=self)
 
     def get_market_liquidations(
         self,
@@ -5141,7 +5141,7 @@ class CoinMetricsClient:
             "timezone": timezone,
             "limit_per_market": limit_per_market,
         }
-        return DataCollection(self._get_data, "timeseries/market-liquidations", params)
+        return DataCollection(self._get_data, "timeseries/market-liquidations", params, client=self)
 
     def get_market_funding_rates(
         self,
@@ -5192,7 +5192,7 @@ class CoinMetricsClient:
             "timezone": timezone,
             "limit_per_market": limit_per_market,
         }
-        return DataCollection(self._get_data, "timeseries/market-funding-rates", params)
+        return DataCollection(self._get_data, "timeseries/market-funding-rates", params, client=self)
 
     def get_predicted_market_funding_rates(
         self,
@@ -5243,7 +5243,7 @@ class CoinMetricsClient:
             "timezone": timezone,
             "limit_per_market": limit_per_market,
         }
-        return DataCollection(self._get_data, "timeseries/market-funding-rates-predicted", params)
+        return DataCollection(self._get_data, "timeseries/market-funding-rates-predicted", params, client=self)
 
     def get_market_orderbooks(
         self,
@@ -5302,7 +5302,7 @@ class CoinMetricsClient:
             "depth_limit": depth_limit,
             "timezone": timezone,
         }
-        return DataCollection(self._get_data, "timeseries/market-orderbooks", params)
+        return DataCollection(self._get_data, "timeseries/market-orderbooks", params, client=self)
 
     def get_market_quotes(
         self,
@@ -5361,7 +5361,7 @@ class CoinMetricsClient:
             "limit_per_market": limit_per_market,
             "include_one_sided": include_one_sided,
         }
-        return DataCollection(self._get_data, "timeseries/market-quotes", params)
+        return DataCollection(self._get_data, "timeseries/market-quotes", params, client=self)
 
     def get_market_contract_prices(
         self,
@@ -5529,7 +5529,7 @@ class CoinMetricsClient:
             "timezone": timezone,
             "limit_per_market": limit_per_market,
         }
-        return DataCollection(self._get_data, "timeseries/market-greeks", params)
+        return DataCollection(self._get_data, "timeseries/market-greeks", params, client=self)
 
     def get_mining_pool_tips_summary(
         self,
@@ -5623,7 +5623,7 @@ class CoinMetricsClient:
             "end_inclusive": end_inclusive,
             "timezone": timezone,
         }
-        return DataCollection(self._get_data, "timeseries/mempool-feerates", params)
+        return DataCollection(self._get_data, "timeseries/mempool-feerates", params, client=self)
 
     def get_stream_asset_metrics(
         self,
@@ -5922,7 +5922,7 @@ class CoinMetricsClient:
             "end_inclusive": end_inclusive,
             "timezone": timezone,
         }
-        return DataCollection(self._get_data, f"blockchain/{asset}/blocks", params)
+        return DataCollection(self._get_data, f"blockchain/{asset}/blocks", params, client=self)
 
     def get_list_of_accounts(
         self,
@@ -5987,7 +5987,7 @@ class CoinMetricsClient:
             "end_inclusive": end_inclusive,
             "timezone": timezone,
         }
-        return DataCollection(self._get_data, f"blockchain/{asset}/accounts", params)
+        return DataCollection(self._get_data, f"blockchain/{asset}/accounts", params, client=self)
 
     def get_list_of_transactions(
         self,
@@ -6190,7 +6190,7 @@ class CoinMetricsClient:
             "end_inclusive": end_inclusive,
             "timezone": timezone,
         }
-        return DataCollection(self._get_data, f"blockchain-v2/{asset}/blocks", params)
+        return DataCollection(self._get_data, f"blockchain-v2/{asset}/blocks", params, client=self)
 
     def get_list_of_accounts_v2(
         self,
@@ -6255,7 +6255,7 @@ class CoinMetricsClient:
             "end_inclusive": end_inclusive,
             "timezone": timezone,
         }
-        return DataCollection(self._get_data, f"blockchain-v2/{asset}/accounts", params)
+        return DataCollection(self._get_data, f"blockchain-v2/{asset}/accounts", params, client=self)
 
     def get_list_of_sub_accounts_v2(
         self,
@@ -6731,7 +6731,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return DataCollection(self._get_data, f"blockchain-v2/{asset}/accounts/{account}/balance-updates", params)
+        return DataCollection(self._get_data, f"blockchain-v2/{asset}/accounts/{account}/balance-updates", params, client=self)
 
     def get_transaction_tracker(
         self,
@@ -6852,7 +6852,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "version": version,
         }
-        return DataCollection(self._get_data, "/taxonomy/assets", params)
+        return DataCollection(self._get_data, "/taxonomy/assets", params, client=self)
 
     def get_taxonomy_assets_metadata(
         self,
@@ -6892,7 +6892,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "version": version,
         }
-        return DataCollection(self._get_data, "/taxonomy-metadata/assets", params)
+        return DataCollection(self._get_data, "/taxonomy-metadata/assets", params, client=self)
 
     def get_asset_profiles(
         self,
@@ -6918,7 +6918,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
         }
-        return DataCollection(self._get_data, "/profile/assets", params)
+        return DataCollection(self._get_data, "/profile/assets", params, client=self)
 
     def reference_data_asset_metrics(
             self,
@@ -7474,7 +7474,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
         }
-        return DataCollection(self._get_data, "/constituent-snapshots/asset-metrics", params)
+        return DataCollection(self._get_data, "/constituent-snapshots/asset-metrics", params, client=self)
 
     def get_timeframes_of_asset_metric_constituents(
             self,
@@ -7522,7 +7522,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
         }
-        return DataCollection(self._get_data, "/constituent-timeframes/asset-metrics", params)
+        return DataCollection(self._get_data, "/constituent-timeframes/asset-metrics", params, client=self)
 
     def blockchain_metadata_tags(
             self,
@@ -7546,7 +7546,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "next_page_token": next_page_token,
         }
-        return DataCollection(self._get_data, "blockchain-metadata/tags", params)
+        return DataCollection(self._get_data, "blockchain-metadata/tags", params, client=self)
 
     def blockchain_metadata_tagged_entities(
             self,
@@ -7578,7 +7578,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "next_page_token": next_page_token,
         }
-        return DataCollection(self._get_data, "blockchain-metadata/tagged-entities", params)
+        return DataCollection(self._get_data, "blockchain-metadata/tagged-entities", params, client=self)
 
     def _get_data(self, url: str, params: Dict[str, Any]) -> DataReturnType:
         if params:

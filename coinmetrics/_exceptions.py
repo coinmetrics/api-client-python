@@ -50,3 +50,10 @@ class CoinMetricsClientQueryParamsException(HTTPError):
 
     def __str__(self) -> str:
         return self.msg
+
+
+class CoinMetricsClientNotFoundError(Exception):
+    """Raised when a CoinMetricsClient instance is not found."""
+    def __init__(self, message="CoinMetricsClient not found"):
+        self.message = message
+        super().__init__(self.message)
