@@ -1298,34 +1298,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get_list_of_blocks" class="md-nav__link">
-    get_list_of_blocks
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get_list_of_accounts" class="md-nav__link">
-    get_list_of_accounts
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get_list_of_transactions" class="md-nav__link">
-    get_list_of_transactions
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get_list_of_balance_updates" class="md-nav__link">
-    get_list_of_balance_updates
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#get_list_of_blocks_v2" class="md-nav__link">
     get_list_of_blocks_v2
   </a>
@@ -1361,29 +1333,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get_full_transaction_for_block" class="md-nav__link">
-    get_full_transaction_for_block
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get_full_block" class="md-nav__link">
-    get_full_block
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#get_full_block_v2" class="md-nav__link">
     get_full_block_v2
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get_full_transaction" class="md-nav__link">
-    get_full_transaction
   </a>
   
 </li>
@@ -2652,34 +2603,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get_list_of_blocks" class="md-nav__link">
-    get_list_of_blocks
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get_list_of_accounts" class="md-nav__link">
-    get_list_of_accounts
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get_list_of_transactions" class="md-nav__link">
-    get_list_of_transactions
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get_list_of_balance_updates" class="md-nav__link">
-    get_list_of_balance_updates
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#get_list_of_blocks_v2" class="md-nav__link">
     get_list_of_blocks_v2
   </a>
@@ -2715,29 +2638,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get_full_transaction_for_block" class="md-nav__link">
-    get_full_transaction_for_block
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get_full_block" class="md-nav__link">
-    get_full_block
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#get_full_block_v2" class="md-nav__link">
     get_full_block_v2
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get_full_transaction" class="md-nav__link">
-    get_full_transaction
   </a>
   
 </li>
@@ -6294,154 +6196,6 @@ if you request metrics for a set of markets.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CmStream</code>: </p>
-<p><a id="coinmetrics.api_client.CoinMetricsClient.get_list_of_blocks"></a></p>
-<h4 id="get_list_of_blocks">get_list_of_blocks<a class="headerlink" href="#get_list_of_blocks" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_list_of_blocks</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                       <span class="n">block_hashes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                       <span class="n">heights</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                       <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                       <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span>
-                       <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                       <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                       <span class="n">start_height</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                       <span class="n">end_height</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                       <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                       <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                       <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
-</code></pre></div>
-<p>Returns a list of blockchain blocks metadata.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>asset</code> (<code>str</code>): Asset name</li>
-<li><code>block_hashes</code> (<code>str, list(str)</code>): Optional comma separated list of block hashes to filter a response.</li>
-<li><code>heights</code> (<code>str, list(str)</code>): Optional comma separated list of block heights to filter a response.</li>
-<li><code>page_size</code> (<code>int</code>): number of items returned per page when calling the API. If the request times out, try using a smaller number.</li>
-<li><code>paging_from</code> (<code>PagingFrom, str</code>): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
-<li><code>start_time</code> (<code>datetime, date, str</code>): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120</li>
-<li><code>end_time</code> (<code>datetime, date, str</code>): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120</li>
-<li><code>start_height</code> (<code>int</code>): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time</li>
-<li><code>end_height</code> (<code>int</code>): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time</li>
-<li><code>start_inclusive</code> (<code>bool</code>): Flag to define if start timestamp must be included in the timeseries if present. True by default.</li>
-<li><code>end_inclusive</code> (<code>bool</code>): Flag to define if end timestamp must be included in the timeseries if present. True by default.</li>
-<li><code>timezone</code> (<code>str</code>): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p><code>DataCollection</code>: list of blockchain blocks metadata</p>
-<p><a id="coinmetrics.api_client.CoinMetricsClient.get_list_of_accounts"></a></p>
-<h4 id="get_list_of_accounts">get_list_of_accounts<a class="headerlink" href="#get_list_of_accounts" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_list_of_accounts</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                         <span class="n">accounts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                         <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                         <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span>
-                                                     <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span>
-                         <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span>
-                                                    <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                         <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                         <span class="n">start_height</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                         <span class="n">end_height</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                         <span class="n">start_chain_sequence_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                         <span class="n">end_chain_sequence_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                         <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                         <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                         <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
-</code></pre></div>
-<p>Returns a list of blockchain accounts with their balances.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>asset</code> (<code>str</code>): Asset name</li>
-<li><code>accounts</code> (<code>str, list(str)</code>): Optional comma separated list of accounts to filter a response.</li>
-<li><code>page_size</code> (<code>int</code>): number of items returned per page when calling the API. If the request times out, try using a smaller number.</li>
-<li><code>paging_from</code> (<code>PagingFrom, str</code>): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
-<li><code>start_time</code> (<code>datetime, date, str</code>): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120</li>
-<li><code>end_time</code> (<code>datetime, date, str</code>): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120</li>
-<li><code>start_height</code> (<code>int</code>): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time</li>
-<li><code>end_height</code> (<code>int</code>): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time</li>
-<li><code>start_chain_sequence_number</code> (<code>int</code>): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time</li>
-<li><code>end_chain_sequence_number</code> (<code>int</code>): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time</li>
-<li><code>start_inclusive</code> (<code>bool</code>): Flag to define if start timestamp must be included in the timeseries if present. True by default.</li>
-<li><code>end_inclusive</code> (<code>bool</code>): Flag to define if end timestamp must be included in the timeseries if present. True by default.</li>
-<li><code>timezone</code> (<code>str</code>): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p><code>DataCollection</code>: list of blockchain accounts metadata</p>
-<p><a id="coinmetrics.api_client.CoinMetricsClient.get_list_of_transactions"></a></p>
-<h4 id="get_list_of_transactions">get_list_of_transactions<a class="headerlink" href="#get_list_of_transactions" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_list_of_transactions</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                             <span class="n">transaction_hashes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-                                                                <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                             <span class="n">block_hashes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-                                                          <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                             <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                             <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span>
-                                                         <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span>
-                             <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span>
-                                                        <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                             <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span>
-                                                      <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                             <span class="n">start_height</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                             <span class="n">end_height</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                             <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                             <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                             <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
-</code></pre></div>
-<p>Returns a list of blockchain transactions metadata.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>asset</code> (<code>str</code>): Asset name</li>
-<li><code>transaction_hashes</code> (<code>str, list(str)</code>): Optional comma separated list of transaction hashes to filter a response.</li>
-<li><code>block_hashes</code> (<code>str, list(str)</code>): Optional comma separated list of block hashes to filter a response.</li>
-<li><code>page_size</code> (<code>int</code>): number of items returned per page when calling the API. If the request times out, try using a smaller number.</li>
-<li><code>paging_from</code> (<code>PagingFrom, str</code>): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
-<li><code>start_time</code> (<code>datetime, date, str</code>): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120</li>
-<li><code>end_time</code> (<code>datetime, date, str</code>): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120</li>
-<li><code>start_height</code> (<code>int</code>): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time</li>
-<li><code>end_height</code> (<code>int</code>): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time</li>
-<li><code>start_inclusive</code> (<code>bool</code>): Flag to define if start timestamp must be included in the timeseries if present. True by default.</li>
-<li><code>end_inclusive</code> (<code>bool</code>): Flag to define if end timestamp must be included in the timeseries if present. True by default.</li>
-<li><code>timezone</code> (<code>str</code>): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p><code>DataCollection</code>: list of transaction metadata</p>
-<p><a id="coinmetrics.api_client.CoinMetricsClient.get_list_of_balance_updates"></a></p>
-<h4 id="get_list_of_balance_updates">get_list_of_balance_updates<a class="headerlink" href="#get_list_of_balance_updates" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_list_of_balance_updates</span><span class="p">(</span>
-        <span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">accounts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">transaction_hashes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">block_hashes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span>
-        <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">start_height</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">end_height</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">start_chain_sequence_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">end_chain_sequence_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
-</code></pre></div>
-<p>Returns a list of blockchain accounts balance updates.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>asset</code> (<code>str</code>): Asset name</li>
-<li><code>accounts</code> (<code>str, list(str)</code>): Optional comma separated list of accounts to filter a response.</li>
-<li><code>transaction_hashes</code> (<code>str, list(str)</code>): Optional comma separated list of transaction hashes to filter a response.</li>
-<li><code>block_hashes</code> (<code>str, list(str)</code>): Optional comma separated list of block hashes to filter a response.</li>
-<li><code>page_size</code> (<code>int</code>): number of items returned per page when calling the API. If the request times out, try using a smaller number.</li>
-<li><code>paging_from</code> (<code>PagingFrom, str</code>): Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.</li>
-<li><code>start_time</code> (<code>datetime, date, str</code>): Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120</li>
-<li><code>end_time</code> (<code>datetime, date, str</code>): End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120</li>
-<li><code>start_height</code> (<code>int</code>): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time</li>
-<li><code>end_height</code> (<code>int</code>): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time</li>
-<li><code>start_chain_sequence_number</code> (<code>int</code>): The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time</li>
-<li><code>end_chain_sequence_number</code> (<code>int</code>): The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time</li>
-<li><code>start_inclusive</code> (<code>bool</code>): Flag to define if start timestamp must be included in the timeseries if present. True by default.</li>
-<li><code>end_inclusive</code> (<code>bool</code>): Flag to define if end timestamp must be included in the timeseries if present. True by default.</li>
-<li><code>timezone</code> (<code>str</code>): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p><code>DataCollection</code>: list of balance updates</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.get_list_of_blocks_v2"></a></p>
 <h4 id="get_list_of_blocks_v2">get_list_of_blocks_v2<a class="headerlink" href="#get_list_of_blocks_v2" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_list_of_blocks_v2</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -6637,30 +6391,6 @@ if you request metrics for a set of markets.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: list of balance updates</p>
-<p><a id="coinmetrics.api_client.CoinMetricsClient.get_full_transaction_for_block"></a></p>
-<h4 id="get_full_transaction_for_block">get_full_transaction_for_block<a class="headerlink" href="#get_full_transaction_for_block" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_full_transaction_for_block</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">block_hash</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                                   <span class="n">txid</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
-</code></pre></div>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>asset</code> (<code>str</code>): Asset name.</li>
-<li><code>block_hash</code> (<code>str</code>): Block hash.</li>
-<li><code>txid</code> (<code>str</code>): Transaction identifier (txid).</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p><code>DataCollection</code>: Blockchain full transaction.</p>
-<p><a id="coinmetrics.api_client.CoinMetricsClient.get_full_block"></a></p>
-<h4 id="get_full_block">get_full_block<a class="headerlink" href="#get_full_block" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_full_block</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">block_hash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
-</code></pre></div>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>asset</code> (<code>str</code>): Asset name.</li>
-<li><code>block_hash</code> (<code>str</code>): Block hash.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p><code>Dict[str, Any]</code>: Blockchain full block.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.get_full_block_v2"></a></p>
 <h4 id="get_full_block_v2">get_full_block_v2<a class="headerlink" href="#get_full_block_v2" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_full_block_v2</span><span class="p">(</span>
@@ -6676,17 +6406,6 @@ if you request metrics for a set of markets.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>list(dict(str), any)</code>: blockchain block data</p>
-<p><a id="coinmetrics.api_client.CoinMetricsClient.get_full_transaction"></a></p>
-<h4 id="get_full_transaction">get_full_transaction<a class="headerlink" href="#get_full_transaction" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_full_transaction</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">txid</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
-</code></pre></div>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>asset</code> (<code>Optional[str]</code>): Asset name.</li>
-<li><code>txid</code> (<code>Optional[str]</code>): Transaction identifier (txid).</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p><code>DataCollection</code>: Blockchain full transaction.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.get_full_transaction_v2"></a></p>
 <h4 id="get_full_transaction_v2">get_full_transaction_v2<a class="headerlink" href="#get_full_transaction_v2" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_full_transaction_v2</span><span class="p">(</span>
