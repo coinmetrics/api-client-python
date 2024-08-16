@@ -171,6 +171,7 @@ class CoinMetricsClient:
             "include": include,
             "exclude": exclude,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetsData(self._get_data("catalog/assets", params)["data"])
 
     def catalog_asset_alerts(
@@ -190,6 +191,7 @@ class CoinMetricsClient:
             "assets": assets,
             "alerts": alerts,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetAlertsData(
             self._get_data("catalog/asset-alerts", params)["data"]
         )
@@ -208,6 +210,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetChainsData(self._get_data("catalog/asset-chains", params)['data'])
 
     def catalog_mempool_feerates(
@@ -224,6 +227,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMempoolFeeratesData(self._get_data("catalog/mempool-feerates", params)['data'])
 
     def catalog_mining_pool_tips_summaries(
@@ -240,6 +244,8 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+
         return CatalogMiningPoolTipsData(self._get_data("catalog/mining-pool-tips-summary", params)['data'])
 
     def catalog_transaction_tracker_assets(
@@ -256,6 +262,8 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+
         return CatalogTransactionTrackerData(self._get_data("catalog/transaction-tracker", params)['data'])
 
     def catalog_asset_pairs(
@@ -270,6 +278,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"pairs": asset_pairs}
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetPairsData(self._get_data("catalog/pairs", params)["data"])
 
     def catalog_asset_metrics(
@@ -289,6 +298,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMetricsData(
             self._get_data("catalog/asset-metrics", params)["data"]
         )
@@ -310,6 +320,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMetricsData(
             self._get_data("catalog/exchange-metrics", params)["data"]
         )
@@ -331,6 +342,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogExchangeAssetMetricsData(
             self._get_data("catalog/exchange-asset-metrics", params)["data"]
         )
@@ -352,6 +364,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogPairMetricsData(
             self._get_data("catalog/pair-metrics", params)["data"]
         )
@@ -373,6 +386,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogInstitutionMetricsData(
             self._get_data("catalog/institution-metrics", params)["data"]
         )
@@ -389,6 +403,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"pairs": asset_pairs}
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetPairCandlesData(
             self._get_data("catalog/pair-candles", params)["data"]
         )
@@ -405,6 +420,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"exchanges": exchanges}
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogExchangesData(self._get_data("catalog/exchanges", params)["data"])
 
     def catalog_exchange_assets(
@@ -419,6 +435,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"exchange_assets": exchange_assets}
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogExchangeAssetsData(
             self._get_data("catalog/exchange-assets", params)["data"]
         )
@@ -435,6 +452,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"indexes": indexes}
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogIndexesData(self._get_data("catalog/indexes", params)["data"])
 
     def catalog_index_candles(
@@ -449,6 +467,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"indexes": indexes}
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketCandlesData(
             self._get_data("catalog/index-candles", params)["data"]
         )
@@ -465,6 +484,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"institutions": institutions}
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogInstitutionsData(
             self._get_data("catalog/institutions", params)["data"]
         )
@@ -518,6 +538,7 @@ class CoinMetricsClient:
             "include": include,
             "exclude": exclude,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketsData(self._get_data("catalog/markets", params)["data"])
 
     def catalog_market_trades(
@@ -559,6 +580,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketTradesData(
             self._get_data("catalog/market-trades", params)["data"]
         )
@@ -580,6 +602,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMetricsData(self._get_data("catalog/metrics", params)["data"])
 
     def catalog_market_metrics(
@@ -621,6 +644,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketMetricsData(
             self._get_data("catalog/market-metrics", params)["data"]
         )
@@ -664,6 +688,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketCandlesData(
             self._get_data("catalog/market-candles", params)["data"]
         )
@@ -707,6 +732,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketOrderbooksData(
             self._get_data("catalog/market-orderbooks", params)["data"]
         )
@@ -750,6 +776,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketTradesData(
             self._get_data("catalog/market-quotes", params)["data"]
         )
@@ -793,6 +820,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketTradesData(
             self._get_data("catalog/market-funding-rates", params)["data"]
         )
@@ -843,6 +871,7 @@ class CoinMetricsClient:
             "format": format,
             "limit": limit,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketContractPrices(self._get_data("catalog/market-contract-prices", params)['data'])
 
     def catalog_market_implied_volatility(
@@ -891,6 +920,7 @@ class CoinMetricsClient:
             "format": format,
             "limit": limit,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketImpliedVolatility(self._get_data("catalog/market-implied-volatility", params)['data'])
 
     def catalog_market_greeks(
@@ -932,6 +962,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketTradesData(
             self._get_data("catalog/market-greeks", params)["data"]
         )
@@ -975,6 +1006,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketTradesData(
             self._get_data("catalog/market-openinterest", params)["data"]
         )
@@ -1018,6 +1050,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketTradesData(
             self._get_data("catalog/market-liquidations", params)["data"]
         )
@@ -1046,6 +1079,7 @@ class CoinMetricsClient:
             "include": include,
             "exclude": exclude,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetsData(self._get_data("catalog-all/assets", params)["data"])
 
     def catalog_full_asset_metrics(
@@ -1065,6 +1099,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMetricsData(
             self._get_data("catalog-all/asset-metrics", params)["data"]
         )
@@ -1086,6 +1121,7 @@ class CoinMetricsClient:
             "assets": assets,
             "alerts": alerts,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetAlertsData(
             self._get_data("catalog-all/asset-alerts", params)["data"]
         )
@@ -1104,6 +1140,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetChainsData(self._get_data("catalog-all/asset-chains", params)['data'])
 
     def catalog_full_mempool_feerates(
@@ -1120,6 +1157,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMempoolFeeratesData(self._get_data("catalog-all/mempool-feerates", params)['data'])
 
     def catalog_full_mining_pool_tips_summaries(
@@ -1136,6 +1174,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMiningPoolTipsData(self._get_data("catalog-all/mining-pool-tips-summary", params)['data'])
 
     def catalog_full_transaction_tracker_assets(
@@ -1152,6 +1191,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
+        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogTransactionTrackerData(self._get_data("catalog-all/transaction-tracker", params)['data'])
 
     def catalog_full_asset_pairs(
@@ -1167,6 +1207,9 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"pairs": asset_pairs}
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogAssetPairsData(
             self._get_data("catalog-all/pairs", params)["data"]
         )
@@ -1188,6 +1231,9 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogPairMetricsData(
             self._get_data("catalog-all/pair-metrics", params)["data"]
         )
@@ -1209,6 +1255,9 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogInstitutionMetricsData(
             self._get_data("catalog-all/institution-metrics", params)["data"]
         )
@@ -1225,6 +1274,9 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"pairs": asset_pairs}
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogAssetPairCandlesData(
             self._get_data("catalog-all/pair-candles", params)["data"]
         )
@@ -1243,6 +1295,9 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"exchanges": exchanges}
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogExchangesData(
             self._get_data("catalog-all/exchanges", params)["data"]
         )
@@ -1259,6 +1314,9 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"exchange_assets": exchange_assets}
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogExchangeAssetsData(
             self._get_data("catalog-all/exchange-assets", params)["data"]
         )
@@ -1280,6 +1338,9 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogMetricsData(
             self._get_data("catalog-all/exchange-metrics", params)["data"]
         )
@@ -1301,6 +1362,9 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogExchangeAssetMetricsData(
             self._get_data("catalog-all/exchange-asset-metrics", params)["data"]
         )
@@ -1317,6 +1381,9 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"indexes": indexes}
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogIndexesData(self._get_data("catalog-all/indexes", params)["data"])
 
     def catalog_full_index_candles(
@@ -1331,6 +1398,9 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"indexes": indexes}
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogMarketCandlesData(
             self._get_data("catalog-all/index-candles", params)["data"]
         )
@@ -1347,6 +1417,9 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"institutions": institutions}
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogInstitutionsData(
             self._get_data("catalog-all/institutions", params)["data"]
         )
@@ -1400,6 +1473,9 @@ class CoinMetricsClient:
             "include": include,
             "exclude": exclude,
         }
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogMarketsData(self._get_data("catalog-all/markets", params)["data"])
 
     def catalog_full_market_trades(
@@ -1441,6 +1517,9 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-trades", params)["data"]
         )
@@ -1462,6 +1541,9 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogMetricsData(self._get_data("catalog-all/metrics", params)["data"])
 
     def catalog_full_market_metrics(
@@ -1503,6 +1585,9 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogMarketMetricsData(
             self._get_data("catalog-all/market-metrics", params)["data"]
         )
@@ -1546,6 +1631,9 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogMarketCandlesData(
             self._get_data("catalog-all/market-candles", params)["data"]
         )
@@ -1589,6 +1677,9 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-orderbooks", params)["data"]
         )
@@ -1632,6 +1723,9 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-quotes", params)["data"]
         )
@@ -1675,6 +1769,9 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-funding-rates", params)["data"]
         )
@@ -1725,6 +1822,9 @@ class CoinMetricsClient:
             "format": format,
             "limit": limit,
         }
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogMarketContractPrices(self._get_data("catalog-all/market-contract-prices", params)['data'])
 
     def catalog_full_contract_prices_v2(
@@ -1829,6 +1929,9 @@ class CoinMetricsClient:
             "format": format,
             "limit": limit,
         }
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogMarketImpliedVolatility(self._get_data("catalog-all/market-implied-volatility", params)['data'])
 
     def catalog_full_market_greeks(
@@ -1870,6 +1973,9 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-greeks", params)["data"]
         )
@@ -1913,6 +2019,9 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-openinterest", params)["data"]
         )
@@ -1956,6 +2065,9 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
+        logger.warning(
+            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+        )
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-liquidations", params)["data"]
         )
@@ -5863,270 +5975,6 @@ class CoinMetricsClient:
         }
         return self._get_stream_data("/timeseries-stream/market-openinterest", params)
 
-    def get_list_of_blocks(
-        self,
-        asset: str,
-        block_hashes: Optional[Union[List[str], str]] = None,
-        heights: Optional[Union[List[str], str]] = None,
-        page_size: Optional[int] = None,
-        paging_from: Optional[Union[PagingFrom, str]] = "start",
-        start_time: Optional[Union[datetime, date, str]] = None,
-        end_time: Optional[Union[datetime, date, str]] = None,
-        start_height: Optional[int] = None,
-        end_height: Optional[int] = None,
-        start_inclusive: Optional[bool] = None,
-        end_inclusive: Optional[bool] = None,
-        timezone: Optional[str] = None,
-    ) -> DataCollection:
-        """
-        Returns a list of blockchain blocks metadata.
-
-        :param asset: Asset name
-        :type asset: str
-        :param block_hashes: Optional comma separated list of block hashes to filter a response.
-        :type block_hashes: str, list(str)
-        :param heights: Optional comma separated list of block heights to filter a response.
-        :type heights: str, list(str)
-        :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
-        :type page_size: int
-        :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-        :type paging_from: PagingFrom, str
-        :param start_time: Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
-        :type start_time: datetime, date, str
-        :param end_time: End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
-        :type end_time: datetime, date, str
-        :param start_height: The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
-        :type start_height: int
-        :param end_height: The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
-        :type end_height: int
-        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
-        :type start_inclusive: bool
-        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
-        :type end_inclusive: bool
-        :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
-        :type timezone: str
-        :return: list of blockchain blocks metadata
-        :rtype: DataCollection
-        """
-        params: Dict[str, Any] = {
-            "asset": asset,
-            "block_hashes": block_hashes,
-            "heights": heights,
-            "page_size": page_size,
-            "paging_from": paging_from,
-            "start_time": start_time,
-            "end_time": end_time,
-            "start_height": start_height,
-            "end_height": end_height,
-            "start_inclusive": start_inclusive,
-            "end_inclusive": end_inclusive,
-            "timezone": timezone,
-        }
-        return DataCollection(self._get_data, f"blockchain/{asset}/blocks", params, client=self)
-
-    def get_list_of_accounts(
-        self,
-        asset: str,
-        accounts: Optional[Union[List[str], str]] = None,
-        page_size: Optional[int] = None,
-        paging_from: Optional[Union[PagingFrom, str]] = "start",
-        start_time: Optional[Union[datetime, date, str]] = None,
-        end_time: Optional[Union[datetime, date, str]] = None,
-        start_height: Optional[int] = None,
-        end_height: Optional[int] = None,
-        start_chain_sequence_number: Optional[int] = None,
-        end_chain_sequence_number: Optional[int] = None,
-        start_inclusive: Optional[bool] = None,
-        end_inclusive: Optional[bool] = None,
-        timezone: Optional[str] = None,
-    ) -> DataCollection:
-        """
-        Returns a list of blockchain accounts with their balances.
-
-        :param asset: Asset name
-        :type asset: str
-        :param accounts: Optional comma separated list of accounts to filter a response.
-        :type accounts: str, list(str)
-        :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
-        :type page_size: int
-        :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-        :type paging_from: PagingFrom, str
-        :param start_time: Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
-        :type start_time: datetime, date, str
-        :param end_time: End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
-        :type end_time: datetime, date, str
-        :param start_height: The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
-        :type start_height: int
-        :param end_height: The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
-        :type end_height: int
-        :param start_chain_sequence_number: The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
-        :type start_chain_sequence_number: int
-        :param end_chain_sequence_number: The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
-        :type end_chain_sequence_number: int
-        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
-        :type start_inclusive: bool
-        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
-        :type end_inclusive: bool
-        :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
-        :type timezone: str
-        :return: list of blockchain accounts metadata
-        :rtype: DataCollection
-        """
-        params: Dict[str, Any] = {
-            "asset": asset,
-            "accounts": accounts,
-            "page_size": page_size,
-            "paging_from": paging_from,
-            "start_time": start_time,
-            "end_time": end_time,
-            "start_height": start_height,
-            "end_height": end_height,
-            "start_chain_sequence_number": start_chain_sequence_number,
-            "end_chain_sequence_number": end_chain_sequence_number,
-            "start_inclusive": start_inclusive,
-            "end_inclusive": end_inclusive,
-            "timezone": timezone,
-        }
-        return DataCollection(self._get_data, f"blockchain/{asset}/accounts", params, client=self)
-
-    def get_list_of_transactions(
-        self,
-        asset: str,
-        transaction_hashes: Optional[Union[List[str], str]] = None,
-        block_hashes: Optional[Union[List[str], str]] = None,
-        page_size: Optional[int] = None,
-        paging_from: Optional[Union[PagingFrom, str]] = "start",
-        start_time: Optional[Union[datetime, date, str]] = None,
-        end_time: Optional[Union[datetime, date, str]] = None,
-        start_height: Optional[int] = None,
-        end_height: Optional[int] = None,
-        start_inclusive: Optional[bool] = None,
-        end_inclusive: Optional[bool] = None,
-        timezone: Optional[str] = None,
-    ) -> DataCollection:
-        """
-        Returns a list of blockchain transactions metadata.
-
-        :param asset: Asset name
-        :type asset: str
-        :param transaction_hashes: Optional comma separated list of transaction hashes to filter a response.
-        :type transaction_hashes: str, list(str)
-        :param block_hashes: Optional comma separated list of block hashes to filter a response.
-        :type block_hashes: str, list(str)
-        :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
-        :type page_size: int
-        :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-        :type paging_from: PagingFrom, str
-        :param start_time: Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
-        :type start_time: datetime, date, str
-        :param end_time: End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
-        :type end_time: datetime, date, str
-        :param start_height: The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
-        :type start_height: int
-        :param end_height: The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
-        :type end_height: int
-        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
-        :type start_inclusive: bool
-        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
-        :type end_inclusive: bool
-        :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
-        :type timezone: str
-        :return: list of transaction metadata
-        :rtype: DataCollection
-        """
-        params: Dict[str, Any] = {
-            "asset": asset,
-            "transaction_hashes": transaction_hashes,
-            "block_hashes": block_hashes,
-            "page_size": page_size,
-            "paging_from": paging_from,
-            "start_time": start_time,
-            "end_time": end_time,
-            "start_height": start_height,
-            "end_height": end_height,
-            "start_inclusive": start_inclusive,
-            "end_inclusive": end_inclusive,
-            "timezone": timezone,
-        }
-        return DataCollection(
-            self._get_data, f"blockchain/{asset}/transactions", params
-        )
-
-    def get_list_of_balance_updates(
-        self,
-        asset: str,
-        accounts: Optional[Union[List[str], str]] = None,
-        transaction_hashes: Optional[Union[List[str], str]] = None,
-        block_hashes: Optional[Union[List[str], str]] = None,
-        page_size: Optional[int] = None,
-        paging_from: Optional[Union[PagingFrom, str]] = "start",
-        start_time: Optional[Union[datetime, date, str]] = None,
-        end_time: Optional[Union[datetime, date, str]] = None,
-        start_height: Optional[int] = None,
-        end_height: Optional[int] = None,
-        start_chain_sequence_number: Optional[int] = None,
-        end_chain_sequence_number: Optional[int] = None,
-        start_inclusive: Optional[bool] = None,
-        end_inclusive: Optional[bool] = None,
-        timezone: Optional[str] = None,
-    ) -> DataCollection:
-        """
-        Returns a list of blockchain accounts balance updates.
-
-        :param asset: Asset name
-        :type asset: str
-        :param accounts: Optional comma separated list of accounts to filter a response.
-        :type accounts: str, list(str)
-        :param transaction_hashes: Optional comma separated list of transaction hashes to filter a response.
-        :type transaction_hashes: str, list(str)
-        :param block_hashes: Optional comma separated list of block hashes to filter a response.
-        :type block_hashes: str, list(str)
-        :param page_size: number of items returned per page when calling the API. If the request times out, try using a smaller number.
-        :type page_size: int
-        :param paging_from: Defines where you want to start receiving items from, 'start' or 'end' of the timeseries.
-        :type paging_from: PagingFrom, str
-        :param start_time: Start time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
-        :type start_time: datetime, date, str
-        :param end_time: End time of the timeseries (string or datetime). Datetime object may be timezone naive or aware. Multiple formats of ISO 8601 are supported: 2006-01-20T00:00:00Z, 2006-01-20T00:00:00.000Z, 2006-01-20T00:00:00.123456Z, 2006-01-20T00:00:00.123456789, 2006-01-20, 20060120
-        :type end_time: datetime, date, str
-        :param start_height: The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
-        :type start_height: int
-        :param end_height: The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
-        :type end_height: int
-        :param start_chain_sequence_number: The start height indicates the beginning block height for the set of data that are returned. Mutually exclusive with start_time
-        :type start_chain_sequence_number: int
-        :param end_chain_sequence_number: The end height indicates the beginning block height for the set of data that are returned. Mutually exclusive with end_time
-        :type end_chain_sequence_number: int
-        :param start_inclusive: Flag to define if start timestamp must be included in the timeseries if present. True by default.
-        :type start_inclusive: bool
-        :param end_inclusive: Flag to define if end timestamp must be included in the timeseries if present. True by default.
-        :type end_inclusive: bool
-        :param timezone: timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
-        :type timezone: str
-        :return: list of balance updates
-        :rtype: DataCollection
-        """
-        params: Dict[str, Any] = {
-            "asset": asset,
-            "accounts": accounts,
-            "transaction_hashes": transaction_hashes,
-            "block_hashes": block_hashes,
-            "page_size": page_size,
-            "paging_from": paging_from,
-            "start_time": start_time,
-            "end_time": end_time,
-            "start_height": start_height,
-            "end_height": end_height,
-            "start_chain_sequence_number": start_chain_sequence_number,
-            "end_chain_sequence_number": end_chain_sequence_number,
-            "start_inclusive": start_inclusive,
-            "end_inclusive": end_inclusive,
-            "timezone": timezone,
-        }
-        return DataCollection(
-            self._get_data, f"blockchain/{asset}/balance-updates", params
-        )
-
     def get_list_of_blocks_v2(
         self,
         asset: str,
@@ -6480,62 +6328,6 @@ class CoinMetricsClient:
             self._get_data, f"blockchain-v2/{asset}/balance-updates", params
         )
 
-    def get_full_transaction_for_block(
-        self,
-        asset: str,
-        block_hash: str,
-        txid: str,
-    ) -> List[Dict[str, Any]]:
-        """
-        :param asset: Asset name.
-        :type asset: str
-        :param block_hash: Block hash.
-        :type block_hash: str
-        :param txid: Transaction identifier (txid).
-        :type txid: str
-
-        :return: Blockchain full transaction.
-        :rtype: DataCollection
-        """
-        params: Dict[str, Any] = {
-            "asset": asset,
-            "block_hash": block_hash,
-            "txid": txid,
-        }
-        return cast(
-            List[Dict[str, Any]],
-            self._get_data(
-                f"blockchain/{asset}/blocks/{block_hash}/transactions/{txid}",
-                params,
-            ),
-        )
-
-    def get_full_block(
-            self,
-            asset: str,
-            block_hash: str,
-    ) -> Dict[str, Any]:
-        """
-        :param asset: Asset name.
-        :type asset: str
-        :param block_hash: Block hash.
-        :type block_hash: str
-
-        :return: Blockchain full block.
-        :rtype: Dict[str, Any]
-        """
-        params: Dict[str, Any] = {
-            "asset": asset,
-            "block_hash": block_hash,
-        }
-        return cast(
-            Dict[str, Any],
-            self._get_data(
-                f"blockchain/{asset}/blocks/{block_hash}",
-                params,
-            ),
-        )
-
     def get_full_block_v2(
         self, asset: str, block_hash: str, include_sub_accounts: Optional[bool]
     ) -> List[Dict[str, Any]]:
@@ -6560,29 +6352,6 @@ class CoinMetricsClient:
         return cast(
             List[Dict[str, Any]],
             self._get_data(f"blockchain-v2/{asset}/blocks/{block_hash}", params),
-        )
-
-    def get_full_transaction(
-        self,
-        asset: str,
-        txid: str,
-    ) -> List[Dict[str, Any]]:
-        """
-        :param asset: Asset name.
-        :type asset: Optional[str]
-        :param txid: Transaction identifier (txid).
-        :type txid: Optional[str]
-
-        :return: Blockchain full transaction.
-        :rtype: DataCollection
-        """
-        params: Dict[str, Any] = {
-            "asset": asset,
-            "txid": txid,
-        }
-        return cast(
-            List[Dict[str, Any]],
-            self._get_data(f"blockchain/{asset}/transactions/{txid}", params),
         )
 
     def get_full_transaction_v2(
