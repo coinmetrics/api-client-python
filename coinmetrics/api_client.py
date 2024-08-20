@@ -82,8 +82,7 @@ class CmStream:
         print(f"{message}")
 
     def _on_error(self, stream: websocket.WebSocketApp, message: str) -> None:
-        data = json.loads(message)
-        print(f"{data['error']}")
+        print(f"{message}")
 
     def _on_close(self, *args: Any, **kwargs: Any) -> None:
         return
