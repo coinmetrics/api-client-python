@@ -6785,7 +6785,7 @@ class CoinMetricsClient:
                 'price_includes_fee', 'variable_fee', 'base_address', 'quote_address', 'status',
                 'order_amount_increment', 'order_amount_min', 'order_amount_max', 'order_price_increment',
                 'order_price_min', 'order_price_max', 'order_size_min', 'order_taker_fee', 'order_maker_fee',
-                'margin_trading_enabled', 'experimental']
+                'margin_trading_enabled', 'experimental', 'base_native', 'quote_native']
         )
 
     def reference_data_exchange_metrics(
@@ -7192,7 +7192,8 @@ class CoinMetricsClient:
                 'order_price_min', 'order_price_max', 'order_size_min',
                 'order_taker_fee', 'order_maker_fee', 'margin_trading_enabled',
                 'experimental', 'price_open', 'price_close', 'price_high',
-                'price_low', 'vwap', 'volume', 'candle_usd_volume', 'candle_trades_count'
+                'price_low', 'vwap', 'volume', 'candle_usd_volume', 'candle_trades_count',
+                'base_native', 'quote_native'
             ]
         )
 
