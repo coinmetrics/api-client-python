@@ -4,6 +4,7 @@ import orjson
 import os
 import websocket
 from coinmetrics.api_client import CoinMetricsClient, CmStream
+import signal
 
 client = CoinMetricsClient(str(os.environ.get("CM_API_KEY")))
 cm_api_key_set = os.environ.get("CM_API_KEY") is not None
@@ -22,7 +23,10 @@ def on_message_index_levels_test(stream: websocket.WebSocketApp, message: str) -
     expected_cols_index_levels = ["index", "time", "level", "cm_sequence_id"]
     for col in expected_cols_index_levels:
         assert col in data
-    stream.close()
+    sequence_id = int(data['cm_sequence_id'])
+    if sequence_id >= 0:
+        os.kill(os.getpid(), signal.SIGINT)
+    # stream.close()
 
 
 def on_message_market_trades_test(stream: websocket.WebSocketApp, message: str) -> None:
@@ -42,8 +46,10 @@ def on_message_market_trades_test(stream: websocket.WebSocketApp, message: str) 
     ]
     for col in expected_cols_index_levels:
         assert col in data
-
-    stream.close()
+    sequence_id = int(data['cm_sequence_id'])
+    if sequence_id >= 0:
+        os.kill(os.getpid(), signal.SIGINT)
+    # stream.close()
 
 
 def on_message_market_orderbooks_test(stream: websocket.WebSocketApp, message: str) -> None:
@@ -63,7 +69,11 @@ def on_message_market_orderbooks_test(stream: websocket.WebSocketApp, message: s
     ]
     for col in expected_cols_index_levels:
         assert col in data
-    stream.close()
+    sequence_id = int(data['cm_sequence_id'])
+    if sequence_id >= 0:
+        os.kill(os.getpid(), signal.SIGINT)
+    # stream.close()
+
 
 def on_message_market_openinterest(stream: websocket.WebSocketApp, message: str) -> None:
     """
@@ -79,7 +89,10 @@ def on_message_market_openinterest(stream: websocket.WebSocketApp, message: str)
     ]
     for col in expected_cols_index_levels:
         assert col in data
-    stream.close()
+    sequence_id = int(data['cm_sequence_id'])
+    if sequence_id >= 0:
+        os.kill(os.getpid(), signal.SIGINT)
+    # stream.close()
 
 
 def on_message_market_candles_test(stream: websocket.WebSocketApp, message: str) -> None:
@@ -102,7 +115,10 @@ def on_message_market_candles_test(stream: websocket.WebSocketApp, message: str)
     ]
     for col in expected_cols_index_levels:
         assert col in data
-    stream.close()
+    sequence_id = int(data['cm_sequence_id'])
+    if sequence_id >= 0:
+        os.kill(os.getpid(), signal.SIGINT)
+    # stream.close()
 
 
 def on_message_market_quotes_test(stream: websocket.WebSocketApp, message: str) -> None:
@@ -122,8 +138,11 @@ def on_message_market_quotes_test(stream: websocket.WebSocketApp, message: str) 
     ]
     for col in expected_cols_index_levels:
         assert col in data
-    stream.close()
-
+    sequence_id = int(data['cm_sequence_id'])
+    if sequence_id >= 0:
+        os.kill(os.getpid(), signal.SIGINT)
+    # stream.close()
+    
 
 def on_message_asset_metrics_rr_test(stream: websocket.WebSocketApp, message: str) -> None:
     """
@@ -133,7 +152,10 @@ def on_message_asset_metrics_rr_test(stream: websocket.WebSocketApp, message: st
     expected_cols_index_levels = ["time", "asset", "ReferenceRateUSD", "cm_sequence_id"]
     for col in expected_cols_index_levels:
         assert col in data
-    stream.close()
+    sequence_id = int(data['cm_sequence_id'])
+    if sequence_id >= 0:
+        os.kill(os.getpid(), signal.SIGINT)
+    # stream.close()
 
 
 def on_message_pair_quotes_test(stream: websocket.WebSocketApp, message: str) -> None:
@@ -141,7 +163,10 @@ def on_message_pair_quotes_test(stream: websocket.WebSocketApp, message: str) ->
     expected_cols = ["pair", "time", "ask_price", "mid_price"]
     for col in expected_cols:
         assert col in data
-    stream.close()
+    sequence_id = int(data['cm_sequence_id'])
+    if sequence_id >= 0:
+        os.kill(os.getpid(), signal.SIGINT)
+    # stream.close()
 
 
 def on_message_assets_quotes_test(stream: websocket.WebSocketApp, message: str) -> None:
@@ -149,7 +174,10 @@ def on_message_assets_quotes_test(stream: websocket.WebSocketApp, message: str) 
     expected_cols = ["pair", "time", "ask_price", "ask_size", "bid_price", "mid_price"]
     for col in expected_cols:
         assert col in data
-    stream.close()
+    sequence_id = int(data['cm_sequence_id'])
+    if sequence_id >= 0:
+        os.kill(os.getpid(), signal.SIGINT)
+        # stream.close()
 
 
 def on_message_market_liquidations_test(stream: websocket.WebSocketApp, message: str) -> None:
@@ -165,7 +193,24 @@ def on_message_market_liquidations_test(stream: websocket.WebSocketApp, message:
     ]
     for col in expected_cols:
         assert col in data
-    stream.close()
+    sequence_id = int(data['cm_sequence_id'])
+    if sequence_id >= 0:
+        os.kill(os.getpid(), signal.SIGINT)
+        # stream.close()
+
+
+def on_message_sigterm_test(stream: websocket.WebSocketApp, message: str) -> None:
+    """
+    Tests closing websocket using sigterm
+    """
+    data = orjson.loads(message)
+    sequence_id = int(data['cm_sequence_id'])
+    if sequence_id >= 1:
+        stream.close()
+
+
+def on_close_sigterm_test(stream: websocket.WebSocketApp, close_status_code: int, close_msg: str) -> None:
+    os.kill(os.getpid(), signal.SIGTERM)
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
@@ -236,6 +281,7 @@ def test_get_market_openinterest() -> None:
     stream = client.get_stream_market_open_interest(markets='binance-LEVERUSDT-future')
     stream.run(on_message=on_message_market_openinterest)
 
+
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_on_close() -> None:
     on_close_ran = False
@@ -245,8 +291,16 @@ def test_on_close() -> None:
     stream = client.get_stream_asset_quotes(assets="btc")
     stream.run(on_message=on_message_assets_quotes_test, on_close=on_close)
     assert on_close_ran
-
-
+    
+    
+# @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+# def test_sigterm() -> None:
+#     assets = ["btc"]
+#     metrics = ["ReferenceRateUSD"]
+#     stream = client.get_stream_asset_metrics(
+#         assets=assets, metrics=metrics, frequency="1s"
+#     )
+#     stream.run(on_message=on_message_sigterm_test, on_close=on_close_sigterm_test)
 
 
 if __name__ == '__main__':

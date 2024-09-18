@@ -4,8 +4,9 @@ import time
 from datetime import date, datetime
 from logging import getLogger
 from typing import Dict, List, Optional, Union, cast, Callable, Any
+from types import FrameType
 from urllib.parse import urlencode
-
+import signal
 import requests
 from requests import HTTPError, Response
 import websocket
@@ -62,9 +63,16 @@ logger = getLogger("cm_client")
 class CmStream:
     def __init__(self, ws_url: str):
         self.ws_url = ws_url
+        self._stop_event_received = False
+        self._events_handlers_set = False
 
     def run(
-            self, on_message: MessageHandlerType = None, on_error: MessageHandlerType = None, on_close: Optional[Callable[[websocket.WebSocketApp, int, str], None]] = None) -> None:
+            self,
+            on_message: MessageHandlerType = None,
+            on_error: MessageHandlerType = None,
+            on_close: Optional[Callable[[websocket.WebSocketApp, int, str], None]] = None,
+            reconnect: bool = True
+    ) -> None:
         if on_message is None:
             on_message = self._on_message
         if on_error is None:
@@ -76,7 +84,23 @@ class CmStream:
             self.ws_url, on_message=on_message, on_error=on_error, on_close=on_close
         )
         self.ws = ws
-        self.ws.run_forever()
+
+        self._stop_event_received = False
+        self._register_signal_handlers([signal.SIGINT])
+        self.ws.run_forever(reconnect=reconnect)
+
+    def _register_signal_handlers(self, signal_types: List[int]) -> None:
+        if self._events_handlers_set:
+            return
+        for signal_type in signal_types:
+            previous_handler = signal.getsignal(signal_type)
+            if callable(previous_handler):
+                def handler(signum: int, frame: Optional[FrameType]) -> None:
+                    self._stop_event_received = True
+                    previous_handler(signum, frame)
+                signal.signal(signal_type, handler)
+
+        self._events_handlers_set = True
 
     def _on_message(self, stream: websocket.WebSocketApp, message: str) -> None:
         print(f"{message}")

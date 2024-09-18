@@ -2,6 +2,7 @@ import pytest
 
 from coinmetrics.api_client import CoinMetricsClient
 import os
+from datetime import datetime
 
 client = CoinMetricsClient(str(os.environ.get("CM_API_KEY")), debug_mode=True)
 cm_api_key_set = os.environ.get("CM_API_KEY") is not None
@@ -20,7 +21,7 @@ def test_debugging_get_rrs() -> None:
     eth_reference_rates = client.get_asset_metrics(
         metrics="ReferenceRateUSD",
         assets="eth",
-        start_time="2020-01-01",
+        start_time=datetime.now().date(),
         frequency="1d",
     )
     for data in eth_reference_rates:
