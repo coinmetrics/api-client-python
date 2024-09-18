@@ -640,7 +640,7 @@ class ParallelDataCollection(DataCollection):
                 end_time = self.parse_date(
                     cast(datetime, self._url_params.get("end_time"))
                 ) if self._url_params.get(
-                    "end_time") else datetime.today()
+                    "end_time") else datetime.utcnow().replace(microsecond=0)
                 for start, end in generate_ranges(
                     start_time,
                     end_time,

@@ -291,6 +291,19 @@ def test_height_increment() -> None:
         end_inclusive=False
     ).parallel(height_increment=10).to_dataframe()
     assert len(df_blocks) == 90
+    
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_end_time_undefined() -> None:
+    start_time = datetime.datetime.utcnow().replace(microsecond=0, second=0) - timedelta(minutes=60)
+    df_metrics_1m = client.get_asset_metrics(
+        assets='btc', 
+        metrics='ReferenceRateUSD',
+        start_time=start_time,
+        frequency='1m'
+    ).parallel(time_increment=timedelta(minutes=1)).to_dataframe()
+    assert not df_metrics_1m.empty
+    assert df_metrics_1m.time.min().to_pydatetime().replace(tzinfo=None) == start_time
 
 
 if __name__ == '__main__':
