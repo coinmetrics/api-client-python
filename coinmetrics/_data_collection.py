@@ -30,6 +30,7 @@ from collections import defaultdict
 from coinmetrics._exceptions import CoinMetricsClientNotFoundError
 if TYPE_CHECKING:
     from coinmetrics.api_client import CoinMetricsClient
+import numpy as np
 
 orjson_found = True
 try:
@@ -285,6 +286,8 @@ class DataCollection:
                     )
                     if dtype_mapper is None:
                         df = df.convert_dtypes()
+                    if df.dtypes.get("coin_metrics_id") == np.dtype("object"):
+                        df["coin_metrics_id"] = df["coin_metrics_id"].astype(np.float128)
                     if header is not None:
                         assert len(df.columns) == len(
                             header
