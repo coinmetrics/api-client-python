@@ -214,6 +214,12 @@ class DataCollection:
             f = path_or_bufstr_obj
             close = False
         else:
+            dirname = os.path.dirname(path_or_bufstr_obj)  # type: ignore
+            if dirname != '':
+                if not os.path.exists(path_or_bufstr_obj):  # type: ignore
+                    os.makedirs(dirname, exist_ok=True)
+                elif not os.path.isdir(dirname):
+                    return None
             f = open(path_or_bufstr_obj, "wb")  # type: ignore
             close = True
         if compress:
@@ -545,6 +551,15 @@ class ParallelDataCollection(DataCollection):
         data_collections = self._add_time_dimension_to_data_collections(data_collections=data_collections)
         return data_collections
 
+    def _get_asset_end_height(self, asset: str) -> int:
+        if self._client is not None:
+            block_data = self._client.get_list_of_blocks_v2(asset=asset, paging_from='end', page_size=1).first_page()
+        if block_data:
+            end_height = int(block_data[0]['height'])
+        else:
+            raise Exception(f"End height for asset {asset} not found.")
+        return end_height
+
     def _add_time_dimension_to_data_collections(
             self,
             data_collections: List[DataCollection]
@@ -614,11 +629,7 @@ class ParallelDataCollection(DataCollection):
                         """
                     )
                 if self._client is not None:
-                    block_data = self._client.get_list_of_blocks_v2(asset=asset, paging_from='end', page_size=1).first_page()
-                    if block_data:
-                        end_height = int(block_data[0]['height'])
-                    else:
-                        raise Exception(f"End height for asset {asset} not found.")
+                    end_height = self._get_asset_end_height(asset)
                 else:
                     raise CoinMetricsClientNotFoundError
 
@@ -718,8 +729,12 @@ class ParallelDataCollection(DataCollection):
         """
         This function will export the data requested to several csvs, based on the `parallize_on` attribute of the
         parent class, for example:
-        client.get_market_trades("coinbase-eth-btc-spot,coinbase-eth-usdc-spot,coinbase-1inch-btc-spot") will create a
-        file each like coinbase-eth-btc.csv, coinbase-eth-usdc-spot.csv, coinbase-1inch-btc-spot.csv
+        client.get_market_trades("coinbase-eth-btc-spot,coinbase-eth-usdc-spot").parallel(["markets"]) will create a
+        file each like ./market-trades/coinbase-eth-btc-spot.csv, ./market-trades/coinbase-eth-usdc-spot.csv
+        client.get_asset_metrics('btc,eth', 'ReferenceRateUSD', start_time='2024-01-01', limit_per_asset=1).parallel(
+        "assets,metrics", time_increment=timedelta(days=1))
+        will create a file each like ./asset-metrics/btc/ReferenceRateUSD/start_time=2024-01-01T00-00-00Z.csv,
+        ./asset-metrics/eth/ReferenceRateUSD/start_time=2024-01-01T00-00-00Z.csv
         :param data_directory: str path to directory where files should be dropped
         :param columns_to_store: List[str] columns to store
         :param compress: bool whether or not to compress to tar files
@@ -733,10 +748,37 @@ class ParallelDataCollection(DataCollection):
         total_tasks = len(data_collections)
         with self._executor(max_workers=self._max_workers) as processor:
             if self._progress_bar:
-                list(tqdm(processor.map(self._helper_to_csv, data_collections, data_directorys, columns_to_store_args, compress_args), total=total_tasks, desc="Exporting to CSV"))
+                list(
+                    tqdm(
+                        processor.map(
+                            self._helper_to_csv,
+                            data_collections,
+                            data_directorys,
+                            columns_to_store_args,
+                            compress_args
+                        ), total=total_tasks,
+                        desc="Exporting to CSV"
+                    )
+                )
             else:
-                processor.map(self._helper_to_csv, data_collections, data_directorys, columns_to_store_args,
-                              compress_args)
+                processor.map(
+                    self._helper_to_csv,
+                    data_collections,
+                    data_directorys,
+                    columns_to_store_args,
+                    compress_args
+                )
+        file_directories = '\n'.join(
+            sorted(
+                list(
+                    set(
+                        f"{data_directory}/{os.path.dirname(self._get_export_file_name(dc, 'csv'))}/*.csv"
+                        for dc in data_collections
+                    )
+                )
+            )
+        )
+        logger.info(f"Files saved in: \n{file_directories}")
 
     def export_to_csv(
         self,
@@ -755,9 +797,24 @@ class ParallelDataCollection(DataCollection):
         compress_args = [compress] * len(data_collections)
         with self._executor(max_workers=self._max_workers) as processor:
             if self._progress_bar:
-                json_data = list(tqdm(processor.map(ParallelDataCollection._helper_to_json, data_collections, compress_args), total=len(data_collections), desc="Exporting to Json"))
+                json_data = list(
+                    tqdm(
+                        processor.map(
+                            ParallelDataCollection._helper_to_json,
+                            data_collections,
+                            compress_args
+                        ), total=len(data_collections),
+                        desc="Exporting to Json"
+                    )
+                )
             else:
-                json_data = list(processor.map(ParallelDataCollection._helper_to_json, data_collections, compress_args))
+                json_data = list(
+                    processor.map(
+                        ParallelDataCollection._helper_to_json,
+                        data_collections,
+                        compress_args
+                    )
+                )
         if path_or_bufstr:
             with open(path_or_bufstr, 'w') as file:  # type: ignore
                 file.writelines(json_data)
@@ -771,10 +828,14 @@ class ParallelDataCollection(DataCollection):
             compress: bool = False,
     ) -> None:
         """
-        This function will export the data requested to several json, based on the `parallize_on` attribute of the
+        This function will export the data requested to several json, based on the `parallelize_on` attribute of the
         parent class, for example:
-        client.get_market_trades("coinbase-eth-btc-spot,coinbase-eth-usdc-spot,coinbase-1inch-btc-spot") will create a
-        file each like coinbase-eth-btc.json, coinbase-eth-usdc-spot.json, coinbase-1inch-btc-spot.json
+        client.get_market_trades("coinbase-eth-btc-spot,coinbase-eth-usdc-spot").parallel("markets") will create a
+        file each like ./market-trades/coinbase-eth-btc-spot.json, ./market-trades/coinbase-eth-usdc-spot.json
+        client.get_asset_metrics('btc,eth', 'ReferenceRateUSD', start_time='2024-01-01', limit_per_asset=1).parallel(
+        "assets,metrics", time_increment=timedelta(days=1))
+        will create a file each like ./asset-metrics/btc/ReferenceRateUSD/start_time=2024-01-01T00-00-00Z.json,
+        ./asset-metrics/eth/ReferenceRateUSD/start_time=2024-01-01T00-00-00Z.json
         :param data_directory: str path to directory where files should be dropped
         :param columns_to_store: List[str] columns to store
         :param compress: bool whether or not to compress to tar files
@@ -786,10 +847,36 @@ class ParallelDataCollection(DataCollection):
         compress_args = [compress] * len(data_collections)
         with self._executor(max_workers=self._max_workers) as processor:
             if self._progress_bar:
-                list(tqdm(processor.map(self._helper_to_json_file, data_collections, data_directorys, compress_args), total=len(data_collections), desc="Exporting to Json Files"))
+                list(
+                    tqdm(
+                        processor.map(
+                            self._helper_to_json_file,
+                            data_collections,
+                            data_directorys,
+                            compress_args
+                        ),
+                        total=len(data_collections),
+                        desc="Exporting to Json Files"
+                    )
+                )
             else:
-                processor.map(self._helper_to_json_file, data_collections, data_directorys,
-                              compress_args)
+                processor.map(
+                    self._helper_to_json_file,
+                    data_collections,
+                    data_directorys,
+                    compress_args
+                )
+        file_directories = '\n'.join(
+            sorted(
+                list(
+                    set(
+                        f"{data_directory}/{os.path.dirname(self._get_export_file_name(dc, 'json'))}/*.json"
+                        for dc in data_collections
+                    )
+                )
+            )
+        )
+        logger.info(f"Files saved in {file_directories}")
 
     def _get_parallelize_on(self, parallelize_on: Optional[Union[List[str], str]]) -> List[str]:
         if parallelize_on is None:
@@ -816,34 +903,49 @@ class ParallelDataCollection(DataCollection):
         if not isinstance(self._url_params.get(param), list) and len(self._url_params.get(param).split(",")) < 2:  # type: ignore
             raise ValueError(f"Invalid parallelization param: {param} - values must be a list, instead: {self._url_params.get(param)}")
 
-    def _helper_to_csv(self, data_collection: DataCollection,
-                       data_directory: str,
-                       *args: Any) -> None:
-        data_names = []
+    def _get_export_file_name(
+            self,
+            data_collection: DataCollection,
+            file_type: str
+    ) -> str:
+        arg_values = []
         for param in self._parallelize_on:
             values = data_collection._url_params.get(param)
             if values:
                 if isinstance(values, str) and len(values.split(",")) > 1:
-                    data_names.extend(values.split(","))
+                    arg_values.extend(values.split(","))
                 else:
-                    data_names.append(values)  # type: ignore
+                    arg_values.append(values)  # type: ignore
 
-        data_name = "_".join(data_names)
+        arg_value = "/".join(arg_values)
         friendly_endpoint_name = data_collection._endpoint.split("/")[-1]
         if self._time_increment and data_collection._url_params.get("start_time"):
-            start_time = cast(datetime, data_collection._url_params.get("start_time")).strftime("%Y%m%d-%H%M%S")
-            file_name = f"{data_name}_{friendly_endpoint_name}_{start_time}.csv"
+            start_time = cast(datetime, data_collection._url_params.get("start_time")).strftime("%Y-%m-%dT%H-%M-%SZ")
+            file_name = f"{friendly_endpoint_name}/{arg_value}/start_time={start_time}.{file_type}"
+        elif self._height_increment and data_collection._url_params.get("start_height"):
+            start_height = cast(int, data_collection._url_params.get("start_height"))
+            file_name = f"{friendly_endpoint_name}/{arg_value}/start_height={start_height}.{file_type}"
         else:
-            file_name = f"{data_name}_{friendly_endpoint_name}.csv"
+            file_name = f"{friendly_endpoint_name}/{arg_value}.{file_type}"
+        return file_name
+
+    def _helper_to_csv(
+            self,
+            data_collection: DataCollection,
+            data_directory: str,
+            *args: Any
+    ) -> None:
+        file_name = self._get_export_file_name(data_collection, file_type="csv")
         full_file_path = os.path.join(data_directory, file_name)
         data_collection.export_to_csv(full_file_path, *args)
 
-    def _helper_to_json_file(self, data_collection: DataCollection, data_directory: str, compress: bool = False) -> Optional[str]:
-        # endpoint = data_collection._endpoint
-        first_param_arg = self._get_first_param_from_endpoint()
-        data_name = data_collection._url_params[first_param_arg]
-        friendly_endpoint_name = data_collection._endpoint.split("/")[-1]
-        file_name = f"{data_name}_{friendly_endpoint_name}.json"
+    def _helper_to_json_file(
+        self,
+        data_collection: DataCollection,
+        data_directory: str,
+        compress: bool = False
+    ) -> Optional[str]:
+        file_name = self._get_export_file_name(data_collection, file_type="json")
         full_file_path = os.path.join(data_directory, file_name)
         return data_collection.export_to_json(full_file_path, compress)
 

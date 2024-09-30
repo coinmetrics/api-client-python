@@ -199,6 +199,11 @@ system
 and `.export_to_json_files()`. Using the methods that return a single output - `.export_to_csv()`, `export_to_list()`, and
 `.export_to_dataframe()` need to join the data from many threads before it can be returned, this may use a lot of memory
 if you are accessing data types like market orderbooks or market trades and could fail altogether
+* If using `export_to_csv/json_files()` functions, note that by default they will be saved in the directory format `/{endpoint}/{parallelize_on}`.
+For example, in `export_to_json_files()`, 
+`client.get_market_trades("coinbase-eth-btc-spot,coinbase-eth-usdc-spot").parallel("markets")` will create a file each like ./market-trades/coinbase-eth-btc-spot.json, ./market-trades/coinbase-eth-usdc-spot.json
+`client.get_asset_metrics('btc,eth', 'ReferenceRateUSD', start_time='2024-01-01', limit_per_asset=1).parallel("assets,metrics", time_increment=timedelta(days=1))`
+will create a file each like ./asset-metrics/btc/ReferenceRateUSD/start_time=2024-01-01T00-00-00Z.json, ./asset-metrics/eth/ReferenceRateUSD/start_time=2024-01-01T00-00-00Z.json
 * If you get the error `BrokenProcessPool` it [might be because you're missing a main() function](https://stackoverflow.com/questions/15900366/all-example-concurrent-futures-code-is-failing-with-brokenprocesspool)
 
 ## Examples
