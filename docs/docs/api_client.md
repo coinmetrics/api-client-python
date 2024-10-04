@@ -2026,6 +2026,7 @@ def catalog_market_metrics_v2(
 **Arguments**:
 
 - `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
 - `exchange` (`Optional[str]`): Unique name of an exchange.
 - `market_type` (`Optional[str]`): Type of markets.
 - `base` (`Optional[str]`): Base asset of markets.
@@ -2471,6 +2472,7 @@ def catalog_full_market_metrics_v2(
 **Arguments**:
 
 - `markets` (`Optional[Union[str, List[str]]]`): Comma separated list of markets. By default all markets are returned.
+- `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
 - `exchange` (`Optional[str]`): Unique name of an exchange.
 - `market_type` (`Optional[str]`): Type of markets.
 - `base` (`Optional[str]`): Base asset of markets.

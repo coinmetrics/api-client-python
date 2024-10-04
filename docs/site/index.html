@@ -786,6 +786,11 @@ system</li>
 and <code>.export_to_json_files()</code>. Using the methods that return a single output - <code>.export_to_csv()</code>, <code>export_to_list()</code>, and
 <code>.export_to_dataframe()</code> need to join the data from many threads before it can be returned, this may use a lot of memory
 if you are accessing data types like market orderbooks or market trades and could fail altogether</li>
+<li>If using <code>export_to_csv/json_files()</code> functions, note that by default they will be saved in the directory format <code>/{endpoint}/{parallelize_on}</code>.
+For example, in <code>export_to_json_files()</code>, 
+<code>client.get_market_trades("coinbase-eth-btc-spot,coinbase-eth-usdc-spot").parallel("markets")</code> will create a file each like ./market-trades/coinbase-eth-btc-spot.json, ./market-trades/coinbase-eth-usdc-spot.json
+<code>client.get_asset_metrics('btc,eth', 'ReferenceRateUSD', start_time='2024-01-01', limit_per_asset=1).parallel("assets,metrics", time_increment=timedelta(days=1))</code>
+will create a file each like ./asset-metrics/btc/ReferenceRateUSD/start_time=2024-01-01T00-00-00Z.json, ./asset-metrics/eth/ReferenceRateUSD/start_time=2024-01-01T00-00-00Z.json</li>
 <li>If you get the error <code>BrokenProcessPool</code> it <a href="https://stackoverflow.com/questions/15900366/all-example-concurrent-futures-code-is-failing-with-brokenprocesspool">might be because you're missing a main() function</a></li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
