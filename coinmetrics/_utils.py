@@ -5,7 +5,7 @@ from functools import wraps
 from logging import getLogger
 from os.path import expanduser
 from time import sleep
-from typing import Any, Callable, Dict, List, Optional, Tuple, Union
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union, Set
 from coinmetrics._typing import FilePathOrBuffer, UrlParamTypes
 
 logger = getLogger("cm_client_utils")
@@ -115,3 +115,14 @@ def retry(
         return wrapper
 
     return retry_wrapper
+
+
+def get_keys_from_catalog(d: Dict[str, str]) -> Set[str]:
+    keys = []
+    for k, v in d.items():
+        if isinstance(v, list):
+            for nested_dict in v:
+                keys.extend(get_keys_from_catalog(nested_dict))
+        else:
+            keys.append(k)
+    return set(keys)

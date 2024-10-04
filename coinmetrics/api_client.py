@@ -43,7 +43,7 @@ from coinmetrics._catalogs import (
     CatalogMiningPoolTipsData,
     CatalogTransactionTrackerData,
     CatalogMarketContractPrices,
-    CatalogMarketImpliedVolatility
+    CatalogMarketImpliedVolatility,
 )
 
 from importlib import import_module
@@ -2205,7 +2205,14 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-candles", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "/catalog-v2/market-candles",
+            params,
+            iterable_col="frequencies",
+            iterable_key="frequency",
+            client=self
+        )
 
     def catalog_market_orderbooks_v2(
             self,
@@ -2261,7 +2268,14 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-orderbooks", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "/catalog-v2/market-orderbooks",
+            params,
+            iterable_key="depth",
+            iterable_col="depths",
+            client=self
+        )
 
     def catalog_market_quotes_v2(
             self,
@@ -2729,6 +2743,8 @@ class CoinMetricsClient:
         """
         :param markets: Comma separated list of markets. By default all markets are returned.
         :type markets: Optional[Union[str, List[str]]]
+        :param metrics: Comma separated list of metrics. By default all metrics are returned.
+        :type metrics: Optional[Union[str, List[str]]]
         :param exchange: Unique name of an exchange.
         :type exchange: Optional[str]
         :param market_type: Type of markets.
@@ -2767,7 +2783,17 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-metrics", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "/catalog-v2/market-metrics",
+            params,
+            metric_type='market',
+            iterable_col="frequencies",
+            iterable_key="frequency",
+            explode_on="metrics",
+            assign_to="metric",
+            client=self
+        )
 
     def catalog_full_market_trades_v2(
             self,
@@ -2879,7 +2905,14 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-candles", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "/catalog-all-v2/market-candles",
+            params,
+            iterable_col="frequencies",
+            iterable_key="frequency",
+            client=self
+        )
 
     def catalog_full_market_orderbooks_v2(
             self,
@@ -2935,7 +2968,14 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-orderbooks", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "/catalog-all-v2/market-orderbooks",
+            params,
+            iterable_key="depth",
+            iterable_col="depths",
+            client=self
+        )
 
     def catalog_full_market_quotes_v2(
             self,
@@ -3403,6 +3443,8 @@ class CoinMetricsClient:
         """
         :param markets: Comma separated list of markets. By default all markets are returned.
         :type markets: Optional[Union[str, List[str]]]
+        :param metrics: Comma separated list of metrics. By default all metrics are returned.
+        :type metrics: Optional[Union[str, List[str]]]
         :param exchange: Unique name of an exchange.
         :type exchange: Optional[str]
         :param market_type: Type of markets.
@@ -3441,7 +3483,17 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-metrics", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "/catalog-all-v2/market-metrics",
+            params,
+            metric_type='market',
+            iterable_col="frequencies",
+            iterable_key="frequency",
+            explode_on="metrics",
+            assign_to="metric",
+            client=self
+        )
 
     def catalog_asset_metrics_v2(
             self,
@@ -3481,7 +3533,18 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
             "format": format,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/asset-metrics", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "/catalog-v2/asset-metrics",
+            params,
+            metric_type="asset",
+            iterable_col="frequencies",
+            iterable_key="frequency",
+            explode_on="metrics",
+            assign_to="metric",
+            nested_catalog_columns=["frequency", "min_time", "max_time", "min_height", "max_height", "min_hash", "max_hash", "community"],
+            client=self
+        )
 
     def catalog_full_asset_metrics_v2(
             self,
@@ -3521,7 +3584,18 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
             "format": format,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/asset-metrics", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "/catalog-all-v2/asset-metrics",
+            params,
+            metric_type="asset",
+            iterable_col="frequencies",
+            iterable_key="frequency",
+            explode_on="metrics",
+            assign_to="metric",
+            nested_catalog_columns=["frequency", "min_time", "max_time", "min_height", "max_height", "min_hash", "max_hash", "community"],
+            client=self
+        )
 
     def catalog_exchange_metrics_v2(
             self,
@@ -3561,7 +3635,17 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
             "format": format,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/exchange-metrics", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "/catalog-v2/exchange-metrics",
+            params,
+            metric_type="exchange",
+            iterable_col="frequencies",
+            iterable_key="frequency",
+            explode_on="metrics",
+            assign_to="metric",
+            client=self
+        )
 
     def catalog_full_exchange_metrics_v2(
             self,
@@ -3601,7 +3685,17 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
             "format": format,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/exchange-metrics", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "/catalog-all-v2/exchange-metrics",
+            params,
+            metric_type="exchange",
+            iterable_col="frequencies",
+            iterable_key="frequency",
+            explode_on="metrics",
+            assign_to="metric",
+            client=self
+        )
 
     def catalog_exchange_asset_metrics_v2(
             self,
@@ -3641,7 +3735,17 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
             "format": format,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/exchange-asset-metrics", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "/catalog-v2/exchange-asset-metrics",
+            params,
+            metric_type="exchange_asset",
+            iterable_col="frequencies",
+            iterable_key="frequency",
+            explode_on="metrics",
+            assign_to="metric",
+            client=self
+        )
 
     def catalog_full_exchange_asset_metrics_v2(
             self,
@@ -3681,7 +3785,17 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
             "format": format,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/exchange-asset-metrics", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "/catalog-all-v2/exchange-asset-metrics",
+            params,
+            metric_type="exchange_asset",
+            iterable_col="frequencies",
+            iterable_key="frequency",
+            explode_on="metrics",
+            assign_to="metric",
+            client=self
+        )
 
     def catalog_pair_metrics_v2(
             self,
@@ -3721,7 +3835,17 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
             "format": format,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/pair-metrics", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "/catalog-v2/pair-metrics",
+            params,
+            metric_type="pair",
+            iterable_col="frequencies",
+            iterable_key="frequency",
+            explode_on="metrics",
+            assign_to="metric",
+            client=self
+        )
 
     def catalog_full_pair_metrics_v2(
             self,
@@ -3761,7 +3885,17 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
             "format": format,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/pair-metrics", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "/catalog-all-v2/pair-metrics",
+            params,
+            metric_type="pair",
+            iterable_col="frequencies",
+            iterable_key="frequency",
+            explode_on="metrics",
+            assign_to="metric",
+            client=self
+        )
 
     def catalog_institution_metrics_v2(
             self,
@@ -3801,7 +3935,17 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
             "format": format,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/institution-metrics", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "/catalog-v2/institution-metrics",
+            params,
+            metric_type="institution",
+            iterable_col="frequencies",
+            iterable_key="frequency",
+            explode_on="metrics",
+            assign_to="metric",
+            client=self
+        )
 
     def catalog_full_institution_metrics_v2(
             self,
@@ -3841,7 +3985,17 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
             "format": format,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/institution-metrics", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "/catalog-all-v2/institution-metrics",
+            params,
+            metric_type="institution",
+            iterable_col="frequencies",
+            iterable_key="frequency",
+            explode_on="metrics",
+            assign_to="metric",
+            client=self
+        )
 
     def catalog_pair_candles_v2(
             self,
@@ -3869,7 +4023,14 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/pair-candles", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "/catalog-v2/pair-candles",
+            params,
+            iterable_col="frequencies",
+            iterable_key="frequency",
+            client=self
+        )
 
     def catalog_index_candles_v2(
             self,
@@ -3897,7 +4058,14 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/index-candles", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "/catalog-v2/index-candles",
+            params,
+            iterable_col="frequencies",
+            iterable_key="frequency",
+            client=self
+        )
 
     def catalog_index_levels_v2(
             self,
@@ -3925,7 +4093,14 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/index-levels", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "/catalog-v2/index-levels",
+            params,
+            iterable_col="frequencies",
+            iterable_key="frequency",
+            client=self
+        )
 
     def catalog_asset_chains_v2(
             self,
@@ -4093,7 +4268,14 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/index-candles", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "/catalog-all-v2/index-candles",
+            params,
+            iterable_col="frequencies",
+            iterable_key="frequency",
+            client=self
+        )
 
     def catalog_full_index_levels_v2(
             self,
@@ -4121,7 +4303,12 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/index-levels", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "/catalog-all-v2/index-levels",
+            params,
+            client=self
+        )
 
     def catalog_full_asset_chains_v2(
             self,
