@@ -374,7 +374,7 @@ class ParallelDataCollection(DataCollection):
     _VALID_PARALLELIZATION_PARAMS = {
         'exchanges', 'assets', 'indexes', 'metrics', 'markets', 'institutions',
         'defi_protocols', 'exchange_assets', 'pairs', 'txid', 'accounts',
-        'block_hashes', 'heights', 'sub_accounts'
+        'block_hashes', 'heights', 'sub_accounts', 'txids'
     }
     _ENDPOINT_FIRST_PARAM_DICT = {
         'blockchain-metadata/tags': 'type',
