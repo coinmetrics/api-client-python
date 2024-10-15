@@ -81,7 +81,8 @@ class CmStream:
             on_close = self._on_close
 
         ws = websocket.WebSocketApp(
-            self.ws_url, on_message=on_message, on_error=on_error, on_close=on_close
+            self.ws_url, on_message=on_message, on_error=on_error, on_close=on_close,
+            header={"User-Agent": f"Coinmetrics-Python-API-Client/{version}"}
         )
         self.ws = ws
 
@@ -131,12 +132,12 @@ class CoinMetricsClient:
             api_path_prefix = "community-"
         self._api_base_url = "https://{}api.coinmetrics.io/v4".format(api_path_prefix)
         self._ws_api_base_url = "wss://{}api.coinmetrics.io/v4".format(api_path_prefix)
-        self._http_header = {"Api-Client-Version": version}
+        self._http_header = {"User-Agent": f"Coinmetrics-Python-API-Client/{version}"}
         self._proxies = {"http": proxy_url, "https": proxy_url}
         if session is None:
             self._session = requests.Session()
             self._session.verify = self._verify_ssl_certs
-            self._session.headers.update({"Api-Client-Version": version})
+            self._session.headers.update({"User-Agent": f"Coinmetrics-Python-API-Client/{version}"})
             self._session.proxies.update({"http": proxy_url, "https": proxy_url})  # type: ignore
         else:
             self._session = session
