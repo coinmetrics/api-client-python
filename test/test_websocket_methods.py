@@ -26,7 +26,6 @@ def on_message_index_levels_test(stream: websocket.WebSocketApp, message: str) -
     sequence_id = int(data['cm_sequence_id'])
     if sequence_id >= 0:
         os.kill(os.getpid(), signal.SIGINT)
-    # stream.close()
 
 
 def on_message_market_trades_test(stream: websocket.WebSocketApp, message: str) -> None:
@@ -49,7 +48,6 @@ def on_message_market_trades_test(stream: websocket.WebSocketApp, message: str) 
     sequence_id = int(data['cm_sequence_id'])
     if sequence_id >= 0:
         os.kill(os.getpid(), signal.SIGINT)
-    # stream.close()
 
 
 def on_message_market_orderbooks_test(stream: websocket.WebSocketApp, message: str) -> None:
@@ -72,7 +70,6 @@ def on_message_market_orderbooks_test(stream: websocket.WebSocketApp, message: s
     sequence_id = int(data['cm_sequence_id'])
     if sequence_id >= 0:
         os.kill(os.getpid(), signal.SIGINT)
-    # stream.close()
 
 
 def on_message_market_openinterest(stream: websocket.WebSocketApp, message: str) -> None:
@@ -92,7 +89,6 @@ def on_message_market_openinterest(stream: websocket.WebSocketApp, message: str)
     sequence_id = int(data['cm_sequence_id'])
     if sequence_id >= 0:
         os.kill(os.getpid(), signal.SIGINT)
-    # stream.close()
 
 
 def on_message_market_candles_test(stream: websocket.WebSocketApp, message: str) -> None:
@@ -118,7 +114,6 @@ def on_message_market_candles_test(stream: websocket.WebSocketApp, message: str)
     sequence_id = int(data['cm_sequence_id'])
     if sequence_id >= 0:
         os.kill(os.getpid(), signal.SIGINT)
-    # stream.close()
 
 
 def on_message_market_quotes_test(stream: websocket.WebSocketApp, message: str) -> None:
@@ -141,7 +136,6 @@ def on_message_market_quotes_test(stream: websocket.WebSocketApp, message: str) 
     sequence_id = int(data['cm_sequence_id'])
     if sequence_id >= 0:
         os.kill(os.getpid(), signal.SIGINT)
-    # stream.close()
     
 
 def on_message_asset_metrics_rr_test(stream: websocket.WebSocketApp, message: str) -> None:
@@ -155,7 +149,6 @@ def on_message_asset_metrics_rr_test(stream: websocket.WebSocketApp, message: st
     sequence_id = int(data['cm_sequence_id'])
     if sequence_id >= 0:
         os.kill(os.getpid(), signal.SIGINT)
-    # stream.close()
 
 
 def on_message_pair_quotes_test(stream: websocket.WebSocketApp, message: str) -> None:
@@ -166,7 +159,6 @@ def on_message_pair_quotes_test(stream: websocket.WebSocketApp, message: str) ->
     sequence_id = int(data['cm_sequence_id'])
     if sequence_id >= 0:
         os.kill(os.getpid(), signal.SIGINT)
-    # stream.close()
 
 
 def on_message_assets_quotes_test(stream: websocket.WebSocketApp, message: str) -> None:
@@ -177,7 +169,6 @@ def on_message_assets_quotes_test(stream: websocket.WebSocketApp, message: str) 
     sequence_id = int(data['cm_sequence_id'])
     if sequence_id >= 0:
         os.kill(os.getpid(), signal.SIGINT)
-        # stream.close()
 
 
 def on_message_market_liquidations_test(stream: websocket.WebSocketApp, message: str) -> None:
@@ -196,7 +187,6 @@ def on_message_market_liquidations_test(stream: websocket.WebSocketApp, message:
     sequence_id = int(data['cm_sequence_id'])
     if sequence_id >= 0:
         os.kill(os.getpid(), signal.SIGINT)
-        # stream.close()
 
 
 def on_message_sigterm_test(stream: websocket.WebSocketApp, message: str) -> None:
@@ -215,21 +205,20 @@ def on_close_sigterm_test(stream: websocket.WebSocketApp, close_status_code: int
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_index_levels_stream() -> None:
-    indexes = ["CMBIBTC", "CMBIETH"]
-    stream = client.get_stream_index_levels(indexes=indexes)
+    stream = client.get_stream_index_levels(indexes="*")
     stream.run(on_message=on_message_index_levels_test)
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_market_trades_stream() -> None:
-    markets = ["coinbase-btc-usd-spot"]
+    markets = ["*"]
     stream = client.get_stream_market_trades(markets=markets)
     stream.run(on_message=on_message_market_trades_test)
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_market_orderbooks_stream() -> None:
-    markets = ["binance-btc-usdt-spot"]
+    markets = ["*"]
     stream = client.get_stream_market_orderbooks(markets=markets)
     stream.run(on_message=on_message_market_orderbooks_test)
 
@@ -243,10 +232,9 @@ def test_market_quotes_stream() -> None:
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_asset_metrics() -> None:
-    assets = ["btc"]
     metrics = ["ReferenceRateUSD"]
     stream = client.get_stream_asset_metrics(
-        assets=assets, metrics=metrics, frequency="1s"
+        assets="*", metrics=metrics, frequency="1s"
     )
     stream.run(on_message_asset_metrics_rr_test)
 
@@ -254,31 +242,31 @@ def test_asset_metrics() -> None:
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_market_candles_stream() -> None:
     stream = client.get_stream_market_candles(
-        markets=["coinbase-btc-usd-spot"], frequency="1m"
+        markets="*", frequency="1m"
     )
     stream.run(on_message_market_candles_test)
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_get_pair_quotes_stream() -> None:
-    stream = client.get_stream_pair_quotes(pairs="btc-usdt")
+    stream = client.get_stream_pair_quotes(pairs="btc-*")
     stream.run(on_message=on_message_pair_quotes_test)
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_get_asset_quotes_stream() -> None:
-    stream = client.get_stream_asset_quotes(assets="btc")
+    stream = client.get_stream_asset_quotes(assets="*")
     stream.run(on_message=on_message_assets_quotes_test)
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_get_market_liquidations() -> None:
-    stream = client.get_stream_market_liquidations(markets='binance-LEVERUSDT-future')
+    stream = client.get_stream_market_liquidations(markets='*')
     stream.run(on_message=on_message_market_liquidations_test)
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_get_market_openinterest() -> None:
-    stream = client.get_stream_market_open_interest(markets='binance-LEVERUSDT-future')
+    stream = client.get_stream_market_open_interest(markets='*')
     stream.run(on_message=on_message_market_openinterest)
 
 
