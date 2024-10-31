@@ -195,7 +195,7 @@ class CoinMetricsClient:
             "include": include,
             "exclude": exclude,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetsData(self._get_data("catalog/assets", params)["data"])
 
     def catalog_asset_alerts(
@@ -215,7 +215,7 @@ class CoinMetricsClient:
             "assets": assets,
             "alerts": alerts,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetAlertsData(
             self._get_data("catalog/asset-alerts", params)["data"]
         )
@@ -234,7 +234,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetChainsData(self._get_data("catalog/asset-chains", params)['data'])
 
     def catalog_mempool_feerates(
@@ -251,7 +251,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMempoolFeeratesData(self._get_data("catalog/mempool-feerates", params)['data'])
 
     def catalog_mining_pool_tips_summaries(
@@ -268,7 +268,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
 
         return CatalogMiningPoolTipsData(self._get_data("catalog/mining-pool-tips-summary", params)['data'])
 
@@ -286,7 +286,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
 
         return CatalogTransactionTrackerData(self._get_data("catalog/transaction-tracker", params)['data'])
 
@@ -302,7 +302,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"pairs": asset_pairs}
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetPairsData(self._get_data("catalog/pairs", params)["data"])
 
     def catalog_asset_metrics(
@@ -322,7 +322,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMetricsData(
             self._get_data("catalog/asset-metrics", params)["data"]
         )
@@ -344,7 +344,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMetricsData(
             self._get_data("catalog/exchange-metrics", params)["data"]
         )
@@ -366,7 +366,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogExchangeAssetMetricsData(
             self._get_data("catalog/exchange-asset-metrics", params)["data"]
         )
@@ -388,7 +388,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogPairMetricsData(
             self._get_data("catalog/pair-metrics", params)["data"]
         )
@@ -410,7 +410,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogInstitutionMetricsData(
             self._get_data("catalog/institution-metrics", params)["data"]
         )
@@ -427,7 +427,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"pairs": asset_pairs}
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetPairCandlesData(
             self._get_data("catalog/pair-candles", params)["data"]
         )
@@ -444,7 +444,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"exchanges": exchanges}
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogExchangesData(self._get_data("catalog/exchanges", params)["data"])
 
     def catalog_exchange_assets(
@@ -459,7 +459,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"exchange_assets": exchange_assets}
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogExchangeAssetsData(
             self._get_data("catalog/exchange-assets", params)["data"]
         )
@@ -476,7 +476,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"indexes": indexes}
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogIndexesData(self._get_data("catalog/indexes", params)["data"])
 
     def catalog_index_candles(
@@ -491,7 +491,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"indexes": indexes}
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketCandlesData(
             self._get_data("catalog/index-candles", params)["data"]
         )
@@ -508,7 +508,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"institutions": institutions}
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogInstitutionsData(
             self._get_data("catalog/institutions", params)["data"]
         )
@@ -562,7 +562,7 @@ class CoinMetricsClient:
             "include": include,
             "exclude": exclude,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketsData(self._get_data("catalog/markets", params)["data"])
 
     def catalog_market_trades(
@@ -604,7 +604,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketTradesData(
             self._get_data("catalog/market-trades", params)["data"]
         )
@@ -626,7 +626,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMetricsData(self._get_data("catalog/metrics", params)["data"])
 
     def catalog_market_metrics(
@@ -668,7 +668,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketMetricsData(
             self._get_data("catalog/market-metrics", params)["data"]
         )
@@ -712,7 +712,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketCandlesData(
             self._get_data("catalog/market-candles", params)["data"]
         )
@@ -756,7 +756,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketOrderbooksData(
             self._get_data("catalog/market-orderbooks", params)["data"]
         )
@@ -800,7 +800,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketTradesData(
             self._get_data("catalog/market-quotes", params)["data"]
         )
@@ -844,7 +844,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketTradesData(
             self._get_data("catalog/market-funding-rates", params)["data"]
         )
@@ -895,7 +895,7 @@ class CoinMetricsClient:
             "format": format,
             "limit": limit,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketContractPrices(self._get_data("catalog/market-contract-prices", params)['data'])
 
     def catalog_market_implied_volatility(
@@ -944,7 +944,7 @@ class CoinMetricsClient:
             "format": format,
             "limit": limit,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketImpliedVolatility(self._get_data("catalog/market-implied-volatility", params)['data'])
 
     def catalog_market_greeks(
@@ -986,7 +986,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketTradesData(
             self._get_data("catalog/market-greeks", params)["data"]
         )
@@ -1030,7 +1030,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketTradesData(
             self._get_data("catalog/market-openinterest", params)["data"]
         )
@@ -1074,7 +1074,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketTradesData(
             self._get_data("catalog/market-liquidations", params)["data"]
         )
@@ -1103,7 +1103,7 @@ class CoinMetricsClient:
             "include": include,
             "exclude": exclude,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetsData(self._get_data("catalog-all/assets", params)["data"])
 
     def catalog_full_asset_metrics(
@@ -1123,7 +1123,7 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMetricsData(
             self._get_data("catalog-all/asset-metrics", params)["data"]
         )
@@ -1145,7 +1145,7 @@ class CoinMetricsClient:
             "assets": assets,
             "alerts": alerts,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetAlertsData(
             self._get_data("catalog-all/asset-alerts", params)["data"]
         )
@@ -1164,7 +1164,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetChainsData(self._get_data("catalog-all/asset-chains", params)['data'])
 
     def catalog_full_mempool_feerates(
@@ -1181,7 +1181,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMempoolFeeratesData(self._get_data("catalog-all/mempool-feerates", params)['data'])
 
     def catalog_full_mining_pool_tips_summaries(
@@ -1198,7 +1198,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMiningPoolTipsData(self._get_data("catalog-all/mining-pool-tips-summary", params)['data'])
 
     def catalog_full_transaction_tracker_assets(
@@ -1215,7 +1215,7 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
-        logger.warning("/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogTransactionTrackerData(self._get_data("catalog-all/transaction-tracker", params)['data'])
 
     def catalog_full_asset_pairs(
@@ -1232,7 +1232,7 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {"pairs": asset_pairs}
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogAssetPairsData(
             self._get_data("catalog-all/pairs", params)["data"]
@@ -1256,7 +1256,7 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogPairMetricsData(
             self._get_data("catalog-all/pair-metrics", params)["data"]
@@ -1280,7 +1280,7 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogInstitutionMetricsData(
             self._get_data("catalog-all/institution-metrics", params)["data"]
@@ -1299,7 +1299,7 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {"pairs": asset_pairs}
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogAssetPairCandlesData(
             self._get_data("catalog-all/pair-candles", params)["data"]
@@ -1320,7 +1320,7 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {"exchanges": exchanges}
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogExchangesData(
             self._get_data("catalog-all/exchanges", params)["data"]
@@ -1339,7 +1339,7 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {"exchange_assets": exchange_assets}
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogExchangeAssetsData(
             self._get_data("catalog-all/exchange-assets", params)["data"]
@@ -1363,7 +1363,7 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogMetricsData(
             self._get_data("catalog-all/exchange-metrics", params)["data"]
@@ -1387,7 +1387,7 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogExchangeAssetMetricsData(
             self._get_data("catalog-all/exchange-asset-metrics", params)["data"]
@@ -1406,7 +1406,7 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {"indexes": indexes}
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogIndexesData(self._get_data("catalog-all/indexes", params)["data"])
 
@@ -1423,7 +1423,7 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {"indexes": indexes}
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogMarketCandlesData(
             self._get_data("catalog-all/index-candles", params)["data"]
@@ -1442,7 +1442,7 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {"institutions": institutions}
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogInstitutionsData(
             self._get_data("catalog-all/institutions", params)["data"]
@@ -1498,7 +1498,7 @@ class CoinMetricsClient:
             "exclude": exclude,
         }
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogMarketsData(self._get_data("catalog-all/markets", params)["data"])
 
@@ -1542,7 +1542,7 @@ class CoinMetricsClient:
             "symbol": symbol,
         }
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-trades", params)["data"]
@@ -1566,7 +1566,7 @@ class CoinMetricsClient:
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogMetricsData(self._get_data("catalog-all/metrics", params)["data"])
 
@@ -1610,7 +1610,7 @@ class CoinMetricsClient:
             "symbol": symbol,
         }
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogMarketMetricsData(
             self._get_data("catalog-all/market-metrics", params)["data"]
@@ -1656,7 +1656,7 @@ class CoinMetricsClient:
             "symbol": symbol,
         }
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogMarketCandlesData(
             self._get_data("catalog-all/market-candles", params)["data"]
@@ -1702,7 +1702,7 @@ class CoinMetricsClient:
             "symbol": symbol,
         }
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-orderbooks", params)["data"]
@@ -1748,7 +1748,7 @@ class CoinMetricsClient:
             "symbol": symbol,
         }
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-quotes", params)["data"]
@@ -1794,7 +1794,7 @@ class CoinMetricsClient:
             "symbol": symbol,
         }
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-funding-rates", params)["data"]
@@ -1847,7 +1847,7 @@ class CoinMetricsClient:
             "limit": limit,
         }
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogMarketContractPrices(self._get_data("catalog-all/market-contract-prices", params)['data'])
 
@@ -1905,7 +1905,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-contract-prices", params)
+        return CatalogV2DataCollection(self._get_data, "catalog-all-v2/market-contract-prices", params)
 
     def catalog_full_market_implied_volatility(
             self,
@@ -1954,7 +1954,7 @@ class CoinMetricsClient:
             "limit": limit,
         }
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogMarketImpliedVolatility(self._get_data("catalog-all/market-implied-volatility", params)['data'])
 
@@ -1998,7 +1998,7 @@ class CoinMetricsClient:
             "symbol": symbol,
         }
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-greeks", params)["data"]
@@ -2044,7 +2044,7 @@ class CoinMetricsClient:
             "symbol": symbol,
         }
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-openinterest", params)["data"]
@@ -2090,7 +2090,7 @@ class CoinMetricsClient:
             "symbol": symbol,
         }
         logger.warning(
-            "/catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
+            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
         )
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-liquidations", params)["data"]
@@ -2150,7 +2150,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-trades", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-v2/market-trades", params, client=self)
 
     def catalog_market_candles_v2(
             self,
@@ -2208,7 +2208,7 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(
             self._get_data,
-            "/catalog-v2/market-candles",
+            "catalog-v2/market-candles",
             params,
             iterable_col="frequencies",
             iterable_key="frequency",
@@ -2271,7 +2271,7 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(
             self._get_data,
-            "/catalog-v2/market-orderbooks",
+            "catalog-v2/market-orderbooks",
             params,
             iterable_key="depth",
             iterable_col="depths",
@@ -2332,7 +2332,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-quotes", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-v2/market-quotes", params, client=self)
 
     def catalog_market_funding_rates_v2(
             self,
@@ -2388,7 +2388,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-funding-rates", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-v2/market-funding-rates", params, client=self)
 
     def catalog_market_funding_rates_predicted_v2(
             self,
@@ -2444,7 +2444,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-funding-rates-predicted", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-v2/market-funding-rates-predicted", params, client=self)
 
     def catalog_market_contract_prices_v2(
             self,
@@ -2500,7 +2500,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-contract-prices", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-v2/market-contract-prices", params, client=self)
 
     def catalog_market_implied_volatility_v2(
             self,
@@ -2556,7 +2556,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-implied-volatility", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-v2/market-implied-volatility", params, client=self)
 
     def catalog_market_greeks_v2(
             self,
@@ -2612,7 +2612,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-greeks", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-v2/market-greeks", params, client=self)
 
     def catalog_market_open_interest_v2(
             self,
@@ -2668,7 +2668,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-openinterest", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-v2/market-openinterest", params, client=self)
 
     def catalog_market_liquidations_v2(
             self,
@@ -2724,7 +2724,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/market-liquidations", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-v2/market-liquidations", params, client=self)
 
     def catalog_market_metrics_v2(
             self,
@@ -2786,7 +2786,7 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(
             self._get_data,
-            "/catalog-v2/market-metrics",
+            "catalog-v2/market-metrics",
             params,
             metric_type='market',
             iterable_col="frequencies",
@@ -2850,7 +2850,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-trades", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-all-v2/market-trades", params, client=self)
 
     def catalog_full_market_candles_v2(
             self,
@@ -2908,7 +2908,7 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(
             self._get_data,
-            "/catalog-all-v2/market-candles",
+            "catalog-all-v2/market-candles",
             params,
             iterable_col="frequencies",
             iterable_key="frequency",
@@ -2971,7 +2971,7 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(
             self._get_data,
-            "/catalog-all-v2/market-orderbooks",
+            "catalog-all-v2/market-orderbooks",
             params,
             iterable_key="depth",
             iterable_col="depths",
@@ -3032,7 +3032,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-quotes", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-all-v2/market-quotes", params, client=self)
 
     def catalog_full_market_funding_rates_v2(
             self,
@@ -3088,7 +3088,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-funding-rates", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-all-v2/market-funding-rates", params, client=self)
 
     def catalog_full_market_funding_rates_predicted_v2(
             self,
@@ -3144,7 +3144,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-funding-rates-predicted", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-all-v2/market-funding-rates-predicted", params, client=self)
 
     def catalog_full_market_contract_prices_v2(
             self,
@@ -3200,7 +3200,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-contract-prices", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-all-v2/market-contract-prices", params, client=self)
 
     def catalog_full_market_implied_volatility_v2(
             self,
@@ -3256,7 +3256,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-implied-volatility", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-all-v2/market-implied-volatility", params, client=self)
 
     def catalog_full_market_greeks_v2(
             self,
@@ -3312,7 +3312,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-greeks", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-all-v2/market-greeks", params, client=self)
 
     def catalog_full_market_open_interest_v2(
             self,
@@ -3368,7 +3368,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-openinterest", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-all-v2/market-openinterest", params, client=self)
 
     def catalog_full_market_liquidations_v2(
             self,
@@ -3424,7 +3424,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/market-liquidations", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-all-v2/market-liquidations", params, client=self)
 
     def catalog_full_market_metrics_v2(
             self,
@@ -3486,7 +3486,7 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(
             self._get_data,
-            "/catalog-all-v2/market-metrics",
+            "catalog-all-v2/market-metrics",
             params,
             metric_type='market',
             iterable_col="frequencies",
@@ -3536,7 +3536,7 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(
             self._get_data,
-            "/catalog-v2/asset-metrics",
+            "catalog-v2/asset-metrics",
             params,
             metric_type="asset",
             iterable_col="frequencies",
@@ -3587,7 +3587,7 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(
             self._get_data,
-            "/catalog-all-v2/asset-metrics",
+            "catalog-all-v2/asset-metrics",
             params,
             metric_type="asset",
             iterable_col="frequencies",
@@ -3638,7 +3638,7 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(
             self._get_data,
-            "/catalog-v2/exchange-metrics",
+            "catalog-v2/exchange-metrics",
             params,
             metric_type="exchange",
             iterable_col="frequencies",
@@ -3688,7 +3688,7 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(
             self._get_data,
-            "/catalog-all-v2/exchange-metrics",
+            "catalog-all-v2/exchange-metrics",
             params,
             metric_type="exchange",
             iterable_col="frequencies",
@@ -3738,7 +3738,7 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(
             self._get_data,
-            "/catalog-v2/exchange-asset-metrics",
+            "catalog-v2/exchange-asset-metrics",
             params,
             metric_type="exchange_asset",
             iterable_col="frequencies",
@@ -3788,7 +3788,7 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(
             self._get_data,
-            "/catalog-all-v2/exchange-asset-metrics",
+            "catalog-all-v2/exchange-asset-metrics",
             params,
             metric_type="exchange_asset",
             iterable_col="frequencies",
@@ -3838,7 +3838,7 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(
             self._get_data,
-            "/catalog-v2/pair-metrics",
+            "catalog-v2/pair-metrics",
             params,
             metric_type="pair",
             iterable_col="frequencies",
@@ -3888,7 +3888,7 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(
             self._get_data,
-            "/catalog-all-v2/pair-metrics",
+            "catalog-all-v2/pair-metrics",
             params,
             metric_type="pair",
             iterable_col="frequencies",
@@ -3938,7 +3938,7 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(
             self._get_data,
-            "/catalog-v2/institution-metrics",
+            "catalog-v2/institution-metrics",
             params,
             metric_type="institution",
             iterable_col="frequencies",
@@ -3988,7 +3988,7 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(
             self._get_data,
-            "/catalog-all-v2/institution-metrics",
+            "catalog-all-v2/institution-metrics",
             params,
             metric_type="institution",
             iterable_col="frequencies",
@@ -4026,7 +4026,7 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(
             self._get_data,
-            "/catalog-v2/pair-candles",
+            "catalog-v2/pair-candles",
             params,
             iterable_col="frequencies",
             iterable_key="frequency",
@@ -4061,7 +4061,7 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(
             self._get_data,
-            "/catalog-v2/index-candles",
+            "catalog-v2/index-candles",
             params,
             iterable_col="frequencies",
             iterable_key="frequency",
@@ -4096,7 +4096,7 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(
             self._get_data,
-            "/catalog-v2/index-levels",
+            "catalog-v2/index-levels",
             params,
             iterable_col="frequencies",
             iterable_key="frequency",
@@ -4129,7 +4129,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/asset-chains", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-v2/asset-chains", params, client=self)
 
     def catalog_mempool_feerates_v2(
             self,
@@ -4157,7 +4157,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/mempool-feerates", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-v2/mempool-feerates", params, client=self)
 
     def catalog_mining_pool_tips_summaries_v2(
             self,
@@ -4185,7 +4185,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/mining-pool-tips-summary", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-v2/mining-pool-tips-summary", params, client=self)
 
     def catalog_transaction_tracker_assets_v2(
             self,
@@ -4213,7 +4213,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-v2/transaction-tracker", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-v2/transaction-tracker", params, client=self)
 
     def catalog_full_pair_candles_v2(
             self,
@@ -4241,7 +4241,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/pair-candles", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-all-v2/pair-candles", params, client=self)
 
     def catalog_full_index_candles_v2(
             self,
@@ -4271,7 +4271,7 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(
             self._get_data,
-            "/catalog-all-v2/index-candles",
+            "catalog-all-v2/index-candles",
             params,
             iterable_col="frequencies",
             iterable_key="frequency",
@@ -4306,7 +4306,7 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(
             self._get_data,
-            "/catalog-all-v2/index-levels",
+            "catalog-all-v2/index-levels",
             params,
             client=self
         )
@@ -4337,7 +4337,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/asset-chains", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-all-v2/asset-chains", params, client=self)
 
     def catalog_full_mempool_feerates_v2(
             self,
@@ -4365,7 +4365,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/mempool-feerates", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-all-v2/mempool-feerates", params, client=self)
 
     def catalog_full_mining_pool_tips_summaries_v2(
             self,
@@ -4393,7 +4393,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/mining-pool-tips-summary", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-all-v2/mining-pool-tips-summary", params, client=self)
 
     def catalog_full_transaction_tracker_assets_v2(
             self,
@@ -4421,7 +4421,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return CatalogV2DataCollection(self._get_data, "/catalog-all-v2/transaction-tracker", params, client=self)
+        return CatalogV2DataCollection(self._get_data, "catalog-all-v2/transaction-tracker", params, client=self)
 
     def get_asset_alerts(
         self,
@@ -6093,7 +6093,7 @@ class CoinMetricsClient:
             "aggregation_method": aggregation_method,
             "backfill": backfill,
         }
-        return self._get_stream_data("/timeseries-stream/asset-quotes", params)
+        return self._get_stream_data("timeseries-stream/asset-quotes", params)
 
     def get_stream_market_candles(
         self,
@@ -6165,7 +6165,7 @@ class CoinMetricsClient:
             "markets": markets,
             "backfill": backfill,
         }
-        return self._get_stream_data("/timeseries-stream/market-liquidations", params)
+        return self._get_stream_data("timeseries-stream/market-liquidations", params)
 
     def get_stream_market_open_interest(
             self,
@@ -6184,7 +6184,7 @@ class CoinMetricsClient:
             "markets": markets,
             "backfill": backfill,
         }
-        return self._get_stream_data("/timeseries-stream/market-openinterest", params)
+        return self._get_stream_data("timeseries-stream/market-openinterest", params)
 
     def get_list_of_blocks_v2(
         self,
@@ -6832,7 +6832,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "version": version,
         }
-        return DataCollection(self._get_data, "/taxonomy/assets", params, client=self)
+        return DataCollection(self._get_data, "taxonomy/assets", params, client=self)
 
     def get_taxonomy_assets_metadata(
         self,
@@ -6872,7 +6872,7 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "version": version,
         }
-        return DataCollection(self._get_data, "/taxonomy-metadata/assets", params, client=self)
+        return DataCollection(self._get_data, "taxonomy-metadata/assets", params, client=self)
 
     def get_asset_profiles(
         self,
@@ -6898,7 +6898,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
         }
-        return DataCollection(self._get_data, "/profile/assets", params, client=self)
+        return DataCollection(self._get_data, "profile/assets", params, client=self)
 
     def reference_data_asset_metrics(
             self,
@@ -6928,7 +6928,7 @@ class CoinMetricsClient:
         }
         return DataCollection(
             self._get_data,
-            "/reference-data/asset-metrics",
+            "reference-data/asset-metrics",
             params,
             columns_to_store=[
                 'metric', 'full_name', 'description', 'product', 'category',
@@ -6988,7 +6988,7 @@ class CoinMetricsClient:
         }
         return DataCollection(
             self._get_data,
-            "/reference-data/markets",
+            "reference-data/markets",
             params,
             columns_to_store=[
                 'market', 'exchange', 'base', 'quote', 'pair', 'symbol', 'type', 'size_asset', 'margin_asset',
@@ -7024,7 +7024,7 @@ class CoinMetricsClient:
         }
         return DataCollection(
             self._get_data,
-            "/reference-data/exchange-metrics",
+            "reference-data/exchange-metrics",
             params,
             columns_to_store=[
                 'metric', 'full_name', 'description', 'product', 'category',
@@ -7056,7 +7056,7 @@ class CoinMetricsClient:
         }
         return DataCollection(
             self._get_data,
-            "/reference-data/exchange-asset-metrics",
+            "reference-data/exchange-asset-metrics",
             params,
             columns_to_store=[
                 'metric', 'full_name', 'description', 'product', 'category',
@@ -7088,7 +7088,7 @@ class CoinMetricsClient:
         }
         return DataCollection(
             self._get_data,
-            "/reference-data/pair-metrics",
+            "reference-data/pair-metrics",
             params,
             columns_to_store=[
                 'metric', 'full_name', 'description', 'product', 'category',
@@ -7120,7 +7120,7 @@ class CoinMetricsClient:
         }
         return DataCollection(
             self._get_data,
-            "/reference-data/institution-metrics",
+            "reference-data/institution-metrics",
             params,
             columns_to_store=[
                 'metric', 'full_name', 'description', 'product', 'category',
@@ -7156,7 +7156,7 @@ class CoinMetricsClient:
         }
         return DataCollection(
             self._get_data,
-            "/reference-data/assets",
+            "reference-data/assets",
             params,
             columns_to_store=['asset', 'full_name']
         )
@@ -7189,7 +7189,7 @@ class CoinMetricsClient:
         }
         return DataCollection(
             self._get_data,
-            "/reference-data/exchanges",
+            "reference-data/exchanges",
             params,
             columns_to_store=['exchange', 'full_name']
         )
@@ -7222,7 +7222,7 @@ class CoinMetricsClient:
         }
         return DataCollection(
             self._get_data,
-            "/reference-data/indexes",
+            "reference-data/indexes",
             params,
             columns_to_store=["index", "full_name"]
         )
@@ -7255,7 +7255,7 @@ class CoinMetricsClient:
         }
         return DataCollection(
             self._get_data,
-            "/reference-data/pairs",
+            "reference-data/pairs",
             params,
             columns_to_store=["pair", "full_name"]
         )
@@ -7288,7 +7288,7 @@ class CoinMetricsClient:
         }
         return DataCollection(
             self._get_data,
-            "/reference-data/market-metrics",
+            "reference-data/market-metrics",
             params,
             columns_to_store=[
                 'metric', 'full_name', 'description', 'product', 'category',
@@ -7328,7 +7328,7 @@ class CoinMetricsClient:
         }
         return DataCollection(
             self._get_data,
-            "/security-master/assets",
+            "security-master/assets",
             params,
             columns_to_store=[
                 'asset', 'code', 'description', 'overview', 'website', 'whitepaper',
@@ -7385,7 +7385,7 @@ class CoinMetricsClient:
         }
         return DataCollection(
             self._get_data,
-            "/security-master/markets",
+            "security-master/markets",
             params,
             columns_to_store=[
                 'market', 'code', 'pair', 'trades_min_time', 'trades_max_time',
@@ -7455,7 +7455,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
         }
-        return DataCollection(self._get_data, "/constituent-snapshots/asset-metrics", params, client=self)
+        return DataCollection(self._get_data, "constituent-snapshots/asset-metrics", params, client=self)
 
     def get_timeframes_of_asset_metric_constituents(
             self,
@@ -7503,7 +7503,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
         }
-        return DataCollection(self._get_data, "/constituent-timeframes/asset-metrics", params, client=self)
+        return DataCollection(self._get_data, "constituent-timeframes/asset-metrics", params, client=self)
 
     def blockchain_metadata_tags(
             self,
