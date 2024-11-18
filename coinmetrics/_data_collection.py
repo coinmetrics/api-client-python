@@ -97,7 +97,7 @@ class DataCollection:
         )
 
     def to_list(self) -> List[Dict[str, Any]]:
-        return [data for data in self]
+        return list(self)
 
     def __next__(self) -> Any:
         try:

@@ -858,7 +858,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             limit: Optional[str] = None,
     ) -> CatalogMarketContractPrices:
         """
@@ -1809,7 +1809,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             limit: Optional[str] = None,
     ) -> CatalogMarketContractPrices:
         """
@@ -1860,7 +1860,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_strean",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -1880,7 +1880,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -1888,6 +1888,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
+
 
         :return: List of contract prices statistics.
         :rtype: CatalogV2DataCollection
@@ -1916,7 +1917,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             limit: Optional[str] = None,
     ) -> CatalogMarketImpliedVolatility:
         """
@@ -2105,7 +2106,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -2161,7 +2162,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -2224,7 +2225,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -2287,7 +2288,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -2343,7 +2344,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -2399,7 +2400,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -2455,7 +2456,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -2511,7 +2512,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -2567,7 +2568,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -2623,7 +2624,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -2679,7 +2680,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -2736,7 +2737,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -2805,7 +2806,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -2861,7 +2862,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -2924,7 +2925,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -2987,7 +2988,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -3043,7 +3044,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -3099,7 +3100,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -3155,7 +3156,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -3211,7 +3212,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -3267,7 +3268,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -3323,7 +3324,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -3379,7 +3380,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -3436,7 +3437,7 @@ class CoinMetricsClient:
             quote: Optional[str] = None,
             asset: Optional[str] = None,
             symbol: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
@@ -3504,7 +3505,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param assets: Comma separated list of assets. By default all assets are returned.
@@ -3555,7 +3556,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param assets: Comma separated list of assets. By default all assets are returned.
@@ -3606,7 +3607,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param exchanges: Comma separated list of exchanges. By default all exchanges are returned.
@@ -3656,7 +3657,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param exchanges: Comma separated list of exchanges. By default all exchanges are returned.
@@ -3706,7 +3707,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param exchange_assets: Comma separated list of exchange-assets. By default, all exchange-assets pairs are returned.
@@ -3756,7 +3757,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param exchange_assets: Comma separated list of exchange-assets. By default, all exchange-assets pairs are returned.
@@ -3806,7 +3807,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param pairs: Comma separated list of asset pairs. By default, all asset pairs are returned.
@@ -3821,9 +3822,8 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Format of the response. Supported values are `json`, `json_stream`.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
         :type format: Optional[str]
-
         :return: List of pair metrics.
         :rtype: CatalogV2DataCollection
         """
@@ -3856,7 +3856,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param pairs: Comma separated list of asset pairs. By default, all asset pairs are returned.
@@ -3906,7 +3906,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param institutions: Comma separated list of institutions. By default, all institutions are returned.
@@ -3956,7 +3956,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
-            format: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param institutions: Comma separated list of institutions. By default, all institutions are returned.
@@ -4004,6 +4004,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param pairs: Comma separated list of asset pairs. By default, all asset pairs are returned.
@@ -4014,6 +4015,8 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of asset pair candles statistics.
         :rtype: CatalogV2DataCollection
@@ -4023,6 +4026,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
             "next_page_token": next_page_token,
+            "format": format
         }
         return CatalogV2DataCollection(
             self._get_data,
@@ -4039,6 +4043,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param indexes: Comma separated list of indexes. By default all assets are returned.
@@ -4049,6 +4054,8 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of index candles statistics.
         :rtype: CatalogV2DataCollection
@@ -4058,6 +4065,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
             "next_page_token": next_page_token,
+            "format": format
         }
         return CatalogV2DataCollection(
             self._get_data,
@@ -4074,6 +4082,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param indexes: Comma separated list of indexes. By default all indexes are returned.
@@ -4084,6 +4093,8 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of index levels.
         :rtype: CatalogV2DataCollection
@@ -4093,6 +4104,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
             "next_page_token": next_page_token,
+            "format": format
         }
         return CatalogV2DataCollection(
             self._get_data,
@@ -4109,6 +4121,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param assets: Comma separated list of assets. By default all assets are returned.
@@ -4119,6 +4132,8 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of asset chains assets
         :rtype: CatalogV2DataCollection
@@ -4128,6 +4143,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
             "next_page_token": next_page_token,
+            "format": format
         }
         return CatalogV2DataCollection(self._get_data, "catalog-v2/asset-chains", params, client=self)
 
@@ -4137,6 +4153,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param assets: Comma separated list of assets. By default all assets are returned.
@@ -4147,6 +4164,8 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of mempool feerates assets
         :rtype: CatalogV2DataCollection
@@ -4156,6 +4175,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
             "next_page_token": next_page_token,
+            "format": format
         }
         return CatalogV2DataCollection(self._get_data, "catalog-v2/mempool-feerates", params, client=self)
 
@@ -4165,6 +4185,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
+            format: Optional[str] = "json_stream"
     ) -> CatalogV2DataCollection:
         """
         :param assets: Comma separated list of assets. By default all assets are returned.
@@ -4175,6 +4196,8 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of mining pool tips assets
         :rtype: CatalogV2DataCollection
@@ -4184,6 +4207,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
             "next_page_token": next_page_token,
+            "format": format
         }
         return CatalogV2DataCollection(self._get_data, "catalog-v2/mining-pool-tips-summary", params, client=self)
 
@@ -4193,6 +4217,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param assets: Comma separated list of assets. By default all assets are returned.
@@ -4212,6 +4237,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
             "next_page_token": next_page_token,
+            "format": format
         }
         return CatalogV2DataCollection(self._get_data, "catalog-v2/transaction-tracker", params, client=self)
 
@@ -4221,6 +4247,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param pairs: Comma separated list of asset pairs. By default, all asset pairs are returned.
@@ -4231,6 +4258,8 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of asset pair candles statistics.
         :rtype: CatalogV2DataCollection
@@ -4240,6 +4269,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
             "next_page_token": next_page_token,
+            "format": format
         }
         return CatalogV2DataCollection(self._get_data, "catalog-all-v2/pair-candles", params, client=self)
 
@@ -4249,6 +4279,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param indexes: Comma separated list of indexes. By default all assets are returned.
@@ -4259,6 +4290,8 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of index candles statistics.
         :rtype: CatalogV2DataCollection
@@ -4268,6 +4301,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
             "next_page_token": next_page_token,
+            "format": format
         }
         return CatalogV2DataCollection(
             self._get_data,
@@ -4284,6 +4318,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param indexes: Comma separated list of indexes. By default all indexes are returned.
@@ -4294,6 +4329,8 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of index levels.
         :rtype: CatalogV2DataCollection
@@ -4303,6 +4340,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
             "next_page_token": next_page_token,
+            "format": format
         }
         return CatalogV2DataCollection(
             self._get_data,
@@ -4317,6 +4355,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param assets: Comma separated list of assets. By default all assets are returned.
@@ -4327,6 +4366,8 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of asset chains assets
         :rtype: CatalogV2DataCollection
@@ -4336,6 +4377,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
             "next_page_token": next_page_token,
+            "format": format,
         }
         return CatalogV2DataCollection(self._get_data, "catalog-all-v2/asset-chains", params, client=self)
 
@@ -4345,6 +4387,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param assets: Comma separated list of assets. By default all assets are returned.
@@ -4355,6 +4398,8 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of mempool feerates assets
         :rtype: CatalogV2DataCollection
@@ -4364,6 +4409,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
             "next_page_token": next_page_token,
+            "format": format
         }
         return CatalogV2DataCollection(self._get_data, "catalog-all-v2/mempool-feerates", params, client=self)
 
@@ -4373,6 +4419,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
+            format: Optional[str] = "json_stream"
     ) -> CatalogV2DataCollection:
         """
         :param assets: Comma separated list of assets. By default all assets are returned.
@@ -4383,6 +4430,8 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of mining pool tips assets
         :rtype: CatalogV2DataCollection
@@ -4392,6 +4441,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
             "next_page_token": next_page_token,
+            "format": format
         }
         return CatalogV2DataCollection(self._get_data, "catalog-all-v2/mining-pool-tips-summary", params, client=self)
 
@@ -4401,6 +4451,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> CatalogV2DataCollection:
         """
         :param assets: Comma separated list of assets. By default all assets are returned.
@@ -4411,6 +4462,8 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of transaction tracker assets
         :rtype: CatalogV2DataCollection
@@ -4420,6 +4473,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
             "next_page_token": next_page_token,
+            "format": format
         }
         return CatalogV2DataCollection(self._get_data, "catalog-all-v2/transaction-tracker", params, client=self)
 
@@ -6906,6 +6960,7 @@ class CoinMetricsClient:
             reviewable: Optional[bool] = None,
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> DataCollection:
         """
         :param metrics: Comma separated list of metrics. By default all metrics are returned.
@@ -6916,6 +6971,8 @@ class CoinMetricsClient:
         :type page_size: Optional[int]
         :param paging_from: Where does the first page start, at the start of the interval or at the end.
         :type paging_from: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of asset metrics metadata.
         :rtype: DataCollection
@@ -6925,6 +6982,7 @@ class CoinMetricsClient:
             "reviewable": reviewable,
             "page_size": page_size,
             "paging_from": paging_from,
+            "format": format
         }
         return DataCollection(
             self._get_data,
@@ -6948,6 +7006,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> DataCollection:
         """
         :param markets: Comma separated list of markets. By default all markets are returned.
@@ -6970,6 +7029,8 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of markets metadata.
         :rtype: DataCollection
@@ -6985,6 +7046,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
             "next_page_token": next_page_token,
+            "format": format
         }
         return DataCollection(
             self._get_data,
@@ -7005,6 +7067,7 @@ class CoinMetricsClient:
             metrics: Optional[Union[str, List[str]]] = None,
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> DataCollection:
         """
         :param metrics: Comma separated list of metrics. By default all metrics are returned.
@@ -7013,6 +7076,8 @@ class CoinMetricsClient:
         :type page_size: Optional[int]
         :param paging_from: Where does the first page start, at the start of the interval or at the end.
         :type paging_from: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of exchange metrics metadata.
         :rtype: DataCollection
@@ -7021,6 +7086,7 @@ class CoinMetricsClient:
             "metrics": metrics,
             "page_size": page_size,
             "paging_from": paging_from,
+            "format": format
         }
         return DataCollection(
             self._get_data,
@@ -7037,6 +7103,7 @@ class CoinMetricsClient:
             metrics: Optional[Union[str, List[str]]] = None,
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> DataCollection:
         """
         :param metrics: Comma separated list of metrics. By default all metrics are returned.
@@ -7045,6 +7112,8 @@ class CoinMetricsClient:
         :type page_size: Optional[int]
         :param paging_from: Where does the first page start, at the start of the interval or at the end.
         :type paging_from: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of exchange asset metrics metadata.
         :rtype: DataCollection
@@ -7053,6 +7122,7 @@ class CoinMetricsClient:
             "metrics": metrics,
             "page_size": page_size,
             "paging_from": paging_from,
+            "format": format
         }
         return DataCollection(
             self._get_data,
@@ -7069,6 +7139,7 @@ class CoinMetricsClient:
             metrics: Optional[Union[str, List[str]]] = None,
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> DataCollection:
         """
         :param metrics: Comma separated list of metrics. By default all metrics are returned.
@@ -7077,6 +7148,8 @@ class CoinMetricsClient:
         :type page_size: Optional[int]
         :param paging_from: Where does the first page start, at the start of the interval or at the end.
         :type paging_from: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of pair metrics metadata.
         :rtype: DataCollection
@@ -7085,6 +7158,7 @@ class CoinMetricsClient:
             "metrics": metrics,
             "page_size": page_size,
             "paging_from": paging_from,
+            "format": format
         }
         return DataCollection(
             self._get_data,
@@ -7101,6 +7175,7 @@ class CoinMetricsClient:
             metrics: Optional[Union[str, List[str]]] = None,
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> DataCollection:
         """
         :param metrics: Comma separated list of metrics. By default all metrics are returned.
@@ -7109,6 +7184,8 @@ class CoinMetricsClient:
         :type page_size: Optional[int]
         :param paging_from: Where does the first page start, at the start of the interval or at the end.
         :type paging_from: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of institution metrics metadata.
         :rtype: DataCollection
@@ -7117,6 +7194,7 @@ class CoinMetricsClient:
             "metrics": metrics,
             "page_size": page_size,
             "paging_from": paging_from,
+            "format": format
         }
         return DataCollection(
             self._get_data,
@@ -7134,6 +7212,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> DataCollection:
         """
         :param assets: Comma separated list of assets. By default all assets are returned.
@@ -7144,6 +7223,8 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of assets metadata.
         :rtype: DataCollection
@@ -7153,6 +7234,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
             "next_page_token": next_page_token,
+            "format": format
         }
         return DataCollection(
             self._get_data,
@@ -7167,6 +7249,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> DataCollection:
         """
         :param exchanges: Comma separated list of exchanges. By default all exchanges are returned.
@@ -7177,6 +7260,8 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of exchanges metadata.
         :rtype: DataCollection
@@ -7186,6 +7271,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
             "next_page_token": next_page_token,
+            "format": format
         }
         return DataCollection(
             self._get_data,
@@ -7200,6 +7286,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> DataCollection:
         """
         :param indexes: Comma separated list of indexes. By default all indexes are returned.
@@ -7210,6 +7297,8 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of indexes metadata.
         :rtype: DataCollection
@@ -7219,6 +7308,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
             "next_page_token": next_page_token,
+            "format": format
         }
         return DataCollection(
             self._get_data,
@@ -7233,6 +7323,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> DataCollection:
         """
         :param pairs: Comma separated list of asset pairs. By default, all asset pairs are returned.
@@ -7243,6 +7334,8 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of pairs metadata.
         :rtype: DataCollection
@@ -7252,6 +7345,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
             "next_page_token": next_page_token,
+            "format": format
         }
         return DataCollection(
             self._get_data,
@@ -7266,6 +7360,7 @@ class CoinMetricsClient:
             page_size: Optional[int] = None,
             paging_from: Optional[str] = None,
             next_page_token: Optional[str] = None,
+            format: Optional[str] = "json_stream",
     ) -> DataCollection:
         """
         :param metrics: Comma separated list of metrics. By default all metrics are returned.
@@ -7276,6 +7371,8 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+        :type format: Optional[str]
 
         :return: List of market metrics metadata.
         :rtype: DataCollection
@@ -7285,6 +7382,7 @@ class CoinMetricsClient:
             "page_size": page_size,
             "paging_from": paging_from,
             "next_page_token": next_page_token,
+            "format": format
         }
         return DataCollection(
             self._get_data,
@@ -7595,7 +7693,10 @@ class CoinMetricsClient:
         else:
             resp = self._send_request(actual_url)
         try:
-            data = json.loads(resp.content)
+            if params.get("format") == "json_stream":
+                data = {"data": [json.loads(i) for i in resp.iter_lines()]}
+            else:
+                data = json.loads(resp.content)
         except ValueError:
             if resp.status_code == 414:
                 raise CoinMetricsClientQueryParamsException(response=resp)
