@@ -637,7 +637,7 @@ def catalog_market_contract_prices(
         quote: Optional[str] = None,
         asset: Optional[str] = None,
         symbol: Optional[str] = None,
-        format: Optional[str] = "json_stream",
+        format: Optional[str] = None,
         limit: Optional[str] = None) -> CatalogMarketContractPrices
 ```
 
@@ -1413,7 +1413,7 @@ def catalog_full_market_contract_prices(
         quote: Optional[str] = None,
         asset: Optional[str] = None,
         symbol: Optional[str] = None,
-        format: Optional[str] = "json_stream",
+        format: Optional[str] = None,
         limit: Optional[str] = None) -> CatalogMarketContractPrices
 ```
 
@@ -1446,7 +1446,7 @@ def catalog_full_contract_prices_v2(
         quote: Optional[str] = None,
         asset: Optional[str] = None,
         symbol: Optional[str] = None,
-        format: Optional[str] = "json_strean",
+        format: Optional[str] = "json_stream",
         page_size: Optional[int] = None,
         paging_from: Optional[str] = None,
         next_page_token: Optional[str] = None) -> CatalogV2DataCollection
@@ -1461,7 +1461,7 @@ def catalog_full_contract_prices_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -1483,7 +1483,7 @@ def catalog_full_market_implied_volatility(
         quote: Optional[str] = None,
         asset: Optional[str] = None,
         symbol: Optional[str] = None,
-        format: Optional[str] = "json_stream",
+        format: Optional[str] = None,
         limit: Optional[str] = None) -> CatalogMarketImpliedVolatility
 ```
 
@@ -1496,7 +1496,7 @@ def catalog_full_market_implied_volatility(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `limit` (`Optional[str]`): Limit of response items. `none` means no limit.
 
 **Returns**:
@@ -1624,7 +1624,7 @@ def catalog_market_trades_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -1661,7 +1661,7 @@ def catalog_market_candles_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -1698,7 +1698,7 @@ def catalog_market_orderbooks_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -1735,7 +1735,7 @@ def catalog_market_quotes_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -1772,7 +1772,7 @@ def catalog_market_funding_rates_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -1809,7 +1809,7 @@ def catalog_market_funding_rates_predicted_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -1846,7 +1846,7 @@ def catalog_market_contract_prices_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -1883,7 +1883,7 @@ def catalog_market_implied_volatility_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -1920,7 +1920,7 @@ def catalog_market_greeks_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -1957,7 +1957,7 @@ def catalog_market_open_interest_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -1994,7 +1994,7 @@ def catalog_market_liquidations_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -2033,7 +2033,7 @@ def catalog_market_metrics_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -2070,7 +2070,7 @@ def catalog_full_market_trades_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -2107,7 +2107,7 @@ def catalog_full_market_candles_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -2144,7 +2144,7 @@ def catalog_full_market_orderbooks_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -2181,7 +2181,7 @@ def catalog_full_market_quotes_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -2218,7 +2218,7 @@ def catalog_full_market_funding_rates_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -2255,7 +2255,7 @@ def catalog_full_market_funding_rates_predicted_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -2292,7 +2292,7 @@ def catalog_full_market_contract_prices_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -2329,7 +2329,7 @@ def catalog_full_market_implied_volatility_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -2366,7 +2366,7 @@ def catalog_full_market_greeks_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -2403,7 +2403,7 @@ def catalog_full_market_open_interest_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -2440,7 +2440,7 @@ def catalog_full_market_liquidations_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -2479,7 +2479,7 @@ def catalog_full_market_metrics_v2(
 - `quote` (`Optional[str]`): Quote asset of markets.
 - `asset` (`Optional[str]`): Any asset of markets.
 - `symbol` (`Optional[str]`): Symbol of derivative markets, full instrument name.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -2511,7 +2511,7 @@ def catalog_asset_metrics_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -2540,7 +2540,7 @@ def catalog_full_asset_metrics_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -2569,7 +2569,7 @@ def catalog_exchange_metrics_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -2598,7 +2598,7 @@ def catalog_full_exchange_metrics_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -2627,7 +2627,7 @@ def catalog_exchange_asset_metrics_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -2656,7 +2656,7 @@ def catalog_full_exchange_asset_metrics_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -2685,7 +2685,7 @@ def catalog_pair_metrics_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -2714,7 +2714,7 @@ def catalog_full_pair_metrics_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -2743,7 +2743,7 @@ def catalog_institution_metrics_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -2772,7 +2772,7 @@ def catalog_full_institution_metrics_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Format of the response. Supported values are `json`, `json_stream`.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -2797,7 +2797,7 @@ def catalog_pair_candles_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -2822,7 +2822,7 @@ def catalog_index_candles_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -2847,7 +2847,7 @@ def catalog_index_levels_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -2872,7 +2872,7 @@ def catalog_asset_chains_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -2897,7 +2897,7 @@ def catalog_mempool_feerates_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -2922,7 +2922,7 @@ def catalog_mining_pool_tips_summaries_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -2947,6 +2947,7 @@ def catalog_transaction_tracker_assets_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -2971,7 +2972,7 @@ def catalog_full_pair_candles_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -2996,7 +2997,7 @@ def catalog_full_index_candles_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -3021,7 +3022,7 @@ def catalog_full_index_levels_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -3046,7 +3047,7 @@ def catalog_full_asset_chains_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -3071,7 +3072,7 @@ def catalog_full_mempool_feerates_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -3096,7 +3097,7 @@ def catalog_full_mining_pool_tips_summaries_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -3121,7 +3122,7 @@ def catalog_full_transaction_tracker_assets_v2(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -4884,7 +4885,7 @@ def reference_data_asset_metrics(
 - `reviewable` (`Optional[bool]`): Limit to human-reviewable metrics. By default all metrics are returned.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -4921,7 +4922,7 @@ def reference_data_markets(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -4944,7 +4945,7 @@ def reference_data_exchange_metrics(
 - `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -4967,7 +4968,7 @@ def reference_data_exchange_asset_metrics(
 - `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -4990,7 +4991,7 @@ def reference_data_pair_metrics(
 - `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -5013,7 +5014,7 @@ def reference_data_institution_metrics(
 - `metrics` (`Optional[Union[str, List[str]]]`): Comma separated list of metrics. By default all metrics are returned.
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -5038,7 +5039,7 @@ def reference_data_assets(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -5063,7 +5064,7 @@ def reference_data_exchanges(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -5088,7 +5089,7 @@ def reference_data_indexes(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -5113,7 +5114,7 @@ def reference_data_pairs(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -5138,7 +5139,7 @@ def reference_data_market_metrics(
 - `page_size` (`Optional[int]`): Number of items per single page of results.
 - `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
 - `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
-- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
 
 **Returns**:
 
