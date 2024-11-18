@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "coinmetrics-api-client"
-version = "2024.10.31.17"
+version = "2024.11.18.19"
 description = "Python client for Coin Metrics API v4."
 authors = ["Coin Metrics <info@coinmetrics.io>", "Oleksandr Buchkovskyi <oleksandr@coinmetrics.io>"]
 license = "MIT"
