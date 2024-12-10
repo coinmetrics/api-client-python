@@ -6990,10 +6990,15 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/asset-metrics",
             params,
-            columns_to_store=[
-                'metric', 'full_name', 'description', 'product', 'category',
-                'subcategory', 'unit', 'data_type', 'type'
-            ]
+            optimize_pandas_types=False,
+            dtype_mapper={
+                "product": "category",
+                "category": "category",
+                "subcategory": "category",
+                "unit": "category",
+                "data_type": "category",
+                "type": "category"
+            }
         )
 
     def reference_data_markets(
@@ -7054,14 +7059,41 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/markets",
             params,
-            columns_to_store=[
-                'market', 'exchange', 'base', 'quote', 'pair', 'symbol', 'type', 'size_asset', 'margin_asset',
-                'strike', 'option_contract_type', 'is_european', 'contract_size', 'tick_size', 'multiplier_size',
-                'listing', 'expiration', 'settlement_price', 'pool_config_id', 'contract_address', 'fee',
-                'price_includes_fee', 'variable_fee', 'base_address', 'quote_address', 'status',
-                'order_amount_increment', 'order_amount_min', 'order_amount_max', 'order_price_increment',
-                'order_price_min', 'order_price_max', 'order_size_min', 'order_taker_fee', 'order_maker_fee',
-                'margin_trading_enabled', 'experimental', 'base_native', 'quote_native']
+            optimize_pandas_types=False,
+            dtype_mapper={
+                "exchange": "category",
+                "base": "category",
+                "quote": "category",
+                "pair": "category",
+                "type": "category",
+                "size_asset": "category",
+                "margin_asset": "category",
+                "strike": "Float64",
+                "option_contract_type": "category",
+                "is_european": "boolean",
+                "contract_size": "Float64",
+                "tick_size": "Float64",
+                "multiplier_size": "Float64",
+                "expiration": "datetime64[ns, UTC]",
+                "listing": "datetime64[ns, UTC]",
+                "settlement_price": "Float64",
+                "pool_config_id": "Int64",
+                "fee": "Float64",
+                "price_includes_fee": "boolean",
+                "variable_fee": "boolean",
+                "order_amount_increment": "Float64",
+                "order_amount_min": "Float64",
+                "order_amount_max": "Float64",
+                "order_price_increment": "Float64",
+                "order_price_min": "Float64",
+                "order_price_max": "Float64",
+                "order_taker_fee": "Float64",
+                "order_maker_fee": "Float64",
+                "margin_trading_enabled": "boolean",
+                "experimental": "boolean",
+                "base_native": "category",
+                "quote_native": "category"
+            }
         )
 
     def reference_data_exchange_metrics(
@@ -7094,10 +7126,15 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/exchange-metrics",
             params,
-            columns_to_store=[
-                'metric', 'full_name', 'description', 'product', 'category',
-                'subcategory', 'unit', 'data_type', 'type'
-            ]
+            optimize_pandas_types=False,
+            dtype_mapper={
+                "product": "category",
+                "category": "category",
+                "subcategory": "category",
+                "unit": "category",
+                "data_type": "category",
+                "type": "category"
+            }
         )
 
     def reference_data_exchange_asset_metrics(
@@ -7130,10 +7167,15 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/exchange-asset-metrics",
             params,
-            columns_to_store=[
-                'metric', 'full_name', 'description', 'product', 'category',
-                'subcategory', 'unit', 'data_type', 'type'
-            ]
+            optimize_pandas_types=False,
+            dtype_mapper={
+                "product": "category",
+                "category": "category",
+                "subcategory": "category",
+                "unit": "category",
+                "data_type": "category",
+                "type": "category"
+            }
         )
 
     def reference_data_pair_metrics(
@@ -7166,10 +7208,15 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/pair-metrics",
             params,
-            columns_to_store=[
-                'metric', 'full_name', 'description', 'product', 'category',
-                'subcategory', 'unit', 'data_type', 'type'
-            ]
+            optimize_pandas_types=False,
+            dtype_mapper={
+                "product": "category",
+                "category": "category",
+                "subcategory": "category",
+                "unit": "category",
+                "data_type": "category",
+                "type": "category"
+            }
         )
 
     def reference_data_institution_metrics(
@@ -7202,10 +7249,15 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/institution-metrics",
             params,
-            columns_to_store=[
-                'metric', 'full_name', 'description', 'product', 'category',
-                'subcategory', 'unit', 'data_type', 'type'
-            ]
+            optimize_pandas_types=False,
+            dtype_mapper={
+                "product": "category",
+                "category": "category",
+                "subcategory": "category",
+                "unit": "category",
+                "data_type": "category",
+                "type": "category"
+            }
         )
 
     def reference_data_assets(
@@ -7242,7 +7294,7 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/assets",
             params,
-            columns_to_store=['asset', 'full_name']
+            optimize_pandas_types=False
         )
 
     def reference_data_exchanges(
@@ -7279,7 +7331,7 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/exchanges",
             params,
-            columns_to_store=['exchange', 'full_name']
+            optimize_pandas_types=False
         )
 
     def reference_data_indexes(
@@ -7316,7 +7368,7 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/indexes",
             params,
-            columns_to_store=["index", "full_name"]
+            optimize_pandas_types=False
         )
 
     def reference_data_pairs(
@@ -7353,7 +7405,7 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/pairs",
             params,
-            columns_to_store=["pair", "full_name"]
+            optimize_pandas_types=False
         )
 
     def reference_data_market_metrics(
@@ -7390,10 +7442,15 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/market-metrics",
             params,
-            columns_to_store=[
-                'metric', 'full_name', 'description', 'product', 'category',
-                'subcategory', 'unit', 'data_type', 'type'
-            ]
+            optimize_pandas_types=False,
+            dtype_mapper={
+                "product": "category",
+                "category": "category",
+                "subcategory": "category",
+                "unit": "category",
+                "data_type": "category",
+                "type": "category"
+            }
         )
 
     def security_master_assets(
@@ -7430,11 +7487,7 @@ class CoinMetricsClient:
             self._get_data,
             "security-master/assets",
             params,
-            columns_to_store=[
-                'asset', 'code', 'description', 'overview', 'website', 'whitepaper',
-                'consensus_mechanism', 'decimals', 'creation_date', 'type', 'parent_asset',
-                'pricing_asset', 'erc20_token_contract', 'fiat'
-            ]
+            optimize_pandas_types=False
         )
 
     def security_master_markets(
@@ -7487,26 +7540,7 @@ class CoinMetricsClient:
             self._get_data,
             "security-master/markets",
             params,
-            columns_to_store=[
-                'market', 'code', 'pair', 'trades_min_time', 'trades_max_time',
-                'orderbooks_min_time', 'orderbooks_max_time',
-                'quotes_min_time', 'quotes_max_time',
-                'funding_rates_min_time', 'funding_rates_max_time',
-                'openinterest_min_time', 'openinterest_max_time',
-                'liquidations_min_time', 'liquidations_max_time',
-                'exchange', 'base', 'quote', 'symbol', 'type',
-                'size_asset', 'margin_asset', 'strike', 'option_contract_type',
-                'is_european', 'contract_size', 'tick_size', 'multiplier_size',
-                'listing', 'expiration', 'settlement_price', 'pool_config_id',
-                'contract_address', 'fee', 'price_includes_fee', 'variable_fee',
-                'base_address', 'quote_address', 'status', 'order_amount_increment',
-                'order_amount_min', 'order_amount_max', 'order_price_increment',
-                'order_price_min', 'order_price_max', 'order_size_min',
-                'order_taker_fee', 'order_maker_fee', 'margin_trading_enabled',
-                'experimental', 'price_open', 'price_close', 'price_high',
-                'price_low', 'vwap', 'volume', 'candle_usd_volume', 'candle_trades_count',
-                'base_native', 'quote_native'
-            ]
+            optimize_pandas_types=False
         )
 
     def get_snapshots_of_asset_metric_constituents(

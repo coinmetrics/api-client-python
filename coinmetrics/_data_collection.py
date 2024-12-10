@@ -79,7 +79,9 @@ class DataCollection:
         url_params: Dict[str, UrlParamTypes],
         csv_export_supported: bool = True,
         columns_to_store: List[str] = [],
-        client: Optional[CoinMetricsClient] = None
+        client: Optional[CoinMetricsClient] = None,
+        optimize_pandas_types: Optional[bool] = True,
+        dtype_mapper: Optional[Dict[str, Any]] = None
     ) -> None:
         self._csv_export_supported = csv_export_supported
         self._data_retrieval_function = data_retrieval_function
@@ -89,6 +91,8 @@ class DataCollection:
         self._current_data_iterator: Optional[Iterator[Any]] = None
         self._columns_to_store = columns_to_store
         self._client = client
+        self._optimize_pandas_types = optimize_pandas_types
+        self._dtype_mapper = dtype_mapper
 
     def first_page(self) -> List[Dict[str, Any]]:
         return cast(
@@ -245,7 +249,7 @@ class DataCollection:
         self,
         header: Optional[List[str]] = None,
         dtype_mapper: Optional[Dict[str, Any]] = None,
-        optimize_pandas_types: Optional[bool] = True,
+        optimize_pandas_types: Optional[bool] = None,
     ) -> DataFrameType:
         """
         Outputs a pandas dataframe.
@@ -259,6 +263,10 @@ class DataCollection:
         :return: Data in a pandas dataframe
         :rtype: DataFrameType
         """
+        if optimize_pandas_types is None:
+            optimize_pandas_types = self._optimize_pandas_types
+        if dtype_mapper is None:
+            dtype_mapper = self._dtype_mapper
         if pd is None:
             logger.info("Pandas not found; Returning None")
             return None
@@ -305,7 +313,9 @@ class DataCollection:
                 if dtype_mapper is None:
                     return pd.DataFrame(self)
                 else:
-                    return pd.DataFrame(self).astype(dtype=dtype_mapper)
+                    df = pd.DataFrame(self)
+                    dtype_mapper = {key: value for key, value in dtype_mapper.items() if key in df.columns}
+                    return df.astype(dtype_mapper)
 
     def parallel(self,
                  parallelize_on: Optional[Union[str, List[str]]] = None,
