@@ -605,5 +605,53 @@ def test_catalogv2_index_levels() -> None:
     assert all(['frequencies' in catalog for catalog in catalog_all_index_levels])
 
 
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_blockchain_blocks() -> None:
+    catalog_blockchain_blocks = client.catalog_blockchain_blocks_v2()
+    catalog_full_blockchain_blocks = client.catalog_full_blockchain_blocks_v2()
+    assert all(['asset' in catalog for catalog in catalog_blockchain_blocks])
+    assert all(['asset' in catalog for catalog in catalog_full_blockchain_blocks])
+    assert all(['min_time' in catalog for catalog in catalog_blockchain_blocks])
+    assert all(['min_time' in catalog for catalog in catalog_full_blockchain_blocks])
+    assert all(['max_time' in catalog for catalog in catalog_blockchain_blocks])
+    assert all(['max_time' in catalog for catalog in catalog_full_blockchain_blocks])
+    
+    
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_blockchain_accounts() -> None:
+    catalog_blockchain_accounts = client.catalog_blockchain_accounts_v2()
+    catalog_full_blockchain_accounts = client.catalog_full_blockchain_accounts_v2()
+    assert all(['asset' in catalog for catalog in catalog_blockchain_accounts])
+    assert all(['asset' in catalog for catalog in catalog_full_blockchain_accounts])
+    assert all(['min_time' in catalog for catalog in catalog_blockchain_accounts])
+    assert all(['min_time' in catalog for catalog in catalog_full_blockchain_accounts])
+    assert all(['max_time' in catalog for catalog in catalog_blockchain_accounts])
+    assert all(['max_time' in catalog for catalog in catalog_full_blockchain_accounts])
+    
+    
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_blockchain_balance_updates() -> None:
+    catalog_blockchain_balance_updates = client.catalog_blockchain_balance_updates_v2()
+    catalog_full_blockchain_balance_updates = client.catalog_full_blockchain_balance_updates_v2()
+    assert all(['asset' in catalog for catalog in catalog_blockchain_balance_updates])
+    assert all(['asset' in catalog for catalog in catalog_full_blockchain_balance_updates])
+    assert all(['min_time' in catalog for catalog in catalog_blockchain_balance_updates])
+    assert all(['min_time' in catalog for catalog in catalog_full_blockchain_balance_updates])
+    assert all(['max_time' in catalog for catalog in catalog_blockchain_balance_updates])
+    assert all(['max_time' in catalog for catalog in catalog_full_blockchain_balance_updates])
+    
+    
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_catalogv2_blockchain_transactions() -> None:
+    catalog_blockchain_transactions = client.catalog_blockchain_transactions_v2()
+    catalog_full_blockchain_transactions = client.catalog_full_blockchain_transactions_v2()
+    assert all(['asset' in catalog for catalog in catalog_blockchain_transactions])
+    assert all(['asset' in catalog for catalog in catalog_full_blockchain_transactions])
+    assert all(['min_time' in catalog for catalog in catalog_blockchain_transactions])
+    assert all(['min_time' in catalog for catalog in catalog_full_blockchain_transactions])
+    assert all(['max_time' in catalog for catalog in catalog_blockchain_transactions])
+    assert all(['max_time' in catalog for catalog in catalog_full_blockchain_transactions])
+
+
 if __name__ == '__main__':
     pytest.main()

@@ -4479,6 +4479,262 @@ class CoinMetricsClient:
         }
         return CatalogV2DataCollection(self._get_data, "catalog-all-v2/transaction-tracker", params, client=self)
 
+    def catalog_blockchain_accounts_v2(
+        self,
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = "json_stream",
+    ) -> CatalogV2DataCollection:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :type format: Optional[str]
+
+        :return: List of blockchain-v2/accounts assets
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+            "format": format
+        }
+        return CatalogV2DataCollection(self._get_data, "catalog-v2/blockchain-v2/accounts", params, client=self)
+
+    def catalog_blockchain_balance_updates_v2(
+        self,
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = "json_stream",
+    ) -> CatalogV2DataCollection:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :type format: Optional[str]
+
+        :return: List of blockchain-v2/balance-updates assets
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+            "format": format
+        }
+        return CatalogV2DataCollection(self._get_data, "catalog-v2/blockchain-v2/balance-updates", params, client=self)
+
+    def catalog_blockchain_blocks_v2(
+        self,
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = "json_stream",
+    ) -> CatalogV2DataCollection:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :type format: Optional[str]
+
+        :return: List of blockchain-v2/blocks assets
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+            "format": format
+        }
+        return CatalogV2DataCollection(self._get_data, "catalog-v2/blockchain-v2/blocks", params, client=self)
+
+    def catalog_blockchain_transactions_v2(
+        self,
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = "json_stream",
+    ) -> CatalogV2DataCollection:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :type format: Optional[str]
+
+        :return: List of blockchain-v2/transactions assets
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+            "format": format
+        }
+        return CatalogV2DataCollection(self._get_data, "catalog-v2/blockchain-v2/transactions", params, client=self)
+
+    def catalog_full_blockchain_accounts_v2(
+        self,
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = "json_stream",
+    ) -> CatalogV2DataCollection:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :type format: Optional[str]
+
+        :return: Full list of blockchain-v2/accounts assets
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+            "format": format
+        }
+        return CatalogV2DataCollection(self._get_data, "catalog-all-v2/blockchain-v2/accounts", params, client=self)
+
+    def catalog_full_blockchain_balance_updates_v2(
+        self,
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = "json_stream",
+    ) -> CatalogV2DataCollection:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :type format: Optional[str]
+
+        :return: Full list of blockchain-v2/balance-updates assets
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+            "format": format
+        }
+        return CatalogV2DataCollection(self._get_data, "catalog-all-v2/blockchain-v2/balance-updates", params, client=self)
+
+    def catalog_full_blockchain_blocks_v2(
+        self,
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = "json_stream",
+    ) -> CatalogV2DataCollection:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :type format: Optional[str]
+
+        :return: Full list of blockchain-v2/blocks assets
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+            "format": format
+        }
+        return CatalogV2DataCollection(self._get_data, "catalog-all-v2/blockchain-v2/blocks", params, client=self)
+
+    def catalog_full_blockchain_transactions_v2(
+        self,
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = "json_stream",
+    ) -> CatalogV2DataCollection:
+        """
+        :param assets: Comma separated list of assets. By default all assets are returned.
+        :type assets: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param paging_from: Where does the first page start, at the start of the interval or at the end.
+        :type paging_from: Optional[str]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :type format: Optional[str]
+
+        :return: Full list of blockchain-v2/transactions assets
+        :rtype: CatalogV2DataCollection
+        """
+        params: Dict[str, Any] = {
+            "assets": assets,
+            "page_size": page_size,
+            "paging_from": paging_from,
+            "next_page_token": next_page_token,
+            "format": format
+        }
+        return CatalogV2DataCollection(self._get_data, "catalog-all-v2/blockchain-v2/transactions", params, client=self)
+
     def get_asset_alerts(
         self,
         assets: Union[List[str], str],
