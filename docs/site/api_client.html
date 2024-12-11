@@ -1046,6 +1046,62 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#catalog_blockchain_accounts_v2" class="md-nav__link">
+    catalog_blockchain_accounts_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_blockchain_balance_updates_v2" class="md-nav__link">
+    catalog_blockchain_balance_updates_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_blockchain_blocks_v2" class="md-nav__link">
+    catalog_blockchain_blocks_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_blockchain_transactions_v2" class="md-nav__link">
+    catalog_blockchain_transactions_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_blockchain_accounts_v2" class="md-nav__link">
+    catalog_full_blockchain_accounts_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_blockchain_balance_updates_v2" class="md-nav__link">
+    catalog_full_blockchain_balance_updates_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_blockchain_blocks_v2" class="md-nav__link">
+    catalog_full_blockchain_blocks_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_blockchain_transactions_v2" class="md-nav__link">
+    catalog_full_blockchain_transactions_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get_asset_alerts" class="md-nav__link">
     get_asset_alerts
   </a>
@@ -2346,6 +2402,62 @@
           <li class="md-nav__item">
   <a href="#catalog_full_transaction_tracker_assets_v2" class="md-nav__link">
     catalog_full_transaction_tracker_assets_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_blockchain_accounts_v2" class="md-nav__link">
+    catalog_blockchain_accounts_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_blockchain_balance_updates_v2" class="md-nav__link">
+    catalog_blockchain_balance_updates_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_blockchain_blocks_v2" class="md-nav__link">
+    catalog_blockchain_blocks_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_blockchain_transactions_v2" class="md-nav__link">
+    catalog_blockchain_transactions_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_blockchain_accounts_v2" class="md-nav__link">
+    catalog_full_blockchain_accounts_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_blockchain_balance_updates_v2" class="md-nav__link">
+    catalog_full_blockchain_balance_updates_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_blockchain_blocks_v2" class="md-nav__link">
+    catalog_full_blockchain_blocks_v2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog_full_blockchain_transactions_v2" class="md-nav__link">
+    catalog_full_blockchain_transactions_v2
   </a>
   
 </li>
@@ -5230,6 +5342,158 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of transaction tracker assets</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_blockchain_accounts_v2"></a></p>
+<h4 id="catalog_blockchain_accounts_v2">catalog_blockchain_accounts_v2<a class="headerlink" href="#catalog_blockchain_accounts_v2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_blockchain_accounts_v2</span><span class="p">(</span>
+        <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">next_page_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;json_stream&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogV2DataCollection</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of assets. By default all assets are returned.</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
+<li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
+<li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogV2DataCollection</code>: List of blockchain-v2/accounts assets</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_blockchain_balance_updates_v2"></a></p>
+<h4 id="catalog_blockchain_balance_updates_v2">catalog_blockchain_balance_updates_v2<a class="headerlink" href="#catalog_blockchain_balance_updates_v2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_blockchain_balance_updates_v2</span><span class="p">(</span>
+        <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">next_page_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;json_stream&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogV2DataCollection</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of assets. By default all assets are returned.</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
+<li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
+<li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogV2DataCollection</code>: List of blockchain-v2/balance-updates assets</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_blockchain_blocks_v2"></a></p>
+<h4 id="catalog_blockchain_blocks_v2">catalog_blockchain_blocks_v2<a class="headerlink" href="#catalog_blockchain_blocks_v2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_blockchain_blocks_v2</span><span class="p">(</span>
+        <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">next_page_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;json_stream&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogV2DataCollection</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of assets. By default all assets are returned.</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
+<li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
+<li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogV2DataCollection</code>: List of blockchain-v2/blocks assets</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_blockchain_transactions_v2"></a></p>
+<h4 id="catalog_blockchain_transactions_v2">catalog_blockchain_transactions_v2<a class="headerlink" href="#catalog_blockchain_transactions_v2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_blockchain_transactions_v2</span><span class="p">(</span>
+        <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">next_page_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;json_stream&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogV2DataCollection</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of assets. By default all assets are returned.</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
+<li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
+<li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogV2DataCollection</code>: List of blockchain-v2/transactions assets</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_blockchain_accounts_v2"></a></p>
+<h4 id="catalog_full_blockchain_accounts_v2">catalog_full_blockchain_accounts_v2<a class="headerlink" href="#catalog_full_blockchain_accounts_v2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_blockchain_accounts_v2</span><span class="p">(</span>
+        <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">next_page_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;json_stream&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogV2DataCollection</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of assets. By default all assets are returned.</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
+<li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
+<li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogV2DataCollection</code>: Full list of blockchain-v2/accounts assets</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_blockchain_balance_updates_v2"></a></p>
+<h4 id="catalog_full_blockchain_balance_updates_v2">catalog_full_blockchain_balance_updates_v2<a class="headerlink" href="#catalog_full_blockchain_balance_updates_v2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_blockchain_balance_updates_v2</span><span class="p">(</span>
+        <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">next_page_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;json_stream&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogV2DataCollection</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of assets. By default all assets are returned.</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
+<li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
+<li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogV2DataCollection</code>: Full list of blockchain-v2/balance-updates assets</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_blockchain_blocks_v2"></a></p>
+<h4 id="catalog_full_blockchain_blocks_v2">catalog_full_blockchain_blocks_v2<a class="headerlink" href="#catalog_full_blockchain_blocks_v2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_blockchain_blocks_v2</span><span class="p">(</span>
+        <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">next_page_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;json_stream&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogV2DataCollection</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of assets. By default all assets are returned.</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
+<li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
+<li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogV2DataCollection</code>: Full list of blockchain-v2/blocks assets</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_blockchain_transactions_v2"></a></p>
+<h4 id="catalog_full_blockchain_transactions_v2">catalog_full_blockchain_transactions_v2<a class="headerlink" href="#catalog_full_blockchain_transactions_v2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_blockchain_transactions_v2</span><span class="p">(</span>
+        <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">next_page_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;json_stream&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogV2DataCollection</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>assets</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of assets. By default all assets are returned.</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
+<li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
+<li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>CatalogV2DataCollection</code>: Full list of blockchain-v2/transactions assets</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.get_asset_alerts"></a></p>
 <h4 id="get_asset_alerts">get_asset_alerts<a class="headerlink" href="#get_asset_alerts" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_asset_alerts</span><span class="p">(</span>

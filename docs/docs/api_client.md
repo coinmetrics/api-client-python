@@ -3128,6 +3128,206 @@ def catalog_full_transaction_tracker_assets_v2(
 
 `CatalogV2DataCollection`: List of transaction tracker assets
 
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_blockchain_accounts_v2"></a>
+
+#### catalog\_blockchain\_accounts\_v2
+
+```python
+def catalog_blockchain_accounts_v2(
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = "json_stream") -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of blockchain-v2/accounts assets
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_blockchain_balance_updates_v2"></a>
+
+#### catalog\_blockchain\_balance\_updates\_v2
+
+```python
+def catalog_blockchain_balance_updates_v2(
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = "json_stream") -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of blockchain-v2/balance-updates assets
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_blockchain_blocks_v2"></a>
+
+#### catalog\_blockchain\_blocks\_v2
+
+```python
+def catalog_blockchain_blocks_v2(
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = "json_stream") -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of blockchain-v2/blocks assets
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_blockchain_transactions_v2"></a>
+
+#### catalog\_blockchain\_transactions\_v2
+
+```python
+def catalog_blockchain_transactions_v2(
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = "json_stream") -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+
+**Returns**:
+
+`CatalogV2DataCollection`: List of blockchain-v2/transactions assets
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_blockchain_accounts_v2"></a>
+
+#### catalog\_full\_blockchain\_accounts\_v2
+
+```python
+def catalog_full_blockchain_accounts_v2(
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = "json_stream") -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+
+**Returns**:
+
+`CatalogV2DataCollection`: Full list of blockchain-v2/accounts assets
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_blockchain_balance_updates_v2"></a>
+
+#### catalog\_full\_blockchain\_balance\_updates\_v2
+
+```python
+def catalog_full_blockchain_balance_updates_v2(
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = "json_stream") -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+
+**Returns**:
+
+`CatalogV2DataCollection`: Full list of blockchain-v2/balance-updates assets
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_blockchain_blocks_v2"></a>
+
+#### catalog\_full\_blockchain\_blocks\_v2
+
+```python
+def catalog_full_blockchain_blocks_v2(
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = "json_stream") -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+
+**Returns**:
+
+`CatalogV2DataCollection`: Full list of blockchain-v2/blocks assets
+
+<a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_blockchain_transactions_v2"></a>
+
+#### catalog\_full\_blockchain\_transactions\_v2
+
+```python
+def catalog_full_blockchain_transactions_v2(
+        assets: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+        next_page_token: Optional[str] = None,
+        format: Optional[str] = "json_stream") -> CatalogV2DataCollection
+```
+
+**Arguments**:
+
+- `assets` (`Optional[Union[str, List[str]]]`): Comma separated list of assets. By default all assets are returned.
+- `page_size` (`Optional[int]`): Number of items per single page of results.
+- `paging_from` (`Optional[str]`): Where does the first page start, at the start of the interval or at the end.
+- `next_page_token` (`Optional[str]`): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+- `format` (`Optional[str]`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+
+**Returns**:
+
+`CatalogV2DataCollection`: Full list of blockchain-v2/transactions assets
+
 <a id="coinmetrics.api_client.CoinMetricsClient.get_asset_alerts"></a>
 
 #### get\_asset\_alerts
