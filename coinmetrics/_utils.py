@@ -1,5 +1,5 @@
 import pathlib
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from enum import Enum
 from functools import wraps
 from logging import getLogger
@@ -7,6 +7,7 @@ from os.path import expanduser
 from time import sleep
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union, Set
 from coinmetrics._typing import FilePathOrBuffer, UrlParamTypes
+from pandas import Timestamp
 
 logger = getLogger("cm_client_utils")
 
@@ -18,7 +19,17 @@ def transform_url_params_values_to_str(
     for param_name, param_value in params.items():
         if param_value is None:
             continue
-        if isinstance(param_value, (datetime, date)):
+        if isinstance(param_value, (datetime, date, Timestamp)):
+            if isinstance(param_value, Timestamp):
+                param_value = param_value.to_pydatetime()
+
+            if isinstance(param_value, datetime):
+                param_value = param_value.astimezone(timezone.utc).replace(tzinfo=None)
+
+            if isinstance(param_value, date) and not isinstance(param_value, datetime):
+                param_value = datetime(param_value.year, param_value.month, param_value.day)
+
+            assert isinstance(param_value, datetime)
             if param_name.endswith("_time"):
                 processed_params[param_name] = param_value.isoformat()
             else:

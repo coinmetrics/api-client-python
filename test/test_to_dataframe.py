@@ -34,5 +34,22 @@ def test_transaction_tracker_catalog() -> None:
     assert len(data) >= 2
 
 
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_pandas_timestamp() -> None:
+    list_timestamp_objects = [
+        pd.Timestamp(2024, 1, 1),
+        pd.Timestamp(2024, 1, 1, 12, 0, 0),
+        pd.Timestamp(2024, 1, 1, 12, 0, 0).tz_localize('US/Eastern'),
+        pd.Timestamp(2024, 1, 1, 0, 0, 0).tz_localize('UTC')
+    ]
+    for ts in list_timestamp_objects:
+        data = client.get_asset_metrics(
+            'btc',
+            'ReferenceRateUSD',
+            start_time=ts,
+            limit_per_asset=1
+        ).to_dataframe()
+
+
 if __name__ == "__main__":
     pytest.main()

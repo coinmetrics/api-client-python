@@ -983,20 +983,26 @@ class ParallelDataCollection(DataCollection):
         return data_collection.to_list()
 
     @staticmethod
-    def parse_date(date_input: Union[datetime, date, str]) -> datetime:
+    def parse_date(date_input: Union[datetime, date, str, pd.Timestamp]) -> datetime:
         """
         Parses a datetime object or datetime string into a datetime object. Datetime string must be a valid
         ISO 8601 format. Timezone aware objects are converted to UTC
         :param date_input: Union[datetime, date, str] date to parse into datetime
         :return: datetime
         """
+        # pd.Timestamp is a subset of datetime
+        if isinstance(date_input, pd.Timestamp):
+            date_input = date_input.to_pydatetime()
+
         if isinstance(date_input, datetime):
             if date_input.tzname() is None:
                 return date_input
             else:
                 return date_input.astimezone(timezone.utc).replace(tzinfo=None)
+
         if isinstance(date_input, date):
             return datetime(date_input.year, date_input.month, date_input.day)
+
         formats = [
             "%Y-%m-%dT%H:%M:%S",
             "%Y-%m-%dT%H%M%S",
