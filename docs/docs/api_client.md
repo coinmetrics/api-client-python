@@ -15,6 +15,7 @@ class CoinMetricsClient()
 #### catalog\_assets
 
 ```python
+@deprecated("catalog")
 def catalog_assets(
         assets: Optional[Union[List[str], str]] = None,
         include: Optional[Union[List[str], str]] = None,
@@ -38,6 +39,7 @@ Returns meta information about _available_ assets.
 #### catalog\_asset\_alerts
 
 ```python
+@deprecated("catalog")
 def catalog_asset_alerts(
         assets: Optional[Union[str, List[str]]] = None,
         alerts: Optional[Union[str,
@@ -58,6 +60,7 @@ def catalog_asset_alerts(
 #### catalog\_asset\_chains
 
 ```python
+@deprecated("catalog")
 def catalog_asset_chains(
         assets: Optional[Union[str,
                                List[str]]] = None) -> CatalogAssetChainsData
@@ -76,6 +79,7 @@ def catalog_asset_chains(
 #### catalog\_mempool\_feerates
 
 ```python
+@deprecated("catalog")
 def catalog_mempool_feerates(
     assets: Optional[Union[str,
                            List[str]]] = None) -> CatalogMempoolFeeratesData
@@ -94,6 +98,7 @@ def catalog_mempool_feerates(
 #### catalog\_mining\_pool\_tips\_summaries
 
 ```python
+@deprecated("catalog")
 def catalog_mining_pool_tips_summaries(
     assets: Optional[Union[str,
                            List[str]]] = None) -> CatalogMiningPoolTipsData
@@ -112,6 +117,7 @@ def catalog_mining_pool_tips_summaries(
 #### catalog\_transaction\_tracker\_assets
 
 ```python
+@deprecated("catalog")
 def catalog_transaction_tracker_assets(
     assets: Optional[Union[str, List[str]]] = None
 ) -> CatalogTransactionTrackerData
@@ -130,6 +136,7 @@ def catalog_transaction_tracker_assets(
 #### catalog\_asset\_pairs
 
 ```python
+@deprecated("catalog")
 def catalog_asset_pairs(
     asset_pairs: Optional[Union[List[str],
                                 str]] = None) -> CatalogAssetPairsData
@@ -150,6 +157,7 @@ Returns meta information about _available_ asset-asset pairs
 #### catalog\_asset\_metrics
 
 ```python
+@deprecated("catalog")
 def catalog_asset_metrics(
         metrics: Optional[Union[List[str], str]] = None,
         reviewable: Optional[bool] = None) -> CatalogMetricsData
@@ -173,6 +181,7 @@ description, category, precision and assets for which a metric is available.
 #### catalog\_exchange\_metrics
 
 ```python
+@deprecated("catalog")
 def catalog_exchange_metrics(
         metrics: Optional[Union[List[str], str]] = None,
         reviewable: Optional[bool] = None) -> CatalogMetricsData
@@ -196,6 +205,7 @@ description, category, precision and assets for which a metric is available.
 #### catalog\_exchange\_asset\_metrics
 
 ```python
+@deprecated("catalog")
 def catalog_exchange_asset_metrics(
         metrics: Optional[Union[List[str], str]] = None,
         reviewable: Optional[bool] = None) -> CatalogExchangeAssetMetricsData
@@ -219,6 +229,7 @@ description, category, precision and assets for which a metric is available.
 #### catalog\_pair\_metrics
 
 ```python
+@deprecated("catalog")
 def catalog_pair_metrics(
         metrics: Optional[Union[List[str], str]] = None,
         reviewable: Optional[bool] = None) -> CatalogPairMetricsData
@@ -242,6 +253,7 @@ description, category, precision and assets for which a metric is available.
 #### catalog\_institution\_metrics
 
 ```python
+@deprecated("catalog")
 def catalog_institution_metrics(
         metrics: Optional[Union[List[str], str]] = None,
         reviewable: Optional[bool] = None) -> CatalogInstitutionMetricsData
@@ -265,6 +277,7 @@ description, category, precision and assets for which a metric is available.
 #### catalog\_asset\_pair\_candles
 
 ```python
+@deprecated("catalog")
 def catalog_asset_pair_candles(
     asset_pairs: Optional[Union[List[str], str]] = None
 ) -> CatalogAssetPairCandlesData
@@ -285,6 +298,7 @@ Returns meta information about _available_ asset-asset pairs
 #### catalog\_exchanges
 
 ```python
+@deprecated("catalog")
 def catalog_exchanges(
         exchanges: Optional[Union[List[str],
                                   str]] = None) -> CatalogExchangesData
@@ -305,6 +319,7 @@ Returns meta information about exchanges.
 #### catalog\_exchange\_assets
 
 ```python
+@deprecated("catalog")
 def catalog_exchange_assets(
     exchange_assets: Optional[Union[List[str], str]] = None
 ) -> CatalogExchangeAssetsData
@@ -325,6 +340,7 @@ Returns meta information about _available_ exchange-asset pairs
 #### catalog\_indexes
 
 ```python
+@deprecated("catalog")
 def catalog_indexes(
         indexes: Optional[Union[List[str], str]] = None) -> CatalogIndexesData
 ```
@@ -344,6 +360,7 @@ Returns meta information about _available_ indexes.
 #### catalog\_index\_candles
 
 ```python
+@deprecated("catalog")
 def catalog_index_candles(
     indexes: Optional[Union[List[str],
                             str]] = None) -> CatalogMarketCandlesData
@@ -364,6 +381,7 @@ Returns meta information about _available_ index candles.
 #### catalog\_institutions
 
 ```python
+@deprecated("catalog")
 def catalog_institutions(
     institutions: Optional[Union[List[str], str]] = None
 ) -> CatalogInstitutionsData
@@ -384,6 +402,7 @@ Returns meta information about _available_ institutions
 #### catalog\_markets
 
 ```python
+@deprecated("catalog")
 def catalog_markets(
         markets: Optional[Union[List[str], str]] = None,
         market_type: Optional[str] = None,
@@ -421,6 +440,7 @@ quotes, funding_rates, openinterest, liquidations. Included by default if omitte
 #### catalog\_market\_trades
 
 ```python
+@deprecated("catalog")
 def catalog_market_trades(
         markets: Optional[Union[List[str], str]] = None,
         market_type: Optional[str] = None,
@@ -452,6 +472,7 @@ Returns a list of markets with trades support along with the time ranges of avai
 #### catalog\_metrics
 
 ```python
+@deprecated("catalog")
 def catalog_metrics(metrics: Optional[Union[List[str], str]] = None,
                     reviewable: Optional[bool] = None) -> CatalogMetricsData
 ```
@@ -474,6 +495,7 @@ description, category, precision and assets for which a metric is available.
 #### catalog\_market\_metrics
 
 ```python
+@deprecated("catalog")
 def catalog_market_metrics(
         markets: Optional[Union[List[str], str]] = None,
         market_type: Optional[str] = None,
@@ -505,6 +527,7 @@ Returns list of _available_ markets with metrics support along woth time ranges 
 #### catalog\_market\_candles
 
 ```python
+@deprecated("catalog")
 def catalog_market_candles(
         markets: Optional[Union[List[str], str]] = None,
         market_type: Optional[str] = None,
@@ -536,6 +559,7 @@ Returns list of _available_ markets with candles support along woth time ranges 
 #### catalog\_market\_orderbooks
 
 ```python
+@deprecated("catalog")
 def catalog_market_orderbooks(
         markets: Optional[Union[List[str], str]] = None,
         market_type: Optional[str] = None,
@@ -567,6 +591,7 @@ Returns a list of markets with orderbooks support along with the time ranges of 
 #### catalog\_market\_quotes
 
 ```python
+@deprecated("catalog")
 def catalog_market_quotes(
         markets: Optional[Union[List[str], str]] = None,
         market_type: Optional[str] = None,
@@ -598,6 +623,7 @@ Returns a list of markets with quotes support along with the time ranges of avai
 #### catalog\_market\_funding\_rates
 
 ```python
+@deprecated("catalog")
 def catalog_market_funding_rates(
         markets: Optional[Union[List[str], str]] = None,
         market_type: Optional[str] = None,
@@ -629,6 +655,7 @@ Returns a list of markets with funding rates support along with the time ranges 
 #### catalog\_market\_contract\_prices
 
 ```python
+@deprecated("catalog")
 def catalog_market_contract_prices(
         markets: Optional[Union[str, List[str]]] = None,
         exchange: Optional[str] = None,
@@ -662,6 +689,7 @@ def catalog_market_contract_prices(
 #### catalog\_market\_implied\_volatility
 
 ```python
+@deprecated("catalog")
 def catalog_market_implied_volatility(
         markets: Optional[Union[str, List[str]]] = None,
         exchange: Optional[str] = None,
@@ -695,6 +723,7 @@ def catalog_market_implied_volatility(
 #### catalog\_market\_greeks
 
 ```python
+@deprecated("catalog")
 def catalog_market_greeks(
         markets: Optional[Union[List[str], str]] = None,
         market_type: Optional[str] = None,
@@ -726,6 +755,7 @@ Returns a list of markets with greeks support along with the time ranges of avai
 #### catalog\_market\_open\_interest
 
 ```python
+@deprecated("catalog")
 def catalog_market_open_interest(
         markets: Optional[Union[List[str], str]] = None,
         market_type: Optional[str] = None,
@@ -757,6 +787,7 @@ Returns a list of markets with open interest support along with the time ranges 
 #### catalog\_market\_liquidations
 
 ```python
+@deprecated("catalog")
 def catalog_market_liquidations(
         markets: Optional[Union[List[str], str]] = None,
         market_type: Optional[str] = None,
@@ -788,6 +819,7 @@ Returns a list of markets with liquidations support along with the time ranges o
 #### catalog\_full\_assets
 
 ```python
+@deprecated("catalog")
 def catalog_full_assets(
         assets: Optional[Union[List[str], str]] = None,
         include: Optional[Union[List[str], str]] = None,
@@ -813,6 +845,7 @@ exchanges. Included by default if omitted.
 #### catalog\_full\_asset\_metrics
 
 ```python
+@deprecated("catalog")
 def catalog_full_asset_metrics(
         metrics: Optional[Union[List[str], str]] = None,
         reviewable: Optional[bool] = None) -> CatalogMetricsData
@@ -836,6 +869,7 @@ description, category, precision and assets for which a metric is available.
 #### catalog\_full\_asset\_alerts
 
 ```python
+@deprecated("catalog")
 def catalog_full_asset_alerts(
         assets: Optional[Union[str, List[str]]] = None,
         alerts: Optional[Union[str,
@@ -856,6 +890,7 @@ def catalog_full_asset_alerts(
 #### catalog\_full\_asset\_chains
 
 ```python
+@deprecated("catalog")
 def catalog_full_asset_chains(
         assets: Optional[Union[str,
                                List[str]]] = None) -> CatalogAssetChainsData
@@ -874,6 +909,7 @@ def catalog_full_asset_chains(
 #### catalog\_full\_mempool\_feerates
 
 ```python
+@deprecated("catalog")
 def catalog_full_mempool_feerates(
     assets: Optional[Union[str,
                            List[str]]] = None) -> CatalogMempoolFeeratesData
@@ -892,6 +928,7 @@ def catalog_full_mempool_feerates(
 #### catalog\_full\_mining\_pool\_tips\_summaries
 
 ```python
+@deprecated("catalog")
 def catalog_full_mining_pool_tips_summaries(
     assets: Optional[Union[str,
                            List[str]]] = None) -> CatalogMiningPoolTipsData
@@ -910,6 +947,7 @@ def catalog_full_mining_pool_tips_summaries(
 #### catalog\_full\_transaction\_tracker\_assets
 
 ```python
+@deprecated("catalog")
 def catalog_full_transaction_tracker_assets(
     assets: Optional[Union[str, List[str]]] = None
 ) -> CatalogTransactionTrackerData
@@ -928,6 +966,7 @@ def catalog_full_transaction_tracker_assets(
 #### catalog\_full\_asset\_pairs
 
 ```python
+@deprecated("catalog")
 def catalog_full_asset_pairs(
     asset_pairs: Optional[Union[List[str],
                                 str]] = None) -> CatalogAssetPairsData
@@ -948,6 +987,7 @@ Returns meta information about _supported_ asset-asset pairs
 #### catalog\_full\_pair\_metrics
 
 ```python
+@deprecated("catalog")
 def catalog_full_pair_metrics(
         metrics: Optional[Union[List[str], str]] = None,
         reviewable: Optional[bool] = None) -> CatalogPairMetricsData
@@ -971,6 +1011,7 @@ description, category, precision and assets for which a metric is available.
 #### catalog\_full\_institution\_metrics
 
 ```python
+@deprecated("catalog")
 def catalog_full_institution_metrics(
         metrics: Optional[Union[List[str], str]] = None,
         reviewable: Optional[bool] = None) -> CatalogInstitutionMetricsData
@@ -994,6 +1035,7 @@ description, category, precision and assets for which a metric is available.
 #### catalog\_full\_asset\_pair\_candles
 
 ```python
+@deprecated("catalog")
 def catalog_full_asset_pair_candles(
     asset_pairs: Optional[Union[List[str], str]] = None
 ) -> CatalogAssetPairCandlesData
@@ -1014,6 +1056,7 @@ Returns meta information about _available_ asset-asset pairs
 #### catalog\_full\_exchanges
 
 ```python
+@deprecated("catalog")
 def catalog_full_exchanges(
         exchanges: Optional[Union[List[str],
                                   str]] = None) -> CatalogExchangesData
@@ -1035,6 +1078,7 @@ all supported exchanges are returned.
 #### catalog\_full\_exchange\_assets
 
 ```python
+@deprecated("catalog")
 def catalog_full_exchange_assets(
     exchange_assets: Optional[Union[List[str], str]] = None
 ) -> CatalogExchangeAssetsData
@@ -1055,6 +1099,7 @@ Returns meta information about _supported_ exchange-asset pairs
 #### catalog\_full\_exchange\_metrics
 
 ```python
+@deprecated("catalog")
 def catalog_full_exchange_metrics(
         metrics: Optional[Union[List[str], str]] = None,
         reviewable: Optional[bool] = None) -> CatalogMetricsData
@@ -1078,6 +1123,7 @@ description, category, precision and assets for which a metric is available.
 #### catalog\_full\_exchange\_asset\_metrics
 
 ```python
+@deprecated("catalog")
 def catalog_full_exchange_asset_metrics(
         metrics: Optional[Union[List[str], str]] = None,
         reviewable: Optional[bool] = None) -> CatalogExchangeAssetMetricsData
@@ -1101,6 +1147,7 @@ description, category, precision and assets for which a metric is available.
 #### catalog\_full\_indexes
 
 ```python
+@deprecated("catalog")
 def catalog_full_indexes(
         indexes: Optional[Union[List[str], str]] = None) -> CatalogIndexesData
 ```
@@ -1120,6 +1167,7 @@ Returns meta information about _supported_ indexes.
 #### catalog\_full\_index\_candles
 
 ```python
+@deprecated("catalog")
 def catalog_full_index_candles(
     indexes: Optional[Union[List[str],
                             str]] = None) -> CatalogMarketCandlesData
@@ -1140,6 +1188,7 @@ Returns meta information about _supported_ index candles.
 #### catalog\_full\_institutions
 
 ```python
+@deprecated("catalog")
 def catalog_full_institutions(
     institutions: Optional[Union[List[str], str]] = None
 ) -> CatalogInstitutionsData
@@ -1160,6 +1209,7 @@ Returns meta information about _supported_ institutions
 #### catalog\_full\_markets
 
 ```python
+@deprecated("catalog")
 def catalog_full_markets(markets: Optional[Union[List[str], str]] = None,
                          market_type: Optional[str] = None,
                          exchange: Optional[str] = None,
@@ -1196,6 +1246,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.
 #### catalog\_full\_market\_trades
 
 ```python
+@deprecated("catalog")
 def catalog_full_market_trades(
         markets: Optional[Union[List[str], str]] = None,
         market_type: Optional[str] = None,
@@ -1227,6 +1278,7 @@ Returns a list of all markets with trades support along with the time ranges of 
 #### catalog\_full\_metrics
 
 ```python
+@deprecated("catalog")
 def catalog_full_metrics(
         metrics: Optional[Union[List[str], str]] = None,
         reviewable: Optional[bool] = None) -> CatalogMetricsData
@@ -1250,6 +1302,7 @@ description, category, precision and assets for which a metric is supported.
 #### catalog\_full\_market\_metrics
 
 ```python
+@deprecated("catalog")
 def catalog_full_market_metrics(
         markets: Optional[Union[List[str], str]] = None,
         market_type: Optional[str] = None,
@@ -1281,6 +1334,7 @@ Returns list of _supported_ markets with metrics support along woth time ranges 
 #### catalog\_full\_market\_candles
 
 ```python
+@deprecated("catalog")
 def catalog_full_market_candles(
         markets: Optional[Union[List[str], str]] = None,
         market_type: Optional[str] = None,
@@ -1312,6 +1366,7 @@ Returns list of _available_ markets with candles support along woth time ranges 
 #### catalog\_full\_market\_orderbooks
 
 ```python
+@deprecated("catalog")
 def catalog_full_market_orderbooks(
         markets: Optional[Union[List[str], str]] = None,
         market_type: Optional[str] = None,
@@ -1343,6 +1398,7 @@ Returns a list of markets with orderbooks support along with the time ranges of 
 #### catalog\_full\_market\_quotes
 
 ```python
+@deprecated("catalog")
 def catalog_full_market_quotes(
         markets: Optional[Union[List[str], str]] = None,
         market_type: Optional[str] = None,
@@ -1374,6 +1430,7 @@ Returns a list of markets with quotes support along with the time ranges of avai
 #### catalog\_full\_market\_funding\_rates
 
 ```python
+@deprecated("catalog")
 def catalog_full_market_funding_rates(
         markets: Optional[Union[List[str], str]] = None,
         market_type: Optional[str] = None,
@@ -1405,6 +1462,7 @@ Returns a list of all markets with funding rates support along with the time ran
 #### catalog\_full\_market\_contract\_prices
 
 ```python
+@deprecated("catalog")
 def catalog_full_market_contract_prices(
         markets: Optional[Union[str, List[str]]] = None,
         exchange: Optional[str] = None,

@@ -4,3 +4,4 @@ processors:
   - type: filter
   - type: smart
   - type: crossref
+  - python_file: docs/processors/pydoc_markdown_processors.py

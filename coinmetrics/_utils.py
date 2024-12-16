@@ -126,3 +126,24 @@ def get_keys_from_catalog(d: Dict[str, str]) -> Set[str]:
         else:
             keys.append(k)
     return set(keys)
+
+
+def deprecated(endpoint: Optional[str] = None) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
+        message = f"Function {func.__name__} is deprecated. "
+        if endpoint == 'catalog':
+            message += "Use 'catalog-v2' and 'reference-data' instead. For more information, see: https://docs.coinmetrics.io/tutorials-and-examples/user-guides/how-to-migrate-from-catalog-v1-to-catalog-v2 "
+            message += "\nNote: markets are truncated to 170,000 entries. Data may be out of date."
+
+        docstring = func.__doc__ or ""
+        deprecation_note = f"\n\nDeprecated: {message}\n"
+        func.__doc__ = deprecation_note + docstring
+
+        @wraps(func)
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
+            logger.warning(message)
+            return func(*args, **kwargs)
+
+        return wrapper
+
+    return decorator

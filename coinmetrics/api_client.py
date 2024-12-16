@@ -11,7 +11,7 @@ import requests
 from requests import HTTPError, Response
 import websocket
 
-from coinmetrics._utils import retry, transform_url_params_values_to_str
+from coinmetrics._utils import retry, transform_url_params_values_to_str, deprecated
 from coinmetrics import __version__ as version
 from coinmetrics._exceptions import CoinMetricsClientQueryParamsException
 from coinmetrics._typing import (
@@ -172,6 +172,7 @@ class CoinMetricsClient:
                 msg=f"Current state of API Client, excluding API KEY: {state_of_client}"
             )
 
+    @deprecated("catalog")
     def catalog_assets(
         self,
         assets: Optional[Union[List[str], str]] = None,
@@ -195,9 +196,9 @@ class CoinMetricsClient:
             "include": include,
             "exclude": exclude,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetsData(self._get_data("catalog/assets", params)["data"])
 
+    @deprecated("catalog")
     def catalog_asset_alerts(
         self,
         assets: Optional[Union[str, List[str]]] = None,
@@ -215,11 +216,11 @@ class CoinMetricsClient:
             "assets": assets,
             "alerts": alerts,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetAlertsData(
             self._get_data("catalog/asset-alerts", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_asset_chains(
             self,
             assets: Optional[Union[str, List[str]]] = None,
@@ -234,9 +235,9 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetChainsData(self._get_data("catalog/asset-chains", params)['data'])
 
+    @deprecated("catalog")
     def catalog_mempool_feerates(
             self,
             assets: Optional[Union[str, List[str]]] = None,
@@ -251,9 +252,9 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMempoolFeeratesData(self._get_data("catalog/mempool-feerates", params)['data'])
 
+    @deprecated("catalog")
     def catalog_mining_pool_tips_summaries(
             self,
             assets: Optional[Union[str, List[str]]] = None,
@@ -268,10 +269,10 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
 
         return CatalogMiningPoolTipsData(self._get_data("catalog/mining-pool-tips-summary", params)['data'])
 
+    @deprecated("catalog")
     def catalog_transaction_tracker_assets(
             self,
             assets: Optional[Union[str, List[str]]] = None,
@@ -286,10 +287,10 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
 
         return CatalogTransactionTrackerData(self._get_data("catalog/transaction-tracker", params)['data'])
 
+    @deprecated("catalog")
     def catalog_asset_pairs(
         self, asset_pairs: Optional[Union[List[str], str]] = None
     ) -> CatalogAssetPairsData:
@@ -302,9 +303,9 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"pairs": asset_pairs}
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetPairsData(self._get_data("catalog/pairs", params)["data"])
 
+    @deprecated("catalog")
     def catalog_asset_metrics(
         self,
         metrics: Optional[Union[List[str], str]] = None,
@@ -322,11 +323,11 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMetricsData(
             self._get_data("catalog/asset-metrics", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_exchange_metrics(
         self,
         metrics: Optional[Union[List[str], str]] = None,
@@ -344,11 +345,11 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMetricsData(
             self._get_data("catalog/exchange-metrics", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_exchange_asset_metrics(
         self,
         metrics: Optional[Union[List[str], str]] = None,
@@ -366,11 +367,11 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogExchangeAssetMetricsData(
             self._get_data("catalog/exchange-asset-metrics", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_pair_metrics(
         self,
         metrics: Optional[Union[List[str], str]] = None,
@@ -388,11 +389,11 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogPairMetricsData(
             self._get_data("catalog/pair-metrics", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_institution_metrics(
         self,
         metrics: Optional[Union[List[str], str]] = None,
@@ -410,11 +411,11 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogInstitutionMetricsData(
             self._get_data("catalog/institution-metrics", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_asset_pair_candles(
         self, asset_pairs: Optional[Union[List[str], str]] = None
     ) -> CatalogAssetPairCandlesData:
@@ -427,11 +428,11 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"pairs": asset_pairs}
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetPairCandlesData(
             self._get_data("catalog/pair-candles", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_exchanges(
         self, exchanges: Optional[Union[List[str], str]] = None
     ) -> CatalogExchangesData:
@@ -444,9 +445,9 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"exchanges": exchanges}
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogExchangesData(self._get_data("catalog/exchanges", params)["data"])
 
+    @deprecated("catalog")
     def catalog_exchange_assets(
         self, exchange_assets: Optional[Union[List[str], str]] = None
     ) -> CatalogExchangeAssetsData:
@@ -459,11 +460,11 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"exchange_assets": exchange_assets}
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogExchangeAssetsData(
             self._get_data("catalog/exchange-assets", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_indexes(
         self, indexes: Optional[Union[List[str], str]] = None
     ) -> CatalogIndexesData:
@@ -476,9 +477,9 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"indexes": indexes}
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogIndexesData(self._get_data("catalog/indexes", params)["data"])
 
+    @deprecated("catalog")
     def catalog_index_candles(
         self, indexes: Optional[Union[List[str], str]] = None
     ) -> CatalogMarketCandlesData:
@@ -491,11 +492,11 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"indexes": indexes}
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketCandlesData(
             self._get_data("catalog/index-candles", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_institutions(
         self, institutions: Optional[Union[List[str], str]] = None
     ) -> CatalogInstitutionsData:
@@ -508,11 +509,11 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"institutions": institutions}
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogInstitutionsData(
             self._get_data("catalog/institutions", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_markets(
         self,
         markets: Optional[Union[List[str], str]] = None,
@@ -562,9 +563,10 @@ class CoinMetricsClient:
             "include": include,
             "exclude": exclude,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
+        logger.warning("Note: catalog/markets is truncated to 170,000 markets!")
         return CatalogMarketsData(self._get_data("catalog/markets", params)["data"])
 
+    @deprecated("catalog")
     def catalog_market_trades(
         self,
         markets: Optional[Union[List[str], str]] = None,
@@ -604,11 +606,11 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketTradesData(
             self._get_data("catalog/market-trades", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_metrics(
         self,
         metrics: Optional[Union[List[str], str]] = None,
@@ -626,9 +628,9 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMetricsData(self._get_data("catalog/metrics", params)["data"])
 
+    @deprecated("catalog")
     def catalog_market_metrics(
         self,
         markets: Optional[Union[List[str], str]] = None,
@@ -668,11 +670,11 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketMetricsData(
             self._get_data("catalog/market-metrics", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_market_candles(
         self,
         markets: Optional[Union[List[str], str]] = None,
@@ -712,11 +714,11 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketCandlesData(
             self._get_data("catalog/market-candles", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_market_orderbooks(
         self,
         markets: Optional[Union[List[str], str]] = None,
@@ -756,11 +758,11 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketOrderbooksData(
             self._get_data("catalog/market-orderbooks", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_market_quotes(
         self,
         markets: Optional[Union[List[str], str]] = None,
@@ -800,11 +802,11 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketTradesData(
             self._get_data("catalog/market-quotes", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_market_funding_rates(
         self,
         markets: Optional[Union[List[str], str]] = None,
@@ -844,11 +846,11 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketTradesData(
             self._get_data("catalog/market-funding-rates", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_market_contract_prices(
             self,
             markets: Optional[Union[str, List[str]]] = None,
@@ -895,9 +897,9 @@ class CoinMetricsClient:
             "format": format,
             "limit": limit,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketContractPrices(self._get_data("catalog/market-contract-prices", params)['data'])
 
+    @deprecated("catalog")
     def catalog_market_implied_volatility(
             self,
             markets: Optional[Union[str, List[str]]] = None,
@@ -944,9 +946,9 @@ class CoinMetricsClient:
             "format": format,
             "limit": limit,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketImpliedVolatility(self._get_data("catalog/market-implied-volatility", params)['data'])
 
+    @deprecated("catalog")
     def catalog_market_greeks(
         self,
         markets: Optional[Union[List[str], str]] = None,
@@ -986,11 +988,11 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketTradesData(
             self._get_data("catalog/market-greeks", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_market_open_interest(
         self,
         markets: Optional[Union[List[str], str]] = None,
@@ -1030,11 +1032,11 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketTradesData(
             self._get_data("catalog/market-openinterest", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_market_liquidations(
         self,
         markets: Optional[Union[List[str], str]] = None,
@@ -1074,11 +1076,11 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMarketTradesData(
             self._get_data("catalog/market-liquidations", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_full_assets(
         self,
         assets: Optional[Union[List[str], str]] = None,
@@ -1103,9 +1105,9 @@ class CoinMetricsClient:
             "include": include,
             "exclude": exclude,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetsData(self._get_data("catalog-all/assets", params)["data"])
 
+    @deprecated("catalog")
     def catalog_full_asset_metrics(
         self,
         metrics: Optional[Union[List[str], str]] = None,
@@ -1123,11 +1125,11 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMetricsData(
             self._get_data("catalog-all/asset-metrics", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_full_asset_alerts(
         self,
         assets: Optional[Union[str, List[str]]] = None,
@@ -1145,11 +1147,11 @@ class CoinMetricsClient:
             "assets": assets,
             "alerts": alerts,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetAlertsData(
             self._get_data("catalog-all/asset-alerts", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_full_asset_chains(
             self,
             assets: Optional[Union[str, List[str]]] = None,
@@ -1164,9 +1166,9 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogAssetChainsData(self._get_data("catalog-all/asset-chains", params)['data'])
 
+    @deprecated("catalog")
     def catalog_full_mempool_feerates(
             self,
             assets: Optional[Union[str, List[str]]] = None,
@@ -1181,9 +1183,9 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMempoolFeeratesData(self._get_data("catalog-all/mempool-feerates", params)['data'])
 
+    @deprecated("catalog")
     def catalog_full_mining_pool_tips_summaries(
             self,
             assets: Optional[Union[str, List[str]]] = None,
@@ -1198,9 +1200,9 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogMiningPoolTipsData(self._get_data("catalog-all/mining-pool-tips-summary", params)['data'])
 
+    @deprecated("catalog")
     def catalog_full_transaction_tracker_assets(
             self,
             assets: Optional[Union[str, List[str]]] = None,
@@ -1215,9 +1217,9 @@ class CoinMetricsClient:
         params: Dict[str, Any] = {
             "assets": assets,
         }
-        logger.warning("catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead.")
         return CatalogTransactionTrackerData(self._get_data("catalog-all/transaction-tracker", params)['data'])
 
+    @deprecated("catalog")
     def catalog_full_asset_pairs(
         self,
         asset_pairs: Optional[Union[List[str], str]] = None,
@@ -1231,13 +1233,12 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"pairs": asset_pairs}
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogAssetPairsData(
             self._get_data("catalog-all/pairs", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_full_pair_metrics(
         self,
         metrics: Optional[Union[List[str], str]] = None,
@@ -1255,13 +1256,12 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogPairMetricsData(
             self._get_data("catalog-all/pair-metrics", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_full_institution_metrics(
         self,
         metrics: Optional[Union[List[str], str]] = None,
@@ -1279,13 +1279,12 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogInstitutionMetricsData(
             self._get_data("catalog-all/institution-metrics", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_full_asset_pair_candles(
         self, asset_pairs: Optional[Union[List[str], str]] = None
     ) -> CatalogAssetPairCandlesData:
@@ -1298,13 +1297,12 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"pairs": asset_pairs}
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogAssetPairCandlesData(
             self._get_data("catalog-all/pair-candles", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_full_exchanges(
         self,
         exchanges: Optional[Union[List[str], str]] = None,
@@ -1319,13 +1317,12 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"exchanges": exchanges}
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogExchangesData(
             self._get_data("catalog-all/exchanges", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_full_exchange_assets(
         self, exchange_assets: Optional[Union[List[str], str]] = None
     ) -> CatalogExchangeAssetsData:
@@ -1338,13 +1335,12 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"exchange_assets": exchange_assets}
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogExchangeAssetsData(
             self._get_data("catalog-all/exchange-assets", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_full_exchange_metrics(
         self,
         metrics: Optional[Union[List[str], str]] = None,
@@ -1362,13 +1358,12 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogMetricsData(
             self._get_data("catalog-all/exchange-metrics", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_full_exchange_asset_metrics(
         self,
         metrics: Optional[Union[List[str], str]] = None,
@@ -1386,13 +1381,12 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogExchangeAssetMetricsData(
             self._get_data("catalog-all/exchange-asset-metrics", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_full_indexes(
         self, indexes: Optional[Union[List[str], str]] = None
     ) -> CatalogIndexesData:
@@ -1405,11 +1399,10 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"indexes": indexes}
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogIndexesData(self._get_data("catalog-all/indexes", params)["data"])
 
+    @deprecated("catalog")
     def catalog_full_index_candles(
         self, indexes: Optional[Union[List[str], str]] = None
     ) -> CatalogMarketCandlesData:
@@ -1422,13 +1415,12 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"indexes": indexes}
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogMarketCandlesData(
             self._get_data("catalog-all/index-candles", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_full_institutions(
         self, institutions: Optional[Union[List[str], str]] = None
     ) -> CatalogInstitutionsData:
@@ -1441,13 +1433,12 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"institutions": institutions}
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogInstitutionsData(
             self._get_data("catalog-all/institutions", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_full_markets(
         self,
         markets: Optional[Union[List[str], str]] = None,
@@ -1497,11 +1488,10 @@ class CoinMetricsClient:
             "include": include,
             "exclude": exclude,
         }
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogMarketsData(self._get_data("catalog-all/markets", params)["data"])
 
+    @deprecated("catalog")
     def catalog_full_market_trades(
         self,
         markets: Optional[Union[List[str], str]] = None,
@@ -1541,13 +1531,12 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-trades", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_full_metrics(
         self,
         metrics: Optional[Union[List[str], str]] = None,
@@ -1565,11 +1554,10 @@ class CoinMetricsClient:
         :rtype: list(dict(str, any))
         """
         params: Dict[str, Any] = {"metrics": metrics, "reviewable": reviewable}
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogMetricsData(self._get_data("catalog-all/metrics", params)["data"])
 
+    @deprecated("catalog")
     def catalog_full_market_metrics(
         self,
         markets: Optional[Union[List[str], str]] = None,
@@ -1609,13 +1597,12 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogMarketMetricsData(
             self._get_data("catalog-all/market-metrics", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_full_market_candles(
         self,
         markets: Optional[Union[List[str], str]] = None,
@@ -1655,13 +1642,12 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogMarketCandlesData(
             self._get_data("catalog-all/market-candles", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_full_market_orderbooks(
         self,
         markets: Optional[Union[List[str], str]] = None,
@@ -1701,13 +1687,12 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-orderbooks", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_full_market_quotes(
         self,
         markets: Optional[Union[List[str], str]] = None,
@@ -1747,13 +1732,12 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-quotes", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_full_market_funding_rates(
         self,
         markets: Optional[Union[List[str], str]] = None,
@@ -1793,13 +1777,12 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-funding-rates", params)["data"]
         )
 
+    @deprecated("catalog")
     def catalog_full_market_contract_prices(
             self,
             markets: Optional[Union[str, List[str]]] = None,
@@ -1846,9 +1829,7 @@ class CoinMetricsClient:
             "format": format,
             "limit": limit,
         }
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogMarketContractPrices(self._get_data("catalog-all/market-contract-prices", params)['data'])
 
     def catalog_full_contract_prices_v2(
@@ -1954,9 +1935,7 @@ class CoinMetricsClient:
             "format": format,
             "limit": limit,
         }
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogMarketImpliedVolatility(self._get_data("catalog-all/market-implied-volatility", params)['data'])
 
     def catalog_full_market_greeks(
@@ -1998,9 +1977,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-greeks", params)["data"]
         )
@@ -2044,9 +2021,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-openinterest", params)["data"]
         )
@@ -2090,9 +2065,7 @@ class CoinMetricsClient:
             "asset": asset,
             "symbol": symbol,
         }
-        logger.warning(
-            "catalog/ endpoints will be deprecated in the future. Consider using /catalog-v2/ and /reference-data/ endpoints instead."
-        )
+
         return CatalogMarketTradesData(
             self._get_data("catalog-all/market-liquidations", params)["data"]
         )
@@ -4273,7 +4246,14 @@ class CoinMetricsClient:
             "next_page_token": next_page_token,
             "format": format
         }
-        return CatalogV2DataCollection(self._get_data, "catalog-all-v2/pair-candles", params, client=self)
+        return CatalogV2DataCollection(
+            self._get_data,
+            "catalog-all-v2/pair-candles",
+            params,
+            iterable_col="frequencies",
+            iterable_key="frequency",
+            client=self
+        )
 
     def catalog_full_index_candles_v2(
             self,
@@ -4499,7 +4479,7 @@ class CoinMetricsClient:
         :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
         :type format: Optional[str]
 
-        :return: List of blockchain-v2/accounts assets
+        :return: List of blockchain-v2/accounts assets using catalog-v2
         :rtype: CatalogV2DataCollection
         """
         params: Dict[str, Any] = {
@@ -4531,7 +4511,7 @@ class CoinMetricsClient:
         :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
         :type format: Optional[str]
 
-        :return: List of blockchain-v2/balance-updates assets
+        :return: List of blockchain-v2/balance-updates assets using catalog-v2
         :rtype: CatalogV2DataCollection
         """
         params: Dict[str, Any] = {
@@ -4563,7 +4543,7 @@ class CoinMetricsClient:
         :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
         :type format: Optional[str]
 
-        :return: List of blockchain-v2/blocks assets
+        :return: List of blockchain-v2/blocks assets using catalog-v2
         :rtype: CatalogV2DataCollection
         """
         params: Dict[str, Any] = {
@@ -4595,7 +4575,7 @@ class CoinMetricsClient:
         :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
         :type format: Optional[str]
 
-        :return: List of blockchain-v2/transactions assets
+        :return: List of blockchain-v2/transactions assets using catalog-v2
         :rtype: CatalogV2DataCollection
         """
         params: Dict[str, Any] = {
@@ -4627,7 +4607,7 @@ class CoinMetricsClient:
         :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
         :type format: Optional[str]
 
-        :return: Full list of blockchain-v2/accounts assets
+        :return: Full list of blockchain-v2/accounts assets using catalog-v2
         :rtype: CatalogV2DataCollection
         """
         params: Dict[str, Any] = {
@@ -4659,7 +4639,7 @@ class CoinMetricsClient:
         :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
         :type format: Optional[str]
 
-        :return: Full list of blockchain-v2/balance-updates assets
+        :return: Full list of blockchain-v2/balance-updates assets using catalog-v2
         :rtype: CatalogV2DataCollection
         """
         params: Dict[str, Any] = {
@@ -4691,7 +4671,7 @@ class CoinMetricsClient:
         :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
         :type format: Optional[str]
 
-        :return: Full list of blockchain-v2/blocks assets
+        :return: Full list of blockchain-v2/blocks assets using catalog-v2
         :rtype: CatalogV2DataCollection
         """
         params: Dict[str, Any] = {
@@ -4723,7 +4703,7 @@ class CoinMetricsClient:
         :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
         :type format: Optional[str]
 
-        :return: Full list of blockchain-v2/transactions assets
+        :return: Full list of blockchain-v2/transactions assets using catalog-v2
         :rtype: CatalogV2DataCollection
         """
         params: Dict[str, Any] = {
