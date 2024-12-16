@@ -3209,7 +3209,7 @@ def catalog_blockchain_accounts_v2(
 
 **Returns**:
 
-`CatalogV2DataCollection`: List of blockchain-v2/accounts assets
+`CatalogV2DataCollection`: List of blockchain-v2/accounts assets using catalog-v2
 
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_blockchain_balance_updates_v2"></a>
 
@@ -3234,7 +3234,7 @@ def catalog_blockchain_balance_updates_v2(
 
 **Returns**:
 
-`CatalogV2DataCollection`: List of blockchain-v2/balance-updates assets
+`CatalogV2DataCollection`: List of blockchain-v2/balance-updates assets using catalog-v2
 
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_blockchain_blocks_v2"></a>
 
@@ -3259,7 +3259,7 @@ def catalog_blockchain_blocks_v2(
 
 **Returns**:
 
-`CatalogV2DataCollection`: List of blockchain-v2/blocks assets
+`CatalogV2DataCollection`: List of blockchain-v2/blocks assets using catalog-v2
 
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_blockchain_transactions_v2"></a>
 
@@ -3284,7 +3284,7 @@ def catalog_blockchain_transactions_v2(
 
 **Returns**:
 
-`CatalogV2DataCollection`: List of blockchain-v2/transactions assets
+`CatalogV2DataCollection`: List of blockchain-v2/transactions assets using catalog-v2
 
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_blockchain_accounts_v2"></a>
 
@@ -3309,7 +3309,7 @@ def catalog_full_blockchain_accounts_v2(
 
 **Returns**:
 
-`CatalogV2DataCollection`: Full list of blockchain-v2/accounts assets
+`CatalogV2DataCollection`: Full list of blockchain-v2/accounts assets using catalog-v2
 
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_blockchain_balance_updates_v2"></a>
 
@@ -3334,7 +3334,7 @@ def catalog_full_blockchain_balance_updates_v2(
 
 **Returns**:
 
-`CatalogV2DataCollection`: Full list of blockchain-v2/balance-updates assets
+`CatalogV2DataCollection`: Full list of blockchain-v2/balance-updates assets using catalog-v2
 
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_blockchain_blocks_v2"></a>
 
@@ -3359,7 +3359,7 @@ def catalog_full_blockchain_blocks_v2(
 
 **Returns**:
 
-`CatalogV2DataCollection`: Full list of blockchain-v2/blocks assets
+`CatalogV2DataCollection`: Full list of blockchain-v2/blocks assets using catalog-v2
 
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_blockchain_transactions_v2"></a>
 
@@ -3384,7 +3384,7 @@ def catalog_full_blockchain_transactions_v2(
 
 **Returns**:
 
-`CatalogV2DataCollection`: Full list of blockchain-v2/transactions assets
+`CatalogV2DataCollection`: Full list of blockchain-v2/transactions assets using catalog-v2
 
 <a id="coinmetrics.api_client.CoinMetricsClient.get_asset_alerts"></a>
 

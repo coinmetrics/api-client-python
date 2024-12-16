@@ -2952,7 +2952,8 @@
 </code></pre></div>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_assets"></a></p>
 <h4 id="catalog_assets">catalog_assets<a class="headerlink" href="#catalog_assets" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_assets</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_assets</span><span class="p">(</span>
         <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">include</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exclude</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogAssetsData</span>
@@ -2968,7 +2969,8 @@
 <p><code>list(dict(str, any))</code>: Information that is available for requested assets, like: Full name, metrics and available frequencies, markets, exchanges, etc.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_alerts"></a></p>
 <h4 id="catalog_asset_alerts">catalog_asset_alerts<a class="headerlink" href="#catalog_asset_alerts" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_asset_alerts</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_asset_alerts</span><span class="p">(</span>
         <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">alerts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span>
                                <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogAssetAlertsData</span>
@@ -2982,7 +2984,8 @@
 <p><code>CatalogAssetAlertsData</code>: List of asset alerts.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_chains"></a></p>
 <h4 id="catalog_asset_chains">catalog_asset_chains<a class="headerlink" href="#catalog_asset_chains" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_asset_chains</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_asset_chains</span><span class="p">(</span>
         <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span>
                                <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogAssetChainsData</span>
 </code></pre></div>
@@ -2994,7 +2997,8 @@
 <p><code>CatalogAssetChainsData</code>: List of asset chains assets</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_mempool_feerates"></a></p>
 <h4 id="catalog_mempool_feerates">catalog_mempool_feerates<a class="headerlink" href="#catalog_mempool_feerates" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_mempool_feerates</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_mempool_feerates</span><span class="p">(</span>
     <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span>
                            <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMempoolFeeratesData</span>
 </code></pre></div>
@@ -3006,7 +3010,8 @@
 <p><code>CatalogMempoolFeeratesData</code>: List of mempool feerates assets</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_mining_pool_tips_summaries"></a></p>
 <h4 id="catalog_mining_pool_tips_summaries">catalog_mining_pool_tips_summaries<a class="headerlink" href="#catalog_mining_pool_tips_summaries" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_mining_pool_tips_summaries</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_mining_pool_tips_summaries</span><span class="p">(</span>
     <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span>
                            <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMiningPoolTipsData</span>
 </code></pre></div>
@@ -3018,7 +3023,8 @@
 <p><code>CatalogMiningPoolTipsData</code>: List of mining pool tips assets</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_transaction_tracker_assets"></a></p>
 <h4 id="catalog_transaction_tracker_assets">catalog_transaction_tracker_assets<a class="headerlink" href="#catalog_transaction_tracker_assets" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_transaction_tracker_assets</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_transaction_tracker_assets</span><span class="p">(</span>
     <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogTransactionTrackerData</span>
 </code></pre></div>
@@ -3030,7 +3036,8 @@
 <p><code>CatalogTransactionTrackerData</code>: List of transaction tracker assets</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_pairs"></a></p>
 <h4 id="catalog_asset_pairs">catalog_asset_pairs<a class="headerlink" href="#catalog_asset_pairs" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_asset_pairs</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_asset_pairs</span><span class="p">(</span>
     <span class="n">asset_pairs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
                                 <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogAssetPairsData</span>
 </code></pre></div>
@@ -3043,7 +3050,8 @@
 <p><code>list(dict(str, any))</code>: Information that is available for requested asset-asset pair like metrics and their respective frequencies and time ranges</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_metrics"></a></p>
 <h4 id="catalog_asset_metrics">catalog_asset_metrics<a class="headerlink" href="#catalog_asset_metrics" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_asset_metrics</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_asset_metrics</span><span class="p">(</span>
         <span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">reviewable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMetricsData</span>
 </code></pre></div>
@@ -3058,7 +3066,8 @@
 <p><code>list(dict(str, any))</code>: Information about asset metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_exchange_metrics"></a></p>
 <h4 id="catalog_exchange_metrics">catalog_exchange_metrics<a class="headerlink" href="#catalog_exchange_metrics" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_exchange_metrics</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_exchange_metrics</span><span class="p">(</span>
         <span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">reviewable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMetricsData</span>
 </code></pre></div>
@@ -3073,7 +3082,8 @@
 <p><code>list(dict(str, any))</code>: Information about exchange metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_exchange_asset_metrics"></a></p>
 <h4 id="catalog_exchange_asset_metrics">catalog_exchange_asset_metrics<a class="headerlink" href="#catalog_exchange_asset_metrics" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_exchange_asset_metrics</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_exchange_asset_metrics</span><span class="p">(</span>
         <span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">reviewable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogExchangeAssetMetricsData</span>
 </code></pre></div>
@@ -3088,7 +3098,8 @@
 <p><code>list(dict(str, any))</code>: Information about exchange metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_pair_metrics"></a></p>
 <h4 id="catalog_pair_metrics">catalog_pair_metrics<a class="headerlink" href="#catalog_pair_metrics" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_pair_metrics</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_pair_metrics</span><span class="p">(</span>
         <span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">reviewable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogPairMetricsData</span>
 </code></pre></div>
@@ -3103,7 +3114,8 @@
 <p><code>list(dict(str, any))</code>: Information about pair metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_institution_metrics"></a></p>
 <h4 id="catalog_institution_metrics">catalog_institution_metrics<a class="headerlink" href="#catalog_institution_metrics" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_institution_metrics</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_institution_metrics</span><span class="p">(</span>
         <span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">reviewable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogInstitutionMetricsData</span>
 </code></pre></div>
@@ -3118,7 +3130,8 @@
 <p><code>list(dict(str, any))</code>: Information about institution metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_asset_pair_candles"></a></p>
 <h4 id="catalog_asset_pair_candles">catalog_asset_pair_candles<a class="headerlink" href="#catalog_asset_pair_candles" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_asset_pair_candles</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_asset_pair_candles</span><span class="p">(</span>
     <span class="n">asset_pairs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogAssetPairCandlesData</span>
 </code></pre></div>
@@ -3131,7 +3144,8 @@
 <p><code>list(dict(str, any))</code>: Returns a list of available asset pair candles along with the time ranges of available data per candle duration.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_exchanges"></a></p>
 <h4 id="catalog_exchanges">catalog_exchanges<a class="headerlink" href="#catalog_exchanges" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_exchanges</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_exchanges</span><span class="p">(</span>
         <span class="n">exchanges</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
                                   <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogExchangesData</span>
 </code></pre></div>
@@ -3144,7 +3158,8 @@
 <p><code>list(dict(str, any))</code>: Information that is available for requested exchanges, like: markets, min and max time available.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_exchange_assets"></a></p>
 <h4 id="catalog_exchange_assets">catalog_exchange_assets<a class="headerlink" href="#catalog_exchange_assets" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_exchange_assets</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_exchange_assets</span><span class="p">(</span>
     <span class="n">exchange_assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogExchangeAssetsData</span>
 </code></pre></div>
@@ -3157,7 +3172,8 @@
 <p><code>list(dict(str, any))</code>: Information that is available for requested exchange-asset pair like metrics and their respective frequencies and time ranges</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_indexes"></a></p>
 <h4 id="catalog_indexes">catalog_indexes<a class="headerlink" href="#catalog_indexes" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_indexes</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_indexes</span><span class="p">(</span>
         <span class="n">indexes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogIndexesData</span>
 </code></pre></div>
 <p>Returns meta information about <em>available</em> indexes.</p>
@@ -3169,7 +3185,8 @@
 <p><code>list(dict(str, any))</code>: Information that is available for requested indexes, like: Full name, and available frequencies.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_index_candles"></a></p>
 <h4 id="catalog_index_candles">catalog_index_candles<a class="headerlink" href="#catalog_index_candles" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_index_candles</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_index_candles</span><span class="p">(</span>
     <span class="n">indexes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
                             <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMarketCandlesData</span>
 </code></pre></div>
@@ -3182,7 +3199,8 @@
 <p><code>list(dict(str, any))</code>: Information that is available for requested index candles, like: Full name, and available frequencies.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_institutions"></a></p>
 <h4 id="catalog_institutions">catalog_institutions<a class="headerlink" href="#catalog_institutions" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_institutions</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_institutions</span><span class="p">(</span>
     <span class="n">institutions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogInstitutionsData</span>
 </code></pre></div>
@@ -3195,7 +3213,8 @@
 <p><code>list(dict(str, any))</code>: Information that is available for requested institution like metrics and their respective frequencies and time ranges.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_markets"></a></p>
 <h4 id="catalog_markets">catalog_markets<a class="headerlink" href="#catalog_markets" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_markets</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_markets</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3225,7 +3244,8 @@ quotes, funding_rates, openinterest, liquidations. Included by default if omitte
 <p><code>list(dict(str, any))</code>: Information about markets that correspond to a filter along with meta information like: type of market and min and max available time frames.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_trades"></a></p>
 <h4 id="catalog_market_trades">catalog_market_trades<a class="headerlink" href="#catalog_market_trades" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_market_trades</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_market_trades</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3249,7 +3269,8 @@ quotes, funding_rates, openinterest, liquidations. Included by default if omitte
 <p><code>list(dict(str, any))</code>: Information about market trades that are available for the provided filter, as well as the time frames they are available</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_metrics"></a></p>
 <h4 id="catalog_metrics">catalog_metrics<a class="headerlink" href="#catalog_metrics" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_metrics</span><span class="p">(</span><span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_metrics</span><span class="p">(</span><span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                     <span class="n">reviewable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMetricsData</span>
 </code></pre></div>
 <p>Returns list of <em>available</em> metrics along with information for them like</p>
@@ -3263,7 +3284,8 @@ quotes, funding_rates, openinterest, liquidations. Included by default if omitte
 <p><code>list(dict(str, any))</code>: Information about metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_metrics"></a></p>
 <h4 id="catalog_market_metrics">catalog_market_metrics<a class="headerlink" href="#catalog_market_metrics" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_market_metrics</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_market_metrics</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3287,7 +3309,8 @@ quotes, funding_rates, openinterest, liquidations. Included by default if omitte
 <p><code>list(dict(str, any))</code>: Information about markets that correspond to a filter along with meta information like: type of market and min and max available time frames.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_candles"></a></p>
 <h4 id="catalog_market_candles">catalog_market_candles<a class="headerlink" href="#catalog_market_candles" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_market_candles</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_market_candles</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3311,7 +3334,8 @@ quotes, funding_rates, openinterest, liquidations. Included by default if omitte
 <p><code>list(dict(str, any))</code>: Information about markets that correspond to a filter along with meta information like: type of market and min and max available time frames.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_orderbooks"></a></p>
 <h4 id="catalog_market_orderbooks">catalog_market_orderbooks<a class="headerlink" href="#catalog_market_orderbooks" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_market_orderbooks</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_market_orderbooks</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3335,7 +3359,8 @@ quotes, funding_rates, openinterest, liquidations. Included by default if omitte
 <p><code>list(dict(str, any))</code>: Information about markets orderbooks that correspond to a filter</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_quotes"></a></p>
 <h4 id="catalog_market_quotes">catalog_market_quotes<a class="headerlink" href="#catalog_market_quotes" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_market_quotes</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_market_quotes</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3359,7 +3384,8 @@ quotes, funding_rates, openinterest, liquidations. Included by default if omitte
 <p><code>list(dict(str, any))</code>: Information about markets quotes that correspond to a filter</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_funding_rates"></a></p>
 <h4 id="catalog_market_funding_rates">catalog_market_funding_rates<a class="headerlink" href="#catalog_market_funding_rates" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_market_funding_rates</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_market_funding_rates</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3383,7 +3409,8 @@ quotes, funding_rates, openinterest, liquidations. Included by default if omitte
 <p><code>list(dict(str, any))</code>: Information about funding rates that correspond to a filter</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_contract_prices"></a></p>
 <h4 id="catalog_market_contract_prices">catalog_market_contract_prices<a class="headerlink" href="#catalog_market_contract_prices" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_market_contract_prices</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_market_contract_prices</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="nb">type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3410,7 +3437,8 @@ quotes, funding_rates, openinterest, liquidations. Included by default if omitte
 <p><code>CatalogMarketContractPrices</code>: List of contract prices statistics.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_implied_volatility"></a></p>
 <h4 id="catalog_market_implied_volatility">catalog_market_implied_volatility<a class="headerlink" href="#catalog_market_implied_volatility" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_market_implied_volatility</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_market_implied_volatility</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="nb">type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3437,7 +3465,8 @@ quotes, funding_rates, openinterest, liquidations. Included by default if omitte
 <p><code>CatalogMarketImpliedVolatility</code>: List of implied volatility statistics.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_greeks"></a></p>
 <h4 id="catalog_market_greeks">catalog_market_greeks<a class="headerlink" href="#catalog_market_greeks" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_market_greeks</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_market_greeks</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3461,7 +3490,8 @@ quotes, funding_rates, openinterest, liquidations. Included by default if omitte
 <p><code>list(dict(str, any))</code>: Information about market greeks that correspond to the filter</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_open_interest"></a></p>
 <h4 id="catalog_market_open_interest">catalog_market_open_interest<a class="headerlink" href="#catalog_market_open_interest" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_market_open_interest</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_market_open_interest</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3485,7 +3515,8 @@ quotes, funding_rates, openinterest, liquidations. Included by default if omitte
 <p><code>list(dict(str, any))</code>: Information about market open interest that correspond to a filter</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_market_liquidations"></a></p>
 <h4 id="catalog_market_liquidations">catalog_market_liquidations<a class="headerlink" href="#catalog_market_liquidations" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_market_liquidations</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_market_liquidations</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3509,7 +3540,8 @@ quotes, funding_rates, openinterest, liquidations. Included by default if omitte
 <p><code>list(dict(str, any))</code>: Information about market liquidations that correspond to a filter</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_assets"></a></p>
 <h4 id="catalog_full_assets">catalog_full_assets<a class="headerlink" href="#catalog_full_assets" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_assets</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_assets</span><span class="p">(</span>
         <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">include</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exclude</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogAssetsData</span>
@@ -3527,7 +3559,8 @@ exchanges. Included by default if omitted.</li>
 <p><code>list(dict(str, any))</code>: Information that is supported for requested assets, like: Full name, metrics and supported frequencies, markets, exchanges, etc.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_metrics"></a></p>
 <h4 id="catalog_full_asset_metrics">catalog_full_asset_metrics<a class="headerlink" href="#catalog_full_asset_metrics" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_asset_metrics</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_asset_metrics</span><span class="p">(</span>
         <span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">reviewable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMetricsData</span>
 </code></pre></div>
@@ -3542,7 +3575,8 @@ exchanges. Included by default if omitted.</li>
 <p><code>list(dict(str, any))</code>: Information about asset metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_alerts"></a></p>
 <h4 id="catalog_full_asset_alerts">catalog_full_asset_alerts<a class="headerlink" href="#catalog_full_asset_alerts" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_asset_alerts</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_asset_alerts</span><span class="p">(</span>
         <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">alerts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span>
                                <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogAssetAlertsData</span>
@@ -3556,7 +3590,8 @@ exchanges. Included by default if omitted.</li>
 <p><code>CatalogAssetAlertsData</code>: List of asset alerts.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_chains"></a></p>
 <h4 id="catalog_full_asset_chains">catalog_full_asset_chains<a class="headerlink" href="#catalog_full_asset_chains" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_asset_chains</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_asset_chains</span><span class="p">(</span>
         <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span>
                                <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogAssetChainsData</span>
 </code></pre></div>
@@ -3568,7 +3603,8 @@ exchanges. Included by default if omitted.</li>
 <p><code>CatalogAssetChainsData</code>: List of asset chains assets</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_mempool_feerates"></a></p>
 <h4 id="catalog_full_mempool_feerates">catalog_full_mempool_feerates<a class="headerlink" href="#catalog_full_mempool_feerates" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_mempool_feerates</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_mempool_feerates</span><span class="p">(</span>
     <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span>
                            <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMempoolFeeratesData</span>
 </code></pre></div>
@@ -3580,7 +3616,8 @@ exchanges. Included by default if omitted.</li>
 <p><code>CatalogMempoolFeeratesData</code>: List of mempool feerates assets</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_mining_pool_tips_summaries"></a></p>
 <h4 id="catalog_full_mining_pool_tips_summaries">catalog_full_mining_pool_tips_summaries<a class="headerlink" href="#catalog_full_mining_pool_tips_summaries" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_mining_pool_tips_summaries</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_mining_pool_tips_summaries</span><span class="p">(</span>
     <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span>
                            <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMiningPoolTipsData</span>
 </code></pre></div>
@@ -3592,7 +3629,8 @@ exchanges. Included by default if omitted.</li>
 <p><code>CatalogMiningPoolTipsData</code>: List of mining pool tips assets</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_transaction_tracker_assets"></a></p>
 <h4 id="catalog_full_transaction_tracker_assets">catalog_full_transaction_tracker_assets<a class="headerlink" href="#catalog_full_transaction_tracker_assets" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_transaction_tracker_assets</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_transaction_tracker_assets</span><span class="p">(</span>
     <span class="n">assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogTransactionTrackerData</span>
 </code></pre></div>
@@ -3604,7 +3642,8 @@ exchanges. Included by default if omitted.</li>
 <p><code>CatalogTransactionTrackerData</code>: List of transaction tracker assets</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_pairs"></a></p>
 <h4 id="catalog_full_asset_pairs">catalog_full_asset_pairs<a class="headerlink" href="#catalog_full_asset_pairs" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_asset_pairs</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_asset_pairs</span><span class="p">(</span>
     <span class="n">asset_pairs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
                                 <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogAssetPairsData</span>
 </code></pre></div>
@@ -3617,7 +3656,8 @@ exchanges. Included by default if omitted.</li>
 <p><code>list(dict(str, any))</code>: Information that is supported for requested asset-asset pair like metrics and their respective frequencies and time ranges</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_pair_metrics"></a></p>
 <h4 id="catalog_full_pair_metrics">catalog_full_pair_metrics<a class="headerlink" href="#catalog_full_pair_metrics" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_pair_metrics</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_pair_metrics</span><span class="p">(</span>
         <span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">reviewable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogPairMetricsData</span>
 </code></pre></div>
@@ -3632,7 +3672,8 @@ exchanges. Included by default if omitted.</li>
 <p><code>list(dict(str, any))</code>: Information about pair metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_institution_metrics"></a></p>
 <h4 id="catalog_full_institution_metrics">catalog_full_institution_metrics<a class="headerlink" href="#catalog_full_institution_metrics" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_institution_metrics</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_institution_metrics</span><span class="p">(</span>
         <span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">reviewable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogInstitutionMetricsData</span>
 </code></pre></div>
@@ -3647,7 +3688,8 @@ exchanges. Included by default if omitted.</li>
 <p><code>list(dict(str, any))</code>: Information about institution metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_asset_pair_candles"></a></p>
 <h4 id="catalog_full_asset_pair_candles">catalog_full_asset_pair_candles<a class="headerlink" href="#catalog_full_asset_pair_candles" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_asset_pair_candles</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_asset_pair_candles</span><span class="p">(</span>
     <span class="n">asset_pairs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogAssetPairCandlesData</span>
 </code></pre></div>
@@ -3660,7 +3702,8 @@ exchanges. Included by default if omitted.</li>
 <p><code>list(dict(str, any))</code>: Returns a list of available asset pair candles along with the time ranges of available data per candle duration.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_exchanges"></a></p>
 <h4 id="catalog_full_exchanges">catalog_full_exchanges<a class="headerlink" href="#catalog_full_exchanges" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_exchanges</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_exchanges</span><span class="p">(</span>
         <span class="n">exchanges</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
                                   <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogExchangesData</span>
 </code></pre></div>
@@ -3674,7 +3717,8 @@ all supported exchanges are returned.</li>
 <p><code>list(dict(str, any))</code>: Information that is supported for requested exchanges, like: markets, min and max time supported.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_exchange_assets"></a></p>
 <h4 id="catalog_full_exchange_assets">catalog_full_exchange_assets<a class="headerlink" href="#catalog_full_exchange_assets" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_exchange_assets</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_exchange_assets</span><span class="p">(</span>
     <span class="n">exchange_assets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogExchangeAssetsData</span>
 </code></pre></div>
@@ -3687,7 +3731,8 @@ all supported exchanges are returned.</li>
 <p><code>list(dict(str, any))</code>: Information that is supported for requested exchange-asset pair like metrics and their respective frequencies and time ranges</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_exchange_metrics"></a></p>
 <h4 id="catalog_full_exchange_metrics">catalog_full_exchange_metrics<a class="headerlink" href="#catalog_full_exchange_metrics" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_exchange_metrics</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_exchange_metrics</span><span class="p">(</span>
         <span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">reviewable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMetricsData</span>
 </code></pre></div>
@@ -3702,7 +3747,8 @@ all supported exchanges are returned.</li>
 <p><code>list(dict(str, any))</code>: Information about exchange metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_exchange_asset_metrics"></a></p>
 <h4 id="catalog_full_exchange_asset_metrics">catalog_full_exchange_asset_metrics<a class="headerlink" href="#catalog_full_exchange_asset_metrics" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_exchange_asset_metrics</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_exchange_asset_metrics</span><span class="p">(</span>
         <span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">reviewable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogExchangeAssetMetricsData</span>
 </code></pre></div>
@@ -3717,7 +3763,8 @@ all supported exchanges are returned.</li>
 <p><code>list(dict(str, any))</code>: Information about exchange metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is available.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_indexes"></a></p>
 <h4 id="catalog_full_indexes">catalog_full_indexes<a class="headerlink" href="#catalog_full_indexes" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_indexes</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_indexes</span><span class="p">(</span>
         <span class="n">indexes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogIndexesData</span>
 </code></pre></div>
 <p>Returns meta information about <em>supported</em> indexes.</p>
@@ -3729,7 +3776,8 @@ all supported exchanges are returned.</li>
 <p><code>list(dict(str, any))</code>: Information that is supported for requested indexes, like: Full name, and supported frequencies.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_index_candles"></a></p>
 <h4 id="catalog_full_index_candles">catalog_full_index_candles<a class="headerlink" href="#catalog_full_index_candles" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_index_candles</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_index_candles</span><span class="p">(</span>
     <span class="n">indexes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
                             <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMarketCandlesData</span>
 </code></pre></div>
@@ -3742,7 +3790,8 @@ all supported exchanges are returned.</li>
 <p><code>list(dict(str, any))</code>: Information that is supported for requested index candles, like: Full name, and supported frequencies.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_institutions"></a></p>
 <h4 id="catalog_full_institutions">catalog_full_institutions<a class="headerlink" href="#catalog_full_institutions" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_institutions</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_institutions</span><span class="p">(</span>
     <span class="n">institutions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogInstitutionsData</span>
 </code></pre></div>
@@ -3755,7 +3804,8 @@ all supported exchanges are returned.</li>
 <p><code>list(dict(str, any))</code>: Information that is supported for requested institution like metrics and their respective frequencies and time ranges.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_markets"></a></p>
 <h4 id="catalog_full_markets">catalog_full_markets<a class="headerlink" href="#catalog_full_markets" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_markets</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_markets</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                          <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                          <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                          <span class="n">base</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3784,7 +3834,8 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <p><code>list(dict(str, any))</code>: Information about markets that correspond to a filter along with meta information like: type of market and min and max supported time frames.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_trades"></a></p>
 <h4 id="catalog_full_market_trades">catalog_full_market_trades<a class="headerlink" href="#catalog_full_market_trades" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_market_trades</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_market_trades</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3808,7 +3859,8 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <p><code>list(dict(str, any))</code>: Information about market trades that are available for the provided filter, as well as the time frames they are available</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_metrics"></a></p>
 <h4 id="catalog_full_metrics">catalog_full_metrics<a class="headerlink" href="#catalog_full_metrics" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_metrics</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_metrics</span><span class="p">(</span>
         <span class="n">metrics</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">reviewable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CatalogMetricsData</span>
 </code></pre></div>
@@ -3823,7 +3875,8 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <p><code>list(dict(str, any))</code>: Information about metrics that correspond to a filter along with meta information like: description, category, precision and assets for which a metric is supported.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_metrics"></a></p>
 <h4 id="catalog_full_market_metrics">catalog_full_market_metrics<a class="headerlink" href="#catalog_full_market_metrics" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_market_metrics</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_market_metrics</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3847,7 +3900,8 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <p><code>list(dict(str, any))</code>: Information about markets that correspond to a filter along with meta information like: type of market and min and max available time frames.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_candles"></a></p>
 <h4 id="catalog_full_market_candles">catalog_full_market_candles<a class="headerlink" href="#catalog_full_market_candles" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_market_candles</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_market_candles</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3871,7 +3925,8 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <p><code>list(dict(str, any))</code>: Information about markets that correspond to a filter along with meta information like: type of market and min and max available time frames.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_orderbooks"></a></p>
 <h4 id="catalog_full_market_orderbooks">catalog_full_market_orderbooks<a class="headerlink" href="#catalog_full_market_orderbooks" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_market_orderbooks</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_market_orderbooks</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3895,7 +3950,8 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <p><code>list(dict(str, any))</code>: Information about markets orderbooks that correspond to a filter</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_quotes"></a></p>
 <h4 id="catalog_full_market_quotes">catalog_full_market_quotes<a class="headerlink" href="#catalog_full_market_quotes" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_market_quotes</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_market_quotes</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3919,7 +3975,8 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <p><code>list(dict(str, any))</code>: Information about markets quotes that correspond to a filter</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_funding_rates"></a></p>
 <h4 id="catalog_full_market_funding_rates">catalog_full_market_funding_rates<a class="headerlink" href="#catalog_full_market_funding_rates" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_market_funding_rates</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_market_funding_rates</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">market_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3943,7 +4000,8 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <p><code>list(dict(str, any))</code>: Information about funding rates that correspond to a filter</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_market_contract_prices"></a></p>
 <h4 id="catalog_full_market_contract_prices">catalog_full_market_contract_prices<a class="headerlink" href="#catalog_full_market_contract_prices" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_market_contract_prices</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog_full_market_contract_prices</span><span class="p">(</span>
         <span class="n">markets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="nb">type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -5360,7 +5418,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p><code>CatalogV2DataCollection</code>: List of blockchain-v2/accounts assets</p>
+<p><code>CatalogV2DataCollection</code>: List of blockchain-v2/accounts assets using catalog-v2</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_blockchain_balance_updates_v2"></a></p>
 <h4 id="catalog_blockchain_balance_updates_v2">catalog_blockchain_balance_updates_v2<a class="headerlink" href="#catalog_blockchain_balance_updates_v2" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_blockchain_balance_updates_v2</span><span class="p">(</span>
@@ -5379,7 +5437,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p><code>CatalogV2DataCollection</code>: List of blockchain-v2/balance-updates assets</p>
+<p><code>CatalogV2DataCollection</code>: List of blockchain-v2/balance-updates assets using catalog-v2</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_blockchain_blocks_v2"></a></p>
 <h4 id="catalog_blockchain_blocks_v2">catalog_blockchain_blocks_v2<a class="headerlink" href="#catalog_blockchain_blocks_v2" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_blockchain_blocks_v2</span><span class="p">(</span>
@@ -5398,7 +5456,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p><code>CatalogV2DataCollection</code>: List of blockchain-v2/blocks assets</p>
+<p><code>CatalogV2DataCollection</code>: List of blockchain-v2/blocks assets using catalog-v2</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_blockchain_transactions_v2"></a></p>
 <h4 id="catalog_blockchain_transactions_v2">catalog_blockchain_transactions_v2<a class="headerlink" href="#catalog_blockchain_transactions_v2" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_blockchain_transactions_v2</span><span class="p">(</span>
@@ -5417,7 +5475,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p><code>CatalogV2DataCollection</code>: List of blockchain-v2/transactions assets</p>
+<p><code>CatalogV2DataCollection</code>: List of blockchain-v2/transactions assets using catalog-v2</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_blockchain_accounts_v2"></a></p>
 <h4 id="catalog_full_blockchain_accounts_v2">catalog_full_blockchain_accounts_v2<a class="headerlink" href="#catalog_full_blockchain_accounts_v2" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_blockchain_accounts_v2</span><span class="p">(</span>
@@ -5436,7 +5494,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p><code>CatalogV2DataCollection</code>: Full list of blockchain-v2/accounts assets</p>
+<p><code>CatalogV2DataCollection</code>: Full list of blockchain-v2/accounts assets using catalog-v2</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_blockchain_balance_updates_v2"></a></p>
 <h4 id="catalog_full_blockchain_balance_updates_v2">catalog_full_blockchain_balance_updates_v2<a class="headerlink" href="#catalog_full_blockchain_balance_updates_v2" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_blockchain_balance_updates_v2</span><span class="p">(</span>
@@ -5455,7 +5513,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p><code>CatalogV2DataCollection</code>: Full list of blockchain-v2/balance-updates assets</p>
+<p><code>CatalogV2DataCollection</code>: Full list of blockchain-v2/balance-updates assets using catalog-v2</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_blockchain_blocks_v2"></a></p>
 <h4 id="catalog_full_blockchain_blocks_v2">catalog_full_blockchain_blocks_v2<a class="headerlink" href="#catalog_full_blockchain_blocks_v2" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_blockchain_blocks_v2</span><span class="p">(</span>
@@ -5474,7 +5532,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p><code>CatalogV2DataCollection</code>: Full list of blockchain-v2/blocks assets</p>
+<p><code>CatalogV2DataCollection</code>: Full list of blockchain-v2/blocks assets using catalog-v2</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_full_blockchain_transactions_v2"></a></p>
 <h4 id="catalog_full_blockchain_transactions_v2">catalog_full_blockchain_transactions_v2<a class="headerlink" href="#catalog_full_blockchain_transactions_v2" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">catalog_full_blockchain_transactions_v2</span><span class="p">(</span>
@@ -5493,7 +5551,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p><code>CatalogV2DataCollection</code>: Full list of blockchain-v2/transactions assets</p>
+<p><code>CatalogV2DataCollection</code>: Full list of blockchain-v2/transactions assets using catalog-v2</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.get_asset_alerts"></a></p>
 <h4 id="get_asset_alerts">get_asset_alerts<a class="headerlink" href="#get_asset_alerts" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_asset_alerts</span><span class="p">(</span>
