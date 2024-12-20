@@ -16,7 +16,7 @@ from coinmetrics import __version__ as version
 from coinmetrics._exceptions import CoinMetricsClientQueryParamsException
 from coinmetrics._typing import (
     DataReturnType,
-    MessageHandlerType,
+    MessageHandlerType
 )
 from coinmetrics.constants import PagingFrom, Backfill
 from coinmetrics._data_collection import DataCollection, AssetChainsDataCollection, TransactionTrackerDataCollection, CatalogV2DataCollection
@@ -70,7 +70,7 @@ class CmStream:
             self,
             on_message: MessageHandlerType = None,
             on_error: MessageHandlerType = None,
-            on_close: Optional[Callable[[websocket.WebSocketApp, int, str], None]] = None,
+            on_close: Optional[Callable[[websocket.WebSocket, Any, Any], None]] = None,
             reconnect: bool = True
     ) -> None:
         if on_message is None:
@@ -81,7 +81,10 @@ class CmStream:
             on_close = self._on_close
 
         ws = websocket.WebSocketApp(
-            self.ws_url, on_message=on_message, on_error=on_error, on_close=on_close,
+            self.ws_url,
+            on_message=on_message,
+            on_error=on_error,
+            on_close=on_close,
             header={"User-Agent": f"Coinmetrics-Python-API-Client/{version}"}
         )
         self.ws = ws
@@ -103,10 +106,10 @@ class CmStream:
 
         self._events_handlers_set = True
 
-    def _on_message(self, stream: websocket.WebSocketApp, message: str) -> None:
+    def _on_message(self, stream: websocket.WebSocket, message: str) -> None:
         print(f"{message}")
 
-    def _on_error(self, stream: websocket.WebSocketApp, message: str) -> None:
+    def _on_error(self, stream: websocket.WebSocket, message: str) -> None:
         print(f"{message}")
 
     def _on_close(self, *args: Any, **kwargs: Any) -> None:
@@ -4866,7 +4869,21 @@ class CoinMetricsClient:
             "end_inclusive": end_inclusive,
             "timezone": timezone,
         }
-        return AssetChainsDataCollection(self._get_data, "timeseries/asset-chains", params, client=self)
+        return AssetChainsDataCollection(
+            self._get_data,
+            "timeseries/asset-chains",
+            params,
+            client=self,
+            dtype_mapper={
+                "asset": "category",
+                # "time": "datetime64[ns, UTC]",
+                "chains_count": "Int64",
+                "blocks_count_at_tip": "Int64",
+                "chains": "string",
+                # "reorg": "string",
+                "reorg_depth": "Int64"
+            }
+        )
 
     def get_asset_metrics(
         self,

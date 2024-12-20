@@ -2,6 +2,7 @@ from datetime import date, datetime
 from pathlib import Path
 from typing import Any, Callable, Dict, IO, List, Tuple, Union, Optional
 from coinmetrics.constants import PagingFrom
+from websocket import WebSocket
 pandas_found = True
 
 try:
@@ -17,4 +18,4 @@ DataRetrievalFuncType = Callable[[str, Dict[str, Any]], DataReturnType]
 UrlParamTypes = Union[
     str, List[str], Tuple[str], PagingFrom, int, datetime, date, bool, None
 ]
-MessageHandlerType = Optional[Callable[[Any, str], None]]
+MessageHandlerType = Optional[Callable[[WebSocket, Any], None]]

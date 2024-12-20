@@ -364,7 +364,7 @@ class AssetChainsDataCollection(DataCollection):
     ) -> DataFrameType:
         df = super().to_dataframe(header=header, dtype_mapper=dtype_mapper, optimize_pandas_types=optimize_pandas_types)
         if 'reorg' in df.columns:
-            df['reorg'] = df['reorg'].apply(lambda reorg: True if reorg == "true" else False)
+            df['reorg'] = df['reorg'].astype(str).apply(lambda x: x == 'True').fillna(False)
         return df
 
 
@@ -490,7 +490,7 @@ class ParallelDataCollection(DataCollection):
                          parent_data_collection._url_params, parent_data_collection._csv_export_supported,
                          client=parent_data_collection._client)
         self._parallelize_on = self._get_parallelize_on(parallelize_on)
-        self._executor: Callable[..., Executor] = executor if executor else ThreadPoolExecutor  # type: ignore
+        self._executor: Callable[..., Executor] = executor or ThreadPoolExecutor
         self._max_workers = max_workers if max_workers else 10
         if self._max_workers > 10:
             warnings.warn("Max workers greater than 10 are not permitted due to rate limits restrictions")

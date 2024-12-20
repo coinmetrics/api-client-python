@@ -15,12 +15,12 @@ RUN apt-get update && \
 
 RUN pip install --upgrade pip
 
-RUN pip install "poetry==1.5.0" pytest-timeout pytest-xdist
+RUN pip install "poetry==1.8.5" pytest-timeout pytest-xdist
 COPY pyproject.toml ./poetry.lock ./
 RUN poetry config virtualenvs.create false
 
 RUN poetry install --no-root
-RUN pip install pandas==1.5.3 numpy==1.26.4
+RUN pip install pandas==2.2.3 numpy==1.26.4
 
 COPY ./ ./
 

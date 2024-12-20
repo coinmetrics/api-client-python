@@ -768,7 +768,7 @@ def test_nested_dataframe() -> None:
 
     test_data_collection = DataCollection(_get_test_data, "", {})
     df_nested = test_data_collection.to_dataframe()
-    assert pd.api.types.is_datetime64tz_dtype(df_nested["time"])
+    assert isinstance(df_nested['time'].dtype, pd.DatetimeTZDtype)
     assert pd.api.types.is_string_dtype(df_nested["constituents"])
     assert pd.api.types.is_dict_like(df_nested["constituents"])
     assert pd.api.types.is_list_like(df_nested["constituents"])
@@ -798,7 +798,7 @@ def test_timeseries_dataframe() -> None:
 
     test_data_collection = DataCollection(_get_test_data, "", {})
     df_test = test_data_collection.to_dataframe()
-    assert pd.api.types.is_datetime64tz_dtype(df_test["time"])
+    assert isinstance(df_test['time'].dtype, pd.DatetimeTZDtype)
     assert pd.api.types.is_integer_dtype(df_test["int_column"])
     assert pd.api.types.is_float_dtype(df_test["float_column"])
     assert pd.api.types.is_string_dtype(df_test["str_column"])
