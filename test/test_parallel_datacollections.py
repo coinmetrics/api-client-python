@@ -3,6 +3,7 @@ import datetime
 from datetime import timedelta
 import dateutil.relativedelta
 import pandas as pd
+from pandas import DateOffset, Timestamp
 import pytest
 
 from coinmetrics.api_client import CoinMetricsClient
@@ -422,6 +423,21 @@ def test_end_time_undefined() -> None:
     ).parallel(time_increment=timedelta(minutes=1)).to_dataframe()
     assert not df_metrics_1m.empty
     assert df_metrics_1m.time.min().to_pydatetime().replace(tzinfo=None) == start_time
+    
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_date_offset() -> None:
+    start_time = Timestamp(2024, 1, 1)
+    time_increment = DateOffset(days=1)
+    end_time = start_time + 2*time_increment
+    df_metrics = client.get_asset_metrics(
+        assets='btc',
+        metrics='ReferenceRateUSD',
+        start_time=start_time,
+        end_time=end_time
+    ).parallel(time_increment=time_increment).to_dataframe()
+    assert not df_metrics.empty
+    assert df_metrics.time.min().to_pydatetime().replace(tzinfo=None) == start_time
 
 
 if __name__ == '__main__':

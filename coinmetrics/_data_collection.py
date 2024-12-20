@@ -51,6 +51,7 @@ logger = getLogger("cm_client_data_collection")
 
 try:
     import pandas as pd
+    from pandas import DateOffset
 except ImportError:
     logger.info(
         "Pandas export is unavailable. Install pandas to unlock dataframe functions."
@@ -322,7 +323,7 @@ class DataCollection:
                  executor: Optional[Callable[[Any], Executor]] = None,
                  max_workers: Optional[int] = None,
                  progress_bar: Optional[bool] = None,
-                 time_increment: Optional[Union[relativedelta, timedelta]] = None,
+                 time_increment: Optional[Union[relativedelta, timedelta, DateOffset]] = None,
                  height_increment: Optional[int] = None
                  ) -> "ParallelDataCollection":
         """
@@ -466,7 +467,7 @@ class ParallelDataCollection(DataCollection):
         executor: Optional[Callable[..., Executor]] = None,
         max_workers: Optional[int] = None,
         progress_bar: Optional[bool] = None,
-        time_increment: Optional[Union[relativedelta, timedelta]] = None,
+        time_increment: Optional[Union[relativedelta, timedelta, DateOffset]] = None,
         height_increment: Optional[int] = None
     ):
         """
@@ -525,12 +526,15 @@ class ParallelDataCollection(DataCollection):
             for item in query_items:  # type: ignore
                 new_params = self._url_params.copy()
                 new_params[self._parallelize_on[0]] = item
-                new_data_collection = DataCollection(data_retrieval_function=self._data_retrieval_function,
-                                                     endpoint=self._endpoint,
-                                                     url_params=new_params,
-                                                     csv_export_supported=True)
+                new_data_collection = DataCollection(
+                    data_retrieval_function=self._data_retrieval_function,
+                    endpoint=self._endpoint,
+                    url_params=new_params,
+                    csv_export_supported=True
+                )
                 data_collections.append(new_data_collection)
             data_collections = self._add_time_dimension_to_data_collections(data_collections=data_collections)
+
             return data_collections
 
         query_items_dict = {}
@@ -578,18 +582,18 @@ class ParallelDataCollection(DataCollection):
         def generate_ranges(
             start: Union[datetime, int],
             end: Union[datetime, int],
-            increment: Union[timedelta, relativedelta, int]
+            increment: Union[timedelta, relativedelta, DateOffset, int]
         ) -> Generator[Tuple[datetime | int, datetime | Any | int], None, None]:
             # code below can be simplified but is expanded for mypy checks
             current = start
             if (
                 isinstance(start, datetime)
                 and isinstance(end, datetime)
-                and isinstance(increment, (timedelta, relativedelta))
+                and isinstance(increment, (timedelta, relativedelta, DateOffset))
             ):
                 if isinstance(end, datetime) and isinstance(current, datetime):
                     while current < end:
-                        if isinstance(current, datetime) and isinstance(increment, (timedelta, relativedelta)):
+                        if isinstance(current, datetime) and isinstance(increment, (timedelta, relativedelta, DateOffset)):
                             next_ = current + increment
                             if next_ > end:
                                 next_ = end
@@ -601,11 +605,11 @@ class ParallelDataCollection(DataCollection):
                 and isinstance(increment, int)
             ):
                 if isinstance(current, int) and isinstance(end, int):
-                    while current < end:  # type: ignore
+                    while current < end:
                         if isinstance(current, int) and isinstance(increment, int):
-                            next_ = current + increment  # type: ignore
-                            if next_ > end:  # type: ignore
-                                next_ = end  # type: ignore
+                            next_ = current + increment
+                            if next_ > end:
+                                next_ = end
                             yield (current, next_)
                             current = next_
             else:
@@ -649,7 +653,7 @@ class ParallelDataCollection(DataCollection):
                         {"start_height": start, "end_height": end}
                     )
                     full_data_collections.append(new_data_collection)
-        elif self._time_increment and isinstance(self._time_increment, (timedelta, relativedelta)):
+        elif self._time_increment and isinstance(self._time_increment, (timedelta, relativedelta, DateOffset)):
             if not self._url_params.get("start_time"):
                 raise ValueError("No start_time specified, cannot use time_increment feature")
             else:
