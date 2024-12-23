@@ -95,15 +95,16 @@ like to gain access or believe you should have access but do not, please contact
 <h3 id="installation-and-set-up">Installation and set up<a class="headerlink" href="#installation-and-set-up" title="Permanent link">&para;</a></h3>
 <p>The tool is installed a long with the <code>coinmetrics-api-client</code>, it's recommended to create a new Python [virtual environment] 
 for your project and install the package:  </p>
-<pre class="highlight"><code class="language-commandline">python -m venv .venv 
+<div class="highlight"><pre><span></span><code>python -m venv .venv 
 source .venv/bin/activate 
-pip install coinmetrics-api-client</code></pre>
+pip install coinmetrics-api-client
+</code></pre></div>
 <p>The export tool requires access to a CoinMetrics API key, and is accessed with the environment variable <code>CM_API_KEY</code>,
 the easiest way to set this is to run <code>export CM_API_KEY=&lt;API_KEY&gt;</code> in your terminal on MacOS/Linux or just <code>set CM_API_KEY=&lt;API_KEY&gt;</code> 
 on Windows. Additionally, you have the option of passing it in which each command instead.</p>
 <p>To confirm the tool is installed correct execute the command <code>coinmetrics export --help</code> which brings up relevant 
 documentation. At the bottom of the help message all the available commands are shown:<br />
-<pre class="highlight"><code class="language-commandline">Commands:
+<div class="highlight"><pre><span></span><code>Commands:
   get-asset-pairs
   get-exchanges
   market-candles-future  Used to export data related to future market...
@@ -111,11 +112,12 @@ documentation. At the bottom of the help message all the available commands are 
   market-quotes-future   Used to export data related to future market...
   market-quotes-spot     Used to export data related to spot market quotes...
   market-trades-future   Used to export data related to future market...
-  market-trades-spot     Used to export data related to spot market trades.</code></pre></p>
+  market-trades-spot     Used to export data related to spot market trades.
+</code></pre></div></p>
 <h3 id="exporting-market-trades-files">Exporting Market Trades Files<a class="headerlink" href="#exporting-market-trades-files" title="Permanent link">&para;</a></h3>
 <p>Further documentation is available on any of the commands by running <code>coinmetrics export &lt;command&gt; --help</code>, for example
 running <code>coinmetrics export market-trades-spot --help</code> prints: 
-<pre class="highlight"><code class="language-commandline">Usage: coinmetrics export market-trades-spot [OPTIONS] EXCHANGES [START_DATE]:
+<div class="highlight"><pre><span></span><code>Usage: coinmetrics export market-trades-spot [OPTIONS] EXCHANGES [START_DATE]:
                                              [%Y-%m-%d|%Y-%m-%dT%H:%M:%S|%Y-%m
                                              -%d %H:%M:%S] [END_DATE]:[%Y-%m-%
                                              d|%Y-%m-%dT%H:%M:%S|%Y-%m-%d
@@ -141,12 +143,12 @@ Options:
   --threaded / --no-threaded  [default: False]
   --api-key TEXT
   --help                      Show this message and exit.
-</code></pre></p>
+</code></pre></div></p>
 <h4 id="example">Example:<a class="headerlink" href="#example" title="Permanent link">&para;</a></h4>
 <p>If you want to get the flat files for spot-market-trades from coinbase and binance for the first 5 days of June 2022:
 <code>coinmetrics export market-trades-spot binance,coinbase 2022-06-01 2022-06-05</code>  </p>
 <p>In your current directory you will see:<br />
-<pre class="highlight"><code class="language-commandline">market-trades-spot
+<div class="highlight"><pre><span></span><code>market-trades-spot
 ├── binance
 │   ├── 2022-06-01.json.gz
 │   ├── 2022-06-02.json.gz
@@ -158,7 +160,8 @@ Options:
     ├── 2022-06-02.json.gz
     ├── 2022-06-03.json.gz
     ├── 2022-06-04.json.gz
-    └── 2022-06-05.json.gz</code></pre>
+    └── 2022-06-05.json.gz
+</code></pre></div>
 By default the files are downloaded as <a href="https://fileinfo.com/extension/gz">gzipped json files</a> - they are compressed in 
 order to take up less space. If you instead wish to download the data as a csv or json you can use:<br />
 <code>coinmetrics export market-trades-spot binance,coinbase 2022-06-01 2022-06-05 --output-format csv</code></p>
@@ -183,7 +186,7 @@ currently <code>"1m", "5m", "10m", "15m", "30m", "1h", and "1d"</code>. </p>
 <p>Example to download 5m spot market candles for coinbase and binance for a date range:<br />
 <code>coinmetrics export market-candles-spot 5m coinbase,binance 2022-01-01 2022-01-05</code><br />
 Which creates these files:<br />
-<pre class="highlight"><code class="language-commandline">market-candles-spot-5m
+<div class="highlight"><pre><span></span><code>market-candles-spot-5m
 ├── binance
 │   ├── 2022-01-01.json.gz
 │   ├── 2022-01-02.json.gz
@@ -195,7 +198,8 @@ Which creates these files:<br />
     ├── 2022-01-02.json.gz
     ├── 2022-01-03.json.gz
     ├── 2022-01-04.json.gz
-    └── 2022-01-05.json.gz</code></pre></p>
+    └── 2022-01-05.json.gz
+</code></pre></div></p>
 <p>The functionality is the same for <code>market-candles-future</code></p>
 <h3 id="using-api-key-without-setting-an-environment-variable">Using API Key without setting an environment variable<a class="headerlink" href="#using-api-key-without-setting-an-environment-variable" title="Permanent link">&para;</a></h3>
 <p>If you don't wish to put your CoinMetrics API key in your environment, you may also pass it in with any command with the
@@ -209,21 +213,22 @@ Note that using this option will consume more system resources and network bandw
 be limited by egress from the files server as well as the specs of your machine. </p>
 <h3 id="using-the-coinmetricsdataexporter-in-python-instead-of-cli">Using the CoinMetricsDataExporter in Python instead of CLI<a class="headerlink" href="#using-the-coinmetricsdataexporter-in-python-instead-of-cli" title="Permanent link">&para;</a></h3>
 <p>Depending on the use case it might be more convenient to use the CoinMetricsDataExporter directly in Python rather than
-from the CLI. There is several examples in the <code>examples/file_downloads directory</code>. Below is one example.
-<pre class="highlight"><code class="language-python">from coinmetrics.data_exporter import CoinMetricsDataExporter
-from datetime import datetime
+from the CLI. There is several examples <a href="examples/files_download">here</a> as well as one below:
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">coinmetrics.data_exporter</span> <span class="kn">import</span> <span class="n">CoinMetricsDataExporter</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
-CM_API_KEY = "&lt;YOUR_API_KEY&gt;"
-data_exporter = CoinMetricsDataExporter(api_key=CM_API_KEY)
+<span class="n">CM_API_KEY</span> <span class="o">=</span> <span class="s2">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>
+<span class="n">data_exporter</span> <span class="o">=</span> <span class="n">CoinMetricsDataExporter</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">CM_API_KEY</span><span class="p">)</span>
 
-if __name__ == "__main__":
-    """
-    This script will export all the daily market-trades-spot files for Coinbase and Gemini for the month of January  
-    """
-    start_date = datetime(2019, 1, 1)
-    end_date = datetime(2019, 1, 31)
-    exchanges = ["coinbase","gemini"]
-    data_exporter.export_market_trades_spot_data(start_date=start_date, end_date=end_date, exchanges=exchanges, threaded=True)</code></pre></p>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This script will export all the daily market-trades-spot files for Coinbase and Gemini for the month of January  </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">start_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">end_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span>
+    <span class="n">exchanges</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;coinbase&quot;</span><span class="p">,</span><span class="s2">&quot;gemini&quot;</span><span class="p">]</span>
+    <span class="n">data_exporter</span><span class="o">.</span><span class="n">export_market_trades_spot_data</span><span class="p">(</span><span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span> <span class="n">exchanges</span><span class="o">=</span><span class="n">exchanges</span><span class="p">,</span> <span class="n">threaded</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div></p>
               
             </div>
           </div><footer>

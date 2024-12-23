@@ -156,7 +156,7 @@ be limited by egress from the files server as well as the specs of your machine.
 
 ### Using the CoinMetricsDataExporter in Python instead of CLI
 Depending on the use case it might be more convenient to use the CoinMetricsDataExporter directly in Python rather than
-from the CLI. There is several examples in the `examples/file_downloads directory`. Below is one example.
+from the CLI. There is several examples [here](examples/files_download) as well as one below:
 ```python
 from coinmetrics.data_exporter import CoinMetricsDataExporter
 from datetime import datetime

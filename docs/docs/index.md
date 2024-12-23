@@ -230,7 +230,7 @@ listed below, there's examples covering all the API methods, found in the [examp
 * `trades_csv_exporter.py`: Queries market trades data then exports the output into a CSV file.
 * `trades_json_exporter.py`: Queries market trades data then exports the output into a JSON file.
 
-**[Parallel processing exports](https://github.com/coinmetrics/api-client-python/tree/master/examples/parallel_data_export)** 
+**[Parallel processing exports](https://github.com/coinmetrics/api-client-python/tree/master/examples/parallel_data_export)
 * `candles_csv_export.py`: Exports market candles in parallel to many separate csv files
 * `candles_json_export.py`: Exports market candles in parallel to many separate json files
 * `market_trades_list.py`: Creates a list of market trades, using `.parallel()` feature to improve performance

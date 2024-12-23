@@ -2,6 +2,13 @@
 
 ## 2024.12.16.21
 ### Added
+- pd.DateOffset as a valid data type for `time_increment` in `parallel()`
+
+### Changed
+- Update pandas dependency to >= 2.0 and websocket-client >= 1.6.0
+
+## 2024.12.16.21
+### Added
 - Allowed pandas Timestamp data type to be passed in `client` API calls
 - Added "deprecated" flag to catalog v1 endpoints
 
