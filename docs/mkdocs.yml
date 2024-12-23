@@ -2,7 +2,7 @@ site_name: Coin Metrics Python API Client
 
 
 theme:
-  name: material
+  name: readthedocs
   palette:
     primary: blue grey
   logo: 'assets/images/logo.png'
@@ -46,5 +46,6 @@ use_directory_urls: false
 
 nav:
   - Home: index.md
+  - Changelog: CHANGELOG.md
   - API Client Spec: api_client.md
   - Flat Files Exporter: FlatFilesExport.md
