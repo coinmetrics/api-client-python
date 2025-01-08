@@ -33,15 +33,8 @@ DST_ROOT = "./data"
 
 def export_data(asset: str):
     logger.info("retrieving metric names")
-    catalog_response = client.catalog_assets(assets=asset)
-    metric_names = [
-        metric_info["metric"]
-        for metric_info in catalog_response[0]["metrics"]
-        if any(
-            frequency_info["frequency"] == "1b"
-            for frequency_info in metric_info["frequencies"]
-        )
-    ]
+    catalog_response = client.catalog_asset_metrics_v2("btc").to_list()
+    metric_names = [catalog_response[0]['metrics'][i]['metric'] for i in range(len(catalog_response[0]['metrics']))]
 
     dst_file = join(DST_ROOT, "{}_bbb_metrics.json".format(asset))
     makedirs(DST_ROOT, exist_ok=True)

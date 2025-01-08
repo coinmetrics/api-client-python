@@ -1,6 +1,6 @@
 import logging
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from multiprocessing import Pool
 from os import environ, makedirs
 from os.path import join
@@ -46,7 +46,7 @@ METRICS_TO_EXPORT = [
 # 15s, 1h, 1d
 FREQUENCY = "1h"
 
-EXPORT_START_DATE = datetime(year=2019, month=1, day=1)
+EXPORT_START_DATE = datetime.today() - timedelta(days=7)
 
 EXPORT_END_DATE = datetime.today()
 

@@ -73,7 +73,7 @@ QUOTE_MARKETS = {
 # DST_ROOT = 's3://<bucket_name>/data'
 DST_ROOT = "./data"
 
-EXPORT_START_DATE = "2021-10-01"
+EXPORT_START_DATE = datetime.today() - timedelta(days=7)
 
 # if you set EXPORT_END_DATE to None, then `today - 1 day` will be used as the end date
 EXPORT_END_DATE: Optional[str] = None
@@ -100,7 +100,7 @@ if DST_ROOT.startswith("s3://"):
 
 
 def export_data():
-    min_export_date = date.fromisoformat(EXPORT_START_DATE)
+    min_export_date = EXPORT_START_DATE
     max_export_date = (
         date.fromisoformat(EXPORT_END_DATE)
         if EXPORT_END_DATE is not None
@@ -172,6 +172,7 @@ def export_data():
             logger.info("processed task: %s/%s, time since start: %s, completion ETA:: %s",
                         i, len(tasks), time_since_start, time_since_start / i * (len(tasks) - i))
 
+
 def get_instrument_root(market):
     if market["type"] == "spot":
         return "{}_{}_{}".format(market["base"], market["quote"], market["type"])
@@ -193,7 +194,7 @@ def get_markets_to_process():
     markets = []
 
     for exchange in EXCHANGES_TO_EXPORT or [None]:
-        for market in client.catalog_markets(exchange=exchange):
+        for market in client.reference_data_markets(exchange=exchange, type='spot', page_size=10000):
             if market["market"] in MARKETS_TO_EXPORT or (
                 (market["type"] in MARKET_TYPES_TO_COLLECT)
                 and (

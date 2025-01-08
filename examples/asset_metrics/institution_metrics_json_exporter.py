@@ -1,6 +1,6 @@
 import logging
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from multiprocessing import Pool
 from os import environ, makedirs
 from os.path import join
@@ -20,9 +20,8 @@ stream_handler.setFormatter(formatter)
 logger.addHandler(stream_handler)
 logger.level = level
 
-
 api_key = (
-    environ.get("CM_API_KEY") or sys.argv[1]
+        environ.get("CM_API_KEY") or sys.argv[1]
 )  # sys.argv[1] is executed only if CM_API_KEY is not found
 
 client = CoinMetricsClient(api_key)
@@ -33,10 +32,9 @@ INSTITUTIONS_TO_EXPORT = [
     "grayscale"
 ]
 
-
 FREQUENCY = "1d"
 
-EXPORT_START_DATE = datetime(year=2021, month=4 , day=1)
+EXPORT_START_DATE = datetime.today() - timedelta(days=7)
 
 EXPORT_END_DATE = datetime.today()
 
@@ -53,10 +51,17 @@ def export_data(institutions: List[str], frequency: str,
     with Pool(processes_count) as pool:
         tasks = []
         for institution in institutions:
-            institution_specific_metrics = [metric['metric'] for metric
-                                            in client.catalog_institutions(institutions=institution)[0]['metrics']]
-            tasks.append(pool.apply_async(export_institution_metric_data,
-                                          (institution, institution_specific_metrics, frequency, start_time, end_time)))
+            institution_specific_metrics = [
+                metric['metric']
+                for metric
+                in client.catalog_institution_metrics_v2(institution).to_list()[0]['metrics']
+            ]
+            tasks.append(
+                pool.apply_async(
+                    export_institution_metric_data,
+                    (institution, institution_specific_metrics, frequency, start_time, end_time)
+                )
+            )
 
         start_time = datetime.utcnow()
         for i, task in enumerate(tasks, 1):
@@ -69,7 +74,8 @@ def export_data(institutions: List[str], frequency: str,
                         i, len(tasks), time_since_start, time_since_start / i * (len(tasks) - i))
 
 
-def export_institution_metric_data(institution: str, metrics: List[str], frequency: str, start_time: datetime, end_time: datetime) -> None:
+def export_institution_metric_data(institution: str, metrics: List[str], frequency: str, start_time: datetime,
+                                   end_time: datetime) -> None:
     logger.info("retrieving institution metrics for institution: %s", institution)
     dst_file = join(DST_ROOT, "{}_institution_metrics.json".format(institution))
     makedirs(DST_ROOT, exist_ok=True)

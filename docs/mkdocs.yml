@@ -1,14 +1,32 @@
 site_name: Coin Metrics Python API Client
-
+repo_url: https://github.com/coinmetrics/api-client-python
+# site_url: https://docs.coinmetrics.io/api-client-python
+site_url: https://coinmetrics.github.io/api-client-python/site/
 
 theme:
-  name: readthedocs
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.tracking
+    # - navigation.prune
+    - navigation.path
+    - navigation.indexes 
+    - navigation.footer
+    # - navigation.sections
+    - toc.follow
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+
   palette:
-    primary: blue grey
+    # primary: blue grey
+    primary: custom
+  font:
+    text: Lato
   logo: 'assets/images/logo.png'
   favicon: 'assets/images/logo.png'
-
-
 
 markdown_extensions:
   - markdown.extensions.admonition
@@ -43,9 +61,30 @@ markdown_extensions:
 
 use_directory_urls: false
 
-
 nav:
-  - Home: index.md
-  - Changelog: CHANGELOG.md
-  - API Client Spec: api_client.md
-  - Flat Files Exporter: FlatFilesExport.md
+  - User Guide: 
+    - index.md
+    - Introduction: 
+      - user-guide/introduction.md
+    - Best Practices:
+      - user-guide/best-practices.md
+    - Examples:
+      - user-guide/examples.md
+    - Troubleshooting:
+      - user-guide/troubleshooting.md
+  - API Reference: 
+      - reference/api_client.md
+  - Releases: releases/CHANGELOG.md
+  - Tools:
+    - Flat Files Exporter (Deprecated): tools/FlatFilesExport.md
+
+extra_css:
+  - stylesheets/extra.css
+
+plugins:
+  - search:
+      lang: en
+
+extra:
+  version:
+    provider: mike

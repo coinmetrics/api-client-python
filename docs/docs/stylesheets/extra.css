@@ -1,0 +1,20 @@
+:root {
+  --md-primary-fg-color:        #495070;
+  --md-primary-fg-color--light: #FFFFFF;
+  --md-primary-fg-color--dark:  #161823;
+  --md-typeset-a-color: #757CA1;
+
+}
+/* a:hover {
+  text-decoration: underline;
+} */
+/* 
+a {
+  color: #1E2130;
+  text-decoration: none;
+} */
+
+a.custom {
+  color: var(--primary-color);
+  text-decoration: underline;
+}

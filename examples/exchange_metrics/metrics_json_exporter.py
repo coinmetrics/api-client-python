@@ -1,6 +1,6 @@
 import logging
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from multiprocessing import Pool
 from os import environ, makedirs
 from os.path import abspath, join
@@ -44,7 +44,7 @@ METRICS = {
 # 1h, 1d
 FREQUENCY = "1d"
 
-EXPORT_START_DATE = "2021-01-01"
+EXPORT_START_DATE = datetime.today() - timedelta(days=7)
 
 # if you set EXPORT_END_DATE to None, then `today - 1 day` will be used as the end date
 EXPORT_END_DATE: Optional[str] = None
@@ -61,10 +61,10 @@ def export_data():
     with Pool(processes_count) as pool:
         tasks = []
         if EXCHANGE_ASSETS_TO_EXPORT:
-            assets_to_export = EXCHANGE_ASSETS_TO_EXPORT
+            exchange_assets_to_export = EXCHANGE_ASSETS_TO_EXPORT
         else:
-            assets_to_export = []
-            catalog_response = client.catalog_exchange_assets()
+            exchange_assets_to_export = []
+            catalog_response = client.catalog_exchange_asset_metrics_v2().to_list()
             for asset_data in catalog_response:
                 metric_names = [
                     metric_info["metric"]
@@ -75,9 +75,9 @@ def export_data():
                     )
                 ]
                 if metric_names:
-                    assets_to_export.append(asset_data['asset'])
-        for asset in assets_to_export:
-            tasks.append(pool.apply_async(export_exchange_asset_data, (asset,)))
+                    exchange_assets_to_export.append(asset_data['exchange_asset'])
+        for exchange_asset in exchange_assets_to_export:
+            tasks.append(pool.apply_async(export_exchange_asset_data, (exchange_asset,)))
 
         start_time = datetime.utcnow()
         for i, task in enumerate(tasks, 1):

@@ -1,6 +1,6 @@
 import logging
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from multiprocessing import Pool
 from os import environ, makedirs
 from os.path import join
@@ -29,10 +29,10 @@ client = CoinMetricsClient(api_key)
 
 DST_ROOT = "./data/market_contract_price/"
 
-# Will export prices for 100 contracts for options with ETH as the base currency
-MARKETS_TO_EXPORT = [data['market'] for data in client.catalog_markets(base="eth", market_type="option")][0:100]
+# Will export prices for 10 contracts for options with ETH as the base currency
+MARKETS_TO_EXPORT = [data['market'] for data in client.reference_data_markets(base="eth", type="option")][0:10]
 
-EXPORT_START_DATE = datetime(year=2020, month=1, day=1)
+EXPORT_START_DATE = datetime.today() - timedelta(days=7)
 
 EXPORT_END_DATE = datetime.today()
 date_string = str(EXPORT_END_DATE).split(" ")[0]

@@ -50,12 +50,12 @@ MARKET_TYPES_TO_COLLECT = {
 }
 
 # leave it empty to catch all
-BASE_MARKETS = {
+BASE_ASSETS = {
     "btc",
 }
 
 # leave it empty to catch all
-QUOTE_MARKETS = {
+QUOTE_ASSETS = {
     "usd",
 }
 
@@ -68,7 +68,7 @@ QUOTE_MARKETS = {
 # DST_ROOT = 's3://<bucket_name>/data'
 DST_ROOT = "./data"
 
-EXPORT_START_DATE = "2019-01-01"
+EXPORT_START_DATE = datetime.today() - datetime.timedelta(days=7)
 
 # if you set EXPORT_END_DATE to None, then `today - 1 day` will be used as the end date
 EXPORT_END_DATE: Optional[str] = None
@@ -176,13 +176,13 @@ def get_markets_to_process():
     markets = []
 
     for exchange in EXCHANGES_TO_EXPORT or [None]:
-        for market in client.catalog_markets(exchange=exchange):
+        for market in client.reference_data_markets(exchange=exchange):
             if market["market"] in MARKETS_TO_EXPORT or (
                 (market["type"] in MARKET_TYPES_TO_COLLECT)
                 and (
                     (
-                        ('base' in market and market["base"] in BASE_MARKETS or not BASE_MARKETS)
-                        and (market["quote"] in QUOTE_MARKETS or not QUOTE_MARKETS)
+                        ('base' in market and market["base"] in BASE_ASSETS or not BASE_ASSETS)
+                        and (market["quote"] in QUOTE_ASSETS or not QUOTE_ASSETS)
                     )
                 )
             ):

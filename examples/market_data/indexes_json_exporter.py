@@ -1,6 +1,6 @@
 import logging
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from multiprocessing import Pool
 from os import environ, makedirs
 from os.path import abspath, join
@@ -40,7 +40,7 @@ INDEXES_TO_EXPORT = {
 # 15s, 1h, 1d
 FREQUENCY = "1h"
 
-EXPORT_START_DATE = "2019-01-01"
+EXPORT_START_DATE = datetime.today() - timedelta(days=7)
 
 # if you set EXPORT_END_DATE to None, then `today - 1 day` will be used as the end date
 EXPORT_END_DATE: Optional[str] = None

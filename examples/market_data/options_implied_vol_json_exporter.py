@@ -39,23 +39,23 @@ logger.level = level
 # "bitfinex",
 # "deribit",
 # "cme",
-EXCHANGES_TO_EXPORT = {}
+EXCHANGES_TO_EXPORT = {"deribit"}
 
 # use it if you want to get specific markets or leave it empty if you want to get all markets
 # example of market name to be used in this filter: "deribit-BTC-10APR21-55000-P-option",
 # note that if you specified exchanges filter, it will act as selecting intersection with the markets to export
 # not as union.
-MARKETS_TO_EXPORT = {}
+MARKETS_TO_EXPORT = {"deribit-BTC-10APR21-55000-P-option"}
 
 
 # leave it empty to catch all
-BASE_MARKETS = {
-    # "btc",
+BASE_ASSETS = {
+    "btc",
 }
 
 # leave it empty to catch all
-QUOTE_MARKETS = {
-    # "usd",
+QUOTE_ASSETS = {
+    "usd",
 }
 
 # DST_ROOT is the path where you want the data to be saved to
@@ -66,7 +66,7 @@ QUOTE_MARKETS = {
 # DST_ROOT = 's3://<bucket_name>/data'
 DST_ROOT = "./data"
 
-EXPORT_START_DATE = "2021-10-01"
+EXPORT_START_DATE = (datetime.today() - timedelta(days=7)).date()
 
 # if you set EXPORT_END_DATE to None, then `today - 1 day` will be used as the end date
 EXPORT_END_DATE: Optional[str] = None
@@ -93,7 +93,7 @@ if DST_ROOT.startswith("s3://"):
 
 
 def export_data():
-    min_export_date = date.fromisoformat(EXPORT_START_DATE)
+    min_export_date = EXPORT_START_DATE
     max_export_date = (
         date.fromisoformat(EXPORT_END_DATE)
         if EXPORT_END_DATE is not None
@@ -144,6 +144,7 @@ def export_data():
             logger.info("processed task: %s/%s, time since start: %s, completion ETA:: %s",
                         i, len(tasks), time_since_start, time_since_start / i * (len(tasks) - i))
 
+
 def get_instrument_root(market):
     if market["type"] == "spot":
         return "{}_{}_{}".format(market["base"], market["quote"], market["type"])
@@ -163,19 +164,21 @@ def read_already_processed_files():
 
 def get_markets_to_process():
     markets = []
-
-    for exchange in EXCHANGES_TO_EXPORT or [None]:
-        for market in client.catalog_markets(exchange=exchange):
-            if market["market"] in MARKETS_TO_EXPORT or (
-                    (market["type"] == 'option')
-                    and (
-                            (
-                                    ('base' in market and market["base"] in BASE_MARKETS or not BASE_MARKETS)
-                                    and (market["quote"] in QUOTE_MARKETS or not QUOTE_MARKETS)
-                            )
-                    )
-            ):
-                markets.append(market)
+    if MARKETS_TO_EXPORT:
+        markets = client.reference_data_markets(markets=list(MARKETS_TO_EXPORT))
+    elif EXCHANGES_TO_EXPORT:
+        for exchange in EXCHANGES_TO_EXPORT or [None]:
+            for market in client.reference_data_markets(exchange=exchange, type='option'):
+                if market["market"] in MARKETS_TO_EXPORT or (
+                        (market["type"] == 'option')
+                        and (
+                                (
+                                        ('base' in market and market.get("base") in BASE_ASSETS or not BASE_ASSETS)
+                                        and (market.get("quote") in QUOTE_ASSETS or not QUOTE_ASSETS)
+                                )
+                        )
+                ):
+                    markets.append(market)
     return markets
 
 

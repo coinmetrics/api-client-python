@@ -91,8 +91,8 @@ def get_atlas_balance_updates(asset: str,
 if __name__ == "__main__":
     """
     This script shows how to export balance updates using ATLAS v2 given a list of accounts. 
-    By defualt it will just read a few accounts from the `accounts.txt` file but there is a commented out example showing 
-    how to get balance updates from the .list_of_accounts_v2() method as well. By defualt these values will be appended
+    By default it will just read a few accounts from the `accounts.txt` file but there is a commented out example showing 
+    how to get balance updates from the .list_of_accounts_v2() method as well. By default these values will be appended
     to a file called `balance_updates_0.csv`
     """
 

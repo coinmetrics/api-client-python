@@ -96,10 +96,11 @@ generate-docs:
     - echo "update version:"
     - echo $UPDATE_VERSION
     - bash update_version.sh $UPDATE_VERSION
-    - export PYTHONPATH=/ && pydoc-markdown -m coinmetrics.api_client > docs/docs/api_client.md
+    - export PYTHONPATH=/ && pydoc-markdown -m coinmetrics.api_client > docs/docs/reference/api_client.md
     - cp -f README.md docs/docs/index.md
     - cp -f FlatFilesExport.md docs/docs/FlatFilesExport.md
     - cp -f CHANGELOG.md docs/docs/CHANGELOG.md
+    - cp -f examples/README.md docs/docs/user-guide/examples.md
     - cd docs && mkdocs build
     - git add --all -- :!api-client-python/
     - git status

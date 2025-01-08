@@ -1,6 +1,6 @@
 import logging
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from multiprocessing import Pool
 from os import environ, makedirs
 from os.path import abspath, join
@@ -43,14 +43,14 @@ REFERENCE_RATES = {
 # 1s, 1m, 1h, 1d
 FREQUENCY = "1h"
 
-EXPORT_START_DATE = "2021-01-01"
+EXPORT_START_DATE = datetime.today() - timedelta(days=7)
 
 # if you set EXPORT_END_DATE to None, then `today - 1 day` will be used as the end date
 EXPORT_END_DATE: Optional[str] = None
 
 
-FILTER_METRIC = 'CapMrktCurUSD'
-FILTER_METRIC_VALUE = 100_000
+FILTER_METRIC = 'CapMrktEstUSD'
+FILTER_METRIC_VALUE = 10_000_000_000
 
 
 def export_data():
@@ -67,20 +67,21 @@ def export_data():
             assets_to_export = ASSETS_TO_EXPORT
         else:
             assets_to_export = []
-            catalog_response = client.catalog_assets()
-            for asset_data in catalog_response:
+            catalog_response = client.catalog_asset_metrics_v2().to_list()
+            for i, asset_data in enumerate(catalog_response):
                 metric_names = [
-                    metric_info["metric"]
-                    for metric_info in asset_data.get("metrics", [])
-                    if any(
-                        frequency_info["frequency"] == FREQUENCY
-                        for frequency_info in metric_info["frequencies"]
-                    ) or (metric_info['metric'] == FILTER_METRIC)
+                    catalog_response[i]['metrics'][j]['metric'] for j in
+                    range(len(catalog_response[i]['metrics']))
                 ]
                 if metric_names and FILTER_METRIC in metric_names:
-                    metric_values = list(client.get_asset_metrics(assets=asset_data['asset'], metrics=FILTER_METRIC,
-                                                                  start_time=EXPORT_START_DATE, end_time=EXPORT_END_DATE,
-                                                                  frequency='1d'))
+                    metric_values = client.get_asset_metrics(
+                        assets=asset_data['asset'],
+                        metrics=FILTER_METRIC,
+                        start_time=EXPORT_START_DATE,
+                        end_time=EXPORT_END_DATE,
+                        frequency='1d',
+                        page_size=10000
+                    ).to_list()
                     if metric_values:
                         max_val = max(*[float(v[FILTER_METRIC]) for v in metric_values])
                         print(asset_data['asset'], max_val)
@@ -103,15 +104,8 @@ def export_data():
 
 def export_asset_data(asset: str) -> None:
     logger.info("retrieving metric names for asset: %s", asset)
-    catalog_response = client.catalog_assets(assets=asset)
-    metric_names = [
-        metric_info["metric"]
-        for metric_info in catalog_response[0]["metrics"]
-        if any(
-            frequency_info["frequency"] == FREQUENCY
-            for frequency_info in metric_info["frequencies"]
-        )
-    ]
+    catalog_response = client.catalog_asset_metrics_v2(asset).to_list()
+    metric_names = [catalog_response[0]['metrics'][i]['metric'] for i in range(len(catalog_response[0]['metrics']))]
     dst_file = join(DST_ROOT, "{}_reference_rates.json".format(asset))
     makedirs(DST_ROOT, exist_ok=True)
     logger.info(
@@ -129,6 +123,7 @@ def export_asset_data(asset: str) -> None:
             paging_from=PagingFrom.START,
             start_time=EXPORT_START_DATE,
             end_time=EXPORT_END_DATE,
+            page_size=10000
         )
         asset_metrics.export_to_json(dst_file_buffer)
 

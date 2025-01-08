@@ -149,7 +149,7 @@ def read_already_processed_files():
 def get_markets_to_process():
     markets = []
     for exchange in EXCHANGES_TO_EXPORT:
-        for market in client.catalog_markets(exchange=exchange):
+        for market in client.reference_data_markets(exchange=exchange):
             if market["market"] in FUTURES_MARKETS_TO_EXPORT or (
                 market["type"] == "spot"
                 and (

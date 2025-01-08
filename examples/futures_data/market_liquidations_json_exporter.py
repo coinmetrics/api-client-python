@@ -1,6 +1,6 @@
 import logging
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from multiprocessing import Pool
 from os import environ, makedirs
 from os.path import join
@@ -30,9 +30,9 @@ client = CoinMetricsClient(api_key)
 DST_ROOT = "./data/market_liquidations/"
 
 # Will export all future markets with ETH as a base on FTX
-MARKETS_TO_EXPORT = [data['market'] for data in client.catalog_markets(base="eth", market_type="future", exchange="ftx")]
+MARKETS_TO_EXPORT = [data['market'] for data in client.reference_data_markets(base="eth", type="future", exchange="binance")]
 
-EXPORT_START_DATE = datetime(year=2020, month=1, day=1)
+EXPORT_START_DATE = datetime.today() - timedelta(days=7)
 
 EXPORT_END_DATE = datetime.today()
 

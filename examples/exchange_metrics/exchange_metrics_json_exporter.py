@@ -2,7 +2,7 @@ import logging
 import sys
 import datetime as dt
 from typing import List, Dict
-from datetime import datetime
+from datetime import datetime, timedelta
 from multiprocessing import Pool
 from os import environ, makedirs
 from os.path import abspath, join
@@ -37,28 +37,20 @@ EXCHANGES = [
 
 FREQUENCY = "1d"
 
-START_DATE = dt.date(year=2018, month=1, day=1)
-END_DATE = dt.date.today()
+START_DATE = datetime.today() - timedelta(days=7)
+END_DATE = datetime.today()
 
 
 def get_exchange_metrics_mapping(exchanges: List[str]=[], frequency: str = "1d") -> Dict[str, List[str]]:
     """
-    Gets a mapping of all the metrics available for provided exchnages at the specified frequency
+    Gets a mapping of all the metrics available for provided exchanges at the specified frequency
     :param exchanges: List of str of support exchanges i.e. ["coinbase", "binance"]
     :parm frequency: frequency metrics is available at either "1d" or "1h"
     :return: Dictionary that maps name of exchange to a list of available metrics
     """
-    result_dict = {}
-    exchange_data = client.catalog_exchanges(exchanges=exchanges)
-    for data in exchange_data:
-        exchange_metrics = data.get("metrics")
-        if exchange_metrics:
-            metrics_filtered = []
-            for metric in exchange_metrics:
-                supported_frequencies = [frequency_metadata['frequency'] for frequency_metadata in metric['frequencies']]
-                if frequency in supported_frequencies:
-                    metrics_filtered.append(metric['metric'])
-            result_dict[data['exchange']] = metrics_filtered
+    df_exchange_metrics = client.catalog_exchange_metrics_v2().to_dataframe()
+    df_exchange_metrics = df_exchange_metrics.loc[df_exchange_metrics.frequency == '1d']
+    result_dict = df_exchange_metrics.groupby('exchange')['metric'].apply(list).to_dict()
     return result_dict
 
 

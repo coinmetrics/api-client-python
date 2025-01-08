@@ -24,6 +24,7 @@ START_TIME = "2022-03-29T00:00:00"
 END_TIME = "2022-03-29T00:01:00"
 DEPTH_LIMIT = 'full_book'  # 1-30000 or 'full_book'
 
+
 def _expand_df(key, iterable):
     def _assign_value(row):
         try:
@@ -32,6 +33,7 @@ def _expand_df(key, iterable):
             return None
 
     return list(map(_assign_value, iterable))
+
 
 def export_data():
     logging.info(f"Gathering orderbook data for {MARKETS} from {START_TIME} to {END_TIME}...")

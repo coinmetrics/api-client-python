@@ -2,7 +2,7 @@ import logging
 import sys
 import datetime as dt
 from typing import List, Union, Dict
-from datetime import datetime
+from datetime import datetime, timedelta
 from os import environ, makedirs
 from os.path import abspath, join
 from coinmetrics.api_client import CoinMetricsClient
@@ -27,7 +27,7 @@ DST_ROOT = "./data"
 FREQUENCY = "1d"
 EXCHANGE = "binance"
 BASE_ASSET = "btc"
-START_TIME = dt.datetime(year=2020, month=1, day=1)
+START_TIME = datetime.today() - timedelta(days=7)
 END_TIME = dt.datetime.today()
 
 
@@ -39,7 +39,7 @@ def get_markets_for_assets_and_exchange(asset: str, exchange: Union[str, None] =
     :return: list of str of markets
     """
     client = CoinMetricsClient(api_key)
-    catalog_market_metrics = client.catalog_market_metrics(base=asset, exchange=exchange)
+    catalog_market_metrics = client.catalog_market_metrics_v2(base=asset, exchange=exchange)
     result_markets_and_metrics: Dict[str, List[str]] = {}
     for item in catalog_market_metrics:
         for metric in item['metrics']:
