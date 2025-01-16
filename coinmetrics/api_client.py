@@ -6506,7 +6506,7 @@ class CoinMetricsClient:
         end_time: Optional[Union[datetime, date, str]] = None,
         start_height: Optional[int] = None,
         end_height: Optional[int] = None,
-        chain: Optional[bool] = None,
+        chain: Optional[str] = None,
         start_inclusive: Optional[bool] = None,
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
