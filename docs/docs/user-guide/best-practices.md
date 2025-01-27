@@ -1,5 +1,42 @@
 # Best Practices
 
+## Use catalog_v2 to prefilter your asset/market/etc selection
+
+Most common use cases can be achieved following the pattern shown below.
+
+![Illustration](/docs/docs/assets/images/api_flow.png)
+
+For example, let's follow the flow indicated in light blue.
+
+First, we shall obtain all possible markets with a certain criterion, e.g. type='spot' or base='btc'. 
+
+Then, we shall query the catalog for the data set we desire, e.g. market candles, to deliver more metadata
+for the markets we identified in step 1. This step will allow us to remove, using appropriate python code, to remove obsolete markets. 
+
+[Video Demo](https://youtu.be/YSC_pwd1B5k?si=DAEQaSthsE4uumkK&t=71)
+
+```python
+cat = client.catalog_market_candles_v2(
+    markets=list(trump.market),
+).to_dataframe()
+cat = cat.loc[
+    (cat.frequency == '1m') &
+    (cat.max_time > '2025-01-15')
+].reset_index(drop=True)
+
+```
+
+The code above, for example, whittles down all possible market candles to only the ones with 1m frequency and 
+data available until at least 2025-01-15. This means it eliminates obsolete markets. 
+
+In the final step, we can obtain the actual timeseries data, and we can be certain that all markets exist and are
+relevant to our use case.
+
+A similar logic can be applied when downloading asset metrics. Rather than going straight to the `get_asset_metrics` 
+endpoint, we recommend using the reference data and catalog endpoints to craft the list of assets and metrics. 
+Of course, a user may want to start with the catalog of available metrics and only later join the asset reference 
+data -- the API is flexible and stateless. 
+
 ## Parallel Execution
 There are times when it may be useful to pull in large amounts of data at once. The most effective way to do this 
 when calling the CoinMetrics API is to split your request into many different queries. This functionality is now 
@@ -13,8 +50,8 @@ from coinmetrics.api_client import CoinMetricsClient
 if __name__ == '__main__':
     client = CoinMetricsClient(os.environ['CM_API_KEY'])
     coinbase_eth_markets = [market['market'] for market in client.catalog_market_candles(exchange="coinbase", base="eth")]
-    start_time = "2022-03-01"
-    end_time = "2023-05-01"
+    start_time = "2024-03-01"
+    end_time = "2024-05-01"
     client.get_market_candles(
       markets=coinbase_eth_markets,
       start_time=start_time,
@@ -54,8 +91,8 @@ if __name__ == '__main__':
         assets=assets,
         metrics="ReferenceRateUSD",
         frequency="1m",
-        start_time="2022-03-01",
-        end_time="2023-03-01",
+        start_time="2024-01-01",
+        end_time="2025-01-01",
         page_size=1000,
         end_inclusive=False).parallel(
         time_increment=relativedelta(months=1)).export_to_csv("btcRRs.csv")
