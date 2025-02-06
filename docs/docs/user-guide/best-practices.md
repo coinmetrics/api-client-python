@@ -1,6 +1,6 @@
 # Best Practices
 
-## Use catalog_v2 to prefilter your asset/market/etc selection
+## Using Catalog to Determine Assets or Markets
 
 Most common use cases can be achieved following the pattern shown below.
 
@@ -13,7 +13,7 @@ First, we shall obtain all possible markets with a certain criterion, e.g. type=
 Then, we shall query the catalog for the data set we desire, e.g. market candles, to deliver more metadata
 for the markets we identified in step 1. This step will allow us to remove, using appropriate python code, to remove obsolete markets. 
 
-[Video Demo](https://youtu.be/YSC_pwd1B5k?si=DAEQaSthsE4uumkK&t=71)
+![video](https://youtu.be/YSC_pwd1B5k?si=DAEQaSthsE4uumkK&t=71)
 
 ```python
 cat = client.catalog_market_candles_v2(
@@ -21,13 +21,13 @@ cat = client.catalog_market_candles_v2(
 ).to_dataframe()
 cat = cat.loc[
     (cat.frequency == '1m') &
-    (cat.max_time > '2025-01-15')
+    (cat.max_time > datetime.now(timezone.utc) - timedelta(days=2))
 ].reset_index(drop=True)
 
 ```
 
 The code above, for example, whittles down all possible market candles to only the ones with 1m frequency and 
-data available until at least 2025-01-15. This means it eliminates obsolete markets. 
+data available until at least 2 days ago. This means it eliminates obsolete markets. 
 
 In the final step, we can obtain the actual timeseries data, and we can be certain that all markets exist and are
 relevant to our use case.

@@ -6,9 +6,7 @@ say you want market candles for BTC trading against any quote currency. The firs
 You have two choices: 
 
 * You use `catalog_market_candles_v2()` to obtain a list of available candles, filter it according to your needs, and pass 
-an explicit list to the `get_market_candles()` function. This gives you full control, but you need to watch 
-the length of the list. At approx. 25 chars per market, more than 180 markets or so risks exceeding the max. of
-5k chars. The API client does not currently implement any safeguards, it will just fail.
+an explicit list to the `get_market_candles()` function. 
 * You use a single wildcard, like so: `get_market_candles(markets='binance-btc-*-spot')`. In the backend, 
 your wildcarded string is mapped against all possible market strings and all matches are used as argument.
 
