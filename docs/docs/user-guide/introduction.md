@@ -88,6 +88,8 @@ coinbase_market_trades = client.get_market_trades(
 
 ## DataFrames
 
+### Pandas
+
 The Coin Metrics API Client allows you to leverage `pandas` DataFrames as a convenient data structure. These can be accessed using the `DataCollection.to_dataframe()` method.
 
 ```python
@@ -145,7 +147,7 @@ If you want to use dataframes, then you will need to install pandas
 - This only works with requests that return the type `DataCollection`. 
 - API restrictions apply. Some requests may return empty results due to limited access to the API from you API key.
 
-### Type Conversion 
+#### Type Conversion 
 _(New in >=`2021.12.17.18.00`)_
 
 As of version `2021.12.17.18.00` or later, outputs from the  `to_dataframe` function automatically convert the dtypes for a dataframe to the optimal pandas types.
@@ -218,6 +220,53 @@ memory usage: 152.0+ bytes
 Note that in order to pass a custom datetime object, setting a dtype_mapper is mandatory.
 
 Pandas type conversion tends to be more performant. But if there are custom operations that must be done using numpy datatypes, this option will let you perform them.
+
+### Polars
+
+[Polars](https://docs.pola.rs/) is a dataframe library for manipulating structured data. It can be a more performant alternative to pandas in some cases.
+
+`DataCollection` objects may be transformed into [Polars Dataframes](https://docs.pola.rs/api/python/stable/reference/dataframe/index.html#) by executing `DataCollection.to_dataframe(dataframe_type="polars")`.
+
+Below are some examples for how to return Polars dataframes:
+
+```python
+# basic call
+df = client.get_asset_metrics(
+    'btc',
+    'ReferenceRateUSD',
+    limit_per_asset=1
+).to_dataframe(dataframe_type="polars")
+
+# example for manually casting data types
+df = client.get_asset_metrics(
+    'btc',
+    'ReferenceRateUSD',
+    limit_per_asset=1
+).to_dataframe(
+    optimize_dtypes=False,
+    dataframe_type="polars",
+    dtype_mapper={"time": pl.Time, "ReferenceRateUSD": pl.Float64}
+)
+
+# examples for catalog and reference-data
+df = client.catalog_asset_metrics_v2('btc', 'ReferenceRateUSD').to_dataframe(dataframe_type='polars')
+
+df = client.catalog_market_contract_prices_v2(
+    'deribit-ETH-25MAR22-1200-P-option'
+).to_dataframe(dataframe_type='polars')
+
+df = client.catalog_market_orderbooks_v2("coinbase-btc-usd-spot").to_dataframe(dataframe_type="polars")
+
+df = client.reference_data_markets(
+    markets=["coinbase-btc-usd-spot", "deribit-ETH-25MAR22-1200-P-option", "binance-BTCUSDT-future"]
+).to_dataframe(dataframe_type="polars")
+```
+
+#### LazyFrames
+
+DataFrames collect data using an "eager" approach whereby data is immediately loaded into memory upon execution. "Lazy" execution is where data is only loaded into memory until it is collected. Lazy execution is advantageous for computation on large datasets where you may need to perform intermediate operations to get to your final output. Eager execution for collecting data as dataframes are best suited for situations where you may want to explore the intermediate outputs of the data.
+
+`DataCollection` objects may be transformed into polars [`LazyFrame`](https://docs.pola.rs/api/python/stable/reference/lazyframe/index.html) objects by executing `DataCollection.to_lazyframe()`. See the [Best Practices]("best-practices.md") guide for a more in depth guide on LazyFrames.
 
 ## File Exports
 

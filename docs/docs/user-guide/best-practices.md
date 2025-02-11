@@ -1,6 +1,29 @@
 # Best Practices
+This section will teach you the best practices for using the Python API Client. See also [this guide](https://docs.coinmetrics.io/tutorials-and-examples/user-guides/how-to-use-the-coin-metrics-api-efficiently-http#python-api-client) for more general guidelines on how to use the Coin Metrics API.
+
+## Page Size
+
+Queries can be made much faster by increasing the `page_size` parameter. The higher the page\_size, the faster the query, with a maximum of `page_size=10000`
+
+## Wildcards
+
+Wildcards (`*`) allow you to query several entities, such as assets, exchanges, and markets, as one parameter. For example:
+
+```python
+# Get prices for all assets
+asset_metrics = client.get_asset_metrics(assets='*', metrics='PriceUSD', limit_per_asset=1)
+
+# Get btc-usd candles for all exchanges
+market_candles_btc_usd = client.get_market_candles(markets=['*-btc-usd-spot'], limit_per_market=10)
+
+# Get all spot exchanges and pairs
+exchanges_reference = client.reference_data_exchanges().to_list()
+
+market_candles_spot = client.get_market_candles(markets=[f'{exchange}-*-spot' for exchange['exchange'] in exchanges_reference], limit_per_market=10)
+```
 
 ## Parallel Execution
+
 There are times when it may be useful to pull in large amounts of data at once. The most effective way to do this 
 when calling the CoinMetrics API is to split your request into many different queries. This functionality is now 
 built into the API Client directly to allow for faster data export:
@@ -12,7 +35,7 @@ from coinmetrics.api_client import CoinMetricsClient
 
 if __name__ == '__main__':
     client = CoinMetricsClient(os.environ['CM_API_KEY'])
-    coinbase_eth_markets = [market['market'] for market in client.catalog_market_candles(exchange="coinbase", base="eth")]
+    coinbase_eth_markets = [market['market'] for market in client.catalog_market_candles_v2(exchange="coinbase", base="eth")]
     start_time = "2022-03-01"
     end_time = "2023-05-01"
     client.get_market_candles(
@@ -31,6 +54,7 @@ package. This means when using this feature, the API Client will use significant
 the [Coin Metrics rate limits](https://docs.python.org/3/library/concurrent.futures.html). 
 
 In terms of resource usage and speed, these usages are in order from most performant to least:
+
 * `.export_to_json_files()`
 * `.export_to_csv_files()`
 * `.to_list()`
@@ -109,3 +133,64 @@ For example, in `export_to_json_files()`,
 `client.get_asset_metrics('btc,eth', 'ReferenceRateUSD', start_time='2024-01-01', limit_per_asset=1).parallel("assets,metrics", time_increment=timedelta(days=1))`
 will create a file each like ./asset-metrics/btc/ReferenceRateUSD/start_time=2024-01-01T00-00-00Z.json, ./asset-metrics/eth/ReferenceRateUSD/start_time=2024-01-01T00-00-00Z.json
 * If you get the error `BrokenProcessPool` it [might be because you're missing a main() function](https://stackoverflow.com/questions/15900366/all-example-concurrent-futures-code-is-failing-with-brokenprocesspool)
+
+
+## Lazy Execution
+
+[Lazy execution](https://docs.pola.rs/user-guide/concepts/lazy-api/) allows you to collect data without executing code right away, giving you flexibility on how to parse your data before performing large computation. This is especially useful if, say, you want to filter for a field which is not a parameter of the API.
+
+For more information on how to use a Lazy API, see the [polars guide](https://docs.pola.rs/user-guide/lazy/using/).
+
+```python
+
+from datetime import datetime, timedelta
+import polars as pl
+import pandas as pd
+import time
+from coinmetrics.api_client import CoinMetricsClient
+import os
+
+client = CoinMetricsClient(os.environ.get("CM_API_KEY"))
+
+# Example 1: Prices where Tether is above 1
+t0 = time.time()
+eager_exec_pandas = client.get_asset_metrics(assets="usdt", metrics="ReferenceRateUSD", end_time="2025-01-01", page_size=10000, frequency='1h').to_dataframe()
+eager_exec_pandas = eager_exec_pandas.loc[eager_exec_pandas.ReferenceRateUSD >= 1.00]
+t1 = time.time()
+print(f"Pandas: {t1-t0}s")
+
+t0 = time.time()
+eager_exec_polars = client.get_asset_metrics(assets="usdt", metrics="ReferenceRateUSD",  end_time="2025-01-01", page_size=10000, frequency='1h').to_dataframe(dataframe_type="polars")
+eager_exec_polars = eager_exec_polars.filter(pl.col("ReferenceRateUSD") >= 1.00)
+t1 = time.time()
+print(f"Polars (Eager): {t1-t0}s")
+
+t0 = time.time()
+lazy_exec = client.get_asset_metrics(assets="usdt", metrics="ReferenceRateUSD", end_time="2025-01-01", page_size=10000, frequency='1h').to_lazyframe()
+lazy_exec = lazy_exec.cast({"change": pl.Float32}).filter(pl.col("ReferenceRateUSD") >= 1.00)
+t1 = time.time()
+print(f"Polars (Lazy): {t1-t0}s")
+
+# Example 2: Fees where change >= 0.001 BTC
+start_time = datetime.now()-timedelta(hours=3)
+end_time = datetime.now()
+
+t0 = time.time()
+eager_exec_pandas = client.get_list_of_balance_updates_v2(asset="btc", accounts="FEES", start_time=start_time, end_time=end_time, page_size=10000).to_dataframe()
+eager_exec_pandas = eager_exec_pandas.loc[eager_exec_pandas.change >= 1.0E-3]
+t1 = time.time()
+print(f"Pandas: {t1-t0}s")
+
+t0 = time.time()
+eager_exec_polars = client.get_list_of_balance_updates_v2(asset="btc", accounts="FEES", start_time=start_time, end_time=end_time, page_size=10000).to_dataframe(dataframe_type="polars")
+eager_exec_polars = eager_exec_polars.filter(pl.col("change") >= 1.0E-3)
+t1 = time.time()
+print(f"Polars (Eager): {t1-t0}s")
+
+t0 = time.time()
+lazy_exec = client.get_list_of_balance_updates_v2(asset="btc", accounts="FEES", start_time=start_time, end_time=end_time, page_size=10000).to_lazyframe()
+lazy_exec = lazy_exec.cast({"change": pl.Float32}).filter(pl.col("change") >= 1.0E-3)
+t1 = time.time()
+print(f"Polars (Lazy): {t1-t0}s")
+
+```

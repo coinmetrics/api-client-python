@@ -50,7 +50,7 @@ build-nix:
     - nix -L build .#coinmetrics-api-client-py39
   allow_failure: true
   tags:
-    - kube-hel1-nix
+    - kube-cp1-nix
 
 generate-docs:
   image: python:3.9-alpine

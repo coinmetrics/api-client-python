@@ -745,7 +745,7 @@ def test_empty_dataframe() -> None:
     empty_response = DataCollection(get_empty_data, "", {})
     assert empty_response
     assert empty_response.first_page() == []
-    df = empty_response.to_dataframe()
+    df: pd.DataFrame = empty_response.to_dataframe(dataframe_type="pandas")
     assert df.empty
 
 

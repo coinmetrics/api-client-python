@@ -3,15 +3,11 @@ from pathlib import Path
 from typing import Any, Callable, Dict, IO, List, Tuple, Union, Optional
 from coinmetrics.constants import PagingFrom
 from websocket import WebSocket
-pandas_found = True
+import pandas as pd
+import polars as pl
 
-try:
-    import pandas as pd
 
-    DataFrameType = pd.DataFrame
-except ImportError:
-    pandas_found = False
-
+DataFrameType = Union[pd.DataFrame, pl.DataFrame]
 FilePathOrBuffer = Union[str, Path, IO[str], IO[bytes], None]
 DataReturnType = Dict[str, Union[str, Dict[str, str], List[Dict[str, Any]]]]
 DataRetrievalFuncType = Callable[[str, Dict[str, Any]], DataReturnType]

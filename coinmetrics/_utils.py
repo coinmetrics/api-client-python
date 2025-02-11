@@ -8,6 +8,8 @@ from time import sleep
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union, Set
 from coinmetrics._typing import FilePathOrBuffer, UrlParamTypes
 from pandas import Timestamp
+import polars as pl
+import pandas as pd
 
 logger = getLogger("cm_client_utils")
 
@@ -158,3 +160,98 @@ def deprecated(endpoint: Optional[str] = None) -> Callable[[Callable[..., Any]],
         return wrapper
 
     return decorator
+
+
+PANDAS_TO_POLARS_DTYPE_MAP: Dict[str, pl.DataType] = {
+    # Numeric types
+    'int8': pl.Int8(),
+    'int16': pl.Int16(),
+    'int32': pl.Int32(),
+    'int64': pl.Int64(),
+    'uint8': pl.UInt8(),
+    'uint16': pl.UInt16(),
+    'uint32': pl.UInt32(),
+    'uint64': pl.UInt64(),
+    'float32': pl.Float32(),
+    'float64': pl.Float64(),
+    'Int8': pl.Int8(),
+    'Int16': pl.Int16(),
+    'Int32': pl.Int32(),
+    'Int64': pl.Int64(),
+    'UInt8': pl.UInt8(),
+    'UInt16': pl.UInt16(),
+    'UInt32': pl.UInt32(),
+    'UInt64': pl.UInt64(),
+    'Float32': pl.Float32(),
+    'Float64': pl.Float64(),
+
+    # Boolean
+    'bool': pl.Boolean(),
+    'boolean': pl.Boolean(),
+
+    # String/Object types
+    'object': pl.String(),
+    'string': pl.String(),
+
+    # DateTime types
+    'datetime64[ns]': pl.Datetime(),
+    'datetime64[ms]': pl.Datetime('ms'),
+    'datetime64[us]': pl.Datetime('us'),
+    'datetime64[ns, UTC]': pl.Datetime('ns', time_zone='UTC'),
+    'datetime64[ms, UTC]': pl.Datetime('ms', time_zone='UTC'),
+    'datetime64[us, UTC]': pl.Datetime('us', time_zone='UTC'),
+
+    # Categorical
+    'category': pl.Categorical(),
+    'categorical': pl.Categorical(),
+
+    # Date
+    'date': pl.Date(),
+
+    # Time
+    'time': pl.Time(),
+
+    # Null type
+    'null': pl.Null(),
+}
+
+
+def convert_pandas_dtype_to_polars(pandas_dtype: Union[str, pd.api.types.CategoricalDtype]) -> pl.DataType:
+    """
+    Convert a pandas dtype to its equivalent Polars dtype.
+
+    Parameters
+    ----------
+    pandas_dtype : str or CategoricalDtype
+        The pandas dtype to convert. Can be a string representation or a pandas dtype object.
+
+    Returns
+    -------
+    pl.DataType
+        The equivalent Polars dtype.
+
+    Examples
+    --------
+    >>> convert_pandas_dtype_to_polars('int64')
+    <class 'polars.datatypes.Int64'>
+    >>> convert_pandas_dtype_to_polars('object')
+    <class 'polars.datatypes.String'>
+
+    Raises
+    ------
+    ValueError
+        If the pandas dtype has no direct equivalent in Polars.
+    """
+    dtype_str = str(pandas_dtype)
+
+    if isinstance(pandas_dtype, pd.api.types.CategoricalDtype):
+        return pl.Categorical()
+
+    dtype_str = dtype_str.replace('numpy.', '').replace('pandas.', '')
+
+    polars_dtype = PANDAS_TO_POLARS_DTYPE_MAP.get(dtype_str)
+
+    if polars_dtype is None:
+        raise ValueError(f"No direct Polars equivalent found for pandas dtype: {dtype_str}")
+
+    return polars_dtype

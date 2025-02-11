@@ -1,5 +1,6 @@
 import datetime
 
+import pandas as pd
 import pytest
 
 from coinmetrics.api_client import CoinMetricsClient
@@ -38,11 +39,11 @@ def test_normal_api_call_asset_chains() -> None:
     """
     Tests that when calling get asset chains, the to_dataframe() will contain those with and without reorgs
     """
-    df = client.get_asset_chains(
+    df: pd.DataFrame = client.get_asset_chains(
         assets='btc',
         start_time='2022-10-22T05:40:00',  # '2022-10-22T00:00:00',
         end_time='2022-10-22T10:40:00'
-    ).to_dataframe()
+    ).to_dataframe(dataframe_type='pandas')
     assert df.iloc[4].reorg == False
     assert df.iloc[3].reorg == True
 

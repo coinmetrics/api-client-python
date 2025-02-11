@@ -11,7 +11,14 @@ try:
     import pandas as pd
 except ImportError:
     logger.warning(
-        "Pandas export is unavailable. Install pandas to unlock dataframe functions."
+        "Pandas is unavailable. Install pandas to unlock dataframe functions."
+    )
+
+try:
+    import polars as pl
+except ImportError:
+    logger.warning(
+        "Polars is unavailable. Install polars to unlock dataframe functions."
     )
 
 
@@ -33,17 +40,28 @@ def _expand_df(key: str, iterable: Iterable[Any]) -> List[Any]:
 
 
 def convert_catalog_dtypes(df: DataFrameType) -> DataFrameType:
-    df = df.convert_dtypes()
-    columns = df.columns
-    date_cols = {"expiration", "listing"}
-    datetime_cols = [c for c in columns if "time" in c.split("_") or c == "time" or c in date_cols]
-    for col in datetime_cols:
-        df[col] = df[col].apply(_convert_utc)
+    if isinstance(df, pd.DataFrame):
+        df = df.convert_dtypes()
+        columns = df.columns
+        date_cols = {"expiration", "listing"}
+        datetime_cols = [c for c in columns if "time" in c.split("_") or c == "time" or c in date_cols]
+        for col in datetime_cols:
+            df[col] = df[col].apply(_convert_utc)
+
+    elif isinstance(df, pl.DataFrame):
+        df = df.with_columns([pl.col(c).alias(c) for c in df.columns])
+
+        datetime_cols = [c for c in df.columns if
+                         "time" in c.split("_") or c == "time" or c in {"expiration", "listing"}]
+        df = df.with_columns([
+            pl.col(col).cast(pl.Datetime).alias(col)
+            for col in datetime_cols
+        ])
     return df
 
 
 class CatalogAssetsData(List[Any]):
-    def to_dataframe(self, secondary_level: Optional[str] = None) -> DataFrameType:
+    def to_dataframe(self, secondary_level: Optional[str] = None) -> pd.DataFrame:
         """
         Transforms catalog data in list form into a dataframe
 
@@ -137,7 +155,7 @@ class CatalogAssetsData(List[Any]):
 
 
 class CatalogAssetAlertsData(List[Any]):
-    def to_dataframe(self) -> DataFrameType:
+    def to_dataframe(self) -> pd.DataFrame:
         """
         Transforms catalog data in list form into a dataframe
         :return: Catalog Data
@@ -146,7 +164,7 @@ class CatalogAssetAlertsData(List[Any]):
 
 
 class CatalogAssetChainsData(List[Any]):
-    def to_dataframe(self) -> DataFrameType:
+    def to_dataframe(self) -> pd.DataFrame:
         """
         Transforms catalog data in list form into a dataframe
         :return: Catalog Data
@@ -155,7 +173,7 @@ class CatalogAssetChainsData(List[Any]):
 
 
 class CatalogMempoolFeeratesData(List[Any]):
-    def to_dataframe(self) -> DataFrameType:
+    def to_dataframe(self) -> pd.DataFrame:
         """
         Transforms catalog data in list form into a dataframe
         :return: Catalog Data
@@ -164,7 +182,7 @@ class CatalogMempoolFeeratesData(List[Any]):
 
 
 class CatalogMiningPoolTipsData(List[Any]):
-    def to_dataframe(self) -> DataFrameType:
+    def to_dataframe(self) -> pd.DataFrame:
         """
         Transforms catalog data in list form into a dataframe
         :return: Catalog Data
@@ -173,7 +191,7 @@ class CatalogMiningPoolTipsData(List[Any]):
 
 
 class CatalogTransactionTrackerData(List[Any]):
-    def to_dataframe(self) -> DataFrameType:
+    def to_dataframe(self) -> pd.DataFrame:
         """
         Transforms catalog data in list form into a dataframe
         :return: Catalog Data
@@ -182,7 +200,7 @@ class CatalogTransactionTrackerData(List[Any]):
 
 
 class CatalogMarketTradesData(List[Any]):
-    def to_dataframe(self) -> DataFrameType:
+    def to_dataframe(self) -> pd.DataFrame:
         """
         Transforms catalog data in list form into a dataframe
         :return: Catalog Data
@@ -191,7 +209,7 @@ class CatalogMarketTradesData(List[Any]):
 
 
 class CatalogMarketOrderbooksData(List[Any]):
-    def to_dataframe(self, secondary_level: Optional[str] = None) -> DataFrameType:
+    def to_dataframe(self, secondary_level: Optional[str] = None) -> pd.DataFrame:
         """
         Transforms catalog data in list form into a dataframe
         :return: Catalog Data
@@ -221,7 +239,7 @@ class CatalogMarketOrderbooksData(List[Any]):
 
 
 class CatalogAssetPairsData(List[Any]):
-    def to_dataframe(self) -> DataFrameType:
+    def to_dataframe(self) -> pd.DataFrame:
         """
         Transforms catalog data in list form into a dataframe
         :return: Catalog Data
@@ -254,7 +272,7 @@ class CatalogAssetPairsData(List[Any]):
 
 
 class CatalogExchangesData(List[Any]):
-    def to_dataframe(self, secondary_level: Optional[str] = None) -> DataFrameType:
+    def to_dataframe(self, secondary_level: Optional[str] = None) -> pd.DataFrame:
         """
         Transforms catalog data in list form into a dataframe
 
@@ -304,7 +322,7 @@ class CatalogExchangesData(List[Any]):
 
 
 class CatalogExchangeAssetsData(List[Any]):
-    def to_dataframe(self) -> DataFrameType:
+    def to_dataframe(self) -> pd.DataFrame:
         """
         Transforms catalog data in list form into a dataframe
         :return: Catalog Data
@@ -342,7 +360,7 @@ class CatalogIndexesData(List[Any]):
     :return: Catalog Data
     """
 
-    def to_dataframe(self) -> DataFrameType:
+    def to_dataframe(self) -> pd.DataFrame:
         df_indexes = pd.DataFrame(self)
         df_indexes = (
             df_indexes.explode("frequencies")
@@ -369,7 +387,7 @@ class CatalogInstitutionsData(List[Any]):
     :return: Catalog Data
     """
 
-    def to_dataframe(self) -> DataFrameType:
+    def to_dataframe(self) -> pd.DataFrame:
         df_institutions = pd.DataFrame(self)
         df_institutions = (
             df_institutions.explode("metrics")
@@ -403,7 +421,7 @@ class CatalogMarketsData(List[Any]):
     :return: Catalog Data
     """
 
-    def to_dataframe(self) -> DataFrameType:
+    def to_dataframe(self) -> pd.DataFrame:
         df_markets = pd.DataFrame(self)
         metadata = ["trades", "funding_rates", "openinterest", "liquidations"]
         for col in metadata:
@@ -425,7 +443,7 @@ class CatalogMetricsData(List[Any]):
     :return: Catalog Data
     """
 
-    def to_dataframe(self) -> DataFrameType:
+    def to_dataframe(self) -> pd.DataFrame:
         df_catalog_metrics = (
             pd.DataFrame(self)
             .explode("frequencies")
@@ -448,7 +466,7 @@ class CatalogExchangeAssetMetricsData(List[Any]):
     :return: Catalog Data
     """
 
-    def to_dataframe(self) -> DataFrameType:
+    def to_dataframe(self) -> pd.DataFrame:
         df_catalog_metrics = (
             pd.DataFrame(self)
             .explode("frequencies")
@@ -475,7 +493,7 @@ class CatalogPairMetricsData(List[Any]):
     :return: Catalog Data
     """
 
-    def to_dataframe(self) -> DataFrameType:
+    def to_dataframe(self) -> pd.DataFrame:
         df_catalog_metrics = (
             pd.DataFrame(self)
             .explode("frequencies")
@@ -498,7 +516,7 @@ class CatalogInstitutionMetricsData(List[Any]):
     :return: Catalog Data
     """
 
-    def to_dataframe(self) -> DataFrameType:
+    def to_dataframe(self) -> pd.DataFrame:
         df_catalog_metrics = (
             pd.DataFrame(self)
             .explode("frequencies")
@@ -525,7 +543,7 @@ class CatalogMarketMetricsData(List[Any]):
     :return: Catalog Data
     """
 
-    def to_dataframe(self) -> DataFrameType:
+    def to_dataframe(self) -> pd.DataFrame:
         df_catalog_market_metrics = pd.DataFrame(self)
         df_catalog_market_metrics = (
             df_catalog_market_metrics.explode("metrics")
@@ -559,7 +577,7 @@ class CatalogMarketCandlesData(List[Any]):
     :return: Catalog Data
     """
 
-    def to_dataframe(self) -> DataFrameType:
+    def to_dataframe(self) -> pd.DataFrame:
         df_catalog_market_candles = pd.DataFrame(self)
         df_catalog_market_candles = (
             df_catalog_market_candles.explode("frequencies")
@@ -586,7 +604,7 @@ class CatalogAssetPairCandlesData(List[Any]):
     :return: Catalog Data
     """
 
-    def to_dataframe(self) -> DataFrameType:
+    def to_dataframe(self) -> pd.DataFrame:
         df_catalog_asset_candles = pd.DataFrame(self)
         df_catalog_asset_candles = (
             df_catalog_asset_candles.explode("frequencies")
@@ -608,7 +626,7 @@ class CatalogAssetPairCandlesData(List[Any]):
 
 
 class CatalogMarketContractPrices(List[Any]):
-    def to_dataframe(self) -> DataFrameType:
+    def to_dataframe(self) -> pd.DataFrame:
         """
         Transforms catalog data in list form into a dataframe
         :return: Catalog Data
@@ -617,7 +635,7 @@ class CatalogMarketContractPrices(List[Any]):
 
 
 class CatalogMarketImpliedVolatility(List[Any]):
-    def to_dataframe(self) -> DataFrameType:
+    def to_dataframe(self) -> pd.DataFrame:
         """
         Transforms catalog data in list form into a dataframe
         :return: Catalog Data
