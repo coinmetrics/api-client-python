@@ -41,8 +41,9 @@ buildPythonPackage rec {
     typer
     websocket-client
     tqdm
-  ] ++ passthru.optional-dependencies.pandas
-    ++ passthru.optional-dependencies.polars;
+    pandas
+    polars
+  ];
 
   nativeCheckInputs = [
     mypy

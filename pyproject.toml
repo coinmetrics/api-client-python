@@ -16,8 +16,8 @@ include = ["test"]
 python = "^3.9.0"
 requests = "^2.24.0"
 orjson = "^3.6.0"
-pandas = {version="^2.0.0", optional=true}
-polars = {version="^1.0.0", optional=true}
+pandas = "^2.0.0"
+polars = "^1.0.0"
 websocket-client = "^1.6.0"
 python-dateutil = "^2.8.2"
 typer = ">=0.7.0"
