@@ -21,7 +21,7 @@ from coinmetrics._typing import (
     UrlParamTypes,
     DataFrameType,
 )
-from coinmetrics._utils import get_file_path_or_buffer
+from coinmetrics._utils import get_file_path_or_buffer, convert_pandas_dtype_to_polars
 from coinmetrics._models import AssetChainsData, CoinMetricsAPIModel, TransactionTrackerData
 from coinmetrics._catalogs import convert_catalog_dtypes, _expand_df
 from importlib import import_module
@@ -32,6 +32,7 @@ from coinmetrics._exceptions import CoinMetricsClientNotFoundError
 if TYPE_CHECKING:
     from coinmetrics.api_client import CoinMetricsClient
 import numpy as np
+import polars as pl
 
 orjson_found = True
 try:
@@ -81,7 +82,7 @@ class DataCollection:
         csv_export_supported: bool = True,
         columns_to_store: List[str] = [],
         client: Optional[CoinMetricsClient] = None,
-        optimize_pandas_types: Optional[bool] = True,
+        optimize_dtypes: Optional[bool] = True,
         dtype_mapper: Optional[Dict[str, Any]] = None
     ) -> None:
         self._csv_export_supported = csv_export_supported
@@ -92,7 +93,7 @@ class DataCollection:
         self._current_data_iterator: Optional[Iterator[Any]] = None
         self._columns_to_store = columns_to_store
         self._client = client
-        self._optimize_pandas_types = optimize_pandas_types
+        self._optimize_dtypes = optimize_dtypes
         self._dtype_mapper = dtype_mapper
 
     def first_page(self) -> List[Dict[str, Any]]:
@@ -250,29 +251,32 @@ class DataCollection:
         self,
         header: Optional[List[str]] = None,
         dtype_mapper: Optional[Dict[str, Any]] = None,
-        optimize_pandas_types: Optional[bool] = None,
+        optimize_dtypes: Optional[bool] = None,
+        dataframe_type: str = "pandas"
     ) -> DataFrameType:
         """
-        Outputs a pandas dataframe.
+        Outputs a pandas or polars dataframe.
 
         :param header: Optional column names for outputted dataframe. List length must match the output.
         :type header: list(str)
         :param dtype_mapper: Dictionary for converting columns to types, where keys are columns and values are types that pandas accepts in an `as_type()` call. This mapping is prioritized over the pandas dtype conversions.
         :type dtype_mapper: dict
-        :param optimize_pandas_types: Boolean flag for using pandas typing for dataframes. If True and dtype_mapper is not specified, then the output will result in all columns with string dtype. If True and dtype_mapper is specified, then the output will convert the dataframe columns with the user-specified dtyoes.
-        :type optimize_pandas_types: Bool
+        :param optimize_dtypes: Boolean flag for using pandas typing for dataframes. If True and dtype_mapper is not specified, then the output will result in all columns with string dtype. If True and dtype_mapper is specified, then the output will convert the dataframe columns with the user-specified dtyoes.
+        :type optimize_dtypes: Bool
+        :param dataframe_type: Type of dataframe outputted, either "pandas" (default) or "polars".
+        :type dataframe_type: str
         :return: Data in a pandas dataframe
         :rtype: DataFrameType
         """
-        if optimize_pandas_types is None:
-            optimize_pandas_types = self._optimize_pandas_types
+        if optimize_dtypes is None:
+            optimize_dtypes = self._optimize_dtypes
         if dtype_mapper is None:
             dtype_mapper = self._dtype_mapper
         if pd is None:
             logger.info("Pandas not found; Returning None")
             return None
         else:
-            if optimize_pandas_types:
+            if optimize_dtypes:
                 f = BytesIO()
                 self.export_to_csv(f)
                 if f.getbuffer().nbytes == 0:
@@ -295,37 +299,70 @@ class DataCollection:
                     buffer: BytesIO = f
                     cols: List[str] = datetime_cols
                     dtype_map: Optional[Dict[str, Any]] = dtype_mapper
-                    df: pd.DataFrame = pd.read_csv(
-                        buffer,
-                        parse_dates=cols,
-                        dtype=dtype_map,
-                    )
-                    if dtype_mapper is None:
-                        df = df.convert_dtypes()
-                    if df.dtypes.get("coin_metrics_id") == np.dtype("object"):
-                        df["coin_metrics_id"] = df["coin_metrics_id"].astype(np.float128)
-                    if header is not None:
-                        assert len(df.columns) == len(
-                            header
-                        ), "header length does not match output values"
-                        df.columns = pd.Index(header)
-                    return df
+                    if dataframe_type == 'pandas':
+                        df = pd.read_csv(
+                            buffer,
+                            parse_dates=cols,
+                            dtype=dtype_map,
+                        )
+                        if dtype_mapper is None:
+                            df = df.convert_dtypes()
+                        if df.dtypes.get("coin_metrics_id") == np.dtype("object"):
+                            df["coin_metrics_id"] = df["coin_metrics_id"].astype(np.float128)
+                        if header is not None:
+                            assert len(df.columns) == len(
+                                header
+                            ), "header length does not match output values"
+                            df.columns = pd.Index(header)
+                        return df
+                    elif dataframe_type == 'polars':
+                        df = pl.read_csv(
+                            buffer,
+                            try_parse_dates=True
+                        )
+                        return df
+                    else:
+                        raise ValueError("Invalid dataframe_type. Choose one of 'polars' or 'pandas'")
             else:
-                if dtype_mapper is None:
-                    return pd.DataFrame(self)
-                else:
-                    df = pd.DataFrame(self)
-                    dtype_mapper = {key: value for key, value in dtype_mapper.items() if key in df.columns}
-                    return df.astype(dtype_mapper)
+                if dataframe_type == 'pandas':
+                    if dtype_mapper is None:
+                        return pd.DataFrame(self)
+                    else:
+                        df = pd.DataFrame(self)
+                        dtype_mapper = {key: value for key, value in dtype_mapper.items() if key in df.columns}
+                        return df.astype(dtype_mapper)
 
-    def parallel(self,
-                 parallelize_on: Optional[Union[str, List[str]]] = None,
-                 executor: Optional[Callable[[Any], Executor]] = None,
-                 max_workers: Optional[int] = None,
-                 progress_bar: Optional[bool] = None,
-                 time_increment: Optional[Union[relativedelta, timedelta, DateOffset]] = None,
-                 height_increment: Optional[int] = None
-                 ) -> "ParallelDataCollection":
+                elif dataframe_type == 'polars':
+                    if dtype_mapper is None:
+                        return pl.DataFrame(self)
+                    else:
+                        df = pl.DataFrame(self)
+                        list_casting_expressions = []
+                        for col_name in df.columns:
+                            if col_name in dtype_mapper:
+                                pandas_dtype = dtype_mapper[col_name]
+                                polars_dtype = convert_pandas_dtype_to_polars(pandas_dtype)
+                                list_casting_expressions.append(pl.col(col_name).cast(polars_dtype, strict=False))
+                            else:
+                                list_casting_expressions.append(pl.col(col_name))
+
+                        return df.select(list_casting_expressions)
+
+                else:
+                    raise ValueError("Invalid dataframe_type. Choose one of 'polars' or 'pandas'")
+
+    def to_lazyframe(self, **kwargs: Any) -> pl.LazyFrame:
+        return pl.LazyFrame(self, **kwargs)
+
+    def parallel(
+            self,
+            parallelize_on: Optional[Union[str, List[str]]] = None,
+            executor: Optional[Callable[[Any], Executor]] = None,
+            max_workers: Optional[int] = None,
+            progress_bar: Optional[bool] = None,
+            time_increment: Optional[Union[relativedelta, timedelta, DateOffset]] = None,
+            height_increment: Optional[int] = None
+    ) -> "ParallelDataCollection":
         """
         This method will convert the DataCollection into a ParallelDataCollection - enabling the ability to split
         one http request into many HTTP requests for faster data export. By default this will be split based on the
@@ -341,6 +378,9 @@ class DataCollection:
         :type progress_bar: bool
         :param time_increment: option to parallelize by a time. Can use timedelta for time periods in weeks and relativedelta for longer time periods like a month or year
         :type time_increment: timedelta, relativedelta
+        :param height_increment: Optionally, can split the data collections by height_increment. This feature splits
+        data collections further by block height increment. If there is no "start_height" in the request it will raise a ValueError
+        :type height_increment: int
         :return: ParallelDataCollection that matches the existing one
         """
         return ParallelDataCollection(self,
@@ -361,16 +401,26 @@ class AssetChainsDataCollection(DataCollection):
         self,
         header: Optional[List[str]] = None,
         dtype_mapper: Optional[Dict[str, Any]] = None,
-        optimize_pandas_types: Optional[bool] = True,
+        optimize_dtypes: Optional[bool] = True,
+        dataframe_type: str = "pandas"
     ) -> DataFrameType:
-        df = super().to_dataframe(header=header, dtype_mapper=dtype_mapper, optimize_pandas_types=optimize_pandas_types)
-        if 'reorg' in df.columns:
-            df['reorg'] = df['reorg'].astype(str).apply(lambda x: x == 'True').fillna(False)
-        return df
+        if dataframe_type == "pandas":
+            df = super().to_dataframe(
+                header=header, dtype_mapper=dtype_mapper, optimize_dtypes=optimize_dtypes, dataframe_type=dataframe_type
+            )
+            if 'reorg' in df.columns:
+                if isinstance(df, pd.DataFrame):
+                    df['reorg'] = df['reorg'].astype(str).apply(lambda x: x == 'True').fillna(False)
+                elif isinstance(df, pl.DataFrame):
+                    df = df.with_columns(
+                        pl.col('reorg').cast(pl.Utf8).eq('True').fill_null(False).alias('reorg')
+                    )
+            return df
+        else:
+            raise ValueError(f"dataframe_type '{dataframe_type}' not supported for AssetChains")
 
 
 class TransactionTrackerDataCollection(DataCollection):
-
     API_RETURN_MODEL = TransactionTrackerData
 
 
@@ -692,42 +742,46 @@ class ParallelDataCollection(DataCollection):
         self,
         header: Optional[List[str]] = None,
         dtype_mapper: Optional[Dict[str, Any]] = None,
-        optimize_pandas_types: Optional[bool] = True,
+        optimize_dtypes: Optional[bool] = True,
+        dataframe_type: str = "pandas"
     ) -> DataFrameType:
 
-        def group_and_merge(dfs: List[pd.DataFrame]) -> pd.DataFrame:
-            """
-            This function is a helper to merge the kind of dataframes we are dealing with. All the dataframes with
-            common columns are merged first, then they are all merged
-            :param dfs: List of dataframes
-            :return: DataFrame that combines the full list into one
-            """
-            grouped_dfs = defaultdict(list)
+        if dataframe_type == "pandas":
+            def group_and_merge(dfs: List[pd.DataFrame]) -> pd.DataFrame:
+                """
+                This function is a helper to merge the kind of dataframes we are dealing with. All the dataframes with
+                common columns are merged first, then they are all merged
+                :param dfs: List of dataframes
+                :return: DataFrame that combines the full list into one
+                """
+                grouped_dfs = defaultdict(list)
 
-            for df in dfs:
-                key = tuple(df.columns)
-                grouped_dfs[key].append(df)
+                for df in dfs:
+                    key = tuple(df.columns)
+                    grouped_dfs[key].append(df)
 
-            concatenated_dfs = [pd.concat(group, axis=0) for group in grouped_dfs.values()]
+                concatenated_dfs = [pd.concat(group, axis=0) for group in grouped_dfs.values()]
 
-            result = concatenated_dfs[0]
-            for df in concatenated_dfs[1:]:
-                result = pd.merge(result, df, on=['time', self._get_first_param_from_endpoint().rstrip("s")], how='outer')
-            return result
+                result = concatenated_dfs[0]
+                for df in concatenated_dfs[1:]:
+                    result = pd.merge(result, df, on=['time', self._get_first_param_from_endpoint().rstrip("s")], how='outer')
+                return result
 
-        data_collections = self.get_parallel_datacollections()
-        with self._executor(max_workers=self._max_workers) as processor:
-            if self._progress_bar:
-                combined_dataframes = list(tqdm(processor.map(ParallelDataCollection._helper_to_dataframe, data_collections), total=len(data_collections), desc="Exporting to dataframe type"))
+            data_collections = self.get_parallel_datacollections()
+            with self._executor(max_workers=self._max_workers) as processor:
+                if self._progress_bar:
+                    combined_dataframes = list(tqdm(processor.map(ParallelDataCollection._helper_to_dataframe, data_collections), total=len(data_collections), desc="Exporting to dataframe type"))
+                else:
+                    combined_dataframes = list(processor.map(ParallelDataCollection._helper_to_dataframe, data_collections))
+
+            if len(self._parallelize_on) > 1 or (len(self._parallelize_on) == 1 and self._get_first_param_from_endpoint() != self._parallelize_on[0]):
+                combined_df = group_and_merge(combined_dataframes)
             else:
-                combined_dataframes = list(processor.map(ParallelDataCollection._helper_to_dataframe, data_collections))
-
-        if len(self._parallelize_on) > 1 or (len(self._parallelize_on) == 1 and self._get_first_param_from_endpoint() != self._parallelize_on[0]):
-            combined_df = group_and_merge(combined_dataframes)
+                combined_df = pd.concat(combined_dataframes, axis=0)
+            combined_df.reset_index(drop=True, inplace=True)
+            return combined_df
         else:
-            combined_df = pd.concat(combined_dataframes, axis=0)
-        combined_df.reset_index(drop=True, inplace=True)
-        return combined_df
+            raise ValueError(f"dataframe_type '{dataframe_type}' not supported for parallelization.")
 
     def export_to_csv_files(
         self,
@@ -794,8 +848,12 @@ class ParallelDataCollection(DataCollection):
         path_or_bufstr: FilePathOrBuffer = None,
         columns_to_store: Optional[List[str]] = None,
         compress: bool = False,
+        dataframe_type: str = "pandas"
     ) -> None:
-        self.to_dataframe().to_csv(path_or_bufstr)
+        if dataframe_type == "pandas":
+            self.to_dataframe(dataframe_type="pandas").to_csv(path_or_bufstr)  # type: ignore
+        elif dataframe_type == "polars":
+            self.to_dataframe(dataframe_type="polars").write_csv(path_or_bufstr)
 
     def export_to_json(
         self,
@@ -1044,7 +1102,8 @@ class CatalogV2DataCollection(DataCollection):
         iterable_key: Optional[str] = None,
         explode_on: Optional[str] = None,
         assign_to: Optional[str] = None,
-        nested_catalog_columns: List[str] = ["min_time", "max_time"]
+        nested_catalog_columns: List[str] = ["min_time", "max_time"],
+        dataframe_type: str = "pandas"
     ):
         super().__init__(
             data_retrieval_function=data_retrieval_function,
@@ -1064,81 +1123,141 @@ class CatalogV2DataCollection(DataCollection):
         self.assign_to = assign_to
         # fields in nested dicts in catalog response
         self.nested_catalog_columns = nested_catalog_columns
+        self.dataframe_type = dataframe_type
 
     def to_dataframe(
         self,
         header: Optional[List[str]] = None,
         dtype_mapper: Optional[Dict[str, Any]] = None,
-        optimize_pandas_types: Optional[bool] = True
+        optimize_dtypes: Optional[bool] = True,
+        dataframe_type: str = "pandas"
     ) -> DataFrameType:
         """
         Transforms catalog data in list form into a dataframe
         :return: DataFrame
         """
-        df = pd.DataFrame(self)
+        if dataframe_type == "pandas":
+            df = pd.DataFrame(self)
 
-        # catalog data with no nested data
-        if self.iterable_col is None or not isinstance(self.iterable_col, str) or not isinstance(self.iterable_key, str):
-            return convert_catalog_dtypes(df)
+            # catalog data with no nested data
+            if self.iterable_col is None or not isinstance(self.iterable_col, str) or not isinstance(self.iterable_key, str):
+                return convert_catalog_dtypes(df)
 
-        # for *-metrics and market-* types, add frequency (depth if orderbook)
-        if isinstance(self.iterable_key, str):
-            self.nested_catalog_columns = [self.iterable_key] + self.nested_catalog_columns
+            # for *-metrics and market-* types, add frequency (depth if orderbook)
+            if isinstance(self.iterable_key, str):
+                self.nested_catalog_columns = [self.iterable_key] + self.nested_catalog_columns
 
-        def _assign_column(df_: DataFrameType, col_name: str, values: Iterable[Any]) -> DataFrameType:
-            return df_.assign(**{col_name: values})
+            def _assign_column(df_: pd.DataFrame, col_name: str, values: Iterable[Any]) -> DataFrameType:
+                return df_.assign(**{col_name: values})
 
-        if self.metric_type is not None:
-            # for *-metrics datatypes
-            mapper = df[self.metric_type].to_dict()
+            if self.metric_type is not None:
+                # for *-metrics datatypes
+                mapper = df[self.metric_type].to_dict()
 
-            def _assign_metric(x: DataFrameType) -> Any:
-                try:
-                    return x[self.assign_to]
-                except TypeError:
-                    return None
+                def _assign_metric(x: pd.DataFrame) -> Any:
+                    try:
+                        return x[self.assign_to]
+                    except TypeError:
+                        return None
 
-            df = df.explode(self.explode_on).assign(
-                metrics=lambda x: pd.Series(x[self.explode_on])
-            )
-            df[self.assign_to] = df[self.explode_on].apply(_assign_metric)
-            df_metrics = df.dropna(subset=[self.explode_on]).metrics.apply(
-                pd.Series
-            )
-            df_metrics[self.metric_type] = df_metrics.index.map(mapper)
-            df_metrics = df_metrics.explode(self.iterable_col)
-
-            # expand min/max time, heights, hash
-            for column in self.nested_catalog_columns:
-                df_metrics = _assign_column(
-                    df_metrics,
-                    column,
-                    _expand_df(
-                        key=column, iterable=df_metrics[self.iterable_col]
-                    )
+                df = df.explode(self.explode_on).assign(
+                    metrics=lambda x: pd.Series(x[self.explode_on])
                 )
-            df_metrics = df_metrics.drop([self.iterable_col], axis=1)
+                df[self.assign_to] = df[self.explode_on].apply(_assign_metric)
+                df_metrics = df.dropna(subset=[self.explode_on]).metrics.apply(
+                    pd.Series
+                )
+                df_metrics[self.metric_type] = df_metrics.index.map(mapper)
+                df_metrics = df_metrics.explode(self.iterable_col)
 
-            df = (
-                df.drop(["metrics"], axis=1).merge(
-                    df_metrics, on=["metric", self.metric_type], how="left"
-                ).reset_index(drop=True)
-            )
-            df = convert_catalog_dtypes(df)
-            return df
+                # expand min/max time, heights, hash
+                for column in self.nested_catalog_columns:
+                    df_metrics = _assign_column(
+                        df_metrics,
+                        column,
+                        _expand_df(
+                            key=column, iterable=df_metrics[self.iterable_col]
+                        )
+                    )
+                df_metrics = df_metrics.drop([self.iterable_col], axis=1)
+
+                df = (
+                    df.drop(["metrics"], axis=1).merge(
+                        df_metrics, on=["metric", self.metric_type], how="left"
+                    ).reset_index(drop=True)
+                )
+                df = convert_catalog_dtypes(df)
+                return df
+            else:
+                # for market-* data types
+                df = df.explode(self.iterable_col)
+
+                # expand metadata (min/max time)
+                for column in self.nested_catalog_columns:
+                    df = _assign_column(
+                        df,
+                        column,
+                        _expand_df(
+                            key=column, iterable=df[self.iterable_col]
+                        )
+                    )
+                df = df.drop([self.iterable_col], axis=1)
+
+                return convert_catalog_dtypes(df)
+        elif dataframe_type == "polars":
+            df = pl.DataFrame(self)
+
+            # catalog data with no nested data
+            if self.iterable_col is None or not isinstance(self.iterable_col, str) or not isinstance(self.iterable_key, str):
+                return convert_catalog_dtypes(df)
+
+            # *-metrics
+            if self.metric_type is not None:
+                df = df.explode('metrics')
+
+                # Get fields from the first struct level
+                first_row_dict = df['metrics'][0]
+                metrics_fields = first_row_dict.keys()
+                df = df.with_columns([
+                    pl.col('metrics').struct.field(field).alias(field)
+                    for field in metrics_fields
+                ])
+
+                # Find any list columns that contain structs and explode them
+                for col in df.schema.items():
+                    col_name, dtype = col
+                    if isinstance(dtype, pl.List):
+                        df = df.explode(col_name)
+                        # Get fields from first row of the exploded column
+                        first_nested_row = df[col_name][0]
+                        nested_fields = first_nested_row.keys()
+                        df = df.with_columns([
+                            pl.col(col_name).struct.field(field).alias(field)
+                            for field in nested_fields
+                        ])
+
+                # Drop the original nested columns
+                df = df.drop(
+                    ['metrics'] + [col for col in metrics_fields if isinstance(df.schema[col], (pl.List, pl.Struct))]
+                )
+
+            # for *-metrics and market-* types, add frequency (depth if orderbook)
+            else:
+                df = df.explode(self.iterable_col)
+
+                # Get the struct field names from the first row
+                first_row_dict = df[self.iterable_col][0]
+                struct_fields = first_row_dict.keys()
+
+                # Create expressions to extract each struct field
+                df = df.with_columns([
+                    pl.col(self.iterable_col).struct.field(field).alias(field)
+                    for field in struct_fields
+                ])
+
+                # Drop the original struct column
+                df = df.drop(self.iterable_col)
+
+            return convert_catalog_dtypes(df)
         else:
-            # for market-* data types
-            df = df.explode(self.iterable_col)
-
-            # expand metadata (min/max time)
-            for column in self.nested_catalog_columns:
-                df = _assign_column(
-                    df,
-                    column,
-                    _expand_df(
-                        key=column, iterable=df[self.iterable_col]
-                    )
-                )
-            df = df.drop([self.iterable_col], axis=1)
-
-            return convert_catalog_dtypes(df)
+            raise ValueError(f"dataframe_type {dataframe_type} not supported.")

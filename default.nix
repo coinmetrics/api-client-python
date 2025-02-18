@@ -5,22 +5,23 @@
 , orjson
 , pandas
 , poetry-core
-, pytestCheckHook
-, pytest-mock
+, polars
 , pythonOlder
 , python-dateutil
+, pytestCheckHook
+, pytest-mock
 , requests
+, tqdm
 , typer
 , types-python-dateutil
 , types-requests
 , types-ujson
 , websocket-client
-, tqdm
 }:
 
 buildPythonPackage rec {
   pname = "coinmetrics-api-client";
-  version = "2025.1.8.20";
+  version = "2025.2.12.22";
   format = "pyproject";
 
   disabled = pythonOlder "3.9";
@@ -41,6 +42,7 @@ buildPythonPackage rec {
     websocket-client
     tqdm
     pandas
+    polars
   ];
 
   nativeCheckInputs = [
@@ -50,7 +52,7 @@ buildPythonPackage rec {
     types-python-dateutil
     types-requests
     types-ujson
-  ] ++ passthru.optional-dependencies.pandas;
+  ];
 
   pythonImportsCheck = [
     "coinmetrics.api_client"
@@ -63,6 +65,7 @@ buildPythonPackage rec {
   passthru = {
     optional-dependencies = {
       pandas = [ pandas ];
+      polars = [ polars ];
     };
   };
 

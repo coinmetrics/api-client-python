@@ -20,7 +20,7 @@ COPY pyproject.toml ./poetry.lock ./
 RUN poetry config virtualenvs.create false
 
 RUN poetry install --no-root
-RUN pip install pandas==2.2.3 numpy==1.26.4
+RUN pip install pandas==2.2.3 numpy==1.26.4 polars==1.21.0
 
 COPY ./ ./
 

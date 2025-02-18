@@ -47,13 +47,12 @@ build-nix:
   script:
     - nix -L build .#coinmetrics-api-client-py311
     - nix -L build .#coinmetrics-api-client-py310
-    - nix -L build .#coinmetrics-api-client-py39
   allow_failure: true
   tags:
     - kube-hel1-nix
 
 generate-docs:
-  image: python:3.9-alpine
+  image: python:3.9-slim
   stage: generate-docs
   tags:
     - linux
@@ -61,8 +60,7 @@ generate-docs:
     - coinmetrics-build-runner
   before_script:
     # Git set up
-    - 'command -v ssh-agent >/dev/null || (apk add openssh-client)'
-    - apk add git
+    - apt-get update && apt-get install -y git ssh
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
@@ -73,7 +71,6 @@ generate-docs:
     - git config --global user.name "Release Bot"
     - git fetch
     # Python build
-    - apk add build-base
     - python -m venv .venv
     - source .venv/bin/activate
     - python -m pip install --upgrade pip
@@ -82,8 +79,6 @@ generate-docs:
     - python -m pip install poetry jinja2==3.0.3 regex
     - poetry lock
     - poetry install
-    - apk add py3-dbus
-    - apk add bash
   script:
     - git checkout -b $CI_COMMIT_REF_NAME-$RANDOM origin/$CI_COMMIT_REF_NAME
     - url_host=$(echo "${CI_REPOSITORY_URL}" | sed -e 's|https\?://gitlab-ci-token:.*@|ssh://git@|g')

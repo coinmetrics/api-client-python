@@ -7243,7 +7243,7 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/asset-metrics",
             params,
-            optimize_pandas_types=False,
+            optimize_dtypes=False,
             dtype_mapper={
                 "product": "category",
                 "category": "category",
@@ -7312,7 +7312,7 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/markets",
             params,
-            optimize_pandas_types=False,
+            optimize_dtypes=False,
             dtype_mapper={
                 "exchange": "category",
                 "base": "category",
@@ -7379,7 +7379,7 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/exchange-metrics",
             params,
-            optimize_pandas_types=False,
+            optimize_dtypes=False,
             dtype_mapper={
                 "product": "category",
                 "category": "category",
@@ -7420,7 +7420,7 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/exchange-asset-metrics",
             params,
-            optimize_pandas_types=False,
+            optimize_dtypes=False,
             dtype_mapper={
                 "product": "category",
                 "category": "category",
@@ -7461,7 +7461,7 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/pair-metrics",
             params,
-            optimize_pandas_types=False,
+            optimize_dtypes=False,
             dtype_mapper={
                 "product": "category",
                 "category": "category",
@@ -7502,7 +7502,7 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/institution-metrics",
             params,
-            optimize_pandas_types=False,
+            optimize_dtypes=False,
             dtype_mapper={
                 "product": "category",
                 "category": "category",
@@ -7547,7 +7547,7 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/assets",
             params,
-            optimize_pandas_types=False
+            optimize_dtypes=False
         )
 
     def reference_data_exchanges(
@@ -7584,7 +7584,7 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/exchanges",
             params,
-            optimize_pandas_types=False
+            optimize_dtypes=False
         )
 
     def reference_data_indexes(
@@ -7621,7 +7621,7 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/indexes",
             params,
-            optimize_pandas_types=False
+            optimize_dtypes=False
         )
 
     def reference_data_pairs(
@@ -7658,7 +7658,7 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/pairs",
             params,
-            optimize_pandas_types=False
+            optimize_dtypes=False
         )
 
     def reference_data_market_metrics(
@@ -7695,7 +7695,7 @@ class CoinMetricsClient:
             self._get_data,
             "reference-data/market-metrics",
             params,
-            optimize_pandas_types=False,
+            optimize_dtypes=False,
             dtype_mapper={
                 "product": "category",
                 "category": "category",
@@ -7740,7 +7740,7 @@ class CoinMetricsClient:
             self._get_data,
             "security-master/assets",
             params,
-            optimize_pandas_types=False
+            optimize_dtypes=False
         )
 
     def security_master_markets(
@@ -7793,7 +7793,7 @@ class CoinMetricsClient:
             self._get_data,
             "security-master/markets",
             params,
-            optimize_pandas_types=False
+            optimize_dtypes=False
         )
 
     def get_snapshots_of_asset_metric_constituents(
