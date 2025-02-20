@@ -10,7 +10,8 @@ an explicit list to the `get_market_candles()` function.
 * You use a single wildcard, like so: `get_market_candles(markets='binance-btc-*-spot')`. In the backend, 
 your wildcarded string is mapped against all possible market strings and all matches are used as argument.
 
-In our current implementation, a wildcarded selection will not benefit from parallelization across the list. For example,
-passing a list of 100 markets could be fully parallelized, but a wildcard resolving to 100 markets would be executed
-as a single thread.
+## Performance
+
+If you have a choice of passing a specific list of 100 markets or a wildcard that resolves to 100 markets, we recommend the former. The API client will parallelize the requests across the list of markets resulting in a performance boost.
+
 
