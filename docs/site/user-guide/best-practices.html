@@ -575,6 +575,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#using-catalog-to-determine-assets-or-markets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using Catalog to Determine Assets or Markets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#parallel-execution" class="md-nav__link">
     <span class="md-ellipsis">
       Parallel Execution
@@ -987,6 +996,34 @@
 
 <span class="n">market_candles_spot</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_market_candles</span><span class="p">(</span><span class="n">markets</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">exchange</span><span class="si">}</span><span class="s1">-*-spot&#39;</span> <span class="k">for</span> <span class="n">exchange</span><span class="p">[</span><span class="s1">&#39;exchange&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">exchanges_reference</span><span class="p">],</span> <span class="n">limit_per_market</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </code></pre></div>
+<h2 id="using-catalog-to-determine-assets-or-markets">Using Catalog to Determine Assets or Markets<a class="headerlink" href="#using-catalog-to-determine-assets-or-markets" title="Permanent link">&para;</a></h2>
+<p>Most common use cases can be achieved following the pattern shown below.</p>
+<p><img alt="Illustration" src="/docs/docs/assets/images/api_flow.png" /></p>
+<p>For example, let's follow the flow indicated in light blue.</p>
+<p>Step 1: Obtain all possible markets with a certain criterion, e.g. type='spot' or base='btc'. </p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Step 1</span>
+<span class="n">spot_markets</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">reference_data_markets</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;spot&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
+</code></pre></div>
+<p>Step 2: Query the catalog for the data set we desire, e.g. market candles, to deliver more metadata
+for the markets we identified in step 1. This step will allow us to remove, using appropriate python code, to remove obsolete markets. </p>
+<p><a href="https://youtu.be/YSC_pwd1B5k?si=DAEQaSthsE4uumkK&amp;t=71">Demo Video</a></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Step 2</span>
+<span class="n">cat</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">catalog_market_candles_v2</span><span class="p">(</span>
+    <span class="n">markets</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">spot_markets</span><span class="o">.</span><span class="n">market</span><span class="p">),</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
+<span class="n">cat</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+    <span class="p">(</span><span class="n">cat</span><span class="o">.</span><span class="n">frequency</span> <span class="o">==</span> <span class="s1">&#39;1m&#39;</span><span class="p">)</span> <span class="o">&amp;</span>
+    <span class="p">(</span><span class="n">cat</span><span class="o">.</span><span class="n">max_time</span> <span class="o">&gt;</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<p>The code above, for example, whittles down all possible market candles to only the ones with 1m frequency and 
+data available until at least 2 days ago. This means it eliminates obsolete markets. </p>
+<p>Step 3: Obtain the actual timeseries data, and we can be certain that all markets exist and are
+relevant to our use case.</p>
+<p>A similar logic can be applied when downloading asset metrics. Rather than going straight to the <code>get_asset_metrics</code> 
+endpoint, we recommend using the reference data and catalog endpoints to craft the list of assets and metrics. 
+Of course, a user may want to start with the catalog of available metrics and only later join the asset reference 
+data -- the API is flexible and stateless. </p>
 <h2 id="parallel-execution">Parallel Execution<a class="headerlink" href="#parallel-execution" title="Permanent link">&para;</a></h2>
 <p>There are times when it may be useful to pull in large amounts of data at once. The most effective way to do this 
 when calling the CoinMetrics API is to split your request into many different queries. This functionality is now 
@@ -998,8 +1035,8 @@ built into the API Client directly to allow for faster data export:</p>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">client</span> <span class="o">=</span> <span class="n">CoinMetricsClient</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;CM_API_KEY&#39;</span><span class="p">])</span>
     <span class="n">coinbase_eth_markets</span> <span class="o">=</span> <span class="p">[</span><span class="n">market</span><span class="p">[</span><span class="s1">&#39;market&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">market</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">catalog_market_candles_v2</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s2">&quot;coinbase&quot;</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="s2">&quot;eth&quot;</span><span class="p">)]</span>
-    <span class="n">start_time</span> <span class="o">=</span> <span class="s2">&quot;2022-03-01&quot;</span>
-    <span class="n">end_time</span> <span class="o">=</span> <span class="s2">&quot;2023-05-01&quot;</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="s2">&quot;2024-03-01&quot;</span>
+    <span class="n">end_time</span> <span class="o">=</span> <span class="s2">&quot;2024-05-01&quot;</span>
     <span class="n">client</span><span class="o">.</span><span class="n">get_market_candles</span><span class="p">(</span>
       <span class="n">markets</span><span class="o">=</span><span class="n">coinbase_eth_markets</span><span class="p">,</span>
       <span class="n">start_time</span><span class="o">=</span><span class="n">start_time</span><span class="p">,</span>
@@ -1037,8 +1074,8 @@ many parallel threads to create a dataframe faster:
         <span class="n">assets</span><span class="o">=</span><span class="n">assets</span><span class="p">,</span>
         <span class="n">metrics</span><span class="o">=</span><span class="s2">&quot;ReferenceRateUSD&quot;</span><span class="p">,</span>
         <span class="n">frequency</span><span class="o">=</span><span class="s2">&quot;1m&quot;</span><span class="p">,</span>
-        <span class="n">start_time</span><span class="o">=</span><span class="s2">&quot;2022-03-01&quot;</span><span class="p">,</span>
-        <span class="n">end_time</span><span class="o">=</span><span class="s2">&quot;2023-03-01&quot;</span><span class="p">,</span>
+        <span class="n">start_time</span><span class="o">=</span><span class="s2">&quot;2024-01-01&quot;</span><span class="p">,</span>
+        <span class="n">end_time</span><span class="o">=</span><span class="s2">&quot;2025-01-01&quot;</span><span class="p">,</span>
         <span class="n">page_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
         <span class="n">end_inclusive</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">parallel</span><span class="p">(</span>
         <span class="n">time_increment</span><span class="o">=</span><span class="n">relativedelta</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">export_to_csv</span><span class="p">(</span><span class="s2">&quot;btcRRs.csv&quot;</span><span class="p">)</span>

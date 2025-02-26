@@ -1,6 +1,26 @@
 # Changelog
 
-## 2024.12.16.21
+## 2025.2.12.22
+### Fixed
+- Polars dependency issues.
+
+## 2025.2.11.16
+**Note: This release may be unstable if you do not have polars installed. Please update to 2025.2.12.22 for a patched version.**
+### Added
+- Added Polars dataframes and LazyFrames. They can be accessed using `DataCollection.to_dataframe(dataframe_type='polars')` and `DataCollection.to_lazyframe()` respectively.
+
+### Changed
+- `DataCollection` attribute `optimize_pandas_types` changed to `optimize_dtypes`.
+
+## 2025.2.4.18
+### Fixed
+- Type annotations in docstrings
+
+## 2024.12.23.19
+### Added
+- CHANGELOG.md
+
+## 2024.12.20.17
 ### Added
 - pd.DateOffset as a valid data type for `time_increment` in `parallel()`
 
