@@ -4168,18 +4168,21 @@ For more information on funding rates, see: https://docs.coinmetrics.io/info/mar
 #### get\_market\_orderbooks
 
 ```python
-def get_market_orderbooks(
-        markets: Union[List[str], str],
-        granularity: Optional[str] = None,
-        page_size: Optional[int] = None,
-        paging_from: Optional[Union[PagingFrom, str]] = "start",
-        start_time: Optional[Union[datetime, date, str]] = None,
-        end_time: Optional[Union[datetime, date, str]] = None,
-        start_inclusive: Optional[bool] = None,
-        end_inclusive: Optional[bool] = None,
-        depth_limit: Optional[str] = "100",
-        timezone: Optional[str] = None,
-        limit_per_market: Optional[int] = None) -> DataCollection
+def get_market_orderbooks(markets: Union[List[str], str],
+                          granularity: Optional[str] = None,
+                          page_size: Optional[int] = None,
+                          paging_from: Optional[Union[PagingFrom,
+                                                      str]] = "start",
+                          start_time: Optional[Union[datetime, date,
+                                                     str]] = None,
+                          end_time: Optional[Union[datetime, date,
+                                                   str]] = None,
+                          start_inclusive: Optional[bool] = None,
+                          end_inclusive: Optional[bool] = None,
+                          depth_limit: Optional[str] = "100",
+                          timezone: Optional[str] = None,
+                          limit_per_market: Optional[int] = None,
+                          format: Optional[str] = None) -> DataCollection
 ```
 
 Returns market order books for specified markets and date range.
@@ -4199,6 +4202,7 @@ For more information on order books, see: https://docs.coinmetrics.io/info/marke
 - `depth_limit` (`str`): book depth limit, 100 levels max or full book that is not limited and provided as is from the exchange. Full book snapshots are collected once per hour
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
 - `limit_per_market` (`int`): How many entries _per market_ the result should contain.
+- `format` (`str`): Default: "json". Format of the response. Supported values are json, json_stream.
 
 **Returns**:
 
@@ -4433,7 +4437,9 @@ def get_stream_asset_metrics(
         assets: Union[List[str], str],
         metrics: Union[List[str], str],
         frequency: Optional[str] = None,
-        backfill: Union[Backfill, str] = Backfill.LATEST) -> CmStream
+        backfill: Union[Backfill, str] = Backfill.LATEST,
+        ignore_forbidden_errors: Optional[bool] = None,
+        ignore_unsupported_errors: Optional[bool] = None) -> CmStream
 ```
 
 Returns timeseries stream of metrics for specified assets.
@@ -4444,6 +4450,8 @@ Returns timeseries stream of metrics for specified assets.
 - `metrics` (`list(str), str`): list of _asset-specific_ metric names, e.g. 'PriceUSD'
 - `frequency` (`str`): frequency of the returned timeseries, e.g 15s, 1d, etc.
 - `backfill` (`str`): What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.
+- `ignore_forbidden_errors` (`bool`): Default: false. Ignore HTTP 403 Forbidden errors
+- `ignore_unsupported_errors` (`bool`): Default: false. Ignore errors for unsupported assets, metrics or frequencies.
 
 **Returns**:
 
@@ -4850,6 +4858,7 @@ Returns a list of blockchain accounts balance updates.
 
 - `asset` (`str`): Asset name
 - `accounts` (`str, list(str)`): Optional comma separated list of accounts to filter a response.
+- `sub_accounts` (`str, list(str)`): Optional comma separated list of sub-accounts to filter a response. This parameter is disabled for Community users.
 - `limit_per_account` (`int`): How many entries per account the result should contain. It is applicable when multiple accounts are requested.
 - `txids` (`str, list(str)`): Optional comma separated list of transaction ids to filter a response.
 - `block_hashes` (`str, list(str)`): Optional comma separated list of block hashes to filter a response.
@@ -5121,6 +5130,26 @@ Returns profile data for assets, ordered by asset
 
 - `assets` (`Optional[Union[List[str], str]]`): Returns profile data for assets.
 - `full_names` (`Optional[Union[List[str], str]]`): Comma separated list of asset full names. By default profile data for all assets is returned. Mutually exclusive with assets parameter.
+- `page_size` (`int`): Number of items per single page of results.
+- `paging_from` (`int`): Where does the first page start, at the "start" of the interval or at the "end"
+
+<a id="coinmetrics.api_client.CoinMetricsClient.get_network_profiles"></a>
+
+#### get\_network\_profiles
+
+```python
+def get_network_profiles(networks: Optional[Union[List[str], str]] = None,
+                         full_names: Optional[Union[List[str], str]] = None,
+                         page_size: Optional[int] = None,
+                         paging_from: Optional[str] = None) -> DataCollection
+```
+
+Returns profile data for assets, ordered by asset
+
+**Arguments**:
+
+- `networks` (`Optional[Union[List[str], str]]`): Comma separated list of networks. By default profile data for all networks is returned. Mutually exclusive with full_names parameter.
+- `full_names` (`Optional[Union[List[str], str]]`): Comma separated list of asset full names. By default profile data for all assets is returned. Mutually exclusive with networks parameter.
 - `page_size` (`int`): Number of items per single page of results.
 - `paging_from` (`int`): Where does the first page start, at the "start" of the interval or at the "end"
 
