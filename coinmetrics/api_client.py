@@ -5890,6 +5890,7 @@ class CoinMetricsClient:
         depth_limit: Optional[str] = "100",
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None,
+        format: Optional[str] = None
     ) -> DataCollection:
         """
         Returns market order books for specified markets and date range.
@@ -5917,6 +5918,8 @@ class CoinMetricsClient:
         :type timezone: str
         :param limit_per_market: How many entries _per market_ the result should contain.
         :type limit_per_market: int
+        :param format: Default: "json". Format of the response. Supported values are json, json_stream.
+        :type format: str
         :return: Market Order Books timeseries.
         :rtype: DataCollection
         """
@@ -5933,6 +5936,7 @@ class CoinMetricsClient:
             "limit_per_market": limit_per_market,
             "depth_limit": depth_limit,
             "timezone": timezone,
+            "format": format,
         }
         return DataCollection(self._get_data, "timeseries/market-orderbooks", params, client=self)
 
@@ -6263,6 +6267,8 @@ class CoinMetricsClient:
         metrics: Union[List[str], str],
         frequency: Optional[str] = None,
         backfill: Union[Backfill, str] = Backfill.LATEST,
+        ignore_forbidden_errors: Optional[bool] = None,
+        ignore_unsupported_errors: Optional[bool] = None,
     ) -> CmStream:
         """
         Returns timeseries stream of metrics for specified assets.
@@ -6275,6 +6281,10 @@ class CoinMetricsClient:
         :type frequency: str
         :param backfill: What data should be sent upon a connection ("latest" or "none"). By default the latest values are sent just before real-time data.
         :type backfill: str
+        :param ignore_forbidden_errors: Default: false. Ignore HTTP 403 Forbidden errors
+        :type ignore_forbidden_errors: bool
+        :param ignore_unsupported_errors: Default: false. Ignore errors for unsupported assets, metrics or frequencies.
+        :type ignore_unsupported_errors: bool
         :return: Asset Metrics timeseries stream.
         :rtype: CmStream
         """
@@ -6284,6 +6294,8 @@ class CoinMetricsClient:
             "metrics": metrics,
             "frequency": frequency,
             "backfill": backfill,
+            "ignore_unsupported_errors": ignore_unsupported_errors,
+            "ignore_forbidden_errors": ignore_forbidden_errors
         }
         return self._get_stream_data("timeseries-stream/asset-metrics", params)
 
@@ -6788,6 +6800,8 @@ class CoinMetricsClient:
         :type asset: str
         :param accounts: Optional comma separated list of accounts to filter a response.
         :type accounts: str, list(str)
+        :param sub_accounts: Optional comma separated list of sub-accounts to filter a response. This parameter is disabled for Community users.
+        :type sub_accounts: str, list(str)
         :param limit_per_account: How many entries per account the result should contain. It is applicable when multiple accounts are requested.
         :type limit_per_account: int
         :param txids: Optional comma separated list of transaction ids to filter a response.
@@ -7208,6 +7222,32 @@ class CoinMetricsClient:
             "paging_from": paging_from,
         }
         return DataCollection(self._get_data, "profile/assets", params, client=self)
+
+    def get_network_profiles(
+        self,
+        networks: Optional[Union[List[str], str]] = None,
+        full_names: Optional[Union[List[str], str]] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        Returns profile data for assets, ordered by asset
+        :param networks: Comma separated list of networks. By default profile data for all networks is returned. Mutually exclusive with full_names parameter.
+        :type networks: Optional[Union[List[str], str]]
+        :param full_names: Comma separated list of asset full names. By default profile data for all assets is returned. Mutually exclusive with networks parameter.
+        :type full_names: Optional[Union[List[str], str]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: int
+        :param paging_from: Where does the first page start, at the "start" of the interval or at the "end"
+        :type paging_from: int
+        """
+        params: Dict[str, Any] = {
+            "networks": networks,
+            "full_names": full_names,
+            "page_size": page_size,
+            "paging_from": paging_from,
+        }
+        return DataCollection(self._get_data, "profile/networks", params, client=self)
 
     def reference_data_asset_metrics(
             self,

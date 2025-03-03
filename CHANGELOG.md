@@ -1,5 +1,9 @@
 # Changelog
 
+## 2025.2.26.22
+### Added
+- Enhanced documentation for API flows
+
 ## 2025.2.12.22
 ### Fixed
 - Polars dependency issues.
