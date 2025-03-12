@@ -1,5 +1,9 @@
 # Changelog
 
+## 2025.3.3.16
+### Added
+- `get_network_profiles`, missing `format` param to `get_market_orderbooks`, `ignore_*_errors` to `get_stream_asset_metrics`,
+
 ## 2025.2.26.22
 ### Added
 - Enhanced documentation for API flows

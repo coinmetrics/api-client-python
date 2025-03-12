@@ -8,3 +8,5 @@ six==1.16.0; python_version >= "2.7" and python_full_version < "3.0.0" or python
 urllib3==1.26.8; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.6.0" and python_version < "4"
 websocket-client==1.8.0; python_version >= "3.6"
 typer>=0.6.1
+polars>=1.0.0
+pandas>=2.0.0
