@@ -43,13 +43,25 @@ build-test-push-image:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
 build-nix:
+  image: docker.io/coinmetrics/nix-builder:latest
   stage: build-test-push-image
+  variables:
+    KUBERNETES_CPU_REQUEST: "16"
+    KUBERNETES_CPU_LIMIT: "16"
+    KUBERNETES_MEMORY_REQUEST: "24Gi"
+    KUBERNETES_MEMORY_LIMIT: "24Gi"
   script:
+    - nix -L build .#coinmetrics-api-client-py312
     - nix -L build .#coinmetrics-api-client-py311
     - nix -L build .#coinmetrics-api-client-py310
   allow_failure: true
+  before_script:
+    - source /before-script.sh
+  after_script:
+    - /after-script.sh
   tags:
-    - kube-hel1-nix
+    - rt-containerd
+  timeout: 8 hours
 
 generate-docs:
   image: python:3.9-slim

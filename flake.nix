@@ -19,9 +19,9 @@
       lib = import ./.;
     in {
       packages = {
-        coinmetrics-api-client-py39 = pkgs.python39Packages.callPackage lib {};
         coinmetrics-api-client-py310 = pkgs.python310Packages.callPackage lib {};
         coinmetrics-api-client-py311 = pkgs.python311Packages.callPackage lib {};
+        coinmetrics-api-client-py312 = pkgs.python312Packages.callPackage lib {};
       };
     }
   );
