@@ -367,7 +367,7 @@ class CoinMetricsDataExporter:
         exchanges: Union[str, List[str]],
         route_url: str,
     ) -> List[str]:
-        if type(exchanges) == str:
+        if isinstance(exchanges, str):
             exchanges = [str(exchanges)]
 
         market_trades_url = self._API_BASE_URL + route_url

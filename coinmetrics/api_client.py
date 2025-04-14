@@ -8063,7 +8063,7 @@ class CoinMetricsClient:
             verify=self._session.verify,
         )
         if response.status_code == 429 or response.headers.get("x-ratelimit-remaining", None) == "0":
-            logger.info("Sleeping for a rate limit window because 429 (too many requests) error was returned. Please"
+            logger.info("Sleeping for a rate limit window because 429 (too many requests) error was returned. Please "
                         "see Coin Metrics APIV4 documentation for more information: https://docs.coinmetrics.io/api/v4/#tag/Rate-limits")
             time.sleep(int(response.headers["x-ratelimit-reset"]))
             response = self._send_request(actual_url=actual_url)

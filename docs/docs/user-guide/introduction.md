@@ -170,7 +170,7 @@ volume_trusted_spot_usd_1d    Float64
 dtype: object
 ```
 
-This can be turned off by setting `optimize_pandas_types=False`
+This can be turned off by setting `optimize_dtypes=False`
 
 Alternatively, you can manually enter your own type conversion by passing in a dictionary for `dtype_mapper`. This can be done in conjunction with pandas' built in type inference.
 ```python
@@ -180,7 +180,7 @@ mapper = {
 }
 df_mapped = client.get_asset_metrics(
   assets=asset_list, metrics=metrics_list, start_time=start_time, limit_per_asset=3
-).to_dataframe(dtype_mapper=mapper, optimize_pandas_types=True)
+).to_dataframe(dtype_mapper=mapper, optimize_dtypes=True)
 print(df_mapped.dtypes)
 ```
 
@@ -202,7 +202,7 @@ dtype_mapper = {
 }
 df = client.get_asset_metrics(
   assets='btc', metrics='ReferenceRateUSD', start_time='2022-06-15', limit_per_asset=1
-).to_dataframe(dtype_mapper=dtype_mapper, optimize_pandas_types=False)
+).to_dataframe(dtype_mapper=dtype_mapper, optimize_dtypes=False)
 df.info()
 ```
 ```

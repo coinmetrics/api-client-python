@@ -162,6 +162,23 @@ def deprecated(endpoint: Optional[str] = None) -> Callable[[Callable[..., Any]],
     return decorator
 
 
+def deprecated_optimize_pandas_types(func: Callable[..., Any]) -> Callable[..., Any]:
+    """Warn on deprecated named argument"""
+    @wraps(func)
+    def decorator(*args: Any, **kwargs: Any) -> Any:
+        if "optimize_pandas_types" in kwargs:
+            logger.warning(
+                f"Function {func.__name__} argument 'optimize_pandas_types' "
+                "is deprecated. Use 'optimize_dtypes' instead."
+            )
+            if "optimize_dtypes" not in kwargs:
+                kwargs["optimize_dtypes"] = kwargs["optimize_pandas_types"]
+            del kwargs["optimize_pandas_types"]
+        return func(*args, **kwargs)
+
+    return decorator
+
+
 PANDAS_TO_POLARS_DTYPE_MAP: Dict[str, pl.DataType] = {
     # Numeric types
     'int8': pl.Int8(),

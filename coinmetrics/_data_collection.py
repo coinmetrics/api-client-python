@@ -21,7 +21,11 @@ from coinmetrics._typing import (
     UrlParamTypes,
     DataFrameType,
 )
-from coinmetrics._utils import get_file_path_or_buffer, convert_pandas_dtype_to_polars
+from coinmetrics._utils import (
+    convert_pandas_dtype_to_polars,
+    deprecated_optimize_pandas_types,
+    get_file_path_or_buffer,
+)
 from coinmetrics._models import AssetChainsData, CoinMetricsAPIModel, TransactionTrackerData
 from coinmetrics._catalogs import convert_catalog_dtypes, _expand_df
 from importlib import import_module
@@ -42,8 +46,6 @@ except ModuleNotFoundError:
 
 if not orjson_found:
     import json
-else:
-    import orjson as json
 
 isoparse_typed: Callable[[Union[str, bytes]], datetime] = isoparse
 
@@ -247,6 +249,7 @@ class DataCollection:
 
         return None
 
+    @deprecated_optimize_pandas_types
     def to_dataframe(
         self,
         header: Optional[List[str]] = None,
@@ -397,6 +400,7 @@ class AssetChainsDataCollection(DataCollection):
 
     API_RETURN_MODEL = AssetChainsData
 
+    @deprecated_optimize_pandas_types
     def to_dataframe(
         self,
         header: Optional[List[str]] = None,
@@ -738,6 +742,7 @@ class ParallelDataCollection(DataCollection):
         combined_list = list(itertools.chain.from_iterable(combined_data))
         return combined_list
 
+    @deprecated_optimize_pandas_types
     def to_dataframe(
         self,
         header: Optional[List[str]] = None,
@@ -851,7 +856,7 @@ class ParallelDataCollection(DataCollection):
         dataframe_type: str = "pandas"
     ) -> None:
         if dataframe_type == "pandas":
-            self.to_dataframe(dataframe_type="pandas").to_csv(path_or_bufstr)  # type: ignore
+            self.to_dataframe(dataframe_type="pandas").to_csv(path_or_bufstr)
         elif dataframe_type == "polars":
             self.to_dataframe(dataframe_type="polars").write_csv(path_or_bufstr)
 
@@ -1125,6 +1130,7 @@ class CatalogV2DataCollection(DataCollection):
         self.nested_catalog_columns = nested_catalog_columns
         self.dataframe_type = dataframe_type
 
+    @deprecated_optimize_pandas_types
     def to_dataframe(
         self,
         header: Optional[List[str]] = None,

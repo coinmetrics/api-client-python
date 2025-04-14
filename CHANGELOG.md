@@ -1,5 +1,13 @@
 # Changelog
 
+## __version__
+### Added
+- Allow `optimize_pandas_types` argument as an alias for `optimize_dtypes` in `DataCollection.to_dataframe()` calls but issue a deprecated warning.  Prevents exception for code using the old name.
+
+## 2025.3.12.17
+### Changed
+- Made Pandas and Polars mandatory packages.
+
 ## 2025.3.3.16
 ### Added
 - `get_network_profiles`, missing `format` param to `get_market_orderbooks`, `ignore_*_errors` to `get_stream_asset_metrics`,

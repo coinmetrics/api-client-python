@@ -50,6 +50,7 @@ def test_pandas_timestamp() -> None:
             start_time=ts,
             limit_per_asset=1
         ).to_dataframe()
+        assert isinstance(data, pd.DataFrame)
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
@@ -84,6 +85,34 @@ def test_to_dataframe_polars() -> None:
         markets=["coinbase-btc-usd-spot", "deribit-ETH-25MAR22-1200-P-option", "binance-BTCUSDT-future"]
     ).to_dataframe(dataframe_type="polars")
 
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_optimize_pandas_types_deprecated(caplog: pytest.LogCaptureFixture) -> None:
+    with caplog.at_level("WARNING"):
+        df = client.get_asset_metrics(
+            "btc", "ReferenceRateUSD", limit_per_asset=1
+        ).to_dataframe(dataframe_type="pandas", optimize_pandas_types=True)
+    assert isinstance(df, pd.DataFrame)
+    assert "'optimize_pandas_types' is deprecated." in caplog.text
+    assert pd.api.types.is_datetime64_ns_dtype(df["time"])
+
+    caplog.clear()
+    with caplog.at_level("WARNING"):
+        df = client.get_asset_metrics(
+            "btc", "ReferenceRateUSD", limit_per_asset=1
+        ).to_dataframe(dataframe_type="pandas", optimize_pandas_types=False)
+    assert isinstance(df, pd.DataFrame)
+    assert "'optimize_pandas_types' is deprecated." in caplog.text
+    assert not pd.api.types.is_datetime64_ns_dtype(df["time"])
+
+    caplog.clear()
+    with caplog.at_level("WARNING"):
+        df = client.get_asset_metrics(
+            "btc", "ReferenceRateUSD", limit_per_asset=1
+        ).to_dataframe(dataframe_type="pandas", optimize_dtypes=True)
+    assert isinstance(df, pd.DataFrame)
+    assert "'optimize_pandas_types' is deprecated." not in caplog.text
+    assert pd.api.types.is_datetime64_ns_dtype(df["time"])
 
 if __name__ == "__main__":
     pytest.main()
