@@ -90,7 +90,7 @@ generate-docs:
     - python -m pip install wheel dulwich pyrsistent
     - python -m pip install poetry jinja2==3.0.3 regex
     - poetry lock
-    - poetry install
+    - poetry install --with-dev
   script:
     - git checkout -b $CI_COMMIT_REF_NAME-$RANDOM origin/$CI_COMMIT_REF_NAME
     - url_host=$(echo "${CI_REPOSITORY_URL}" | sed -e 's|https\?://gitlab-ci-token:.*@|ssh://git@|g')
