@@ -1,6 +1,6 @@
 # Changelog
 
-## __version__
+## 2025.4.15.13
 ### Added
 - Allow `optimize_pandas_types` argument as an alias for `optimize_dtypes` in `DataCollection.to_dataframe()` calls but issue a deprecated warning.  Prevents exception for code using the old name.
 

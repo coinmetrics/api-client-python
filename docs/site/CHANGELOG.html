@@ -857,13 +857,23 @@
 
 
 <h1 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h1>
-<h2 id="20253316">2025.3.3.16<a class="headerlink" href="#20253316" title="Permanent link">&para;</a></h2>
+<h2 id="202541513">2025.4.15.13<a class="headerlink" href="#202541513" title="Permanent link">&para;</a></h2>
 <h3 id="added">Added<a class="headerlink" href="#added" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Allow <code>optimize_pandas_types</code> argument as an alias for <code>optimize_dtypes</code> in <code>DataCollection.to_dataframe()</code> calls but issue a deprecated warning.  Prevents exception for code using the old name.</li>
+</ul>
+<h2 id="202531217">2025.3.12.17<a class="headerlink" href="#202531217" title="Permanent link">&para;</a></h2>
+<h3 id="changed">Changed<a class="headerlink" href="#changed" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Made Pandas and Polars mandatory packages.</li>
+</ul>
+<h2 id="20253316">2025.3.3.16<a class="headerlink" href="#20253316" title="Permanent link">&para;</a></h2>
+<h3 id="added_1">Added<a class="headerlink" href="#added_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>get_network_profiles</code>, missing <code>format</code> param to <code>get_market_orderbooks</code>, <code>ignore_*_errors</code> to <code>get_stream_asset_metrics</code>,</li>
 </ul>
 <h2 id="202522622">2025.2.26.22<a class="headerlink" href="#202522622" title="Permanent link">&para;</a></h2>
-<h3 id="added_1">Added<a class="headerlink" href="#added_1" title="Permanent link">&para;</a></h3>
+<h3 id="added_2">Added<a class="headerlink" href="#added_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Enhanced documentation for API flows</li>
 </ul>
@@ -874,11 +884,11 @@
 </ul>
 <h2 id="202521116">2025.2.11.16<a class="headerlink" href="#202521116" title="Permanent link">&para;</a></h2>
 <p><strong>Note: This release may be unstable if you do not have polars installed. Please update to 2025.2.12.22 for a patched version.</strong></p>
-<h3 id="added_2">Added<a class="headerlink" href="#added_2" title="Permanent link">&para;</a></h3>
+<h3 id="added_3">Added<a class="headerlink" href="#added_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Added Polars dataframes and LazyFrames. They can be accessed using <code>DataCollection.to_dataframe(dataframe_type='polars')</code> and <code>DataCollection.to_lazyframe()</code> respectively.</li>
 </ul>
-<h3 id="changed">Changed<a class="headerlink" href="#changed" title="Permanent link">&para;</a></h3>
+<h3 id="changed_1">Changed<a class="headerlink" href="#changed_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>DataCollection</code> attribute <code>optimize_pandas_types</code> changed to <code>optimize_dtypes</code>.</li>
 </ul>
@@ -888,43 +898,43 @@
 <li>Type annotations in docstrings</li>
 </ul>
 <h2 id="2024122319">2024.12.23.19<a class="headerlink" href="#2024122319" title="Permanent link">&para;</a></h2>
-<h3 id="added_3">Added<a class="headerlink" href="#added_3" title="Permanent link">&para;</a></h3>
+<h3 id="added_4">Added<a class="headerlink" href="#added_4" title="Permanent link">&para;</a></h3>
 <ul>
 <li>CHANGELOG.md</li>
 </ul>
 <h2 id="2024122017">2024.12.20.17<a class="headerlink" href="#2024122017" title="Permanent link">&para;</a></h2>
-<h3 id="added_4">Added<a class="headerlink" href="#added_4" title="Permanent link">&para;</a></h3>
+<h3 id="added_5">Added<a class="headerlink" href="#added_5" title="Permanent link">&para;</a></h3>
 <ul>
 <li>pd.DateOffset as a valid data type for <code>time_increment</code> in <code>parallel()</code></li>
 </ul>
-<h3 id="changed_1">Changed<a class="headerlink" href="#changed_1" title="Permanent link">&para;</a></h3>
+<h3 id="changed_2">Changed<a class="headerlink" href="#changed_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Update pandas dependency to &gt;= 2.0 and websocket-client &gt;= 1.6.0</li>
 </ul>
 <h2 id="2024121621">2024.12.16.21<a class="headerlink" href="#2024121621" title="Permanent link">&para;</a></h2>
-<h3 id="added_5">Added<a class="headerlink" href="#added_5" title="Permanent link">&para;</a></h3>
+<h3 id="added_6">Added<a class="headerlink" href="#added_6" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Allowed pandas Timestamp data type to be passed in <code>client</code> API calls</li>
 <li>Added "deprecated" flag to catalog v1 endpoints</li>
 </ul>
 <h2 id="2024121119">2024.12.11.19<a class="headerlink" href="#2024121119" title="Permanent link">&para;</a></h2>
-<h3 id="added_6">Added<a class="headerlink" href="#added_6" title="Permanent link">&para;</a></h3>
+<h3 id="added_7">Added<a class="headerlink" href="#added_7" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Catalog-v2/blockchain endpoints</li>
 </ul>
 <h2 id="2024121020">2024.12.10.20<a class="headerlink" href="#2024121020" title="Permanent link">&para;</a></h2>
-<h3 id="changed_2">Changed<a class="headerlink" href="#changed_2" title="Permanent link">&para;</a></h3>
+<h3 id="changed_3">Changed<a class="headerlink" href="#changed_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Removed unused columns for <code>reference_data_*().to_dataframe()</code> return</li>
 <li>Improved casting for return data types</li>
 </ul>
 <h2 id="2024112120">2024.11.21.20<a class="headerlink" href="#2024112120" title="Permanent link">&para;</a></h2>
-<h3 id="changed_3">Changed<a class="headerlink" href="#changed_3" title="Permanent link">&para;</a></h3>
+<h3 id="changed_4">Changed<a class="headerlink" href="#changed_4" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Upgraded the typer dependency to &gt;= 0.6.1</li>
 </ul>
 <h2 id="2024111819">2024.11.18.19<a class="headerlink" href="#2024111819" title="Permanent link">&para;</a></h2>
-<h3 id="changed_4">Changed<a class="headerlink" href="#changed_4" title="Permanent link">&para;</a></h3>
+<h3 id="changed_5">Changed<a class="headerlink" href="#changed_5" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set <code>format=json_stream</code> for <code>catalog</code> and <code>reference_data</code> functions by default, drastically improving speed</li>
 </ul>
@@ -934,17 +944,17 @@
 <li>Bug where requests have double '/' in URL</li>
 </ul>
 <h2 id="2024101519">2024.10.15.19<a class="headerlink" href="#2024101519" title="Permanent link">&para;</a></h2>
-<h3 id="changed_5">Changed<a class="headerlink" href="#changed_5" title="Permanent link">&para;</a></h3>
+<h3 id="changed_6">Changed<a class="headerlink" href="#changed_6" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Updated the request header to denote User-Agent as a Python API Client user</li>
 </ul>
 <h2 id="202410920">2024.10.9.20<a class="headerlink" href="#202410920" title="Permanent link">&para;</a></h2>
-<h3 id="added_7">Added<a class="headerlink" href="#added_7" title="Permanent link">&para;</a></h3>
+<h3 id="added_8">Added<a class="headerlink" href="#added_8" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>txids</code> as a valid <code>parallelize_on</code> variable</li>
 </ul>
 <h2 id="202410415">2024.10.4.15<a class="headerlink" href="#202410415" title="Permanent link">&para;</a></h2>
-<h3 id="added_8">Added<a class="headerlink" href="#added_8" title="Permanent link">&para;</a></h3>
+<h3 id="added_9">Added<a class="headerlink" href="#added_9" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Transformation logic for <code>catalog_*_v2().to_dataframe()</code> that flattens these dataframes</li>
 </ul>
@@ -953,7 +963,7 @@
 <li>Type casting for <code>coin_metrics_id</code> field from pandas dataframes for very large integers</li>
 </ul>
 <h2 id="202491817">2024.9.18.17<a class="headerlink" href="#202491817" title="Permanent link">&para;</a></h2>
-<h3 id="added_9">Added<a class="headerlink" href="#added_9" title="Permanent link">&para;</a></h3>
+<h3 id="added_10">Added<a class="headerlink" href="#added_10" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Auto-retry logic for Websockets</li>
 </ul>
@@ -966,12 +976,12 @@
 <ul>
 <li>Bug on parallelization where <code>end_time</code> uses user's timezone instead of UTC</li>
 </ul>
-<h3 id="added_10">Added<a class="headerlink" href="#added_10" title="Permanent link">&para;</a></h3>
+<h3 id="added_11">Added<a class="headerlink" href="#added_11" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>base_native</code> and <code>quote_native</code> fields to <code>reference_data_markets()</code></li>
 </ul>
 <h2 id="202482013">2024.8.20.13<a class="headerlink" href="#202482013" title="Permanent link">&para;</a></h2>
-<h3 id="changed_6">Changed<a class="headerlink" href="#changed_6" title="Permanent link">&para;</a></h3>
+<h3 id="changed_7">Changed<a class="headerlink" href="#changed_7" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Removed JSON parsing on <code>on_error</code> for <code>CmStream</code> default</li>
 </ul>
@@ -980,28 +990,28 @@
 <ul>
 <li>Atlas V1 (<code>get_blockchain_()</code>) endpoints</li>
 </ul>
-<h3 id="added_11">Added<a class="headerlink" href="#added_11" title="Permanent link">&para;</a></h3>
+<h3 id="added_12">Added<a class="headerlink" href="#added_12" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Warnings for upcoming <code>catalog</code> deprecation</li>
 </ul>
 <h2 id="202481417">2024.8.14.17<a class="headerlink" href="#202481417" title="Permanent link">&para;</a></h2>
-<h3 id="added_12">Added<a class="headerlink" href="#added_12" title="Permanent link">&para;</a></h3>
+<h3 id="added_13">Added<a class="headerlink" href="#added_13" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>txid</code>, <code>accounts</code>, <code>block_hashes</code>, <code>heights</code>, and <code>sub_accounts</code> as valid <code>parallel</code> variables</li>
 <li><code>height_increment</code> as a valid <code>parallel</code> parameter</li>
 </ul>
 <h2 id="20248513">2024.8.5.13<a class="headerlink" href="#20248513" title="Permanent link">&para;</a></h2>
-<h3 id="added_13">Added<a class="headerlink" href="#added_13" title="Permanent link">&para;</a></h3>
+<h3 id="added_14">Added<a class="headerlink" href="#added_14" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Temporary patch for returning all columns for <code>to_dataframe()</code> call for <code>reference_data_*</code> and <code>security_master_*</code> functions</li>
 </ul>
 <h2 id="202471214">2024.7.12.14<a class="headerlink" href="#202471214" title="Permanent link">&para;</a></h2>
-<h3 id="added_14">Added<a class="headerlink" href="#added_14" title="Permanent link">&para;</a></h3>
+<h3 id="added_15">Added<a class="headerlink" href="#added_15" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Allowed timezone aware datetimes to be passed to client API calls</li>
 </ul>
 <h2 id="20242616">2024.2.6.16<a class="headerlink" href="#20242616" title="Permanent link">&para;</a></h2>
-<h3 id="added_15">Added<a class="headerlink" href="#added_15" title="Permanent link">&para;</a></h3>
+<h3 id="added_16">Added<a class="headerlink" href="#added_16" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Functions <code>get_market_funding_rates_predicted</code>, <code>catalog_{full}_market_funding_rates_predicted_v2</code></li>
 <li>Generic examples for Python API Client functions</li>
@@ -1012,66 +1022,66 @@
 <li>Bug where <code>blockchain_metadata</code> functions were not being called properly</li>
 </ul>
 <h2 id="2023112717">2023.11.27.17<a class="headerlink" href="#2023112717" title="Permanent link">&para;</a></h2>
-<h3 id="added_16">Added<a class="headerlink" href="#added_16" title="Permanent link">&para;</a></h3>
+<h3 id="added_17">Added<a class="headerlink" href="#added_17" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>blockchain_metadata_tags()</code> and <code>blockchain_metadata_tagged_entities</code> functions</li>
 </ul>
-<h3 id="changed_7">Changed<a class="headerlink" href="#changed_7" title="Permanent link">&para;</a></h3>
+<h3 id="changed_8">Changed<a class="headerlink" href="#changed_8" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Updated README to shorten example code and remove catalog v1</li>
 </ul>
 <h2 id="2023111314">2023.11.13.14<a class="headerlink" href="#2023111314" title="Permanent link">&para;</a></h2>
-<h3 id="added_17">Added<a class="headerlink" href="#added_17" title="Permanent link">&para;</a></h3>
+<h3 id="added_18">Added<a class="headerlink" href="#added_18" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Functions <code>get_snapshots_of_asset_metric_constituents</code> and <code>get_timeframes_of_asset_metric_constituents</code></li>
 </ul>
 <h2 id="2023103013">2023.10.30.13<a class="headerlink" href="#2023103013" title="Permanent link">&para;</a></h2>
-<h3 id="added_18">Added<a class="headerlink" href="#added_18" title="Permanent link">&para;</a></h3>
+<h3 id="added_19">Added<a class="headerlink" href="#added_19" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Function <code>get_stream_market_open_interest</code></li>
 </ul>
 <h2 id="2023101917">2023.10.19.17<a class="headerlink" href="#2023101917" title="Permanent link">&para;</a></h2>
-<h3 id="added_19">Added<a class="headerlink" href="#added_19" title="Permanent link">&para;</a></h3>
+<h3 id="added_20">Added<a class="headerlink" href="#added_20" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Function <code>get_stream_market_liquidations</code></li>
 </ul>
 <h2 id="202392914">2023.9.29.14<a class="headerlink" href="#202392914" title="Permanent link">&para;</a></h2>
-<h3 id="added_20">Added<a class="headerlink" href="#added_20" title="Permanent link">&para;</a></h3>
+<h3 id="added_21">Added<a class="headerlink" href="#added_21" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>metrics</code> parameter to <code>catalog_{full}_markets_v2</code></li>
 <li><code>catalog_index_levels_v2</code> and <code>reference_data_markets</code></li>
 </ul>
 <h2 id="202392221">2023.9.22.21<a class="headerlink" href="#202392221" title="Permanent link">&para;</a></h2>
-<h3 id="added_21">Added<a class="headerlink" href="#added_21" title="Permanent link">&para;</a></h3>
+<h3 id="added_22">Added<a class="headerlink" href="#added_22" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Parallelization support for <code>blockchain</code> endpoints</li>
 </ul>
 <h2 id="202391114">2023.9.11.14<a class="headerlink" href="#202391114" title="Permanent link">&para;</a></h2>
-<h3 id="changed_8">Changed<a class="headerlink" href="#changed_8" title="Permanent link">&para;</a></h3>
+<h3 id="changed_9">Changed<a class="headerlink" href="#changed_9" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Replaced <code>frequency</code> parameter with <code>granularity</code> for <code>get_market_quotes</code> and <code>get_market_orderbooks</code></li>
 </ul>
-<h3 id="added_22">Added<a class="headerlink" href="#added_22" title="Permanent link">&para;</a></h3>
+<h3 id="added_23">Added<a class="headerlink" href="#added_23" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Functions <code>reference_data_assets</code>, <code>reference_data_indexes</code>, <code>reference_data_pairs</code></li>
 </ul>
 <h2 id="202383020">2023.8.30.20<a class="headerlink" href="#202383020" title="Permanent link">&para;</a></h2>
-<h3 id="added_23">Added<a class="headerlink" href="#added_23" title="Permanent link">&para;</a></h3>
+<h3 id="added_24">Added<a class="headerlink" href="#added_24" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Functions <code>security_master_assets</code>, <code>security_master_markets</code></li>
 </ul>
 <h2 id="202382816">2023.8.28.16<a class="headerlink" href="#202382816" title="Permanent link">&para;</a></h2>
-<h3 id="added_24">Added<a class="headerlink" href="#added_24" title="Permanent link">&para;</a></h3>
+<h3 id="added_25">Added<a class="headerlink" href="#added_25" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Functions <code>catalog_{full}_pair_candles_v2</code>, <code>catalog_{full}_index_candles_v2</code>, <code>catalog_{full}_asset_chains_v2</code>, <code>catalog_{full}_mempool_feerates_v2</code>, <code>catalog_{full}_mining_pool_tips_summaries_v2</code>, <code>catalog_{full}_transaction_tracker_assets_v2</code></li>
 </ul>
 <h2 id="202382515">2023.8.25.15<a class="headerlink" href="#202382515" title="Permanent link">&para;</a></h2>
-<h3 id="added_25">Added<a class="headerlink" href="#added_25" title="Permanent link">&para;</a></h3>
+<h3 id="added_26">Added<a class="headerlink" href="#added_26" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Ability to parallelize API request for significantly improved data pull speed</li>
 </ul>
 <h2 id="202382413">2023.8.24.13<a class="headerlink" href="#202382413" title="Permanent link">&para;</a></h2>
-<h3 id="added_26">Added<a class="headerlink" href="#added_26" title="Permanent link">&para;</a></h3>
+<h3 id="added_27">Added<a class="headerlink" href="#added_27" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Functions <code>reference_data_asset_metrics</code>, <code>reference_data_institution_metrics</code></li>
 </ul>
@@ -1080,17 +1090,17 @@
 <li>Added <code>frequency</code> parameter to <code>get_market_orderbooks</code> (fixed in 2023.9.11.14)</li>
 </ul>
 <h2 id="202382214">2023.8.22.14<a class="headerlink" href="#202382214" title="Permanent link">&para;</a></h2>
-<h3 id="added_27">Added<a class="headerlink" href="#added_27" title="Permanent link">&para;</a></h3>
+<h3 id="added_28">Added<a class="headerlink" href="#added_28" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Functions <code>catalog_{full}_asset_metrics_v2</code>, <code>catalog_exchange_{full}_metrics_v2</code>, <code>catalog_{full}_exchange_asset_metrics_v2</code>, <code>catalog_{full}_pair_metrics_v2</code>, <code>catalog_{full}_institution_metrics_v2</code></li>
 </ul>
 <h2 id="202381019">2023.8.10.19<a class="headerlink" href="#202381019" title="Permanent link">&para;</a></h2>
-<h3 id="added_28">Added<a class="headerlink" href="#added_28" title="Permanent link">&para;</a></h3>
+<h3 id="added_29">Added<a class="headerlink" href="#added_29" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>on_close</code> handler to <code>CmStream</code></li>
 </ul>
 <h2 id="202371117">2023.7.11.17<a class="headerlink" href="#202371117" title="Permanent link">&para;</a></h2>
-<h3 id="added_29">Added<a class="headerlink" href="#added_29" title="Permanent link">&para;</a></h3>
+<h3 id="added_30">Added<a class="headerlink" href="#added_30" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Functions <code>catalog_{full}_contract_prices_v2</code>, <code>catalog_{full}_market_trades_v2</code>, <code>catalog_{full}_market_candles_v2</code>, <code>catalog_{full}_market_orderbooks_v2</code>, <code>catalog_{full}_market_quotes_v2</code>, <code>catalog_{full}_market_funding_rates_v2</code>, <code>catalog_{full}_market_contract_prices_v2</code>, <code>catalog_{full}_market_implied_volatility_v2</code>, <code>catalog_{full}_market_greeks_v2</code>, <code>catalog_{full}_market_open_interest</code>, <code>catalog_{full}_market_liquidations_v2</code>, <code>catalog_{full}_market_metrics_v2</code>.</li>
 </ul>
@@ -1101,22 +1111,22 @@
 <li>Added test to verify one row per frequency</li>
 </ul>
 <h2 id="202352617">2023.5.26.17<a class="headerlink" href="#202352617" title="Permanent link">&para;</a></h2>
-<h3 id="added_30">Added<a class="headerlink" href="#added_30" title="Permanent link">&para;</a></h3>
+<h3 id="added_31">Added<a class="headerlink" href="#added_31" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Transaction tracker parameters</li>
 <li>Include heartbeats functionality</li>
 </ul>
 <h2 id="202351719">2023.5.17.19<a class="headerlink" href="#202351719" title="Permanent link">&para;</a></h2>
-<h3 id="changed_9">Changed<a class="headerlink" href="#changed_9" title="Permanent link">&para;</a></h3>
+<h3 id="changed_10">Changed<a class="headerlink" href="#changed_10" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Fixed catalog performance issues</li>
 </ul>
-<h3 id="added_31">Added<a class="headerlink" href="#added_31" title="Permanent link">&para;</a></h3>
+<h3 id="added_32">Added<a class="headerlink" href="#added_32" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Walkthrough notebook for DS UA Workshop</li>
 </ul>
 <h2 id="20235220">2023.5.2.20<a class="headerlink" href="#20235220" title="Permanent link">&para;</a></h2>
-<h3 id="added_32">Added<a class="headerlink" href="#added_32" title="Permanent link">&para;</a></h3>
+<h3 id="added_33">Added<a class="headerlink" href="#added_33" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Rate limiter for community users</li>
 <li>Multithreading to CI pipeline</li>
@@ -1128,42 +1138,42 @@
 <li>URL fixes</li>
 </ul>
 <h2 id="202342414">2023.4.24.14<a class="headerlink" href="#202342414" title="Permanent link">&para;</a></h2>
-<h3 id="added_33">Added<a class="headerlink" href="#added_33" title="Permanent link">&para;</a></h3>
+<h3 id="added_34">Added<a class="headerlink" href="#added_34" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Missing catalog endpoints</li>
 <li>Support for optional columns in API data</li>
 <li>New endpoint and tests</li>
 </ul>
 <h2 id="202331617">2023.3.16.17<a class="headerlink" href="#202331617" title="Permanent link">&para;</a></h2>
-<h3 id="changed_10">Changed<a class="headerlink" href="#changed_10" title="Permanent link">&para;</a></h3>
+<h3 id="changed_11">Changed<a class="headerlink" href="#changed_11" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Updated Dockerfile and dependencies</li>
 <li>Updated poetry lock file</li>
 <li>Bug fixes in examples</li>
 </ul>
-<h3 id="added_34">Added<a class="headerlink" href="#added_34" title="Permanent link">&para;</a></h3>
+<h3 id="added_35">Added<a class="headerlink" href="#added_35" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Missing timeseries stream endpoints</li>
 </ul>
 <h2 id="202322722">2023.2.27.22<a class="headerlink" href="#202322722" title="Permanent link">&para;</a></h2>
-<h3 id="added_35">Added<a class="headerlink" href="#added_35" title="Permanent link">&para;</a></h3>
+<h3 id="added_36">Added<a class="headerlink" href="#added_36" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Missing functions and parameters</li>
 </ul>
 <h2 id="20232230">2023.2.23.0<a class="headerlink" href="#20232230" title="Permanent link">&para;</a></h2>
-<h3 id="added_36">Added<a class="headerlink" href="#added_36" title="Permanent link">&para;</a></h3>
+<h3 id="added_37">Added<a class="headerlink" href="#added_37" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Missing functions parameters</li>
 <li>Improved documentation for DataCollections usage</li>
 </ul>
 <h2 id="202312623">2023.1.26.23<a class="headerlink" href="#202312623" title="Permanent link">&para;</a></h2>
-<h3 id="added_37">Added<a class="headerlink" href="#added_37" title="Permanent link">&para;</a></h3>
+<h3 id="added_38">Added<a class="headerlink" href="#added_38" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Unauthorized error handling to FlatFilesExporter</li>
 <li>Updated CI pipeline</li>
 </ul>
 <h2 id="202311021">2023.1.10.21<a class="headerlink" href="#202311021" title="Permanent link">&para;</a></h2>
-<h3 id="added_38">Added<a class="headerlink" href="#added_38" title="Permanent link">&para;</a></h3>
+<h3 id="added_39">Added<a class="headerlink" href="#added_39" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Debug mode to help figure out performance issues</li>
 <li>Documentation updates for to_dataframe() method for catalog</li>
@@ -1173,12 +1183,12 @@
 <li>Support for index levels via WS in the client</li>
 </ul>
 <h2 id="2022111416">2022.11.14.16<a class="headerlink" href="#2022111416" title="Permanent link">&para;</a></h2>
-<h3 id="changed_11">Changed<a class="headerlink" href="#changed_11" title="Permanent link">&para;</a></h3>
+<h3 id="changed_12">Changed<a class="headerlink" href="#changed_12" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Modified API Client to use python requests.Session for improved performance</li>
 </ul>
 <h2 id="202211318">2022.11.3.18<a class="headerlink" href="#202211318" title="Permanent link">&para;</a></h2>
-<h3 id="added_39">Added<a class="headerlink" href="#added_39" title="Permanent link">&para;</a></h3>
+<h3 id="added_40">Added<a class="headerlink" href="#added_40" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Taxonomy endpoints</li>
 <li>Updated Atlas V2 balance endpoints</li>
@@ -1188,12 +1198,12 @@
 <li>Fixed broken examples using <code>type</code> parameter</li>
 </ul>
 <h2 id="2022101818">2022.10.18.18<a class="headerlink" href="#2022101818" title="Permanent link">&para;</a></h2>
-<h3 id="changed_12">Changed<a class="headerlink" href="#changed_12" title="Permanent link">&para;</a></h3>
+<h3 id="changed_13">Changed<a class="headerlink" href="#changed_13" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Updated build pipeline</li>
 </ul>
 <h2 id="2022101420">2022.10.14.20<a class="headerlink" href="#2022101420" title="Permanent link">&para;</a></h2>
-<h3 id="added_40">Added<a class="headerlink" href="#added_40" title="Permanent link">&para;</a></h3>
+<h3 id="added_41">Added<a class="headerlink" href="#added_41" title="Permanent link">&para;</a></h3>
 <ul>
 <li>New catalog endpoints for metrics</li>
 <li>Automated version updates on release</li>

@@ -1149,7 +1149,7 @@ SplyFF                        Float64
 volume_trusted_spot_usd_1d    Float64
 dtype: object
 </code></pre></div>
-<p>This can be turned off by setting <code>optimize_pandas_types=False</code></p>
+<p>This can be turned off by setting <code>optimize_dtypes=False</code></p>
 <p>Alternatively, you can manually enter your own type conversion by passing in a dictionary for <code>dtype_mapper</code>. This can be done in conjunction with pandas' built in type inference.
 <div class="highlight"><pre><span></span><code><span class="n">mapper</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">&#39;SplyFF&#39;</span><span class="p">:</span> <span class="s1">&#39;Float64&#39;</span><span class="p">,</span>
@@ -1157,7 +1157,7 @@ dtype: object
 <span class="p">}</span>
 <span class="n">df_mapped</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_asset_metrics</span><span class="p">(</span>
   <span class="n">assets</span><span class="o">=</span><span class="n">asset_list</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="n">metrics_list</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="n">start_time</span><span class="p">,</span> <span class="n">limit_per_asset</span><span class="o">=</span><span class="mi">3</span>
-<span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">dtype_mapper</span><span class="o">=</span><span class="n">mapper</span><span class="p">,</span> <span class="n">optimize_pandas_types</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">dtype_mapper</span><span class="o">=</span><span class="n">mapper</span><span class="p">,</span> <span class="n">optimize_dtypes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_mapped</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
 </code></pre></div></p>
 <div class="highlight"><pre><span></span><code>asset                                          object
@@ -1174,7 +1174,7 @@ dtype: object
 <span class="p">}</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_asset_metrics</span><span class="p">(</span>
   <span class="n">assets</span><span class="o">=</span><span class="s1">&#39;btc&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="s1">&#39;ReferenceRateUSD&#39;</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="s1">&#39;2022-06-15&#39;</span><span class="p">,</span> <span class="n">limit_per_asset</span><span class="o">=</span><span class="mi">1</span>
-<span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">dtype_mapper</span><span class="o">=</span><span class="n">dtype_mapper</span><span class="p">,</span> <span class="n">optimize_pandas_types</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">dtype_mapper</span><span class="o">=</span><span class="n">dtype_mapper</span><span class="p">,</span> <span class="n">optimize_dtypes</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>RangeIndex: 1 entries, 0 to 0
