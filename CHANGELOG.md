@@ -1,6 +1,6 @@
 # Changelog
 
-## __version__
+## 2025.4.24.14
 ### Fixed
 - Install CHANGELOG to correct location for documentation site.
 - Fix broken image link in Best Practices user guide.
