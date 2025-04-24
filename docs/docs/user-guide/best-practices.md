@@ -26,7 +26,7 @@ market_candles_spot = client.get_market_candles(markets=[f'{exchange}-*-spot' fo
 
 Most common use cases can be achieved following the pattern shown below.
 
-![Illustration](/docs/docs/assets/images/api_flow.png)
+![API_Flow_Illustration](../assets/images/api_flow.png)
 
 For example, let's follow the flow indicated in light blue.
 

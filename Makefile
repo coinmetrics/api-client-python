@@ -1,4 +1,4 @@
-.PHONY:  all check clean image imagetest test venv
+.PHONY:  all check clean docs image imagetest test venv
 
 # default image name
 IMAGE = api-client-image
@@ -11,7 +11,7 @@ venv:
 	rm -rf ./$(VENV)
 	python3.11 -m venv ./$(VENV)
 	./$(VENV)/bin/pip install -U pip setuptools
-	./$(VENV)/bin/pip install poetry==1.8.5
+	./$(VENV)/bin/pip install poetry
 	. ./$(VENV)/bin/activate && poetry install --with dev
 	@echo "To use virtual environment run 'source ./$(VENV)/bin/activate'"
 
@@ -27,6 +27,14 @@ test:
 # Run all tests including those normally skipped by the CI/CD pipeline
 all-tests: test
 	python -m pytest test/test_data_exporter.py test/test_catalog.py test/test_catalog_benchmarks.py
+
+docs:
+	pydoc-markdown -m coinmetrics.api_client > docs/docs/reference/api_client.md
+	cp -f README.md docs/docs/index.md
+	cp -f FlatFilesExport.md docs/docs/tools/FlatFilesExport.md
+	cp -f CHANGELOG.md docs/docs/releases/CHANGELOG.md
+	cp -f examples/README.md docs/docs/user-guide/examples.md
+	cd docs && mkdocs build
 
 image:
 	docker build --tag $(IMAGE) .
