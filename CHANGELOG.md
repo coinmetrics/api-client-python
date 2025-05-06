@@ -1,5 +1,9 @@
 # Changelog
 
+## __version__
+### Fixed
+- Timezone normalization when using the parallel option with datetime.timedelta.
+
 ## 2025.4.24.14
 ### Fixed
 - Install CHANGELOG to correct location for documentation site.

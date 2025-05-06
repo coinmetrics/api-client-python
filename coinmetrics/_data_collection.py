@@ -59,6 +59,9 @@ except ImportError:
     logger.info(
         "Pandas export is unavailable. Install pandas to unlock dataframe functions."
     )
+    if TYPE_CHECKING:
+        import pandas as pd
+        from pandas import DateOffset
 
 
 class CsvExportError(Exception):
@@ -572,49 +575,33 @@ class ParallelDataCollection(DataCollection):
         :return: List[DataCollection] all combinations of DataCollections based on the parallelized parameters and
         time increment.
         """
-        data_collections = []
-        if len(self._parallelize_on) == 1:
-            query_items = self._url_params[self._parallelize_on[0]]
-            if isinstance(query_items, str):
-                query_items = query_items.split(",")
-            for item in query_items:  # type: ignore
-                new_params = self._url_params.copy()
-                new_params[self._parallelize_on[0]] = item
-                new_data_collection = DataCollection(
-                    data_retrieval_function=self._data_retrieval_function,
-                    endpoint=self._endpoint,
-                    url_params=new_params,
-                    csv_export_supported=True
-                )
-                data_collections.append(new_data_collection)
-            data_collections = self._add_time_dimension_to_data_collections(data_collections=data_collections)
-
-            return data_collections
-
-        query_items_dict = {}
+        query_items = {}
         for param in self._parallelize_on:
-            if isinstance(self._url_params.get(param), str) and "," in self._url_params.get(param):  # type: ignore
-                query_items_dict[param] = self._url_params[param].split(",")  # type: ignore
-            else:
-                query_items_dict[param] = self._url_params[param]
+            val = self._url_params.get(param)
+            if isinstance(val, str):
+                val = val.split(",")  # Always convert to a list
+            assert isinstance(val, Iterable)
+            query_items[param] = val
 
-        combinations = []
-        keys = list(query_items_dict.keys())
-        for values_combo in itertools.product(*query_items_dict.values()):
-            combinations.append(dict(zip(keys, values_combo)))
+        combinations = [dict(zip(query_items, vals)) for vals in itertools.product(*query_items.values())]
+
+        data_collections = []
         for combo in combinations:
             new_params = self._url_params.copy()
             new_params.update(combo)
-            new_data_collection = DataCollection(data_retrieval_function=self._data_retrieval_function,
-                                                 endpoint=self._endpoint,
-                                                 url_params=new_params,
-                                                 csv_export_supported=True)
+            new_data_collection = DataCollection(
+                data_retrieval_function=self._data_retrieval_function,
+                endpoint=self._endpoint,
+                url_params=new_params,
+                csv_export_supported=True
+            )
             data_collections.append(new_data_collection)
 
         data_collections = self._add_time_dimension_to_data_collections(data_collections=data_collections)
         return data_collections
 
     def _get_asset_end_height(self, asset: str) -> int:
+        block_data = None
         if self._client is not None:
             block_data = self._client.get_list_of_blocks_v2(asset=asset, paging_from='end', page_size=1).first_page()
         if block_data:
@@ -637,35 +624,30 @@ class ParallelDataCollection(DataCollection):
             start: Union[datetime, int],
             end: Union[datetime, int],
             increment: Union[timedelta, relativedelta, DateOffset, int]
-        ) -> Generator[Tuple[datetime | int, datetime | Any | int], None, None]:
-            # code below can be simplified but is expanded for mypy checks
+        ) -> Generator[Tuple[Union[datetime, int], Union[datetime, int]]]:
             current = start
             if (
-                isinstance(start, datetime)
+                isinstance(current, datetime)
                 and isinstance(end, datetime)
                 and isinstance(increment, (timedelta, relativedelta, DateOffset))
             ):
-                if isinstance(end, datetime) and isinstance(current, datetime):
-                    while current < end:
-                        if isinstance(current, datetime) and isinstance(increment, (timedelta, relativedelta, DateOffset)):
-                            next_ = current + increment
-                            if next_ > end:
-                                next_ = end
-                            yield (current, next_)
-                            current = next_
+                while current < end:
+                    next_ = current + increment
+                    if next_ > end:
+                        next_ = end
+                    yield (current, next_)
+                    current = next_
             elif (
-                isinstance(start, int)
+                isinstance(current, int)
                 and isinstance(end, int)
                 and isinstance(increment, int)
             ):
-                if isinstance(current, int) and isinstance(end, int):
-                    while current < end:
-                        if isinstance(current, int) and isinstance(increment, int):
-                            next_ = current + increment
-                            if next_ > end:
-                                next_ = end
-                            yield (current, next_)
-                            current = next_
+                while current < end:
+                    next_ = current + increment
+                    if next_ > end:
+                        next_ = end
+                    yield (current, next_)
+                    current = next_
             else:
                 raise ValueError("Unsupported combination of types for start, end, or increment")
 
@@ -717,7 +699,7 @@ class ParallelDataCollection(DataCollection):
                 end_time = self.parse_date(
                     cast(datetime, self._url_params.get("end_time"))
                 ) if self._url_params.get(
-                    "end_time") else datetime.utcnow().replace(microsecond=0)
+                    "end_time") else datetime.now(timezone.utc).replace(microsecond=0, tzinfo=None)
                 for start, end in generate_ranges(
                     start_time,
                     end_time,
@@ -733,12 +715,9 @@ class ParallelDataCollection(DataCollection):
         data_collections = self.get_parallel_datacollections()
         total_tasks = len(data_collections)
         with self._executor(max_workers=self._max_workers) as processor:
+            combined_data = processor.map(self._helper_to_list, data_collections)
             if self._progress_bar:
-                combined_data = list(
-                    tqdm(processor.map(ParallelDataCollection._helper_to_list, data_collections), total=total_tasks,
-                         desc="Converting to List"))
-            else:
-                combined_data = processor.map(ParallelDataCollection._helper_to_list, data_collections)  # type: ignore
+                combined_data = tqdm(combined_data, total=total_tasks, desc="Converting to List")
         combined_list = list(itertools.chain.from_iterable(combined_data))
         return combined_list
 

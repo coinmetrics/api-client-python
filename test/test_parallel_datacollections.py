@@ -1,10 +1,11 @@
 # type: ignore
 import datetime
-from datetime import timedelta
+from datetime import timedelta, timezone
 import dateutil.relativedelta
 import pandas as pd
 from pandas import DateOffset, Timestamp
 import pytest
+from zoneinfo import ZoneInfo
 
 from coinmetrics.api_client import CoinMetricsClient
 from coinmetrics._data_collection import ParallelDataCollection
@@ -438,6 +439,54 @@ def test_date_offset() -> None:
     ).parallel(time_increment=time_increment).to_dataframe()
     assert not df_metrics.empty
     assert df_metrics.time.min().to_pydatetime().replace(tzinfo=None) == start_time
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_normalize_tz() -> None:
+    """Check that timezone normalization works as expected."""
+
+    def get_start_end_data(start, end) -> tuple[datetime, datetime]:
+        data = (
+            client.get_asset_metrics(
+                assets="btc",
+                metrics="PriceUSD",
+                frequency="1h",
+                start_time=start,
+                end_time=end,
+                page_size=10,
+            )
+            .parallel(time_increment=timedelta(hours=1))
+            .to_list()
+        )
+        fmt = "%Y-%m-%dT%H:%M:%S.%f000Z"
+        start = datetime.datetime.strptime(data[0]["time"], fmt)
+        end = datetime.datetime.strptime(data[-1]["time"], fmt)
+        return start, end
+
+    tz = ZoneInfo("America/New_York")
+    hr = 3
+    windows = [
+        (
+            "2025-01-01T00:00:00",
+            "2025-01-01T03:00:00",
+        ),
+        (
+            datetime.datetime(2025, 1, 1),
+            datetime.datetime(2025, 1, 1, hr),
+        ),
+        (
+            datetime.datetime(2025, 1, 1, tzinfo=tz),
+            datetime.datetime(2025, 1, 1, hr, tzinfo=tz),
+        ),
+    ]
+    for start_time, end_time in windows:
+        expected_start = datetime.datetime(2025, 1, 1)
+        if isinstance(start_time, datetime.datetime) and start_time.tzinfo:
+            expected_start =  start_time.astimezone(timezone.utc).replace(tzinfo=None)
+        expected_end = expected_start + timedelta(hours=hr - 1)
+        start, end = get_start_end_data(start_time, end_time)
+        assert start == expected_start
+        assert end == expected_end
 
 
 if __name__ == '__main__':

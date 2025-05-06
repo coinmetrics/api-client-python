@@ -26,7 +26,9 @@ def transform_url_params_values_to_str(
                 param_value = param_value.to_pydatetime()
 
             if isinstance(param_value, datetime):
-                param_value = param_value.astimezone(timezone.utc).replace(tzinfo=None)
+                if param_value.tzinfo is not None:
+                    param_value = param_value.astimezone(timezone.utc)
+                param_value = param_value.replace(tzinfo=None)
 
             if isinstance(param_value, date) and not isinstance(param_value, datetime):
                 param_value = datetime(param_value.year, param_value.month, param_value.day)
