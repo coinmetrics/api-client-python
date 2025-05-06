@@ -1,6 +1,6 @@
 # Changelog
 
-## __version__
+## 2025.5.6.13
 ### Fixed
 - Timezone normalization when using the parallel option with datetime.timedelta.
 
