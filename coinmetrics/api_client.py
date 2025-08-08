@@ -1864,7 +1864,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -1919,7 +1919,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param limit: Limit of response items. `none` means no limit.
         :type limit: Optional[str]
@@ -2102,7 +2102,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -2158,7 +2158,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -2221,7 +2221,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -2284,7 +2284,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -2340,7 +2340,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -2396,7 +2396,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -2452,7 +2452,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -2508,7 +2508,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -2564,7 +2564,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -2620,7 +2620,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -2676,7 +2676,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -2735,7 +2735,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -2802,7 +2802,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -2858,7 +2858,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -2921,7 +2921,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -2984,7 +2984,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -3040,7 +3040,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -3096,7 +3096,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -3152,7 +3152,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -3208,7 +3208,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -3264,7 +3264,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -3320,7 +3320,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -3376,7 +3376,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -3435,7 +3435,7 @@ class CoinMetricsClient:
         :type asset: Optional[str]
         :param symbol: Symbol of derivative markets, full instrument name.
         :type symbol: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
@@ -3496,7 +3496,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of asset metrics.
@@ -3547,7 +3547,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of asset metrics.
@@ -3598,7 +3598,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of exchange metrics.
@@ -3648,7 +3648,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of exchange metrics.
@@ -3698,7 +3698,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of exchange-asset metrics.
@@ -3748,7 +3748,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of exchange-asset metrics.
@@ -3798,7 +3798,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
         :return: List of pair metrics.
         :rtype: CatalogV2DataCollection
@@ -3847,7 +3847,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of pair metrics.
@@ -3897,7 +3897,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of institution metrics.
@@ -3947,7 +3947,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of institution metrics.
@@ -3991,7 +3991,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of asset pair candles statistics.
@@ -4030,7 +4030,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of index candles statistics.
@@ -4069,7 +4069,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of index levels.
@@ -4108,7 +4108,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of asset chains assets
@@ -4140,7 +4140,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of mempool feerates assets
@@ -4172,7 +4172,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of mining pool tips assets
@@ -4204,7 +4204,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of transaction tracker assets
@@ -4236,7 +4236,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of asset pair candles statistics.
@@ -4275,7 +4275,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of index candles statistics.
@@ -4314,7 +4314,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of index levels.
@@ -4351,7 +4351,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of asset chains assets
@@ -4383,7 +4383,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of mempool feerates assets
@@ -4415,7 +4415,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of mining pool tips assets
@@ -4447,7 +4447,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of transaction tracker assets
@@ -4479,7 +4479,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of blockchain-v2/accounts assets using catalog-v2
@@ -4511,7 +4511,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of blockchain-v2/balance-updates assets using catalog-v2
@@ -4543,7 +4543,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of blockchain-v2/blocks assets using catalog-v2
@@ -4575,7 +4575,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of blockchain-v2/transactions assets using catalog-v2
@@ -4607,7 +4607,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: Full list of blockchain-v2/accounts assets using catalog-v2
@@ -4639,7 +4639,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: Full list of blockchain-v2/balance-updates assets using catalog-v2
@@ -4671,7 +4671,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: Full list of blockchain-v2/blocks assets using catalog-v2
@@ -4703,7 +4703,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: Full list of blockchain-v2/transactions assets using catalog-v2
@@ -4908,6 +4908,7 @@ class CoinMetricsClient:
         null_as_zero: Optional[bool] = None,
         ignore_forbidden_errors: Optional[bool] = None,
         ignore_unsupported_errors: Optional[bool] = None,
+        format: Optional[str] = "json_stream",
     ) -> DataCollection:
         """
         Returns requested metrics for specified assets.
@@ -4958,6 +4959,8 @@ class CoinMetricsClient:
         :type ignore_forbidden_errors: bool
         :param ignore_unsupported_errors: Default: false. Ignore errors for unsupported assets, metrics or frequencies.
         :type ignore_unsupported_errors: bool
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
+        :type format: str
         :return: Asset Metrics timeseries.
         :rtype: DataCollection
         """
@@ -4983,7 +4986,8 @@ class CoinMetricsClient:
             "min_confirmations": min_confirmations,
             "null_as_zero": null_as_zero,
             "ignore_forbidden_errors": ignore_forbidden_errors,
-            "ignore_unsupported_errors": ignore_unsupported_errors
+            "ignore_unsupported_errors": ignore_unsupported_errors,
+            "format": format,
         }
         return DataCollection(self._get_data, "timeseries/asset-metrics", params, client=self)
 
@@ -5571,6 +5575,7 @@ class CoinMetricsClient:
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None,
+        format: Optional[str] = "json_stream",
     ) -> DataCollection:
         """
         Returns market candles for specified markets, frequency and date range.
@@ -5596,6 +5601,8 @@ class CoinMetricsClient:
         :type timezone: str
         :param limit_per_market: How many entries _per market_ the result should contain.
         :type limit_per_market: int
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
+        :type format: str
         :return: Market Candles timeseries.
         :rtype: DataCollection
         """
@@ -5611,6 +5618,7 @@ class CoinMetricsClient:
             "end_inclusive": end_inclusive,
             "timezone": timezone,
             "limit_per_market": limit_per_market,
+            "format": format
         }
         return DataCollection(self._get_data, "timeseries/market-candles", params, client=self)
 
@@ -5626,6 +5634,7 @@ class CoinMetricsClient:
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None,
         min_confirmations: Optional[int] = None,
+        format: Optional[str] = "json_stream",
     ) -> DataCollection:
         """
         Returns market trades for specified markets and date range.
@@ -5651,6 +5660,8 @@ class CoinMetricsClient:
         :type limit_per_market: int
         :param min_confirmations: Specifies how many blocks behind the chain tip trades are based on. Default is 2.
         :type min_confirmations: int
+        :param format: Default: "json_stream". Format of the response. Supported values are json, json_stream.
+        :type format: str
         :return: Market Trades timeseries.
         :rtype: DataCollection
         """
@@ -5666,6 +5677,7 @@ class CoinMetricsClient:
             "timezone": timezone,
             "limit_per_market": limit_per_market,
             "min_confirmations": min_confirmations,
+            "format": format
         }
         return DataCollection(self._get_data, "timeseries/market-trades", params, client=self)
 
@@ -5681,6 +5693,7 @@ class CoinMetricsClient:
         granularity: Optional[str] = None,
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None,
+        format: Optional[str] = "json_stream",
     ) -> DataCollection:
         """
         Returns market open interest for specified markets and date range.
@@ -5890,7 +5903,7 @@ class CoinMetricsClient:
         depth_limit: Optional[str] = "100",
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None,
-        format: Optional[str] = None
+        format: Optional[str] = "json_stream"
     ) -> DataCollection:
         """
         Returns market order books for specified markets and date range.
@@ -5918,7 +5931,7 @@ class CoinMetricsClient:
         :type timezone: str
         :param limit_per_market: How many entries _per market_ the result should contain.
         :type limit_per_market: int
-        :param format: Default: "json". Format of the response. Supported values are json, json_stream.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: str
         :return: Market Order Books timeseries.
         :rtype: DataCollection
@@ -5953,6 +5966,7 @@ class CoinMetricsClient:
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None,
         include_one_sided: Optional[bool] = None,
+        format: Optional[str] = "json_stream",
     ) -> DataCollection:
         """
         Returns market quotes for specified markets and date range.
@@ -5980,6 +5994,8 @@ class CoinMetricsClient:
         :type limit_per_market: int
         :param include_one_sided: Default: false Include one-side and empty books in quotes response.
         :type include_one_sided: bool
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
+        :type format: str
         :return: Market Quotes timeseries.
         :rtype: DataCollection
         """
@@ -5996,6 +6012,7 @@ class CoinMetricsClient:
             "timezone": timezone,
             "limit_per_market": limit_per_market,
             "include_one_sided": include_one_sided,
+            "format": format,
         }
         return DataCollection(self._get_data, "timeseries/market-quotes", params, client=self)
 
@@ -7266,7 +7283,7 @@ class CoinMetricsClient:
         :type page_size: Optional[int]
         :param paging_from: Where does the first page start, at the start of the interval or at the end.
         :type paging_from: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of asset metrics metadata.
@@ -7329,7 +7346,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of markets metadata.
@@ -7403,7 +7420,7 @@ class CoinMetricsClient:
         :type page_size: Optional[int]
         :param paging_from: Where does the first page start, at the start of the interval or at the end.
         :type paging_from: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of exchange metrics metadata.
@@ -7444,7 +7461,7 @@ class CoinMetricsClient:
         :type page_size: Optional[int]
         :param paging_from: Where does the first page start, at the start of the interval or at the end.
         :type paging_from: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of exchange asset metrics metadata.
@@ -7485,7 +7502,7 @@ class CoinMetricsClient:
         :type page_size: Optional[int]
         :param paging_from: Where does the first page start, at the start of the interval or at the end.
         :type paging_from: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of pair metrics metadata.
@@ -7526,7 +7543,7 @@ class CoinMetricsClient:
         :type page_size: Optional[int]
         :param paging_from: Where does the first page start, at the start of the interval or at the end.
         :type paging_from: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of institution metrics metadata.
@@ -7570,7 +7587,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of assets metadata.
@@ -7607,7 +7624,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of exchanges metadata.
@@ -7644,7 +7661,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of indexes metadata.
@@ -7681,7 +7698,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of pairs metadata.
@@ -7718,7 +7735,7 @@ class CoinMetricsClient:
         :type paging_from: Optional[str]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
         :type next_page_token: Optional[str]
-        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size is ignored when format='json_stream'.
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
         :type format: Optional[str]
 
         :return: List of market metrics metadata.
@@ -8023,7 +8040,7 @@ class CoinMetricsClient:
             resp = self._send_request(actual_url)
         try:
             if params.get("format") == "json_stream":
-                data = {"data": [json.loads(i) for i in resp.iter_lines()]}
+                data = {"data": (json.loads(i) for i in resp.iter_lines())}
             else:
                 data = json.loads(resp.content)
         except ValueError:

@@ -26,70 +26,70 @@ COMMON_REFD_COLS = ["metric",
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_refd_asset_pairs() -> None:
     expected_cols = COMMON_REFD_COLS
-    asset_pairs = client.reference_data_pair_metrics().first_page()[0]
+    asset_pairs = next(client.reference_data_pair_metrics())
     assert all([col in asset_pairs for col in expected_cols])
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_refd_institution_metrics() -> None:
     expected_cols = COMMON_REFD_COLS
-    institution_data = client.reference_data_institution_metrics().first_page()[0]
+    institution_data = next(client.reference_data_institution_metrics())
     assert all([col in institution_data for col in expected_cols])
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_refd_exchange_asset_metrics() -> None:
     expected_cols = COMMON_REFD_COLS
-    exchange_asset_metrics = client.reference_data_exchange_asset_metrics().first_page()[0]
+    exchange_asset_metrics = next(client.reference_data_exchange_asset_metrics())
     assert all([col in exchange_asset_metrics for col in expected_cols])
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_refd_exchange_metrics() -> None:
     expected_cols = COMMON_REFD_COLS
-    exchange_asset_metrics = client.reference_data_exchange_metrics().first_page()[0]
+    exchange_asset_metrics = next(client.reference_data_exchange_metrics())
     assert all([col in exchange_asset_metrics for col in expected_cols])
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_refd_asset_metrics() -> None:
     expected_cols = COMMON_REFD_COLS
-    asset_metrics = client.reference_data_exchange_asset_metrics().first_page()[0]
+    asset_metrics = next(client.reference_data_exchange_asset_metrics())
     assert all([col in asset_metrics for col in expected_cols])
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_refd_assets() -> None:
     expected_cols = ["asset", "full_name"]
-    assets = client.reference_data_assets().first_page()[0]
+    assets = next(client.reference_data_assets())
     assert all([col in assets for col in expected_cols])
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_refd_indexes() -> None:
     expected_cols = ["index", "full_name", "description", "type"]
-    indexes = client.reference_data_indexes().first_page()[0]
+    indexes = next(client.reference_data_indexes())
     assert all([col in indexes for col in expected_cols])
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_refd_pairs() -> None:
     expected_cols = ["pair", "full_name"]
-    pairs = client.reference_data_pairs().first_page()[0]
+    pairs = next(client.reference_data_pairs())
     assert all([col in pairs for col in expected_cols])
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_refd_market_metrics() -> None:
     expected_cols = ["metric", "full_name", "description", "product", "category", "subcategory", "unit", "data_type", "display_name"]
-    pairs = client.reference_data_market_metrics().first_page()[0]
+    pairs = next(client.reference_data_market_metrics())
     assert all([col in pairs for col in expected_cols])
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_refd_markets() -> None:
     expected_cols = ["market", "exchange", "type"]
-    markets = client.reference_data_markets().first_page()[0]
+    markets = next(client.reference_data_markets())
     assert all([col in markets for col in expected_cols])
 
 

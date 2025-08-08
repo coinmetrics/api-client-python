@@ -15,7 +15,7 @@ print("CM_API_KEY is set - tests will run") if cm_api_key_set else print(
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
-def test_as_list_works_like_first_page_short_query() -> None:
+def test_to_list_works_like_first_page_short_query() -> None:
     """
     In theory, on a small query that works on a small number of results should have equivalent results for .first_page()
     and also _to_list()
@@ -28,6 +28,7 @@ def test_as_list_works_like_first_page_short_query() -> None:
         limit_per_asset=1,
         start_time=test_time,
         end_time=test_time,
+        format="json",
     ).first_page()
     data_list = client.get_asset_metrics(
         assets=assets,
@@ -35,12 +36,13 @@ def test_as_list_works_like_first_page_short_query() -> None:
         limit_per_asset=1,
         start_time=test_time,
         end_time=test_time,
+        format="json",
     ).to_list()
     assert data_list == data_first_page
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
-def test_as_list_doesnt_work_like_first_page_long_query() -> None:
+def test_to_list_doesnt_work_like_first_page_long_query() -> None:
     """
     In theory, on a long query, that will have multiple pages of response data should have very different results
     as first page
@@ -54,6 +56,7 @@ def test_as_list_doesnt_work_like_first_page_long_query() -> None:
         limit_per_asset=100,
         start_time=start_time,
         end_time=end_time,
+        format="json",
     ).first_page()
     data_list = client.get_asset_metrics(
         assets=assets,
@@ -61,12 +64,13 @@ def test_as_list_doesnt_work_like_first_page_long_query() -> None:
         limit_per_asset=100,
         start_time=start_time,
         end_time=end_time,
+        format="json",
     ).to_list()
     assert data_list != data_first_page
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
-def test_as_list_gets_all_data() -> None:
+def test_to_list_gets_all_data() -> None:
     """
     This tests that .to_list() gets the same amount and the same data as _to_dataframe()
     """

@@ -1,4 +1,4 @@
-FROM python:3.11-buster
+FROM python:3.11-bookworm
 
 ARG CM_API_KEY=""
 ENV CM_API_KEY=$CM_API_KEY
