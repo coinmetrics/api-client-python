@@ -35,6 +35,22 @@ def test_parallel_market_trades() -> None:
     assert len(parallel_trades) == len(normal_trades)
     for market in markets:
         assert market in unique_markets
+        
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_parallel_predicted_market_funding_rates() -> None:
+    """
+    Basic test to make sure that parallel predicted funding rates works over a short horizon
+    """
+    markets = ["deribit-XRP_USDC-PERPETUAL-future", "bybit-10000LADYSUSDT-future"]
+    pmfr = client.get_predicted_market_funding_rates(
+        markets=markets,
+        start_time="2023-11-01T00:00:00",
+        end_time="2023-11-01T00:01:00"
+    ).parallel().to_dataframe()
+
+    assert len(pmfr) > 1
+    assert all([market in set(pmfr['market']) for market in markets])
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)

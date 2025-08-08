@@ -5543,7 +5543,7 @@ class CoinMetricsClient:
         1d metrics by (time, market) you should choose time as value for the sort parameter. Sorting by time is useful
         if you request metrics for a set of markets.
         :type sort: str
-        :return: Market Candles timeseries.
+        :return: Market metrics timeseries.
         :rtype: DataCollection
         """
 

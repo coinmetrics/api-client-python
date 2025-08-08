@@ -498,6 +498,7 @@ class ParallelDataCollection(DataCollection):
         'timeseries/market-candles': 'markets',
         'timeseries/market-contract-prices': 'markets',
         'timeseries/market-funding-rates': 'markets',
+        'timeseries/market-funding-rates-predicted': 'markets',
         'timeseries/market-greeks': 'markets',
         'timeseries/market-implied-volatility': 'markets',
         'timeseries/market-liquidations': 'markets',
