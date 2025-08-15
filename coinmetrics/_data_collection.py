@@ -175,6 +175,35 @@ class DataCollection:
                 return
             if self.API_RETURN_MODEL:
                 columns_to_store = self.API_RETURN_MODEL.get_dataframe_cols()
+            elif (
+                # for timeseries/{*-metrics}
+                self._endpoint.split("/")[0] == "timeseries"
+                and self._endpoint.split("/")[1].split("-")[-1] == "metrics"
+                and self._url_params.get("metrics") is not None
+            ):
+                entity = ["_".join(self._endpoint.split("/")[1].split("-")[:-1])]
+                metrics = self._url_params.get("metrics")
+                if isinstance(metrics, str):
+                    metrics = metrics.split(",")
+                else:
+                    metrics = list(metrics)  # type: ignore
+                if (
+                    any(m.startswith(("Sply", "Flow")) for m in metrics)
+                ):
+                    metrics_copy = metrics[:]
+                    for metric in metrics_copy:
+                        if (
+                            metric.startswith("Sply")
+                            or metric.startswith("Flow")
+                            or metric.startswith("TxEx")
+                        ):
+                            metrics.append(f"{metric}-status-time")
+                            metrics.append(f"{metric}-status")
+                if self._url_params.get("frequency") == "1b":
+                    time = ["time", "block_hash", "parent_block_hash", "height"]
+                else:
+                    time = ["time"]
+                columns_to_store = time + entity + metrics
             elif self._columns_to_store:
                 columns_to_store = self._columns_to_store
             else:

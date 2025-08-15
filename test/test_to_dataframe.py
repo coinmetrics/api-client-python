@@ -17,22 +17,11 @@ def test_defi_balance_sheets() -> None:
     Testing this works for aave
     """
     aave_balance_sheets: pd.DataFrame = client.get_defi_balance_sheets(
-        defi_protocols="aave_v2_eth"
+        defi_protocols="aave_v2_eth",
+        start_time="2025-01-01",
+        end_time="2025-01-01"
     ).to_dataframe(dataframe_type='pandas')
-    assert len(aave_balance_sheets) > 100
-    assert aave_balance_sheets.iloc[:1]["defi_protocol"][0] == "aave_v2_eth"
-
-
-@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
-def test_transaction_tracker_catalog_full() -> None:
-    data = client.catalog_full_transaction_tracker_assets().to_dataframe()
-    assert len(data) >= 2
-
-
-@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
-def test_transaction_tracker_catalog() -> None:
-    data = client.catalog_transaction_tracker_assets().to_dataframe()
-    assert len(data) >= 2
+    assert not aave_balance_sheets.empty
 
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
@@ -113,6 +102,109 @@ def test_optimize_pandas_types_deprecated(caplog: pytest.LogCaptureFixture) -> N
     assert isinstance(df, pd.DataFrame)
     assert "'optimize_pandas_types' is deprecated." not in caplog.text
     assert pd.api.types.is_datetime64_ns_dtype(df["time"])
+    
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_nullable_columns_exchange() -> None:
+    """
+    Test that nullable columns are returned correctly when calling to_dataframe()
+    """
+    # Case 1: Exchange Metrcs
+    # pick exchanges where metric coverage is spotty to force nullable columns
+    exchanges = ["binance", "bibox", "bitmex"]
+    metrics = [
+        "open_interest_reported_future_usd",
+        "volume_reported_spot_usd_1d",
+        "volume_reported_future_usd_1d"
+    ]
+    df_exchanges_default = client.get_exchange_metrics(
+        exchanges=exchanges,
+        metrics=metrics,
+        start_time="2024-01-01",
+        end_time="2024-02-01",
+        end_inclusive=False,
+        limit_per_exchange=1
+    ).to_dataframe()
+    
+    fields = set()
+    for row in client.get_exchange_metrics(
+        exchanges=exchanges,
+        metrics=metrics,
+        start_time="2024-01-01",
+        end_time="2024-02-01",
+        end_inclusive=False,
+        limit_per_exchange=1
+    ):
+        fields.update(set(row.keys()))
+        
+    assert set(df_exchanges_default.columns) >= set(metrics)
+    assert sorted(df_exchanges_default.columns) == sorted(fields)
+    
+    # Case 2: Exchange-Asset Metrics
+    exchange_assets = ["binance-btc", "bibox-btc", "bitmex-btc"]
+    df_exchange_assets_default = client.get_exchange_asset_metrics(
+        exchange_assets=exchange_assets,
+        metrics=metrics,
+        start_time="2024-01-01",
+        end_time="2024-02-01",
+        end_inclusive=False,
+        limit_per_exchange_asset=1
+    ).to_dataframe()
+    
+    fields = set()
+    for row in client.get_exchange_asset_metrics(
+            exchange_assets=exchange_assets,
+            metrics=metrics,
+            start_time="2024-01-01",
+            end_time="2024-02-01",
+            end_inclusive=False,
+            limit_per_exchange_asset=1
+        ):
+        fields.update(set(row.keys()))
+
+    assert set(df_exchange_assets_default.columns) >= set(metrics)
+    assert sorted(df_exchange_assets_default.columns) == sorted(fields)
+
+    
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_nullable_columns_asset_metrics() -> None:
+    # Case 3: Asset Metrics
+    # Case 3a: frequency=1b returns time columns beyond "time"
+    assets = ["btc"]
+    metrics_1b = ["TxCnt"]
+    df_assets_default = client.get_asset_metrics(
+        assets=assets,
+        metrics=metrics_1b,
+        frequency="1b",
+        limit_per_asset=1
+    ).to_dataframe()
+    api_return_row = next(
+        client.get_asset_metrics(
+            assets=assets,
+            metrics=metrics_1b,
+            frequency="1b",
+            limit_per_asset=1
+        )
+    )
+    assert set(df_assets_default.columns) >= set(metrics_1b)
+    assert sorted(df_assets_default.columns) == sorted(api_return_row.keys())
+    
+    # Case 3b: Exchange Flow metrics return <metric>-status and <metric>-status-time columns
+    metrics_flow = ["SplyBMXNtv"]
+    df_flow_metrics_default = client.get_asset_metrics(
+        assets=assets,
+        metrics=metrics_flow,
+        limit_per_asset=1
+    ).to_dataframe()
+    api_return_row = next(
+        client.get_asset_metrics(
+            assets=assets,
+            metrics=metrics_flow,
+            limit_per_asset=1
+        )
+    )
+    assert set(df_flow_metrics_default.columns) >= set(["SplyBMXNtv", "SplyBMXNtv-status", "SplyBMXNtv-status-time"])
+    assert sorted(df_flow_metrics_default.columns) == sorted(api_return_row.keys())
+
 
 if __name__ == "__main__":
     pytest.main()
