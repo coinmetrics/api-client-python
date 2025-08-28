@@ -4889,9 +4889,8 @@ Returns a list of blockchain accounts balance updates.
 #### get\_full\_block\_v2
 
 ```python
-def get_full_block_v2(
-        asset: str, block_hash: str,
-        include_sub_accounts: Optional[bool]) -> List[Dict[str, Any]]
+def get_full_block_v2(asset: str, block_hash: str,
+                      include_sub_accounts: Optional[bool]) -> DataCollection
 ```
 
 Returns a full blockchain block with all transactions and balance updates.
@@ -4913,7 +4912,7 @@ Returns a full blockchain block with all transactions and balance updates.
 ```python
 def get_full_transaction_v2(
         asset: str, txid: str,
-        include_sub_accounts: Optional[bool]) -> List[Dict[str, Any]]
+        include_sub_accounts: Optional[bool]) -> DataCollection
 ```
 
 Returns a full blockchain transaction with all balance updates.
@@ -4935,7 +4934,7 @@ Returns a full blockchain transaction with all balance updates.
 ```python
 def get_full_transaction_for_block_v2(
         asset: str, block_hash: str, txid: str,
-        include_sub_accounts: Optional[bool]) -> List[Dict[str, Any]]
+        include_sub_accounts: Optional[bool]) -> DataCollection
 ```
 
 Returns a full blockchain transaction with all balance updates for a specific block.
