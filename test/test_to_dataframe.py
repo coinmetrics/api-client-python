@@ -2,6 +2,7 @@ import pandas as pd
 import polars as pl
 import pytest
 from coinmetrics.api_client import CoinMetricsClient
+from coinmetrics.schema_resolver import get_schema_fields
 import os
 import numpy as np
 
@@ -204,6 +205,96 @@ def test_nullable_columns_asset_metrics() -> None:
     )
     assert set(df_flow_metrics_default.columns) >= set(["SplyBMXNtv", "SplyBMXNtv-status", "SplyBMXNtv-status-time"])
     assert sorted(df_flow_metrics_default.columns) == sorted(api_return_row.keys())
+
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_nullable_columns_blockchain_v2() -> None:
+    # Case 4: Blockchain V2 with Sub-Accounts
+    api_return_row = next(
+        client.get_list_of_balance_updates_v2(
+            asset="btc",
+            accounts="112dvb4DogEpcp3yUR59HQuN1LFJbPErAT",
+            include_sub_accounts=True,
+            limit_per_account=1
+        )
+    )
+
+    df_balance_updates = client.get_list_of_balance_updates_v2(
+        asset="btc",
+        accounts="112dvb4DogEpcp3yUR59HQuN1LFJbPErAT",
+        include_sub_accounts=True,
+        limit_per_account=1
+    ).to_dataframe()
+    assert set(df_balance_updates.columns) >= set(api_return_row.keys())
+    
+    api_return_row = next(
+        client.get_list_of_balance_updates_for_account_v2(
+            asset="btc",
+            account="112dvb4DogEpcp3yUR59HQuN1LFJbPErAT",
+            include_sub_accounts=True,
+        )
+    )
+
+    df_balance_updates = client.get_list_of_balance_updates_for_account_v2(
+        asset="btc",
+        account="112dvb4DogEpcp3yUR59HQuN1LFJbPErAT",
+        include_sub_accounts=True,
+    ).to_dataframe()
+    assert set(df_balance_updates.columns) >= set(api_return_row.keys())
+    
+    fields = set()
+    for row in client.get_full_transaction_v2(
+        asset="ltc",
+        txid="16262dacdac04f41b50dd4174d3bd0d133916a325e5244b3febcb760a8d3975f",
+        include_sub_accounts=True
+    ):
+        fields.update(set(row.keys()))
+        
+    df_transactions = client.get_full_transaction_v2(
+        asset="ltc",
+        txid="16262dacdac04f41b50dd4174d3bd0d133916a325e5244b3febcb760a8d3975f",
+        include_sub_accounts=True
+    ).to_dataframe()
+    assert set(df_transactions.columns) >= set(fields)
+    
+    fields = set()
+    for row in client.get_full_block_v2(
+        asset="btc",
+        block_hash="0000000000000000000079fca9c54dd7532d139ed258f02e3d1368e7006157d9",
+        include_sub_accounts=True
+    ):
+        fields.update(set(row.keys()))
+        
+    df_blocks = client.get_full_block_v2(
+        asset="btc",
+        block_hash="0000000000000000000079fca9c54dd7532d139ed258f02e3d1368e7006157d9",
+        include_sub_accounts=True
+    ).to_dataframe()
+    assert set(df_blocks.columns) >= set(fields)
+    
+
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_nullable_columns_market_trades() -> None:
+    # Case 5: Market Trades
+    markets = [
+        "uniswap_v3_eth-1-usdc-weth-spot",
+        "coinbase-btc-usd-spot",
+        "deribit-BTC-10JAN25-93500-C-option"
+    ]
+
+    fields = set()
+    for row in client.get_market_trades(
+        markets=markets,
+        limit_per_market=1
+    ):
+        fields.update(set(row.keys()))
+        
+    df_market_trades = client.get_market_trades(
+        markets=markets,
+        limit_per_market=1
+    ).to_dataframe()
+
+    assert set(df_market_trades.columns) >= set(fields)
 
 
 if __name__ == "__main__":

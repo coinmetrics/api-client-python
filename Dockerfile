@@ -23,4 +23,7 @@ RUN poetry install --no-root --with dev
 
 COPY ./ ./
 
+# Generate minimal schema constants at build time
+RUN python coinmetrics/build.py
+
 CMD [ "python" ]

@@ -1,11 +1,17 @@
-.PHONY:  all check clean docs image imagetest test venv
+.PHONY:  all fetch-openapi-spec build-schema check clean docs image imagetest test venv
 
 # default image name
 IMAGE = api-client-image
 # default virtual environment name
 VENV = .venv-api
 
-all: check test
+all: build-schema check test
+
+fetch-openapi-spec:
+	curl -o openapi.yaml https://docs.coinmetrics.io/api/static/openapi.yaml
+
+build-schema:
+	python coinmetrics/build.py
 
 venv:
 	rm -rf ./$(VENV)
@@ -47,3 +53,4 @@ imagetest:
 
 clean:
 	rm -rf ./cm_api_client_debug_*.txt
+	rm -f coinmetrics/_schema_constants.py

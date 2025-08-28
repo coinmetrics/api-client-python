@@ -2,6 +2,7 @@
 , buildPythonPackage
 , fetchPypi
 , mypy
+, numpy
 , orjson
 , pandas
 , poetry-core
@@ -10,10 +11,12 @@
 , python-dateutil
 , pytestCheckHook
 , pytest-mock
+, pyyaml
 , requests
 , tqdm
 , typer
 , types-python-dateutil
+, types-pyyaml
 , types-requests
 , types-ujson
 , websocket-client
@@ -32,9 +35,11 @@ buildPythonPackage rec {
 
   nativeBuildInputs = [
     poetry-core
+    pyyaml
   ];
 
   propagatedBuildInputs = [
+    numpy
     orjson
     python-dateutil
     requests
@@ -43,6 +48,7 @@ buildPythonPackage rec {
     tqdm
     pandas
     polars
+    pyyaml
   ];
 
   nativeCheckInputs = [
@@ -50,6 +56,7 @@ buildPythonPackage rec {
     pytestCheckHook
     pytest-mock
     types-python-dateutil
+    types-pyyaml
     types-requests
     types-ujson
   ];
@@ -57,6 +64,11 @@ buildPythonPackage rec {
   pythonImportsCheck = [
     "coinmetrics.api_client"
   ];
+
+  preBuild = ''
+    echo "Generating OpenAPI schema"
+    python coinmetrics/build.py
+  '';
 
   preCheck = ''
     mypy -p coinmetrics -p test

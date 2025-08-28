@@ -8,9 +8,9 @@ readme = "README.md"
 homepage = "https://coinmetrics.github.io/api-client-python/site/index.html"
 repository = "https://github.com/coinmetrics/api-client-python"
 packages = [{include = "coinmetrics"}]
+include = ["test", "openapi.yaml"]
 keywords = ["coin metrics", "coin", "metrics", "crypto", "bitcoin", "network-data", "market-data", "api", "handy"]
 documentation = "https://coinmetrics.github.io/api-client-python/site/index.html"
-include = ["test"]
 
 [tool.poetry.dependencies]
 python = "^3.9.0"
@@ -23,6 +23,7 @@ websocket-client = "^1.6.0"
 python-dateutil = "^2.8.2"
 typer = ">=0.7.0"
 tqdm = "^4.64.1"
+PyYAML = "^6.0"
 
 [tool.poetry.group.dev]
 optional = true
@@ -46,7 +47,11 @@ types-ujson = "*"
 
 [tool.poetry.scripts]
 coinmetrics = 'coinmetrics.typer_cli:main'
+cm-build-schema = 'coinmetrics.build:main'
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=1.0.0", "PyYAML"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.build]
+generate-setup-file = false

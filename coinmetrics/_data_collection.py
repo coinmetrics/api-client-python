@@ -88,7 +88,8 @@ class DataCollection:
         columns_to_store: List[str] = [],
         client: Optional[CoinMetricsClient] = None,
         optimize_dtypes: Optional[bool] = True,
-        dtype_mapper: Optional[Dict[str, Any]] = None
+        dtype_mapper: Optional[Dict[str, Any]] = None,
+        paginated: bool = True
     ) -> None:
         self._csv_export_supported = csv_export_supported
         self._data_retrieval_function = data_retrieval_function
@@ -100,6 +101,9 @@ class DataCollection:
         self._client = client
         self._optimize_dtypes = optimize_dtypes
         self._dtype_mapper = dtype_mapper
+        self._paginated = paginated
+        if url_params.get("format") == "json_stream":
+            self._paginated = False
 
     def first_page(self) -> List[Dict[str, Any]]:
         return cast(
@@ -122,8 +126,22 @@ class DataCollection:
         if self._next_page_token:
             url_params["next_page_token"] = self._next_page_token
         api_response = self._data_retrieval_function(self._endpoint, url_params)
-        self._next_page_token = cast(Optional[str], api_response.get("next_page_token"))
-        self._current_data_iterator = iter(api_response["data"])
+        if (
+            isinstance(api_response, dict)
+        ):
+            data = api_response.get("data")
+            # API responses that are paginated with "data" key
+            if "data" in api_response and isinstance(data, list):
+                self._next_page_token = cast(Optional[str], api_response.get("next_page_token"))
+                self._current_data_iterator = iter(cast(List[Any], data))
+            # API responses that return a single object
+            else:
+                self._next_page_token = None
+                self._current_data_iterator = iter([api_response])
+        # API responses that are not paginated, such as json_stream
+        elif isinstance(api_response, list):
+            self._next_page_token = None
+            self._current_data_iterator = iter(list(api_response))
         return next(self._current_data_iterator)
 
     def __iter__(self) -> "DataCollection":
@@ -598,7 +616,7 @@ class ParallelDataCollection(DataCollection):
         parallelized on, as well as all over all date incremnts as specified in time_increment. For example, if a user
         is calls client.get_asset_metrics(assets="btc,eth,algo", ...).parallel.get_parallel_datacollections() this will
         return three data collections split by asset. If they instead called
-        client.get_asset_metrics(assets="btc,eth,algo", metrics="volume_reported_spot_usd_1d", "volume_trusted_spot_usd_1d").parallel(paralellize_on=["metrics", "assets']).get_parallel_datacollections()
+        client.get_asset_metrics(assets="btc,eth,algo", metrics="volume_reported_spot_usd_1d", "volume_trusted_spot_usd_1d").parallel(paralellize_on=["metrics", "assets"]).get_parallel_datacollections()
         this would instead create 6 data collections combinations. There is also a possible time increment, so if the
         user did client.get_asset_metrics(assets="btc,eth,algo", metrics="volume_reported_spot_usd_1d", "volume_trusted_spot_usd_1d", start_time="2023-01-01", end_time="2023-02-01).parallel(paralellize_on=["metrics", "assets'], time_increment=timedelta(weeks=2)).get_parallel_datacollections()
         it would create 12 data collections total, since it would split it by the 2 week increment as well.

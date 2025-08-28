@@ -147,3 +147,6 @@ examples/*/*.txt
 
 .idea/
 .DS_Store
+
+# Generated schema constants (build-time generated)
+coinmetrics/_schema_constants.py

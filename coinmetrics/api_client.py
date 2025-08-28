@@ -45,6 +45,7 @@ from coinmetrics._catalogs import (
     CatalogMarketContractPrices,
     CatalogMarketImpliedVolatility,
 )
+from coinmetrics.schema_resolver import get_schema_fields
 
 from importlib import import_module
 ujson_found = True
@@ -58,6 +59,12 @@ if not ujson_found:
 else:
     import ujson as json
 logger = getLogger("cm_client")
+
+# with open("openapi.yaml") as stream:
+#     try:
+#         OPENAPI_YAML: Dict[str, Any] = yaml.safe_load(stream)
+#     except yaml.YAMLError as exc:
+#         print(f"Error loading OpenAPI YAML: {exc}")
 
 
 class CmStream:
@@ -5679,7 +5686,15 @@ class CoinMetricsClient:
             "min_confirmations": min_confirmations,
             "format": format
         }
-        return DataCollection(self._get_data, "timeseries/market-trades", params, client=self)
+        return DataCollection(
+            self._get_data,
+            "timeseries/market-trades",
+            params,
+            client=self,
+            columns_to_store=list(
+                get_schema_fields("MarketTrade").keys()
+            )
+        )
 
     def get_market_open_interest(
         self,
@@ -6876,12 +6891,17 @@ class CoinMetricsClient:
             "timezone": timezone,
         }
         return DataCollection(
-            self._get_data, f"blockchain-v2/{asset}/balance-updates", params
+            self._get_data,
+            f"blockchain-v2/{asset}/balance-updates",
+            params,
+            columns_to_store=list(
+                get_schema_fields("BlockchainBalanceUpdateV2").keys()
+            ),
         )
 
     def get_full_block_v2(
         self, asset: str, block_hash: str, include_sub_accounts: Optional[bool]
-    ) -> List[Dict[str, Any]]:
+    ) -> DataCollection:
         """
         Returns a full blockchain block with all transactions and balance updates.
 
@@ -6899,15 +6919,19 @@ class CoinMetricsClient:
             "block_hash": block_hash,
             "include_sub_accounts": include_sub_accounts,
         }
-
-        return cast(
-            List[Dict[str, Any]],
-            self._get_data(f"blockchain-v2/{asset}/blocks/{block_hash}", params),
+        return DataCollection(
+            self._get_data,
+            f"blockchain-v2/{asset}/blocks/{block_hash}",
+            params,
+            columns_to_store=list(
+                get_schema_fields("BlockchainFullBlockResponseV2").keys()
+            ),
+            paginated=False
         )
 
     def get_full_transaction_v2(
         self, asset: str, txid: str, include_sub_accounts: Optional[bool]
-    ) -> List[Dict[str, Any]]:
+    ) -> DataCollection:
         """
         Returns a full blockchain transaction with all balance updates.
 
@@ -6925,9 +6949,15 @@ class CoinMetricsClient:
             "txid": txid,
             "include_sub_accounts": include_sub_accounts,
         }
-        return cast(
-            List[Dict[str, Any]],
-            self._get_data(f"blockchain-v2/{asset}/transactions/{txid}", params),
+
+        return DataCollection(
+            self._get_data,
+            f"blockchain-v2/{asset}/transactions/{txid}",
+            params,
+            columns_to_store=list(
+                get_schema_fields("BlockchainFullSingleTransactionResponseV2").keys()
+            ),
+            paginated=False
         )
 
     def get_full_transaction_for_block_v2(
@@ -6936,7 +6966,7 @@ class CoinMetricsClient:
         block_hash: str,
         txid: str,
         include_sub_accounts: Optional[bool],
-    ) -> List[Dict[str, Any]]:
+    ) -> DataCollection:
         """
         Returns a full blockchain transaction with all balance updates for a specific block.
 
@@ -6957,12 +6987,14 @@ class CoinMetricsClient:
             "txid": txid,
             "include_sub_accounts": include_sub_accounts,
         }
-        return cast(
-            List[Dict[str, Any]],
-            self._get_data(
-                f"blockchain-v2/{asset}/blocks/{block_hash}/transactions/{txid}",
-                params,
+        return DataCollection(
+            self._get_data,
+            f"blockchain-v2/{asset}/blocks/{block_hash}/transactions/{txid}",
+            params,
+            columns_to_store=list(
+                get_schema_fields("BlockchainFullSingleTransactionResponseV2").keys()
             ),
+            paginated=False
         )
 
     def get_list_of_balance_updates_for_account_v2(
@@ -7051,7 +7083,15 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "next_page_token": next_page_token,
         }
-        return DataCollection(self._get_data, f"blockchain-v2/{asset}/accounts/{account}/balance-updates", params, client=self)
+        return DataCollection(
+            self._get_data,
+            f"blockchain-v2/{asset}/accounts/{account}/balance-updates",
+            params,
+            columns_to_store=list(
+                get_schema_fields("BlockchainBalanceUpdateV2").keys()
+            ),
+            client=self
+        )
 
     def get_transaction_tracker(
         self,
@@ -8040,7 +8080,7 @@ class CoinMetricsClient:
             resp = self._send_request(actual_url)
         try:
             if params.get("format") == "json_stream":
-                data = {"data": (json.loads(i) for i in resp.iter_lines())}
+                data = [json.loads(i) for i in resp.iter_lines()]
             else:
                 data = json.loads(resp.content)
         except ValueError:
@@ -8051,9 +8091,13 @@ class CoinMetricsClient:
                 raise
         else:
             if "error" in data:
+                if isinstance(data, dict):
+                    error_details = data.get("error")
+                else:
+                    error_details = data
                 error_msg = (
                     f"Error found for the query: \n {actual_url}\n"
-                    f"Error details: {data['error']}"
+                    f"Error details: {error_details}"
                 )
                 logger.error(error_msg)
                 resp.raise_for_status()
