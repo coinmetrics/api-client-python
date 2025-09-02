@@ -5,6 +5,7 @@ from coinmetrics.api_client import CoinMetricsClient
 from coinmetrics.schema_resolver import get_schema_fields
 import os
 import numpy as np
+from typing import Any
 
 CM_API_KEY = os.environ.get("CM_API_KEY")
 client = CoinMetricsClient(str(CM_API_KEY))
@@ -205,7 +206,33 @@ def test_nullable_columns_asset_metrics() -> None:
     )
     assert set(df_flow_metrics_default.columns) >= set(["SplyBMXNtv", "SplyBMXNtv-status", "SplyBMXNtv-status-time"])
     assert sorted(df_flow_metrics_default.columns) == sorted(api_return_row.keys())
+    
+    
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_polars_dataframe() -> None:
+    # Test: Check that Polars DataFrame with nullable columns doesn't error when loading and is equivalent
+    df_accounts_btc_no_debit = client.get_list_of_accounts_v2(
+        asset='btc', 
+        page_size=10000,
+        end_height=1,
+    ).to_lazyframe().filter(pl.col("last_debit_height").is_null()).collect()
 
+    df_accounts_btc_debited = client.get_list_of_accounts_v2(
+        asset='btc', 
+        page_size=10000,
+        end_height=1,
+    ).to_lazyframe().filter(pl.col("last_debit_height").is_not_null()).collect()
+    
+    df_concat = pl.concat([df_accounts_btc_debited, df_accounts_btc_no_debit]) 
+    
+    df_accounts_btc = client.get_list_of_accounts_v2(
+        asset='btc', 
+        page_size=10000,
+        end_height=1,
+    ).to_dataframe(dataframe_type="polars")
+    
+    assert df_concat.columns == df_accounts_btc.columns
+    
 
 @pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
 def test_nullable_columns_blockchain_v2() -> None:

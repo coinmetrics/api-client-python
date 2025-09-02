@@ -60,12 +60,6 @@ else:
     import ujson as json
 logger = getLogger("cm_client")
 
-# with open("openapi.yaml") as stream:
-#     try:
-#         OPENAPI_YAML: Dict[str, Any] = yaml.safe_load(stream)
-#     except yaml.YAMLError as exc:
-#         print(f"Error loading OpenAPI YAML: {exc}")
-
 
 class CmStream:
     def __init__(self, ws_url: str):
@@ -5966,7 +5960,14 @@ class CoinMetricsClient:
             "timezone": timezone,
             "format": format,
         }
-        return DataCollection(self._get_data, "timeseries/market-orderbooks", params, client=self)
+        dtype_mapper = get_schema_fields("MarketOrderBook")
+        return DataCollection(
+            self._get_data,
+            "timeseries/market-orderbooks",
+            params,
+            client=self,
+            dtype_mapper=dtype_mapper,
+        )
 
     def get_market_quotes(
         self,

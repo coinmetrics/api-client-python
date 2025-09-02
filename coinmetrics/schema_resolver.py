@@ -24,7 +24,11 @@ ENDPOINT_SCHEMA_MAP = {
 
 # If mapping between field and type from schemas is suboptimal, override them here
 FIELD_TYPE_EXCEPTIONS = {
-    "time": "datetime64[ns, UTC]"
+    "bids": "object",
+    "asks": "object",
+    "transactions": "object",
+    "balance_updates": "object",
+    "sub_accounts": "object",
 }
 
 

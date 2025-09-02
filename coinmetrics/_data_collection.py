@@ -371,7 +371,8 @@ class DataCollection:
                     elif dataframe_type == 'polars':
                         df = pl.read_csv(
                             buffer,
-                            try_parse_dates=True
+                            try_parse_dates=True,
+                            null_values=["None"]
                         )
                         return df
                     else:
