@@ -121,6 +121,7 @@ deploy:
   script:
     - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME || true
     - docker build --cache-from $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA . --build-arg PYPI_USERNAME=$PYPI_USERNAME --build-arg PYPI_PASSWORD=$PYPI_PASSWORD
+    - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python coinmetrics/build.py
     - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python -m poetry publish --build --username $PYPI_USERNAME --password $PYPI_PASSWORD
   tags:
     - linux
