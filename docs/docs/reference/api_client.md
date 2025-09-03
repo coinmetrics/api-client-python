@@ -3623,7 +3623,8 @@ def get_exchange_asset_metrics(
         end_inclusive: Optional[bool] = None,
         timezone: Optional[str] = None,
         sort: Optional[str] = None,
-        limit_per_exchange_asset: Optional[int] = None) -> DataCollection
+        limit_per_exchange_asset: Optional[int] = None,
+        format: Optional[str] = "json_stream") -> DataCollection
 ```
 
 Returns metrics for specified exchange-asset.
@@ -3644,6 +3645,7 @@ Returns metrics for specified exchange-asset.
 - `timezone` (`str`): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.
 - `sort` (`str`): How results will be sorted, e.g. "exchange_asset", "time". Default is "exchange_asset".
 - `limit_per_exchange_asset` (`int`): How many entries _per exchange-asset_ the result should contain.
+- `format` (`str`): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
 
 **Returns**:
 
@@ -3897,18 +3899,21 @@ Returns index constituents for specified indexes and date range.
 #### get\_market\_metrics
 
 ```python
-def get_market_metrics(markets: Union[List[str], str],
-                       metrics: Union[List[str], str],
-                       frequency: Optional[str] = None,
-                       page_size: Optional[int] = None,
-                       paging_from: Optional[Union[PagingFrom, str]] = "start",
-                       start_time: Optional[Union[datetime, date, str]] = None,
-                       end_time: Optional[Union[datetime, date, str]] = None,
-                       start_inclusive: Optional[bool] = None,
-                       end_inclusive: Optional[bool] = None,
-                       timezone: Optional[str] = None,
-                       limit_per_market: Optional[int] = None,
-                       sort: Optional[str] = None) -> DataCollection
+def get_market_metrics(
+        markets: Union[List[str], str],
+        metrics: Union[List[str], str],
+        frequency: Optional[str] = None,
+        page_size: Optional[int] = None,
+        paging_from: Optional[Union[PagingFrom, str]] = "start",
+        start_time: Optional[Union[datetime, date, str]] = None,
+        end_time: Optional[Union[datetime, date, str]] = None,
+        start_inclusive: Optional[bool] = None,
+        end_inclusive: Optional[bool] = None,
+        timezone: Optional[str] = None,
+        limit_per_market: Optional[int] = None,
+        sort: Optional[str] = None,
+        ignore_forbidden_errors: Optional[bool] = None,
+        ignore_unsupported_errors: Optional[bool] = None) -> DataCollection
 ```
 
 Returns market metrics for specified markets, frequency and date range.
@@ -3931,6 +3936,8 @@ For more information on market metrics, see: https://docs.coinmetrics.io/api/v4#
 - `sort` (`str`): How results will be sorted. Metrics are sorted by (market, time) by default. If you want to sort
 1d metrics by (time, market) you should choose time as value for the sort parameter. Sorting by time is useful
 if you request metrics for a set of markets.
+- `ignore_forbidden_errors` (`bool`): Default: false. Ignore HTTP 403 Forbidden errors
+- `ignore_unsupported_errors` (`bool`): Default: false. Ignore errors for unsupported assets, metrics or frequencies.
 
 **Returns**:
 
