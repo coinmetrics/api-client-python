@@ -5078,6 +5078,7 @@ class CoinMetricsClient:
         timezone: Optional[str] = None,
         sort: Optional[str] = None,
         limit_per_exchange_asset: Optional[int] = None,
+        format: Optional[str] = "json_stream",
     ) -> DataCollection:
         """
         Returns metrics for specified exchange-asset.
@@ -5110,6 +5111,8 @@ class CoinMetricsClient:
         :type sort: str
         :param limit_per_exchange_asset: How many entries _per exchange-asset_ the result should contain.
         :type limit_per_exchange_asset: int
+        :param format: Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.
+        :type format: str
         :return: Exchange-Asset Metrics timeseries.
         :rtype: DataCollection
         """
@@ -5129,6 +5132,7 @@ class CoinMetricsClient:
             "timezone": timezone,
             "sort": sort,
             "limit_per_exchange_asset": limit_per_exchange_asset,
+            "format": format,
         }
         return DataCollection(
             self._get_data, "timeseries/exchange-asset-metrics", params
@@ -5513,6 +5517,8 @@ class CoinMetricsClient:
         timezone: Optional[str] = None,
         limit_per_market: Optional[int] = None,
         sort: Optional[str] = None,
+        ignore_forbidden_errors: Optional[bool] = None,
+        ignore_unsupported_errors: Optional[bool] = None,
     ) -> DataCollection:
         """
         Returns market metrics for specified markets, frequency and date range.
@@ -5544,6 +5550,10 @@ class CoinMetricsClient:
         1d metrics by (time, market) you should choose time as value for the sort parameter. Sorting by time is useful
         if you request metrics for a set of markets.
         :type sort: str
+        :param ignore_forbidden_errors: Default: false. Ignore HTTP 403 Forbidden errors
+        :type ignore_forbidden_errors: bool
+        :param ignore_unsupported_errors: Default: false. Ignore errors for unsupported assets, metrics or frequencies.
+        :type ignore_unsupported_errors: bool
         :return: Market metrics timeseries.
         :rtype: DataCollection
         """
@@ -5561,6 +5571,8 @@ class CoinMetricsClient:
             "timezone": timezone,
             "limit_per_market": limit_per_market,
             "sort": sort,
+            "ignore_forbidden_errors": ignore_forbidden_errors,
+            "ignore_unsupported_errors": ignore_unsupported_errors
         }
         return DataCollection(self._get_data, "timeseries/market-metrics", params, client=self)
 
