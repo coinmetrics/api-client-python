@@ -10,6 +10,36 @@
 class CoinMetricsClient()
 ```
 
+The CoinMetricsClient class is a Python wrapper for calling the Coin Metrics API.
+
+<a id="coinmetrics.api_client.CoinMetricsClient.__init__"></a>
+
+#### \_\_init\_\_
+
+```python
+def __init__(api_key: str = "",
+             verify_ssl_certs: Union[bool, str] = True,
+             proxy_url: Optional[str] = None,
+             session: Optional[requests.Session] = None,
+             debug_mode: bool = False,
+             verbose: bool = False,
+             host: Optional[str] = None,
+             port: Optional[int] = None,
+             schema: str = "https")
+```
+
+**Arguments**:
+
+- `api_key` (`str`): The API key for the CoinMetrics API.
+- `verify_ssl_certs` (`bool or str`): Whether to verify SSL certificates. Default is True. SSLErrors may be raised due to network configurations (e.g. proxies). You may set this to False or a path to bypass this error.
+- `proxy_url` (`str`): The URL of the proxy to use.
+- `session` (`requests.Session`): The session to use.
+- `debug_mode` (`bool`): Whether to enable debug mode for logging.
+- `verbose` (`bool`): Whether to enable verbose mode for logging.
+- `host` (`str`): The host for the Coin Metrics API. Default is "api.coinmetrics.io" or "community-api.coinmetrics.io based on user credentials.
+- `port` (`int`): The port for accessing the Coin Metrics API. Default is None.
+- `schema` (`str`): The schema for accessing the Coin Metrics API. Default is "https".
+
 <a id="coinmetrics.api_client.CoinMetricsClient.catalog_assets"></a>
 
 #### catalog\_assets

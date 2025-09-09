@@ -819,6 +819,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __init__
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#catalog_assets" class="md-nav__link">
     <span class="md-ellipsis">
       catalog_assets
@@ -2635,6 +2644,31 @@
 <h2 id="coinmetricsclient-objects">CoinMetricsClient Objects<a class="headerlink" href="#coinmetricsclient-objects" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">CoinMetricsClient</span><span class="p">()</span>
 </code></pre></div>
+<p>The CoinMetricsClient class is a Python wrapper for calling the Coin Metrics API.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.__init__"></a></p>
+<h4 id="__init__">__init__<a class="headerlink" href="#__init__" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="n">api_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+             <span class="n">verify_ssl_certs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+             <span class="n">proxy_url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+             <span class="n">session</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+             <span class="n">debug_mode</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+             <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+             <span class="n">host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+             <span class="n">port</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+             <span class="n">schema</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;https&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>api_key</code> (<code>str</code>): The API key for the CoinMetrics API.</li>
+<li><code>verify_ssl_certs</code> (<code>bool or str</code>): Whether to verify SSL certificates. Default is True. SSLErrors may be raised due to network configurations (e.g. proxies). You may set this to False or a path to bypass this error.</li>
+<li><code>proxy_url</code> (<code>str</code>): The URL of the proxy to use.</li>
+<li><code>session</code> (<code>requests.Session</code>): The session to use.</li>
+<li><code>debug_mode</code> (<code>bool</code>): Whether to enable debug mode for logging.</li>
+<li><code>verbose</code> (<code>bool</code>): Whether to enable verbose mode for logging.</li>
+<li><code>host</code> (<code>str</code>): The host for the Coin Metrics API. Default is "api.coinmetrics.io" or "community-api.coinmetrics.io based on user credentials.</li>
+<li><code>port</code> (<code>int</code>): The port for accessing the Coin Metrics API. Default is None.</li>
+<li><code>schema</code> (<code>str</code>): The schema for accessing the Coin Metrics API. Default is "https".</li>
+</ul>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.catalog_assets"></a></p>
 <h4 id="catalog_assets">catalog_assets<a class="headerlink" href="#catalog_assets" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">)</span>
