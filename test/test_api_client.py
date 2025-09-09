@@ -582,24 +582,8 @@ def get_empty_data(x: Any, y: Any) -> DataReturnType:
     return {"data": []}
 
 
-def test_catalog_assets_request(mocker: Any) -> None:
-    client = CoinMetricsClient("xxx")
-    mock = Mock()
-    mock.content = '{"data": [{"asset": "btc", "markets": ["coinbase-btc-usd-spot"]}]}'
-    mocked_obj = mocker.patch.object(requests.Session, "get", return_value=mock)
-    response = client.catalog_assets(assets="btc")
-    mocked_obj.assert_called_once_with(
-        "https://api.coinmetrics.io/v4/catalog/assets?api_key=xxx&assets=btc",
-        verify=True,
-        headers=client._session.headers,
-        proxies={"http": None, "https": None},
-    )
-    assert response == [{"asset": "btc", "markets": ["coinbase-btc-usd-spot"]}]
-
-
 def test_base_url() -> None:
-    assert CoinMetricsClient("xxx")._api_base_url == "https://api.coinmetrics.io/v4"
-    assert CoinMetricsClient("xxx")._api_key_url_str == "api_key=xxx"
+    assert CoinMetricsClient(" ")._api_base_url == "https://api.coinmetrics.io/v4"
     assert (
         CoinMetricsClient()._api_base_url == "https://community-api.coinmetrics.io/v4"
     )

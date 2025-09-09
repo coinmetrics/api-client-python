@@ -118,6 +118,9 @@ class CmStream:
 
 
 class CoinMetricsClient:
+    """
+    The CoinMetricsClient class is a Python wrapper for calling the Coin Metrics API.
+    """
     def __init__(
         self,
         api_key: str = "",
@@ -126,16 +129,51 @@ class CoinMetricsClient:
         session: Optional[requests.Session] = None,
         debug_mode: bool = False,
         verbose: bool = False,
+        host: Optional[str] = None,
+        port: Optional[int] = None,
+        schema: str = "https",
     ):
+        """
+        :param api_key: The API key for the CoinMetrics API.
+        :type api_key: str
+        :param verify_ssl_certs: Whether to verify SSL certificates. Default is True. SSLErrors may be raised due to network configurations (e.g. proxies). You may set this to False or a path to bypass this error.
+        :type verify_ssl_certs: bool or str
+        :param proxy_url: The URL of the proxy to use.
+        :type proxy_url: str
+        :param session: The session to use.
+        :type session: requests.Session
+        :param debug_mode: Whether to enable debug mode for logging.
+        :type debug_mode: bool
+        :param verbose: Whether to enable verbose mode for logging.
+        :type verbose: bool
+        :param host: The host for the Coin Metrics API. Default is "api.coinmetrics.io" or "community-api.coinmetrics.io based on user credentials.
+        :type host: str
+        :param port: The port for accessing the Coin Metrics API. Default is None.
+        :type port: int
+        :param schema: The schema for accessing the Coin Metrics API. Default is "https".
+        :type schema: str
+        """
         self._api_key_url_str = "api_key={}".format(api_key) if api_key else ""
 
         self._verify_ssl_certs = verify_ssl_certs
 
-        api_path_prefix = ""
-        if not api_key:
-            api_path_prefix = "community-"
-        self._api_base_url = "https://{}api.coinmetrics.io/v4".format(api_path_prefix)
-        self._ws_api_base_url = "wss://{}api.coinmetrics.io/v4".format(api_path_prefix)
+        if host is None:
+            self._host = "api.coinmetrics.io" if api_key else "community-api.coinmetrics.io"
+        else:
+            self._host = host
+
+        self._port = port
+        self._schema = schema
+        if schema == "https":
+            self._ws_schema = "wss"
+        elif schema == "http":
+            self._ws_schema = "ws"
+        else:
+            raise ValueError(f"Invalid schema: {schema}")
+
+        self._host_port = self._host if port is None else f"{self._host}:{self._port}"
+        self._api_base_url = f"{self._schema}://{self._host_port}/v4"
+        self._ws_api_base_url = f"{self._ws_schema}://{self._host_port}/v4"
         self._http_header = {"User-Agent": f"Coinmetrics-Python-API-Client/{version}"}
         self._proxies = {"http": proxy_url, "https": proxy_url}
         if session is None:

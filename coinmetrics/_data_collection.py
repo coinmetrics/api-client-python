@@ -76,6 +76,14 @@ NUMBER_OF_RETRIES = 3
 
 
 class DataCollection:
+    """
+    The DataCollection class is a Python wrapper for collecting data from the CoinMetrics API. It can be used to transform API calls into Python data structures. For example:
+    `DataCollection.to_dataframe()` -> pd.DataFrame or pl.DataFrame.
+    `DataCollection.to_list()` -> List[Dict[str, Any]].
+    `DataCollection.export_to_csv()` -> str. Export data to a CSV file.
+    `DataCollection.export_to_json()` -> str. Export data to a JSON file.
+    `DataCollection.parallel()` -> ParallelDataCollection. Make API calls in parallel. Can be chained with `.to_dataframe()`, `.to_list()`, `.export_to_csv()`, `.export_to_json()`, `.export_to_csv_files()`, `.export_to_json_files()`.
+    """
 
     API_RETURN_MODEL: Optional[Type[CoinMetricsAPIModel]] = None
 
@@ -91,6 +99,24 @@ class DataCollection:
         dtype_mapper: Optional[Dict[str, Any]] = None,
         paginated: bool = True
     ) -> None:
+        """
+        :param data_retrieval_function: The function to use to retrieve data from the CoinMetrics API.
+        :type data_retrieval_function: DataRetrievalFuncType
+        :param endpoint: The CoinMetrics API endpoint.
+        :type endpoint: str
+        :param url_params: The URL parameters to use to retrieve data from the CoinMetrics API.
+        :type url_params: Dict[str, UrlParamTypes]
+        :param csv_export_supported: Whether CSV export is supported for this data type.
+        :type csv_export_supported: bool
+        :param columns_to_store: The columns to store in the data collection. If not specified, the data collection object will infer the columns from the Coin Metrics API schema or the first row of the data.
+        :type columns_to_store: List[str]
+        :param client: The CoinMetricsClient to use to retrieve data from the CoinMetrics API.
+        :type client: CoinMetricsClient
+        :param optimize_dtypes: Whether to optimize the data types for the data collection.
+        :type optimize_dtypes: bool
+        :param dtype_mapper: The dtype mapper to use to convert the data types for the data collection.
+        :type dtype_mapper: Dict[str, Any]
+        """
         self._csv_export_supported = csv_export_supported
         self._data_retrieval_function = data_retrieval_function
         self._endpoint = endpoint

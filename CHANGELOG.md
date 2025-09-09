@@ -1,5 +1,34 @@
 # Changelog
 
+## 2025.9.2.14
+### Fixed
+- Fixed the error where `_schema_constants.py` module is not in the Python Client package.
+
+
+## 2025.8.28.15
+### Fixed
+- Fixed a bug where nullable columns for `blockchain-v2` endpoints and `timeseries/market-trades` were not returned when calling `.to_dataframe()`.
+
+### Added
+- Added `.to_dataframe()` for `get_full_block_v2()`, `get_full_transaction_v2()`, and `get_full_transaction_for_block_v2()`.
+- Added the API schema as part of the package build.
+
+
+## 2025.8.15.5
+### Fixed
+- Fixed a bug where nullable columns from `timeseries/*-metrics endpoints` are sometimes not returned when calling `.to_dataframe()`. This happened when the first row's columns are not the same as any of the subsequent rows.
+
+
+## 2025.8.8.16
+### Added
+- Parallelization support to `get_predicted_funding_rates()`.
+
+### Changed
+- Changed the default to format=json_stream for the following functions:
+  - All of `reference_data`.
+  - All of `catalog_*_v2`.
+  - `get_market_orderbooks`, `get_market_quotes`, `get_market_open_interest`, `get_market_trades`, `get_market_candles`, `get_asset_metrics`
+
 ## 2025.5.6.13
 ### Fixed
 - Timezone normalization when using the parallel option with datetime.timedelta.
