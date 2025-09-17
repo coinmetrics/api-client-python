@@ -3769,7 +3769,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -3798,7 +3798,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>limit</code> (<code>Optional[str]</code>): Limit of response items. <code>none</code> means no limit.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
@@ -3899,7 +3899,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -3930,7 +3930,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -3961,7 +3961,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -3992,7 +3992,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -4023,7 +4023,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -4054,7 +4054,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -4085,7 +4085,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -4116,7 +4116,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -4147,7 +4147,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -4178,7 +4178,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -4209,7 +4209,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -4242,7 +4242,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -4273,7 +4273,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -4304,7 +4304,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -4335,7 +4335,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -4366,7 +4366,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -4397,7 +4397,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -4428,7 +4428,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -4459,7 +4459,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -4490,7 +4490,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -4521,7 +4521,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -4552,7 +4552,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -4583,7 +4583,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -4616,7 +4616,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>quote</code> (<code>Optional[str]</code>): Quote asset of markets.</li>
 <li><code>asset</code> (<code>Optional[str]</code>): Any asset of markets.</li>
 <li><code>symbol</code> (<code>Optional[str]</code>): Symbol of derivative markets, full instrument name.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
@@ -4642,7 +4642,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of asset metrics.</p>
@@ -4665,7 +4665,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of asset metrics.</p>
@@ -4688,7 +4688,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of exchange metrics.</p>
@@ -4711,7 +4711,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of exchange metrics.</p>
@@ -4734,7 +4734,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of exchange-asset metrics.</p>
@@ -4757,7 +4757,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of exchange-asset metrics.</p>
@@ -4780,7 +4780,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of pair metrics.</p>
@@ -4803,7 +4803,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of pair metrics.</p>
@@ -4826,7 +4826,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of institution metrics.</p>
@@ -4849,7 +4849,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of institution metrics.</p>
@@ -4868,7 +4868,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of asset pair candles statistics.</p>
@@ -4887,7 +4887,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of index candles statistics.</p>
@@ -4906,7 +4906,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of index levels.</p>
@@ -4925,7 +4925,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of asset chains assets</p>
@@ -4944,7 +4944,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of mempool feerates assets</p>
@@ -4963,7 +4963,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of mining pool tips assets</p>
@@ -4982,7 +4982,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of transaction tracker assets</p>
@@ -5001,7 +5001,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of asset pair candles statistics.</p>
@@ -5020,7 +5020,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of index candles statistics.</p>
@@ -5039,7 +5039,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of index levels.</p>
@@ -5058,7 +5058,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of asset chains assets</p>
@@ -5077,7 +5077,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of mempool feerates assets</p>
@@ -5096,7 +5096,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of mining pool tips assets</p>
@@ -5115,7 +5115,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of transaction tracker assets</p>
@@ -5134,7 +5134,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of blockchain-v2/accounts assets using catalog-v2</p>
@@ -5153,7 +5153,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of blockchain-v2/balance-updates assets using catalog-v2</p>
@@ -5172,7 +5172,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of blockchain-v2/blocks assets using catalog-v2</p>
@@ -5191,7 +5191,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: List of blockchain-v2/transactions assets using catalog-v2</p>
@@ -5210,7 +5210,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: Full list of blockchain-v2/accounts assets using catalog-v2</p>
@@ -5229,7 +5229,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: Full list of blockchain-v2/balance-updates assets using catalog-v2</p>
@@ -5248,7 +5248,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: Full list of blockchain-v2/blocks assets using catalog-v2</p>
@@ -5267,7 +5267,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>CatalogV2DataCollection</code>: Full list of blockchain-v2/transactions assets using catalog-v2</p>
@@ -5382,7 +5382,7 @@ funding_rates, openinterest, liquidations. Included by default if omitted.</li>
                       <span class="n">null_as_zero</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                       <span class="n">ignore_forbidden_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                       <span class="n">ignore_unsupported_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                      <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;json_stream&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+                      <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;json&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
 </code></pre></div>
 <p>Returns requested metrics for specified assets.</p>
 <p><strong>Arguments</strong>:</p>
@@ -5412,7 +5412,7 @@ Inclusive by default. Mutually exclusive with end_time and end_height.</li>
 <li><code>null_as_zero</code> (<code>bool</code>): Default: false. Nulls are represented as zeros in the response.</li>
 <li><code>ignore_forbidden_errors</code> (<code>bool</code>): Default: false. Ignore HTTP 403 Forbidden errors</li>
 <li><code>ignore_unsupported_errors</code> (<code>bool</code>): Default: false. Ignore errors for unsupported assets, metrics or frequencies.</li>
-<li><code>format</code> (<code>str</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>str</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: Asset Metrics timeseries.</p>
@@ -5471,7 +5471,7 @@ Inclusive by default. Mutually exclusive with end_time and end_height.</li>
         <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">sort</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">limit_per_exchange_asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;json_stream&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;json&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
 </code></pre></div>
 <p>Returns metrics for specified exchange-asset.</p>
 <p><strong>Arguments</strong>:</p>
@@ -5490,7 +5490,7 @@ Inclusive by default. Mutually exclusive with end_time and end_height.</li>
 <li><code>timezone</code> (<code>str</code>): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.</li>
 <li><code>sort</code> (<code>str</code>): How results will be sorted, e.g. "exchange_asset", "time". Default is "exchange_asset".</li>
 <li><code>limit_per_exchange_asset</code> (<code>int</code>): How many entries <em>per exchange-asset</em> the result should contain.</li>
-<li><code>format</code> (<code>str</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>str</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: Exchange-Asset Metrics timeseries.</p>
@@ -5509,7 +5509,8 @@ Inclusive by default. Mutually exclusive with end_time and end_height.</li>
                      <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                      <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                      <span class="n">sort</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                     <span class="n">limit_per_pair</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+                     <span class="n">limit_per_pair</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                     <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;json&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
 </code></pre></div>
 <p>Returns metrics books for specified asset-asset pairs.</p>
 <p><strong>Arguments</strong>:</p>
@@ -5634,18 +5635,18 @@ Inclusive by default. Mutually exclusive with end_time and end_height.</li>
 <p><code>DataCollection</code>: Index Candles timeseries.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.get_index_levels"></a></p>
 <h4 id="get_index_levels">get_index_levels<a class="headerlink" href="#get_index_levels" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_index_levels</span><span class="p">(</span>
-        <span class="n">indexes</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
-        <span class="n">frequency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span>
-        <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">limit_per_index</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">include_verification</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_index_levels</span><span class="p">(</span><span class="n">indexes</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
+                     <span class="n">frequency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                     <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                     <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span>
+                     <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                     <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                     <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                     <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                     <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                     <span class="n">limit_per_index</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                     <span class="n">include_verification</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                     <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;json&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
 </code></pre></div>
 <p>Returns index levels for specified indexes and date range.</p>
 <p><strong>Arguments</strong>:</p>
@@ -5661,6 +5662,7 @@ Inclusive by default. Mutually exclusive with end_time and end_height.</li>
 <li><code>timezone</code> (<code>str</code>): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.</li>
 <li><code>limit_per_index</code> (<code>int</code>): How many entries <em>per index</em> the result should contain.</li>
 <li><code>include_verification</code>: Default: False set to true, includes information about verification.</li>
+<li><code>format</code> (<code>str</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: Index Levels timeseries.</p>
@@ -5696,21 +5698,21 @@ Inclusive by default. Mutually exclusive with end_time and end_height.</li>
 <p><code>DataCollection</code>: Index Constituents timeseries.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.get_market_metrics"></a></p>
 <h4 id="get_market_metrics">get_market_metrics<a class="headerlink" href="#get_market_metrics" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_market_metrics</span><span class="p">(</span>
-        <span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
-        <span class="n">metrics</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
-        <span class="n">frequency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span>
-        <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">limit_per_market</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">sort</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">ignore_forbidden_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">ignore_unsupported_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_market_metrics</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
+                       <span class="n">metrics</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
+                       <span class="n">frequency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span>
+                       <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">limit_per_market</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">sort</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">ignore_forbidden_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">ignore_unsupported_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;json&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
 </code></pre></div>
 <p>Returns market metrics for specified markets, frequency and date range.</p>
 <p>For more information on market metrics, see: <a href="https://docs.coinmetrics.io/api/v4#operation/getTimeseriesMarketMetrics">https://docs.coinmetrics.io/api/v4#operation/getTimeseriesMarketMetrics</a></p>
@@ -5732,23 +5734,23 @@ Inclusive by default. Mutually exclusive with end_time and end_height.</li>
 if you request metrics for a set of markets.</li>
 <li><code>ignore_forbidden_errors</code> (<code>bool</code>): Default: false. Ignore HTTP 403 Forbidden errors</li>
 <li><code>ignore_unsupported_errors</code> (<code>bool</code>): Default: false. Ignore errors for unsupported assets, metrics or frequencies.</li>
+<li><code>format</code> (<code>str</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: Market metrics timeseries.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.get_market_candles"></a></p>
 <h4 id="get_market_candles">get_market_candles<a class="headerlink" href="#get_market_candles" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_market_candles</span><span class="p">(</span>
-        <span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
-        <span class="n">frequency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span>
-        <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">limit_per_market</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;json_stream&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_market_candles</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
+                       <span class="n">frequency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span>
+                       <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">limit_per_market</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;json&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
 </code></pre></div>
 <p>Returns market candles for specified markets, frequency and date range.</p>
 <p>For more information on market candles, see: <a href="https://docs.coinmetrics.io/info/markets/candles">https://docs.coinmetrics.io/info/markets/candles</a></p>
@@ -5764,7 +5766,7 @@ if you request metrics for a set of markets.</li>
 <li><code>end_inclusive</code> (<code>bool</code>): Flag to define if end timestamp must be included in the timeseries if present. True by default.</li>
 <li><code>timezone</code> (<code>str</code>): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.</li>
 <li><code>limit_per_market</code> (<code>int</code>): How many entries <em>per market</em> the result should contain.</li>
-<li><code>format</code> (<code>str</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>str</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: Market Candles timeseries.</p>
@@ -5780,7 +5782,7 @@ if you request metrics for a set of markets.</li>
                       <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                       <span class="n">limit_per_market</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                       <span class="n">min_confirmations</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                      <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;json_stream&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+                      <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;json&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
 </code></pre></div>
 <p>Returns market trades for specified markets and date range.</p>
 <p>For more information on market trades, see: <a href="https://docs.coinmetrics.io/info/markets/trades">https://docs.coinmetrics.io/info/markets/trades</a></p>
@@ -5802,18 +5804,20 @@ if you request metrics for a set of markets.</li>
 <p><code>DataCollection</code>: Market Trades timeseries.</p>
 <p><a id="coinmetrics.api_client.CoinMetricsClient.get_market_open_interest"></a></p>
 <h4 id="get_market_open_interest">get_market_open_interest<a class="headerlink" href="#get_market_open_interest" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_market_open_interest</span><span class="p">(</span>
-        <span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
-        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span>
-        <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">granularity</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">limit_per_market</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;json_stream&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_market_open_interest</span><span class="p">(</span><span class="n">markets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
+                             <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                             <span class="n">paging_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PagingFrom</span><span class="p">,</span>
+                                                         <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span>
+                             <span class="n">start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span>
+                                                        <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                             <span class="n">end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span>
+                                                      <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                             <span class="n">start_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                             <span class="n">end_inclusive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                             <span class="n">granularity</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                             <span class="n">timezone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                             <span class="n">limit_per_market</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                             <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;json&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
 </code></pre></div>
 <p>Returns market open interest for specified markets and date range.</p>
 <p>For more information on open interest, see: <a href="https://docs.coinmetrics.io/info/markets/openinterest">https://docs.coinmetrics.io/info/markets/openinterest</a></p>
@@ -5829,6 +5833,7 @@ if you request metrics for a set of markets.</li>
 <li><code>granularity</code> (<code>str</code>): Downsampling granularity of market open interest. Supported values are raw, 1m, 1h, and 1d.</li>
 <li><code>timezone</code> (<code>str</code>): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.</li>
 <li><code>limit_per_market</code> (<code>int</code>): How many entries <em>per market</em> the result should contain.</li>
+<li><code>format</code> (<code>str</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: Market Open Interest timeseries.</p>
@@ -5950,7 +5955,7 @@ if you request metrics for a set of markets.</li>
 <li><code>depth_limit</code> (<code>str</code>): book depth limit, 100 levels max or full book that is not limited and provided as is from the exchange. Full book snapshots are collected once per hour</li>
 <li><code>timezone</code> (<code>str</code>): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.</li>
 <li><code>limit_per_market</code> (<code>int</code>): How many entries <em>per market</em> the result should contain.</li>
-<li><code>format</code> (<code>str</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>str</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: Market Order Books timeseries.</p>
@@ -5984,7 +5989,7 @@ if you request metrics for a set of markets.</li>
 <li><code>timezone</code> (<code>str</code>): timezone of the start/end times in db format for example: "America/Chicago". Default value is "UTC". For more details check out API documentation page.</li>
 <li><code>limit_per_market</code> (<code>int</code>): How many entries <em>per market</em> the result should contain.</li>
 <li><code>include_one_sided</code> (<code>bool</code>): Default: false Include one-side and empty books in quotes response.</li>
-<li><code>format</code> (<code>str</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>str</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: Market Quotes timeseries.</p>
@@ -6710,7 +6715,7 @@ if you request metrics for a set of markets.</li>
 <li><code>reviewable</code> (<code>Optional[bool]</code>): Limit to human-reviewable metrics. By default all metrics are returned.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: List of asset metrics metadata.</p>
@@ -6741,7 +6746,7 @@ if you request metrics for a set of markets.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: List of markets metadata.</p>
@@ -6758,7 +6763,7 @@ if you request metrics for a set of markets.</li>
 <li><code>metrics</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of metrics. By default all metrics are returned.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: List of exchange metrics metadata.</p>
@@ -6775,7 +6780,7 @@ if you request metrics for a set of markets.</li>
 <li><code>metrics</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of metrics. By default all metrics are returned.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: List of exchange asset metrics metadata.</p>
@@ -6792,7 +6797,7 @@ if you request metrics for a set of markets.</li>
 <li><code>metrics</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of metrics. By default all metrics are returned.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: List of pair metrics metadata.</p>
@@ -6809,7 +6814,7 @@ if you request metrics for a set of markets.</li>
 <li><code>metrics</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of metrics. By default all metrics are returned.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: List of institution metrics metadata.</p>
@@ -6828,7 +6833,7 @@ if you request metrics for a set of markets.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: List of assets metadata.</p>
@@ -6847,7 +6852,7 @@ if you request metrics for a set of markets.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: List of exchanges metadata.</p>
@@ -6866,7 +6871,7 @@ if you request metrics for a set of markets.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: List of indexes metadata.</p>
@@ -6885,7 +6890,7 @@ if you request metrics for a set of markets.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: List of pairs metadata.</p>
@@ -6904,7 +6909,7 @@ if you request metrics for a set of markets.</li>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>paging_from</code> (<code>Optional[str]</code>): Where does the first page start, at the start of the interval or at the end.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
-<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (Python API Client). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
+<li><code>format</code> (<code>Optional[str]</code>): Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), Default: "json_stream" (catalog-v2 and reference-data, market-orderbooks and other heavy endpoints), "json" (timeseries/*-metrics and other lighter endpoints). Format of the response. Supported values are json, json_stream. Setting format='json_stream' is generally more performant. page_size and paging_from is ignored when format='json_stream'.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: List of market metrics metadata.</p>
