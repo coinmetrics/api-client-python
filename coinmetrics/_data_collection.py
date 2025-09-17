@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import os
 import warnings
-
 import requests
 import itertools
 from dateutil.relativedelta import relativedelta
@@ -28,7 +27,6 @@ from coinmetrics._utils import (
 )
 from coinmetrics._models import AssetChainsData, CoinMetricsAPIModel, TransactionTrackerData
 from coinmetrics._catalogs import convert_catalog_dtypes, _expand_df
-from importlib import import_module
 from concurrent.futures import ThreadPoolExecutor, Executor
 from tqdm import tqdm
 from collections import defaultdict
@@ -38,14 +36,17 @@ if TYPE_CHECKING:
 import numpy as np
 import polars as pl
 
-orjson_found = True
 try:
-    json = import_module("orjson")
-except ModuleNotFoundError:
-    orjson_found = False
+    import orjson as _orjson
 
-if not orjson_found:
-    import json
+    def json_dumps(obj: Any) -> bytes:
+        return _orjson.dumps(obj)
+
+except ModuleNotFoundError:
+    import json as _json
+
+    def json_dumps(obj: Any) -> bytes:
+        return _json.dumps(obj).encode("utf-8")
 
 isoparse_typed: Callable[[Union[str, bytes]], datetime] = isoparse
 
@@ -130,6 +131,9 @@ class DataCollection:
         self._paginated = paginated
         if url_params.get("format") == "json_stream":
             self._paginated = False
+        self._is_stream = str(self._url_params.get("format", "")).lower() == "json_stream"
+        self._last_page_token: Optional[str] = None
+        self._current_data_iterator = None
 
     def first_page(self) -> List[Dict[str, Any]]:
         return cast(
@@ -141,34 +145,56 @@ class DataCollection:
         return list(self)
 
     def __next__(self) -> Any:
-        try:
-            if self._current_data_iterator is not None:
+        # Fast path: if we already have an iterator, try to yield from it
+        if self._current_data_iterator is not None:
+            try:
                 return next(self._current_data_iterator)
-        except StopIteration:
-            if self._next_page_token is None:
-                raise StopIteration
+            except StopIteration:
+                if self._is_stream:
+                    # The stream is consumed.
+                    raise
+                self._current_data_iterator = None
+                # Continue, to see if we have more pages.
 
-        url_params = deepcopy(self._url_params)
+        # --- STREAM MODE (json_stream): fetch exactly once, never paginate ---
+        if self._is_stream:
+            # one-shot retrieval: should return an iterator/generator over rows
+            api_response = self._data_retrieval_function(self._endpoint, dict(self._url_params))
+            # assume iterable/generator; do NOT wrap in list()
+            self._current_data_iterator = iter(api_response)
+            return next(self._current_data_iterator)
+
+        # --- PAGED MODE (normal JSON): keep following next_page_token safely ---
+        # Build params; add token if present
+        url_params = dict(self._url_params)
         if self._next_page_token:
             url_params["next_page_token"] = self._next_page_token
+
+        # If there is no current token and we've already fetched at least one page, we're done
+        elif self._last_page_token is not None:
+            raise StopIteration
+
+        # Fetch next page (or the first page, if no token yet)
         api_response = self._data_retrieval_function(self._endpoint, url_params)
-        if (
-            isinstance(api_response, dict)
-        ):
-            data = api_response.get("data")
-            # API responses that are paginated with "data" key
-            if "data" in api_response and isinstance(data, list):
-                self._next_page_token = cast(Optional[str], api_response.get("next_page_token"))
-                self._current_data_iterator = iter(cast(List[Any], data))
-            # API responses that return a single object
+
+        if isinstance(api_response, dict):
+            # API returns JSON pages like {"data": [...], "next_page_token": "..."}
+            if "data" in api_response:
+                data = api_response.get("data") or []
+                self._last_page_token = self._next_page_token
+                self._next_page_token = api_response.get("next_page_token")  # type: ignore
+                if not data and not self._next_page_token:
+                    # empty terminal page
+                    raise StopIteration
+                self._current_data_iterator = iter(data)
+                return next(self._current_data_iterator)
             else:
+                # API returns JSON pages like {"txid": "123x", "height": "1", ...}
                 self._next_page_token = None
-                self._current_data_iterator = iter([api_response])
-        # API responses that are not paginated, such as json_stream
-        elif isinstance(api_response, list):
-            self._next_page_token = None
-            self._current_data_iterator = iter(list(api_response))
-        return next(self._current_data_iterator)
+                self._current_data_iterator = None
+                # break iteration
+                self._last_page_token = " "
+                return api_response
 
     def __iter__(self) -> "DataCollection":
         return self
@@ -274,11 +300,11 @@ class DataCollection:
     def export_to_json(
         self,
         path_or_bufstr: FilePathOrBuffer = None,
-        compress: bool = False,
+        compress: bool = False
     ) -> Optional[str]:
         def _gen_json_lines() -> Iterable[bytes]:
             for data_row in self:
-                yield json.dumps(data_row) + b"\n"
+                yield json_dumps(data_row) + b"\n"
 
         return self._export_to_file(_gen_json_lines(), path_or_bufstr, compress)
 

@@ -100,6 +100,9 @@ def retry(
     message: Optional[str] = None,
     fail: bool = True,
     error_str: Optional[str] = None,
+    exponential_backoff: bool = True,
+    base_delay: float = 1.0,
+    max_delay: float = 60.0,
 ) -> Callable[..., Any]:
     def retry_wrapper(f: Any) -> Any:
         @wraps(f)
@@ -113,13 +116,21 @@ def retry(
                         or (error_str is not None and error_str not in str(error))
                     ) and fail:
                         raise
+
                     if callable(wait_time_between_retries):
                         wait_time = wait_time_between_retries()
+                    elif exponential_backoff:
+                        # Calculate exponential backoff with jitter
+                        import random
+                        delay = min(base_delay * (2 ** (n - 1)), max_delay)
+                        jitter = random.uniform(0, 0.1) * delay
+                        wait_time = delay + jitter
                     else:
                         wait_time = wait_time_between_retries
+
                     if message:
                         logger.info(
-                            "%s. Retrying in: %s sec. Iteration: %s",
+                            "%s. Retrying in: %.2f sec. Iteration: %s",
                             message,
                             wait_time,
                             n,
