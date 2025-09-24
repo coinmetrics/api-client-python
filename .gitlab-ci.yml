@@ -1,4 +1,4 @@
-image: docker:latest
+image: docker:${CM_DOCKER_IMAGE_VERSION}
 
 .check-for-changes: &check-for-changes |
   DOCUMENTATION_ERROR_MESSAGE="Failing pipeline build because changes were made to the API Client without generating new documentation"
@@ -11,7 +11,7 @@ image: docker:latest
   fi
 
 services:
-  - docker:dind
+  - docker:${CM_DOCKER_IMAGE_VERSION}-dind
 
 stages:
   - build-test-push-image
@@ -26,20 +26,18 @@ variables:
 build-test-push-image:
   stage: build-test-push-image
   script:
+    - mkdir -p ~/.docker && echo $DOCKER_AUTH_CONFIG > ~/.docker/config.json && unset DOCKER_AUTH_CONFIG
     - apk add git
     - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME || true
     - docker build --cache-from $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --build-arg CM_API_KEY=$CM_API_KEY  .
     - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python -m mypy -p coinmetrics -p test --install-types --non-interactive
     - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python -m flake8 coinmetrics
     - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python -m pytest -n auto --timeout=60 test --ignore test/test_data_exporter.py --ignore test/test_rate_limits.py  --ignore test/test_catalog.py --ignore test/test_speed_benchmarks.py
+    - echo ${CI_REGISTRY_PASSWORD} | docker login ${CI_REGISTRY} -u ${CI_REGISTRY_USER} --password-stdin
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
   tags:
-    - linux
-    - docker
-    - coinmetrics-build-runner
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - svc-docker
 
 build-nix:
   image: docker.io/coinmetrics/nix-builder:latest
@@ -66,9 +64,7 @@ generate-docs:
   image: python:3.11-slim
   stage: generate-docs
   tags:
-    - linux
-    - docker
-    - coinmetrics-build-runner
+    - rt-runc
   before_script:
     # Git set up
     - apt-get update && apt-get install -y git ssh
@@ -124,11 +120,7 @@ deploy:
     - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python coinmetrics/build.py
     - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python -m poetry publish --build --username $PYPI_USERNAME --password $PYPI_PASSWORD
   tags:
-    - linux
-    - docker
-    - coinmetrics-build-runner
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - svc-docker
   when: manual
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
