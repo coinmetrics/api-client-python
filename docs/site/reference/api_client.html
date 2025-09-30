@@ -2484,6 +2484,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get_blockchain_metadata_tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_blockchain_metadata_tags
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#blockchain_metadata_tags" class="md-nav__link">
     <span class="md-ellipsis">
       blockchain_metadata_tags
@@ -2493,9 +2502,36 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get_blockchain_metadata_tagged_entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_blockchain_metadata_tagged_entities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#blockchain_metadata_tagged_entities" class="md-nav__link">
     <span class="md-ellipsis">
       blockchain_metadata_tagged_entities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_blockchain_metadata_owners" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_blockchain_metadata_owners
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_blockchain_metadata_locations" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_blockchain_metadata_locations
     </span>
   </a>
   
@@ -7007,13 +7043,14 @@ For example, constituents for <code>volume_trusted_spot_usd_1d</code> are exchan
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: List of timeframes.</p>
-<p><a id="coinmetrics.api_client.CoinMetricsClient.blockchain_metadata_tags"></a></p>
-<h4 id="blockchain_metadata_tags">blockchain_metadata_tags<a class="headerlink" href="#blockchain_metadata_tags" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">blockchain_metadata_tags</span><span class="p">(</span>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.get_blockchain_metadata_tags"></a></p>
+<h4 id="get_blockchain_metadata_tags">get_blockchain_metadata_tags<a class="headerlink" href="#get_blockchain_metadata_tags" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_blockchain_metadata_tags</span><span class="p">(</span>
         <span class="nb">type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">next_page_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
 </code></pre></div>
+<p>Returns a list of all available tags along with their descriptions, lexicographically ordered by the tag field.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>type</code> (<code>Optional[str]</code>): The type of a tag.</li>
@@ -7022,20 +7059,95 @@ For example, constituents for <code>volume_trusted_spot_usd_1d</code> are exchan
 </ul>
 <p><strong>Returns</strong>:</p>
 <p><code>DataCollection</code>: List of tags.</p>
-<p><a id="coinmetrics.api_client.CoinMetricsClient.blockchain_metadata_tagged_entities"></a></p>
-<h4 id="blockchain_metadata_tagged_entities">blockchain_metadata_tagged_entities<a class="headerlink" href="#blockchain_metadata_tagged_entities" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">blockchain_metadata_tagged_entities</span><span class="p">(</span>
-        <span class="n">tags</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">entities</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">locations</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.blockchain_metadata_tags"></a></p>
+<h4 id="blockchain_metadata_tags">blockchain_metadata_tags<a class="headerlink" href="#blockchain_metadata_tags" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nd">@alias</span><span class="p">(</span><span class="s2">&quot;get_blockchain_metadata_tags&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">blockchain_metadata_tags</span><span class="p">(</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">next_page_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
 </code></pre></div>
+<p>Get blockchain metadata tags.</p>
+<p>.. deprecated::
+   Use :meth:<code>get_blockchain_metadata_tags</code> instead.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>type</code> (<code>Optional[str]</code>): The type of a tag.</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
+<li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>DataCollection</code>: List of tags.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.get_blockchain_metadata_tagged_entities"></a></p>
+<h4 id="get_blockchain_metadata_tagged_entities">get_blockchain_metadata_tagged_entities<a class="headerlink" href="#get_blockchain_metadata_tagged_entities" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_blockchain_metadata_tagged_entities</span><span class="p">(</span>
+        <span class="n">tags</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">entities</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">locations</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">owner_names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">next_page_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+<p>Returns a list of all entities associated with provided tags. Ordered by tuple (entity, tag, location, start_time) if requested by providing entities parameter. Ordered by tuple (tag, location, entity, started_time) if requested by providing tags parameter. Ordered by tuple (owner_name, location, entity, tag, timestamp_start) if requested by providing owner_name parameter.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>tags</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of tags. Mutually exclusive with <code>entities</code> parameter. Currently a single tag is allowed per each request.</li>
 <li><code>entities</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of entities. Mutually exclusive with <code>tags</code> parameter.</li>
 <li><code>locations</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of entity locations (asset representation where the entity has been tagged). Currently a single entity location is allowed per each request.</li>
+<li><code>owner_names</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of owner names. Mutually exclusive with tags and entities parameters. Currently a single owner name is allowed in a request.</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
+<li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>DataCollection</code>: List of tagged entities. Ordered by tuple <code>(entity, tag, location, start_time)</code> if requested by providing <code>entities</code> parameter. Ordered by tuple <code>(tag, location, entity, started_time)</code> if requested by providing <code>tags</code> parameter.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.blockchain_metadata_tagged_entities"></a></p>
+<h4 id="blockchain_metadata_tagged_entities">blockchain_metadata_tagged_entities<a class="headerlink" href="#blockchain_metadata_tagged_entities" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nd">@alias</span><span class="p">(</span><span class="s2">&quot;get_blockchain_metadata_tagged_entities&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">blockchain_metadata_tagged_entities</span><span class="p">(</span>
+        <span class="n">tags</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">entities</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">locations</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">owner_names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">next_page_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+<p>Returns a list of all entities associated with provided tags. Ordered by tuple (entity, tag, location, start_time) if requested by providing entities parameter. Ordered by tuple (tag, location, entity, started_time) if requested by providing tags parameter. Ordered by tuple (owner_name, location, entity, tag, timestamp_start) if requested by providing owner_name parameter.</p>
+<p>.. deprecated::
+   Use :meth:<code>get_blockchain_metadata_tagged_entities</code> instead.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>tags</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of tags. Mutually exclusive with <code>entities</code> parameter. Currently a single tag is allowed per each request.</li>
+<li><code>entities</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of entities. Mutually exclusive with <code>tags</code> parameter.</li>
+<li><code>locations</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of entity locations (asset representation where the entity has been tagged). Currently a single entity location is allowed per each request.</li>
+<li><code>owner_names</code> (<code>Optional[Union[str, List[str]]]</code>): Comma separated list of owner names. Mutually exclusive with tags and entities parameters. Currently a single owner name is allowed in a request.</li>
+<li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
+<li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>DataCollection</code>: List of tagged entities. Ordered by tuple <code>(entity, tag, location, start_time)</code> if requested by providing <code>entities</code> parameter. Ordered by tuple <code>(tag, location, entity, started_time)</code> if requested by providing <code>tags</code> parameter.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.get_blockchain_metadata_owners"></a></p>
+<h4 id="get_blockchain_metadata_owners">get_blockchain_metadata_owners<a class="headerlink" href="#get_blockchain_metadata_owners" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_blockchain_metadata_owners</span><span class="p">(</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">next_page_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+<p>Returns a list of all supported owners lexicographically ordered by the owner_name field.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
+<li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p><code>DataCollection</code>: List of tagged entities. Ordered by tuple <code>(entity, tag, location, start_time)</code> if requested by providing <code>entities</code> parameter. Ordered by tuple <code>(tag, location, entity, started_time)</code> if requested by providing <code>tags</code> parameter.</p>
+<p><a id="coinmetrics.api_client.CoinMetricsClient.get_blockchain_metadata_locations"></a></p>
+<h4 id="get_blockchain_metadata_locations">get_blockchain_metadata_locations<a class="headerlink" href="#get_blockchain_metadata_locations" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_blockchain_metadata_locations</span><span class="p">(</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">next_page_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollection</span>
+</code></pre></div>
+<p>Returns a list of all supported locations ordered lexicographically.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
 <li><code>page_size</code> (<code>Optional[int]</code>): Number of items per single page of results.</li>
 <li><code>next_page_token</code> (<code>Optional[str]</code>): Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use <code>next_page_url</code> response field.</li>
 </ul>
