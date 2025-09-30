@@ -11,7 +11,7 @@ import requests
 from requests import HTTPError, Response
 import websocket
 
-from coinmetrics._utils import retry, transform_url_params_values_to_str, deprecated
+from coinmetrics._utils import retry, transform_url_params_values_to_str, deprecated, alias
 from coinmetrics import __version__ as version
 from coinmetrics._exceptions import CoinMetricsClientQueryParamsException
 from coinmetrics._typing import (
@@ -8053,13 +8053,15 @@ class CoinMetricsClient:
         }
         return DataCollection(self._get_data, "constituent-timeframes/asset-metrics", params, client=self)
 
-    def blockchain_metadata_tags(
-            self,
-            type: Optional[str] = None,
-            page_size: Optional[int] = None,
-            next_page_token: Optional[str] = None,
+    def get_blockchain_metadata_tags(
+        self,
+        type: Optional[str] = None,
+        page_size: Optional[int] = None,
+        next_page_token: Optional[str] = None,
     ) -> DataCollection:
         """
+        Returns a list of all available tags along with their descriptions, lexicographically ordered by the tag field.
+
         :param type: The type of a tag.
         :type type: Optional[str]
         :param page_size: Number of items per single page of results.
@@ -8077,21 +8079,50 @@ class CoinMetricsClient:
         }
         return DataCollection(self._get_data, "blockchain-metadata/tags", params, client=self)
 
-    def blockchain_metadata_tagged_entities(
+    @alias("get_blockchain_metadata_tags")
+    def blockchain_metadata_tags(
             self,
-            tags: Optional[Union[str, List[str]]] = None,
-            entities: Optional[Union[str, List[str]]] = None,
-            locations: Optional[Union[str, List[str]]] = None,
+            type: Optional[str] = None,
             page_size: Optional[int] = None,
             next_page_token: Optional[str] = None,
     ) -> DataCollection:
         """
+        Get blockchain metadata tags.
+
+        .. deprecated::
+           Use :meth:`get_blockchain_metadata_tags` instead.
+
+        :param type: The type of a tag.
+        :type type: Optional[str]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of tags.
+        :rtype: DataCollection
+        """
+        return self.get_blockchain_metadata_tags(type, page_size, next_page_token)
+
+    def get_blockchain_metadata_tagged_entities(
+        self,
+        tags: Optional[Union[str, List[str]]] = None,
+        entities: Optional[Union[str, List[str]]] = None,
+        locations: Optional[Union[str, List[str]]] = None,
+        owner_names: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        next_page_token: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        Returns a list of all entities associated with provided tags. Ordered by tuple (entity, tag, location, start_time) if requested by providing entities parameter. Ordered by tuple (tag, location, entity, started_time) if requested by providing tags parameter. Ordered by tuple (owner_name, location, entity, tag, timestamp_start) if requested by providing owner_name parameter.
         :param tags: Comma separated list of tags. Mutually exclusive with `entities` parameter. Currently a single tag is allowed per each request.
         :type tags: Optional[Union[str, List[str]]]
         :param entities: Comma separated list of entities. Mutually exclusive with `tags` parameter.
         :type entities: Optional[Union[str, List[str]]]
         :param locations: Comma separated list of entity locations (asset representation where the entity has been tagged). Currently a single entity location is allowed per each request.
         :type locations: Optional[Union[str, List[str]]]
+        :param owner_names: Comma separated list of owner names. Mutually exclusive with tags and entities parameters. Currently a single owner name is allowed in a request.
+        :type owner_names: Optional[Union[str, List[str]]]
         :param page_size: Number of items per single page of results.
         :type page_size: Optional[int]
         :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
@@ -8104,10 +8135,95 @@ class CoinMetricsClient:
             "tags": tags,
             "entities": entities,
             "locations": locations,
+            "owner_names": owner_names,
             "page_size": page_size,
             "next_page_token": next_page_token,
         }
         return DataCollection(self._get_data, "blockchain-metadata/tagged-entities", params, client=self)
+
+    @alias("get_blockchain_metadata_tagged_entities")
+    def blockchain_metadata_tagged_entities(
+        self,
+        tags: Optional[Union[str, List[str]]] = None,
+        entities: Optional[Union[str, List[str]]] = None,
+        locations: Optional[Union[str, List[str]]] = None,
+        owner_names: Optional[Union[str, List[str]]] = None,
+        page_size: Optional[int] = None,
+        next_page_token: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        Returns a list of all entities associated with provided tags. Ordered by tuple (entity, tag, location, start_time) if requested by providing entities parameter. Ordered by tuple (tag, location, entity, started_time) if requested by providing tags parameter. Ordered by tuple (owner_name, location, entity, tag, timestamp_start) if requested by providing owner_name parameter.
+
+        .. deprecated::
+           Use :meth:`get_blockchain_metadata_tagged_entities` instead.
+
+        :param tags: Comma separated list of tags. Mutually exclusive with `entities` parameter. Currently a single tag is allowed per each request.
+        :type tags: Optional[Union[str, List[str]]]
+        :param entities: Comma separated list of entities. Mutually exclusive with `tags` parameter.
+        :type entities: Optional[Union[str, List[str]]]
+        :param locations: Comma separated list of entity locations (asset representation where the entity has been tagged). Currently a single entity location is allowed per each request.
+        :type locations: Optional[Union[str, List[str]]]
+        :param owner_names: Comma separated list of owner names. Mutually exclusive with tags and entities parameters. Currently a single owner name is allowed in a request.
+        :type owner_names: Optional[Union[str, List[str]]]
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of tagged entities. Ordered by tuple `(entity, tag, location, start_time)` if requested by providing `entities` parameter. Ordered by tuple `(tag, location, entity, started_time)` if requested by providing `tags` parameter.
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "tags": tags,
+            "entities": entities,
+            "locations": locations,
+            "owner_names": owner_names,
+            "page_size": page_size,
+            "next_page_token": next_page_token,
+        }
+        return DataCollection(self._get_data, "blockchain-metadata/tagged-entities", params, client=self)
+
+    def get_blockchain_metadata_owners(
+        self,
+        page_size: Optional[int] = None,
+        next_page_token: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        Returns a list of all supported owners lexicographically ordered by the owner_name field.
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of tagged entities. Ordered by tuple `(entity, tag, location, start_time)` if requested by providing `entities` parameter. Ordered by tuple `(tag, location, entity, started_time)` if requested by providing `tags` parameter.
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "page_size": page_size,
+            "next_page_token": next_page_token,
+        }
+        return DataCollection(self._get_data, "blockchain-metadata/owners", params, client=self)
+
+    def get_blockchain_metadata_locations(
+        self,
+        page_size: Optional[int] = None,
+        next_page_token: Optional[str] = None,
+    ) -> DataCollection:
+        """
+        Returns a list of all supported locations ordered lexicographically.
+        :param page_size: Number of items per single page of results.
+        :type page_size: Optional[int]
+        :param next_page_token: Token for receiving the results from the next page of a query. Should not be used directly. To iterate through pages just use `next_page_url` response field.
+        :type next_page_token: Optional[str]
+
+        :return: List of tagged entities. Ordered by tuple `(entity, tag, location, start_time)` if requested by providing `entities` parameter. Ordered by tuple `(tag, location, entity, started_time)` if requested by providing `tags` parameter.
+        :rtype: DataCollection
+        """
+        params: Dict[str, Any] = {
+            "page_size": page_size,
+            "next_page_token": next_page_token,
+        }
+        return DataCollection(self._get_data, "blockchain-metadata/locations", params, client=self)
 
     def _log(self, msg: str) -> None:
         (logger.info if self.verbose else logger.debug)(msg)

@@ -1,11 +1,12 @@
 import pathlib
+import warnings
 from datetime import date, datetime, timezone
 from enum import Enum
 from functools import wraps
 from logging import getLogger
 from os.path import expanduser
 from time import sleep
-from typing import Any, Callable, Dict, List, Optional, Tuple, Union, Set
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union, Set, Type
 from coinmetrics._typing import FilePathOrBuffer, UrlParamTypes
 from pandas import Timestamp
 import polars as pl
@@ -285,3 +286,292 @@ def convert_pandas_dtype_to_polars(pandas_dtype: Union[str, pd.api.types.Categor
         raise ValueError(f"No direct Polars equivalent found for pandas dtype: {dtype_str}")
 
     return polars_dtype
+
+
+# =============================================================================
+# Function Alias Utilities
+# =============================================================================
+
+def alias(
+    canonical_name: str,
+    warning_message: Optional[str] = None,
+    category: Type[Warning] = DeprecationWarning,
+    stacklevel: int = 2
+) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
+    """
+    Create a function alias that routes to a canonical function with a deprecation warning.
+
+    Parameters
+    ----------
+    canonical_name : str
+        The canonical name of the function this alias should route to.
+    warning_message : str, optional
+        Custom warning message. If None, a default message will be generated.
+    category : Type[Warning], default DeprecationWarning
+        The warning category to use.
+    stacklevel : int, default 2
+        The stack level for the warning (how many frames up to show in traceback).
+
+    Returns
+    -------
+    Callable
+        A decorator that creates the alias function.
+
+    Examples
+    --------
+    >>> class MyClass:
+    ...     def get_data(self):
+    ...         return "data"
+    ...
+    ...     @alias("get_data")
+    ...     def data(self):
+    ...         return self.get_data()
+
+    When `data()` is called, it will route to `get_data()` and show a deprecation warning.
+    """
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
+        # Generate warning message if not provided
+        msg = warning_message
+        if msg is None:
+            msg = (
+                f"Function '{func.__name__}' is deprecated and will be removed in a future version. "
+                f"Please use '{canonical_name}' instead."
+            )
+
+        # Update docstring to include deprecation notice
+        original_doc = func.__doc__ or ""
+        deprecation_note = f"\n\n.. deprecated::\n   Use :meth:`{canonical_name}` instead.\n"
+        func.__doc__ = original_doc + deprecation_note
+
+        @wraps(func)
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
+            # Issue the deprecation warning
+            warnings.warn(
+                msg,
+                category=category,
+                stacklevel=stacklevel
+            )
+
+            # Log the warning as well
+            logger.warning(
+                f"Deprecated function '{func.__name__}' called. "
+                f"Please use '{canonical_name}' instead."
+            )
+
+            # Call the original function
+            return func(*args, **kwargs)
+
+        # Mark the wrapper as an alias
+        setattr(wrapper, '_is_alias', True)
+        setattr(wrapper, '_canonical_name', canonical_name)
+        setattr(wrapper, '_original_func', func)
+
+        return wrapper
+
+    return decorator
+
+
+class AliasManager:
+    """
+    Manager class for handling function aliases in a class.
+
+    This class provides methods to create, manage, and validate function aliases
+    within a class context.
+    """
+
+    def __init__(self, target_class: Type[Any]) -> None:
+        """
+        Initialize the alias manager for a target class.
+
+        Parameters
+        ----------
+        target_class : Type[Any]
+            The class to manage aliases for.
+        """
+        self.target_class = target_class
+        self._aliases: Dict[str, str] = {}
+        self._reverse_aliases: Dict[str, str] = {}
+
+    def add_alias(self, alias_name: str, canonical_name: str) -> None:
+        """
+        Add an alias mapping.
+
+        Parameters
+        ----------
+        alias_name : str
+            The alias function name.
+        canonical_name : str
+            The canonical function name.
+        """
+        self._aliases[alias_name] = canonical_name
+        self._reverse_aliases[canonical_name] = alias_name
+
+    def get_canonical_name(self, alias_name: str) -> Optional[str]:
+        """
+        Get the canonical name for an alias.
+
+        Parameters
+        ----------
+        alias_name : str
+            The alias function name.
+
+        Returns
+        -------
+        Optional[str]
+            The canonical name if the alias exists, None otherwise.
+        """
+        return self._aliases.get(alias_name)
+
+    def get_aliases(self, canonical_name: str) -> list[str]:
+        """
+        Get all aliases for a canonical function name.
+
+        Parameters
+        ----------
+        canonical_name : str
+            The canonical function name.
+
+        Returns
+        -------
+        list[str]
+            List of alias names for the canonical function.
+        """
+        return [alias for alias, canonical in self._aliases.items()
+                if canonical == canonical_name]
+
+    def create_alias_method(self, alias_name: str, canonical_name: str) -> Callable[..., Any]:
+        """
+        Create an alias method that routes to the canonical method.
+
+        Parameters
+        ----------
+        alias_name : str
+            The alias method name.
+        canonical_name : str
+            The canonical method name.
+
+        Returns
+        -------
+        Callable
+            The alias method.
+        """
+        def alias_method(self: Any, *args: Any, **kwargs: Any) -> Any:
+            # Get the canonical method
+            canonical_method = getattr(self, canonical_name, None)
+            if canonical_method is None:
+                raise AttributeError(
+                    f"Canonical method '{canonical_name}' not found for alias '{alias_name}'"
+                )
+
+            # Issue deprecation warning
+            warning_message = (
+                f"Method '{alias_name}' is deprecated and will be removed in a future version. "
+                f"Please use '{canonical_name}' instead."
+            )
+            warnings.warn(warning_message, DeprecationWarning, stacklevel=2)
+            logger.warning(f"Deprecated method '{alias_name}' called. Use '{canonical_name}' instead.")
+
+            # Call the canonical method
+            return canonical_method(*args, **kwargs)
+
+        # Set method attributes
+        alias_method.__name__ = alias_name
+        alias_method.__qualname__ = f"{self.target_class.__name__}.{alias_name}"
+        setattr(alias_method, '_is_alias', True)
+        setattr(alias_method, '_canonical_name', canonical_name)
+
+        # Add to aliases
+        self.add_alias(alias_name, canonical_name)
+
+        return alias_method
+
+    def apply_aliases(self) -> None:
+        """
+        Apply all registered aliases to the target class.
+
+        This method should be called after all aliases have been registered.
+        """
+        for alias_name, canonical_name in self._aliases.items():
+            if hasattr(self.target_class, canonical_name):
+                alias_method = self.create_alias_method(alias_name, canonical_name)
+                setattr(self.target_class, alias_name, alias_method)
+            else:
+                logger.warning(
+                    f"Cannot create alias '{alias_name}' for '{canonical_name}': "
+                    f"canonical method not found in {self.target_class.__name__}"
+                )
+
+
+def create_function_alias(
+    canonical_func: Callable[..., Any],
+    alias_name: str,
+    warning_message: Optional[str] = None
+) -> Callable[..., Any]:
+    """
+    Create a standalone function alias.
+
+    Parameters
+    ----------
+    canonical_func : Callable
+        The canonical function to alias.
+    alias_name : str
+        The name for the alias function.
+    warning_message : str, optional
+        Custom warning message.
+
+    Returns
+    -------
+    Callable
+        The alias function.
+    """
+    if warning_message is None:
+        warning_message = (
+            f"Function '{alias_name}' is deprecated and will be removed in a future version. "
+            f"Please use '{canonical_func.__name__}' instead."
+        )
+
+    @wraps(canonical_func)
+    def alias_func(*args: Any, **kwargs: Any) -> Any:
+        warnings.warn(warning_message, DeprecationWarning, stacklevel=2)
+        logger.warning(f"Deprecated function '{alias_name}' called. Use '{canonical_func.__name__}' instead.")
+        return canonical_func(*args, **kwargs)
+
+    alias_func.__name__ = alias_name
+    setattr(alias_func, '_is_alias', True)
+    setattr(alias_func, '_canonical_name', canonical_func.__name__)
+
+    return alias_func
+
+
+def is_alias(func: Callable[..., Any]) -> bool:
+    """
+    Check if a function is an alias.
+
+    Parameters
+    ----------
+    func : Callable
+        The function to check.
+
+    Returns
+    -------
+    bool
+        True if the function is an alias, False otherwise.
+    """
+    return getattr(func, '_is_alias', False)
+
+
+def get_canonical_name(func: Callable[..., Any]) -> Optional[str]:
+    """
+    Get the canonical name of an alias function.
+
+    Parameters
+    ----------
+    func : Callable
+        The function to get the canonical name for.
+
+    Returns
+    -------
+    Optional[str]
+        The canonical name if the function is an alias, None otherwise.
+    """
+    return getattr(func, '_canonical_name', None)

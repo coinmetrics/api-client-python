@@ -22,5 +22,13 @@ def test_get_blockchain_list_of_account_balance_updates() -> None:
     assert updates[0]['block_hash'] == "0000000000000000002c7505ef2272e0677fa53d68d633f8e076ed42dd3380e6"
 
 
+@pytest.mark.skipif(not cm_api_key_set, reason=REASON_TO_SKIP)
+def test_get_blockchain_metadata() -> None:
+    owner = next(client.get_blockchain_metadata_owners())['owner_name']
+    location = next(client.get_blockchain_metadata_locations())['location']
+    tag = next(client.get_blockchain_metadata_tags())['tag']
+    tagged_entities = next(client.get_blockchain_metadata_tagged_entities(tags=[tag]))['entity']
+
+
 if __name__ == "__main__":
     pytest.main()
