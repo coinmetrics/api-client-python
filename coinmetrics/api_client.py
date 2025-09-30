@@ -7276,7 +7276,15 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "version": version,
         }
-        return DataCollection(self._get_data, "taxonomy/assets", params, client=self)
+        return DataCollection(
+            self._get_data,
+            "taxonomy/assets",
+            params,
+            client=self,
+            columns_to_store=list(
+                get_schema_fields("TaxonomyAsset").keys()
+            ),
+        )
 
     def get_taxonomy_assets_metadata(
         self,
@@ -7316,7 +7324,15 @@ class CoinMetricsClient:
             "paging_from": paging_from,
             "version": version,
         }
-        return DataCollection(self._get_data, "taxonomy-metadata/assets", params, client=self)
+        return DataCollection(
+            self._get_data,
+            "taxonomy-metadata/assets",
+            params,
+            client=self,
+            columns_to_store=list(
+                get_schema_fields("TaxonomyMetadataAsset").keys()
+            ),
+        )
 
     def get_asset_profiles(
         self,

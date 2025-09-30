@@ -27,7 +27,9 @@ REQUIRED_SCHEMAS = {
     "BlockchainBalanceUpdateV2",
     "BlockchainBlockInfoV2",
     "BlockchainFullSingleTransactionResponseV2",
-    "BlockchainFullBlockResponseV2"
+    "BlockchainFullBlockResponseV2",
+    "TaxonomyAsset",
+    "TaxonomyMetadataAsset",
 }
 
 
