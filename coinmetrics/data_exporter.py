@@ -9,7 +9,7 @@ import sys
 from requests import Response, HTTPError
 from requests.auth import HTTPBasicAuth
 
-from coinmetrics._exceptions import CoinMetricsUnauthorizedException
+from coinmetrics._exceptions import CoinMetricsClientFlatFilesUnauthorizedException
 from coinmetrics._utils import retry
 from datetime import datetime
 from typing import Union, Optional, List, Dict, Any, Iterable
@@ -472,7 +472,7 @@ class CoinMetricsDataExporter:
             actual_url, verify=self._verify_ssl_certs, auth=self._auth, stream=stream, proxies=self.proxies  # type: ignore
         )
         if response.status_code == 403 or response.status_code == 401:
-            raise CoinMetricsUnauthorizedException(response=response)
+            raise CoinMetricsClientFlatFilesUnauthorizedException(response=response)
         if response.status_code != 200:
             response.raise_for_status()
         return response

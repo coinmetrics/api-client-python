@@ -13,7 +13,13 @@ import websocket
 
 from coinmetrics._utils import retry, transform_url_params_values_to_str, deprecated, alias
 from coinmetrics import __version__ as version
-from coinmetrics._exceptions import CoinMetricsClientQueryParamsException
+from coinmetrics._exceptions import (
+    CoinMetricsClientQueryParamsException,
+    CoinMetricsClientBadParameterError,
+    CoinMetricsClientForbiddenError,
+    CoinMetricsClientUnauthorizedError,
+    CoinMetricsClientRateLimitError,
+)
 from coinmetrics._typing import (
     DataReturnType,
     MessageHandlerType
@@ -132,6 +138,8 @@ class CoinMetricsClient:
         host: Optional[str] = None,
         port: Optional[int] = None,
         schema: str = "https",
+        ignore_unauthorized_errors: bool = False,
+        ignore_forbidden_errors: bool = False,
     ):
         """
         :param api_key: The API key for the CoinMetrics API.
@@ -152,10 +160,16 @@ class CoinMetricsClient:
         :type port: int
         :param schema: The schema for accessing the Coin Metrics API. Default is "https".
         :type schema: str
+        :param ignore_unauthorized_errors: Whether to ignore 401 Unauthorized errors. Default is False.
+        :type ignore_unauthorized_errors: bool
+        :param ignore_forbidden_errors: Whether to ignore 403 Forbidden errors. Default is False.
+        :type ignore_forbidden_errors: bool
         """
         self._api_key_url_str = "api_key={}".format(api_key) if api_key else ""
 
         self._verify_ssl_certs = verify_ssl_certs
+        self._ignore_unauthorized_errors = ignore_unauthorized_errors
+        self._ignore_forbidden_errors = ignore_forbidden_errors
 
         if host is None:
             self._host = "api.coinmetrics.io" if api_key else "community-api.coinmetrics.io"
@@ -8268,23 +8282,35 @@ class CoinMetricsClient:
         else:
             self._log(f"Response status code: {resp.status_code} for url: {resp.url} took: {elapsed}")
 
-        # Raise early on HTTP errors
-        try:
-            resp.raise_for_status()
-        except HTTPError:
-            if resp.status_code == 414:
-                # URI is too long
-                raise CoinMetricsClientQueryParamsException(response=resp)
-            if resp.headers.get("content-type") == "application/json":
-                try:
-                    data = json.loads(resp.content)
-                    if isinstance(data, dict) and "error" in data:
-                        error_msg = (f"Error found for the query: \n {actual_url}\nError details: {data.get('error')}")
-                        logger.error(error_msg)
-                        resp.raise_for_status()
-                except ValueError:
-                    raise ValueError(f"Failed to parse error response as JSON. Status code: {resp.status_code}, Content: {resp.content}")
-            raise
+        # Handle HTTP errors with custom exceptions
+        if resp.status_code == 400:
+            raise CoinMetricsClientBadParameterError(response=resp)
+        elif resp.status_code == 401:
+            if not self._ignore_unauthorized_errors:
+                raise CoinMetricsClientUnauthorizedError(response=resp)
+        elif resp.status_code == 403:
+            if not self._ignore_forbidden_errors:
+                raise CoinMetricsClientForbiddenError(response=resp)
+        elif resp.status_code == 414:
+            # URI is too long
+            raise CoinMetricsClientQueryParamsException(response=resp)
+        elif resp.status_code == 429:
+            raise CoinMetricsClientRateLimitError(response=resp)
+        elif resp.status_code >= 400:
+            # Handle other HTTP errors
+            try:
+                resp.raise_for_status()
+            except HTTPError:
+                if resp.headers.get("content-type") == "application/json":
+                    try:
+                        data = json.loads(resp.content)
+                        if isinstance(data, dict) and "error" in data:
+                            error_msg = (f"Error found for the query: \n {actual_url}\nError details: {data.get('error')}")
+                            logger.error(error_msg)
+                            resp.raise_for_status()
+                    except ValueError:
+                        raise ValueError(f"Failed to parse error response as JSON. Status code: {resp.status_code}, Content: {resp.content}")
+                raise
 
         if is_json_stream:
             # Return a generator: caller can iterate without loading into memory
@@ -8318,21 +8344,46 @@ class CoinMetricsClient:
         )
         return CmStream(ws_url=actual_url)
 
-    @retry((socket.gaierror, HTTPError), retries=5, wait_time_between_retries=5)
+    @retry((socket.gaierror, HTTPError, CoinMetricsClientRateLimitError), retries=5, wait_time_between_retries=5)
     def _send_request(self, actual_url: str, is_json_stream: False) -> Response:  # type: ignore
         """
         Wrapper for requests.get with retry on certain exceptions.
         """
-        response = self._session.get(
-            actual_url,
-            headers=self._session.headers,
-            proxies=self._session.proxies,
-            verify=self._session.verify,
-            stream=is_json_stream,
-        )
-        if response.status_code == 429 or response.headers.get("x-ratelimit-remaining", None) == "0":
-            logger.info("Sleeping for a rate limit window because 429 (too many requests) error was returned. Please "
-                        "see Coin Metrics APIV4 documentation for more information: https://docs.coinmetrics.io/api/v4/#tag/Rate-limits")
-            time.sleep(int(response.headers["x-ratelimit-reset"]))
-            response = self._send_request(actual_url=actual_url)
-        return response
+        max_retries = 5
+        retry_count = 0
+
+        while retry_count < max_retries:
+            response = self._session.get(
+                actual_url,
+                headers=self._session.headers,
+                proxies=self._session.proxies,
+                verify=self._session.verify,
+                stream=is_json_stream,
+            )
+
+            # Handle rate limiting with proper header-based retry logic
+            if response.status_code == 429:
+                retry_count += 1
+                rate_limit_reset = response.headers.get("x-ratelimit-reset", "60")
+                rate_limit_remaining = response.headers.get("x-ratelimit-remaining", "0")
+
+                logger.info(
+                    "Rate limit exceeded (429). Remaining requests: %s, Reset in: %s seconds. "
+                    "Retry attempt: %d/%d. See Coin Metrics API v4 documentation for more information: "
+                    "https://docs.coinmetrics.io/api/v4/#tag/Rate-limits",
+                    rate_limit_remaining, rate_limit_reset, retry_count, max_retries
+                )
+
+                if retry_count >= max_retries:
+                    raise CoinMetricsClientRateLimitError(response=response)
+
+                # Sleep for the reset time specified in the header
+                sleep_time = int(rate_limit_reset)
+                time.sleep(sleep_time)
+                continue
+
+            # If we get here, the request was successful or had a different error
+            return response
+
+        # This should never be reached, but just in case
+        raise CoinMetricsClientRateLimitError(response=response)

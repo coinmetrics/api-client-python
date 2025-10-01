@@ -3,7 +3,7 @@ import requests
 from datetime import datetime
 from coinmetrics._exceptions import (
     CoinMetricsClientQueryParamsException,
-    # CoinMetricsUnauthorizedException,
+    # CoinMetricsClientFlatFilesUnauthorizedException,
 )
 from coinmetrics.api_client import CoinMetricsClient
 from coinmetrics.data_exporter import CoinMetricsDataExporter
@@ -58,7 +58,7 @@ def test_custom_exception_not_raised_for_403() -> None:
 #         data_exporter.export_market_trades_spot_data(
 #             start_date=start_date, end_date=end_date, exchanges=exchanges, threaded=True
 #         )
-#     except CoinMetricsUnauthorizedException as e:
+#     except CoinMetricsClientFlatFilesUnauthorizedException as e:
 #         assert e.response is not None
 #         assert e.response.status_code == 403 or e.response.status_code == 401
 #         print(e)
