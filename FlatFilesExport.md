@@ -7,7 +7,7 @@ market trades, market quotes, and market candles.
 This program was set up to easily access a flat files server provided to Coin Metrics commercial clients. If you are a 
 community API user or a client without access to this server, a 403 error will be returned. If you are a community API 
 user and looking to get historical asset prices, Coin Metrics does offer [historical asset prices for download](https://coinmetrics.io/community-network-data/).  
-The `CoinMetricsDataExporter` class will return a `CoinMetricsClientFlatFilesUnauthorizedException` if your API key is not authorized
+The `CoinMetricsDataExporter` class will return a `CoinMetricsUnauthorizedException` if your API key is not authorized
 to access this server. The flat files export is considered a separate product from the Coin Metrics API, if you would
 like to gain access or believe you should have access but do not, please contact coinmetrics support. 
 

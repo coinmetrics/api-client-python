@@ -1046,7 +1046,7 @@ market trades, market quotes, and market candles.  </p>
 <p>This program was set up to easily access a flat files server provided to Coin Metrics commercial clients. If you are a 
 community API user or a client without access to this server, a 403 error will be returned. If you are a community API 
 user and looking to get historical asset prices, Coin Metrics does offer <a href="https://coinmetrics.io/community-network-data/">historical asset prices for download</a>.<br />
-The <code>CoinMetricsDataExporter</code> class will return a <code>CoinMetricsClientFlatFilesUnauthorizedException</code> if your API key is not authorized
+The <code>CoinMetricsDataExporter</code> class will return a <code>CoinMetricsUnauthorizedException</code> if your API key is not authorized
 to access this server. The flat files export is considered a separate product from the Coin Metrics API, if you would
 like to gain access or believe you should have access but do not, please contact coinmetrics support. </p>
 <h3 id="installation-and-set-up">Installation and set up<a class="headerlink" href="#installation-and-set-up" title="Permanent link">&para;</a></h3>
