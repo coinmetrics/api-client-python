@@ -13,6 +13,9 @@ import websocket
 
 from coinmetrics._utils import retry, transform_url_params_values_to_str, deprecated, alias
 from coinmetrics import __version__ as version
+from coinmetrics._exceptions import (
+    CoinMetricsClientQueryParamsException,
+)
 from coinmetrics._exceptions import CoinMetricsClientQueryParamsException
 from coinmetrics._typing import (
     DataReturnType,
