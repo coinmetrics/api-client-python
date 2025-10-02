@@ -75,8 +75,6 @@ nav:
   - API Reference: 
       - reference/api_client.md
   - Releases: releases/CHANGELOG.md
-  - Tools:
-    - Flat Files Exporter (Deprecated): tools/FlatFilesExport.md
 
 extra_css:
   - stylesheets/extra.css

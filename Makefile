@@ -37,7 +37,6 @@ all-tests: test
 docs:
 	pydoc-markdown -m coinmetrics.api_client > docs/docs/reference/api_client.md
 	cp -f README.md docs/docs/index.md
-	cp -f FlatFilesExport.md docs/docs/tools/FlatFilesExport.md
 	cp -f CHANGELOG.md docs/docs/releases/CHANGELOG.md
 	cp -f examples/README.md docs/docs/user-guide/examples.md
 	cd docs && mkdocs build
